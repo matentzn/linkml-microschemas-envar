@@ -1,0 +1,50 @@
+---
+id: https://w3id.org/linkml/microschemas/envar
+name: linkml-microschemas-envar
+title: EnVar Microschemas — Umbrella Schema
+version: "0.1.0"
+description: |-
+  LinkML microschemas for environmental exposure variables (EnVar). Initial
+  scope: heat-related exposures (Tmax, WBGT, heat index, heat-wave flags)
+  and the surrounding provenance metadata needed to load them into OMOP
+  external_exposure with full reproducibility.
+
+  This umbrella schema imports the eleven modules that together define the
+  EnVar metadata layer:
+
+    - envar_common         shared enums and slots
+    - envar_variable       variable identity (CF, UCUM, OMOP, ECTO, ENVO)
+    - envar_spatial        spatial reference, extraction
+    - envar_temporal       temporal reference, day-boundary convention
+    - envar_source         upstream source dataset
+    - envar_model          exposure model character
+    - envar_uncertainty    uncertainty and quality
+    - envar_linkage        gridded-to-patient linkage
+    - envar_toolrun        tool run and W3C-PROV provenance chain
+    - envar_heat_metric    derived heat metrics (WBGT, HI, UTCI, heat-wave)
+    - envar_omop           OMOP linkage and FAIR deposit
+    - envar_record         the top EnvironmentalExposureRecord composite
+    - envar_examples       concrete record subclasses (Tmax, Tmin, WBGT, EHD)
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+  - envar_variable
+  - envar_spatial
+  - envar_temporal
+  - envar_source
+  - envar_model
+  - envar_uncertainty
+  - envar_linkage
+  - envar_toolrun
+  - envar_heat_metric
+  - envar_omop
+  - envar_record
+  - envar_examples

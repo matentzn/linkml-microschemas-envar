@@ -1,0 +1,170 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/spatial
+name: envar-spatial
+title: EnVar Microschemas — Spatial Reference
+version: "0.1.0"
+description: |-
+  Spatial reference slots: native grid, extraction footprint, CRS, geographic
+  extent, extraction method, target geography. Covers §3 of
+  envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+  EPSG: https://epsg.io/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  SpatialReference:
+    description: >-
+      Spatial provenance of an environmental exposure value: the native grid /
+      footprint of the source product, the CRS, the geographic extent, the
+      extraction rule used to attach a value to a patient location, and the
+      target geography type. One per record.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - native_spatial_resolution_m
+      - native_spatial_resolution_descriptor
+      - crs
+      - spatial_extent_bbox
+      - spatial_extent_descriptor
+      - extraction_method
+      - extraction_buffer_m
+      - extraction_buffer_m_missing_reason
+      - population_weighting_source
+      - population_weighting_source_missing_reason
+      - target_geography_type
+    slot_usage:
+      crs:
+        required: true
+      extraction_method:
+        required: true
+      target_geography_type:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  native_spatial_resolution_m:
+    range: float
+    description: >-
+      Native spatial resolution of the source product in metres. Daymet = 1000,
+      GridMET ≈ 4000, NARR ≈ 32000.
+
+  native_spatial_resolution_descriptor:
+    range: string
+    description: >-
+      Human-readable label for the native resolution, e.g. "1 km regular grid",
+      "H3 hex zoom 8", "census tract polygon", "point station".
+
+  crs:
+    range: string
+    description: >-
+      Coordinate reference system as an EPSG identifier or PROJ string.
+      Mandatory. E.g. `EPSG:4326` for Daymet, `EPSG:5072` for NARR Lambert
+      Conformal Conic.
+
+  spatial_extent_bbox:
+    range: float
+    multivalued: true
+    description: >-
+      Bounding box of the source *product* (not the extracted subset), as
+      `[min_lon, min_lat, max_lon, max_lat]`.
+
+  spatial_extent_descriptor:
+    range: string
+    description: >-
+      Human-readable description of the product extent, e.g.
+      "CONUS + Hawaii + Puerto Rico", "global land surface 60°S-80°N".
+
+  extraction_method:
+    range: ExtractionMethodEnum
+    description: >-
+      How a gridded value was extracted at the patient's coordinates. Default
+      for DeGAUSS daymet / narr is `inverse_distance_weighted_4_nearest_cells`.
+
+  extraction_buffer_m:
+    range: float
+    description: >-
+      Radius of any spatial buffer applied (e.g. greenspace at 500 / 1500 /
+      2500 m). Null when no buffer is applied.
+
+  extraction_buffer_m_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `extraction_buffer_m` is null.
+
+  population_weighting_source:
+    range: string
+    description: >-
+      Census vintage used for population weighting (e.g. the Spangler et al.
+      WBGT product is population-weighted from gridMET). Null when no weighting
+      is applied.
+
+  population_weighting_source_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `population_weighting_source` is null.
+
+  target_geography_type:
+    range: TargetGeographyTypeEnum
+    description: >-
+      Geographic unit the exposure value is attached to.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  ExtractionMethodEnum:
+    description: >-
+      How a gridded value was extracted at a target location.
+    permissible_values:
+      nearest_cell:
+        description: Take the value from the single nearest grid cell.
+      bilinear:
+        description: Bilinear interpolation of the four nearest cells.
+      inverse_distance_weighted_4_nearest_cells:
+        description: >-
+          Inverse-distance-weighted average of the 4 nearest cells. Default for
+          DeGAUSS `daymet` and `narr`.
+      area_weighted_polygon_mean:
+        description: Area-weighted mean of cells overlapping a polygon.
+      population_weighted_mean:
+        description: >-
+          Population-weighted mean over a target geography (e.g. tract).
+      point_station_lookup:
+        description: Direct lookup at a point station observation.
+
+  TargetGeographyTypeEnum:
+    description: >-
+      Geographic unit the exposure is attached to.
+    permissible_values:
+      point_residence:
+        description: Attached to the patient's exact lat / lon.
+      census_block_group:
+        description: US Census Block Group.
+      census_tract:
+        description: US Census Tract.
+      zcta:
+        description: ZIP Code Tabulation Area.
+      county:
+        description: US County (FIPS).
+      h3_hex:
+        description: H3 hexagon at some resolution. Resolution captured separately.
+      public_water_system:
+        description: Public water system service area polygon.

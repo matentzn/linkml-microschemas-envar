@@ -1,0 +1,117 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/common
+name: envar-common
+title: EnVar Microschemas — Common Types
+version: "0.1.0"
+description: |-
+  Shared enums and slots used across the EnVar microschemas.
+  Pulls in the LinkML Microschema Profile (MicroschemaDefinition,
+  ValueMicroschemaDefinition, Quantity, CodedValue, …) so downstream modules
+  can compose against a common base.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  dcterms: http://purl.org/dc/terms/
+  prov: http://www.w3.org/ns/prov#
+  CF: http://vocab.nerc.ac.uk/standard_name/
+  UCUM: https://ucum.org/
+  ECTO: http://purl.obolibrary.org/obo/ECTO_
+  ENVO: http://purl.obolibrary.org/obo/ENVO_
+  OMOP: https://athena.ohdsi.org/search-terms/terms/
+  LOINC: https://loinc.org/
+  SNOMED: http://snomed.info/id/
+  SPDX: https://spdx.org/licenses/
+  EPSG: https://epsg.io/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - https://raw.githubusercontent.com/linkml/linkml-microschema-profile/v0.3.0/src/linkml_microschema_profile/schema/linkml_microschema_profile
+
+#────────────────────────────────────────────────────────────────
+# SHARED SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  schema_version:
+    range: string
+    description: >-
+      The version of the EnVar micro-schema this document conforms to. Required
+      on every sidecar so downstream consumers can branch on schema evolution.
+    required: true
+
+  provenance_id:
+    range: string
+    description: >-
+      Stable identifier for this sidecar / record (ULID recommended). This is
+      the value that OMOP `external_exposure.exposure_source_value` carries to
+      link a row back to its provenance.
+    required: true
+
+  missing_reason:
+    range: MissingReasonEnum
+    description: >-
+      Controlled reason a nullable slot is null. Every nullable slot in the
+      EnVar schemas should be paired with a *_missing_reason slot taking this
+      range. CF-Conventions "missing_value with reason" pattern lifted to the
+      metadata layer.
+
+#────────────────────────────────────────────────────────────────
+# SHARED ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  MissingReasonEnum:
+    description: >-
+      Controlled reasons that a slot value is missing. Distinguishes a slot
+      the source genuinely does not produce (terminal) from one we could
+      extract but did not (roadmap) from a bug in the chain.
+    permissible_values:
+      not_provided_by_source:
+        description: Source product does not produce this information. Terminal.
+      available_but_not_extracted:
+        description: >-
+          Source produces this information but the current pipeline does not
+          surface it. Roadmap item.
+      upstream_data_not_propagated:
+        description: >-
+          An upstream tool emitted this information but the current pipeline
+          dropped it on the way through. Bug.
+      under_investigation:
+        description: We are working on populating this slot.
+      not_applicable:
+        description: This slot does not apply to this variable / record.
+
+  DataTypeEnum:
+    description: The data type of an exposure value.
+    permissible_values:
+      continuous_numeric:
+        description: Continuous numeric value (e.g. temperature in °C).
+      categorical:
+        description: Categorical value (e.g. land-use class).
+      binary_flag:
+        description: Binary flag (e.g. extreme-heat-day yes/no).
+      count:
+        description: Integer count (e.g. consecutive heat days).
+      event_marker:
+        description: Date-stamped event (e.g. wildfire smoke plume).
+
+  OmopConceptStatusEnum:
+    description: >-
+      Status of a variable's representation in the OHDSI Standardised
+      Vocabulary. `existing` = a concept_id is available now; `proposed` =
+      submission in flight; `gap` = no concept exists and none is proposed.
+    permissible_values:
+      existing:
+        description: A concept_id is available in the standard OHDSI vocabulary.
+      proposed:
+        description: A concept submission is in flight.
+      gap:
+        description: No concept exists yet and none is yet proposed.

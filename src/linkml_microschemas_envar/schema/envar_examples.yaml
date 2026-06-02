@@ -1,0 +1,105 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/examples
+name: envar-examples
+title: EnVar Microschemas — Concrete Example Records
+version: "0.1.0"
+description: |-
+  Concrete EnvironmentalExposureRecord subclasses that pin specific values
+  (CF standard name, cell methods, units, heat-metric family, equation
+  variant, data type) using LinkML rules. These act as the bound contract
+  for the canonical heat-exposure variables.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+  CF: http://vocab.nerc.ac.uk/standard_name/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+  - envar_variable
+  - envar_heat_metric
+  - envar_record
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  DailyMaxTemperatureRecord:
+    is_a: EnvironmentalExposureRecord
+    description: >-
+      Canonical record for daily maximum 2 m air temperature (Tmax).
+      Pins `cf_standard_name = air_temperature`, `cf_cell_methods =
+      "time: maximum"`, `units_ucum = Cel`, `value_data_type =
+      continuous_numeric`.
+    rules:
+      - postconditions:
+          slot_conditions:
+            observation_type:
+              any_of:
+                - range: VariableIdentity
+        description: >-
+          The variable identity for a DailyMaxTemperatureRecord must use the
+          CF triple (air_temperature, time: maximum, Cel) and a
+          continuous_numeric value_data_type. Enforce by pinning the inner
+          slots when authoring an instance. (Placeholder rule; nested-object
+          pinning is not yet expressed — see schema README "Design
+          decisions".)
+
+  DailyMinTemperatureRecord:
+    is_a: EnvironmentalExposureRecord
+    description: >-
+      Canonical record for daily minimum 2 m air temperature (Tmin). Pins
+      `cf_standard_name = air_temperature`, `cf_cell_methods =
+      "time: minimum"`, `units_ucum = Cel`, `value_data_type =
+      continuous_numeric`.
+
+  WetBulbGlobeTemperatureOutdoorRecord:
+    is_a: EnvironmentalExposureRecord
+    description: >-
+      Canonical record for outdoor WBGT under the Liljegren 2008
+      formulation. Pins `heat_metric_family = wbgt_outdoor`,
+      `equation_variant = liljegren_2008`, `indoor_outdoor = outdoor`,
+      `units_ucum = Cel`, `value_data_type = continuous_numeric`.
+    slot_usage:
+      derived_heat_metric:
+        required: true
+    rules:
+      - postconditions:
+          slot_conditions:
+            derived_heat_metric:
+              any_of:
+                - range: DerivedHeatMetric
+        description: >-
+          The DerivedHeatMetric inner object must pin heat_metric_family =
+          wbgt_outdoor, equation_variant = liljegren_2008, and
+          indoor_outdoor = outdoor.
+
+  ExtremeHeatDayFlagRecord:
+    is_a: EnvironmentalExposureRecord
+    description: >-
+      Canonical record for a daily binary extreme-heat-day flag, defined
+      against a local 95th-percentile Tmax baseline. Pins
+      `heat_metric_family = heat_wave_flag`, `value_data_type =
+      binary_flag`, and requires the percentile-reference-period slots in
+      DerivedHeatMetric to be populated.
+    slot_usage:
+      derived_heat_metric:
+        required: true
+    rules:
+      - postconditions:
+          slot_conditions:
+            derived_heat_metric:
+              any_of:
+                - range: DerivedHeatMetric
+        description: >-
+          The DerivedHeatMetric inner object must pin heat_metric_family =
+          heat_wave_flag, heat_wave_threshold_definition =
+          percentile_local, and supply
+          percentile_reference_period_start / _end and
+          percentile_reference_geographic_scope.

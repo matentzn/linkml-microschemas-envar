@@ -1,0 +1,209 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/source
+name: envar-source
+title: EnVar Microschemas — Source Dataset
+version: "0.1.0"
+description: |-
+  Source-dataset slots: upstream product identity, DOI, version, coverage,
+  producer, citation, license, native format, homogenisation status, ACDD
+  passthrough. Covers §5 of envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+  SPDX: https://spdx.org/licenses/
+  dcterms: http://purl.org/dc/terms/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  SourceDataset:
+    description: >-
+      The upstream gridded / station product the exposure values originate
+      from. Carries identity, DOI, version, coverage, producer, citation,
+      license, native format, and homogenisation status. One per record.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - source_dataset_name
+      - source_dataset_short_code
+      - source_dataset_doi
+      - source_dataset_doi_missing_reason
+      - source_dataset_version
+      - source_dataset_temporal_coverage
+      - source_dataset_spatial_extent
+      - source_producer_institution
+      - source_citation_apa
+      - source_citation_bibtex
+      - source_citation_bibtex_missing_reason
+      - source_license_spdx
+      - source_access_url
+      - source_native_format
+      - source_homogenisation_status
+      - source_homogenisation_status_missing_reason
+      - source_acdd_attributes
+      - source_acdd_attributes_missing_reason
+    slot_usage:
+      source_dataset_name:
+        required: true
+      source_dataset_short_code:
+        required: true
+      source_dataset_version:
+        required: true
+      source_producer_institution:
+        required: true
+      source_license_spdx:
+        required: true
+      source_native_format:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  source_dataset_name:
+    range: string
+    description: >-
+      Full name of the source product, e.g. "Daymet V4 Daily Surface Weather
+      Data", "GridMET", "NARR", "ERA5-HEAT".
+
+  source_dataset_short_code:
+    range: string
+    description: >-
+      Short code keying into the EnVar source registry, e.g. `daymet_v4`,
+      `gridmet`, `narr`, `era5_heat`.
+
+  source_dataset_doi:
+    range: string
+    description: >-
+      DOI of the source dataset. Mandatory if a DOI exists. Daymet V4 =
+      `10.3334/ORNLDAAC/2129`; ERA5 = `10.24381/cds.adbb2d47`.
+    slot_uri: dcterms:identifier
+
+  source_dataset_doi_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `source_dataset_doi` is null.
+
+  source_dataset_version:
+    range: string
+    description: >-
+      Source product version. E.g. "V4 R1" for Daymet; "V5.GL.03" vs
+      "V6.GL.02" for ACAG PM products. Version differences materially change
+      values.
+
+  source_dataset_temporal_coverage:
+    range: string
+    description: >-
+      Source product temporal coverage as an ISO 8601 interval string
+      `<start>/<end>`.
+
+  source_dataset_spatial_extent:
+    range: string
+    description: >-
+      Human-readable spatial extent of the product, e.g.
+      "CONUS, Hawaii, Puerto Rico".
+
+  source_producer_institution:
+    range: string
+    description: >-
+      Producer institution, e.g. "NASA ORNL DAAC", "University of Idaho",
+      "NOAA NCEP", "ECMWF Copernicus".
+
+  source_citation_apa:
+    range: string
+    description: Full APA-style citation for the source dataset.
+
+  source_citation_bibtex:
+    range: string
+    description: BibTeX entry for the source dataset, machine-parseable.
+
+  source_citation_bibtex_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `source_citation_bibtex` is null.
+
+  source_license_spdx:
+    range: string
+    description: >-
+      SPDX identifier of the source license, e.g. `CC0-1.0`, `CC-BY-4.0`. Use
+      `public-domain-us-gov` for US federal data with no formal SPDX
+      equivalent.
+
+  source_access_url:
+    range: uri
+    description: >-
+      Landing-page URL for the dataset (not a download link, which rots).
+
+  source_native_format:
+    range: SourceNativeFormatEnum
+    description: Format the source ships in.
+
+  source_homogenisation_status:
+    range: HomogenisationStatusEnum
+    description: >-
+      For station-based products, whether values have been homogenised.
+      Mandatory for station-based products; GHCN-D = `not_homogenised`,
+      GHCN-M v4 = `homogenised`.
+
+  source_homogenisation_status_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `source_homogenisation_status` is null.
+
+  source_acdd_attributes:
+    range: string
+    description: >-
+      Passthrough of ACDD (Attribute Convention for Data Discovery) global
+      attributes from the source NetCDF header, serialised as a JSON string.
+
+  source_acdd_attributes_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `source_acdd_attributes` is null.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  HomogenisationStatusEnum:
+    description: >-
+      For station-based products, the homogenisation status of values across
+      the record period.
+    permissible_values:
+      homogenised:
+        description: Values have been homogenised against breakpoints.
+      not_homogenised:
+        description: Values are as-observed, with no homogenisation applied.
+      partial:
+        description: Partial homogenisation has been applied.
+
+  SourceNativeFormatEnum:
+    description: Format the source ships in.
+    permissible_values:
+      NetCDF-4_CF:
+        description: NetCDF version 4 with CF Conventions metadata.
+      HDF5:
+        description: Hierarchical Data Format version 5.
+      GeoTIFF:
+        description: GeoTIFF raster format.
+      GRIB-1:
+        description: WMO GRIB-1 format.
+      GRIB-2:
+        description: WMO GRIB-2 format.
+      CSV_station_observations:
+        description: CSV file of station observations.
+      Zarr:
+        description: Zarr cloud-optimised array format.
+      Parquet:
+        description: Apache Parquet tabular format.

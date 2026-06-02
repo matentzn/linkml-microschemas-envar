@@ -1,0 +1,174 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/model
+name: envar-model
+title: EnVar Microschemas — Exposure Model
+version: "0.1.0"
+description: |-
+  Exposure-model slots: model type, inputs, paper DOI, cross-validation R²,
+  known biases, uncertainty field, ensemble member count, bias correction.
+  Covers §6 of envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  ExposureModel:
+    description: >-
+      The model class that produced the values (interpolation, reanalysis,
+      ML, statistical blend, equation), its inputs, its methods-paper DOI,
+      its cross-validation skill, known biases, and any bias correction.
+      One per record; may be null for direct observation.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - exposure_model_type
+      - exposure_model_inputs
+      - exposure_model_paper_doi
+      - exposure_model_paper_doi_missing_reason
+      - exposure_model_cross_validation_r2
+      - exposure_model_cross_validation_r2_missing_reason
+      - exposure_model_known_biases
+      - exposure_model_uncertainty_field
+      - exposure_model_uncertainty_field_missing_reason
+      - exposure_model_ensemble_member_count
+      - exposure_model_ensemble_member_count_missing_reason
+      - bias_correction_applied
+      - bias_correction_applied_missing_reason
+    slot_usage:
+      exposure_model_type:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  exposure_model_type:
+    range: ExposureModelTypeEnum
+    description: >-
+      The class of model that produced the values. Daymet =
+      `spatial_interpolation`; NARR / ERA5 = `reanalysis`; GridMET =
+      `statistical_blend`; Brokamp PM = `single_machine_learning`; Di et al.
+      PM = `ensemble_machine_learning`.
+
+  exposure_model_inputs:
+    range: string
+    multivalued: true
+    description: >-
+      Inputs to the model. For GridMET: `["PRISM monthly normals", "NLDAS-2
+      sub-daily reanalysis"]`. For derived heat metrics, the input variable
+      list (held in `DerivedHeatMetric.equation_inputs` for typed cases).
+
+  exposure_model_paper_doi:
+    range: string
+    description: >-
+      DOI of the methods paper describing the model (Thornton et al. 2022 for
+      Daymet; Abatzoglou 2013 for GridMET).
+
+  exposure_model_paper_doi_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `exposure_model_paper_doi` is null.
+
+  exposure_model_cross_validation_r2:
+    range: float
+    description: >-
+      Model cross-validation R², where reported by the producer.
+
+  exposure_model_cross_validation_r2_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `exposure_model_cross_validation_r2` is null.
+
+  exposure_model_known_biases:
+    range: string
+    multivalued: true
+    description: >-
+      Free-text flags of known issues, e.g. "NLDAS-2 coastal Tmax bias up to
+      -1.48 °C", "NARR cold bias at extremes", "Daymet warm bias in summer in
+      some western US regions". The field reviewers care about.
+
+  exposure_model_uncertainty_field:
+    range: string
+    description: >-
+      Name of any per-value uncertainty column emitted alongside the value
+      (e.g. `pm_se` for DeGAUSS `pm`). Null with reason for products whose
+      per-cell SE exists upstream but is not surfaced.
+
+  exposure_model_uncertainty_field_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `exposure_model_uncertainty_field` is null.
+
+  exposure_model_ensemble_member_count:
+    range: integer
+    description: >-
+      For ensemble products, the number of members. Null with reason
+      `not_provided_by_source` for single-realisation products.
+
+  exposure_model_ensemble_member_count_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `exposure_model_ensemble_member_count` is null.
+
+  bias_correction_applied:
+    range: BiasCorrectionAppliedEnum
+    description: >-
+      Whether and how bias correction has been applied. Usually `none` for
+      Tmax from reference products.
+
+  bias_correction_applied_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `bias_correction_applied` is null.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  ExposureModelTypeEnum:
+    description: The class of model that produced the values.
+    permissible_values:
+      direct_measurement:
+        description: Direct instrument observation.
+      spatial_interpolation:
+        description: Station observations interpolated to a grid (Daymet).
+      reanalysis:
+        description: Data-assimilation reanalysis (NARR, ERA5).
+      statistical_blend:
+        description: Blend of multiple sources (GridMET = PRISM + NLDAS-2).
+      chemical_transport_model:
+        description: Deterministic chemical transport model (CMAQ, GEOS-Chem).
+      ensemble_machine_learning:
+        description: Ensemble ML model (Di et al. PM2.5).
+      single_machine_learning:
+        description: Single ML model (Brokamp PM2.5).
+      equation_derived:
+        description: Derived analytically from other variables via an equation.
+      satellite_retrieval:
+        description: Satellite-based retrieval algorithm.
+
+  BiasCorrectionAppliedEnum:
+    description: Whether and how bias correction has been applied.
+    permissible_values:
+      none:
+        description: No bias correction applied.
+      quantile_mapping:
+        description: Quantile-mapping bias correction.
+      linear_scaling:
+        description: Linear scaling bias correction.
+      delta_method:
+        description: Delta-method bias correction.
+      other:
+        description: Some other bias-correction method has been applied.

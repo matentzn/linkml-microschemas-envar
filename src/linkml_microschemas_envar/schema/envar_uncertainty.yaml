@@ -1,0 +1,167 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/uncertainty
+name: envar-uncertainty
+title: EnVar Microschemas — Uncertainty and Quality
+version: "0.1.0"
+description: |-
+  Uncertainty and quality slots: per-value uncertainty field references,
+  uncertainty type and units, model aggregate uncertainty, quality-flag
+  pointers, missing-data handling, data completeness. Covers §8 of
+  envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  Uncertainty:
+    description: >-
+      Uncertainty and quality character of a value series: per-value
+      uncertainty column, uncertainty type / units, model-aggregate
+      uncertainty summary, quality flag pointers, missing-data handling, and
+      data completeness. One per record; slots may be null with reasons.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - per_value_uncertainty_field_name
+      - per_value_uncertainty_field_name_missing_reason
+      - per_value_uncertainty_type
+      - per_value_uncertainty_type_missing_reason
+      - per_value_uncertainty_units_ucum
+      - per_value_uncertainty_units_ucum_missing_reason
+      - model_aggregate_uncertainty
+      - model_aggregate_uncertainty_missing_reason
+      - quality_flag_field_name
+      - quality_flag_field_name_missing_reason
+      - quality_flag_vocabulary
+      - quality_flag_vocabulary_missing_reason
+      - missing_data_handling_method
+      - missing_data_handling_method_missing_reason
+      - data_completeness_pct
+      - data_completeness_pct_missing_reason
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  per_value_uncertainty_field_name:
+    range: string
+    description: >-
+      Name of the column carrying per-value uncertainty (e.g. `pm_se`).
+
+  per_value_uncertainty_field_name_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `per_value_uncertainty_field_name` is null.
+
+  per_value_uncertainty_type:
+    range: UncertaintyTypeEnum
+    description: Kind of per-value uncertainty captured in the column.
+
+  per_value_uncertainty_type_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `per_value_uncertainty_type` is null.
+
+  per_value_uncertainty_units_ucum:
+    range: string
+    description: >-
+      Units of the per-value uncertainty in UCUM syntax. Usually the same as
+      the value units.
+
+  per_value_uncertainty_units_ucum_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `per_value_uncertainty_units_ucum` is null.
+
+  model_aggregate_uncertainty:
+    range: string
+    description: >-
+      Summary statistics for the model as a whole, serialised as a JSON
+      string, e.g. `{"cv_r2": 0.95, "cv_rmse": 1.4, "reported_in": "10.x/y"}`.
+
+  model_aggregate_uncertainty_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `model_aggregate_uncertainty` is null.
+
+  quality_flag_field_name:
+    range: string
+    description: >-
+      Name of any per-value QA flag column. CF `ancillary_variables` analogue.
+
+  quality_flag_field_name_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `quality_flag_field_name` is null.
+
+  quality_flag_vocabulary:
+    range: string
+    description: >-
+      Reference to the QA flag vocabulary (e.g. an EPA AQS qualifier-code
+      list).
+
+  quality_flag_vocabulary_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `quality_flag_vocabulary` is null.
+
+  missing_data_handling_method:
+    range: MissingDataHandlingEnum
+    description: >-
+      How the source handles missing values (e.g. how Daymet handles
+      snow-covered pixels).
+
+  missing_data_handling_method_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `missing_data_handling_method` is null.
+
+  data_completeness_pct:
+    range: float
+    description: >-
+      Percent of (location, date) cells in the extracted window that have a
+      non-missing value. 0-100.
+
+  data_completeness_pct_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `data_completeness_pct` is null.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  UncertaintyTypeEnum:
+    description: Kind of per-value uncertainty.
+    permissible_values:
+      standard_error:
+        description: Standard error of the value.
+      prediction_interval:
+        description: >-
+          Prediction interval; the percentile (e.g. 95 %) is captured
+          implicitly in the producer documentation.
+      ensemble_std_dev:
+        description: Standard deviation across ensemble members.
+      monte_carlo_std_dev:
+        description: Standard deviation from Monte Carlo sampling.
+
+  MissingDataHandlingEnum:
+    description: How the source handles missing values.
+    permissible_values:
+      none:
+        description: Values are passed through as missing.
+      spatiotemporal_interpolation:
+        description: Missing cells are filled by spatiotemporal interpolation.
+      forward_fill:
+        description: Forward fill from the previous non-missing observation.
+      nearest_neighbour:
+        description: Fill from the nearest non-missing neighbour cell.

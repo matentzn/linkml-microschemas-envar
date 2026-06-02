@@ -1,0 +1,180 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/linkage
+name: envar-linkage
+title: EnVar Microschemas — Linkage Method (gridded → patient)
+version: "0.1.0"
+description: |-
+  Linkage-method slots: how a gridded value is attached to a patient
+  location, propagated geocoder quality, address-period alignment.
+  Covers §9 of envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  LinkageMethod:
+    description: >-
+      How a gridded environmental value gets attached to a patient location:
+      the linkage strategy, any buffer parameters, the propagated geocoder
+      precision and score, and how patient address-over-time is modelled.
+      One per record.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - linkage_strategy
+      - linkage_buffer_radius_m
+      - linkage_buffer_radius_m_missing_reason
+      - linkage_buffer_aggregation_method
+      - linkage_buffer_aggregation_method_missing_reason
+      - linkage_max_distance_to_station_m
+      - linkage_max_distance_to_station_m_missing_reason
+      - geocoding_precision_propagated
+      - geocoding_score_propagated
+      - geocoding_score_propagated_missing_reason
+      - address_period_alignment
+    slot_usage:
+      linkage_strategy:
+        required: true
+      geocoding_precision_propagated:
+        required: true
+      address_period_alignment:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  linkage_strategy:
+    range: LinkageStrategyEnum
+    description: How a gridded value is attached to a patient location.
+
+  linkage_buffer_radius_m:
+    range: float
+    description: >-
+      Buffer radius in metres for buffer-aggregation strategies.
+
+  linkage_buffer_radius_m_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `linkage_buffer_radius_m` is null.
+
+  linkage_buffer_aggregation_method:
+    range: BufferAggregationEnum
+    description: >-
+      Aggregation method applied within the buffer (mean / max / median /
+      area-weighted mean).
+
+  linkage_buffer_aggregation_method_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `linkage_buffer_aggregation_method` is null.
+
+  linkage_max_distance_to_station_m:
+    range: float
+    description: >-
+      Maximum distance to a station for nearest-station strategies; values
+      beyond this distance get null.
+
+  linkage_max_distance_to_station_m_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `linkage_max_distance_to_station_m` is null.
+
+  geocoding_precision_propagated:
+    range: GeocodingPrecisionEnum
+    description: >-
+      Quality category propagated from the upstream geocoder (DeGAUSS
+      `precision` column).
+
+  geocoding_score_propagated:
+    range: float
+    description: >-
+      Geocoder score (0-1) propagated from the upstream geocoder so the
+      exposure record knows the spatial precision of its anchor.
+
+  geocoding_score_propagated_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `geocoding_score_propagated` is null.
+
+  address_period_alignment:
+    range: AddressPeriodAlignmentEnum
+    description: How the patient's address-over-time was modelled.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  LinkageStrategyEnum:
+    description: How a gridded value is attached to a patient location.
+    permissible_values:
+      point_extraction_at_residence:
+        description: Extract value at the patient's residence coordinates.
+      buffer_aggregation_around_residence:
+        description: >-
+          Aggregate values within a buffer around the patient's residence.
+      area_membership_residence_in_polygon:
+        description: >-
+          Membership of the patient's residence in a polygon (e.g. public
+          water system service area).
+      nearest_station_with_max_distance:
+        description: >-
+          Use the nearest observing station, with a maximum allowed distance.
+      population_weighted_area_to_residence:
+        description: >-
+          Population-weighted aggregation over an area surrounding the
+          patient's residence.
+
+  BufferAggregationEnum:
+    description: Aggregation within a buffer.
+    permissible_values:
+      mean:
+        description: Arithmetic mean of values in the buffer.
+      max:
+        description: Maximum value in the buffer.
+      median:
+        description: Median of values in the buffer.
+      area_weighted_mean:
+        description: Area-weighted mean of values in the buffer.
+
+  GeocodingPrecisionEnum:
+    description: >-
+      Geocoder precision category, mirroring DeGAUSS `geocoder.precision`.
+    permissible_values:
+      range:
+        description: >-
+          Street-centerline point interpolated within an address-range
+          segment. Highest precision typical for residential addresses.
+      street:
+        description: Representative point on the matched street segment.
+      intersection:
+        description: Geocoded crossing of two named streets.
+      zip:
+        description: Centroid of the matched 5-digit ZIP code.
+      city:
+        description: City centroid; lowest precision.
+      unknown:
+        description: Precision is unknown.
+
+  AddressPeriodAlignmentEnum:
+    description: How the patient's address-over-time was modelled.
+    permissible_values:
+      single_static_address:
+        description: A single address is used for the whole observation period.
+      address_history_from_emr:
+        description: An EMR-sourced address history is used.
+      synthetic_residence_period:
+        description: A synthetic residence period was constructed for the patient.

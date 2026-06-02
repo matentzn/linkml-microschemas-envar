@@ -1,0 +1,314 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/heat_metric
+name: envar-heat-metric
+title: EnVar Microschemas — Derived Heat Metric
+version: "0.1.0"
+description: |-
+  Derived-heat-metric slots: heat-metric family, equation variant, inputs,
+  validity range, indoor/outdoor flag, solar-radiation basis, wind-speed
+  height, heat-wave threshold definition, percentile-baseline definition.
+  Covers §7 of envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  DerivedHeatMetric:
+    description: >-
+      Methodology slots specific to derived heat metrics (WBGT, Heat Index,
+      UTCI, apparent temperature, heat-wave flag, etc.). Captures the
+      decisions that the heat-epidemiology literature flags as critical
+      sources of cross-study disagreement: which equation variant, which
+      indoor / outdoor regime, which solar-radiation input, and -- for
+      percentile-based metrics -- the reference period, scope, and seasonal
+      window. One per record where applicable.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - heat_metric_family
+      - equation_variant
+      - equation_variant_missing_reason
+      - equation_inputs
+      - equation_validity_range
+      - equation_validity_range_missing_reason
+      - indoor_outdoor
+      - wind_speed_measurement_height_m
+      - wind_speed_measurement_height_m_missing_reason
+      - solar_radiation_basis
+      - solar_radiation_basis_missing_reason
+      - heat_wave_threshold_definition
+      - heat_wave_threshold_definition_missing_reason
+      - heat_wave_threshold_specifier
+      - heat_wave_min_consecutive_days
+      - heat_wave_min_consecutive_days_missing_reason
+      - percentile_reference_period_start
+      - percentile_reference_period_start_missing_reason
+      - percentile_reference_period_end
+      - percentile_reference_period_end_missing_reason
+      - percentile_reference_geographic_scope
+      - percentile_reference_geographic_scope_missing_reason
+      - percentile_reference_seasonal_window
+      - percentile_reference_seasonal_window_missing_reason
+      - metric_temporal_aggregation_rule
+      - metric_temporal_aggregation_rule_missing_reason
+    slot_usage:
+      heat_metric_family:
+        required: true
+      indoor_outdoor:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  heat_metric_family:
+    range: HeatMetricFamilyEnum
+    description: The family of heat metric this variable represents.
+
+  equation_variant:
+    range: EquationVariantEnum
+    description: >-
+      For derived heat metrics, the equation variant used. Mandatory for
+      WBGT, HI, and UTCI: a Liljegren WBGT and an ACSM WBGT for the same
+      inputs can differ by 2-3 °C.
+
+  equation_variant_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `equation_variant` is null.
+
+  equation_inputs:
+    range: string
+    multivalued: true
+    description: >-
+      Per-input references to source datasets. For WBGT typically four
+      entries (`air_temperature`, `relative_humidity`, `wind_speed`,
+      `surface_downwelling_shortwave_flux_in_air`). Free-text per-entry
+      strings of the form `<cf_standard_name>:<source_short_code>`.
+
+  equation_validity_range:
+    range: string
+    description: >-
+      Validity-range conditions for the equation, serialised as a JSON
+      string. For Heat Index: `{"min_temperature_F": 80,
+      "min_relative_humidity_pct": 40}` — Rothfusz is undefined below
+      80 °F / 40 % RH.
+
+  equation_validity_range_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `equation_validity_range` is null.
+
+  indoor_outdoor:
+    range: IndoorOutdoorEnum
+    description: >-
+      Indoor / outdoor regime. Mandatory for WBGT (the indoor vs outdoor
+      distinction changes the equation and the health interpretation).
+
+  wind_speed_measurement_height_m:
+    range: float
+    description: >-
+      For WBGT and UTCI inputs, the wind-speed measurement height in metres.
+      The ISO 7243 standard is 2 m, but reanalysis products often supply
+      10 m -- the height affects the WBGT value.
+
+  wind_speed_measurement_height_m_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `wind_speed_measurement_height_m` is null.
+
+  solar_radiation_basis:
+    range: SolarRadiationBasisEnum
+    description: >-
+      For WBGT / UTCI inputs, the basis used for solar radiation.
+
+  solar_radiation_basis_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `solar_radiation_basis` is null.
+
+  heat_wave_threshold_definition:
+    range: HeatWaveThresholdDefinitionEnum
+    description: >-
+      For heat-wave flags, the definition of the threshold (absolute,
+      percentile-local, percentile-climatological, NWS advisory, ETCCDI).
+
+  heat_wave_threshold_definition_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `heat_wave_threshold_definition` is null.
+
+  heat_wave_threshold_specifier:
+    range: string
+    description: >-
+      Free-form specifier paired with `heat_wave_threshold_definition` to
+      capture the concrete threshold values (e.g. `"35_Cel"` for an absolute
+      threshold, `"95"` for the 95th percentile).
+
+  heat_wave_min_consecutive_days:
+    range: integer
+    description: >-
+      Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3).
+      Changes which days are flagged.
+
+  heat_wave_min_consecutive_days_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `heat_wave_min_consecutive_days` is null.
+
+  percentile_reference_period_start:
+    range: date
+    description: >-
+      Start of the reference distribution used for percentile-based
+      thresholds. Mandatory for percentile metrics: "95th percentile" over
+      2000-2019 gives a different threshold than 1980-2010, and this delta
+      is real.
+
+  percentile_reference_period_start_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `percentile_reference_period_start` is null.
+
+  percentile_reference_period_end:
+    range: date
+    description: End of the reference distribution.
+
+  percentile_reference_period_end_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `percentile_reference_period_end` is null.
+
+  percentile_reference_geographic_scope:
+    range: string
+    description: >-
+      Geographic scope over which the reference distribution was computed.
+      One of `local_tract`, `local_county`, `local_climate_region`,
+      `national`.
+
+  percentile_reference_geographic_scope_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `percentile_reference_geographic_scope` is null.
+
+  percentile_reference_seasonal_window:
+    range: string
+    description: >-
+      Seasonal window over which the reference was computed. One of
+      `annual`, `warm_season_may_sep`, `calendar_month`.
+
+  percentile_reference_seasonal_window_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `percentile_reference_seasonal_window` is null.
+
+  metric_temporal_aggregation_rule:
+    range: string
+    description: >-
+      For heat-wave flags, how multi-day exposures are stamped on individual
+      days (e.g. `first_day_of_event` / `each_day_of_event` /
+      `last_day_of_event`).
+
+  metric_temporal_aggregation_rule_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `metric_temporal_aggregation_rule` is null.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  HeatMetricFamilyEnum:
+    description: Family of heat metric.
+    permissible_values:
+      tmax:
+        description: Daily maximum air temperature.
+      tmin:
+        description: Daily minimum air temperature.
+      tmean:
+        description: Daily mean air temperature.
+      heat_index:
+        description: Heat Index (NWS Rothfusz / Steadman).
+      wbgt_outdoor:
+        description: Wet Bulb Globe Temperature, outdoor variant.
+      wbgt_indoor:
+        description: Wet Bulb Globe Temperature, indoor variant.
+      utci:
+        description: Universal Thermal Climate Index.
+      apparent_temperature:
+        description: Apparent temperature (Steadman family).
+      humidex:
+        description: Humidex (Masterton-Richardson).
+      heat_wave_flag:
+        description: Binary heat-wave flag.
+      consecutive_extreme_heat_days:
+        description: Count of consecutive extreme-heat days.
+      cooling_degree_days:
+        description: Cooling degree-days.
+
+  EquationVariantEnum:
+    description: >-
+      Equation variant for a derived heat metric. The applicable subset
+      depends on the `heat_metric_family`.
+    permissible_values:
+      liljegren_2008:
+        description: WBGT — Liljegren et al. 2008 outdoor formulation.
+      acsm_simplified:
+        description: WBGT — American College of Sports Medicine simplified.
+      bernard_simplified:
+        description: WBGT — Bernard simplified.
+      rothfusz_1990_nws:
+        description: Heat Index — Rothfusz / NWS 1990 polynomial.
+      steadman_1979:
+        description: Heat Index / apparent temperature — Steadman 1979.
+      brode_2012_polynomial:
+        description: UTCI — Bröde et al. 2012 polynomial approximation.
+
+  IndoorOutdoorEnum:
+    description: Indoor / outdoor regime for derived heat metrics.
+    permissible_values:
+      outdoor:
+        description: >-
+          Outdoor (default for all reanalysis / satellite / interpolation
+          products).
+      indoor_modeled:
+        description: Indoor regime, modelled.
+      indoor_measured:
+        description: Indoor regime, measured by an indoor instrument.
+      mixed_unspecified:
+        description: Mixed indoor / outdoor, regime unspecified.
+
+  SolarRadiationBasisEnum:
+    description: Basis used for the solar-radiation input to a heat metric.
+    permissible_values:
+      surface_downwelling_shortwave_flux:
+        description: Surface downwelling shortwave flux density.
+      mean_radiant_temperature_modeled:
+        description: Modelled mean radiant temperature.
+      not_available:
+        description: Solar radiation input not available; metric falls back.
+
+  HeatWaveThresholdDefinitionEnum:
+    description: >-
+      How the heat-wave threshold is defined. Companion slot
+      `heat_wave_threshold_specifier` captures the concrete value.
+    permissible_values:
+      absolute:
+        description: >-
+          Absolute threshold value (e.g. 35 °C). Concrete value in
+          `heat_wave_threshold_specifier`.
+      percentile_local:
+        description: >-
+          Local-distribution percentile (e.g. 95th percentile of local Tmax
+          history). Percentile in `heat_wave_threshold_specifier`.
+      percentile_climatological:
+        description: Climatological-baseline percentile.
+      nws_heat_advisory_criteria:
+        description: National Weather Service Heat Advisory criteria.
+      etccdi_warm_spell_duration_index:
+        description: ETCCDI Warm Spell Duration Index.

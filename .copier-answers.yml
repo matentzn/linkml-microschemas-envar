@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier
+_commit: v0.5.0
+_src_path: https://github.com/linkml/linkml-project-copier
+add_example: false
+copyright_year: '2026'
+email: nicolas.matentzoglu@gmail.com
+existing_license_file: ''
+full_name: Nico Matentzoglu
+gh_action_docs_preview: false
+gh_action_pypi: false
+github_org: monarch-initiative
+license: Apache-2.0
+project_description: 'LinkML microschemas for environmental exposure variables (EnVar).
+    Initial scope: heat-related exposures (Tmax, WBGT, heat index, heat-wave flags)
+    and the surrounding provenance metadata needed to load them into OMOP external_exposure
+    with full reproducibility.'
+project_name: linkml-microschemas-envar
+project_slug: linkml_microschemas_envar
+

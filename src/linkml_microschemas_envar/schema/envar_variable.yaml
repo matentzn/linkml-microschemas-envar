@@ -1,0 +1,185 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/variable
+name: envar-variable
+title: EnVar Microschemas — Variable Identity
+version: "0.1.0"
+description: |-
+  Variable identity slots: CF standard name, UCUM units, OMOP concept ID,
+  ECTO / ENVO bindings, plausible value range, value data type. Covers
+  §2 of envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+  CF: http://vocab.nerc.ac.uk/standard_name/
+  UCUM: https://ucum.org/
+  ECTO: http://purl.obolibrary.org/obo/ECTO_
+  ENVO: http://purl.obolibrary.org/obo/ENVO_
+  OMOP: https://athena.ohdsi.org/search-terms/terms/
+  LOINC: https://loinc.org/
+  SNOMED: http://snomed.info/id/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  VariableIdentity:
+    description: >-
+      The identity and semantics of an environmental exposure variable —
+      what physical quantity is being captured, in what units, and how it
+      binds to community vocabularies. One per record.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - variable_name
+      - variable_label
+      - cf_standard_name
+      - cf_cell_methods
+      - units_ucum
+      - units_display
+      - omop_concept_id
+      - omop_concept_id_missing_reason
+      - omop_concept_status
+      - ecto_iri
+      - ecto_iri_missing_reason
+      - envo_iri
+      - loinc_code
+      - loinc_code_missing_reason
+      - snomed_code
+      - snomed_code_missing_reason
+      - value_data_type
+      - value_range_plausible_min
+      - value_range_plausible_max
+    slot_usage:
+      variable_name:
+        required: true
+      cf_standard_name:
+        required: true
+      units_ucum:
+        required: true
+      omop_concept_status:
+        required: true
+      value_data_type:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  variable_name:
+    range: string
+    description: >-
+      The literal column name produced by the upstream tool (e.g. `tmax`,
+      `tmmx`, `air.2m`).
+
+  variable_label:
+    range: string
+    description: >-
+      Human-readable label, e.g. "daily maximum air temperature at 2 m".
+
+  cf_standard_name:
+    range: string
+    description: >-
+      The CF Conventions Standard Name (v85+) for the variable. Cross-agency
+      identifier; e.g. `air_temperature` for Tmax. Mandatory.
+    slot_uri: dcterms:subject
+    exact_mappings:
+      - CF:air_temperature
+
+  cf_cell_methods:
+    range: string
+    description: >-
+      CF `cell_methods` string describing how the value summarises sub-period
+      values, e.g. `time: maximum` for Tmax, `time: mean` for daily mean.
+
+  units_ucum:
+    range: string
+    description: >-
+      The unit expressed in UCUM syntax, e.g. `Cel` for degrees Celsius,
+      `K` for Kelvin, `ug/m3` for PM2.5 mass concentration.
+
+  units_display:
+    range: string
+    description: >-
+      Human-readable unit string for display purposes, e.g. `°C`.
+
+  omop_concept_id:
+    range: integer
+    description: >-
+      Standard OHDSI Vocabulary concept_id for the variable. Nullable with
+      reason for environmental variables that lack OMOP coverage today.
+
+  omop_concept_id_missing_reason:
+    range: MissingReasonEnum
+    description: >-
+      Reason `omop_concept_id` is null. Distinguishes "no OMOP concept yet
+      exists" from "the pipeline did not resolve it".
+
+  omop_concept_status:
+    range: OmopConceptStatusEnum
+    description: >-
+      Status of this variable's OMOP vocabulary coverage. Required.
+
+  ecto_iri:
+    range: uriorcurie
+    description: >-
+      Environmental Conditions, Treatments and Exposures Ontology (ECTO) IRI
+      for the variable. Critical for cross-Monarch / cross-CHORDS alignment.
+
+  ecto_iri_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `ecto_iri` is null.
+
+  envo_iri:
+    range: uriorcurie
+    description: >-
+      Environment Ontology (ENVO) IRI for the environmental material or
+      process being exposed to, where applicable.
+
+  loinc_code:
+    range: string
+    description: >-
+      LOINC code, where the variable has clinical-laboratory coverage.
+      Usually null for ambient environmental variables.
+
+  loinc_code_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `loinc_code` is null.
+
+  snomed_code:
+    range: string
+    description: >-
+      SNOMED CT code, where the variable has clinical coverage. Usually null
+      for ambient environmental variables.
+
+  snomed_code_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `snomed_code` is null.
+
+  value_data_type:
+    range: DataTypeEnum
+    description: >-
+      The data type of the stored exposure value.
+
+  value_range_plausible_min:
+    range: float
+    description: >-
+      Physical / domain lower bound for plausible values (e.g. -50 °C for
+      ambient Tmax). Not a hard validation bound; sanity-check signal.
+
+  value_range_plausible_max:
+    range: float
+    description: >-
+      Physical / domain upper bound for plausible values (e.g. 60 °C for
+      ambient Tmax).

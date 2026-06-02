@@ -1,0 +1,98 @@
+# Worked example: Daymet V4 Tmax sidecar for Phoenix on 2022-07-19.
+# Replicates the JSON block in ../../../pipeline/heat-omop-slice/envar-heat-scenario.md §4,
+# restructured to use the LinkML Microschema Profile slot names at top level
+# (subject / observation_type / location / temporality / methodology /
+# observation_result). See src/linkml_microschemas_envar/schema/README.md
+# "Design decisions" for the rationale and known drawbacks.
+---
+schema_version: "0.1"
+provenance_id: "01HFA7K8R3M6XP-daymet"
+
+subject: "cohort:phoenix_aki_2022"
+
+observation_type:
+  variable_name: tmax
+  variable_label: "daily maximum air temperature at 2 m"
+  cf_standard_name: air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+  units_display: "°C"
+  omop_concept_id: null
+  omop_concept_id_missing_reason: not_provided_by_source
+  omop_concept_status: gap
+  ecto_iri: "http://purl.obolibrary.org/obo/ECTO_0000012"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+
+location:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: "1 km regular grid"
+  crs: "EPSG:4326"
+  spatial_extent_descriptor: "CONUS + Hawaii + Puerto Rico"
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight
+  temporal_coverage_start: "1980-01-01"
+  temporal_coverage_end: "2024-12-31"
+  extraction_window_start: "2018-05-01"
+  extraction_window_end: "2022-09-30"
+  calendar: gregorian
+
+methodology:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+    - "GHCN-Daily station observations"
+  exposure_model_paper_doi: "10.3334/ORNLDAAC/2129"
+  exposure_model_known_biases:
+    - "warm-season warm bias documented in some western US regions"
+    - "interpolation degrades in sparse-station areas"
+  exposure_model_uncertainty_field: null
+  exposure_model_uncertainty_field_missing_reason: available_but_not_extracted
+
+source_dataset:
+  source_dataset_name: "Daymet V4 Daily Surface Weather Data"
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: "10.3334/ORNLDAAC/2129"
+  source_dataset_version: "V4 R1"
+  source_producer_institution: "NASA ORNL DAAC"
+  source_citation_apa: >-
+    Thornton, M.M. et al. (2022). Daymet: Daily Surface Weather Data on a
+    1-km Grid for North America, Version 4 R1. ORNL DAAC.
+  source_license_spdx: public-domain-us-gov
+  source_native_format: NetCDF-4_CF
+  source_access_url: "https://daymet.ornl.gov/"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet
+  tool_version: "1.0.0"
+  container_image_repository: "ghcr.io/degauss-org/daymet"
+  container_image_digest: "sha256:a8b3c2..."
+  run_arguments: '{"variables": "tmax"}'
+  run_timestamp_utc: "2026-05-23T14:18:42Z"
+  input_file_sha256: "9f8e7d..."
+  input_row_count: 3
+  output_file_sha256: "1c2d3e..."
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+    - tool_name: geocoder
+      tool_version: "3.3.0"
+      run_timestamp_utc: "2026-05-23T14:02:11Z"
+
+omop_linkage:
+  omop_external_exposure_link_field: exposure_source_value
+  phi_status: no_phi

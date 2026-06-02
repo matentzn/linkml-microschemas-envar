@@ -1,0 +1,224 @@
+---
+id: https://w3id.org/linkml/microschemas/envar/temporal
+name: envar-temporal
+title: EnVar Microschemas — Temporal Reference
+version: "0.1.0"
+description: |-
+  Temporal reference slots: resolution, aggregation method, day-boundary
+  convention, coverage, calendar, lag alignment. Covers §4 of
+  envar-heat-scenario-requirements.md.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+  - envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  TemporalReference:
+    description: >-
+      Temporal provenance of an environmental exposure value: native temporal
+      grain, aggregation rule, day-boundary convention, coverage of the source
+      product, the extraction window the run actually pulled, calendar, and
+      lag alignment to a clinical event. One per record.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+      - temporal_resolution
+      - temporal_aggregation_method
+      - temporal_aggregation_window_seconds
+      - day_boundary_convention
+      - temporal_coverage_start
+      - temporal_coverage_end
+      - extraction_window_start
+      - extraction_window_end
+      - calendar
+      - lag_alignment_applied
+      - lag_alignment_specifier
+      - lag_alignment_applied_missing_reason
+    slot_usage:
+      temporal_resolution:
+        required: true
+      temporal_aggregation_method:
+        required: true
+      day_boundary_convention:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  temporal_resolution:
+    range: TemporalResolutionEnum
+    description: Native temporal grain of the values.
+
+  temporal_aggregation_method:
+    range: TemporalAggregationMethodEnum
+    description: >-
+      How the value summarises sub-period values. Maps 1:1 to CF cell_methods.
+
+  temporal_aggregation_window_seconds:
+    range: integer
+    description: >-
+      Redundant with `temporal_resolution` but explicit for machine use; e.g.
+      86400 for daily, 3600 for hourly.
+
+  day_boundary_convention:
+    range: DayBoundaryConventionEnum
+    description: >-
+      Where the 24-hour day window starts. **Mandatory.** Daymet =
+      `local_midnight`; PRISM = `24h_ending_1200_GMT`; NARR / ERA5 sub-daily =
+      `utc_midnight`. The single most-omitted slot in the literature and a
+      known source of cross-study disagreement.
+
+  temporal_coverage_start:
+    range: date
+    description: Start of the source product's full temporal coverage.
+
+  temporal_coverage_end:
+    range: date
+    description: >-
+      End of the source product's coverage. May be an "ongoing" sentinel for
+      live products.
+
+  extraction_window_start:
+    range: date
+    description: Actual start date the run extracted.
+
+  extraction_window_end:
+    range: date
+    description: Actual end date the run extracted.
+
+  calendar:
+    range: CalendarEnum
+    description: >-
+      CF calendar. `gregorian` is the default; only matters when a source uses
+      a non-standard calendar (some climate model output does).
+
+  lag_alignment_applied:
+    range: LagAlignmentEnum
+    description: >-
+      Whether and how values were lag-aligned to a clinical event. See
+      `lag_alignment_specifier` for the concrete lag value(s).
+
+  lag_alignment_specifier:
+    range: string
+    description: >-
+      Free-form specifier paired with `lag_alignment_applied` to capture the
+      concrete lag values (e.g. `"3"` for a 3-day lag, or `"0-21"` for a
+      distributed lag from 0 to 21 days). Empty when `lag_alignment_applied`
+      = `none`.
+
+  lag_alignment_applied_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `lag_alignment_applied` is null.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  TemporalResolutionEnum:
+    description: Native temporal grain of the source product.
+    permissible_values:
+      instantaneous:
+        description: Instantaneous snapshot at a timestamp.
+      hourly:
+        description: One value per hour.
+      "3_hourly":
+        description: One value per 3-hour window (NARR sub-daily).
+      daily:
+        description: One value per day.
+      monthly:
+        description: One value per calendar month.
+      seasonal:
+        description: One value per season (3-month window).
+      annual:
+        description: One value per year.
+
+  TemporalAggregationMethodEnum:
+    description: >-
+      How sub-period values were aggregated. CF `cell_methods` aligned.
+    permissible_values:
+      mean:
+        description: Arithmetic mean over the window.
+      maximum:
+        description: "Maximum over the window. `time: maximum` in CF."
+      minimum:
+        description: "Minimum over the window. `time: minimum` in CF."
+      sum:
+        description: Sum over the window.
+      percentile:
+        description: A percentile of the values in the window.
+      point_in_time:
+        description: A point-in-time sample with no aggregation applied.
+
+  DayBoundaryConventionEnum:
+    description: >-
+      Where the 24-hour day window starts. The single most-omitted slot in the
+      environmental-health literature.
+    permissible_values:
+      local_midnight:
+        description: >-
+          Day starts at local midnight at the target location. Daymet
+          convention.
+      utc_midnight:
+        description: >-
+          Day starts at 00:00 UTC. NARR / ERA5 sub-daily are computed against
+          this.
+      "24h_ending_1200_GMT":
+        description: >-
+          24-hour window ending 12:00 GMT, used by PRISM and historically
+          common in US station-network products.
+      solar_noon_centered:
+        description: 24-hour window centered on local solar noon.
+      observation_dependent:
+        description: >-
+          Day boundary follows whatever the underlying observation network
+          uses (e.g. weather-station local custom).
+
+  CalendarEnum:
+    description: CF `calendar` values.
+    permissible_values:
+      gregorian:
+        description: Standard mixed Julian / Gregorian calendar (default).
+      noleap:
+        description: 365-day calendar with no leap days. Common in climate-model output.
+      all_leap:
+        description: 366-day calendar with all years leap.
+      "360_day":
+        description: 12 months of 30 days each. Common in some climate-model outputs.
+      julian:
+        description: Proleptic Julian calendar.
+      proleptic_gregorian:
+        description: Proleptic Gregorian calendar.
+
+  LagAlignmentEnum:
+    description: >-
+      Whether the values have been pre-aligned to a clinical event window in
+      this ETL. Companion slot `lag_alignment_specifier` captures the
+      concrete lag pattern (e.g. `lag_3_days`, `distributed_lag_0_21`).
+    permissible_values:
+      none:
+        description: No lag alignment applied; values are at native dates.
+      lag_n_days:
+        description: >-
+          A single-day lag of N days has been applied. Concrete N captured
+          in `lag_alignment_specifier`.
+      distributed_lag:
+        description: >-
+          A distributed lag over a range of days has been applied. Range
+          captured in `lag_alignment_specifier` (e.g. `"0-21"`).

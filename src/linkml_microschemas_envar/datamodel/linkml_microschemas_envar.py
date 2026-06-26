@@ -1,5 +1,5 @@
 # Auto generated from linkml_microschemas_envar.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-06-01T17:49:06
+# Generation date: 2026-06-26T18:05:21
 # Schema: linkml-microschemas-envar
 #
 # id: https://w3id.org/linkml/microschemas/envar
@@ -8,11 +8,11 @@
 #   and the surrounding provenance metadata needed to load them into OMOP
 #   external_exposure with full reproducibility.
 #
-#   This umbrella schema imports the eleven modules that together define the
+#   This umbrella schema imports the thirteen modules that together define the
 #   EnVar metadata layer:
 #
 #     - envar_common         shared enums and slots
-#     - envar_variable       variable identity (CF, UCUM, OMOP, ECTO, ENVO)
+#     - envar_variable       variable identity (CF, UCUM, target-vocab concept, ECTO, ENVO)
 #     - envar_spatial        spatial reference, extraction
 #     - envar_temporal       temporal reference, day-boundary convention
 #     - envar_source         upstream source dataset
@@ -21,7 +21,7 @@
 #     - envar_linkage        gridded-to-patient linkage
 #     - envar_toolrun        tool run and W3C-PROV provenance chain
 #     - envar_heat_metric    derived heat metrics (WBGT, HI, UTCI, heat-wave)
-#     - envar_omop           OMOP linkage and FAIR deposit
+#     - envar_health_layer   health-data-layer linkage (OMOP, BDC, …) and FAIR deposit
 #     - envar_record         the top EnvironmentalExposureRecord composite
 #     - envar_examples       concrete record subclasses (Tmax, Tmin, WBGT, EHD)
 # license: Apache-2.0
@@ -83,7 +83,6 @@ metamodel_version = "1.11.0"
 version = "0.1.0"
 
 # Namespaces
-CF = CurieNamespace('CF', 'http://vocab.nerc.ac.uk/standard_name/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 ENVAR = CurieNamespace('envar', 'https://w3id.org/linkml/microschemas/envar/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
@@ -97,6 +96,8 @@ DEFAULT_ = ENVAR
 # Class references
 
 
+
+AnyValue = Any
 
 @dataclass(repr=False)
 class VariableIdentity(YAMLRoot):
@@ -112,22 +113,17 @@ class VariableIdentity(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = ENVAR.VariableIdentity
 
     variable_name: str = None
-    cf_standard_name: str = None
+    standard_name: Union[str, URIorCURIE] = None
     units_ucum: str = None
-    omop_concept_status: Union[str, "OmopConceptStatusEnum"] = None
+    concept_status: Union[str, "ConceptStatusEnum"] = None
     value_data_type: Union[str, "DataTypeEnum"] = None
     variable_label: Optional[str] = None
     cf_cell_methods: Optional[str] = None
     units_display: Optional[str] = None
-    omop_concept_id: Optional[int] = None
-    omop_concept_id_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    ecto_iri: Optional[Union[str, URIorCURIE]] = None
-    ecto_iri_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    envo_iri: Optional[Union[str, URIorCURIE]] = None
-    loinc_code: Optional[str] = None
-    loinc_code_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    snomed_code: Optional[str] = None
-    snomed_code_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    target_concept_vocabulary: Optional[str] = None
+    target_concept_id: Optional[str] = None
+    target_concept_id_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    concept_mappings: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
     value_range_plausible_min: Optional[float] = None
     value_range_plausible_max: Optional[float] = None
 
@@ -137,20 +133,20 @@ class VariableIdentity(YAMLRoot):
         if not isinstance(self.variable_name, str):
             self.variable_name = str(self.variable_name)
 
-        if self._is_empty(self.cf_standard_name):
-            self.MissingRequiredField("cf_standard_name")
-        if not isinstance(self.cf_standard_name, str):
-            self.cf_standard_name = str(self.cf_standard_name)
+        if self._is_empty(self.standard_name):
+            self.MissingRequiredField("standard_name")
+        if not isinstance(self.standard_name, URIorCURIE):
+            self.standard_name = URIorCURIE(self.standard_name)
 
         if self._is_empty(self.units_ucum):
             self.MissingRequiredField("units_ucum")
         if not isinstance(self.units_ucum, str):
             self.units_ucum = str(self.units_ucum)
 
-        if self._is_empty(self.omop_concept_status):
-            self.MissingRequiredField("omop_concept_status")
-        if not isinstance(self.omop_concept_status, OmopConceptStatusEnum):
-            self.omop_concept_status = OmopConceptStatusEnum(self.omop_concept_status)
+        if self._is_empty(self.concept_status):
+            self.MissingRequiredField("concept_status")
+        if not isinstance(self.concept_status, ConceptStatusEnum):
+            self.concept_status = ConceptStatusEnum(self.concept_status)
 
         if self._is_empty(self.value_data_type):
             self.MissingRequiredField("value_data_type")
@@ -166,32 +162,18 @@ class VariableIdentity(YAMLRoot):
         if self.units_display is not None and not isinstance(self.units_display, str):
             self.units_display = str(self.units_display)
 
-        if self.omop_concept_id is not None and not isinstance(self.omop_concept_id, int):
-            self.omop_concept_id = int(self.omop_concept_id)
+        if self.target_concept_vocabulary is not None and not isinstance(self.target_concept_vocabulary, str):
+            self.target_concept_vocabulary = str(self.target_concept_vocabulary)
 
-        if self.omop_concept_id_missing_reason is not None and not isinstance(self.omop_concept_id_missing_reason, MissingReasonEnum):
-            self.omop_concept_id_missing_reason = MissingReasonEnum(self.omop_concept_id_missing_reason)
+        if self.target_concept_id is not None and not isinstance(self.target_concept_id, str):
+            self.target_concept_id = str(self.target_concept_id)
 
-        if self.ecto_iri is not None and not isinstance(self.ecto_iri, URIorCURIE):
-            self.ecto_iri = URIorCURIE(self.ecto_iri)
+        if self.target_concept_id_missing_reason is not None and not isinstance(self.target_concept_id_missing_reason, MissingReasonEnum):
+            self.target_concept_id_missing_reason = MissingReasonEnum(self.target_concept_id_missing_reason)
 
-        if self.ecto_iri_missing_reason is not None and not isinstance(self.ecto_iri_missing_reason, MissingReasonEnum):
-            self.ecto_iri_missing_reason = MissingReasonEnum(self.ecto_iri_missing_reason)
-
-        if self.envo_iri is not None and not isinstance(self.envo_iri, URIorCURIE):
-            self.envo_iri = URIorCURIE(self.envo_iri)
-
-        if self.loinc_code is not None and not isinstance(self.loinc_code, str):
-            self.loinc_code = str(self.loinc_code)
-
-        if self.loinc_code_missing_reason is not None and not isinstance(self.loinc_code_missing_reason, MissingReasonEnum):
-            self.loinc_code_missing_reason = MissingReasonEnum(self.loinc_code_missing_reason)
-
-        if self.snomed_code is not None and not isinstance(self.snomed_code, str):
-            self.snomed_code = str(self.snomed_code)
-
-        if self.snomed_code_missing_reason is not None and not isinstance(self.snomed_code_missing_reason, MissingReasonEnum):
-            self.snomed_code_missing_reason = MissingReasonEnum(self.snomed_code_missing_reason)
+        if not isinstance(self.concept_mappings, list):
+            self.concept_mappings = [self.concept_mappings] if self.concept_mappings is not None else []
+        self.concept_mappings = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.concept_mappings]
 
         if self.value_range_plausible_min is not None and not isinstance(self.value_range_plausible_min, float):
             self.value_range_plausible_min = float(self.value_range_plausible_min)
@@ -276,8 +258,8 @@ class SpatialReference(YAMLRoot):
 class TemporalReference(YAMLRoot):
     """
     Temporal provenance of an environmental exposure value: native temporal grain, aggregation rule, day-boundary
-    convention, coverage of the source product, the extraction window the run actually pulled, calendar, and lag
-    alignment to a clinical event. One per record.
+    convention, coverage of the source product, the extraction window the run actually pulled, and calendar. One per
+    record.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -295,9 +277,6 @@ class TemporalReference(YAMLRoot):
     extraction_window_start: Optional[Union[str, XSDDate]] = None
     extraction_window_end: Optional[Union[str, XSDDate]] = None
     calendar: Optional[Union[str, "CalendarEnum"]] = None
-    lag_alignment_applied: Optional[Union[str, "LagAlignmentEnum"]] = None
-    lag_alignment_specifier: Optional[str] = None
-    lag_alignment_applied_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.temporal_resolution):
@@ -333,15 +312,6 @@ class TemporalReference(YAMLRoot):
         if self.calendar is not None and not isinstance(self.calendar, CalendarEnum):
             self.calendar = CalendarEnum(self.calendar)
 
-        if self.lag_alignment_applied is not None and not isinstance(self.lag_alignment_applied, LagAlignmentEnum):
-            self.lag_alignment_applied = LagAlignmentEnum(self.lag_alignment_applied)
-
-        if self.lag_alignment_specifier is not None and not isinstance(self.lag_alignment_specifier, str):
-            self.lag_alignment_specifier = str(self.lag_alignment_specifier)
-
-        if self.lag_alignment_applied_missing_reason is not None and not isinstance(self.lag_alignment_applied_missing_reason, MissingReasonEnum):
-            self.lag_alignment_applied_missing_reason = MissingReasonEnum(self.lag_alignment_applied_missing_reason)
-
         super().__post_init__(**kwargs)
 
 
@@ -359,22 +329,22 @@ class SourceDataset(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = ENVAR.SourceDataset
 
     source_dataset_name: str = None
-    source_dataset_short_code: str = None
     source_dataset_version: str = None
-    source_producer_institution: str = None
-    source_license_spdx: str = None
-    source_native_format: Union[str, "SourceNativeFormatEnum"] = None
+    source_dataset_short_code: Optional[str] = None
     source_dataset_doi: Optional[str] = None
     source_dataset_doi_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     source_dataset_temporal_coverage: Optional[str] = None
     source_dataset_spatial_extent: Optional[str] = None
+    source_producer_institution: Optional[str] = None
     source_citation_apa: Optional[str] = None
     source_citation_bibtex: Optional[str] = None
     source_citation_bibtex_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    source_license_spdx: Optional[str] = None
     source_access_url: Optional[Union[str, URI]] = None
+    source_native_format: Optional[Union[str, "SourceNativeFormatEnum"]] = None
     source_homogenisation_status: Optional[Union[str, "HomogenisationStatusEnum"]] = None
     source_homogenisation_status_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    source_acdd_attributes: Optional[str] = None
+    source_acdd_attributes: Optional[Union[dict, AnyValue]] = None
     source_acdd_attributes_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -383,30 +353,13 @@ class SourceDataset(YAMLRoot):
         if not isinstance(self.source_dataset_name, str):
             self.source_dataset_name = str(self.source_dataset_name)
 
-        if self._is_empty(self.source_dataset_short_code):
-            self.MissingRequiredField("source_dataset_short_code")
-        if not isinstance(self.source_dataset_short_code, str):
-            self.source_dataset_short_code = str(self.source_dataset_short_code)
-
         if self._is_empty(self.source_dataset_version):
             self.MissingRequiredField("source_dataset_version")
         if not isinstance(self.source_dataset_version, str):
             self.source_dataset_version = str(self.source_dataset_version)
 
-        if self._is_empty(self.source_producer_institution):
-            self.MissingRequiredField("source_producer_institution")
-        if not isinstance(self.source_producer_institution, str):
-            self.source_producer_institution = str(self.source_producer_institution)
-
-        if self._is_empty(self.source_license_spdx):
-            self.MissingRequiredField("source_license_spdx")
-        if not isinstance(self.source_license_spdx, str):
-            self.source_license_spdx = str(self.source_license_spdx)
-
-        if self._is_empty(self.source_native_format):
-            self.MissingRequiredField("source_native_format")
-        if not isinstance(self.source_native_format, SourceNativeFormatEnum):
-            self.source_native_format = SourceNativeFormatEnum(self.source_native_format)
+        if self.source_dataset_short_code is not None and not isinstance(self.source_dataset_short_code, str):
+            self.source_dataset_short_code = str(self.source_dataset_short_code)
 
         if self.source_dataset_doi is not None and not isinstance(self.source_dataset_doi, str):
             self.source_dataset_doi = str(self.source_dataset_doi)
@@ -420,6 +373,9 @@ class SourceDataset(YAMLRoot):
         if self.source_dataset_spatial_extent is not None and not isinstance(self.source_dataset_spatial_extent, str):
             self.source_dataset_spatial_extent = str(self.source_dataset_spatial_extent)
 
+        if self.source_producer_institution is not None and not isinstance(self.source_producer_institution, str):
+            self.source_producer_institution = str(self.source_producer_institution)
+
         if self.source_citation_apa is not None and not isinstance(self.source_citation_apa, str):
             self.source_citation_apa = str(self.source_citation_apa)
 
@@ -429,17 +385,20 @@ class SourceDataset(YAMLRoot):
         if self.source_citation_bibtex_missing_reason is not None and not isinstance(self.source_citation_bibtex_missing_reason, MissingReasonEnum):
             self.source_citation_bibtex_missing_reason = MissingReasonEnum(self.source_citation_bibtex_missing_reason)
 
+        if self.source_license_spdx is not None and not isinstance(self.source_license_spdx, str):
+            self.source_license_spdx = str(self.source_license_spdx)
+
         if self.source_access_url is not None and not isinstance(self.source_access_url, URI):
             self.source_access_url = URI(self.source_access_url)
+
+        if self.source_native_format is not None and not isinstance(self.source_native_format, SourceNativeFormatEnum):
+            self.source_native_format = SourceNativeFormatEnum(self.source_native_format)
 
         if self.source_homogenisation_status is not None and not isinstance(self.source_homogenisation_status, HomogenisationStatusEnum):
             self.source_homogenisation_status = HomogenisationStatusEnum(self.source_homogenisation_status)
 
         if self.source_homogenisation_status_missing_reason is not None and not isinstance(self.source_homogenisation_status_missing_reason, MissingReasonEnum):
             self.source_homogenisation_status_missing_reason = MissingReasonEnum(self.source_homogenisation_status_missing_reason)
-
-        if self.source_acdd_attributes is not None and not isinstance(self.source_acdd_attributes, str):
-            self.source_acdd_attributes = str(self.source_acdd_attributes)
 
         if self.source_acdd_attributes_missing_reason is not None and not isinstance(self.source_acdd_attributes_missing_reason, MissingReasonEnum):
             self.source_acdd_attributes_missing_reason = MissingReasonEnum(self.source_acdd_attributes_missing_reason)
@@ -542,7 +501,7 @@ class Uncertainty(YAMLRoot):
     per_value_uncertainty_type_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     per_value_uncertainty_units_ucum: Optional[str] = None
     per_value_uncertainty_units_ucum_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    model_aggregate_uncertainty: Optional[str] = None
+    model_aggregate_uncertainty: Optional[Union[dict, "ModelAggregateUncertainty"]] = None
     model_aggregate_uncertainty_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     quality_flag_field_name: Optional[str] = None
     quality_flag_field_name_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
@@ -572,8 +531,8 @@ class Uncertainty(YAMLRoot):
         if self.per_value_uncertainty_units_ucum_missing_reason is not None and not isinstance(self.per_value_uncertainty_units_ucum_missing_reason, MissingReasonEnum):
             self.per_value_uncertainty_units_ucum_missing_reason = MissingReasonEnum(self.per_value_uncertainty_units_ucum_missing_reason)
 
-        if self.model_aggregate_uncertainty is not None and not isinstance(self.model_aggregate_uncertainty, str):
-            self.model_aggregate_uncertainty = str(self.model_aggregate_uncertainty)
+        if self.model_aggregate_uncertainty is not None and not isinstance(self.model_aggregate_uncertainty, ModelAggregateUncertainty):
+            self.model_aggregate_uncertainty = ModelAggregateUncertainty(**as_dict(self.model_aggregate_uncertainty))
 
         if self.model_aggregate_uncertainty_missing_reason is not None and not isinstance(self.model_aggregate_uncertainty_missing_reason, MissingReasonEnum):
             self.model_aggregate_uncertainty_missing_reason = MissingReasonEnum(self.model_aggregate_uncertainty_missing_reason)
@@ -606,10 +565,42 @@ class Uncertainty(YAMLRoot):
 
 
 @dataclass(repr=False)
+class ModelAggregateUncertainty(YAMLRoot):
+    """
+    Whole-model uncertainty summary — cross-validation metrics and the reference where they are reported. Inlined on
+    `model_aggregate_uncertainty`.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = ENVAR["ModelAggregateUncertainty"]
+    class_class_curie: ClassVar[str] = "envar:ModelAggregateUncertainty"
+    class_name: ClassVar[str] = "ModelAggregateUncertainty"
+    class_model_uri: ClassVar[URIRef] = ENVAR.ModelAggregateUncertainty
+
+    cv_r2: Optional[float] = None
+    cv_rmse: Optional[float] = None
+    reported_in: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.cv_r2 is not None and not isinstance(self.cv_r2, float):
+            self.cv_r2 = float(self.cv_r2)
+
+        if self.cv_rmse is not None and not isinstance(self.cv_rmse, float):
+            self.cv_rmse = float(self.cv_rmse)
+
+        if self.reported_in is not None and not isinstance(self.reported_in, str):
+            self.reported_in = str(self.reported_in)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class LinkageMethod(YAMLRoot):
     """
-    How a gridded environmental value gets attached to a patient location: the linkage strategy, any buffer
-    parameters, the propagated geocoder precision and score, and how patient address-over-time is modelled. One per
+    How a gridded environmental value gets attached to a patient: the resolution of the patient's spatiotemporal
+    trajectory down to the resolution the exposure data supports. Covers the linkage strategy and buffer parameters,
+    the propagated geocoder precision and score, how patient location-over-time is modelled (the spatial axis), and
+    the clinical-date-assignment convention, partial-day attribution, and lag alignment (the temporal axis). One per
     record.
     """
     _inherited_slots: ClassVar[list[str]] = []
@@ -620,32 +611,29 @@ class LinkageMethod(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = ENVAR.LinkageMethod
 
     linkage_strategy: Union[str, "LinkageStrategyEnum"] = None
-    geocoding_precision_propagated: Union[str, "GeocodingPrecisionEnum"] = None
-    address_period_alignment: Union[str, "AddressPeriodAlignmentEnum"] = None
     linkage_buffer_radius_m: Optional[float] = None
     linkage_buffer_radius_m_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     linkage_buffer_aggregation_method: Optional[Union[str, "BufferAggregationEnum"]] = None
     linkage_buffer_aggregation_method_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     linkage_max_distance_to_station_m: Optional[float] = None
     linkage_max_distance_to_station_m_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    geocoding_precision_propagated: Optional[Union[str, "GeocodingPrecisionEnum"]] = None
     geocoding_score_propagated: Optional[float] = None
     geocoding_score_propagated_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    address_period_alignment: Optional[Union[str, "AddressPeriodAlignmentEnum"]] = None
+    clinical_date_assignment_convention: Optional[Union[str, "ClinicalDateAssignmentEnum"]] = None
+    clinical_date_assignment_convention_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    partial_day_attribution_rule: Optional[Union[str, "PartialDayAttributionEnum"]] = None
+    partial_day_attribution_rule_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    lag_alignment_applied: Optional[Union[str, "LagAlignmentEnum"]] = None
+    lag_alignment_specifier: Optional[str] = None
+    lag_alignment_applied_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.linkage_strategy):
             self.MissingRequiredField("linkage_strategy")
         if not isinstance(self.linkage_strategy, LinkageStrategyEnum):
             self.linkage_strategy = LinkageStrategyEnum(self.linkage_strategy)
-
-        if self._is_empty(self.geocoding_precision_propagated):
-            self.MissingRequiredField("geocoding_precision_propagated")
-        if not isinstance(self.geocoding_precision_propagated, GeocodingPrecisionEnum):
-            self.geocoding_precision_propagated = GeocodingPrecisionEnum(self.geocoding_precision_propagated)
-
-        if self._is_empty(self.address_period_alignment):
-            self.MissingRequiredField("address_period_alignment")
-        if not isinstance(self.address_period_alignment, AddressPeriodAlignmentEnum):
-            self.address_period_alignment = AddressPeriodAlignmentEnum(self.address_period_alignment)
 
         if self.linkage_buffer_radius_m is not None and not isinstance(self.linkage_buffer_radius_m, float):
             self.linkage_buffer_radius_m = float(self.linkage_buffer_radius_m)
@@ -665,11 +653,38 @@ class LinkageMethod(YAMLRoot):
         if self.linkage_max_distance_to_station_m_missing_reason is not None and not isinstance(self.linkage_max_distance_to_station_m_missing_reason, MissingReasonEnum):
             self.linkage_max_distance_to_station_m_missing_reason = MissingReasonEnum(self.linkage_max_distance_to_station_m_missing_reason)
 
+        if self.geocoding_precision_propagated is not None and not isinstance(self.geocoding_precision_propagated, GeocodingPrecisionEnum):
+            self.geocoding_precision_propagated = GeocodingPrecisionEnum(self.geocoding_precision_propagated)
+
         if self.geocoding_score_propagated is not None and not isinstance(self.geocoding_score_propagated, float):
             self.geocoding_score_propagated = float(self.geocoding_score_propagated)
 
         if self.geocoding_score_propagated_missing_reason is not None and not isinstance(self.geocoding_score_propagated_missing_reason, MissingReasonEnum):
             self.geocoding_score_propagated_missing_reason = MissingReasonEnum(self.geocoding_score_propagated_missing_reason)
+
+        if self.address_period_alignment is not None and not isinstance(self.address_period_alignment, AddressPeriodAlignmentEnum):
+            self.address_period_alignment = AddressPeriodAlignmentEnum(self.address_period_alignment)
+
+        if self.clinical_date_assignment_convention is not None and not isinstance(self.clinical_date_assignment_convention, ClinicalDateAssignmentEnum):
+            self.clinical_date_assignment_convention = ClinicalDateAssignmentEnum(self.clinical_date_assignment_convention)
+
+        if self.clinical_date_assignment_convention_missing_reason is not None and not isinstance(self.clinical_date_assignment_convention_missing_reason, MissingReasonEnum):
+            self.clinical_date_assignment_convention_missing_reason = MissingReasonEnum(self.clinical_date_assignment_convention_missing_reason)
+
+        if self.partial_day_attribution_rule is not None and not isinstance(self.partial_day_attribution_rule, PartialDayAttributionEnum):
+            self.partial_day_attribution_rule = PartialDayAttributionEnum(self.partial_day_attribution_rule)
+
+        if self.partial_day_attribution_rule_missing_reason is not None and not isinstance(self.partial_day_attribution_rule_missing_reason, MissingReasonEnum):
+            self.partial_day_attribution_rule_missing_reason = MissingReasonEnum(self.partial_day_attribution_rule_missing_reason)
+
+        if self.lag_alignment_applied is not None and not isinstance(self.lag_alignment_applied, LagAlignmentEnum):
+            self.lag_alignment_applied = LagAlignmentEnum(self.lag_alignment_applied)
+
+        if self.lag_alignment_specifier is not None and not isinstance(self.lag_alignment_specifier, str):
+            self.lag_alignment_specifier = str(self.lag_alignment_specifier)
+
+        if self.lag_alignment_applied_missing_reason is not None and not isinstance(self.lag_alignment_applied_missing_reason, MissingReasonEnum):
+            self.lag_alignment_applied_missing_reason = MissingReasonEnum(self.lag_alignment_applied_missing_reason)
 
         super().__post_init__(**kwargs)
 
@@ -690,15 +705,15 @@ class ToolRun(YAMLRoot):
 
     tool_name: str = None
     tool_version: str = None
-    run_timestamp_utc: Union[str, XSDDateTime] = None
     tool_description: Optional[str] = None
     container_image_repository: Optional[str] = None
     container_image_repository_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     container_image_digest: Optional[str] = None
     container_image_digest_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     run_arguments: Optional[str] = None
+    run_timestamp_utc: Optional[Union[str, XSDDateTime]] = None
     run_duration_seconds: Optional[float] = None
-    run_environment: Optional[str] = None
+    run_environment: Optional[Union[dict, AnyValue]] = None
     input_file_sha256: Optional[str] = None
     input_row_count: Optional[int] = None
     output_file_sha256: Optional[str] = None
@@ -716,11 +731,6 @@ class ToolRun(YAMLRoot):
             self.MissingRequiredField("tool_version")
         if not isinstance(self.tool_version, str):
             self.tool_version = str(self.tool_version)
-
-        if self._is_empty(self.run_timestamp_utc):
-            self.MissingRequiredField("run_timestamp_utc")
-        if not isinstance(self.run_timestamp_utc, XSDDateTime):
-            self.run_timestamp_utc = XSDDateTime(self.run_timestamp_utc)
 
         if self.tool_description is not None and not isinstance(self.tool_description, str):
             self.tool_description = str(self.tool_description)
@@ -740,11 +750,11 @@ class ToolRun(YAMLRoot):
         if self.run_arguments is not None and not isinstance(self.run_arguments, str):
             self.run_arguments = str(self.run_arguments)
 
+        if self.run_timestamp_utc is not None and not isinstance(self.run_timestamp_utc, XSDDateTime):
+            self.run_timestamp_utc = XSDDateTime(self.run_timestamp_utc)
+
         if self.run_duration_seconds is not None and not isinstance(self.run_duration_seconds, float):
             self.run_duration_seconds = float(self.run_duration_seconds)
-
-        if self.run_environment is not None and not isinstance(self.run_environment, str):
-            self.run_environment = str(self.run_environment)
 
         if self.input_file_sha256 is not None and not isinstance(self.input_file_sha256, str):
             self.input_file_sha256 = str(self.input_file_sha256)
@@ -780,18 +790,14 @@ class ProvenanceChain(YAMLRoot):
     class_name: ClassVar[str] = "ProvenanceChain"
     class_model_uri: ClassVar[URIRef] = ENVAR.ProvenanceChain
 
-    provenance_chain_steps: Union[Union[dict, ToolRun], list[Union[dict, ToolRun]]] = None
-    provenance_chain_terminus_type: Union[str, "ProvenanceChainTerminusEnum"] = None
+    provenance_chain_steps: Optional[Union[Union[dict, ToolRun], list[Union[dict, ToolRun]]]] = empty_list()
+    provenance_chain_terminus_type: Optional[Union[str, "ProvenanceChainTerminusEnum"]] = None
     chain_compatibility_assertions: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.provenance_chain_steps):
-            self.MissingRequiredField("provenance_chain_steps")
         self._normalize_inlined_as_list(slot_name="provenance_chain_steps", slot_type=ToolRun, key_name="tool_name", keyed=False)
 
-        if self._is_empty(self.provenance_chain_terminus_type):
-            self.MissingRequiredField("provenance_chain_terminus_type")
-        if not isinstance(self.provenance_chain_terminus_type, ProvenanceChainTerminusEnum):
+        if self.provenance_chain_terminus_type is not None and not isinstance(self.provenance_chain_terminus_type, ProvenanceChainTerminusEnum):
             self.provenance_chain_terminus_type = ProvenanceChainTerminusEnum(self.provenance_chain_terminus_type)
 
         if not isinstance(self.chain_compatibility_assertions, list):
@@ -820,7 +826,7 @@ class DerivedHeatMetric(YAMLRoot):
     indoor_outdoor: Union[str, "IndoorOutdoorEnum"] = None
     equation_variant: Optional[Union[str, "EquationVariantEnum"]] = None
     equation_variant_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    equation_inputs: Optional[Union[str, list[str]]] = empty_list()
+    equation_inputs: Optional[Union[Union[dict, "EquationInput"], list[Union[dict, "EquationInput"]]]] = empty_list()
     equation_validity_range: Optional[str] = None
     equation_validity_range_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     wind_speed_measurement_height_m: Optional[float] = None
@@ -860,9 +866,7 @@ class DerivedHeatMetric(YAMLRoot):
         if self.equation_variant_missing_reason is not None and not isinstance(self.equation_variant_missing_reason, MissingReasonEnum):
             self.equation_variant_missing_reason = MissingReasonEnum(self.equation_variant_missing_reason)
 
-        if not isinstance(self.equation_inputs, list):
-            self.equation_inputs = [self.equation_inputs] if self.equation_inputs is not None else []
-        self.equation_inputs = [v if isinstance(v, str) else str(v) for v in self.equation_inputs]
+        self._normalize_inlined_as_list(slot_name="equation_inputs", slot_type=EquationInput, key_name="input_role", keyed=False)
 
         if self.equation_validity_range is not None and not isinstance(self.equation_validity_range, str):
             self.equation_validity_range = str(self.equation_validity_range)
@@ -931,41 +935,71 @@ class DerivedHeatMetric(YAMLRoot):
 
 
 @dataclass(repr=False)
-class OmopLinkage(YAMLRoot):
+class EquationInput(YAMLRoot):
     """
-    Hooks the sidecar uses to interface with OMOP (or BDC, or another) health-data layer. These are *not* clinical
-    metadata — they are the hooks the exposure record needs to be findable from the health side. One per record.
+    A single physical-state input to a derived heat metric, recorded as a typed reference into the provenance chain
+    rather than an inline copy of the input's metadata. It names the input's role (a CF standard name) and points, via
+    `input_provenance_id`, to the upstream sidecar that carries that input's full spatial / temporal / model context.
+    This is the Option-B decomposition: when a multi-input metric (Heat Index from T + RH; WBGT from T + RH + wind +
+    radiation) draws its inputs from different products that diverge in resolution, day-boundary convention, or
+    temporal aggregation, each input remains its own full sidecar — listed here and as a step in `provenance_chain` —
+    so the divergence stays explicit and machine-checkable instead of being silently absorbed into the single output
+    value.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = ENVAR["OmopLinkage"]
-    class_class_curie: ClassVar[str] = "envar:OmopLinkage"
-    class_name: ClassVar[str] = "OmopLinkage"
-    class_model_uri: ClassVar[URIRef] = ENVAR.OmopLinkage
+    class_class_uri: ClassVar[URIRef] = ENVAR["EquationInput"]
+    class_class_curie: ClassVar[str] = "envar:EquationInput"
+    class_name: ClassVar[str] = "EquationInput"
+    class_model_uri: ClassVar[URIRef] = ENVAR.EquationInput
 
-    omop_external_exposure_link_field: str = None
-    phi_status: Union[str, "PhiStatusEnum"] = None
-    bdc_link_field: Optional[str] = None
-    bdc_link_field_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    input_role: str = None
+    input_provenance_id: str = None
+    input_source_short_code: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.input_role):
+            self.MissingRequiredField("input_role")
+        if not isinstance(self.input_role, str):
+            self.input_role = str(self.input_role)
+
+        if self._is_empty(self.input_provenance_id):
+            self.MissingRequiredField("input_provenance_id")
+        if not isinstance(self.input_provenance_id, str):
+            self.input_provenance_id = str(self.input_provenance_id)
+
+        if self.input_source_short_code is not None and not isinstance(self.input_source_short_code, str):
+            self.input_source_short_code = str(self.input_source_short_code)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class HealthLayerLinkage(YAMLRoot):
+    """
+    Hooks the sidecar uses to be findable from a downstream health-data layer (OMOP, BioData Catalyst, …). These are
+    *not* clinical metadata — they are the hooks the exposure record needs so a health-side row can resolve back to
+    its provenance. The target layer is named in `health_layer_target`, so no single model is privileged. One per
+    record.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = ENVAR["HealthLayerLinkage"]
+    class_class_curie: ClassVar[str] = "envar:HealthLayerLinkage"
+    class_name: ClassVar[str] = "HealthLayerLinkage"
+    class_model_uri: ClassVar[URIRef] = ENVAR.HealthLayerLinkage
+
+    health_layer_target: Optional[Union[str, "HealthLayerTargetEnum"]] = None
+    health_layer_link_field: Optional[str] = None
     cohort_size_anchored: Optional[int] = None
     cohort_size_anchored_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.omop_external_exposure_link_field):
-            self.MissingRequiredField("omop_external_exposure_link_field")
-        if not isinstance(self.omop_external_exposure_link_field, str):
-            self.omop_external_exposure_link_field = str(self.omop_external_exposure_link_field)
+        if self.health_layer_target is not None and not isinstance(self.health_layer_target, HealthLayerTargetEnum):
+            self.health_layer_target = HealthLayerTargetEnum(self.health_layer_target)
 
-        if self._is_empty(self.phi_status):
-            self.MissingRequiredField("phi_status")
-        if not isinstance(self.phi_status, PhiStatusEnum):
-            self.phi_status = PhiStatusEnum(self.phi_status)
-
-        if self.bdc_link_field is not None and not isinstance(self.bdc_link_field, str):
-            self.bdc_link_field = str(self.bdc_link_field)
-
-        if self.bdc_link_field_missing_reason is not None and not isinstance(self.bdc_link_field_missing_reason, MissingReasonEnum):
-            self.bdc_link_field_missing_reason = MissingReasonEnum(self.bdc_link_field_missing_reason)
+        if self.health_layer_link_field is not None and not isinstance(self.health_layer_link_field, str):
+            self.health_layer_link_field = str(self.health_layer_link_field)
 
         if self.cohort_size_anchored is not None and not isinstance(self.cohort_size_anchored, int):
             self.cohort_size_anchored = int(self.cohort_size_anchored)
@@ -1038,7 +1072,7 @@ class EnvironmentalExposureRecord(YAMLRoot):
     A single environmental-exposure record sidecar: the complete metadata graph that travels alongside a value (or
     value series) emitted by an upstream tool. Composes variable identity, spatial / temporal reference, source
     dataset, exposure model, uncertainty, linkage, tool run, provenance chain, optional derived-heat-metric
-    methodology, OMOP linkage hooks, and FAIR-deposit metadata.
+    methodology, health-data-layer linkage hooks, and FAIR-deposit metadata.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -1052,16 +1086,16 @@ class EnvironmentalExposureRecord(YAMLRoot):
     location: Union[dict, SpatialReference] = None
     temporality: Union[dict, TemporalReference] = None
     methodology: Union[dict, ExposureModel] = None
-    observation_result: Union[dict, "ValueMicroschemaDefinition"] = None
     schema_version: str = None
     provenance_id: str = None
+    phi_status: Union[str, "PhiStatusEnum"] = None
     source_dataset: Union[dict, SourceDataset] = None
     linkage_method: Union[dict, LinkageMethod] = None
     tool_run: Union[dict, ToolRun] = None
-    provenance_chain: Union[dict, ProvenanceChain] = None
-    omop_linkage: Union[dict, OmopLinkage] = None
     uncertainty: Optional[Union[dict, Uncertainty]] = None
+    provenance_chain: Optional[Union[dict, ProvenanceChain]] = None
     derived_heat_metric: Optional[Union[dict, DerivedHeatMetric]] = None
+    health_layer_linkage: Optional[Union[dict, HealthLayerLinkage]] = None
     deposit_metadata: Optional[Union[dict, DepositMetadata]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1090,11 +1124,6 @@ class EnvironmentalExposureRecord(YAMLRoot):
         if not isinstance(self.methodology, ExposureModel):
             self.methodology = ExposureModel(**as_dict(self.methodology))
 
-        if self._is_empty(self.observation_result):
-            self.MissingRequiredField("observation_result")
-        if not isinstance(self.observation_result, ValueMicroschemaDefinition):
-            self.observation_result = ValueMicroschemaDefinition()
-
         if self._is_empty(self.schema_version):
             self.MissingRequiredField("schema_version")
         if not isinstance(self.schema_version, str):
@@ -1104,6 +1133,11 @@ class EnvironmentalExposureRecord(YAMLRoot):
             self.MissingRequiredField("provenance_id")
         if not isinstance(self.provenance_id, str):
             self.provenance_id = str(self.provenance_id)
+
+        if self._is_empty(self.phi_status):
+            self.MissingRequiredField("phi_status")
+        if not isinstance(self.phi_status, PhiStatusEnum):
+            self.phi_status = PhiStatusEnum(self.phi_status)
 
         if self._is_empty(self.source_dataset):
             self.MissingRequiredField("source_dataset")
@@ -1120,21 +1154,17 @@ class EnvironmentalExposureRecord(YAMLRoot):
         if not isinstance(self.tool_run, ToolRun):
             self.tool_run = ToolRun(**as_dict(self.tool_run))
 
-        if self._is_empty(self.provenance_chain):
-            self.MissingRequiredField("provenance_chain")
-        if not isinstance(self.provenance_chain, ProvenanceChain):
-            self.provenance_chain = ProvenanceChain(**as_dict(self.provenance_chain))
-
-        if self._is_empty(self.omop_linkage):
-            self.MissingRequiredField("omop_linkage")
-        if not isinstance(self.omop_linkage, OmopLinkage):
-            self.omop_linkage = OmopLinkage(**as_dict(self.omop_linkage))
-
         if self.uncertainty is not None and not isinstance(self.uncertainty, Uncertainty):
             self.uncertainty = Uncertainty(**as_dict(self.uncertainty))
 
+        if self.provenance_chain is not None and not isinstance(self.provenance_chain, ProvenanceChain):
+            self.provenance_chain = ProvenanceChain(**as_dict(self.provenance_chain))
+
         if self.derived_heat_metric is not None and not isinstance(self.derived_heat_metric, DerivedHeatMetric):
             self.derived_heat_metric = DerivedHeatMetric(**as_dict(self.derived_heat_metric))
+
+        if self.health_layer_linkage is not None and not isinstance(self.health_layer_linkage, HealthLayerLinkage):
+            self.health_layer_linkage = HealthLayerLinkage(**as_dict(self.health_layer_linkage))
 
         if self.deposit_metadata is not None and not isinstance(self.deposit_metadata, DepositMetadata):
             self.deposit_metadata = DepositMetadata(**as_dict(self.deposit_metadata))
@@ -1145,7 +1175,7 @@ class EnvironmentalExposureRecord(YAMLRoot):
 @dataclass(repr=False)
 class DailyMaxTemperatureRecord(EnvironmentalExposureRecord):
     """
-    Canonical record for daily maximum 2 m air temperature (Tmax). Pins `cf_standard_name = air_temperature`,
+    Canonical record for daily maximum 2 m air temperature (Tmax). Pins `standard_name = CF:air_temperature`,
     `cf_cell_methods = "time: maximum"`, `units_ucum = Cel`, `value_data_type = continuous_numeric`.
     """
     _inherited_slots: ClassVar[list[str]] = []
@@ -1160,19 +1190,17 @@ class DailyMaxTemperatureRecord(EnvironmentalExposureRecord):
     location: Union[dict, SpatialReference] = None
     temporality: Union[dict, TemporalReference] = None
     methodology: Union[dict, ExposureModel] = None
-    observation_result: Union[dict, "ValueMicroschemaDefinition"] = None
     schema_version: str = None
     provenance_id: str = None
+    phi_status: Union[str, "PhiStatusEnum"] = None
     source_dataset: Union[dict, SourceDataset] = None
     linkage_method: Union[dict, LinkageMethod] = None
     tool_run: Union[dict, ToolRun] = None
-    provenance_chain: Union[dict, ProvenanceChain] = None
-    omop_linkage: Union[dict, OmopLinkage] = None
 
 @dataclass(repr=False)
 class DailyMinTemperatureRecord(EnvironmentalExposureRecord):
     """
-    Canonical record for daily minimum 2 m air temperature (Tmin). Pins `cf_standard_name = air_temperature`,
+    Canonical record for daily minimum 2 m air temperature (Tmin). Pins `standard_name = CF:air_temperature`,
     `cf_cell_methods = "time: minimum"`, `units_ucum = Cel`, `value_data_type = continuous_numeric`.
     """
     _inherited_slots: ClassVar[list[str]] = []
@@ -1187,14 +1215,12 @@ class DailyMinTemperatureRecord(EnvironmentalExposureRecord):
     location: Union[dict, SpatialReference] = None
     temporality: Union[dict, TemporalReference] = None
     methodology: Union[dict, ExposureModel] = None
-    observation_result: Union[dict, "ValueMicroschemaDefinition"] = None
     schema_version: str = None
     provenance_id: str = None
+    phi_status: Union[str, "PhiStatusEnum"] = None
     source_dataset: Union[dict, SourceDataset] = None
     linkage_method: Union[dict, LinkageMethod] = None
     tool_run: Union[dict, ToolRun] = None
-    provenance_chain: Union[dict, ProvenanceChain] = None
-    omop_linkage: Union[dict, OmopLinkage] = None
 
 @dataclass(repr=False)
 class WetBulbGlobeTemperatureOutdoorRecord(EnvironmentalExposureRecord):
@@ -1215,14 +1241,12 @@ class WetBulbGlobeTemperatureOutdoorRecord(EnvironmentalExposureRecord):
     location: Union[dict, SpatialReference] = None
     temporality: Union[dict, TemporalReference] = None
     methodology: Union[dict, ExposureModel] = None
-    observation_result: Union[dict, "ValueMicroschemaDefinition"] = None
     schema_version: str = None
     provenance_id: str = None
+    phi_status: Union[str, "PhiStatusEnum"] = None
     source_dataset: Union[dict, SourceDataset] = None
     linkage_method: Union[dict, LinkageMethod] = None
     tool_run: Union[dict, ToolRun] = None
-    provenance_chain: Union[dict, ProvenanceChain] = None
-    omop_linkage: Union[dict, OmopLinkage] = None
     derived_heat_metric: Union[dict, DerivedHeatMetric] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1253,14 +1277,12 @@ class ExtremeHeatDayFlagRecord(EnvironmentalExposureRecord):
     location: Union[dict, SpatialReference] = None
     temporality: Union[dict, TemporalReference] = None
     methodology: Union[dict, ExposureModel] = None
-    observation_result: Union[dict, "ValueMicroschemaDefinition"] = None
     schema_version: str = None
     provenance_id: str = None
+    phi_status: Union[str, "PhiStatusEnum"] = None
     source_dataset: Union[dict, SourceDataset] = None
     linkage_method: Union[dict, LinkageMethod] = None
     tool_run: Union[dict, ToolRun] = None
-    provenance_chain: Union[dict, ProvenanceChain] = None
-    omop_linkage: Union[dict, OmopLinkage] = None
     derived_heat_metric: Union[dict, DerivedHeatMetric] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1526,14 +1548,34 @@ class DataTypeEnum(EnumDefinitionImpl):
         description="The data type of an exposure value.",
     )
 
-class OmopConceptStatusEnum(EnumDefinitionImpl):
+class PhiStatusEnum(EnumDefinitionImpl):
     """
-    Status of a variable's representation in the OHDSI Standardised Vocabulary. `existing` = a concept_id is available
-    now; `proposed` = submission in flight; `gap` = no concept exists and none is proposed.
+    PHI content of the sidecar.
+    """
+    no_phi = PermissibleValue(
+        text="no_phi",
+        description="The sidecar carries no PHI.")
+    aggregated_no_phi = PermissibleValue(
+        text="aggregated_no_phi",
+        description="The sidecar carries aggregated values with no PHI.")
+    phi_present = PermissibleValue(
+        text="phi_present",
+        description="The sidecar carries PHI. Should never happen; sidecars are by design PHI-free.")
+
+    _defn = EnumDefinition(
+        name="PhiStatusEnum",
+        description="PHI content of the sidecar.",
+    )
+
+class ConceptStatusEnum(EnumDefinitionImpl):
+    """
+    Status of a variable's representation in the target health-data vocabulary named by `target_concept_vocabulary`
+    (e.g. the OHDSI Standardised Vocabulary, the BioData Catalyst model). `existing` = a concept id is available now;
+    `proposed` = a submission is in flight; `gap` = no concept exists and none is proposed.
     """
     existing = PermissibleValue(
         text="existing",
-        description="A concept_id is available in the standard OHDSI vocabulary.")
+        description="A concept id is available in the target vocabulary.")
     proposed = PermissibleValue(
         text="proposed",
         description="A concept submission is in flight.")
@@ -1542,8 +1584,8 @@ class OmopConceptStatusEnum(EnumDefinitionImpl):
         description="No concept exists yet and none is yet proposed.")
 
     _defn = EnumDefinition(
-        name="OmopConceptStatusEnum",
-        description="""Status of a variable's representation in the OHDSI Standardised Vocabulary. `existing` = a concept_id is available now; `proposed` = submission in flight; `gap` = no concept exists and none is proposed.""",
+        name="ConceptStatusEnum",
+        description="""Status of a variable's representation in the target health-data vocabulary named by `target_concept_vocabulary` (e.g. the OHDSI Standardised Vocabulary, the BioData Catalyst model). `existing` = a concept id is available now; `proposed` = a submission is in flight; `gap` = no concept exists and none is proposed.""",
     )
 
 class ExtractionMethodEnum(EnumDefinitionImpl):
@@ -1615,6 +1657,10 @@ class TemporalResolutionEnum(EnumDefinitionImpl):
     hourly = PermissibleValue(
         text="hourly",
         description="One value per hour.")
+    three_hourly = PermissibleValue(
+        text="three_hourly",
+        title="3-hourly",
+        description="One value per 3-hour window (NARR sub-daily).")
     daily = PermissibleValue(
         text="daily",
         description="One value per day.")
@@ -1632,13 +1678,6 @@ class TemporalResolutionEnum(EnumDefinitionImpl):
         name="TemporalResolutionEnum",
         description="Native temporal grain of the source product.",
     )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "3_hourly",
-            PermissibleValue(
-                text="3_hourly",
-                description="One value per 3-hour window (NARR sub-daily)."))
 
 class TemporalAggregationMethodEnum(EnumDefinitionImpl):
     """
@@ -1678,24 +1717,24 @@ class DayBoundaryConventionEnum(EnumDefinitionImpl):
     utc_midnight = PermissibleValue(
         text="utc_midnight",
         description="Day starts at 00:00 UTC. NARR / ERA5 sub-daily are computed against this.")
+    ending_1200_gmt = PermissibleValue(
+        text="ending_1200_gmt",
+        title="24h ending 1200 GMT",
+        description="""24-hour window ending 12:00 GMT, used by PRISM and historically common in US station-network products.""")
     solar_noon_centered = PermissibleValue(
         text="solar_noon_centered",
         description="24-hour window centered on local solar noon.")
     observation_dependent = PermissibleValue(
         text="observation_dependent",
         description="""Day boundary follows whatever the underlying observation network uses (e.g. weather-station local custom).""")
+    not_applicable = PermissibleValue(
+        text="not_applicable",
+        description="""No day boundary applies — e.g. an annual or monthly aggregate where the sub-daily window is not a meaningful concept (SPEC §5).""")
 
     _defn = EnumDefinition(
         name="DayBoundaryConventionEnum",
         description="""Where the 24-hour day window starts. The single most-omitted slot in the environmental-health literature.""",
     )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "24h_ending_1200_GMT",
-            PermissibleValue(
-                text="24h_ending_1200_GMT",
-                description="""24-hour window ending 12:00 GMT, used by PRISM and historically common in US station-network products."""))
 
 class CalendarEnum(EnumDefinitionImpl):
     """
@@ -1710,6 +1749,10 @@ class CalendarEnum(EnumDefinitionImpl):
     all_leap = PermissibleValue(
         text="all_leap",
         description="366-day calendar with all years leap.")
+    day_360 = PermissibleValue(
+        text="day_360",
+        title="360_day",
+        description="""12 months of 30 days each (CF `calendar` value `360_day`). Common in some climate-model outputs.""")
     julian = PermissibleValue(
         text="julian",
         description="Proleptic Julian calendar.")
@@ -1720,33 +1763,6 @@ class CalendarEnum(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="CalendarEnum",
         description="CF `calendar` values.",
-    )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "360_day",
-            PermissibleValue(
-                text="360_day",
-                description="12 months of 30 days each. Common in some climate-model outputs."))
-
-class LagAlignmentEnum(EnumDefinitionImpl):
-    """
-    Whether the values have been pre-aligned to a clinical event window in this ETL. Companion slot
-    `lag_alignment_specifier` captures the concrete lag pattern (e.g. `lag_3_days`, `distributed_lag_0_21`).
-    """
-    none = PermissibleValue(
-        text="none",
-        description="No lag alignment applied; values are at native dates.")
-    lag_n_days = PermissibleValue(
-        text="lag_n_days",
-        description="A single-day lag of N days has been applied. Concrete N captured in `lag_alignment_specifier`.")
-    distributed_lag = PermissibleValue(
-        text="distributed_lag",
-        description="""A distributed lag over a range of days has been applied. Range captured in `lag_alignment_specifier` (e.g. `\"0-21\"`).""")
-
-    _defn = EnumDefinition(
-        name="LagAlignmentEnum",
-        description="""Whether the values have been pre-aligned to a clinical event window in this ETL. Companion slot `lag_alignment_specifier` captures the concrete lag pattern (e.g. `lag_3_days`, `distributed_lag_0_21`).""",
     )
 
 class HomogenisationStatusEnum(EnumDefinitionImpl):
@@ -1772,41 +1788,43 @@ class SourceNativeFormatEnum(EnumDefinitionImpl):
     """
     Format the source ships in.
     """
-    HDF5 = PermissibleValue(
-        text="HDF5",
+    netcdf4_cf = PermissibleValue(
+        text="netcdf4_cf",
+        title="NetCDF-4/CF",
+        description="NetCDF version 4 with CF Conventions metadata.")
+    hdf5 = PermissibleValue(
+        text="hdf5",
+        title="HDF5",
         description="Hierarchical Data Format version 5.")
-    GeoTIFF = PermissibleValue(
-        text="GeoTIFF",
+    geotiff = PermissibleValue(
+        text="geotiff",
+        title="GeoTIFF",
         description="GeoTIFF raster format.")
-    CSV_station_observations = PermissibleValue(
-        text="CSV_station_observations",
+    grib1 = PermissibleValue(
+        text="grib1",
+        title="GRIB-1",
+        description="WMO GRIB-1 format.")
+    grib2 = PermissibleValue(
+        text="grib2",
+        title="GRIB-2",
+        description="WMO GRIB-2 format.")
+    csv_station_observations = PermissibleValue(
+        text="csv_station_observations",
+        title="CSV station observations",
         description="CSV file of station observations.")
-    Zarr = PermissibleValue(
-        text="Zarr",
+    zarr = PermissibleValue(
+        text="zarr",
+        title="Zarr",
         description="Zarr cloud-optimised array format.")
-    Parquet = PermissibleValue(
-        text="Parquet",
+    parquet = PermissibleValue(
+        text="parquet",
+        title="Parquet",
         description="Apache Parquet tabular format.")
 
     _defn = EnumDefinition(
         name="SourceNativeFormatEnum",
         description="Format the source ships in.",
     )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "NetCDF-4_CF",
-            PermissibleValue(
-                text="NetCDF-4_CF",
-                description="NetCDF version 4 with CF Conventions metadata."))
-        setattr(cls, "GRIB-1",
-            PermissibleValue(
-                text="GRIB-1",
-                description="WMO GRIB-1 format."))
-        setattr(cls, "GRIB-2",
-            PermissibleValue(
-                text="GRIB-2",
-                description="WMO GRIB-2 format."))
 
 class ExposureModelTypeEnum(EnumDefinitionImpl):
     """
@@ -1991,7 +2009,7 @@ class GeocodingPrecisionEnum(EnumDefinitionImpl):
 
 class AddressPeriodAlignmentEnum(EnumDefinitionImpl):
     """
-    How the patient's address-over-time was modelled.
+    How the patient's location-over-time (the spatial axis of trajectory resolution) was modelled.
     """
     single_static_address = PermissibleValue(
         text="single_static_address",
@@ -1999,13 +2017,90 @@ class AddressPeriodAlignmentEnum(EnumDefinitionImpl):
     address_history_from_emr = PermissibleValue(
         text="address_history_from_emr",
         description="An EMR-sourced address history is used.")
+    known_travel_interval = PermissibleValue(
+        text="known_travel_interval",
+        description="""A documented trip away from the residence is accounted for (e.g. a holiday), rather than assuming the residence for the whole period; assuming a static address would smear home-location exposure across days the patient was elsewhere.""")
     synthetic_residence_period = PermissibleValue(
         text="synthetic_residence_period",
         description="A synthetic residence period was constructed for the patient.")
 
     _defn = EnumDefinition(
         name="AddressPeriodAlignmentEnum",
-        description="How the patient's address-over-time was modelled.",
+        description="How the patient's location-over-time (the spatial axis of trajectory resolution) was modelled.",
+    )
+
+class ClinicalDateAssignmentEnum(EnumDefinitionImpl):
+    """
+    The clinical-side mirror of `DayBoundaryConventionEnum` (envar_temporal): which timezone / day-boundary rule was
+    used to collapse the clinical timestamp to the date used in the join. Compared against the exposure-side
+    `day_boundary_convention` by the day-boundary cross-check.
+    """
+    local_midnight = PermissibleValue(
+        text="local_midnight",
+        description="Clinical date assigned at local midnight at the patient location.")
+    utc_midnight = PermissibleValue(
+        text="utc_midnight",
+        description="Clinical date assigned at 00:00 UTC.")
+    source_system_local_time = PermissibleValue(
+        text="source_system_local_time",
+        description="""Clinical date assigned in the source clinical system's local time, whose offset may not be documented.""")
+    date_only_no_time = PermissibleValue(
+        text="date_only_no_time",
+        description="""The clinical record carried only a date (no time of day), so no boundary rule applies; the date is taken as-is.""")
+    unknown = PermissibleValue(
+        text="unknown",
+        description="The clinical-date-assignment convention is unknown.")
+
+    _defn = EnumDefinition(
+        name="ClinicalDateAssignmentEnum",
+        description="""The clinical-side mirror of `DayBoundaryConventionEnum` (envar_temporal): which timezone / day-boundary rule was used to collapse the clinical timestamp to the date used in the join. Compared against the exposure-side `day_boundary_convention` by the day-boundary cross-check.""",
+    )
+
+class PartialDayAttributionEnum(EnumDefinitionImpl):
+    """
+    How boundary / transition days of the patient's trajectory (trip start / end, travel days) are attributed when
+    location changes within a day.
+    """
+    origin_location = PermissibleValue(
+        text="origin_location",
+        description="The transition day is attributed to the origin location.")
+    destination_location = PermissibleValue(
+        text="destination_location",
+        description="The transition day is attributed to the destination location.")
+    both_days_included = PermissibleValue(
+        text="both_days_included",
+        description="Both ends of the transition are counted (exposure attributed at both locations).")
+    excluded = PermissibleValue(
+        text="excluded",
+        description="Transition days are excluded from exposure attribution.")
+    not_applicable = PermissibleValue(
+        text="not_applicable",
+        description="No trajectory transitions occur (e.g. a single static address), so the rule does not apply.")
+
+    _defn = EnumDefinition(
+        name="PartialDayAttributionEnum",
+        description="""How boundary / transition days of the patient's trajectory (trip start / end, travel days) are attributed when location changes within a day.""",
+    )
+
+class LagAlignmentEnum(EnumDefinitionImpl):
+    """
+    Whether the values have been pre-aligned to a clinical event window in this ETL. Companion slot
+    `lag_alignment_specifier` captures the concrete lag pattern (e.g. `lag_3_days`, `distributed_lag_0_21`). Relocated
+    here from envar_temporal.
+    """
+    none = PermissibleValue(
+        text="none",
+        description="No lag alignment applied; values are at native dates.")
+    lag_n_days = PermissibleValue(
+        text="lag_n_days",
+        description="A single-day lag of N days has been applied. Concrete N captured in `lag_alignment_specifier`.")
+    distributed_lag = PermissibleValue(
+        text="distributed_lag",
+        description="""A distributed lag over a range of days has been applied. Range captured in `lag_alignment_specifier` (e.g. `\"0-21\"`).""")
+
+    _defn = EnumDefinition(
+        name="LagAlignmentEnum",
+        description="""Whether the values have been pre-aligned to a clinical event window in this ETL. Companion slot `lag_alignment_specifier` captures the concrete lag pattern (e.g. `lag_3_days`, `distributed_lag_0_21`). Relocated here from envar_temporal.""",
     )
 
 class ProvenanceChainTerminusEnum(EnumDefinitionImpl):
@@ -2167,23 +2262,23 @@ class HeatWaveThresholdDefinitionEnum(EnumDefinitionImpl):
         description="""How the heat-wave threshold is defined. Companion slot `heat_wave_threshold_specifier` captures the concrete value.""",
     )
 
-class PhiStatusEnum(EnumDefinitionImpl):
+class HealthLayerTargetEnum(EnumDefinitionImpl):
     """
-    PHI content of the sidecar.
+    The downstream health-data layer a sidecar links into. Open by design; extend as new targets are supported.
     """
-    no_phi = PermissibleValue(
-        text="no_phi",
-        description="The sidecar carries no PHI.")
-    aggregated_no_phi = PermissibleValue(
-        text="aggregated_no_phi",
-        description="The sidecar carries aggregated values with no PHI.")
-    phi_present = PermissibleValue(
-        text="phi_present",
-        description="The sidecar carries PHI. Should never happen; sidecars are by design PHI-free.")
+    omop_external_exposure = PermissibleValue(
+        text="omop_external_exposure",
+        description="OMOP CDM, via the OHDSI GIS `external_exposure` table extension.")
+    bdc = PermissibleValue(
+        text="bdc",
+        description="BioData Catalyst (BDC) harmonised model.")
+    other = PermissibleValue(
+        text="other",
+        description="Another health-data layer named out of band.")
 
     _defn = EnumDefinition(
-        name="PhiStatusEnum",
-        description="PHI content of the sidecar.",
+        name="HealthLayerTargetEnum",
+        description="""The downstream health-data layer a sidecar links into. Open by design; extend as new targets are supported.""",
     )
 
 class DepositRepositoryEnum(EnumDefinitionImpl):
@@ -2199,6 +2294,10 @@ class DepositRepositoryEnum(EnumDefinitionImpl):
     figshare = PermissibleValue(
         text="figshare",
         description="Figshare.")
+    c_her = PermissibleValue(
+        text="c_her",
+        title="C-HER",
+        description="ORNL C-HER (Centralized Health and Exposomic Resource).")
     osf = PermissibleValue(
         text="osf",
         description="Open Science Framework.")
@@ -2207,13 +2306,6 @@ class DepositRepositoryEnum(EnumDefinitionImpl):
         name="DepositRepositoryEnum",
         description="Repository hosting a FAIR deposit.",
     )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "c-her",
-            PermissibleValue(
-                text="c-her",
-                description="ORNL C-HER (Centralized Health and Exposomic Resource)."))
 
 class ComparatorEnum(EnumDefinitionImpl):
     """
@@ -2247,6 +2339,9 @@ slots.schema_version = Slot(uri=ENVAR.schema_version, name="schema_version", cur
 slots.provenance_id = Slot(uri=ENVAR.provenance_id, name="provenance_id", curie=ENVAR.curie('provenance_id'),
                    model_uri=ENVAR.provenance_id, domain=None, range=str)
 
+slots.phi_status = Slot(uri=ENVAR.phi_status, name="phi_status", curie=ENVAR.curie('phi_status'),
+                   model_uri=ENVAR.phi_status, domain=None, range=Union[str, "PhiStatusEnum"])
+
 slots.missing_reason = Slot(uri=ENVAR.missing_reason, name="missing_reason", curie=ENVAR.curie('missing_reason'),
                    model_uri=ENVAR.missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
@@ -2256,8 +2351,8 @@ slots.variable_name = Slot(uri=ENVAR.variable_name, name="variable_name", curie=
 slots.variable_label = Slot(uri=ENVAR.variable_label, name="variable_label", curie=ENVAR.curie('variable_label'),
                    model_uri=ENVAR.variable_label, domain=None, range=Optional[str])
 
-slots.cf_standard_name = Slot(uri=DCTERMS.subject, name="cf_standard_name", curie=DCTERMS.curie('subject'),
-                   model_uri=ENVAR.cf_standard_name, domain=None, range=Optional[str])
+slots.standard_name = Slot(uri=DCTERMS.subject, name="standard_name", curie=DCTERMS.curie('subject'),
+                   model_uri=ENVAR.standard_name, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.cf_cell_methods = Slot(uri=ENVAR.cf_cell_methods, name="cf_cell_methods", curie=ENVAR.curie('cf_cell_methods'),
                    model_uri=ENVAR.cf_cell_methods, domain=None, range=Optional[str])
@@ -2268,35 +2363,20 @@ slots.units_ucum = Slot(uri=ENVAR.units_ucum, name="units_ucum", curie=ENVAR.cur
 slots.units_display = Slot(uri=ENVAR.units_display, name="units_display", curie=ENVAR.curie('units_display'),
                    model_uri=ENVAR.units_display, domain=None, range=Optional[str])
 
-slots.omop_concept_id = Slot(uri=ENVAR.omop_concept_id, name="omop_concept_id", curie=ENVAR.curie('omop_concept_id'),
-                   model_uri=ENVAR.omop_concept_id, domain=None, range=Optional[int])
+slots.target_concept_vocabulary = Slot(uri=ENVAR.target_concept_vocabulary, name="target_concept_vocabulary", curie=ENVAR.curie('target_concept_vocabulary'),
+                   model_uri=ENVAR.target_concept_vocabulary, domain=None, range=Optional[str])
 
-slots.omop_concept_id_missing_reason = Slot(uri=ENVAR.omop_concept_id_missing_reason, name="omop_concept_id_missing_reason", curie=ENVAR.curie('omop_concept_id_missing_reason'),
-                   model_uri=ENVAR.omop_concept_id_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+slots.target_concept_id = Slot(uri=ENVAR.target_concept_id, name="target_concept_id", curie=ENVAR.curie('target_concept_id'),
+                   model_uri=ENVAR.target_concept_id, domain=None, range=Optional[str])
 
-slots.omop_concept_status = Slot(uri=ENVAR.omop_concept_status, name="omop_concept_status", curie=ENVAR.curie('omop_concept_status'),
-                   model_uri=ENVAR.omop_concept_status, domain=None, range=Optional[Union[str, "OmopConceptStatusEnum"]])
+slots.target_concept_id_missing_reason = Slot(uri=ENVAR.target_concept_id_missing_reason, name="target_concept_id_missing_reason", curie=ENVAR.curie('target_concept_id_missing_reason'),
+                   model_uri=ENVAR.target_concept_id_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
-slots.ecto_iri = Slot(uri=ENVAR.ecto_iri, name="ecto_iri", curie=ENVAR.curie('ecto_iri'),
-                   model_uri=ENVAR.ecto_iri, domain=None, range=Optional[Union[str, URIorCURIE]])
+slots.concept_status = Slot(uri=ENVAR.concept_status, name="concept_status", curie=ENVAR.curie('concept_status'),
+                   model_uri=ENVAR.concept_status, domain=None, range=Optional[Union[str, "ConceptStatusEnum"]])
 
-slots.ecto_iri_missing_reason = Slot(uri=ENVAR.ecto_iri_missing_reason, name="ecto_iri_missing_reason", curie=ENVAR.curie('ecto_iri_missing_reason'),
-                   model_uri=ENVAR.ecto_iri_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
-slots.envo_iri = Slot(uri=ENVAR.envo_iri, name="envo_iri", curie=ENVAR.curie('envo_iri'),
-                   model_uri=ENVAR.envo_iri, domain=None, range=Optional[Union[str, URIorCURIE]])
-
-slots.loinc_code = Slot(uri=ENVAR.loinc_code, name="loinc_code", curie=ENVAR.curie('loinc_code'),
-                   model_uri=ENVAR.loinc_code, domain=None, range=Optional[str])
-
-slots.loinc_code_missing_reason = Slot(uri=ENVAR.loinc_code_missing_reason, name="loinc_code_missing_reason", curie=ENVAR.curie('loinc_code_missing_reason'),
-                   model_uri=ENVAR.loinc_code_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
-slots.snomed_code = Slot(uri=ENVAR.snomed_code, name="snomed_code", curie=ENVAR.curie('snomed_code'),
-                   model_uri=ENVAR.snomed_code, domain=None, range=Optional[str])
-
-slots.snomed_code_missing_reason = Slot(uri=ENVAR.snomed_code_missing_reason, name="snomed_code_missing_reason", curie=ENVAR.curie('snomed_code_missing_reason'),
-                   model_uri=ENVAR.snomed_code_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+slots.concept_mappings = Slot(uri=ENVAR.concept_mappings, name="concept_mappings", curie=ENVAR.curie('concept_mappings'),
+                   model_uri=ENVAR.concept_mappings, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
 
 slots.value_data_type = Slot(uri=ENVAR.value_data_type, name="value_data_type", curie=ENVAR.curie('value_data_type'),
                    model_uri=ENVAR.value_data_type, domain=None, range=Optional[Union[str, "DataTypeEnum"]])
@@ -2367,15 +2447,6 @@ slots.extraction_window_end = Slot(uri=ENVAR.extraction_window_end, name="extrac
 slots.calendar = Slot(uri=ENVAR.calendar, name="calendar", curie=ENVAR.curie('calendar'),
                    model_uri=ENVAR.calendar, domain=None, range=Optional[Union[str, "CalendarEnum"]])
 
-slots.lag_alignment_applied = Slot(uri=ENVAR.lag_alignment_applied, name="lag_alignment_applied", curie=ENVAR.curie('lag_alignment_applied'),
-                   model_uri=ENVAR.lag_alignment_applied, domain=None, range=Optional[Union[str, "LagAlignmentEnum"]])
-
-slots.lag_alignment_specifier = Slot(uri=ENVAR.lag_alignment_specifier, name="lag_alignment_specifier", curie=ENVAR.curie('lag_alignment_specifier'),
-                   model_uri=ENVAR.lag_alignment_specifier, domain=None, range=Optional[str])
-
-slots.lag_alignment_applied_missing_reason = Slot(uri=ENVAR.lag_alignment_applied_missing_reason, name="lag_alignment_applied_missing_reason", curie=ENVAR.curie('lag_alignment_applied_missing_reason'),
-                   model_uri=ENVAR.lag_alignment_applied_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
 slots.source_dataset_name = Slot(uri=ENVAR.source_dataset_name, name="source_dataset_name", curie=ENVAR.curie('source_dataset_name'),
                    model_uri=ENVAR.source_dataset_name, domain=None, range=Optional[str])
 
@@ -2425,7 +2496,7 @@ slots.source_homogenisation_status_missing_reason = Slot(uri=ENVAR.source_homoge
                    model_uri=ENVAR.source_homogenisation_status_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
 slots.source_acdd_attributes = Slot(uri=ENVAR.source_acdd_attributes, name="source_acdd_attributes", curie=ENVAR.curie('source_acdd_attributes'),
-                   model_uri=ENVAR.source_acdd_attributes, domain=None, range=Optional[str])
+                   model_uri=ENVAR.source_acdd_attributes, domain=None, range=Optional[Union[dict, AnyValue]])
 
 slots.source_acdd_attributes_missing_reason = Slot(uri=ENVAR.source_acdd_attributes_missing_reason, name="source_acdd_attributes_missing_reason", curie=ENVAR.curie('source_acdd_attributes_missing_reason'),
                    model_uri=ENVAR.source_acdd_attributes_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
@@ -2488,7 +2559,7 @@ slots.per_value_uncertainty_units_ucum_missing_reason = Slot(uri=ENVAR.per_value
                    model_uri=ENVAR.per_value_uncertainty_units_ucum_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
 slots.model_aggregate_uncertainty = Slot(uri=ENVAR.model_aggregate_uncertainty, name="model_aggregate_uncertainty", curie=ENVAR.curie('model_aggregate_uncertainty'),
-                   model_uri=ENVAR.model_aggregate_uncertainty, domain=None, range=Optional[str])
+                   model_uri=ENVAR.model_aggregate_uncertainty, domain=None, range=Optional[Union[dict, ModelAggregateUncertainty]])
 
 slots.model_aggregate_uncertainty_missing_reason = Slot(uri=ENVAR.model_aggregate_uncertainty_missing_reason, name="model_aggregate_uncertainty_missing_reason", curie=ENVAR.curie('model_aggregate_uncertainty_missing_reason'),
                    model_uri=ENVAR.model_aggregate_uncertainty_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
@@ -2550,6 +2621,27 @@ slots.geocoding_score_propagated_missing_reason = Slot(uri=ENVAR.geocoding_score
 slots.address_period_alignment = Slot(uri=ENVAR.address_period_alignment, name="address_period_alignment", curie=ENVAR.curie('address_period_alignment'),
                    model_uri=ENVAR.address_period_alignment, domain=None, range=Optional[Union[str, "AddressPeriodAlignmentEnum"]])
 
+slots.clinical_date_assignment_convention = Slot(uri=ENVAR.clinical_date_assignment_convention, name="clinical_date_assignment_convention", curie=ENVAR.curie('clinical_date_assignment_convention'),
+                   model_uri=ENVAR.clinical_date_assignment_convention, domain=None, range=Optional[Union[str, "ClinicalDateAssignmentEnum"]])
+
+slots.clinical_date_assignment_convention_missing_reason = Slot(uri=ENVAR.clinical_date_assignment_convention_missing_reason, name="clinical_date_assignment_convention_missing_reason", curie=ENVAR.curie('clinical_date_assignment_convention_missing_reason'),
+                   model_uri=ENVAR.clinical_date_assignment_convention_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+
+slots.partial_day_attribution_rule = Slot(uri=ENVAR.partial_day_attribution_rule, name="partial_day_attribution_rule", curie=ENVAR.curie('partial_day_attribution_rule'),
+                   model_uri=ENVAR.partial_day_attribution_rule, domain=None, range=Optional[Union[str, "PartialDayAttributionEnum"]])
+
+slots.partial_day_attribution_rule_missing_reason = Slot(uri=ENVAR.partial_day_attribution_rule_missing_reason, name="partial_day_attribution_rule_missing_reason", curie=ENVAR.curie('partial_day_attribution_rule_missing_reason'),
+                   model_uri=ENVAR.partial_day_attribution_rule_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+
+slots.lag_alignment_applied = Slot(uri=ENVAR.lag_alignment_applied, name="lag_alignment_applied", curie=ENVAR.curie('lag_alignment_applied'),
+                   model_uri=ENVAR.lag_alignment_applied, domain=None, range=Optional[Union[str, "LagAlignmentEnum"]])
+
+slots.lag_alignment_specifier = Slot(uri=ENVAR.lag_alignment_specifier, name="lag_alignment_specifier", curie=ENVAR.curie('lag_alignment_specifier'),
+                   model_uri=ENVAR.lag_alignment_specifier, domain=None, range=Optional[str])
+
+slots.lag_alignment_applied_missing_reason = Slot(uri=ENVAR.lag_alignment_applied_missing_reason, name="lag_alignment_applied_missing_reason", curie=ENVAR.curie('lag_alignment_applied_missing_reason'),
+                   model_uri=ENVAR.lag_alignment_applied_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+
 slots.tool_name = Slot(uri=ENVAR.tool_name, name="tool_name", curie=ENVAR.curie('tool_name'),
                    model_uri=ENVAR.tool_name, domain=None, range=Optional[str])
 
@@ -2581,7 +2673,7 @@ slots.run_duration_seconds = Slot(uri=ENVAR.run_duration_seconds, name="run_dura
                    model_uri=ENVAR.run_duration_seconds, domain=None, range=Optional[float])
 
 slots.run_environment = Slot(uri=ENVAR.run_environment, name="run_environment", curie=ENVAR.curie('run_environment'),
-                   model_uri=ENVAR.run_environment, domain=None, range=Optional[str])
+                   model_uri=ENVAR.run_environment, domain=None, range=Optional[Union[dict, AnyValue]])
 
 slots.input_file_sha256 = Slot(uri=ENVAR.input_file_sha256, name="input_file_sha256", curie=ENVAR.curie('input_file_sha256'),
                    model_uri=ENVAR.input_file_sha256, domain=None, range=Optional[str])
@@ -2620,7 +2712,16 @@ slots.equation_variant_missing_reason = Slot(uri=ENVAR.equation_variant_missing_
                    model_uri=ENVAR.equation_variant_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
 slots.equation_inputs = Slot(uri=ENVAR.equation_inputs, name="equation_inputs", curie=ENVAR.curie('equation_inputs'),
-                   model_uri=ENVAR.equation_inputs, domain=None, range=Optional[Union[str, list[str]]])
+                   model_uri=ENVAR.equation_inputs, domain=None, range=Optional[Union[Union[dict, EquationInput], list[Union[dict, EquationInput]]]])
+
+slots.input_role = Slot(uri=ENVAR.input_role, name="input_role", curie=ENVAR.curie('input_role'),
+                   model_uri=ENVAR.input_role, domain=None, range=Optional[str])
+
+slots.input_provenance_id = Slot(uri=ENVAR.input_provenance_id, name="input_provenance_id", curie=ENVAR.curie('input_provenance_id'),
+                   model_uri=ENVAR.input_provenance_id, domain=None, range=Optional[str])
+
+slots.input_source_short_code = Slot(uri=ENVAR.input_source_short_code, name="input_source_short_code", curie=ENVAR.curie('input_source_short_code'),
+                   model_uri=ENVAR.input_source_short_code, domain=None, range=Optional[str])
 
 slots.equation_validity_range = Slot(uri=ENVAR.equation_validity_range, name="equation_validity_range", curie=ENVAR.curie('equation_validity_range'),
                    model_uri=ENVAR.equation_validity_range, domain=None, range=Optional[str])
@@ -2688,23 +2789,17 @@ slots.metric_temporal_aggregation_rule = Slot(uri=ENVAR.metric_temporal_aggregat
 slots.metric_temporal_aggregation_rule_missing_reason = Slot(uri=ENVAR.metric_temporal_aggregation_rule_missing_reason, name="metric_temporal_aggregation_rule_missing_reason", curie=ENVAR.curie('metric_temporal_aggregation_rule_missing_reason'),
                    model_uri=ENVAR.metric_temporal_aggregation_rule_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
-slots.omop_external_exposure_link_field = Slot(uri=ENVAR.omop_external_exposure_link_field, name="omop_external_exposure_link_field", curie=ENVAR.curie('omop_external_exposure_link_field'),
-                   model_uri=ENVAR.omop_external_exposure_link_field, domain=None, range=Optional[str])
+slots.health_layer_target = Slot(uri=ENVAR.health_layer_target, name="health_layer_target", curie=ENVAR.curie('health_layer_target'),
+                   model_uri=ENVAR.health_layer_target, domain=None, range=Optional[Union[str, "HealthLayerTargetEnum"]])
 
-slots.bdc_link_field = Slot(uri=ENVAR.bdc_link_field, name="bdc_link_field", curie=ENVAR.curie('bdc_link_field'),
-                   model_uri=ENVAR.bdc_link_field, domain=None, range=Optional[str])
-
-slots.bdc_link_field_missing_reason = Slot(uri=ENVAR.bdc_link_field_missing_reason, name="bdc_link_field_missing_reason", curie=ENVAR.curie('bdc_link_field_missing_reason'),
-                   model_uri=ENVAR.bdc_link_field_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+slots.health_layer_link_field = Slot(uri=ENVAR.health_layer_link_field, name="health_layer_link_field", curie=ENVAR.curie('health_layer_link_field'),
+                   model_uri=ENVAR.health_layer_link_field, domain=None, range=Optional[str])
 
 slots.cohort_size_anchored = Slot(uri=ENVAR.cohort_size_anchored, name="cohort_size_anchored", curie=ENVAR.curie('cohort_size_anchored'),
                    model_uri=ENVAR.cohort_size_anchored, domain=None, range=Optional[int])
 
 slots.cohort_size_anchored_missing_reason = Slot(uri=ENVAR.cohort_size_anchored_missing_reason, name="cohort_size_anchored_missing_reason", curie=ENVAR.curie('cohort_size_anchored_missing_reason'),
                    model_uri=ENVAR.cohort_size_anchored_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
-slots.phi_status = Slot(uri=ENVAR.phi_status, name="phi_status", curie=ENVAR.curie('phi_status'),
-                   model_uri=ENVAR.phi_status, domain=None, range=Optional[Union[str, "PhiStatusEnum"]])
 
 slots.deposit_doi = Slot(uri=ENVAR.deposit_doi, name="deposit_doi", curie=ENVAR.curie('deposit_doi'),
                    model_uri=ENVAR.deposit_doi, domain=None, range=Optional[str])
@@ -2746,13 +2841,13 @@ slots.tool_run = Slot(uri=ENVAR.tool_run, name="tool_run", curie=ENVAR.curie('to
                    model_uri=ENVAR.tool_run, domain=None, range=Union[dict, ToolRun])
 
 slots.provenance_chain = Slot(uri=ENVAR.provenance_chain, name="provenance_chain", curie=ENVAR.curie('provenance_chain'),
-                   model_uri=ENVAR.provenance_chain, domain=None, range=Union[dict, ProvenanceChain])
+                   model_uri=ENVAR.provenance_chain, domain=None, range=Optional[Union[dict, ProvenanceChain]])
 
 slots.derived_heat_metric = Slot(uri=ENVAR.derived_heat_metric, name="derived_heat_metric", curie=ENVAR.curie('derived_heat_metric'),
                    model_uri=ENVAR.derived_heat_metric, domain=None, range=Optional[Union[dict, DerivedHeatMetric]])
 
-slots.omop_linkage = Slot(uri=ENVAR.omop_linkage, name="omop_linkage", curie=ENVAR.curie('omop_linkage'),
-                   model_uri=ENVAR.omop_linkage, domain=None, range=Union[dict, OmopLinkage])
+slots.health_layer_linkage = Slot(uri=ENVAR.health_layer_linkage, name="health_layer_linkage", curie=ENVAR.curie('health_layer_linkage'),
+                   model_uri=ENVAR.health_layer_linkage, domain=None, range=Optional[Union[dict, HealthLayerLinkage]])
 
 slots.deposit_metadata = Slot(uri=ENVAR.deposit_metadata, name="deposit_metadata", curie=ENVAR.curie('deposit_metadata'),
                    model_uri=ENVAR.deposit_metadata, domain=None, range=Optional[Union[dict, DepositMetadata]])
@@ -2820,17 +2915,26 @@ slots.code_label = Slot(uri=LINKML['linkml-microschema-profile/code_label'], nam
 slots.code_system = Slot(uri=LINKML['linkml-microschema-profile/code_system'], name="code_system", curie=LINKML.curie('linkml-microschema-profile/code_system'),
                    model_uri=ENVAR.code_system, domain=None, range=Optional[Union[str, URIorCURIE]])
 
+slots.modelAggregateUncertainty__cv_r2 = Slot(uri=ENVAR.cv_r2, name="modelAggregateUncertainty__cv_r2", curie=ENVAR.curie('cv_r2'),
+                   model_uri=ENVAR.modelAggregateUncertainty__cv_r2, domain=None, range=Optional[float])
+
+slots.modelAggregateUncertainty__cv_rmse = Slot(uri=ENVAR.cv_rmse, name="modelAggregateUncertainty__cv_rmse", curie=ENVAR.curie('cv_rmse'),
+                   model_uri=ENVAR.modelAggregateUncertainty__cv_rmse, domain=None, range=Optional[float])
+
+slots.modelAggregateUncertainty__reported_in = Slot(uri=ENVAR.reported_in, name="modelAggregateUncertainty__reported_in", curie=ENVAR.curie('reported_in'),
+                   model_uri=ENVAR.modelAggregateUncertainty__reported_in, domain=None, range=Optional[str])
+
 slots.VariableIdentity_variable_name = Slot(uri=ENVAR.variable_name, name="VariableIdentity_variable_name", curie=ENVAR.curie('variable_name'),
                    model_uri=ENVAR.VariableIdentity_variable_name, domain=VariableIdentity, range=str)
 
-slots.VariableIdentity_cf_standard_name = Slot(uri=DCTERMS.subject, name="VariableIdentity_cf_standard_name", curie=DCTERMS.curie('subject'),
-                   model_uri=ENVAR.VariableIdentity_cf_standard_name, domain=VariableIdentity, range=str)
+slots.VariableIdentity_standard_name = Slot(uri=DCTERMS.subject, name="VariableIdentity_standard_name", curie=DCTERMS.curie('subject'),
+                   model_uri=ENVAR.VariableIdentity_standard_name, domain=VariableIdentity, range=Union[str, URIorCURIE])
 
 slots.VariableIdentity_units_ucum = Slot(uri=ENVAR.units_ucum, name="VariableIdentity_units_ucum", curie=ENVAR.curie('units_ucum'),
                    model_uri=ENVAR.VariableIdentity_units_ucum, domain=VariableIdentity, range=str)
 
-slots.VariableIdentity_omop_concept_status = Slot(uri=ENVAR.omop_concept_status, name="VariableIdentity_omop_concept_status", curie=ENVAR.curie('omop_concept_status'),
-                   model_uri=ENVAR.VariableIdentity_omop_concept_status, domain=VariableIdentity, range=Union[str, "OmopConceptStatusEnum"])
+slots.VariableIdentity_concept_status = Slot(uri=ENVAR.concept_status, name="VariableIdentity_concept_status", curie=ENVAR.curie('concept_status'),
+                   model_uri=ENVAR.VariableIdentity_concept_status, domain=VariableIdentity, range=Union[str, "ConceptStatusEnum"])
 
 slots.VariableIdentity_value_data_type = Slot(uri=ENVAR.value_data_type, name="VariableIdentity_value_data_type", curie=ENVAR.curie('value_data_type'),
                    model_uri=ENVAR.VariableIdentity_value_data_type, domain=VariableIdentity, range=Union[str, "DataTypeEnum"])
@@ -2856,20 +2960,8 @@ slots.TemporalReference_day_boundary_convention = Slot(uri=ENVAR.day_boundary_co
 slots.SourceDataset_source_dataset_name = Slot(uri=ENVAR.source_dataset_name, name="SourceDataset_source_dataset_name", curie=ENVAR.curie('source_dataset_name'),
                    model_uri=ENVAR.SourceDataset_source_dataset_name, domain=SourceDataset, range=str)
 
-slots.SourceDataset_source_dataset_short_code = Slot(uri=ENVAR.source_dataset_short_code, name="SourceDataset_source_dataset_short_code", curie=ENVAR.curie('source_dataset_short_code'),
-                   model_uri=ENVAR.SourceDataset_source_dataset_short_code, domain=SourceDataset, range=str)
-
 slots.SourceDataset_source_dataset_version = Slot(uri=ENVAR.source_dataset_version, name="SourceDataset_source_dataset_version", curie=ENVAR.curie('source_dataset_version'),
                    model_uri=ENVAR.SourceDataset_source_dataset_version, domain=SourceDataset, range=str)
-
-slots.SourceDataset_source_producer_institution = Slot(uri=ENVAR.source_producer_institution, name="SourceDataset_source_producer_institution", curie=ENVAR.curie('source_producer_institution'),
-                   model_uri=ENVAR.SourceDataset_source_producer_institution, domain=SourceDataset, range=str)
-
-slots.SourceDataset_source_license_spdx = Slot(uri=ENVAR.source_license_spdx, name="SourceDataset_source_license_spdx", curie=ENVAR.curie('source_license_spdx'),
-                   model_uri=ENVAR.SourceDataset_source_license_spdx, domain=SourceDataset, range=str)
-
-slots.SourceDataset_source_native_format = Slot(uri=ENVAR.source_native_format, name="SourceDataset_source_native_format", curie=ENVAR.curie('source_native_format'),
-                   model_uri=ENVAR.SourceDataset_source_native_format, domain=SourceDataset, range=Union[str, "SourceNativeFormatEnum"])
 
 slots.ExposureModel_exposure_model_type = Slot(uri=ENVAR.exposure_model_type, name="ExposureModel_exposure_model_type", curie=ENVAR.curie('exposure_model_type'),
                    model_uri=ENVAR.ExposureModel_exposure_model_type, domain=ExposureModel, range=Union[str, "ExposureModelTypeEnum"])
@@ -2877,26 +2969,11 @@ slots.ExposureModel_exposure_model_type = Slot(uri=ENVAR.exposure_model_type, na
 slots.LinkageMethod_linkage_strategy = Slot(uri=ENVAR.linkage_strategy, name="LinkageMethod_linkage_strategy", curie=ENVAR.curie('linkage_strategy'),
                    model_uri=ENVAR.LinkageMethod_linkage_strategy, domain=LinkageMethod, range=Union[str, "LinkageStrategyEnum"])
 
-slots.LinkageMethod_geocoding_precision_propagated = Slot(uri=ENVAR.geocoding_precision_propagated, name="LinkageMethod_geocoding_precision_propagated", curie=ENVAR.curie('geocoding_precision_propagated'),
-                   model_uri=ENVAR.LinkageMethod_geocoding_precision_propagated, domain=LinkageMethod, range=Union[str, "GeocodingPrecisionEnum"])
-
-slots.LinkageMethod_address_period_alignment = Slot(uri=ENVAR.address_period_alignment, name="LinkageMethod_address_period_alignment", curie=ENVAR.curie('address_period_alignment'),
-                   model_uri=ENVAR.LinkageMethod_address_period_alignment, domain=LinkageMethod, range=Union[str, "AddressPeriodAlignmentEnum"])
-
 slots.ToolRun_tool_name = Slot(uri=ENVAR.tool_name, name="ToolRun_tool_name", curie=ENVAR.curie('tool_name'),
                    model_uri=ENVAR.ToolRun_tool_name, domain=ToolRun, range=str)
 
 slots.ToolRun_tool_version = Slot(uri=ENVAR.tool_version, name="ToolRun_tool_version", curie=ENVAR.curie('tool_version'),
                    model_uri=ENVAR.ToolRun_tool_version, domain=ToolRun, range=str)
-
-slots.ToolRun_run_timestamp_utc = Slot(uri=ENVAR.run_timestamp_utc, name="ToolRun_run_timestamp_utc", curie=ENVAR.curie('run_timestamp_utc'),
-                   model_uri=ENVAR.ToolRun_run_timestamp_utc, domain=ToolRun, range=Union[str, XSDDateTime])
-
-slots.ProvenanceChain_provenance_chain_steps = Slot(uri=ENVAR.provenance_chain_steps, name="ProvenanceChain_provenance_chain_steps", curie=ENVAR.curie('provenance_chain_steps'),
-                   model_uri=ENVAR.ProvenanceChain_provenance_chain_steps, domain=ProvenanceChain, range=Union[Union[dict, ToolRun], list[Union[dict, ToolRun]]])
-
-slots.ProvenanceChain_provenance_chain_terminus_type = Slot(uri=ENVAR.provenance_chain_terminus_type, name="ProvenanceChain_provenance_chain_terminus_type", curie=ENVAR.curie('provenance_chain_terminus_type'),
-                   model_uri=ENVAR.ProvenanceChain_provenance_chain_terminus_type, domain=ProvenanceChain, range=Union[str, "ProvenanceChainTerminusEnum"])
 
 slots.DerivedHeatMetric_heat_metric_family = Slot(uri=ENVAR.heat_metric_family, name="DerivedHeatMetric_heat_metric_family", curie=ENVAR.curie('heat_metric_family'),
                    model_uri=ENVAR.DerivedHeatMetric_heat_metric_family, domain=DerivedHeatMetric, range=Union[str, "HeatMetricFamilyEnum"])
@@ -2904,11 +2981,11 @@ slots.DerivedHeatMetric_heat_metric_family = Slot(uri=ENVAR.heat_metric_family, 
 slots.DerivedHeatMetric_indoor_outdoor = Slot(uri=ENVAR.indoor_outdoor, name="DerivedHeatMetric_indoor_outdoor", curie=ENVAR.curie('indoor_outdoor'),
                    model_uri=ENVAR.DerivedHeatMetric_indoor_outdoor, domain=DerivedHeatMetric, range=Union[str, "IndoorOutdoorEnum"])
 
-slots.OmopLinkage_omop_external_exposure_link_field = Slot(uri=ENVAR.omop_external_exposure_link_field, name="OmopLinkage_omop_external_exposure_link_field", curie=ENVAR.curie('omop_external_exposure_link_field'),
-                   model_uri=ENVAR.OmopLinkage_omop_external_exposure_link_field, domain=OmopLinkage, range=str)
+slots.EquationInput_input_role = Slot(uri=ENVAR.input_role, name="EquationInput_input_role", curie=ENVAR.curie('input_role'),
+                   model_uri=ENVAR.EquationInput_input_role, domain=EquationInput, range=str)
 
-slots.OmopLinkage_phi_status = Slot(uri=ENVAR.phi_status, name="OmopLinkage_phi_status", curie=ENVAR.curie('phi_status'),
-                   model_uri=ENVAR.OmopLinkage_phi_status, domain=OmopLinkage, range=Union[str, "PhiStatusEnum"])
+slots.EquationInput_input_provenance_id = Slot(uri=ENVAR.input_provenance_id, name="EquationInput_input_provenance_id", curie=ENVAR.curie('input_provenance_id'),
+                   model_uri=ENVAR.EquationInput_input_provenance_id, domain=EquationInput, range=str)
 
 slots.EnvironmentalExposureRecord_subject = Slot(uri=LINKML['linkml-microschema-profile/subject'], name="EnvironmentalExposureRecord_subject", curie=LINKML.curie('linkml-microschema-profile/subject'),
                    model_uri=ENVAR.EnvironmentalExposureRecord_subject, domain=EnvironmentalExposureRecord, range=str)
@@ -2924,9 +3001,6 @@ slots.EnvironmentalExposureRecord_temporality = Slot(uri=LINKML['linkml-microsch
 
 slots.EnvironmentalExposureRecord_methodology = Slot(uri=LINKML['linkml-microschema-profile/methodology'], name="EnvironmentalExposureRecord_methodology", curie=LINKML.curie('linkml-microschema-profile/methodology'),
                    model_uri=ENVAR.EnvironmentalExposureRecord_methodology, domain=EnvironmentalExposureRecord, range=Union[dict, ExposureModel])
-
-slots.EnvironmentalExposureRecord_observation_result = Slot(uri=LINKML['linkml-microschema-profile/observation_result'], name="EnvironmentalExposureRecord_observation_result", curie=LINKML.curie('linkml-microschema-profile/observation_result'),
-                   model_uri=ENVAR.EnvironmentalExposureRecord_observation_result, domain=EnvironmentalExposureRecord, range=Union[dict, "ValueMicroschemaDefinition"])
 
 slots.WetBulbGlobeTemperatureOutdoorRecord_derived_heat_metric = Slot(uri=ENVAR.derived_heat_metric, name="WetBulbGlobeTemperatureOutdoorRecord_derived_heat_metric", curie=ENVAR.curie('derived_heat_metric'),
                    model_uri=ENVAR.WetBulbGlobeTemperatureOutdoorRecord_derived_heat_metric, domain=WetBulbGlobeTemperatureOutdoorRecord, range=Union[dict, DerivedHeatMetric])

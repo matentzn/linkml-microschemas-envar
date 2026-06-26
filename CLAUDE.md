@@ -20,7 +20,7 @@ This repository is a **very early prototype for illustration purposes**. The sch
 - `just gen-doc` — regenerate Markdown docs into `docs/elements/` plus a merged `docs/schema/<schema_name>.yaml`.
 - `just site` — `gen-project` + `gen-doc`.
 - `just lint` — `linkml-lint` over `src/linkml_microschemas_envar/schema/`.
-- `just test` — runs `_test-schema` (gen-project into `tmp/`), `_test-python` (pytest, after regenerating Python datamodel), and `_test-examples` (`linkml-run-examples` over `tests/data/valid` and `tests/data/invalid`, writing into `examples/output/`). The `tests/data/valid` and `tests/data/invalid` directories are currently empty — example-based tests will run but find nothing until they are populated.
+- `just test` — runs `_test-schema` (gen-project into `tmp/`), `_test-python` (pytest, after regenerating Python datamodel), and `_test-examples` (`linkml-run-examples` over `tests/data/valid` and `tests/data/invalid`, writing into `examples/output/`). `tests/data/valid` holds the passing `core`/`recommended`/`ideal` gradient (`EnvironmentalExposureRecord-{tmax,pm25}_*.yaml`) and `tests/data/invalid` holds the `core_missing` counter-examples that must fail validation.
 - `just testdoc` — generate docs and serve them locally via `mkdocs serve`.
 - `just clean` — remove generated artifacts under `project/` and regenerated docs under `docs/elements/`.
 - Run a single Python test: `uv run pytest tests/path/to/test_file.py::test_name`.
@@ -35,8 +35,8 @@ The substantive content is the LinkML schema set under `src/linkml_microschemas_
 
 | Module | Class(es) | Concern |
 |---|---|---|
-| `envar_common.yaml` | enums + shared slots | `MissingReasonEnum`, `DataTypeEnum`, `OmopConceptStatusEnum`; imports the **LinkML Microschema Profile** |
-| `envar_variable.yaml` | `VariableIdentity` | CF standard name, UCUM, OMOP, ECTO, ENVO |
+| `envar_common.yaml` | enums + shared slots | `MissingReasonEnum`, `DataTypeEnum`, `ConceptStatusEnum`, `PhiStatusEnum`; shared `schema_version`, `provenance_id`, `phi_status`; imports the **LinkML Microschema Profile** |
+| `envar_variable.yaml` | `VariableIdentity` | CF standard name, UCUM, target-vocabulary concept id + status, ECTO, ENVO |
 | `envar_spatial.yaml` | `SpatialReference` | grid, CRS, extraction method |
 | `envar_temporal.yaml` | `TemporalReference` | resolution, day-boundary convention, calendar |
 | `envar_source.yaml` | `SourceDataset` | upstream product identity, DOI, license |
@@ -45,19 +45,19 @@ The substantive content is the LinkML schema set under `src/linkml_microschemas_
 | `envar_linkage.yaml` | `LinkageMethod` | gridded-to-patient linkage |
 | `envar_toolrun.yaml` | `ToolRun`, `ProvenanceChain` | exact invocation + W3C-PROV chain |
 | `envar_heat_metric.yaml` | `DerivedHeatMetric` | WBGT/HI/UTCI/heat-wave methodology |
-| `envar_omop.yaml` | `OmopLinkage`, `DepositMetadata` | OMOP/BDC linkage + FAIR deposit |
+| `envar_health_layer.yaml` | `HealthLayerLinkage`, `DepositMetadata` | health-data-layer linkage (OMOP, BDC, …) + FAIR deposit |
 | `envar_record.yaml` | `EnvironmentalExposureRecord` | top composite — binds profile slots to envar ranges |
 | `envar_examples.yaml` | `DailyMaxTemperatureRecord`, `DailyMinTemperatureRecord`, `WetBulbGlobeTemperatureOutdoorRecord`, `ExtremeHeatDayFlagRecord` | concrete record subclasses |
 
 ### Key design decision: profile-slot names at the top level
 
-`EnvironmentalExposureRecord` `instantiates: MicroschemaDefinition` from the [LinkML Microschema Profile](https://github.com/linkml/linkml-microschema-profile). The six profile anatomy slots (`subject`, `observation_type`, `location`, `temporality`, `methodology`, `observation_result`) are used **verbatim** at the top level, with envar-specific classes bound as their ranges via `slot_usage`. Envar concerns with no profile equivalent (`source_dataset`, `linkage_method`, `tool_run`, `provenance_chain`, `derived_heat_metric`, `omop_linkage`, `deposit_metadata`, `uncertainty`) are added as additional top-level slots. The full rationale and known drawbacks are documented in `src/linkml_microschemas_envar/schema/README.md` — read that before renaming top-level slots or restructuring `EnvironmentalExposureRecord`.
+`EnvironmentalExposureRecord` `instantiates: MicroschemaDefinition` from the [LinkML Microschema Profile](https://github.com/linkml/linkml-microschema-profile). Five of the six profile anatomy slots (`subject`, `observation_type`, `location`, `temporality`, `methodology`) are used **verbatim** at the top level, with envar-specific classes bound as their ranges via `slot_usage`. The sixth, `observation_result`, is intentionally **not** bound: a batch sidecar carries values in the companion data file, and the profile marks `observation_result` required — keeping it would force every record to inline an (abstract-ranged) value and breaks `linkml-run-examples` (which instantiates the Python dataclass, where the optional override does not propagate). It was therefore dropped from the record's slot list. Envar concerns with no profile equivalent (`source_dataset`, `linkage_method`, `tool_run`, `provenance_chain`, `derived_heat_metric`, `health_layer_linkage`, `deposit_metadata`, `uncertainty`, and the record-root `phi_status`) are added as additional top-level slots. The full rationale and known drawbacks are documented in `src/linkml_microschemas_envar/schema/README.md` — read that before renaming top-level slots or restructuring `EnvironmentalExposureRecord`.
 
 ### Edit-vs-generated boundary
 
 - **Edit:** `src/linkml_microschemas_envar/schema/*.yaml` only.
 - **Do not edit:** anything under `project/` (regenerated by `just gen-project`), anything under `src/linkml_microschemas_envar/datamodel/` except `__init__.py` (Python dataclasses + Pydantic regenerated from the schema), and `docs/elements/` (regenerated by `just gen-doc`).
-- The canonical worked example is `examples/daymet_tmax_phoenix_2022_07_19.yaml`. `tests/data/valid` and `tests/data/invalid` are empty placeholders for `linkml-run-examples`-based test cases.
+- The canonical worked example is `examples/daymet_tmax_phoenix_2022_07_19.yaml`. The tier-branded gradient lives in `tests/data/valid/` (passing) and `tests/data/invalid/` (`core_missing`, must fail), exercised by `just test` via `linkml-run-examples`.
 
 ## Other context
 

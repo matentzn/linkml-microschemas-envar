@@ -1,4 +1,3 @@
----
 id: https://w3id.org/linkml/microschemas/envar/record
 name: envar-record
 title: EnVar Microschemas — Environmental Exposure Record
@@ -19,18 +18,18 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
-  - envar_variable
-  - envar_spatial
-  - envar_temporal
-  - envar_source
-  - envar_model
-  - envar_uncertainty
-  - envar_linkage
-  - envar_toolrun
-  - envar_heat_metric
-  - envar_omop
+- linkml:types
+- envar_common
+- envar_variable
+- envar_spatial
+- envar_temporal
+- envar_source
+- envar_model
+- envar_uncertainty
+- envar_linkage
+- envar_toolrun
+- envar_heat_metric
+- envar_health_layer
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -39,60 +38,80 @@ imports:
 classes:
 
   EnvironmentalExposureRecord:
+    tree_root: true
     instantiates:
-      - MicroschemaDefinition
+    - MicroschemaDefinition
     description: >-
       A single environmental-exposure record sidecar: the complete metadata
       graph that travels alongside a value (or value series) emitted by an
       upstream tool. Composes variable identity, spatial / temporal
       reference, source dataset, exposure model, uncertainty, linkage,
       tool run, provenance chain, optional derived-heat-metric methodology,
-      OMOP linkage hooks, and FAIR-deposit metadata.
+      health-data-layer linkage hooks, and FAIR-deposit metadata.
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - subject
-      - observation_type
-      - location
-      - temporality
-      - methodology
-      - observation_result
-      - schema_version
-      - provenance_id
-      - source_dataset
-      - uncertainty
-      - linkage_method
-      - tool_run
-      - provenance_chain
-      - derived_heat_metric
-      - omop_linkage
-      - deposit_metadata
+    - subject
+    - observation_type
+    - location
+    - temporality
+    - methodology
+    - schema_version
+    - provenance_id
+    - phi_status
+    - source_dataset
+    - uncertainty
+    - linkage_method
+    - tool_run
+    - provenance_chain
+    - derived_heat_metric
+    - health_layer_linkage
+    - deposit_metadata
     slot_usage:
       subject:
         description: >-
           The patient or cohort the exposure value is attached to. Carried
           as an opaque identifier; PHI must not appear here.
         range: string
+        annotations:
+          tier: core
       observation_type:
+        # Readable domain name for the profile-abstract `observation_type`.
+        # See issue_naming.md: documents the scientist-facing name; does NOT
+        # change the validated key (input must still use `observation_type`).
+        aliases:
+        - variable_identity
         description: >-
           The variable identity object — what physical quantity is being
           captured. Bound to VariableIdentity (see envar_variable).
         range: VariableIdentity
         inlined: true
+        annotations:
+          tier: core
       location:
+        aliases:
+        - spatial_reference
         description: >-
           Spatial reference object describing the native grid and extraction.
           Bound to SpatialReference (see envar_spatial).
         range: SpatialReference
         inlined: true
+        annotations:
+          tier: core
       temporality:
+        aliases:
+        - temporal_reference
         description: >-
           Temporal reference object describing resolution, aggregation, and
           day-boundary convention. Bound to TemporalReference (see
           envar_temporal).
         range: TemporalReference
         inlined: true
+        annotations:
+          tier: core
       methodology:
+        aliases:
+        - exposure_model
         description: >-
           The exposure-model object describing how values were produced.
           Bound to ExposureModel (see envar_model). Other methodology-
@@ -102,13 +121,12 @@ classes:
           model itself.
         range: ExposureModel
         inlined: true
-      observation_result:
-        description: >-
-          For per-batch sidecars (the common case), the numeric values live
-          in the accompanying CSV / parquet file, so this slot is overridden
-          to be optional. A per-record sidecar may populate it with a
-          Quantity from the imported profile.
-        required: false
+        annotations:
+          tier: core
+      # observation_result is intentionally NOT bound at the top level: a
+      # per-batch sidecar carries values in the accompanying CSV / parquet
+      # file, never inline. The profile's required observation_result is
+      # dropped from this record's slot list rather than forced empty.
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -122,31 +140,41 @@ slots:
     required: true
     description: Source dataset object — see envar_source.
 
+    annotations:
+      tier: core
   uncertainty:
     range: Uncertainty
     inlined: true
     description: Uncertainty object — see envar_uncertainty.
 
+    annotations:
+      tier: recommended
   linkage_method:
     range: LinkageMethod
     inlined: true
     required: true
     description: Linkage-method object — see envar_linkage.
 
+    annotations:
+      tier: core
   tool_run:
     range: ToolRun
     inlined: true
     required: true
     description: The current ToolRun — see envar_toolrun.
 
+    annotations:
+      tier: core
   provenance_chain:
     range: ProvenanceChain
     inlined: true
-    required: true
     description: >-
       Ordered W3C-PROV-style chain of upstream tool runs — see
-      envar_toolrun.
+      envar_toolrun. Recommended (not required): a record is reproducible in
+      principle without the full chain, but real reproduction needs it.
 
+    annotations:
+      tier: recommended
   derived_heat_metric:
     range: DerivedHeatMetric
     inlined: true
@@ -154,15 +182,23 @@ slots:
       Heat-metric methodology, present when the variable is a derived heat
       metric — see envar_heat_metric. Omitted for non-heat variables.
 
-  omop_linkage:
-    range: OmopLinkage
+    annotations:
+      tier: conditionally_core
+  health_layer_linkage:
+    range: HealthLayerLinkage
     inlined: true
-    required: true
-    description: OMOP / BDC linkage hooks — see envar_omop.
+    description: >-
+      Downstream health-data-layer linkage hooks (OMOP, BDC, …) — see
+      envar_health_layer. Optional: its members are Recommended/Optional, and
+      the Core PHI assertion lives at the record root (`phi_status`).
 
+    annotations:
+      tier: recommended
   deposit_metadata:
     range: DepositMetadata
     inlined: true
     description: >-
       FAIR-deposit metadata, present when the sidecar is intended to travel
-      with a published deposit — see envar_omop.
+      with a published deposit — see envar_health_layer.
+    annotations:
+      tier: optional

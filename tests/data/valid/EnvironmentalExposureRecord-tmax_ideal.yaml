@@ -1,0 +1,146 @@
+schema_version: "0.1"
+provenance_id: "01HFA7K8R3M6XP-daymet-deposit"
+
+observation_type:
+  variable_name: tmax
+  variable_label: "daily maximum air temperature at 2 m"
+  standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+  units_display: "°C"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+  concept_mappings:
+    - ECTO:0000012   # exposure to temperature
+    - ENVO:03000049  # temperature of air (illustrative)
+    # no LOINC / SNOMED — not applicable to an ambient environmental variable
+
+location:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: "1 km regular grid"
+  crs: "EPSG:4326"
+  spatial_extent_bbox: [-131.104, 14.075, -52.95, 53.038]
+  spatial_extent_descriptor: "CONUS + Hawaii + Puerto Rico"
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  extraction_buffer_m:
+  extraction_buffer_m_missing_reason: not_applicable
+  target_geography_type: point_residence
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight
+  temporal_coverage_start: "1980-01-01"
+  temporal_coverage_end: "2024-12-31"
+  extraction_window_start: "2022-07-18"
+  extraction_window_end: "2022-07-20"
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: "Daymet V4 Daily Surface Weather Data"
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: "10.3334/ORNLDAAC/2129"
+  source_dataset_version: "V4 R1"
+  source_dataset_temporal_coverage: "1980-01-01/2024-12-31"
+  source_dataset_spatial_extent: "CONUS, Hawaii, Puerto Rico"
+  source_producer_institution: "NASA ORNL DAAC"
+  source_citation_apa: >-
+    Thornton, M.M., Shrestha, R., Wei, Y., Thornton, P.E., Kao, S.-C., &
+    Wilson, B.E. (2022). Daymet: Daily Surface Weather Data on a 1-km Grid
+    for North America, Version 4 R1. ORNL DAAC, Oak Ridge, Tennessee, USA.
+  source_citation_bibtex: >-
+    @misc{daymet_v4_r1, title={Daymet: Daily Surface Weather Data on a 1-km
+    Grid for North America, Version 4 R1}, author={Thornton, M.M. and others},
+    year={2022}, publisher={ORNL DAAC}, doi={10.3334/ORNLDAAC/2129}}
+  source_license_spdx: public-domain-us-gov
+  source_access_url: "https://daymet.ornl.gov/"
+  source_native_format: netcdf4_cf
+  source_acdd_attributes:
+    title: "Daymet Daily Surface Weather Data"
+    institution: "ORNL DAAC"
+    Conventions: "CF-1.6, ACDD-1.3"
+    source: "GHCN-Daily station observations"
+
+methodology:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - "GHCN-Daily station observations"
+  exposure_model_paper_doi: "10.3334/ORNLDAAC/2129"
+  exposure_model_cross_validation_r2:
+  exposure_model_cross_validation_r2_missing_reason: not_provided_by_source
+  exposure_model_known_biases:
+  - "warm-season warm bias documented in some western US regions"
+  - "interpolation degrades in sparse-station areas"
+  exposure_model_uncertainty_field: tmax_stderr
+  exposure_model_ensemble_member_count:
+  exposure_model_ensemble_member_count_missing_reason: not_applicable
+  bias_correction_applied: none
+
+uncertainty:
+  per_value_uncertainty_field_name: tmax_stderr
+  per_value_uncertainty_type: standard_error
+  per_value_uncertainty_units_ucum: Cel
+  quality_flag_field_name:
+  quality_flag_field_name_missing_reason: not_provided_by_source
+  missing_data_handling_method: spatiotemporal_interpolation
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+  clinical_date_assignment_convention: local_midnight    # matches exposure-side day_boundary_convention
+  partial_day_attribution_rule: not_applicable
+  lag_alignment_applied: none
+
+tool_run:
+  tool_name: daymet
+  tool_version: "1.0.0"
+  tool_description: "DeGAUSS Daymet extraction container"
+  container_image_repository: "ghcr.io/degauss-org/daymet"
+  container_image_digest: "sha256:a8b3c2d1e0f9..."
+  run_arguments: '{"variables": "tmax"}'
+  run_timestamp_utc: "2026-05-23T14:18:42Z"
+  run_duration_seconds: 37
+  run_environment:
+    os: "Ubuntu 22.04"
+    container_runtime: "docker 24.0.7"
+    r_version: "4.3.1"
+  input_file_sha256: "9f8e7d6c5b4a..."
+  input_row_count: 3
+  output_file_sha256: "1c2d3e4f5a6b..."
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    run_timestamp_utc: "2026-05-23T14:02:11Z"
+    output_file_sha256: "5b6c7d8e9f0a..."
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+  cohort_size_anchored: 3
+deposit_metadata:
+  deposit_doi: "10.5281/zenodo.9999999"
+  deposit_repository: zenodo
+  deposit_license_spdx: CC-BY-4.0
+  deposit_redistribution_constraints_inherited: []
+  recommended_citation: >-
+    EnVar exposure record for cohort:phoenix_aki_2022 daily Tmax (Daymet V4),
+    2026. Deposited at Zenodo, doi:10.5281/zenodo.9999999.
+  dcat_distribution_url: "https://zenodo.org/record/9999999/files/tmax_phoenix.parquet"
+
+subject: "cohort:phoenix_aki_2022"
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: "2022-07-19"  value: 46.7  unit: Cel  tmax_stderr: 0.8
+phi_status: no_phi

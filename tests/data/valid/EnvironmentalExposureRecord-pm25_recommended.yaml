@@ -1,0 +1,110 @@
+schema_version: "0.1"
+provenance_id: "01HXDIENSEMBLEML00000PM25SURF"
+
+observation_type:
+  variable_name: pm25_daily
+  variable_label: "daily mean fine particulate matter (PM2.5) mass concentration, modeled"
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: "time: mean"
+  units_ucum: ug/m3
+  units_display: "µg/m³"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: 0
+  value_range_plausible_max: 1000
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: proposed   # PM2.5 within OHDSI GIS/Exposome vocabulary effort
+  # concept_mappings omitted — available but not extracted
+
+location:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: "1 km modeled grid"
+  crs: "EPSG:4326"
+  spatial_extent_descriptor: "contiguous United States"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: utc_midnight
+  temporal_coverage_start: "2000-01-01"
+  temporal_coverage_end: "2016-12-31"
+  extraction_window_start: "2016-07-01"
+  extraction_window_end: "2016-07-31"
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: "Di et al. ensemble PM2.5 daily predictions, contiguous US, 1 km"
+  source_dataset_short_code: di_pm25_ensemble
+  source_dataset_doi: "10.1016/j.envint.2019.104909"
+  source_dataset_version: "v1 (2000-2016)"
+  source_producer_institution: "Harvard T.H. Chan School of Public Health / NASA SEDAC"
+  source_citation_apa: >-
+    Di, Q., Amini, H., Shi, L., et al. (2019). An ensemble-based model of
+    PM2.5 concentration across the contiguous United States with high
+    spatiotemporal resolution. Environment International, 130, 104909.
+  source_license_spdx: CC-BY-4.0
+  source_access_url: "https://www.epa.gov/aqs"
+  source_native_format: netcdf4_cf
+
+methodology:
+  exposure_model_type: ensemble_machine_learning
+  exposure_model_inputs:
+  - "EPA AQS monitor observations"
+  - "MAIAC satellite AOD"
+  - "GEOS-Chem chemical transport model output"
+  - "meteorology, land-use, and elevation covariates"
+  exposure_model_paper_doi: "10.1016/j.envint.2019.104909"
+  exposure_model_cross_validation_r2: 0.86
+  exposure_model_known_biases:
+  - "underprediction of high-concentration peaks (smoothing toward the mean)"
+  - "larger error in sparsely-monitored rural and western regions"
+  exposure_model_uncertainty_field: pm25_monthly_se
+  exposure_model_ensemble_member_count: 3
+
+uncertainty:
+  per_value_uncertainty_field_name: pm25_monthly_se
+  per_value_uncertainty_type: ensemble_std_dev
+  per_value_uncertainty_units_ucum: ug/m3
+  model_aggregate_uncertainty:
+    cv_r2: 0.86
+    reported_in: "10.1016/j.envint.2019.104909"
+  missing_data_handling_method: none
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: street
+  geocoding_score_propagated: 0.91
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: aqdh_pm25_extract
+  tool_version: "2.1.0"
+  container_image_repository: "ghcr.io/example/aqdh-pm25"
+  container_image_digest: "sha256:dd4477aa1199..."
+  run_arguments: '{"variable": "pm25", "window": "2016-07"}'
+  run_timestamp_utc: "2026-05-24T09:11:03Z"
+  input_file_sha256: "ab12cd34..."
+  input_row_count: 3
+  output_file_sha256: "ef56ab78..."
+  output_row_count: 93
+
+provenance_chain:
+  provenance_chain_terminus_type: pre_existing_curated_dataset
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    run_timestamp_utc: "2026-05-24T09:01:55Z"
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+  cohort_size_anchored: 3
+subject: "cohort:phoenix_aki_2022"
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: "2016-07-19"  value: 9.7  unit: ug/m3  pm25_monthly_se: 1.3
+phi_status: no_phi

@@ -1,4 +1,3 @@
----
 id: https://w3id.org/linkml/microschemas/envar/spatial
 name: envar-spatial
 title: EnVar Microschemas — Spatial Reference
@@ -17,8 +16,8 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -35,17 +34,17 @@ classes:
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - native_spatial_resolution_m
-      - native_spatial_resolution_descriptor
-      - crs
-      - spatial_extent_bbox
-      - spatial_extent_descriptor
-      - extraction_method
-      - extraction_buffer_m
-      - extraction_buffer_m_missing_reason
-      - population_weighting_source
-      - population_weighting_source_missing_reason
-      - target_geography_type
+    - native_spatial_resolution_m
+    - native_spatial_resolution_descriptor
+    - crs
+    - spatial_extent_bbox
+    - spatial_extent_descriptor
+    - extraction_method
+    - extraction_buffer_m
+    - extraction_buffer_m_missing_reason
+    - population_weighting_source
+    - population_weighting_source_missing_reason
+    - target_geography_type
     slot_usage:
       crs:
         required: true
@@ -66,12 +65,16 @@ slots:
       Native spatial resolution of the source product in metres. Daymet = 1000,
       GridMET ≈ 4000, NARR ≈ 32000.
 
+    annotations:
+      tier: core
   native_spatial_resolution_descriptor:
     range: string
     description: >-
       Human-readable label for the native resolution, e.g. "1 km regular grid",
       "H3 hex zoom 8", "census tract polygon", "point station".
 
+    annotations:
+      tier: recommended
   crs:
     range: string
     description: >-
@@ -79,6 +82,8 @@ slots:
       Mandatory. E.g. `EPSG:4326` for Daymet, `EPSG:5072` for NARR Lambert
       Conformal Conic.
 
+    annotations:
+      tier: core
   spatial_extent_bbox:
     range: float
     multivalued: true
@@ -86,28 +91,38 @@ slots:
       Bounding box of the source *product* (not the extracted subset), as
       `[min_lon, min_lat, max_lon, max_lat]`.
 
+    annotations:
+      tier: recommended
   spatial_extent_descriptor:
     range: string
     description: >-
       Human-readable description of the product extent, e.g.
       "CONUS + Hawaii + Puerto Rico", "global land surface 60°S-80°N".
 
+    annotations:
+      tier: recommended
   extraction_method:
     range: ExtractionMethodEnum
     description: >-
       How a gridded value was extracted at the patient's coordinates. Default
       for DeGAUSS daymet / narr is `inverse_distance_weighted_4_nearest_cells`.
 
+    annotations:
+      tier: core
   extraction_buffer_m:
     range: float
     description: >-
       Radius of any spatial buffer applied (e.g. greenspace at 500 / 1500 /
       2500 m). Null when no buffer is applied.
 
+    annotations:
+      tier: conditionally_core
   extraction_buffer_m_missing_reason:
     range: MissingReasonEnum
     description: Reason `extraction_buffer_m` is null.
 
+    annotations:
+      tier: optional
   population_weighting_source:
     range: string
     description: >-
@@ -115,14 +130,20 @@ slots:
       WBGT product is population-weighted from gridMET). Null when no weighting
       is applied.
 
+    annotations:
+      tier: conditionally_core
   population_weighting_source_missing_reason:
     range: MissingReasonEnum
     description: Reason `population_weighting_source` is null.
 
+    annotations:
+      tier: optional
   target_geography_type:
     range: TargetGeographyTypeEnum
     description: >-
       Geographic unit the exposure value is attached to.
+    annotations:
+      tier: core
 
 #────────────────────────────────────────────────────────────────
 # ENUMS

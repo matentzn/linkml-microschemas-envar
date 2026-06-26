@@ -1,0 +1,39 @@
+# TMAX — CORE tier (the minimum that still validates).
+# Exactly the required Core fields, nothing more. Contrast with the
+# `core_missing` counter-example under tests/data/invalid/, which drops some of
+# these required fields and therefore fails validation.
+schema_version: "0.1"
+provenance_id: "01HFA7K8R3M6XP-daymet-core"
+phi_status: no_phi
+subject: "cohort:phoenix_aki_2022"
+
+observation_type:
+  variable_name: tmax
+  standard_name: CF:air_temperature
+  units_ucum: Cel
+  concept_status: gap
+  value_data_type: continuous_numeric
+
+location:
+  crs: "EPSG:4326"
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+
+methodology:
+  exposure_model_type: spatial_interpolation
+
+source_dataset:
+  source_dataset_name: "Daymet V4 Daily Surface Weather Data"
+  source_dataset_version: "V4 R1"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+
+tool_run:
+  tool_name: daymet
+  tool_version: "1.0.0"

@@ -1,0 +1,20 @@
+# linkml-lint configuration for the EnVar microschemas.
+# Used by `just lint` (uv run linkml-lint -c linter-config.yaml ...).
+#
+# We start from linkml's `recommended` ruleset and relax one check that
+# produces false positives for this domain:
+extends: recommended
+rules:
+  # UCUM and SPDX prefixes are deliberately mapped to their authoritative
+  # official sites (https://ucum.org/, https://spdx.org/licenses/). The
+  # bundled `prefixmaps` registry records different namespaces for these,
+  # which is the only reason the rule fires. Keep our canonical URLs.
+  canonical_prefixes:
+    level: disabled
+
+  # standard_naming is active: all permissible values are snake_case. The
+  # recognised domain form (NetCDF-4/CF, GRIB-2, 360_day, C-HER, …) is kept
+  # on each value's `title`.
+  standard_naming:
+    level: error
+    permissible_values_upper_case: false

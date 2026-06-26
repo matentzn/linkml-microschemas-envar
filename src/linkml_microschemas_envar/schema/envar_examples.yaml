@@ -34,7 +34,7 @@ classes:
     is_a: EnvironmentalExposureRecord
     description: >-
       Canonical record for daily maximum 2 m air temperature (Tmax).
-      Pins `cf_standard_name = air_temperature`, `cf_cell_methods =
+      Pins `standard_name = CF:air_temperature`, `cf_cell_methods =
       "time: maximum"`, `units_ucum = Cel`, `value_data_type =
       continuous_numeric`.
     rules:
@@ -55,7 +55,7 @@ classes:
     is_a: EnvironmentalExposureRecord
     description: >-
       Canonical record for daily minimum 2 m air temperature (Tmin). Pins
-      `cf_standard_name = air_temperature`, `cf_cell_methods =
+      `standard_name = CF:air_temperature`, `cf_cell_methods =
       "time: minimum"`, `units_ucum = Cel`, `value_data_type =
       continuous_numeric`.
 

@@ -1,0 +1,58 @@
+schema_version: "0.1"
+provenance_id: "01HXEPAAQS00000000000PM25MON"
+
+observation_type:
+  variable_name: pm25
+  variable_label: "24-hour mean fine particulate matter (PM2.5) mass concentration"
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: "time: mean"
+  units_ucum: ug/m3
+  value_data_type: continuous_numeric
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+
+location:
+  native_spatial_resolution_descriptor: "point station (FRM/FEM monitor)"
+  crs: "EPSG:4326"
+  extraction_method: point_station_lookup
+  target_geography_type: point_residence
+  # CORE GAP: nearest-station assignment has no documented max distance, so
+  # the spatial precision of the assignment is unknown.
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean
+  # CORE GAP: AQS daily summaries are local-standard-time; not recorded here.
+  day_boundary_convention:
+  day_boundary_convention_missing_reason: not_provided_by_source
+
+source_dataset:
+  source_dataset_name: "US EPA Air Quality System (AQS)"
+  source_dataset_short_code: epa_aqs
+  source_producer_institution: "US Environmental Protection Agency"
+  source_access_url: "https://www.epa.gov/aqs"
+  source_license_spdx: public-domain-us-gov
+
+methodology:
+  exposure_model_type: direct_measurement
+
+linkage_method:
+  linkage_strategy: nearest_station_with_max_distance
+  # CORE-adjacent GAP: max distance not set, so far-from-monitor patients are
+  # silently assigned a possibly-irrelevant value.
+  linkage_max_distance_to_station_m:
+  linkage_max_distance_to_station_m_missing_reason: not_provided_by_source
+
+tool_run:
+  tool_name: epa_aqs_api
+  tool_version: "unknown"
+  tool_version_missing_reason: not_provided_by_source
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+subject: "cohort:demo_min_pm"
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: "2022-07-19"  value: 12.4  unit: ug/m3
+phi_status: no_phi

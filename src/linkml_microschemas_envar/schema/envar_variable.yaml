@@ -1,30 +1,30 @@
----
 id: https://w3id.org/linkml/microschemas/envar/variable
 name: envar-variable
 title: EnVar Microschemas — Variable Identity
 version: "0.1.0"
 description: |-
-  Variable identity slots: CF standard name, UCUM units, OMOP concept ID,
-  ECTO / ENVO bindings, plausible value range, value data type. Covers
-  §2 of envar-heat-scenario-requirements.md.
+  Variable identity slots: standard-name CURIE (CF where it exists, ENVAR or
+  ontology terms otherwise), UCUM units, target-vocabulary concept id + status,
+  generic concept cross-references, plausible value range, value data type.
+  Covers §2 of envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
 prefixes:
   envar: https://w3id.org/linkml/microschemas/envar/
+  ENVAR: https://w3id.org/linkml/microschemas/envar/vocab/
   linkml: https://w3id.org/linkml/
   CF: http://vocab.nerc.ac.uk/standard_name/
   UCUM: https://ucum.org/
   ECTO: http://purl.obolibrary.org/obo/ECTO_
   ENVO: http://purl.obolibrary.org/obo/ENVO_
-  OMOP: https://athena.ohdsi.org/search-terms/terms/
   LOINC: https://loinc.org/
   SNOMED: http://snomed.info/id/
 default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -40,33 +40,28 @@ classes:
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - variable_name
-      - variable_label
-      - cf_standard_name
-      - cf_cell_methods
-      - units_ucum
-      - units_display
-      - omop_concept_id
-      - omop_concept_id_missing_reason
-      - omop_concept_status
-      - ecto_iri
-      - ecto_iri_missing_reason
-      - envo_iri
-      - loinc_code
-      - loinc_code_missing_reason
-      - snomed_code
-      - snomed_code_missing_reason
-      - value_data_type
-      - value_range_plausible_min
-      - value_range_plausible_max
+    - variable_name
+    - variable_label
+    - standard_name
+    - cf_cell_methods
+    - units_ucum
+    - units_display
+    - target_concept_vocabulary
+    - target_concept_id
+    - target_concept_id_missing_reason
+    - concept_status
+    - concept_mappings
+    - value_data_type
+    - value_range_plausible_min
+    - value_range_plausible_max
     slot_usage:
       variable_name:
         required: true
-      cf_standard_name:
+      standard_name:
         required: true
       units_ucum:
         required: true
-      omop_concept_status:
+      concept_status:
         required: true
       value_data_type:
         required: true
@@ -83,103 +78,125 @@ slots:
       The literal column name produced by the upstream tool (e.g. `tmax`,
       `tmmx`, `air.2m`).
 
+    annotations:
+      tier: core
   variable_label:
     range: string
     description: >-
       Human-readable label, e.g. "daily maximum air temperature at 2 m".
 
-  cf_standard_name:
-    range: string
+    annotations:
+      tier: recommended
+  standard_name:
+    range: uriorcurie
     description: >-
-      The CF Conventions Standard Name (v85+) for the variable. Cross-agency
-      identifier; e.g. `air_temperature` for Tmax. Mandatory.
+      The standard-name identifier for the physical quantity, as a CURIE so the
+      schema privileges no single naming authority. Use a CF Convention Standard
+      Name where one exists (`CF:air_temperature`, `CF:relative_humidity`); for
+      health-relevant quantities CF does not define (e.g. Heat Index, WBGT), mint
+      a term in the project registry (`ENVAR:heat_index`) or reuse an ontology
+      term (`ECTO:...`). The prefix carries the authority; the slot name does
+      not. Mandatory.
     slot_uri: dcterms:subject
-    exact_mappings:
-      - CF:air_temperature
 
+    annotations:
+      tier: core
   cf_cell_methods:
     range: string
     description: >-
       CF `cell_methods` string describing how the value summarises sub-period
       values, e.g. `time: maximum` for Tmax, `time: mean` for daily mean.
 
+    annotations:
+      tier: core
   units_ucum:
     range: string
     description: >-
       The unit expressed in UCUM syntax, e.g. `Cel` for degrees Celsius,
       `K` for Kelvin, `ug/m3` for PM2.5 mass concentration.
 
+    annotations:
+      tier: core
   units_display:
     range: string
     description: >-
       Human-readable unit string for display purposes, e.g. `°C`.
 
-  omop_concept_id:
-    range: integer
-    description: >-
-      Standard OHDSI Vocabulary concept_id for the variable. Nullable with
-      reason for environmental variables that lack OMOP coverage today.
-
-  omop_concept_id_missing_reason:
-    range: MissingReasonEnum
-    description: >-
-      Reason `omop_concept_id` is null. Distinguishes "no OMOP concept yet
-      exists" from "the pipeline did not resolve it".
-
-  omop_concept_status:
-    range: OmopConceptStatusEnum
-    description: >-
-      Status of this variable's OMOP vocabulary coverage. Required.
-
-  ecto_iri:
-    range: uriorcurie
-    description: >-
-      Environmental Conditions, Treatments and Exposures Ontology (ECTO) IRI
-      for the variable. Critical for cross-Monarch / cross-CHORDS alignment.
-
-  ecto_iri_missing_reason:
-    range: MissingReasonEnum
-    description: Reason `ecto_iri` is null.
-
-  envo_iri:
-    range: uriorcurie
-    description: >-
-      Environment Ontology (ENVO) IRI for the environmental material or
-      process being exposed to, where applicable.
-
-  loinc_code:
+    annotations:
+      tier: optional
+  target_concept_vocabulary:
     range: string
     description: >-
-      LOINC code, where the variable has clinical-laboratory coverage.
-      Usually null for ambient environmental variables.
+      The downstream health-data vocabulary that `target_concept_id` and
+      `concept_status` refer to, e.g. `omop` (OHDSI Standardised Vocabulary),
+      `bdc` (BioData Catalyst). Names the vocabulary so the schema privileges
+      no single health-data layer.
 
-  loinc_code_missing_reason:
-    range: MissingReasonEnum
-    description: Reason `loinc_code` is null.
-
-  snomed_code:
+    annotations:
+      tier: recommended
+  target_concept_id:
     range: string
     description: >-
-      SNOMED CT code, where the variable has clinical coverage. Usually null
-      for ambient environmental variables.
+      Concept identifier for the variable in the vocabulary named by
+      `target_concept_vocabulary` (e.g. an OHDSI concept_id). Nullable with
+      reason for environmental variables that lack coverage today.
 
-  snomed_code_missing_reason:
+    annotations:
+      tier: recommended
+  target_concept_id_missing_reason:
     range: MissingReasonEnum
-    description: Reason `snomed_code` is null.
+    description: >-
+      Reason `target_concept_id` is null. Distinguishes "no concept yet exists
+      in the target vocabulary" from "the pipeline did not resolve it".
 
+    annotations:
+      tier: optional
+  concept_status:
+    range: ConceptStatusEnum
+    description: >-
+      Status of this variable's coverage in the target health-data vocabulary
+      (`existing` / `proposed` / `gap`). Makes the vocabulary gap explicit
+      rather than silent. Required.
+
+    annotations:
+      tier: core
+  concept_mappings:
+    range: uriorcurie
+    multivalued: true
+    description: >-
+      Cross-references binding this variable to other vocabularies and
+      ontologies, each as a CURIE. One generic list rather than a slot per
+      standard, so adding a vocabulary is a new prefix, not a schema change.
+      Examples: `ECTO:0000012` (Environmental Conditions, Treatments and
+      Exposures Ontology — cross-Monarch / cross-CHORDS alignment),
+      `ENVO:01000339` (Environment Ontology — material or process exposed to),
+      `LOINC:...` / `SNOMED:...` (where the variable has clinical coverage).
+      Note: the *primary* downstream health-data binding, with its
+      `existing` / `proposed` / `gap` status, stays in the structured
+      `target_concept_*` slots — this list is for additional, status-free
+      cross-references.
+
+    annotations:
+      tier: optional
   value_data_type:
     range: DataTypeEnum
     description: >-
       The data type of the stored exposure value.
 
+    annotations:
+      tier: core
   value_range_plausible_min:
     range: float
     description: >-
       Physical / domain lower bound for plausible values (e.g. -50 °C for
       ambient Tmax). Not a hard validation bound; sanity-check signal.
 
+    annotations:
+      tier: recommended
   value_range_plausible_max:
     range: float
     description: >-
       Physical / domain upper bound for plausible values (e.g. 60 °C for
       ambient Tmax).
+    annotations:
+      tier: recommended

@@ -1,0 +1,54 @@
+schema_version: "0.1"
+provenance_id: "01HXAMADEUS0000000000GRIDMET"
+
+observation_type:
+  variable_name: tmmx                      # GridMET's native column name
+  variable_label: "daily maximum near-surface air temperature"
+  standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+  value_data_type: continuous_numeric
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+
+location:
+  native_spatial_resolution_m: 4000
+  native_spatial_resolution_descriptor: "~4 km regular grid"
+  crs: "EPSG:4326"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  # CORE GAP: GridMET blends UTC-referenced NLDAS-2 with PRISM normals; the
+  # Amadeus output does not record which day-boundary convention applies.
+  day_boundary_convention:
+  day_boundary_convention_missing_reason: not_provided_by_source
+
+source_dataset:
+  source_dataset_name: "GridMET (University of Idaho gridded surface meteorology)"
+  source_dataset_short_code: gridmet
+  # CORE GAP: version not surfaced by the Amadeus acknowledgement string.
+  source_dataset_version:
+  source_dataset_version_missing_reason: not_provided_by_source
+  source_acknowledgement_freetext: >-
+    Data provided by the University of Idaho; GridMET via Amadeus.
+
+methodology:
+  exposure_model_type: statistical_blend
+
+tool_run:
+  tool_name: amadeus
+  tool_version: "1.3.2"
+  input_file_sha256: "3a1b9c..."
+  output_file_sha256: "7f2e4d..."
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+subject: "cohort:demo_min"
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: "2022-07-19"  value: 45.1  unit: Cel
+phi_status: no_phi

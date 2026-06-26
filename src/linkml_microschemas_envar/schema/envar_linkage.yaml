@@ -1,12 +1,15 @@
----
 id: https://w3id.org/linkml/microschemas/envar/linkage
 name: envar-linkage
 title: EnVar Microschemas — Linkage Method (gridded → patient)
 version: "0.1.0"
 description: |-
-  Linkage-method slots: how a gridded value is attached to a patient
-  location, propagated geocoder quality, address-period alignment.
-  Covers §9 of envar-heat-scenario-requirements.md.
+  Linkage-method slots: how a gridded value is attached to a patient's
+  location and clinical date — the spatiotemporal trajectory-resolution step.
+  Linkage strategy, buffer parameters, propagated geocoder quality,
+  address-period alignment (spatial axis), and clinical-date-assignment
+  convention, partial-day attribution, and lag alignment (temporal axis).
+  Covers §9 and the temporal-linkage parts of §4 of
+  envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
 prefixes:
@@ -16,8 +19,8 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -27,30 +30,36 @@ classes:
 
   LinkageMethod:
     description: >-
-      How a gridded environmental value gets attached to a patient location:
-      the linkage strategy, any buffer parameters, the propagated geocoder
-      precision and score, and how patient address-over-time is modelled.
-      One per record.
+      How a gridded environmental value gets attached to a patient: the
+      resolution of the patient's spatiotemporal trajectory down to the
+      resolution the exposure data supports. Covers the linkage strategy and
+      buffer parameters, the propagated geocoder precision and score, how
+      patient location-over-time is modelled (the spatial axis), and the
+      clinical-date-assignment convention, partial-day attribution, and lag
+      alignment (the temporal axis). One per record.
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - linkage_strategy
-      - linkage_buffer_radius_m
-      - linkage_buffer_radius_m_missing_reason
-      - linkage_buffer_aggregation_method
-      - linkage_buffer_aggregation_method_missing_reason
-      - linkage_max_distance_to_station_m
-      - linkage_max_distance_to_station_m_missing_reason
-      - geocoding_precision_propagated
-      - geocoding_score_propagated
-      - geocoding_score_propagated_missing_reason
-      - address_period_alignment
+    - linkage_strategy
+    - linkage_buffer_radius_m
+    - linkage_buffer_radius_m_missing_reason
+    - linkage_buffer_aggregation_method
+    - linkage_buffer_aggregation_method_missing_reason
+    - linkage_max_distance_to_station_m
+    - linkage_max_distance_to_station_m_missing_reason
+    - geocoding_precision_propagated
+    - geocoding_score_propagated
+    - geocoding_score_propagated_missing_reason
+    - address_period_alignment
+    - clinical_date_assignment_convention
+    - clinical_date_assignment_convention_missing_reason
+    - partial_day_attribution_rule
+    - partial_day_attribution_rule_missing_reason
+    - lag_alignment_applied
+    - lag_alignment_specifier
+    - lag_alignment_applied_missing_reason
     slot_usage:
       linkage_strategy:
-        required: true
-      geocoding_precision_propagated:
-        required: true
-      address_period_alignment:
         required: true
 
 #────────────────────────────────────────────────────────────────
@@ -63,54 +72,131 @@ slots:
     range: LinkageStrategyEnum
     description: How a gridded value is attached to a patient location.
 
+    annotations:
+      tier: core
   linkage_buffer_radius_m:
     range: float
     description: >-
       Buffer radius in metres for buffer-aggregation strategies.
 
+    annotations:
+      tier: conditionally_core
   linkage_buffer_radius_m_missing_reason:
     range: MissingReasonEnum
     description: Reason `linkage_buffer_radius_m` is null.
 
+    annotations:
+      tier: optional
   linkage_buffer_aggregation_method:
     range: BufferAggregationEnum
     description: >-
       Aggregation method applied within the buffer (mean / max / median /
       area-weighted mean).
 
+    annotations:
+      tier: conditionally_core
   linkage_buffer_aggregation_method_missing_reason:
     range: MissingReasonEnum
     description: Reason `linkage_buffer_aggregation_method` is null.
 
+    annotations:
+      tier: optional
   linkage_max_distance_to_station_m:
     range: float
     description: >-
       Maximum distance to a station for nearest-station strategies; values
       beyond this distance get null.
 
+    annotations:
+      tier: conditionally_core
   linkage_max_distance_to_station_m_missing_reason:
     range: MissingReasonEnum
     description: Reason `linkage_max_distance_to_station_m` is null.
 
+    annotations:
+      tier: optional
   geocoding_precision_propagated:
     range: GeocodingPrecisionEnum
     description: >-
       Quality category propagated from the upstream geocoder (DeGAUSS
       `precision` column).
 
+    annotations:
+      tier: recommended
   geocoding_score_propagated:
     range: float
     description: >-
       Geocoder score (0-1) propagated from the upstream geocoder so the
       exposure record knows the spatial precision of its anchor.
 
+    annotations:
+      tier: recommended
   geocoding_score_propagated_missing_reason:
     range: MissingReasonEnum
     description: Reason `geocoding_score_propagated` is null.
 
+    annotations:
+      tier: optional
   address_period_alignment:
     range: AddressPeriodAlignmentEnum
-    description: How the patient's address-over-time was modelled.
+    description: >-
+      How the patient's location-over-time (the spatial axis of trajectory
+      resolution) was modelled.
+    annotations:
+      tier: recommended
+  clinical_date_assignment_convention:
+    range: ClinicalDateAssignmentEnum
+    description: >-
+      The clinical-side mirror of `day_boundary_convention` (envar_temporal):
+      which timezone / day-boundary rule collapsed the clinical timestamp to
+      the date used in the join. A boundary mismatch between this and the
+      exposure-side `day_boundary_convention` silently misattributes
+      boundary-hour events to the wrong day, which is what makes the Core
+      `day_boundary_convention` checkable at all. Metadata *about the join* —
+      never the clinical timestamp itself; carries no PHI.
+    annotations:
+      tier: conditionally_core
+  clinical_date_assignment_convention_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `clinical_date_assignment_convention` is null.
+    annotations:
+      tier: optional
+  partial_day_attribution_rule:
+    range: PartialDayAttributionEnum
+    description: >-
+      How boundary / transition days of the patient's trajectory (trip start /
+      end, travel days) are attributed when location changes within a day. The
+      temporal partner to the `known_travel_interval` address alignment.
+    annotations:
+      tier: recommended
+  partial_day_attribution_rule_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `partial_day_attribution_rule` is null.
+    annotations:
+      tier: optional
+  lag_alignment_applied:
+    range: LagAlignmentEnum
+    description: >-
+      Whether and how values were lag-aligned to a clinical event. Relocated
+      from envar_temporal: lag alignment attaches a value to an event (a
+      linkage concern), not an intrinsic temporal property. See
+      `lag_alignment_specifier` for the concrete lag value(s).
+    annotations:
+      tier: recommended
+  lag_alignment_specifier:
+    range: string
+    description: >-
+      Free-form specifier paired with `lag_alignment_applied` to capture the
+      concrete lag values (e.g. `"3"` for a 3-day lag, or `"0-21"` for a
+      distributed lag from 0 to 21 days). Empty when `lag_alignment_applied`
+      = `none`.
+    annotations:
+      tier: optional
+  lag_alignment_applied_missing_reason:
+    range: MissingReasonEnum
+    description: Reason `lag_alignment_applied` is null.
+    annotations:
+      tier: optional
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -170,11 +256,79 @@ enums:
         description: Precision is unknown.
 
   AddressPeriodAlignmentEnum:
-    description: How the patient's address-over-time was modelled.
+    description: >-
+      How the patient's location-over-time (the spatial axis of trajectory
+      resolution) was modelled.
     permissible_values:
       single_static_address:
         description: A single address is used for the whole observation period.
       address_history_from_emr:
         description: An EMR-sourced address history is used.
+      known_travel_interval:
+        description: >-
+          A documented trip away from the residence is accounted for (e.g. a
+          holiday), rather than assuming the residence for the whole period;
+          assuming a static address would smear home-location exposure across
+          days the patient was elsewhere.
       synthetic_residence_period:
         description: A synthetic residence period was constructed for the patient.
+
+  ClinicalDateAssignmentEnum:
+    description: >-
+      The clinical-side mirror of `DayBoundaryConventionEnum` (envar_temporal):
+      which timezone / day-boundary rule was used to collapse the clinical
+      timestamp to the date used in the join. Compared against the
+      exposure-side `day_boundary_convention` by the day-boundary cross-check.
+    permissible_values:
+      local_midnight:
+        description: Clinical date assigned at local midnight at the patient location.
+      utc_midnight:
+        description: Clinical date assigned at 00:00 UTC.
+      source_system_local_time:
+        description: >-
+          Clinical date assigned in the source clinical system's local time,
+          whose offset may not be documented.
+      date_only_no_time:
+        description: >-
+          The clinical record carried only a date (no time of day), so no
+          boundary rule applies; the date is taken as-is.
+      unknown:
+        description: The clinical-date-assignment convention is unknown.
+
+  PartialDayAttributionEnum:
+    description: >-
+      How boundary / transition days of the patient's trajectory (trip start /
+      end, travel days) are attributed when location changes within a day.
+    permissible_values:
+      origin_location:
+        description: The transition day is attributed to the origin location.
+      destination_location:
+        description: The transition day is attributed to the destination location.
+      both_days_included:
+        description: >-
+          Both ends of the transition are counted (exposure attributed at both
+          locations).
+      excluded:
+        description: Transition days are excluded from exposure attribution.
+      not_applicable:
+        description: >-
+          No trajectory transitions occur (e.g. a single static address), so
+          the rule does not apply.
+
+  LagAlignmentEnum:
+    description: >-
+      Whether the values have been pre-aligned to a clinical event window in
+      this ETL. Companion slot `lag_alignment_specifier` captures the concrete
+      lag pattern (e.g. `lag_3_days`, `distributed_lag_0_21`). Relocated here
+      from envar_temporal.
+    permissible_values:
+      none:
+        description: No lag alignment applied; values are at native dates.
+      lag_n_days:
+        description: >-
+          A single-day lag of N days has been applied. Concrete N captured
+          in `lag_alignment_specifier`.
+      distributed_lag:
+        description: >-
+          A distributed lag over a range of days has been applied. Range
+          captured in `lag_alignment_specifier` (e.g. `"0-21"`).

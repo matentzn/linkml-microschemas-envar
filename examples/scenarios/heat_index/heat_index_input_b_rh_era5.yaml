@@ -1,0 +1,86 @@
+# Heat Index demo — input B: the relative-humidity parent sidecar.
+# ERA5 reanalysis, ~31 km (0.25°) grid, UTC day boundary, daily MEAN.
+# Referenced by heat_index_derived.yaml via equation_inputs[input_role=relative_humidity].
+# This is the COARSER, utc, mean-aggregated input. Every line marked "<-- diverges"
+# is a divergence from input A that the single output number would otherwise hide.
+---
+schema_version: "0.1"
+provenance_id: "01HFA7K8R3M6XP-era5-rh"
+
+variable_identity:
+  variable_name: rh
+  variable_label: "daily mean near-surface relative humidity"
+  standard_name: CF:relative_humidity
+  cf_cell_methods: "time: mean"
+  units_ucum: "%"
+  units_display: "%"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: 0
+  value_range_plausible_max: 100
+
+spatial_reference:
+  native_spatial_resolution_m: 31000               # <-- diverges from input A (1000 m)
+  native_spatial_resolution_descriptor: "~31 km (0.25°) reanalysis grid"
+  crs: "EPSG:4326"
+  spatial_extent_descriptor: "global"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean                # <-- diverges from input A (maximum)
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: utc                     # <-- diverges from input A (local_midnight)
+  temporal_coverage_start: "1940-01-01"
+  temporal_coverage_end: "2024-12-31"
+  extraction_window_start: "2022-07-18"
+  extraction_window_end: "2022-07-20"
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: "ERA5 hourly data on single levels"
+  source_dataset_short_code: era5
+  source_dataset_doi: "10.24381/cds.adbb2d47"
+  source_dataset_version: "ERA5"
+  source_producer_institution: "ECMWF / Copernicus Climate Change Service (C3S)"
+  source_license_spdx: "Copernicus-Licence"
+  source_native_format: grib1
+  source_access_url: "https://cds.climate.copernicus.eu/"
+
+exposure_model:
+  exposure_model_type: reanalysis
+  exposure_model_inputs:
+  - "ECMWF IFS 4D-Var assimilation of multi-source observations"
+  exposure_model_known_biases:
+  - "near-surface humidity biased in arid regions"
+  - "coarse grid smooths sub-grid humidity gradients"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: era5_extract
+  tool_version: "0.4.2"
+  container_image_repository: "ghcr.io/envar-org/era5-extract"
+  container_image_digest: "sha256:f4e3d2c1b0a9..."
+  run_arguments: '{"variable": "relative_humidity", "statistic": "daily_mean"}'
+  run_timestamp_utc: "2026-05-23T14:21:09Z"
+  output_file_sha256: "7a6b5c4d3e2f..."
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    run_timestamp_utc: "2026-05-23T14:02:11Z"
+
+data_row:
+  subject: "cohort:phoenix_aki_2022"
+  date: "2022-07-19"
+  value: 18.0
+  unit: "%"
+phi_status: no_phi

@@ -1,0 +1,85 @@
+# Heat Index demo — input A: the dry-bulb air-temperature parent sidecar.
+# Daymet V4, 1 km grid, local-midnight day boundary, daily MAXIMUM.
+# Referenced by heat_index_derived.yaml via equation_inputs[input_role=air_temperature].
+# This is the FINER, local-midnight, max-aggregated input.
+---
+schema_version: "0.1"
+provenance_id: "01HFA7K8R3M6XP-daymet-tmax"
+
+variable_identity:
+  variable_name: tmax
+  variable_label: "daily maximum air temperature at 2 m"
+  standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+  units_display: "°C"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: "1 km regular grid"
+  crs: "EPSG:4326"
+  spatial_extent_descriptor: "CONUS + Hawaii + Puerto Rico"
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight        # <-- diverges from input B (era5 = utc)
+  temporal_coverage_start: "1980-01-01"
+  temporal_coverage_end: "2024-12-31"
+  extraction_window_start: "2022-07-18"
+  extraction_window_end: "2022-07-20"
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: "Daymet V4 Daily Surface Weather Data"
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: "10.3334/ORNLDAAC/2129"
+  source_dataset_version: "V4 R1"
+  source_producer_institution: "NASA ORNL DAAC"
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: "https://daymet.ornl.gov/"
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - "GHCN-Daily station observations"
+  exposure_model_paper_doi: "10.3334/ORNLDAAC/2129"
+  exposure_model_known_biases:
+  - "warm-season warm bias documented in some western US regions"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet
+  tool_version: "1.0.0"
+  container_image_repository: "ghcr.io/degauss-org/daymet"
+  container_image_digest: "sha256:a8b3c2d1e0f9..."
+  run_arguments: '{"variables": "tmax"}'
+  run_timestamp_utc: "2026-05-23T14:18:42Z"
+  output_file_sha256: "1c2d3e4f5a6b..."
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    run_timestamp_utc: "2026-05-23T14:02:11Z"
+
+data_row:
+  subject: "cohort:phoenix_aki_2022"
+  date: "2022-07-19"
+  value: 46.7
+  unit: Cel
+phi_status: no_phi

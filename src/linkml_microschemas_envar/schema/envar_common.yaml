@@ -1,4 +1,3 @@
----
 id: https://w3id.org/linkml/microschemas/envar/common
 name: envar-common
 title: EnVar Microschemas — Common Types
@@ -21,7 +20,6 @@ prefixes:
   UCUM: https://ucum.org/
   ECTO: http://purl.obolibrary.org/obo/ECTO_
   ENVO: http://purl.obolibrary.org/obo/ENVO_
-  OMOP: https://athena.ohdsi.org/search-terms/terms/
   LOINC: https://loinc.org/
   SNOMED: http://snomed.info/id/
   SPDX: https://spdx.org/licenses/
@@ -30,8 +28,22 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - https://raw.githubusercontent.com/linkml/linkml-microschema-profile/v0.3.0/src/linkml_microschema_profile/schema/linkml_microschema_profile
+- linkml:types
+- https://raw.githubusercontent.com/linkml/linkml-microschema-profile/v0.3.0/src/linkml_microschema_profile/schema/linkml_microschema_profile
+
+#────────────────────────────────────────────────────────────────
+# SHARED CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  AnyValue:
+    class_uri: linkml:Any
+    description: >-
+      An arbitrary passthrough object (open-ended key/value map) whose keys are
+      not fixed by this schema — e.g. ACDD global attributes or a run-environment
+      map. Lets such payloads be carried as native objects rather than opaque
+      JSON strings.
 
 #────────────────────────────────────────────────────────────────
 # SHARED SLOTS
@@ -46,14 +58,28 @@ slots:
       on every sidecar so downstream consumers can branch on schema evolution.
     required: true
 
+    annotations:
+      tier: core
   provenance_id:
     range: string
     description: >-
       Stable identifier for this sidecar / record (ULID recommended). This is
-      the value that OMOP `external_exposure.exposure_source_value` carries to
-      link a row back to its provenance.
+      the value the downstream health-data layer's source-value field carries
+      to link a row back to its provenance (for OMOP, that field is
+      `external_exposure.exposure_source_value`).
     required: true
 
+    annotations:
+      tier: core
+  phi_status:
+    range: PhiStatusEnum
+    description: >-
+      Whether the sidecar carries any Protected Health Information. A
+      record-level safety assertion; by design, sidecars are PHI-free.
+    required: true
+
+    annotations:
+      tier: core
   missing_reason:
     range: MissingReasonEnum
     description: >-
@@ -61,6 +87,8 @@ slots:
       EnVar schemas should be paired with a *_missing_reason slot taking this
       range. CF-Conventions "missing_value with reason" pattern lifted to the
       metadata layer.
+    annotations:
+      tier: optional
 
 #────────────────────────────────────────────────────────────────
 # SHARED ENUMS
@@ -103,14 +131,28 @@ enums:
       event_marker:
         description: Date-stamped event (e.g. wildfire smoke plume).
 
-  OmopConceptStatusEnum:
+  PhiStatusEnum:
+    description: PHI content of the sidecar.
+    permissible_values:
+      no_phi:
+        description: The sidecar carries no PHI.
+      aggregated_no_phi:
+        description: The sidecar carries aggregated values with no PHI.
+      phi_present:
+        description: >-
+          The sidecar carries PHI. Should never happen; sidecars are by
+          design PHI-free.
+
+  ConceptStatusEnum:
     description: >-
-      Status of a variable's representation in the OHDSI Standardised
-      Vocabulary. `existing` = a concept_id is available now; `proposed` =
-      submission in flight; `gap` = no concept exists and none is proposed.
+      Status of a variable's representation in the target health-data
+      vocabulary named by `target_concept_vocabulary` (e.g. the OHDSI
+      Standardised Vocabulary, the BioData Catalyst model). `existing` = a
+      concept id is available now; `proposed` = a submission is in flight;
+      `gap` = no concept exists and none is proposed.
     permissible_values:
       existing:
-        description: A concept_id is available in the standard OHDSI vocabulary.
+        description: A concept id is available in the target vocabulary.
       proposed:
         description: A concept submission is in flight.
       gap:

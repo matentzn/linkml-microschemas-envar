@@ -1,11 +1,12 @@
----
-id: https://w3id.org/linkml/microschemas/envar/omop
-name: envar-omop
-title: EnVar Microschemas — OMOP Linkage and FAIR Deposit
+id: https://w3id.org/linkml/microschemas/envar/health_layer
+name: envar-health-layer
+title: EnVar Microschemas — Health-Layer Linkage and FAIR Deposit
 version: "0.1.0"
 description: |-
-  OMOP / BDC linkage hooks and FAIR deposit-time slots. Covers §12 and §13
-  of envar-heat-scenario-requirements.md.
+  Hooks that link a sidecar into a downstream health-data layer (OMOP, BDC,
+  …) plus FAIR deposit-time slots. The schema privileges no single health
+  model: the target layer is named in a slot rather than baked into slot
+  names. Covers §12 and §13 of envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
 prefixes:
@@ -16,8 +17,8 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -25,26 +26,20 @@ imports:
 
 classes:
 
-  OmopLinkage:
+  HealthLayerLinkage:
     description: >-
-      Hooks the sidecar uses to interface with OMOP (or BDC, or another)
-      health-data layer. These are *not* clinical metadata — they are the
-      hooks the exposure record needs to be findable from the health side.
-      One per record.
+      Hooks the sidecar uses to be findable from a downstream health-data
+      layer (OMOP, BioData Catalyst, …). These are *not* clinical metadata —
+      they are the hooks the exposure record needs so a health-side row can
+      resolve back to its provenance. The target layer is named in
+      `health_layer_target`, so no single model is privileged. One per record.
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - omop_external_exposure_link_field
-      - bdc_link_field
-      - bdc_link_field_missing_reason
-      - cohort_size_anchored
-      - cohort_size_anchored_missing_reason
-      - phi_status
-    slot_usage:
-      omop_external_exposure_link_field:
-        required: true
-      phi_status:
-        required: true
+    - health_layer_target
+    - health_layer_link_field
+    - cohort_size_anchored
+    - cohort_size_anchored_missing_reason
 
   DepositMetadata:
     description: >-
@@ -55,15 +50,15 @@ classes:
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - deposit_doi
-      - deposit_doi_missing_reason
-      - deposit_repository
-      - deposit_repository_missing_reason
-      - deposit_license_spdx
-      - deposit_redistribution_constraints_inherited
-      - recommended_citation
-      - dcat_distribution_url
-      - dcat_distribution_url_missing_reason
+    - deposit_doi
+    - deposit_doi_missing_reason
+    - deposit_repository
+    - deposit_repository_missing_reason
+    - deposit_license_spdx
+    - deposit_redistribution_constraints_inherited
+    - recommended_citation
+    - dcat_distribution_url
+    - dcat_distribution_url_missing_reason
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -71,79 +66,99 @@ classes:
 
 slots:
 
-  omop_external_exposure_link_field:
+  health_layer_target:
+    range: HealthLayerTargetEnum
+    description: >-
+      The downstream health-data layer this sidecar links into. Names the
+      target so `health_layer_link_field` is interpreted against the right
+      model.
+
+    annotations:
+      tier: recommended
+  health_layer_link_field:
     range: string
     description: >-
-      Name of the OMOP field carrying `provenance_id`. Default
-      `exposure_source_value`.
+      Name of the field in the target health-data layer that carries
+      `provenance_id`. For OMOP this is `external_exposure.exposure_source_value`
+      (the default); other layers name their own field.
 
-  bdc_link_field:
-    range: string
-    description: BDC equivalent of `omop_external_exposure_link_field`.
-
-  bdc_link_field_missing_reason:
-    range: MissingReasonEnum
-    description: Reason `bdc_link_field` is null.
-
+    annotations:
+      tier: recommended
   cohort_size_anchored:
     range: integer
     description: >-
       Number of distinct persons this exposure record was extracted for.
-      Helps downstream estimate the volume of OMOP rows the sidecar
+      Helps downstream estimate the volume of health-layer rows the sidecar
       describes.
 
+    annotations:
+      tier: optional
   cohort_size_anchored_missing_reason:
     range: MissingReasonEnum
     description: Reason `cohort_size_anchored` is null.
 
-  phi_status:
-    range: PhiStatusEnum
-    description: >-
-      Whether the sidecar carries any Protected Health Information. By
-      design, sidecars are PHI-free.
-
+    annotations:
+      tier: optional
   deposit_doi:
     range: string
     description: >-
       DOI assigned by the deposit repository (e.g. Zenodo).
 
+    annotations:
+      tier: optional
   deposit_doi_missing_reason:
     range: MissingReasonEnum
     description: Reason `deposit_doi` is null (e.g. pre-deposit).
 
+    annotations:
+      tier: optional
   deposit_repository:
     range: DepositRepositoryEnum
     description: Repository hosting the deposit.
 
+    annotations:
+      tier: optional
   deposit_repository_missing_reason:
     range: MissingReasonEnum
     description: Reason `deposit_repository` is null.
 
+    annotations:
+      tier: optional
   deposit_license_spdx:
     range: string
     description: >-
       SPDX identifier of the license under which the *derived* exposure
       record (not the source) is published.
 
+    annotations:
+      tier: optional
   deposit_redistribution_constraints_inherited:
     range: string
     multivalued: true
     description: >-
       Constraints from any input source that pass through to the deposit.
 
+    annotations:
+      tier: optional
   recommended_citation:
     range: string
     description: >-
       One-line recommended citation derived from the slots above.
 
+    annotations:
+      tier: optional
   dcat_distribution_url:
     range: uri
     description: >-
       DCAT-compatible distribution URL for catalogue integration.
 
+    annotations:
+      tier: optional
   dcat_distribution_url_missing_reason:
     range: MissingReasonEnum
     description: Reason `dcat_distribution_url` is null.
+    annotations:
+      tier: optional
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -151,17 +166,18 @@ slots:
 
 enums:
 
-  PhiStatusEnum:
-    description: PHI content of the sidecar.
+  HealthLayerTargetEnum:
+    description: >-
+      The downstream health-data layer a sidecar links into. Open by design;
+      extend as new targets are supported.
     permissible_values:
-      no_phi:
-        description: The sidecar carries no PHI.
-      aggregated_no_phi:
-        description: The sidecar carries aggregated values with no PHI.
-      phi_present:
+      omop_external_exposure:
         description: >-
-          The sidecar carries PHI. Should never happen; sidecars are by
-          design PHI-free.
+          OMOP CDM, via the OHDSI GIS `external_exposure` table extension.
+      bdc:
+        description: BioData Catalyst (BDC) harmonised model.
+      other:
+        description: Another health-data layer named out of band.
 
   DepositRepositoryEnum:
     description: Repository hosting a FAIR deposit.
@@ -172,7 +188,8 @@ enums:
         description: Dryad.
       figshare:
         description: Figshare.
-      c-her:
+      c_her:
+        title: C-HER
         description: ORNL C-HER (Centralized Health and Exposomic Resource).
       osf:
         description: Open Science Framework.

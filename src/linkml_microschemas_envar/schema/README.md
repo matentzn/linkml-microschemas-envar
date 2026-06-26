@@ -6,16 +6,16 @@ tool (Amadeus, DeGAUSS, …) and consumed downstream by OMOP or another
 health-data layer. The top class is `EnvironmentalExposureRecord`; it
 composes variable identity, spatial / temporal reference, source dataset,
 exposure model, uncertainty, linkage method, tool-run / W3C-PROV provenance
-chain, optional derived-heat-metric methodology, OMOP linkage hooks, and
-FAIR-deposit metadata. The schema implements §1.1 of
+chain, optional derived-heat-metric methodology, health-data-layer linkage
+hooks (OMOP, BDC, …), and FAIR-deposit metadata. The schema implements §1.1 of
 `pipeline/heat-omop-slice/envar-heat-scenario-requirements.md`.
 
 ## Modules
 
 | File | Class(es) | Purpose |
 |---|---|---|
-| `envar_common.yaml` | (enums, shared slots) | Shared `MissingReasonEnum`, `DataTypeEnum`, `OmopConceptStatusEnum`; `schema_version`, `provenance_id`. Imports the LinkML Microschema Profile. |
-| `envar_variable.yaml` | `VariableIdentity` | CF standard name, UCUM units, OMOP concept ID, ECTO / ENVO bindings, plausible value range. Covers req §2. |
+| `envar_common.yaml` | (enums, shared slots) | Shared `MissingReasonEnum`, `DataTypeEnum`, `ConceptStatusEnum`, `PhiStatusEnum`; `schema_version`, `provenance_id`, `phi_status`. Imports the LinkML Microschema Profile. |
+| `envar_variable.yaml` | `VariableIdentity` | CF standard name, UCUM units, target-vocabulary concept id + status, ECTO / ENVO bindings, plausible value range. Covers req §2. |
 | `envar_spatial.yaml` | `SpatialReference` | Native grid, CRS, extent, extraction method, target geography. Covers req §3. |
 | `envar_temporal.yaml` | `TemporalReference` | Resolution, aggregation, day-boundary convention, coverage, calendar, lag alignment. Covers req §4. |
 | `envar_source.yaml` | `SourceDataset` | Upstream product identity, DOI, version, license, native format, homogenisation status. Covers req §5. |
@@ -24,7 +24,7 @@ FAIR-deposit metadata. The schema implements §1.1 of
 | `envar_linkage.yaml` | `LinkageMethod` | Gridded-to-patient linkage strategy, buffer parameters, propagated geocoder quality. Covers req §9. |
 | `envar_toolrun.yaml` | `ToolRun`, `ProvenanceChain` | Exact tool invocation and the ordered W3C-PROV chain of upstream runs. Covers req §10 and §11. |
 | `envar_heat_metric.yaml` | `DerivedHeatMetric` | Heat-metric methodology: family, equation variant, indoor / outdoor, percentile reference period. Covers req §7. |
-| `envar_omop.yaml` | `OmopLinkage`, `DepositMetadata` | OMOP / BDC linkage hooks and FAIR-deposit slots. Covers req §12 and §13. |
+| `envar_health_layer.yaml` | `HealthLayerLinkage`, `DepositMetadata` | Health-data-layer linkage hooks (OMOP, BDC, …; target named in a slot) and FAIR-deposit slots. Covers req §12 and §13. |
 | `envar_record.yaml` | `EnvironmentalExposureRecord` | Top composite class — binds the microschema-profile slots to envar-specific ranges and lists the top-level slots. |
 | `envar_examples.yaml` | `DailyMaxTemperatureRecord`, `DailyMinTemperatureRecord`, `WetBulbGlobeTemperatureOutdoorRecord`, `ExtremeHeatDayFlagRecord` | Concrete record subclasses for the canonical heat-exposure variables. |
 | `linkml_microschemas_envar.yaml` | (umbrella) | Manifest schema importing the eleven modules above. |
@@ -61,8 +61,9 @@ ranges via `slot_usage`:
 
 The remaining envar concerns that have no profile equivalent —
 `source_dataset`, `linkage_method`, `tool_run`, `provenance_chain`,
-`derived_heat_metric`, `omop_linkage`, `deposit_metadata`, `uncertainty` —
-are surfaced as additional top-level slots alongside the profile slots.
+`derived_heat_metric`, `health_layer_linkage`, `deposit_metadata`,
+`uncertainty`, and the record-root `phi_status` — are surfaced as additional
+top-level slots alongside the profile slots.
 
 ### Why this choice
 

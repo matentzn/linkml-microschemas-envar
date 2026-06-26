@@ -1,4 +1,3 @@
----
 id: https://w3id.org/linkml/microschemas/envar/model
 name: envar-model
 title: EnVar Microschemas — Exposure Model
@@ -16,8 +15,8 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -34,19 +33,19 @@ classes:
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - exposure_model_type
-      - exposure_model_inputs
-      - exposure_model_paper_doi
-      - exposure_model_paper_doi_missing_reason
-      - exposure_model_cross_validation_r2
-      - exposure_model_cross_validation_r2_missing_reason
-      - exposure_model_known_biases
-      - exposure_model_uncertainty_field
-      - exposure_model_uncertainty_field_missing_reason
-      - exposure_model_ensemble_member_count
-      - exposure_model_ensemble_member_count_missing_reason
-      - bias_correction_applied
-      - bias_correction_applied_missing_reason
+    - exposure_model_type
+    - exposure_model_inputs
+    - exposure_model_paper_doi
+    - exposure_model_paper_doi_missing_reason
+    - exposure_model_cross_validation_r2
+    - exposure_model_cross_validation_r2_missing_reason
+    - exposure_model_known_biases
+    - exposure_model_uncertainty_field
+    - exposure_model_uncertainty_field_missing_reason
+    - exposure_model_ensemble_member_count
+    - exposure_model_ensemble_member_count_missing_reason
+    - bias_correction_applied
+    - bias_correction_applied_missing_reason
     slot_usage:
       exposure_model_type:
         required: true
@@ -65,6 +64,8 @@ slots:
       `statistical_blend`; Brokamp PM = `single_machine_learning`; Di et al.
       PM = `ensemble_machine_learning`.
 
+    annotations:
+      tier: core
   exposure_model_inputs:
     range: string
     multivalued: true
@@ -73,25 +74,35 @@ slots:
       sub-daily reanalysis"]`. For derived heat metrics, the input variable
       list (held in `DerivedHeatMetric.equation_inputs` for typed cases).
 
+    annotations:
+      tier: recommended
   exposure_model_paper_doi:
     range: string
     description: >-
       DOI of the methods paper describing the model (Thornton et al. 2022 for
       Daymet; Abatzoglou 2013 for GridMET).
 
+    annotations:
+      tier: recommended
   exposure_model_paper_doi_missing_reason:
     range: MissingReasonEnum
     description: Reason `exposure_model_paper_doi` is null.
 
+    annotations:
+      tier: optional
   exposure_model_cross_validation_r2:
     range: float
     description: >-
       Model cross-validation R², where reported by the producer.
 
+    annotations:
+      tier: recommended
   exposure_model_cross_validation_r2_missing_reason:
     range: MissingReasonEnum
     description: Reason `exposure_model_cross_validation_r2` is null.
 
+    annotations:
+      tier: optional
   exposure_model_known_biases:
     range: string
     multivalued: true
@@ -100,6 +111,8 @@ slots:
       -1.48 °C", "NARR cold bias at extremes", "Daymet warm bias in summer in
       some western US regions". The field reviewers care about.
 
+    annotations:
+      tier: recommended
   exposure_model_uncertainty_field:
     range: string
     description: >-
@@ -107,29 +120,41 @@ slots:
       (e.g. `pm_se` for DeGAUSS `pm`). Null with reason for products whose
       per-cell SE exists upstream but is not surfaced.
 
+    annotations:
+      tier: recommended
   exposure_model_uncertainty_field_missing_reason:
     range: MissingReasonEnum
     description: Reason `exposure_model_uncertainty_field` is null.
 
+    annotations:
+      tier: optional
   exposure_model_ensemble_member_count:
     range: integer
     description: >-
       For ensemble products, the number of members. Null with reason
       `not_provided_by_source` for single-realisation products.
 
+    annotations:
+      tier: conditionally_core
   exposure_model_ensemble_member_count_missing_reason:
     range: MissingReasonEnum
     description: Reason `exposure_model_ensemble_member_count` is null.
 
+    annotations:
+      tier: optional
   bias_correction_applied:
     range: BiasCorrectionAppliedEnum
     description: >-
       Whether and how bias correction has been applied. Usually `none` for
       Tmax from reference products.
 
+    annotations:
+      tier: recommended
   bias_correction_applied_missing_reason:
     range: MissingReasonEnum
     description: Reason `bias_correction_applied` is null.
+    annotations:
+      tier: optional
 
 #────────────────────────────────────────────────────────────────
 # ENUMS

@@ -1,0 +1,38 @@
+# PM2.5 — CORE tier (the minimum that still validates).
+# Exactly the required Core fields, nothing more. Contrast with the
+# `core_missing` counter-example under tests/data/invalid/.
+schema_version: "0.1"
+provenance_id: "01HXDIENSEMBLEML00000PM25-core"
+phi_status: no_phi
+subject: "cohort:phoenix_aki_2022"
+
+observation_type:
+  variable_name: pm25
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  units_ucum: ug/m3
+  concept_status: proposed
+  value_data_type: continuous_numeric
+
+location:
+  crs: "EPSG:4326"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporality:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean
+  day_boundary_convention: utc_midnight
+
+methodology:
+  exposure_model_type: ensemble_machine_learning
+
+source_dataset:
+  source_dataset_name: "Di et al. ensemble PM2.5 (contiguous US)"
+  source_dataset_version: "v1.0"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+
+tool_run:
+  tool_name: pm25_extract
+  tool_version: "1.0.0"

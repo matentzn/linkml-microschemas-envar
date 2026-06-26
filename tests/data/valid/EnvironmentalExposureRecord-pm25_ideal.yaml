@@ -1,0 +1,151 @@
+schema_version: "0.1"
+provenance_id: "01HXACAGSATELLITE0000PM25ANN"
+
+observation_type:
+  variable_name: pm25_annual
+  variable_label: "annual mean fine particulate matter (PM2.5) mass concentration, satellite-derived"
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: "time: mean"
+  units_ucum: ug/m3
+  units_display: "µg/m³"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: 0
+  value_range_plausible_max: 500
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: proposed
+  concept_mappings:
+    - ECTO:7000117   # exposure to fine respirable suspended particulate matter
+    - ENVO:01000415  # fine respirable suspended particulate matter
+    # no LOINC / SNOMED — not applicable to an ambient environmental variable
+
+location:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: "~0.01° (~1 km) geophysical+GWR grid"
+  crs: "EPSG:4326"
+  spatial_extent_bbox: [-180.0, -55.0, 180.0, 70.0]
+  spatial_extent_descriptor: "global land surface"
+  extraction_method: area_weighted_polygon_mean
+  population_weighting_source: "GPW v4 (2020)"
+  target_geography_type: census_tract
+
+temporality:
+  temporal_resolution: annual
+  temporal_aggregation_method: mean
+  temporal_aggregation_window_seconds: 31536000
+  day_boundary_convention: not_applicable    # annual aggregate; no day boundary
+  temporal_coverage_start: "1998-01-01"
+  temporal_coverage_end: "2022-12-31"
+  extraction_window_start: "2019-01-01"
+  extraction_window_end: "2019-12-31"
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: "ACAG Surface PM2.5 (V5.GL), satellite-derived global estimates"
+  source_dataset_short_code: acag_pm25_v5gl
+  source_dataset_doi: "10.1021/acs.est.1c05309"
+  source_dataset_version: "V5.GL.04"
+  source_dataset_temporal_coverage: "1998-01-01/2022-12-31"
+  source_dataset_spatial_extent: "global land surface"
+  source_producer_institution: "Atmospheric Composition Analysis Group (Washington University in St. Louis)"
+  source_citation_apa: >-
+    van Donkelaar, A., Hammer, M.S., Bindle, L., et al. (2021). Monthly
+    Global Estimates of Fine Particulate Matter and Their Uncertainty.
+    Environmental Science & Technology, 55(22), 15287-15300.
+  source_citation_bibtex: >-
+    @article{vandonkelaar2021, title={Monthly Global Estimates of Fine
+    Particulate Matter and Their Uncertainty}, author={van Donkelaar, A. and
+    others}, journal={Environ. Sci. Technol.}, volume={55}, number={22},
+    pages={15287--15300}, year={2021}, doi={10.1021/acs.est.1c05309}}
+  source_license_spdx: CC-BY-4.0
+  source_access_url: "https://sites.wustl.edu/acag/datasets/surface-pm2-5/"
+  source_native_format: netcdf4_cf
+  source_acdd_attributes:
+    title: "ACAG Surface PM2.5 V5.GL"
+    institution: "Atmospheric Composition Analysis Group, Washington University in St. Louis"
+    Conventions: "CF-1.8, ACDD-1.3"
+    source: "MODIS/MISR/SeaWiFS AOD + GEOS-Chem + GWR calibration to monitors"
+
+methodology:
+  exposure_model_type: satellite_retrieval
+  exposure_model_inputs:
+  - "satellite aerosol optical depth (MODIS, MISR, SeaWiFS)"
+  - "GEOS-Chem chemical transport model"
+  - "geographically weighted regression calibration to ground monitors"
+  exposure_model_paper_doi: "10.1021/acs.est.1c05309"
+  exposure_model_cross_validation_r2: 0.90
+  exposure_model_known_biases:
+  - "AOD-to-surface conversion uncertainty highest in arid and high-altitude regions"
+  - "sparse-monitor regions rely more heavily on the geophysical prior"
+  exposure_model_uncertainty_field: pm25_uncertainty
+  exposure_model_ensemble_member_count:
+  exposure_model_ensemble_member_count_missing_reason: not_applicable
+  bias_correction_applied: other
+
+uncertainty:
+  per_value_uncertainty_field_name: pm25_uncertainty
+  per_value_uncertainty_type: prediction_interval
+  per_value_uncertainty_units_ucum: ug/m3
+  model_aggregate_uncertainty:
+    cv_r2: 0.90
+    reported_in: "10.1021/acs.est.1c05309"
+  quality_flag_field_name:
+  quality_flag_field_name_missing_reason: not_provided_by_source
+  missing_data_handling_method: none
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: population_weighted_area_to_residence
+  linkage_buffer_aggregation_method: area_weighted_mean
+  geocoding_precision_propagated: street
+  geocoding_score_propagated: 0.93
+  address_period_alignment: address_history_from_emr
+  clinical_date_assignment_convention: date_only_no_time    # annual aggregate; date-only clinical join
+  partial_day_attribution_rule: not_applicable
+  lag_alignment_applied: none
+
+tool_run:
+  tool_name: acag_pm25_extract
+  tool_version: "1.4.2"
+  tool_description: "ACAG V5.GL annual PM2.5 tract aggregation"
+  container_image_repository: "ghcr.io/example/acag-pm25"
+  container_image_digest: "sha256:99aabb22ccdd..."
+  run_arguments: '{"variable": "pm25", "year": 2019, "aggregation": "tract_pop_weighted"}'
+  run_timestamp_utc: "2026-05-24T10:42:18Z"
+  run_duration_seconds: 51
+  run_environment:
+    os: "Ubuntu 22.04"
+    container_runtime: "docker 24.0.7"
+    python_version: "3.11.6"
+  input_file_sha256: "1122334455..."
+  input_row_count: 3
+  output_file_sha256: "6677889900..."
+  output_row_count: 3
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    run_timestamp_utc: "2026-05-24T10:30:02Z"
+    output_file_sha256: "aa11bb22cc33..."
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+  cohort_size_anchored: 3
+deposit_metadata:
+  deposit_doi: "10.5281/zenodo.8888888"
+  deposit_repository: zenodo
+  deposit_license_spdx: CC-BY-4.0
+  deposit_redistribution_constraints_inherited: []
+  recommended_citation: >-
+    EnVar exposure record for cohort:phoenix_aki_2022 annual-mean PM2.5
+    (ACAG V5.GL), 2019. Deposited at Zenodo, doi:10.5281/zenodo.8888888.
+  dcat_distribution_url: "https://zenodo.org/record/8888888/files/pm25_annual_tract.parquet"
+
+subject: "cohort:phoenix_aki_2022"
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   year: 2019  value: 8.2  unit: ug/m3  pm25_uncertainty: 1.1
+phi_status: no_phi

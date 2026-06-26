@@ -1,4 +1,3 @@
----
 id: https://w3id.org/linkml/microschemas/envar/heat_metric
 name: envar-heat-metric
 title: EnVar Microschemas — Derived Heat Metric
@@ -17,8 +16,8 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -38,36 +37,63 @@ classes:
     annotations:
       domain_of_use: environmental_exposure
     slots:
-      - heat_metric_family
-      - equation_variant
-      - equation_variant_missing_reason
-      - equation_inputs
-      - equation_validity_range
-      - equation_validity_range_missing_reason
-      - indoor_outdoor
-      - wind_speed_measurement_height_m
-      - wind_speed_measurement_height_m_missing_reason
-      - solar_radiation_basis
-      - solar_radiation_basis_missing_reason
-      - heat_wave_threshold_definition
-      - heat_wave_threshold_definition_missing_reason
-      - heat_wave_threshold_specifier
-      - heat_wave_min_consecutive_days
-      - heat_wave_min_consecutive_days_missing_reason
-      - percentile_reference_period_start
-      - percentile_reference_period_start_missing_reason
-      - percentile_reference_period_end
-      - percentile_reference_period_end_missing_reason
-      - percentile_reference_geographic_scope
-      - percentile_reference_geographic_scope_missing_reason
-      - percentile_reference_seasonal_window
-      - percentile_reference_seasonal_window_missing_reason
-      - metric_temporal_aggregation_rule
-      - metric_temporal_aggregation_rule_missing_reason
+    - heat_metric_family
+    - equation_variant
+    - equation_variant_missing_reason
+    - equation_inputs
+    - equation_validity_range
+    - equation_validity_range_missing_reason
+    - indoor_outdoor
+    - wind_speed_measurement_height_m
+    - wind_speed_measurement_height_m_missing_reason
+    - solar_radiation_basis
+    - solar_radiation_basis_missing_reason
+    - heat_wave_threshold_definition
+    - heat_wave_threshold_definition_missing_reason
+    - heat_wave_threshold_specifier
+    - heat_wave_min_consecutive_days
+    - heat_wave_min_consecutive_days_missing_reason
+    - percentile_reference_period_start
+    - percentile_reference_period_start_missing_reason
+    - percentile_reference_period_end
+    - percentile_reference_period_end_missing_reason
+    - percentile_reference_geographic_scope
+    - percentile_reference_geographic_scope_missing_reason
+    - percentile_reference_seasonal_window
+    - percentile_reference_seasonal_window_missing_reason
+    - metric_temporal_aggregation_rule
+    - metric_temporal_aggregation_rule_missing_reason
     slot_usage:
       heat_metric_family:
         required: true
       indoor_outdoor:
+        required: true
+
+  EquationInput:
+    description: >-
+      A single physical-state input to a derived heat metric, recorded as a
+      typed reference into the provenance chain rather than an inline copy of
+      the input's metadata. It names the input's role (a CF standard name) and
+      points, via `input_provenance_id`, to the upstream sidecar that carries
+      that input's full spatial / temporal / model context.
+
+      This is the Option-B decomposition: when a multi-input metric (Heat
+      Index from T + RH; WBGT from T + RH + wind + radiation) draws its inputs
+      from different products that diverge in resolution, day-boundary
+      convention, or temporal aggregation, each input remains its own full
+      sidecar — listed here and as a step in `provenance_chain` — so the
+      divergence stays explicit and machine-checkable instead of being
+      silently absorbed into the single output value.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+    - input_role
+    - input_provenance_id
+    - input_source_short_code
+    slot_usage:
+      input_role:
+        required: true
+      input_provenance_id:
         required: true
 
 #────────────────────────────────────────────────────────────────
@@ -80,6 +106,8 @@ slots:
     range: HeatMetricFamilyEnum
     description: The family of heat metric this variable represents.
 
+    annotations:
+      tier: core
   equation_variant:
     range: EquationVariantEnum
     description: >-
@@ -87,19 +115,75 @@ slots:
       WBGT, HI, and UTCI: a Liljegren WBGT and an ACSM WBGT for the same
       inputs can differ by 2-3 °C.
 
+    annotations:
+      tier: conditionally_core
   equation_variant_missing_reason:
     range: MissingReasonEnum
     description: Reason `equation_variant` is null.
 
+    annotations:
+      tier: optional
   equation_inputs:
-    range: string
+    range: EquationInput
     multivalued: true
+    inlined: true
+    inlined_as_list: true
     description: >-
-      Per-input references to source datasets. For WBGT typically four
-      entries (`air_temperature`, `relative_humidity`, `wind_speed`,
-      `surface_downwelling_shortwave_flux_in_air`). Free-text per-entry
-      strings of the form `<cf_standard_name>:<source_short_code>`.
+      Typed per-input references for a multi-input derived metric (Heat Index
+      from T + RH; WBGT from T + RH + wind + radiation). Each entry names the
+      input's role and points, by `provenance_id`, to the upstream sidecar
+      carrying that input's full context — it is an index into the lineage,
+      not an inline copy of it.
 
+      Option-B decomposition (see the `EquationInput` class): when the inputs
+      originate from different products and diverge in resolution, day-boundary
+      convention, or temporal aggregation, each input is a full upstream
+      sidecar referenced here and listed as a step in `provenance_chain`, so
+      the divergence stays explicit and checkable.
+
+      Conditionally-Core: optional for a single-input metric, mandatory the
+      moment a metric has more than one input.
+    comments:
+    - >-
+      Cross-input consistency check (completeness checker, not structural
+      LinkML validation): when more than one entry is present, dereference each
+      `input_provenance_id` and WARN if the referenced inputs' day-boundary
+      conventions, temporal aggregation windows, or native spatial resolutions
+      differ. A divergence is allowed but must be recorded via the decomposed
+      sidecars rather than absorbed silently into the output value.
+    annotations:
+      tier: conditionally_core
+  input_role:
+    range: string
+    description: >-
+      The standard-name local token of this input's physical quantity (the same
+      quantity the referenced sidecar carries in `standard_name`), e.g.
+      `air_temperature`, `relative_humidity`, `wind_speed`,
+      `surface_downwelling_shortwave_flux_in_air`.
+
+    annotations:
+      tier: conditionally_core
+  input_provenance_id:
+    range: string
+    description: >-
+      The `provenance_id` of the upstream sidecar that fully describes this
+      input — its source dataset, spatial / temporal reference, and exposure
+      model. Dereferencing it lets a consumer (or the completeness checker)
+      compare inputs and surface any divergence in resolution, day-boundary
+      convention, or temporal aggregation.
+
+    annotations:
+      tier: conditionally_core
+  input_source_short_code:
+    range: string
+    description: >-
+      Human-readable short code of the input's source product (e.g.
+      `daymet_v4`, `era5`), duplicated from the referenced sidecar for
+      convenience when scanning the record. Not authoritative —
+      `input_provenance_id` is.
+
+    annotations:
+      tier: recommended
   equation_validity_range:
     range: string
     description: >-
@@ -108,16 +192,22 @@ slots:
       "min_relative_humidity_pct": 40}` — Rothfusz is undefined below
       80 °F / 40 % RH.
 
+    annotations:
+      tier: conditionally_core
   equation_validity_range_missing_reason:
     range: MissingReasonEnum
     description: Reason `equation_validity_range` is null.
 
+    annotations:
+      tier: optional
   indoor_outdoor:
     range: IndoorOutdoorEnum
     description: >-
       Indoor / outdoor regime. Mandatory for WBGT (the indoor vs outdoor
       distinction changes the equation and the health interpretation).
 
+    annotations:
+      tier: conditionally_core
   wind_speed_measurement_height_m:
     range: float
     description: >-
@@ -125,29 +215,41 @@ slots:
       The ISO 7243 standard is 2 m, but reanalysis products often supply
       10 m -- the height affects the WBGT value.
 
+    annotations:
+      tier: recommended
   wind_speed_measurement_height_m_missing_reason:
     range: MissingReasonEnum
     description: Reason `wind_speed_measurement_height_m` is null.
 
+    annotations:
+      tier: optional
   solar_radiation_basis:
     range: SolarRadiationBasisEnum
     description: >-
       For WBGT / UTCI inputs, the basis used for solar radiation.
 
+    annotations:
+      tier: recommended
   solar_radiation_basis_missing_reason:
     range: MissingReasonEnum
     description: Reason `solar_radiation_basis` is null.
 
+    annotations:
+      tier: optional
   heat_wave_threshold_definition:
     range: HeatWaveThresholdDefinitionEnum
     description: >-
       For heat-wave flags, the definition of the threshold (absolute,
       percentile-local, percentile-climatological, NWS advisory, ETCCDI).
 
+    annotations:
+      tier: conditionally_core
   heat_wave_threshold_definition_missing_reason:
     range: MissingReasonEnum
     description: Reason `heat_wave_threshold_definition` is null.
 
+    annotations:
+      tier: optional
   heat_wave_threshold_specifier:
     range: string
     description: >-
@@ -155,16 +257,22 @@ slots:
       capture the concrete threshold values (e.g. `"35_Cel"` for an absolute
       threshold, `"95"` for the 95th percentile).
 
+    annotations:
+      tier: optional
   heat_wave_min_consecutive_days:
     range: integer
     description: >-
       Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3).
       Changes which days are flagged.
 
+    annotations:
+      tier: conditionally_core
   heat_wave_min_consecutive_days_missing_reason:
     range: MissingReasonEnum
     description: Reason `heat_wave_min_consecutive_days` is null.
 
+    annotations:
+      tier: optional
   percentile_reference_period_start:
     range: date
     description: >-
@@ -173,18 +281,26 @@ slots:
       2000-2019 gives a different threshold than 1980-2010, and this delta
       is real.
 
+    annotations:
+      tier: conditionally_core
   percentile_reference_period_start_missing_reason:
     range: MissingReasonEnum
     description: Reason `percentile_reference_period_start` is null.
 
+    annotations:
+      tier: optional
   percentile_reference_period_end:
     range: date
     description: End of the reference distribution.
 
+    annotations:
+      tier: conditionally_core
   percentile_reference_period_end_missing_reason:
     range: MissingReasonEnum
     description: Reason `percentile_reference_period_end` is null.
 
+    annotations:
+      tier: optional
   percentile_reference_geographic_scope:
     range: string
     description: >-
@@ -192,20 +308,28 @@ slots:
       One of `local_tract`, `local_county`, `local_climate_region`,
       `national`.
 
+    annotations:
+      tier: recommended
   percentile_reference_geographic_scope_missing_reason:
     range: MissingReasonEnum
     description: Reason `percentile_reference_geographic_scope` is null.
 
+    annotations:
+      tier: optional
   percentile_reference_seasonal_window:
     range: string
     description: >-
       Seasonal window over which the reference was computed. One of
       `annual`, `warm_season_may_sep`, `calendar_month`.
 
+    annotations:
+      tier: recommended
   percentile_reference_seasonal_window_missing_reason:
     range: MissingReasonEnum
     description: Reason `percentile_reference_seasonal_window` is null.
 
+    annotations:
+      tier: optional
   metric_temporal_aggregation_rule:
     range: string
     description: >-
@@ -213,9 +337,13 @@ slots:
       days (e.g. `first_day_of_event` / `each_day_of_event` /
       `last_day_of_event`).
 
+    annotations:
+      tier: recommended
   metric_temporal_aggregation_rule_missing_reason:
     range: MissingReasonEnum
     description: Reason `metric_temporal_aggregation_rule` is null.
+    annotations:
+      tier: optional
 
 #────────────────────────────────────────────────────────────────
 # ENUMS

@@ -1,0 +1,119 @@
+# Heat Index demo — the DERIVED metric sidecar (Option B decomposition).
+#
+# Heat Index (Rothfusz/NWS) computed from TWO physical-state inputs that come
+# from DIFFERENT products and diverge in resolution, day-boundary convention,
+# and temporal aggregation:
+#
+#   input A  air_temperature   daymet_v4  1 km    local_midnight  maximum
+#   input B  relative_humidity era5       ~31 km  utc             mean
+#
+# Under Option B the two inputs are NOT inlined as light descriptors; each is a
+# full upstream sidecar (heat_index_input_a_*.yaml, heat_index_input_b_*.yaml),
+# referenced below by provenance_id through `equation_inputs` and listed as a
+# step in `provenance_chain`. The divergence then stays explicit and a
+# completeness checker can WARN on it instead of it vanishing into "HI = 44 °C".
+---
+schema_version: "0.1"
+provenance_id: "01HFA7K8R3M6XP-heatindex"
+
+variable_identity:
+  variable_name: heat_index
+  variable_label: "daily maximum NWS Heat Index"
+  standard_name: ENVAR:heat_index   # local registry term — CF defines no Heat Index standard name
+  units_ucum: Cel
+  units_display: "°C"
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 80
+
+spatial_reference:
+  # Resolution INHERITED from the coarser input (era5, ~31 km), not the 1 km TMAX.
+  native_spatial_resolution_m: 31000
+  native_spatial_resolution_descriptor: >-
+    effective ~31 km — limited by the coarser relative-humidity input (era5);
+    see equation_inputs and the per-input sidecars
+  crs: "EPSG:4326"
+  spatial_extent_descriptor: "Phoenix metro"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  # The two inputs disagree on the day boundary (local_midnight vs utc); this
+  # record carries the air-temperature convention but the mismatch is real and
+  # is recorded via the decomposed input sidecars rather than hidden here.
+  day_boundary_convention: local_midnight
+  extraction_window_start: "2022-07-18"
+  extraction_window_end: "2022-07-20"
+  calendar: gregorian
+
+source_dataset:
+  # The derived metric is itself a new sidecar; its "source" is the derivation,
+  # with the true upstream products carried by the referenced input sidecars.
+  source_dataset_name: "EnVar-derived NWS Heat Index"
+  source_dataset_short_code: envar_heat_index
+  source_dataset_version: "0.1"
+  source_producer_institution: "EnVar pipeline"
+  source_license_spdx: Apache-2.0
+  source_native_format: parquet
+
+exposure_model:
+  exposure_model_type: equation_derived
+  exposure_model_inputs:
+  - "air_temperature (see equation_inputs / provenance_id 01HFA7K8R3M6XP-daymet-tmax)"
+  - "relative_humidity (see equation_inputs / provenance_id 01HFA7K8R3M6XP-era5-rh)"
+  exposure_model_known_biases:
+  - "inherits the coarser ~31 km humidity resolution"
+  - "inputs use different day-boundary conventions (local_midnight vs utc)"
+
+derived_heat_metric:
+  heat_metric_family: heat_index
+  equation_variant: rothfusz_1990_nws
+  indoor_outdoor: outdoor
+  equation_validity_range: '{"min_temperature_F": 80, "min_relative_humidity_pct": 40}'
+  equation_inputs:
+  - input_role: air_temperature
+    input_provenance_id: "01HFA7K8R3M6XP-daymet-tmax"
+    input_source_short_code: daymet_v4
+  - input_role: relative_humidity
+    input_provenance_id: "01HFA7K8R3M6XP-era5-rh"
+    input_source_short_code: era5
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: envar_heat_index
+  tool_version: "0.1.0"
+  container_image_repository: "ghcr.io/envar-org/heat-index"
+  container_image_digest: "sha256:c1d2e3f4a5b6..."
+  run_arguments: '{"equation": "rothfusz_1990_nws", "indoor_outdoor": "outdoor"}'
+  run_timestamp_utc: "2026-05-23T14:25:30Z"
+  output_file_sha256: "2b3c4d5e6f7a..."
+  output_row_count: 459
+
+# Both upstream derivations are steps in the chain — this is the B linkage that
+# equation_inputs indexes into. The chain terminates once per parent product.
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: daymet
+    tool_version: "1.0.0"
+    run_timestamp_utc: "2026-05-23T14:18:42Z"
+    output_file_sha256: "1c2d3e4f5a6b..."
+  - tool_name: era5_extract
+    tool_version: "0.4.2"
+    run_timestamp_utc: "2026-05-23T14:21:09Z"
+    output_file_sha256: "7a6b5c4d3e2f..."
+
+data_row:
+  subject: "cohort:phoenix_aki_2022"
+  date: "2022-07-19"
+  value: 44.0
+  unit: Cel
+phi_status: no_phi

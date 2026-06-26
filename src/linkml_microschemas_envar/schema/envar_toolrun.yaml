@@ -1,4 +1,3 @@
----
 id: https://w3id.org/linkml/microschemas/envar/toolrun
 name: envar-toolrun
 title: EnVar Microschemas — Tool Run and Provenance Chain
@@ -18,8 +17,8 @@ default_prefix: envar
 default_range: string
 
 imports:
-  - linkml:types
-  - envar_common
+- linkml:types
+- envar_common
 
 #────────────────────────────────────────────────────────────────
 # CLASSES
@@ -37,29 +36,27 @@ classes:
       domain_of_use: environmental_exposure
     class_uri: prov:Activity
     slots:
-      - tool_name
-      - tool_version
-      - tool_description
-      - container_image_repository
-      - container_image_repository_missing_reason
-      - container_image_digest
-      - container_image_digest_missing_reason
-      - run_arguments
-      - run_timestamp_utc
-      - run_duration_seconds
-      - run_environment
-      - input_file_sha256
-      - input_row_count
-      - output_file_sha256
-      - output_row_count
-      - run_log_excerpt
-      - run_log_excerpt_missing_reason
+    - tool_name
+    - tool_version
+    - tool_description
+    - container_image_repository
+    - container_image_repository_missing_reason
+    - container_image_digest
+    - container_image_digest_missing_reason
+    - run_arguments
+    - run_timestamp_utc
+    - run_duration_seconds
+    - run_environment
+    - input_file_sha256
+    - input_row_count
+    - output_file_sha256
+    - output_row_count
+    - run_log_excerpt
+    - run_log_excerpt_missing_reason
     slot_usage:
       tool_name:
         required: true
       tool_version:
-        required: true
-      run_timestamp_utc:
         required: true
 
   ProvenanceChain:
@@ -71,14 +68,9 @@ classes:
       domain_of_use: environmental_exposure
     class_uri: prov:Bundle
     slots:
-      - provenance_chain_steps
-      - provenance_chain_terminus_type
-      - chain_compatibility_assertions
-    slot_usage:
-      provenance_chain_steps:
-        required: true
-      provenance_chain_terminus_type:
-        required: true
+    - provenance_chain_steps
+    - provenance_chain_terminus_type
+    - chain_compatibility_assertions
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -91,80 +83,115 @@ slots:
     description: >-
       Tool name, e.g. `daymet`, `narr`, `pm`, `amadeus`, `geocoder`.
 
+    annotations:
+      tier: core
   tool_version:
     range: string
     description: Semver tool version. Mandatory.
 
+    annotations:
+      tier: core
   tool_description:
     range: string
     description: >-
       One-line tool description (from the tool's `dht` env var or equivalent).
 
+    annotations:
+      tier: optional
   container_image_repository:
     range: string
     description: >-
       Container image repository, e.g. `ghcr.io/degauss-org/daymet`. Null for
       non-containerised tools.
 
+    annotations:
+      tier: recommended
   container_image_repository_missing_reason:
     range: MissingReasonEnum
     description: Reason `container_image_repository` is null.
 
+    annotations:
+      tier: optional
   container_image_digest:
     range: string
     description: >-
       SHA256 of the container image actually used (not just the tag).
       Reproducibility-critical.
 
+    annotations:
+      tier: recommended
   container_image_digest_missing_reason:
     range: MissingReasonEnum
     description: Reason `container_image_digest` is null.
 
+    annotations:
+      tier: optional
   run_arguments:
     range: string
     description: >-
       The exact argument map passed at invocation, serialised as a JSON
       string.
 
+    annotations:
+      tier: recommended
   run_timestamp_utc:
     range: datetime
     description: When the run started (UTC).
 
+    annotations:
+      tier: recommended
   run_duration_seconds:
     range: float
     description: How long the run took, in seconds.
 
+    annotations:
+      tier: optional
   run_environment:
-    range: string
+    range: AnyValue
+    inlined: true
     description: >-
       Host OS, Docker / podman version, R / Python version, key library
-      versions, serialised as a JSON string.
+      versions, as a native key/value object.
 
+    annotations:
+      tier: optional
   input_file_sha256:
     range: string
     description: SHA256 of the input file (CSV / parquet).
 
+    annotations:
+      tier: recommended
   input_row_count:
     range: integer
     description: Number of rows in the input.
 
+    annotations:
+      tier: recommended
   output_file_sha256:
     range: string
     description: SHA256 of the output file (CSV / parquet).
 
+    annotations:
+      tier: recommended
   output_row_count:
     range: integer
     description: Number of rows in the output.
 
+    annotations:
+      tier: recommended
   run_log_excerpt:
     range: string
     description: >-
       Last ~50 lines of the run log, where useful for debugging or audit.
 
+    annotations:
+      tier: optional
   run_log_excerpt_missing_reason:
     range: MissingReasonEnum
     description: Reason `run_log_excerpt` is null.
 
+    annotations:
+      tier: optional
   provenance_chain_steps:
     range: ToolRun
     multivalued: true
@@ -174,10 +201,14 @@ slots:
       Ordered list of upstream `ToolRun`s, from oldest to most recent, whose
       outputs were inputs to this run.
 
+    annotations:
+      tier: recommended
   provenance_chain_terminus_type:
     range: ProvenanceChainTerminusEnum
     description: The kind of root of the chain.
 
+    annotations:
+      tier: recommended
   chain_compatibility_assertions:
     range: string
     multivalued: true
@@ -185,6 +216,8 @@ slots:
       Declarations that two chain steps are compatible (e.g.
       `daymet@1.0.0` expects `geocoder@>=3.0.0` output column schema).
       Optional but enables strict-mode validation.
+    annotations:
+      tier: optional
 
 #────────────────────────────────────────────────────────────────
 # ENUMS

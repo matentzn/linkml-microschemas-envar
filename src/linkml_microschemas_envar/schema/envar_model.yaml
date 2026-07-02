@@ -4,8 +4,8 @@ title: EnVar Microschemas — Exposure Model
 version: "0.1.0"
 description: |-
   Exposure-model slots: model type, inputs, paper DOI, cross-validation R²,
-  known biases, uncertainty field, ensemble member count, bias correction.
-  Covers §6 of envar-heat-scenario-requirements.md.
+  known biases, ensemble member count, bias correction. Covers §6 of
+  envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
 prefixes:
@@ -25,11 +25,14 @@ imports:
 classes:
 
   ExposureModel:
+    title: Exposure Model
     description: >-
       The model class that produced the values (interpolation, reanalysis,
       ML, statistical blend, equation), its inputs, its methods-paper DOI,
       its cross-validation skill, known biases, and any bias correction.
       One per record; may be null for direct observation.
+    see_also:
+    - https://en.wikipedia.org/wiki/Reanalysis_(meteorology)
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -40,8 +43,6 @@ classes:
     - exposure_model_cross_validation_r2
     - exposure_model_cross_validation_r2_missing_reason
     - exposure_model_known_biases
-    - exposure_model_uncertainty_field
-    - exposure_model_uncertainty_field_missing_reason
     - exposure_model_ensemble_member_count
     - exposure_model_ensemble_member_count_missing_reason
     - bias_correction_applied
@@ -57,104 +58,251 @@ classes:
 slots:
 
   exposure_model_type:
+    title: Exposure Model Type
     range: ExposureModelTypeEnum
     description: >-
       The class of model that produced the values. Daymet =
       `spatial_interpolation`; NARR / ERA5 = `reanalysis`; GridMET =
       `statistical_blend`; Brokamp PM = `single_machine_learning`; Di et al.
       PM = `ensemble_machine_learning`.
+    examples:
+    - value: spatial_interpolation
+      description: Daymet V4 daily Tmax (station observations interpolated to a 1 km grid)
+    - value: satellite_retrieval
+      description: ACAG V5.GL satellite-derived annual PM2.5
+    see_also:
+    - https://daymet.ornl.gov/
+    - https://www.climatologylab.org/gridmet.html
+    - https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5
 
     annotations:
       tier: core
+      justification: >-
+        A measured value, an interpolated value, and an ML-predicted value
+        have different error structures and cannot be pooled naively; this is
+        the field that tells them apart. Without it, users cannot judge
+        whether values are measurements or predictions.
+      explanation: >-
+        Most "exposure" numbers were never measured at your door: a model
+        estimates them from weather stations, satellites, or physics
+        equations. This field says which kind of machinery produced the
+        number, so you know how much to trust it and what could go wrong.
   exposure_model_inputs:
+    title: Exposure Model Inputs
     range: string
     multivalued: true
     description: >-
       Inputs to the model. For GridMET: `["PRISM monthly normals", "NLDAS-2
       sub-daily reanalysis"]`. For derived heat metrics, the input variable
       list (held in `DerivedHeatMetric.equation_inputs` for typed cases).
+    examples:
+    - value: "GHCN-Daily station observations"
+      description: sole element of the Daymet V4 input list
+    see_also:
+    - https://prism.oregonstate.edu/
 
     annotations:
       tier: recommended
+      justification: >-
+        Needed to trace what the value actually derives from. Without the
+        input list, a shared bias or gap in an upstream dataset cannot be
+        traced through to the exposure values it contaminated.
+      explanation: >-
+        A model is only as good as what you feed it. This lists the raw
+        ingredients — station readings, satellite images, other datasets —
+        that went into cooking up the final numbers.
   exposure_model_paper_doi:
+    title: Methods Paper DOI
     range: string
     description: >-
       DOI of the methods paper describing the model (Thornton et al. 2022 for
       Daymet; Abatzoglou 2013 for GridMET).
+    examples:
+    - value: "10.1021/acs.est.1c05309"
+      description: van Donkelaar et al. 2021 methods paper for ACAG PM2.5
+    see_also:
+    - https://www.doi.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        The reproducibility anchor for how the value was made. Without it,
+        anyone auditing or reproducing the analysis must guess which of
+        several versions of a method the values actually came from.
+      explanation: >-
+        Scientists publish a paper describing exactly how a model works, and
+        a DOI is a permanent web address for that paper. Recording it here
+        means anyone can look up the full recipe behind the numbers, even
+        years later.
   exposure_model_paper_doi_missing_reason:
+    title: Reason Methods Paper DOI Is Missing
     range: MissingReasonEnum
     description: Reason `exposure_model_paper_doi` is null.
+    examples:
+    - value: not_provided_by_source
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "no methods paper exists" from "nobody bothered to
+        record it". Without the reason, a blank DOI silently hides whether
+        the model is undocumented or the metadata is just incomplete.
+      explanation: >-
+        When a field is empty, it helps to say why. This slot records whether
+        the paper genuinely does not exist, was not shared by the producer,
+        or simply was not looked up.
   exposure_model_cross_validation_r2:
+    title: Cross-Validation R²
     range: float
     description: >-
       Model cross-validation R², where reported by the producer.
+    examples:
+    - value: "0.90"
+      description: reported for ACAG V5.GL satellite-derived PM2.5
+    see_also:
+    - https://en.wikipedia.org/wiki/Coefficient_of_determination
 
     annotations:
       tier: recommended
+      justification: >-
+        The single most useful one-number quality signal for a modeled
+        product. Omitting it leaves downstream users with no quantitative
+        basis for weighing one exposure product against another or for
+        propagating model skill into their error budgets.
+      explanation: >-
+        Cross-validation R² is a 0-to-1 score of how well the model predicted
+        values it had never seen during training — closer to 1 is better. A
+        score of 0.90 means the model captures most of the real variation; a
+        low score means treat the numbers with caution.
   exposure_model_cross_validation_r2_missing_reason:
+    title: Reason Cross-Validation R² Is Missing
     range: MissingReasonEnum
     description: Reason `exposure_model_cross_validation_r2` is null.
+    examples:
+    - value: not_provided_by_source
+      description: Daymet does not publish a cross-validation R²
 
     annotations:
       tier: optional
+      justification: >-
+        Separates "the producer never published a skill score" from "we
+        forgot to record it". Without this, a missing R² is ambiguous and
+        reviewers cannot tell an undocumented model from sloppy metadata.
+      explanation: >-
+        If the quality score is blank, this slot says why — for example, some
+        well-known products simply never publish one. It turns an empty field
+        into an honest answer.
   exposure_model_known_biases:
+    title: Known Model Biases
     range: string
     multivalued: true
     description: >-
       Free-text flags of known issues, e.g. "NLDAS-2 coastal Tmax bias up to
       -1.48 °C", "NARR cold bias at extremes", "Daymet warm bias in summer in
       some western US regions". The field reviewers care about.
+    examples:
+    - value: "warm-season warm bias documented in some western US regions"
+      description: one known bias of Daymet V4 daily Tmax
+    - value: "interpolation degrades in sparse-station areas"
+      description: another element of the same Daymet V4 bias list
+    see_also:
+    - https://psl.noaa.gov/data/gridded/data.narr.html
+    - https://daymet.ornl.gov/
 
     annotations:
       tier: recommended
-  exposure_model_uncertainty_field:
-    range: string
-    description: >-
-      Name of any per-value uncertainty column emitted alongside the value
-      (e.g. `pm_se` for DeGAUSS `pm`). Null with reason for products whose
-      per-cell SE exists upstream but is not surfaced.
-
-    annotations:
-      tier: recommended
-  exposure_model_uncertainty_field_missing_reason:
-    range: MissingReasonEnum
-    description: Reason `exposure_model_uncertainty_field` is null.
-
-    annotations:
-      tier: optional
+      justification: >-
+        The field reviewers care about most; it bites coastal and
+        sparse-station analyses in particular. Omitting it lets a documented
+        systematic error (e.g. a coastal cold bias) silently propagate into
+        health-effect estimates that reviewers will later reject.
+      explanation: >-
+        Every model has known blind spots — places or conditions where it is
+        reliably a bit wrong, like running warm in summer or cold at the
+        coast. This slot writes those warnings down so the next person does
+        not rediscover them the hard way.
   exposure_model_ensemble_member_count:
+    title: Ensemble Member Count
     range: integer
     description: >-
       For ensemble products, the number of members. Null with reason
       `not_provided_by_source` for single-realisation products.
+    examples:
+    - value: "100"
+      description: e.g. an ensemble ML product with 100 members; single-realisation products such as Daymet leave this null
+    see_also:
+    - https://en.wikipedia.org/wiki/Ensemble_forecasting
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Mandatory for ensemble products: the member count determines how the
+        ensemble spread can be interpreted as an uncertainty estimate.
+        Without it, per-value spread statistics cannot be reproduced or
+        sanity-checked.
+      explanation: >-
+        Some products run the same model many times with slightly different
+        settings and combine the results — each run is a "member". Knowing
+        how many members there were (say, 100) tells you how much the spread
+        between runs can be trusted as a measure of uncertainty.
   exposure_model_ensemble_member_count_missing_reason:
+    title: Reason Ensemble Member Count Is Missing
     range: MissingReasonEnum
     description: Reason `exposure_model_ensemble_member_count` is null.
+    examples:
+    - value: not_applicable
+      description: single-realisation products (Daymet, ACAG) have no ensemble
 
     annotations:
       tier: optional
+      justification: >-
+        Confirms explicitly that a product is single-realisation rather than
+        an ensemble whose member count was dropped. Without it, a null count
+        is ambiguous and the conditionally-core rule for ensemble products
+        cannot be audited.
+      explanation: >-
+        Many products come from just one model run, so "number of members"
+        genuinely does not apply. This slot says so explicitly, instead of
+        leaving readers to wonder whether information was lost.
   bias_correction_applied:
+    title: Bias Correction Applied
     range: BiasCorrectionAppliedEnum
     description: >-
       Whether and how bias correction has been applied. Usually `none` for
       Tmax from reference products.
+    examples:
+    - value: none
+      description: Daymet V4 daily Tmax is used uncorrected
 
     annotations:
       tier: recommended
+      justification: >-
+        Pooling bias-corrected and raw values silently mixes apples and
+        oranges. Without this flag, an analyst cannot tell whether two
+        datasets differ because of the environment or because one of them
+        was statistically adjusted.
+      explanation: >-
+        Sometimes model output is nudged after the fact to better match real
+        observations — that nudging is "bias correction". This slot records
+        whether the numbers were adjusted that way and, if so, which
+        technique was used.
   bias_correction_applied_missing_reason:
+    title: Reason Bias Correction Is Missing
     range: MissingReasonEnum
     description: Reason `bias_correction_applied` is null.
+    examples:
+    - value: not_provided_by_source
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "the producer never documented any correction" from an
+        unrecorded answer. Without it, a blank bias-correction field cannot
+        be told apart from missing metadata, weakening any audit of how
+        values were adjusted.
+      explanation: >-
+        If nobody could say whether the numbers were statistically adjusted,
+        this slot records why that answer is missing — for example, the data
+        producer never documented it.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -163,6 +311,7 @@ slots:
 enums:
 
   ExposureModelTypeEnum:
+    title: Exposure Model Type
     description: The class of model that produced the values.
     permissible_values:
       direct_measurement:
@@ -185,6 +334,7 @@ enums:
         description: Satellite-based retrieval algorithm.
 
   BiasCorrectionAppliedEnum:
+    title: Bias Correction Method
     description: Whether and how bias correction has been applied.
     permissible_values:
       none:

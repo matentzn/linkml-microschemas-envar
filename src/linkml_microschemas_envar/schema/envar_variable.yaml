@@ -6,7 +6,8 @@ description: |-
   Variable identity slots: standard-name CURIE (CF where it exists, ENVAR or
   ontology terms otherwise), UCUM units, target-vocabulary concept id + status,
   generic concept cross-references, plausible value range, value data type.
-  Covers §2 of envar-heat-scenario-requirements.md.
+  Identity only — the binding to columns in the companion data file lives in
+  envar_layout. Covers §2 of envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
 prefixes:
@@ -33,10 +34,14 @@ imports:
 classes:
 
   VariableIdentity:
+    title: Variable Identity
     description: >-
       The identity and semantics of an environmental exposure variable —
       what physical quantity is being captured, in what units, and how it
       binds to community vocabularies. One per record.
+    see_also:
+    - https://cfconventions.org/standard-names.html
+    - https://ucum.org/
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -73,21 +78,50 @@ classes:
 slots:
 
   variable_name:
+    title: Variable Name
     range: string
     description: >-
-      The literal column name produced by the upstream tool (e.g. `tmax`,
-      `tmmx`, `air.2m`).
+      Short machine-readable name for the variable, usually the name the
+      upstream tool uses for it (e.g. `tmax`, `tmmx`, `air.2m`). Identity
+      only — not necessarily the column header in the companion data file;
+      that binding lives in `DataLayout.value_column` (see envar_layout).
+    examples:
+    - value: tmax
+      description: Daymet daily maximum air temperature variable
 
     annotations:
       tier: core
+      justification: >-
+        This is the handle under which the upstream product knows the variable
+        (Daymet `tmax` vs gridMET `tmmx`). Without it the record cannot be
+        traced back to the source product's variable, and a rerun cannot
+        request the same quantity from the tool.
+      explanation: >-
+        Data tools give each measurement a short nickname, like `tmax` for
+        maximum temperature. This is that nickname, written down exactly as
+        the tool spells it, so you can go back to the source and find the
+        same measurement again.
   variable_label:
+    title: Variable Label
     range: string
     description: >-
       Human-readable label, e.g. "daily maximum air temperature at 2 m".
+    examples:
+    - value: daily maximum air temperature at 2 m
 
     annotations:
       tier: recommended
+      justification: >-
+        Terse tool codes like `tmmx` are easy to misread (maximum vs mean) and
+        force readers to consult external tool documentation. A plain-language
+        label lets a human verify at a glance that the record describes the
+        intended quantity.
+      explanation: >-
+        A friendly, spelled-out name for the measurement — like "daily maximum
+        air temperature at 2 m" instead of the cryptic code `tmax` — so anyone
+        reading the record knows what it is without decoding jargon.
   standard_name:
+    title: Standard Name
     range: uriorcurie
     description: >-
       The standard-name identifier for the physical quantity, as a CURIE so the
@@ -97,70 +131,219 @@ slots:
       a term in the project registry (`ENVAR:heat_index`) or reuse an ontology
       term (`ECTO:...`). The prefix carries the authority; the slot name does
       not. Mandatory.
+    examples:
+    - value: CF:air_temperature
+      description: CF Standard Name for the Daymet daily Tmax scenario
+    - value: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+      description: CF Standard Name for the ACAG PM2.5 scenario
+    see_also:
+    - https://cfconventions.org/standard-names.html
+    - https://obofoundry.org/ontology/ecto.html
     slot_uri: dcterms:subject
 
     annotations:
       tier: core
+      justification: >-
+        This is the cross-agency identifier that makes the variable
+        interoperable: without it, `tmax` from one product and `tmmx` from
+        another cannot be recognised by machines as the same physical
+        quantity, so records cannot be pooled or harmonised across studies.
+      explanation: >-
+        Different tools use different nicknames for the same thing, so
+        scientific communities maintain shared official names for physical
+        quantities (like "air_temperature"). Tagging the record with the
+        official name lets computers tell that two datasets measure the same
+        thing, no matter what each dataset called it.
   cf_cell_methods:
+    title: CF Cell Methods
     range: string
     description: >-
       CF `cell_methods` string describing how the value summarises sub-period
       values, e.g. `time: maximum` for Tmax, `time: mean` for daily mean.
+    examples:
+    - value: "time: maximum"
+      description: daily maximum (Tmax)
+    - value: "time: mean"
+      description: mean over the aggregation period (e.g. annual-mean PM2.5)
+    comments:
+    - >-
+      Deliberately CF-specific — do not generalise. The vocabulary-neutral
+      capture of aggregation semantics already exists as the required
+      `TemporalReference.temporal_aggregation_method` enum (envar_temporal),
+      which maps 1:1 to the temporal part of `cell_methods`; that enum is what
+      machines should reason over. This slot instead preserves the *verbatim*
+      CF expression. `cell_methods` is a structured mini-language (multi-axis
+      forms like `area: mean time: maximum`, `within`/`over` qualifiers,
+      `where` clauses) with no cross-vocabulary equivalent, so a "generalised"
+      slot would be either a free string of unspecified syntax (losing
+      machine-readability) or a newly minted EnVar aggregation grammar with no
+      tooling support. Keeping the literal string also enables round-tripping
+      against CF/NetCDF source products and the CF-consistency triple check
+      over `standard_name` + `cf_cell_methods` + `units_ucum` (SPEC.md,
+      validation rule 5). Contrast `standard_name`, which *was* generalised to
+      a CURIE — that works because it is an identifier, and prefixes provide a
+      standard generalisation mechanism; no such mechanism exists for
+      expressions.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods
 
     annotations:
       tier: core
+      justification: >-
+        A daily maximum and a daily mean of the same quantity carry the same
+        standard name and units; only the aggregation statement tells them
+        apart. Keeping the verbatim CF string also enables round-tripping
+        against CF/NetCDF source products and the CF-consistency triple check
+        over `standard_name` + `cf_cell_methods` + `units_ucum`.
+      explanation: >-
+        A "daily temperature" value could be the day's highest reading, its
+        average, or its lowest — very different numbers. This short standard
+        phrase (like "time: maximum") records which one it is, in the exact
+        wording that climate-data software already understands.
   units_ucum:
+    title: Units (UCUM)
     range: string
     description: >-
       The unit expressed in UCUM syntax, e.g. `Cel` for degrees Celsius,
       `K` for Kelvin, `ug/m3` for PM2.5 mass concentration.
+    examples:
+    - value: Cel
+      description: degrees Celsius (Daymet Tmax)
+    - value: ug/m3
+      description: micrograms per cubic metre (PM2.5 mass concentration)
+    see_also:
+    - https://ucum.org/
 
     annotations:
       tier: core
+      justification: >-
+        A number without units is uninterpretable — a value of 35 could be
+        °C or °F, a factor-of-1.8 error in an exposure analysis. UCUM is the
+        machine-readable form that health-data layers (e.g. OMOP's
+        unit_concept_id) align to, so omitting it also blocks automated unit
+        conversion and downstream integration.
+      explanation: >-
+        UCUM is a compact, machine-readable spelling of the unit — `Cel` for
+        degrees Celsius, `ug/m3` for micrograms per cubic metre — so software
+        can convert °C to °F or check units automatically without guessing
+        what a human-written unit string means.
   units_display:
+    title: Display Units
     range: string
     description: >-
       Human-readable unit string for display purposes, e.g. `°C`.
+    examples:
+    - value: "°C"
 
     annotations:
       tier: optional
+      justification: >-
+        Keeps human-facing output (tables, plots, reports) readable without
+        every consumer having to translate UCUM codes; omitting it risks each
+        tool rendering the unit differently or mislabelling axes.
+      explanation: >-
+        The pretty version of the unit for people to read, like "°C". The
+        machine version (`Cel`) is stored separately; this one exists purely
+        for showing on screen or in print.
   target_concept_vocabulary:
+    title: Target Concept Vocabulary
     range: string
     description: >-
       The downstream health-data vocabulary that `target_concept_id` and
       `concept_status` refer to, e.g. `omop` (OHDSI Standardised Vocabulary),
       `bdc` (BioData Catalyst). Names the vocabulary so the schema privileges
       no single health-data layer.
+    examples:
+    - value: omop
+      description: OHDSI Standardised Vocabulary (OMOP CDM)
+    see_also:
+    - https://athena.ohdsi.org/
+    - https://biodatacatalyst.nhlbi.nih.gov/
 
     annotations:
       tier: recommended
+      justification: >-
+        `target_concept_id` and `concept_status` are meaningless without
+        knowing which vocabulary they refer to; naming it explicitly keeps
+        the record portable across health-data layers (OMOP, BDC, ...)
+        instead of silently assuming one.
+      explanation: >-
+        Health databases each keep their own catalogue of codes for the
+        things they record. This slot says which catalogue the record's
+        health-data code (and its status) comes from — for example the OMOP
+        catalogue used by many hospital research databases.
   target_concept_id:
+    title: Target Concept Identifier
     range: string
     description: >-
       Concept identifier for the variable in the vocabulary named by
       `target_concept_vocabulary` (e.g. an OHDSI concept_id). Nullable with
       reason for environmental variables that lack coverage today.
+    examples:
+    - value: "2005200123"
+      description: >-
+        illustrative OHDSI concept_id; in the canonical Tmax and PM2.5
+        scenarios this slot is null with a missing reason
+    see_also:
+    - https://athena.ohdsi.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        This is the hook that lets the environmental value land in a health
+        database as a recognised concept. Recording it — or its documented
+        absence — shows whether the vocabulary binding was attempted and
+        against what, instead of leaving the linkage silent and
+        unreproducible.
+      explanation: >-
+        Health databases store everything under numeric codes from a shared
+        catalogue. This is that code for the environmental measurement, when
+        one exists, so the exposure value can sit alongside clinical data
+        under an identifier the database already knows.
   target_concept_id_missing_reason:
+    title: Reason Concept ID Is Missing
     range: MissingReasonEnum
     description: >-
       Reason `target_concept_id` is null. Distinguishes "no concept yet exists
       in the target vocabulary" from "the pipeline did not resolve it".
+    examples:
+    - value: not_provided_by_source
 
     annotations:
       tier: optional
+      justification: >-
+        Without a stated reason, a null `target_concept_id` is ambiguous:
+        downstream users cannot tell a genuine vocabulary gap from a pipeline
+        that simply failed to look the concept up, and so cannot decide
+        whether to fix the data or request a new concept.
+      explanation: >-
+        When a code is missing, it matters why. This slot records the reason
+        — for example that no such code has been invented yet — so an empty
+        field is not mistaken for a processing mistake.
   concept_status:
+    title: Concept Status
     range: ConceptStatusEnum
     description: >-
       Status of this variable's coverage in the target health-data vocabulary
       (`existing` / `proposed` / `gap`). Makes the vocabulary gap explicit
       rather than silent. Required.
+    examples:
+    - value: gap
+      description: no OMOP concept exists yet for daily Tmax
 
     annotations:
       tier: core
+      justification: >-
+        A downstream system must know whether to expect a concept id. The
+        explicit existing/proposed/gap status makes vocabulary gaps visible
+        and countable rather than silently null — which is what drives
+        vocabulary-extension requests for environmental variables.
+      explanation: >-
+        A simple status flag saying whether the health-data catalogue already
+        has a code for this measurement, has one in the works, or has nothing
+        yet. It turns a silent gap into an explicit, reportable fact.
   concept_mappings:
+    title: Concept Cross-References
     range: uriorcurie
     multivalued: true
     description: >-
@@ -175,28 +358,87 @@ slots:
       `existing` / `proposed` / `gap` status, stays in the structured
       `target_concept_*` slots — this list is for additional, status-free
       cross-references.
+    examples:
+    - value: ECTO:0000012
+      description: >-
+        exposure to temperature (ECTO) — one element of the cross-reference
+        list for the Daymet daily Tmax scenario
+    - value: ENVO:03000049
+      description: >-
+        temperature of air (ENVO) — a second element of the same
+        cross-reference list
+    see_also:
+    - https://obofoundry.org/ontology/ecto.html
+    - https://obofoundry.org/ontology/envo.html
+    - https://loinc.org/
 
     annotations:
       tier: optional
+      justification: >-
+        Cross-references to ontologies (ECTO, ENVO) and clinical codes
+        (LOINC, SNOMED) let the variable be found and aligned across projects
+        and communities; without them, cross-study harmonisation has to be
+        redone by hand. Enrichment only — not needed to reproduce the value.
+      explanation: >-
+        Different scientific communities keep different dictionaries of
+        concepts. This is a list of "also known as" links pointing to the
+        matching entries in those dictionaries, so people searching any of
+        them can still find this measurement.
   value_data_type:
+    title: Value Data Type
     range: DataTypeEnum
     description: >-
       The data type of the stored exposure value.
+    examples:
+    - value: continuous_numeric
 
     annotations:
       tier: core
+      justification: >-
+        Tells consumers how to parse and analyse the values — continuous
+        numbers, categories, and flags need different statistics and storage.
+        Omitting it forces guessing from the data, which fails on ambiguous
+        cases like 0/1 columns (count, flag, or category?).
+      explanation: >-
+        Says what kind of value to expect: a decimal number that can take any
+        value (like a temperature), a yes/no flag, or a category. Software
+        needs this to know how to read and summarise the data correctly.
   value_range_plausible_min:
+    title: Plausible Minimum Value
     range: float
     description: >-
       Physical / domain lower bound for plausible values (e.g. -50 °C for
       ambient Tmax). Not a hard validation bound; sanity-check signal.
+    examples:
+    - value: "-50"
+      description: plausible lower bound for ambient Tmax in °C
 
     annotations:
       tier: recommended
+      justification: >-
+        Gives automated quality checks a sanity band: without it, unit
+        mix-ups and corrupted values (e.g. a Tmax of 350 from unconverted
+        Kelvin) pass silently into downstream analyses.
+      explanation: >-
+        The lowest value that would still make physical sense — for example
+        -50 °C for outdoor air temperature. Anything below it is probably an
+        error; this is a warning signal, not a hard rule.
   value_range_plausible_max:
+    title: Plausible Maximum Value
     range: float
     description: >-
       Physical / domain upper bound for plausible values (e.g. 60 °C for
       ambient Tmax).
+    examples:
+    - value: "60"
+      description: plausible upper bound for ambient Tmax in °C
     annotations:
       tier: recommended
+      justification: >-
+        Together with the plausible minimum, this gives automated quality
+        checks a sanity band: without it, unit mix-ups and corrupted values
+        slip silently past validation into exposure analyses.
+      explanation: >-
+        The highest value that would still make physical sense — for example
+        60 °C for outdoor air temperature. Anything above it likely signals a
+        unit mix-up or a data error worth investigating.

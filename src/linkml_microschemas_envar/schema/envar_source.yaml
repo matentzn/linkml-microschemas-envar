@@ -27,10 +27,15 @@ imports:
 classes:
 
   SourceDataset:
+    title: Source Dataset
     description: >-
       The upstream gridded / station product the exposure values originate
       from. Carries identity, DOI, version, coverage, producer, citation,
       license, native format, and homogenisation status. One per record.
+    see_also:
+    - https://www.doi.org/
+    - https://spdx.org/licenses/
+    - https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -65,138 +70,369 @@ classes:
 slots:
 
   source_dataset_name:
+    title: Source Dataset Name
     range: string
     description: >-
       Full name of the source product, e.g. "Daymet V4 Daily Surface Weather
       Data", "GridMET", "NARR", "ERA5-HEAT".
+    examples:
+    - value: "Daymet V4 Daily Surface Weather Data"
+    see_also:
+    - https://daymet.ornl.gov/
+    - https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5
 
     annotations:
       tier: core
+      justification: >-
+        Without the product name, "daily maximum temperature" could come from
+        any of a dozen products whose values disagree; the name is the first
+        anchor for identifying which upstream data actually produced the
+        exposure values.
+      explanation: >-
+        Weather and air-quality data come from named products made by
+        different organisations, much like maps come from different
+        map-makers. This is simply the full official name of the product the
+        values were taken from.
   source_dataset_short_code:
+    title: Source Dataset Short Code
     range: string
     description: >-
       Short code keying into the EnVar source registry, e.g. `daymet_v4`,
       `gridmet`, `narr`, `era5_heat`.
+    examples:
+    - value: "daymet_v4"
 
     annotations:
       tier: recommended
+      justification: >-
+        A stable machine-readable key lets tools group and compare records
+        from the same product without fuzzy-matching free-text names, which
+        vary in spelling and capitalisation across studies.
+      explanation: >-
+        A short nickname for the dataset, like a username, that computers can
+        match exactly — "Daymet V4 Daily Surface Weather Data" becomes just
+        `daymet_v4`.
   source_dataset_doi:
+    title: Source Dataset DOI
     range: string
     description: >-
       DOI of the source dataset. Mandatory if a DOI exists. Daymet V4 =
       `10.3334/ORNLDAAC/2129`; ERA5 = `10.24381/cds.adbb2d47`.
+    examples:
+    - value: "10.3334/ORNLDAAC/2129"
+      description: Daymet V4 R1 DOI
     slot_uri: dcterms:identifier
+    see_also:
+    - https://www.doi.org/
+    - https://datacite.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        The DOI is the durable handle for the source; access URLs rot, but a
+        DOI keeps resolving to the dataset, so future readers can always
+        retrieve exactly what was used and producers get citable credit.
+      explanation: >-
+        A DOI is a permanent ID for a dataset or paper that keeps working
+        even when websites move. Looking it up at doi.org always leads to the
+        current home of the data.
   source_dataset_doi_missing_reason:
+    title: Reason Source Dataset DOI Is Missing
     range: MissingReasonEnum
     description: Reason `source_dataset_doi` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "this product genuinely has no DOI" from "nobody filled
+        the field in"; a blank is a bug, while a null-with-reason is
+        information a completeness checker can act on.
+      explanation: >-
+        If the DOI box is empty, this field says why — for example, the
+        producer never issued one. That way an empty field is a deliberate
+        statement, not an oversight.
   source_dataset_version:
+    title: Source Dataset Version
     range: string
     description: >-
       Source product version. E.g. "V4 R1" for Daymet; "V5.GL.03" vs
       "V6.GL.02" for ACAG PM products. Version differences materially change
       values.
+    examples:
+    - value: "V4 R1"
+      description: Daymet V4 Release 1
+    - value: "V5.GL.04"
+      description: ACAG global PM2.5 product version
 
     annotations:
       tier: core
+      justification: >-
+        Version differences materially change values (e.g. ACAG V5 vs V6
+        PM2.5), so two studies "using Daymet" may in fact use different data;
+        a value without a version is not reproducible.
+      explanation: >-
+        Datasets get updated and re-released like software, and the numbers
+        can change between releases. The version says exactly which release
+        the values came from.
   source_dataset_temporal_coverage:
+    title: Source Dataset Temporal Coverage
     range: string
     description: >-
       Source product temporal coverage as an ISO 8601 interval string
       `<start>/<end>`.
+    examples:
+    - value: "1980-01-01/2024-12-31"
+    see_also:
+    - https://en.wikipedia.org/wiki/ISO_8601
 
     annotations:
       tier: recommended
+      justification: >-
+        Knowing the product's full time span distinguishes "date outside the
+        product's coverage" from "value genuinely missing", preventing
+        coverage gaps from being misread as data errors.
+      explanation: >-
+        Simply the first and last dates the dataset covers. If you ask for a
+        day outside that window, there was never any data to find — which is
+        different from data that should exist but is missing.
   source_dataset_spatial_extent:
+    title: Source Dataset Spatial Extent
     range: string
     description: >-
       Human-readable spatial extent of the product, e.g.
       "CONUS, Hawaii, Puerto Rico".
+    examples:
+    - value: "CONUS, Hawaii, Puerto Rico"
 
     annotations:
       tier: recommended
+      justification: >-
+        The product footprint distinguishes "location outside the product's
+        extent" from "missing value"; without it, a subject in Alaska queried
+        against a CONUS-only product looks like a data error rather than an
+        out-of-coverage case.
+      explanation: >-
+        A plain-language note of which regions the dataset covers, for
+        example the continental United States plus Hawaii and Puerto Rico.
+        Places outside this area simply have no data.
   source_producer_institution:
+    title: Producer Institution
     range: string
     description: >-
       Producer institution, e.g. "NASA ORNL DAAC", "University of Idaho",
       "NOAA NCEP", "ECMWF Copernicus".
+    examples:
+    - value: "NASA ORNL DAAC"
 
     annotations:
       tier: recommended
+      justification: >-
+        Identifies who is accountable for the product, supports correct
+        attribution, and helps disambiguate similarly named products
+        maintained by different institutions.
+      explanation: >-
+        The organisation that makes and publishes the dataset — for example a
+        NASA data centre or a university group. Knowing who made the data
+        tells you where to go with questions.
   source_citation_apa:
+    title: Source Citation (APA)
     range: string
     description: Full APA-style citation for the source dataset.
+    examples:
+    - value: "Thornton, M.M., et al. (2022). Daymet: Daily Surface Weather Data on a 1-km Grid for North America, Version 4 R1. ORNL DAAC."
+      description: truncated form; the real citation lists all authors
 
     annotations:
       tier: recommended
+      justification: >-
+        The producer's requested citation is what enables attribution and
+        retrieval; omitting it makes it harder for readers to credit the
+        producers and to locate the exact product in the literature.
+      explanation: >-
+        The ready-to-paste reference for the dataset, formatted the way
+        academic papers list their sources, so anyone reusing the data knows
+        exactly how to cite it.
   source_citation_bibtex:
+    title: Source Citation (BibTeX)
     range: string
     description: BibTeX entry for the source dataset, machine-parseable.
+    examples:
+    - value: "@misc{daymet_v4_r1, title={Daymet: Daily Surface Weather Data on a 1-km Grid for North America, Version 4 R1}, author={Thornton, M.M. and others}, year={2022}, publisher={ORNL DAAC}, doi={10.3334/ORNLDAAC/2129}}"
 
     annotations:
       tier: optional
+      justification: >-
+        A machine-parseable citation lets reference managers and pipelines
+        ingest the attribution automatically, avoiding transcription errors
+        when the citation is copied by hand.
+      explanation: >-
+        BibTeX is a structured text format that reference-manager software
+        understands. It carries the same citation as the human-readable text,
+        but in a form computers can read directly.
   source_citation_bibtex_missing_reason:
+    title: Reason BibTeX Citation Is Missing
     range: MissingReasonEnum
     description: Reason `source_citation_bibtex` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Records whether the BibTeX entry is absent because the producer never
+        supplied one or because it was not extracted, so an empty field is
+        auditable rather than ambiguous.
+      explanation: >-
+        If the machine-readable citation is empty, this field says why, so
+        the gap is a deliberate statement rather than an oversight.
   source_license_spdx:
+    title: Source License (SPDX)
     range: string
     description: >-
       SPDX identifier of the source license, e.g. `CC0-1.0`, `CC-BY-4.0`. Use
       `public-domain-us-gov` for US federal data with no formal SPDX
       equivalent.
+    examples:
+    - value: "public-domain-us-gov"
+      description: US federal data (e.g. Daymet V4)
+    - value: "CC-BY-4.0"
+      description: e.g. ACAG PM2.5 V5.GL
+    see_also:
+    - https://spdx.org/licenses/
 
     annotations:
       tier: recommended
+      justification: >-
+        Without the license, downstream deposit and redistribution legality
+        is unknowable — you cannot tell whether derived exposure values may
+        be shared, deposited in a repository, or must stay private.
+      explanation: >-
+        SPDX codes are standard short names for licenses, like CC-BY-4.0, so
+        software can check reuse rules automatically. The license says what
+        you are allowed to do with the data.
   source_access_url:
+    title: Source Access URL
     range: uri
     description: >-
       Landing-page URL for the dataset (not a download link, which rots).
+    examples:
+    - value: "https://daymet.ornl.gov/"
 
     annotations:
       tier: recommended
+      justification: >-
+        A stable landing page is how future users actually reach the data; a
+        raw download link rots when files are reorganised, leaving the record
+        pointing nowhere.
+      explanation: >-
+        The dataset's home page on the web — the front door where you can
+        read about the data and find the download options — rather than a
+        direct file link that stops working when files move.
   source_native_format:
+    title: Source Native Format
     range: SourceNativeFormatEnum
     description: Format the source ships in.
+    examples:
+    - value: "netcdf4_cf"
 
     annotations:
       tier: recommended
+      justification: >-
+        The shipping format determines which tools can read the source and
+        what metadata survives; knowing it lets others rebuild the same
+        extraction pipeline and anticipate format-specific quirks.
+      explanation: >-
+        Scientific data comes packaged in different file types (NetCDF,
+        GeoTIFF, CSV, and others), a bit like documents come as PDF or Word.
+        This records which package the producer ships.
   source_homogenisation_status:
+    title: Homogenisation Status
     range: HomogenisationStatusEnum
     description: >-
       For station-based products, whether values have been homogenised.
       Mandatory for station-based products; GHCN-D = `not_homogenised`,
       GHCN-M v4 = `homogenised`.
+    examples:
+    - value: "not_homogenised"
+      description: e.g. GHCN-Daily station observations
+    see_also:
+    - https://en.wikipedia.org/wiki/Homogenization_(climate)
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Using a non-homogenised station product (e.g. GHCN-Daily) for trend
+        work without saying so is a known trap: station moves and instrument
+        changes masquerade as climate signal. Mandatory for station-based
+        products.
+      explanation: >-
+        Weather stations get moved, replaced, or re-instrumented over the
+        decades, which creates artificial jumps in their records.
+        "Homogenised" data has had those jumps statistically corrected;
+        "not homogenised" data is raw, as observed.
   source_homogenisation_status_missing_reason:
+    title: Reason Homogenisation Status Is Missing
     range: MissingReasonEnum
     description: Reason `source_homogenisation_status` is null.
+    examples:
+    - value: "not_applicable"
+      description: e.g. gridded (non-station) products
 
     annotations:
       tier: optional
+      justification: >-
+        For gridded products homogenisation status is genuinely not
+        applicable; recording that reason keeps the conditionally-core check
+        auditable instead of leaving an ambiguous blank.
+      explanation: >-
+        If the homogenisation field is empty, this field says why — most
+        often because the data is a gridded product rather than raw station
+        records, so the question does not apply.
   source_acdd_attributes:
+    title: ACDD Global Attributes
     range: AnyValue
     inlined: true
     description: >-
       Passthrough of ACDD (Attribute Convention for Data Discovery) global
       attributes from the source NetCDF header, as a native key/value object.
+    examples:
+    - object:
+        title: "Daymet Daily Surface Weather Data"
+        institution: "ORNL DAAC"
+        Conventions: "CF-1.6, ACDD-1.3"
+    see_also:
+    - https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
 
     annotations:
       tier: optional
+      justification: >-
+        Carrying the source's own ACDD header attributes forward preserves
+        producer-supplied metadata verbatim, allowing later cross-checks
+        against what this record claims without re-downloading the source.
+      explanation: >-
+        Many scientific data files carry a built-in "title page" of
+        descriptive labels inside the file itself (following the ACDD
+        convention). This field simply copies those labels across so nothing
+        the producer wrote is lost.
   source_acdd_attributes_missing_reason:
+    title: Reason ACDD Attributes Are Missing
     range: MissingReasonEnum
     description: Reason `source_acdd_attributes` is null.
+    examples:
+    - value: "not_provided_by_source"
+      description: e.g. source not distributed as NetCDF with ACDD headers
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes sources that ship no ACDD headers (e.g. CSV station
+        data) from headers that simply were not extracted, keeping the empty
+        field auditable.
+      explanation: >-
+        If the copied-over file labels are absent, this field says why —
+        often because the source is not distributed as a NetCDF file that
+        carries such labels.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -205,9 +441,12 @@ slots:
 enums:
 
   HomogenisationStatusEnum:
+    title: Homogenisation Status
     description: >-
       For station-based products, the homogenisation status of values across
       the record period.
+    see_also:
+    - https://en.wikipedia.org/wiki/Homogenization_(climate)
     permissible_values:
       homogenised:
         description: Values have been homogenised against breakpoints.
@@ -217,6 +456,7 @@ enums:
         description: Partial homogenisation has been applied.
 
   SourceNativeFormatEnum:
+    title: Source Native Format
     description: Format the source ships in.
     permissible_values:
       netcdf4_cf:

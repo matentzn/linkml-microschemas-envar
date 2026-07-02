@@ -1,0 +1,313 @@
+id: https://w3id.org/linkml/microschemas/envar/layout
+name: envar-layout
+title: EnVar Microschemas — Data Layout
+version: "0.1.0"
+description: |-
+  Column bindings between the sidecar and the companion data file: which
+  column carries the values, how long-format rows are discriminated, and
+  where the subject / time / uncertainty / QA-flag columns live. Pure file
+  layout — variable identity stays in envar_variable; file-level identity
+  (hashes, row counts) stays in envar_toolrun.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+- linkml:types
+- envar_common
+
+#────────────────────────────────────────────────────────────────
+# CLASSES
+#────────────────────────────────────────────────────────────────
+
+classes:
+
+  DataLayout:
+    title: Data Layout
+    description: >-
+      How the companion data file (CSV / parquet) is laid out and how this
+      record's values are located inside it. Separates the file-layout
+      concern from variable identity: `VariableIdentity.variable_name` says
+      what the variable is; `DataLayout` says which column (and, for long
+      format, which rows) carry its values. One per record.
+    annotations:
+      domain_of_use: environmental_exposure
+    slots:
+    - table_orientation
+    - value_column
+    - variable_column
+    - variable_key
+    - subject_column
+    - time_column
+    - value_uncertainty_column
+    - value_uncertainty_column_missing_reason
+    - quality_flag_column
+    - quality_flag_column_missing_reason
+    slot_usage:
+      table_orientation:
+        required: true
+      value_column:
+        required: true
+
+#────────────────────────────────────────────────────────────────
+# SLOTS
+#────────────────────────────────────────────────────────────────
+
+slots:
+
+  table_orientation:
+    title: Table Orientation
+    range: TableOrientationEnum
+    description: >-
+      Whether the companion file is wide (one column per variable) or long
+      (one `value` column, variables discriminated by row). Required.
+    examples:
+    - value: wide
+      description: one column per variable, e.g. a `tmax` column in a Daymet extract
+    - value: long
+      description: tidy format with a shared `value` column, e.g. tract-level PM2.5
+    see_also:
+    - https://doi.org/10.18637/jss.v059.i10
+
+    annotations:
+      tier: core
+      justification: >-
+        Every other column binding in this class is read relative to the
+        orientation: in a wide file `value_column` names a variable-specific
+        column, in a long file it names a shared column whose rows must be
+        filtered. Without this flag a consumer cannot interpret the bindings
+        and so cannot reliably locate this record's values in the companion
+        file.
+      explanation: >-
+        Wide means one column per measurement type (a `tmax` column, a `vp`
+        column, and so on); long means one row per measurement, with a shared
+        `value` column and a label column saying which measurement each row
+        is. Long is also known as "tidy" format.
+  value_column:
+    title: Value Column
+    range: string
+    description: >-
+      Name of the column carrying this record's exposure values, e.g. `tmax`
+      in a wide file or `value` in a long file. Required.
+    examples:
+    - value: tmax
+      description: wide file — the variable's own column carries the values
+    - value: value
+      description: long file — the shared value column
+
+    annotations:
+      tier: core
+      justification: >-
+        The record deliberately carries no inline observation result — the
+        values live only in the companion CSV/parquet file. Without this
+        column binding, a validator or downstream pipeline has no way to
+        find the values the sidecar describes, so the sidecar is
+        unverifiable and the data unusable.
+      explanation: >-
+        This is simply the name of the spreadsheet column where the actual
+        numbers live — for example a column headed `tmax` holding daily
+        maximum temperatures, or a generic column headed `value` in a long
+        table.
+  variable_column:
+    title: Variable Column
+    range: string
+    description: >-
+      For long orientation: name of the column that discriminates variables
+      (e.g. `variable`). Not applicable to wide files.
+    examples:
+    - value: variable
+    see_also:
+    - https://doi.org/10.18637/jss.v059.i10
+
+    annotations:
+      tier: conditionally_core
+      justification: >-
+        In a long file many variables share one value column and are told
+        apart only by a discriminator column. Without naming that column,
+        a consumer cannot separate this record's variable from every other
+        variable in the file, so the value binding is ambiguous for all
+        long-format data.
+      explanation: >-
+        In a long table there is a column — often literally called
+        `variable` — that says what each row measures (`tmax`, `vp`, ...).
+        This slot names that column. Wide files do not have one, which is
+        why this only applies to long orientation.
+  variable_key:
+    title: Variable Key
+    range: string
+    description: >-
+      For long orientation: the value in `variable_column` that selects this
+      record's rows (e.g. `tmax`). Often, but not necessarily, equal to
+      `VariableIdentity.variable_name`.
+    examples:
+    - value: pm25_annual
+      description: selects the PM2.5 rows in a long tract-level file
+    see_also:
+    - https://doi.org/10.18637/jss.v059.i10
+
+    annotations:
+      tier: conditionally_core
+      justification: >-
+        Knowing which column discriminates variables is not enough — a
+        consumer also needs the label value that selects this record's
+        rows. Without the key, every row of a long file is a candidate and
+        this record's values cannot be filtered out of the shared value
+        column.
+      explanation: >-
+        This is the label to filter on: keep only the rows where the
+        variable column says, for example, `tmax`, and you have exactly
+        this record's measurements. It usually matches the variable's
+        short name, but does not have to.
+  subject_column:
+    title: Subject Column
+    range: string
+    description: >-
+      Name of the column carrying the opaque subject / cohort identifier the
+      record-level `subject` refers to (e.g. `subject_id`).
+    examples:
+    - value: subject_id
+      description: patient-level extract
+    - value: tract_id
+      description: census-tract-level extract
+
+    annotations:
+      tier: recommended
+      justification: >-
+        The whole point of an exposure sidecar is to be joined back to a
+        health-data layer. Without knowing which column carries the subject
+        or cohort identifier, the values cannot be attached to the people
+        or places the record-level `subject` refers to, and the linkage
+        step becomes guesswork.
+      explanation: >-
+        This names the ID column that says who (or where) each row belongs
+        to — a patient identifier like `subject_id`, or a place identifier
+        like a census-tract code.
+  time_column:
+    title: Time Column
+    range: string
+    description: >-
+      Name of the column carrying the observation date / timestamp
+      (e.g. `date`).
+    examples:
+    - value: date
+      description: daily data
+    - value: year
+      description: annual aggregate
+
+    annotations:
+      tier: recommended
+      justification: >-
+        Without knowing which column carries the date or timestamp, each
+        value cannot be placed in time, so exposure values cannot be
+        aligned with clinical events — which day's exposure goes with
+        which health record — and any lag or window analysis is
+        impossible.
+      explanation: >-
+        This names the column that gives each measurement its "when" — a
+        `date` column for daily data, or a `year` column for annual
+        summaries.
+  value_uncertainty_column:
+    title: Per-Value Uncertainty Column
+    range: string
+    description: >-
+      Name of the column carrying per-value uncertainty (e.g. `pm_se`,
+      `tmax_stderr`). Its semantics (uncertainty type, units) live in
+      the Uncertainty microschema. Null with reason for products whose
+      per-value uncertainty exists upstream but is not surfaced.
+    examples:
+    - value: tmax_stderr
+
+    annotations:
+      tier: recommended
+      justification: >-
+        Products like Daymet ship per-value standard errors that most
+        pipelines silently drop. Without this binding, downstream analyses
+        cannot find or propagate the measurement error attached to each
+        value, and dropped uncertainty is indistinguishable from
+        uncertainty that never existed.
+      explanation: >-
+        Some datasets include a "plus or minus" column next to each value
+        — an estimate of how far off each number might be. This slot names
+        that column so the uncertainty travels with the data instead of
+        being lost.
+  value_uncertainty_column_missing_reason:
+    title: Reason Uncertainty Column Is Missing
+    range: MissingReasonEnum
+    description: Reason `value_uncertainty_column` is null.
+    examples:
+    - value: not_provided_by_source
+
+    annotations:
+      tier: optional
+      justification: >-
+        A bare null cannot be audited: it could mean the source has no
+        per-value uncertainty, the pipeline dropped it, or the producer
+        forgot to record it. Stating the reason makes the absence
+        deliberate and lets reviewers tell "unavailable" from "lost",
+        which matters for reproducing the extraction.
+      explanation: >-
+        When there is no uncertainty column, this slot says why — for
+        example "the upstream product does not provide one" versus "it
+        exists upstream but was not extracted".
+  quality_flag_column:
+    title: Quality Flag Column
+    range: string
+    description: >-
+      Name of any per-value QA flag column. CF `ancillary_variables`
+      analogue; the flag vocabulary lives in the Uncertainty microschema.
+    examples:
+    - value: tmax_qc
+      description: per-value QA flag column accompanying a `tmax` value column
+    see_also:
+    - https://cfconventions.org/
+
+    annotations:
+      tier: optional
+      justification: >-
+        Without knowing where the per-value QA flags live, consumers
+        cannot filter or down-weight values the producer already marked
+        as suspect, so known-bad measurements flow silently into
+        analyses.
+      explanation: >-
+        A quality flag column is like a traffic light next to each number
+        — good, suspect, or bad — recorded by the data producer. This
+        slot names that column; what the flag codes mean is described in
+        the Uncertainty microschema.
+  quality_flag_column_missing_reason:
+    title: Reason Quality Flag Column Is Missing
+    range: MissingReasonEnum
+    description: Reason `quality_flag_column` is null.
+    examples:
+    - value: not_provided_by_source
+    annotations:
+      tier: optional
+      justification: >-
+        Without a stated reason, a missing QA-flag column is ambiguous:
+        the source may publish no flags, or the pipeline may have dropped
+        them. The reason turns a silent gap into a documented decision
+        that a reviewer can check against the upstream product.
+      explanation: >-
+        When there is no quality-flag column, this slot says why it is
+        absent — for example because the source dataset simply does not
+        publish quality flags.
+
+#────────────────────────────────────────────────────────────────
+# ENUMS
+#────────────────────────────────────────────────────────────────
+
+enums:
+
+  TableOrientationEnum:
+    title: Table Orientation
+    description: How variables map onto columns in the companion data file.
+    permissible_values:
+      wide:
+        description: One column per variable; column name identifies the variable.
+      long:
+        description: >-
+          One shared value column; the variable is discriminated by a row
+          value in a variable column (tidy format).

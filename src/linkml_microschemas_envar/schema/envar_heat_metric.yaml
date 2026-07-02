@@ -26,6 +26,7 @@ imports:
 classes:
 
   DerivedHeatMetric:
+    title: Derived Heat Metric
     description: >-
       Methodology slots specific to derived heat metrics (WBGT, Heat Index,
       UTCI, apparent temperature, heat-wave flag, etc.). Captures the
@@ -34,6 +35,10 @@ classes:
       indoor / outdoor regime, which solar-radiation input, and -- for
       percentile-based metrics -- the reference period, scope, and seasonal
       window. One per record where applicable.
+    see_also:
+    - https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature
+    - https://www.weather.gov/safety/heat-index
+    - http://www.utci.org/
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -70,6 +75,7 @@ classes:
         required: true
 
   EquationInput:
+    title: Equation Input
     description: >-
       A single physical-state input to a derived heat metric, recorded as a
       typed reference into the provenance chain rather than an inline copy of
@@ -84,6 +90,8 @@ classes:
       sidecar — listed here and as a step in `provenance_chain` — so the
       divergence stays explicit and machine-checkable instead of being
       silently absorbed into the single output value.
+    see_also:
+    - https://cfconventions.org/
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -103,27 +111,71 @@ classes:
 slots:
 
   heat_metric_family:
+    title: Heat Metric Family
     range: HeatMetricFamilyEnum
     description: The family of heat metric this variable represents.
+    examples:
+    - value: "wbgt_outdoor"
+      description: outdoor Wet Bulb Globe Temperature (Phoenix 2022 heat-wave record)
 
     annotations:
       tier: core
+      justification: >-
+        Tmax, Heat Index, WBGT, and a heat-wave flag are distinct exposures
+        with distinct health associations; without the family, values from
+        different metrics are indistinguishable and get pooled as if they
+        measured the same thing.
+      explanation: >-
+        There are many different "heat numbers" — plain air temperature,
+        composite scores that also fold in humidity, wind and sunshine, or a
+        simple yes/no heat-wave flag. This field says which kind of heat
+        number the record is about.
   equation_variant:
+    title: Equation Variant
     range: EquationVariantEnum
     description: >-
       For derived heat metrics, the equation variant used. Mandatory for
       WBGT, HI, and UTCI: a Liljegren WBGT and an ACSM WBGT for the same
       inputs can differ by 2-3 °C.
+    examples:
+    - value: "liljegren_2008"
+      description: Liljegren et al. 2008 outdoor WBGT formulation
+    see_also:
+    - https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        WBGT approximations diverge materially from the reference model —
+        well beyond 2-3 °C in hot-humid conditions — so two studies using
+        "WBGT" with different variants are measuring systematically different
+        quantities; pooling them without this field mixes those quantities
+        silently.
+      explanation: >-
+        Well-known heat metrics have several published formulas that share
+        one name but differ mathematically — like recipes with the same
+        title from different cookbooks. This records which exact recipe was
+        used to cook the number.
   equation_variant_missing_reason:
+    title: Reason Equation Variant Is Missing
     range: MissingReasonEnum
     description: Reason `equation_variant` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "no equation variant exists for this metric" from
+        "the variant was used but never captured" — the first is fine, the
+        second means the record is unusable for cross-study comparison and
+        someone should go back to the producer.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   equation_inputs:
+    title: Equation Inputs
     range: EquationInput
     multivalued: true
     inlined: true
@@ -143,6 +195,22 @@ slots:
 
       Conditionally-Core: optional for a single-input metric, mandatory the
       moment a metric has more than one input.
+    examples:
+    - object:
+        input_role: air_temperature
+        input_provenance_id: "01HFA7K8R3M6XP-daymet-tmax"
+        input_source_short_code: daymet_v4
+      description: >-
+        one entry of the list — the air-temperature input of a Liljegren
+        WBGT; a wind-speed entry from a divergent product (e.g. ~31 km ERA5)
+        would sit alongside it as a second element
+    - object:
+        input_role: wind_speed
+        input_provenance_id: "01HFA7K8R3M6XP-era5-wind"
+        input_source_short_code: era5
+      description: >-
+        a second list entry from a divergent product (~31 km ERA5 vs 1 km
+        Daymet), pointing at its own full upstream sidecar
     comments:
     - >-
       Cross-input consistency check (completeness checker, not structural
@@ -153,17 +221,42 @@ slots:
       sidecars rather than absorbed silently into the output value.
     annotations:
       tier: conditionally_core
+      justification: >-
+        Multi-input metrics can silently absorb mismatched inputs — e.g. a
+        Heat Index built from a 1 km local-midnight daily-max temperature
+        and a ~31 km UTC daily-mean humidity. Without per-input references
+        that divergence is invisible and no checker can surface it.
+      explanation: >-
+        Composite heat metrics are cooked from several ingredients —
+        temperature, humidity, wind, sunshine. This is the ingredient list,
+        where each entry points to that ingredient's own full paperwork
+        instead of hiding it inside the final number.
   input_role:
+    title: Input Role
     range: string
     description: >-
       The standard-name local token of this input's physical quantity (the same
       quantity the referenced sidecar carries in `standard_name`), e.g.
       `air_temperature`, `relative_humidity`, `wind_speed`,
       `surface_downwelling_shortwave_flux_in_air`.
+    examples:
+    - value: "air_temperature"
+    see_also:
+    - https://cfconventions.org/
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Without a named role, a consumer cannot tell which physical quantity
+        each referenced input supplied to the equation, so inputs cannot be
+        matched to equation terms and cross-input consistency checks cannot
+        run.
+      explanation: >-
+        This labels what each ingredient actually is — temperature versus
+        humidity versus wind — using a shared standard vocabulary so that
+        machines and people read the label the same way.
   input_provenance_id:
+    title: Input Provenance ID
     range: string
     description: >-
       The `provenance_id` of the upstream sidecar that fully describes this
@@ -171,179 +264,473 @@ slots:
       model. Dereferencing it lets a consumer (or the completeness checker)
       compare inputs and surface any divergence in resolution, day-boundary
       convention, or temporal aggregation.
+    examples:
+    - value: "01HFA7K8R3M6XP-daymet-tmax"
+      description: provenance_id of the upstream Daymet Tmax sidecar
+    see_also:
+    - https://www.w3.org/TR/prov-o/
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        This is the only machine-followable link from an input back to its
+        full spatial, temporal, and model context; without it, divergences
+        between inputs in resolution, day-boundary convention, or aggregation
+        cannot be detected at all.
+      explanation: >-
+        Think of it as a tracking number: instead of copying all the details
+        of the ingredient into this record, we store a pointer to the record
+        that already holds them, and anyone can follow the pointer.
   input_source_short_code:
+    title: Input Source Short Code
     range: string
     description: >-
       Human-readable short code of the input's source product (e.g.
       `daymet_v4`, `era5`), duplicated from the referenced sidecar for
       convenience when scanning the record. Not authoritative —
       `input_provenance_id` is.
+    examples:
+    - value: "daymet_v4"
 
     annotations:
       tier: recommended
+      justification: >-
+        Lets a human scanning the record see at a glance which product each
+        input came from without dereferencing every provenance id; because it
+        is a non-authoritative duplicate, omitting it costs readability, not
+        machine-checkability.
+      explanation: >-
+        A friendly nickname for the dataset an ingredient came from (like
+        "daymet_v4"), written next to the tracking number so people do not
+        have to look everything up just to get oriented.
   equation_validity_range:
+    title: Equation Validity Range
     range: string
     description: >-
       Validity-range conditions for the equation, serialised as a JSON
       string. For Heat Index: `{"min_temperature_F": 80,
       "min_relative_humidity_pct": 40}` — Rothfusz is undefined below
       80 °F / 40 % RH.
+    examples:
+    - value: '{"min_wind_speed_m_s": 0.13}'
+      description: Liljegren 2008 clamps wind speed below 0.13 m/s
+    see_also:
+    - https://www.weather.gov/safety/heat-index
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        The Rothfusz Heat Index is undefined below ~80 °F / 40 % RH; applied
+        outside its range an equation produces plausible-looking nonsense.
+        Without the recorded range, no downstream consumer can flag values
+        computed where the formula does not hold.
+      explanation: >-
+        Every formula only works within a fence of weather conditions it was
+        designed for. This field writes the fence down, so anyone can check
+        whether a value was computed inside or outside it.
   equation_validity_range_missing_reason:
+    title: Reason Validity Range Is Missing
     range: MissingReasonEnum
     description: Reason `equation_validity_range` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "this equation has no published validity range" from
+        "the range exists but was not captured" — the difference decides
+        whether out-of-range screening is impossible or merely deferred.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   indoor_outdoor:
+    title: Indoor or Outdoor Regime
     range: IndoorOutdoorEnum
     description: >-
       Indoor / outdoor regime. Mandatory for WBGT (the indoor vs outdoor
       distinction changes the equation and the health interpretation).
+    examples:
+    - value: "outdoor"
+    see_also:
+    - https://www.iso.org/standard/67188.html
+    - https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Indoor and outdoor WBGT use different equations and carry different
+        health interpretations; an indoor formula applied to outdoor
+        conditions (or a regime left unstated) makes the value invalid or
+        uninterpretable for the exposure being claimed.
+      explanation: >-
+        Heat stress works differently inside and outside — indoors there is
+        no direct sun and little wind — so heat metrics come in indoor and
+        outdoor versions, and you need to know which one you are looking at.
   wind_speed_measurement_height_m:
+    title: Wind Speed Measurement Height (Metres)
     range: float
     description: >-
       For WBGT and UTCI inputs, the wind-speed measurement height in metres.
       The ISO 7243 standard is 2 m, but reanalysis products often supply
       10 m -- the height affects the WBGT value.
+    examples:
+    - value: "10"
+      description: ERA5 10 m wind used without height adjustment
+    see_also:
+    - https://www.iso.org/standard/67188.html
 
     annotations:
       tier: recommended
+      justification: >-
+        ISO 7243 assumes wind measured at 2 m, but reanalysis products
+        usually supply 10 m wind; wind is slower near the ground, so an
+        uncorrected 10 m input systematically shifts the resulting WBGT.
+      explanation: >-
+        Wind blows faster the higher above the ground you measure it, so a
+        "wind speed" is only meaningful together with the height it was
+        taken at — this field records that height.
   wind_speed_measurement_height_m_missing_reason:
+    title: Reason Measurement Height Is Missing
     range: MissingReasonEnum
     description: Reason `wind_speed_measurement_height_m` is null.
+    examples:
+    - value: "available_but_not_extracted"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "the producer never recorded a measurement height"
+        from "it exists upstream but was not extracted" — only the latter is
+        recoverable, and only the former precludes a height correction.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   solar_radiation_basis:
+    title: Solar Radiation Basis
     range: SolarRadiationBasisEnum
     description: >-
       For WBGT / UTCI inputs, the basis used for solar radiation.
+    examples:
+    - value: "surface_downwelling_shortwave_flux"
 
     annotations:
       tier: recommended
+      justification: >-
+        WBGT and UTCI respond strongly to solar load; whether the sun input
+        was a measured shortwave flux, a modelled mean radiant temperature,
+        or absent (triggering a fallback formula) changes the value and
+        whether two records are comparable at all.
+      explanation: >-
+        How much sunshine hits a person is part of how hot they feel, and
+        datasets represent "sunshine" in different ways — or not at all.
+        This says which representation fed the calculation.
   solar_radiation_basis_missing_reason:
+    title: Reason Radiation Basis Is Missing
     range: MissingReasonEnum
     description: Reason `solar_radiation_basis` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "the source never stated its radiation basis" from
+        "it was not extracted" — deciding whether the ambiguity can be
+        resolved by going back to the source or is permanent.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   heat_wave_threshold_definition:
+    title: Heat-Wave Threshold Definition
     range: HeatWaveThresholdDefinitionEnum
     description: >-
       For heat-wave flags, the definition of the threshold (absolute,
       percentile-local, percentile-climatological, NWS advisory, ETCCDI).
+    examples:
+    - value: "percentile_local"
+      description: 95th percentile of the local Tmax distribution
+    see_also:
+    - https://en.wikipedia.org/wiki/Heat_wave
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        At least seven heat-wave definitions are in active use and none are
+        convertible after the fact; two definitions can disagree on most
+        flagged days, which changes both the exposure series and the
+        resulting mortality estimate.
+      explanation: >-
+        There is no universal definition of a heat wave. "Above 35 °C" and
+        "hotter than 95 % of days usually are here" are both in use and flag
+        different days — this field records which rulebook was applied.
   heat_wave_threshold_definition_missing_reason:
+    title: Reason Threshold Definition Is Missing
     range: MissingReasonEnum
     description: Reason `heat_wave_threshold_definition` is null.
+    examples:
+    - value: "not_applicable"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "this record is not a heat-wave flag, so no threshold
+        definition exists" from "a definition was used but not captured" —
+        the first is benign, the second makes the flag unusable.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   heat_wave_threshold_specifier:
+    title: Heat-Wave Threshold Specifier
     range: string
     description: >-
       Free-form specifier paired with `heat_wave_threshold_definition` to
       capture the concrete threshold values (e.g. `"35_Cel"` for an absolute
       threshold, `"95"` for the 95th percentile).
+    examples:
+    - value: "95"
+      description: percentile, paired with heat_wave_threshold_definition = percentile_local
+    - value: "35_Cel"
+      description: absolute threshold, paired with heat_wave_threshold_definition = absolute
 
     annotations:
       tier: optional
+      justification: >-
+        The definition names the rule but not the number: two records both
+        marked "percentile_local" are still incomparable unless the concrete
+        value (95th vs 90th percentile, 35 vs 40 °C) is recorded here.
+      explanation: >-
+        The threshold definition is the type of cutoff; this is the actual
+        number plugged into it — like knowing a speed limit exists versus
+        knowing it is 50.
   heat_wave_min_consecutive_days:
+    title: Heat-Wave Minimum Consecutive Days
     range: integer
     description: >-
       Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3).
       Changes which days are flagged.
+    examples:
+    - value: "3"
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        A 2-day rule and a 3-day rule flag different sets of days from the
+        same temperature series, changing which person-days count as
+        heat-wave-exposed and therefore the effect estimates built on them.
+      explanation: >-
+        A heat wave means it stays hot for several days in a row — but how
+        many days count as "several" is a choice (usually 2 or 3), and the
+        choice changes which days get flagged.
   heat_wave_min_consecutive_days_missing_reason:
+    title: Reason Consecutive Days Is Missing
     range: MissingReasonEnum
     description: Reason `heat_wave_min_consecutive_days` is null.
+    examples:
+    - value: "not_applicable"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "not a heat-wave flag, so no consecutive-days rule
+        applies" from "a rule was applied but not recorded" — only the
+        latter undermines reuse of the flag.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   percentile_reference_period_start:
+    title: Percentile Reference Period Start
     range: date
     description: >-
       Start of the reference distribution used for percentile-based
       thresholds. Mandatory for percentile metrics: "95th percentile" over
       2000-2019 gives a different threshold than 1980-2010, and this delta
       is real.
+    examples:
+    - value: "1991-01-01"
+      description: start of the 1991-2020 climate-normal baseline
+    see_also:
+    - https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        In a warming climate a "95th percentile" computed over 1971-2000 is
+        a materially different threshold than one over 2000-2019; leaving
+        the baseline unstated makes percentile-based studies non-comparable
+        and non-reproducible.
+      explanation: >-
+        "Unusually hot" means hot compared to some stretch of past years.
+        Which years you compare against changes what counts as unusual —
+        this field records where that stretch begins.
   percentile_reference_period_start_missing_reason:
+    title: Reason Period Start Is Missing
     range: MissingReasonEnum
     description: Reason `percentile_reference_period_start` is null.
+    examples:
+    - value: "not_applicable"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "not a percentile-based metric, so no baseline exists"
+        from "a baseline was used but not captured" — without the reason,
+        a consumer cannot tell a benign blank from a blocking one.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   percentile_reference_period_end:
+    title: Percentile Reference Period End
     range: date
     description: End of the reference distribution.
+    examples:
+    - value: "2020-12-31"
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Together with the start date this pins down the reference
+        distribution; an end date that includes or excludes the most recent
+        warm years shifts the percentile threshold, so an open-ended
+        baseline is not reproducible.
+      explanation: >-
+        The other end of the stretch of past years used as the comparison —
+        start and end together say exactly which years define "normal".
   percentile_reference_period_end_missing_reason:
+    title: Reason Period End Is Missing
     range: MissingReasonEnum
     description: Reason `percentile_reference_period_end` is null.
+    examples:
+    - value: "not_applicable"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "no percentile baseline applies to this metric" from
+        "the baseline end was used but never recorded" — deciding whether
+        the threshold is merely undocumented or genuinely absent.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   percentile_reference_geographic_scope:
+    title: Percentile Reference Geographic Scope
     range: string
     description: >-
       Geographic scope over which the reference distribution was computed.
       One of `local_tract`, `local_county`, `local_climate_region`,
       `national`.
+    examples:
+    - value: "local_county"
+      description: reference distribution computed over Maricopa County
 
     annotations:
       tier: recommended
+      justification: >-
+        A 95th percentile computed over one county and one computed over the
+        whole nation are very different thresholds; the scope is what
+        encodes "hot for here", and without it the threshold cannot be
+        reproduced or compared across studies.
+      explanation: >-
+        "Unusually hot" can mean hot compared to what is normal HERE, or
+        compared to the whole country. This field says which area's history
+        the comparison was made against.
   percentile_reference_geographic_scope_missing_reason:
+    title: Reason Geographic Scope Is Missing
     range: MissingReasonEnum
     description: Reason `percentile_reference_geographic_scope` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "the source never stated its baseline geography" from
+        "it was not extracted" — telling consumers whether the ambiguity is
+        recoverable from the source or permanent.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   percentile_reference_seasonal_window:
+    title: Percentile Reference Seasonal Window
     range: string
     description: >-
       Seasonal window over which the reference was computed. One of
       `annual`, `warm_season_may_sep`, `calendar_month`.
+    examples:
+    - value: "warm_season_may_sep"
 
     annotations:
       tier: recommended
+      justification: >-
+        An annual reference distribution includes winter days and drags the
+        95th percentile far below a warm-season-only percentile; two
+        thresholds that sound identical diverge substantially when the
+        seasonal window is left unstated.
+      explanation: >-
+        Whether "normal" includes the whole year or only the summer months
+        changes what counts as unusually hot — a day that is extreme against
+        summer-only history may be unremarkable against the full year.
   percentile_reference_seasonal_window_missing_reason:
+    title: Reason Seasonal Window Is Missing
     range: MissingReasonEnum
     description: Reason `percentile_reference_seasonal_window` is null.
+    examples:
+    - value: "not_provided_by_source"
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "the source never stated its seasonal window" from
+        "it was not extracted" — so consumers know whether asking the
+        producer could still recover it.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
   metric_temporal_aggregation_rule:
+    title: Metric Temporal Aggregation Rule
     range: string
     description: >-
       For heat-wave flags, how multi-day exposures are stamped on individual
       days (e.g. `first_day_of_event` / `each_day_of_event` /
       `last_day_of_event`).
+    examples:
+    - value: "each_day_of_event"
 
     annotations:
       tier: recommended
+      justification: >-
+        Stamping a five-day event only on its first day versus on every day
+        changes which person-days count as exposed, directly altering effect
+        estimates in daily time-series and case-crossover designs.
+      explanation: >-
+        A heat wave spans several days but health records are kept day by
+        day; this says which calendar days actually get the "heat wave"
+        label — just the first day, every day, or the last.
   metric_temporal_aggregation_rule_missing_reason:
+    title: Reason Aggregation Rule Is Missing
     range: MissingReasonEnum
     description: Reason `metric_temporal_aggregation_rule` is null.
+    examples:
+    - value: "available_but_not_extracted"
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "no multi-day stamping rule applies to this metric"
+        from "a rule was applied but never captured" — only the latter makes
+        the daily exposure series ambiguous.
+      explanation: >-
+        A blank field is ambiguous: it could mean the thing does not exist,
+        or that nobody wrote it down. This companion field says which one
+        it is.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -352,6 +739,7 @@ slots:
 enums:
 
   HeatMetricFamilyEnum:
+    title: Heat Metric Family
     description: Family of heat metric.
     permissible_values:
       tmax:
@@ -380,9 +768,14 @@ enums:
         description: Cooling degree-days.
 
   EquationVariantEnum:
+    title: Equation Variant
     description: >-
       Equation variant for a derived heat metric. The applicable subset
       depends on the `heat_metric_family`.
+    see_also:
+    - https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature
+    - https://www.weather.gov/safety/heat-index
+    - http://www.utci.org/
     permissible_values:
       liljegren_2008:
         description: WBGT — Liljegren et al. 2008 outdoor formulation.
@@ -398,6 +791,7 @@ enums:
         description: UTCI — Bröde et al. 2012 polynomial approximation.
 
   IndoorOutdoorEnum:
+    title: Indoor or Outdoor Regime
     description: Indoor / outdoor regime for derived heat metrics.
     permissible_values:
       outdoor:
@@ -412,6 +806,7 @@ enums:
         description: Mixed indoor / outdoor, regime unspecified.
 
   SolarRadiationBasisEnum:
+    title: Solar Radiation Basis
     description: Basis used for the solar-radiation input to a heat metric.
     permissible_values:
       surface_downwelling_shortwave_flux:
@@ -422,6 +817,7 @@ enums:
         description: Solar radiation input not available; metric falls back.
 
   HeatWaveThresholdDefinitionEnum:
+    title: Heat-Wave Threshold Definition
     description: >-
       How the heat-wave threshold is defined. Companion slot
       `heat_wave_threshold_specifier` captures the concrete value.

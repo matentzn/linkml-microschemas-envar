@@ -3,9 +3,10 @@ name: envar-uncertainty
 title: EnVar Microschemas — Uncertainty and Quality
 version: "0.1.0"
 description: |-
-  Uncertainty and quality slots: per-value uncertainty field references,
-  uncertainty type and units, model aggregate uncertainty, quality-flag
-  pointers, missing-data handling, data completeness. Covers §8 of
+  Uncertainty and quality slots: per-value uncertainty type and units, model
+  aggregate uncertainty, quality-flag vocabulary, missing-data handling, data
+  completeness. The names of the uncertainty / QA-flag columns in the
+  companion data file live in envar_layout. Covers §8 of
   envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
@@ -26,24 +27,24 @@ imports:
 classes:
 
   Uncertainty:
+    title: Uncertainty and Quality
     description: >-
       Uncertainty and quality character of a value series: per-value
-      uncertainty column, uncertainty type / units, model-aggregate
-      uncertainty summary, quality flag pointers, missing-data handling, and
-      data completeness. One per record; slots may be null with reasons.
+      uncertainty type / units, model-aggregate uncertainty summary, quality
+      flag vocabulary, missing-data handling, and data completeness. The
+      uncertainty / QA-flag column bindings live in DataLayout (see
+      envar_layout). One per record; slots may be null with reasons.
+    see_also:
+    - https://en.wikipedia.org/wiki/Uncertainty_quantification
     annotations:
       domain_of_use: environmental_exposure
     slots:
-    - per_value_uncertainty_field_name
-    - per_value_uncertainty_field_name_missing_reason
     - per_value_uncertainty_type
     - per_value_uncertainty_type_missing_reason
     - per_value_uncertainty_units_ucum
     - per_value_uncertainty_units_ucum_missing_reason
     - model_aggregate_uncertainty
     - model_aggregate_uncertainty_missing_reason
-    - quality_flag_field_name
-    - quality_flag_field_name_missing_reason
     - quality_flag_vocabulary
     - quality_flag_vocabulary_missing_reason
     - missing_data_handling_method
@@ -52,19 +53,62 @@ classes:
     - data_completeness_pct_missing_reason
 
   ModelAggregateUncertainty:
+    title: Model Aggregate Uncertainty
     description: >-
       Whole-model uncertainty summary — cross-validation metrics and the
       reference where they are reported. Inlined on `model_aggregate_uncertainty`.
+    see_also:
+    - https://en.wikipedia.org/wiki/Root_mean_square_deviation
+    - https://en.wikipedia.org/wiki/Coefficient_of_determination
     attributes:
       cv_r2:
+        title: Cross-Validated R²
         range: float
         description: Cross-validated R² for the model as a whole.
+        examples:
+        - value: "0.86"
+          description: Di et al. ensemble PM2.5
+        annotations:
+          justification: >-
+            The single most comparable headline number for model skill.
+            Without it a consumer cannot weigh this product against an
+            alternative, or decide whether the model is good enough for the
+            health analysis at hand.
+          explanation: >-
+            A 0-to-1 score of how well the model's predictions matched
+            reality on data it was not trained on — 1 is perfect, 0 is no
+            better than always guessing the average. "Cross-validated"
+            means the test used held-out data, so the score is honest.
       cv_rmse:
+        title: Cross-Validated RMSE
         range: float
         description: Cross-validated RMSE for the model as a whole.
+        annotations:
+          justification: >-
+            R² alone hides how large the errors actually are. RMSE states
+            the typical error in the value's own units, which is what
+            determines whether model error is negligible or fatal for a
+            given effect size.
+          explanation: >-
+            Root-mean-square error — the typical size of the model's
+            mistakes, in the same units as the value itself (e.g. °C or
+            µg/m³). Smaller is better.
       reported_in:
+        title: Reporting Reference
         range: string
         description: DOI / citation where the aggregate uncertainty is reported.
+        examples:
+        - value: "10.1016/j.envint.2019.104909"
+          description: DOI of the methods paper reporting the metrics
+        annotations:
+          justification: >-
+            Uncertainty numbers copied into a sidecar are only as
+            trustworthy as their source. Without the reference the metrics
+            cannot be verified, attributed, or updated when the producer
+            revises them.
+          explanation: >-
+            Where these numbers come from — the paper or report (ideally a
+            DOI) so a reader can check them at the source.
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -72,114 +116,279 @@ classes:
 
 slots:
 
-  per_value_uncertainty_field_name:
-    range: string
-    description: >-
-      Name of the column carrying per-value uncertainty (e.g. `pm_se`).
-
-    annotations:
-      tier: recommended
-  per_value_uncertainty_field_name_missing_reason:
-    range: MissingReasonEnum
-    description: Reason `per_value_uncertainty_field_name` is null.
-
-    annotations:
-      tier: optional
   per_value_uncertainty_type:
+    title: Per-Value Uncertainty Type
     range: UncertaintyTypeEnum
-    description: Kind of per-value uncertainty captured in the column.
+    description: >-
+      Kind of per-value uncertainty captured in the column named by
+      `DataLayout.value_uncertainty_column` (see envar_layout).
+    examples:
+    - value: standard_error
+      description: Daymet daily Tmax reports a per-value standard error.
+    - value: prediction_interval
+      description: ACAG satellite PM2.5 reports a per-value prediction interval.
+    see_also:
+    - https://en.wikipedia.org/wiki/Standard_error
+    - https://en.wikipedia.org/wiki/Prediction_interval
 
     annotations:
       tier: recommended
+      justification: >-
+        A "±" number means nothing until you know what kind of number it is: a
+        standard error, a 95 % prediction interval, and an ensemble spread are
+        not interchangeable and cannot be pooled or propagated the same way.
+        Without the type, downstream code either mishandles the uncertainty or
+        drops it, so exposure measurement error goes unaccounted for and
+        health-effect estimates are biased, usually toward the null.
+      explanation: >-
+        Every estimated value comes with a "how sure are we" number, but there
+        are several different kinds. This says which kind you are looking at —
+        for example a standard error (a ± number saying how far off the
+        estimate could plausibly be) versus a prediction interval (a range the
+        true value should fall inside, say 95 times out of 100).
   per_value_uncertainty_type_missing_reason:
+    title: Reason Uncertainty Type Is Missing
     range: MissingReasonEnum
     description: Reason `per_value_uncertainty_type` is null.
+    examples:
+    - value: not_provided_by_source
+      description: The source product publishes no per-value uncertainty.
 
     annotations:
       tier: optional
+      justification: >-
+        Records the difference between "we know the source has no per-value
+        uncertainty" and "someone forgot to fill this in". Without the reason,
+        a blank uncertainty type is ambiguous and a validator cannot tell an
+        honest gap from an oversight, so quality-completeness reporting is
+        unreliable.
+      explanation: >-
+        If the uncertainty-type field is left empty, this simply says why —
+        for instance the original dataset never published one. It turns a
+        confusing blank into an explicit, honest "not available, and here is
+        the reason".
   per_value_uncertainty_units_ucum:
+    title: Uncertainty Units (UCUM)
     range: string
     description: >-
       Units of the per-value uncertainty in UCUM syntax. Usually the same as
       the value units.
+    examples:
+    - value: Cel
+      description: Standard error of a daily Tmax value, in degrees Celsius.
+    see_also:
+    - https://ucum.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        An uncertainty number is meaningless without its units: a per-value
+        error of "2" is 2 °C or 2 K depending on this field, and a mismatch
+        between value units and uncertainty units silently corrupts any error
+        propagation into the health analysis.
+      explanation: >-
+        This says what the uncertainty is measured in — degrees Celsius,
+        micrograms per cubic metre, and so on — written in a standard code
+        (UCUM) that computers read the same way every time. Usually it matches
+        the units of the value itself.
   per_value_uncertainty_units_ucum_missing_reason:
+    title: Reason Uncertainty Units Are Missing
     range: MissingReasonEnum
     description: Reason `per_value_uncertainty_units_ucum` is null.
+    examples:
+    - value: not_applicable
+      description: No per-value uncertainty column exists, so units do not apply.
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "there is no uncertainty column, so units genuinely do
+        not apply" from an accidental omission. Without the reason a blank
+        units field is ambiguous and completeness checks cannot tell a
+        legitimate not-applicable from a missing entry.
+      explanation: >-
+        If the uncertainty-units field is blank, this explains why — often
+        because there is no uncertainty column at all, so there is nothing to
+        put units on. It stops a reader from wondering whether the units were
+        simply forgotten.
   model_aggregate_uncertainty:
+    title: Model Aggregate Uncertainty
     range: ModelAggregateUncertainty
     inlined: true
     description: >-
       Summary statistics for the model as a whole — cross-validation metrics
       and where they are reported.
+    examples:
+    - object:
+        cv_r2: 0.90
+        reported_in: "10.1021/acs.est.1c05309"
+      description: Cross-validated R² for ACAG satellite PM2.5 and its reporting DOI.
+    see_also:
+    - https://en.wikipedia.org/wiki/Cross-validation_(statistics)
 
     annotations:
       tier: recommended
+      justification: >-
+        Per-value uncertainty is often absent, so the whole-model
+        cross-validation summary (R², RMSE) is frequently the only quantitative
+        handle on how accurate the product is. Without it an analyst cannot
+        judge whether the exposure estimates are precise enough for the health
+        question, and cannot compare the reliability of two products.
+      explanation: >-
+        A report card for how well the model predicts reality overall, checked
+        by holding some data back and seeing how close its guesses came — for
+        example an R² near 1 means the model tracks the true values closely. It
+        also records where those scores were published.
   model_aggregate_uncertainty_missing_reason:
+    title: Reason Aggregate Uncertainty Is Missing
     range: MissingReasonEnum
     description: Reason `model_aggregate_uncertainty` is null.
+    examples:
+    - value: not_provided_by_source
+      description: The producer reports no whole-model cross-validation metrics.
 
     annotations:
       tier: optional
-  quality_flag_field_name:
-    range: string
-    description: >-
-      Name of any per-value QA flag column. CF `ancillary_variables` analogue.
-
-    annotations:
-      tier: optional
-  quality_flag_field_name_missing_reason:
-    range: MissingReasonEnum
-    description: Reason `quality_flag_field_name` is null.
-
-    annotations:
-      tier: optional
+      justification: >-
+        Separates "the producer published no cross-validation metrics" from a
+        forgotten entry. Without the reason, a missing model-accuracy summary
+        looks like a data-entry lapse, and reviewers cannot tell whether the
+        information was ever available.
+      explanation: >-
+        When the model-accuracy summary is missing, this says why — usually
+        because the people who made the dataset never reported those scores. It
+        makes the absence deliberate and explainable rather than a mystery
+        blank.
   quality_flag_vocabulary:
+    title: Quality Flag Vocabulary
     range: string
     description: >-
       Reference to the QA flag vocabulary (e.g. an EPA AQS qualifier-code
-      list).
+      list) used by the column named in `DataLayout.quality_flag_column`
+      (see envar_layout).
+    examples:
+    - value: "EPA AQS qualifier codes"
+      description: Flag vocabulary for monitor-derived series; gridded products often have none.
 
     annotations:
       tier: optional
+      justification: >-
+        QA flags (e.g. "estimated", "below detection limit", "instrument
+        malfunction") are only interpretable against the code list that defines
+        them; without naming the vocabulary, a flagged value cannot be
+        correctly filtered or trusted, so suspect measurements may enter the
+        analysis unnoticed.
+      explanation: >-
+        Some datasets tag individual values with short quality codes — think of
+        the little footnote letters next to numbers in a table. This points to
+        the key that explains what each code means, so you know which readings
+        to trust or set aside.
   quality_flag_vocabulary_missing_reason:
+    title: Reason Quality Flag Vocabulary Is Missing
     range: MissingReasonEnum
     description: Reason `quality_flag_vocabulary` is null.
+    examples:
+    - value: not_provided_by_source
+      description: Daymet publishes no QA-flag column, so no vocabulary exists.
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "this product has no QA flags at all" (common for gridded
+        data) from an omission. Without the reason, an empty vocabulary field
+        is ambiguous and a completeness check cannot tell an inapplicable
+        entry from a missing one.
+      explanation: >-
+        If there is no quality-code key listed, this says why — often because
+        the dataset simply does not use quality codes. It turns a blank into a
+        clear statement rather than leaving the reader guessing.
   missing_data_handling_method:
+    title: Missing Data Handling Method
     range: MissingDataHandlingEnum
     description: >-
       How the source handles missing values (e.g. how Daymet handles
       snow-covered pixels).
+    examples:
+    - value: spatiotemporal_interpolation
+      description: Daymet fills missing cells by spatiotemporal interpolation.
+    see_also:
+    - https://daymet.ornl.gov/
 
     annotations:
       tier: recommended
+      justification: >-
+        How gaps were filled is often invisible downstream: an interpolated
+        value looks identical to a measured one, so without this field an
+        analyst overstates coverage and treats imputed exposures as if they
+        were observed, biasing associations in unknown directions. It is the
+        difference between apparent and real completeness.
+      explanation: >-
+        Real data has holes — a cloud blocks a satellite, snow covers a sensor.
+        This says what the dataset did about those holes: leave them empty,
+        guess from nearby days and places, copy the last known value, and so
+        on. Filled-in numbers can look just like real measurements, so it
+        matters to know which is which.
   missing_data_handling_method_missing_reason:
+    title: Reason Handling Method Is Missing
     range: MissingReasonEnum
     description: Reason `missing_data_handling_method` is null.
+    examples:
+    - value: not_provided_by_source
+      description: The producer does not document its missing-data handling.
 
     annotations:
       tier: optional
+      justification: >-
+        Separates "the producer never documented how gaps were handled" from an
+        entry someone forgot. Without the reason, a blank handling method is
+        ambiguous and an analyst cannot judge whether the gap-filling behaviour
+        is unknown or simply unrecorded here.
+      explanation: >-
+        When the gap-handling method is left empty, this explains why — often
+        because the original dataset never said how it dealt with missing
+        values. It makes the unknown explicit instead of a silent blank.
   data_completeness_pct:
+    title: Data Completeness Percentage
     range: float
     description: >-
       Percent of (location, date) cells in the extracted window that have a
       non-missing value. 0-100.
+    examples:
+    - value: "100"
+      description: Every (location, date) cell in the extracted window has a value.
 
     annotations:
       tier: recommended
+      justification: >-
+        A quantitative handle on how much of the requested exposure window is
+        actually populated. A series that is 60 % complete supports very
+        different inferences from one that is 100 % complete; without this
+        number, sparse coverage is hidden and averages or exposure windows are
+        computed over gaps as if they were full, biasing the health analysis.
+      explanation: >-
+        Out of all the days and places you asked about, this is the percentage
+        that actually have a value — 100 means nothing is missing, 60 means
+        four in ten slots are blank. It is a quick honesty check on how full
+        the dataset really is.
   data_completeness_pct_missing_reason:
+    title: Reason Data Completeness Is Missing
     range: MissingReasonEnum
     description: Reason `data_completeness_pct` is null.
+    examples:
+    - value: available_but_not_extracted
+      description: Completeness could be computed from the output but the pipeline does not yet do so.
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "completeness is genuinely uncomputable" from "it could
+        be derived but the pipeline does not yet do so" — a distinction that
+        tells a data steward whether the gap is a limitation of the source or a
+        fixable pipeline shortfall.
+      explanation: >-
+        If the completeness percentage is missing, this says why — for example
+        the number could be worked out from the data but the software has not
+        been set up to calculate it yet. It flags the blank as a known to-do
+        rather than an impossibility.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -188,6 +397,7 @@ slots:
 enums:
 
   UncertaintyTypeEnum:
+    title: Uncertainty Type
     description: Kind of per-value uncertainty.
     permissible_values:
       standard_error:
@@ -202,6 +412,7 @@ enums:
         description: Standard deviation from Monte Carlo sampling.
 
   MissingDataHandlingEnum:
+    title: Missing Data Handling
     description: How the source handles missing values.
     permissible_values:
       none:

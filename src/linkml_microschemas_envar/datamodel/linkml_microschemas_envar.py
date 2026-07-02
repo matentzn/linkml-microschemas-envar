@@ -1,5 +1,5 @@
 # Auto generated from linkml_microschemas_envar.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-06-26T18:05:21
+# Generation date: 2026-07-02T18:26:19
 # Schema: linkml-microschemas-envar
 #
 # id: https://w3id.org/linkml/microschemas/envar
@@ -8,11 +8,12 @@
 #   and the surrounding provenance metadata needed to load them into OMOP
 #   external_exposure with full reproducibility.
 #
-#   This umbrella schema imports the thirteen modules that together define the
+#   This umbrella schema imports the fourteen modules that together define the
 #   EnVar metadata layer:
 #
 #     - envar_common         shared enums and slots
 #     - envar_variable       variable identity (CF, UCUM, target-vocab concept, ECTO, ENVO)
+#     - envar_layout         data layout (column bindings into the companion data file)
 #     - envar_spatial        spatial reference, extraction
 #     - envar_temporal       temporal reference, day-boundary convention
 #     - envar_source         upstream source dataset
@@ -86,6 +87,7 @@ version = "0.1.0"
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 ENVAR = CurieNamespace('envar', 'https://w3id.org/linkml/microschemas/envar/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
+MSPROFILE = CurieNamespace('msprofile', 'https://w3id.org/linkml/linkml-microschema-profile/')
 PROV = CurieNamespace('prov', 'http://www.w3.org/ns/prov#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 DEFAULT_ = ENVAR
@@ -180,6 +182,69 @@ class VariableIdentity(YAMLRoot):
 
         if self.value_range_plausible_max is not None and not isinstance(self.value_range_plausible_max, float):
             self.value_range_plausible_max = float(self.value_range_plausible_max)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class DataLayout(YAMLRoot):
+    """
+    How the companion data file (CSV / parquet) is laid out and how this record's values are located inside it.
+    Separates the file-layout concern from variable identity: `VariableIdentity.variable_name` says what the variable
+    is; `DataLayout` says which column (and, for long format, which rows) carry its values. One per record.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = ENVAR["DataLayout"]
+    class_class_curie: ClassVar[str] = "envar:DataLayout"
+    class_name: ClassVar[str] = "DataLayout"
+    class_model_uri: ClassVar[URIRef] = ENVAR.DataLayout
+
+    table_orientation: Union[str, "TableOrientationEnum"] = None
+    value_column: str = None
+    variable_column: Optional[str] = None
+    variable_key: Optional[str] = None
+    subject_column: Optional[str] = None
+    time_column: Optional[str] = None
+    value_uncertainty_column: Optional[str] = None
+    value_uncertainty_column_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    quality_flag_column: Optional[str] = None
+    quality_flag_column_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.table_orientation):
+            self.MissingRequiredField("table_orientation")
+        if not isinstance(self.table_orientation, TableOrientationEnum):
+            self.table_orientation = TableOrientationEnum(self.table_orientation)
+
+        if self._is_empty(self.value_column):
+            self.MissingRequiredField("value_column")
+        if not isinstance(self.value_column, str):
+            self.value_column = str(self.value_column)
+
+        if self.variable_column is not None and not isinstance(self.variable_column, str):
+            self.variable_column = str(self.variable_column)
+
+        if self.variable_key is not None and not isinstance(self.variable_key, str):
+            self.variable_key = str(self.variable_key)
+
+        if self.subject_column is not None and not isinstance(self.subject_column, str):
+            self.subject_column = str(self.subject_column)
+
+        if self.time_column is not None and not isinstance(self.time_column, str):
+            self.time_column = str(self.time_column)
+
+        if self.value_uncertainty_column is not None and not isinstance(self.value_uncertainty_column, str):
+            self.value_uncertainty_column = str(self.value_uncertainty_column)
+
+        if self.value_uncertainty_column_missing_reason is not None and not isinstance(self.value_uncertainty_column_missing_reason, MissingReasonEnum):
+            self.value_uncertainty_column_missing_reason = MissingReasonEnum(self.value_uncertainty_column_missing_reason)
+
+        if self.quality_flag_column is not None and not isinstance(self.quality_flag_column, str):
+            self.quality_flag_column = str(self.quality_flag_column)
+
+        if self.quality_flag_column_missing_reason is not None and not isinstance(self.quality_flag_column_missing_reason, MissingReasonEnum):
+            self.quality_flag_column_missing_reason = MissingReasonEnum(self.quality_flag_column_missing_reason)
 
         super().__post_init__(**kwargs)
 
@@ -427,8 +492,6 @@ class ExposureModel(YAMLRoot):
     exposure_model_cross_validation_r2: Optional[float] = None
     exposure_model_cross_validation_r2_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     exposure_model_known_biases: Optional[Union[str, list[str]]] = empty_list()
-    exposure_model_uncertainty_field: Optional[str] = None
-    exposure_model_uncertainty_field_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     exposure_model_ensemble_member_count: Optional[int] = None
     exposure_model_ensemble_member_count_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     bias_correction_applied: Optional[Union[str, "BiasCorrectionAppliedEnum"]] = None
@@ -460,12 +523,6 @@ class ExposureModel(YAMLRoot):
             self.exposure_model_known_biases = [self.exposure_model_known_biases] if self.exposure_model_known_biases is not None else []
         self.exposure_model_known_biases = [v if isinstance(v, str) else str(v) for v in self.exposure_model_known_biases]
 
-        if self.exposure_model_uncertainty_field is not None and not isinstance(self.exposure_model_uncertainty_field, str):
-            self.exposure_model_uncertainty_field = str(self.exposure_model_uncertainty_field)
-
-        if self.exposure_model_uncertainty_field_missing_reason is not None and not isinstance(self.exposure_model_uncertainty_field_missing_reason, MissingReasonEnum):
-            self.exposure_model_uncertainty_field_missing_reason = MissingReasonEnum(self.exposure_model_uncertainty_field_missing_reason)
-
         if self.exposure_model_ensemble_member_count is not None and not isinstance(self.exposure_model_ensemble_member_count, int):
             self.exposure_model_ensemble_member_count = int(self.exposure_model_ensemble_member_count)
 
@@ -484,9 +541,9 @@ class ExposureModel(YAMLRoot):
 @dataclass(repr=False)
 class Uncertainty(YAMLRoot):
     """
-    Uncertainty and quality character of a value series: per-value uncertainty column, uncertainty type / units,
-    model-aggregate uncertainty summary, quality flag pointers, missing-data handling, and data completeness. One per
-    record; slots may be null with reasons.
+    Uncertainty and quality character of a value series: per-value uncertainty type / units, model-aggregate
+    uncertainty summary, quality flag vocabulary, missing-data handling, and data completeness. The uncertainty /
+    QA-flag column bindings live in DataLayout (see envar_layout). One per record; slots may be null with reasons.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -495,16 +552,12 @@ class Uncertainty(YAMLRoot):
     class_name: ClassVar[str] = "Uncertainty"
     class_model_uri: ClassVar[URIRef] = ENVAR.Uncertainty
 
-    per_value_uncertainty_field_name: Optional[str] = None
-    per_value_uncertainty_field_name_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     per_value_uncertainty_type: Optional[Union[str, "UncertaintyTypeEnum"]] = None
     per_value_uncertainty_type_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     per_value_uncertainty_units_ucum: Optional[str] = None
     per_value_uncertainty_units_ucum_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     model_aggregate_uncertainty: Optional[Union[dict, "ModelAggregateUncertainty"]] = None
     model_aggregate_uncertainty_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    quality_flag_field_name: Optional[str] = None
-    quality_flag_field_name_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     quality_flag_vocabulary: Optional[str] = None
     quality_flag_vocabulary_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     missing_data_handling_method: Optional[Union[str, "MissingDataHandlingEnum"]] = None
@@ -513,12 +566,6 @@ class Uncertainty(YAMLRoot):
     data_completeness_pct_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self.per_value_uncertainty_field_name is not None and not isinstance(self.per_value_uncertainty_field_name, str):
-            self.per_value_uncertainty_field_name = str(self.per_value_uncertainty_field_name)
-
-        if self.per_value_uncertainty_field_name_missing_reason is not None and not isinstance(self.per_value_uncertainty_field_name_missing_reason, MissingReasonEnum):
-            self.per_value_uncertainty_field_name_missing_reason = MissingReasonEnum(self.per_value_uncertainty_field_name_missing_reason)
-
         if self.per_value_uncertainty_type is not None and not isinstance(self.per_value_uncertainty_type, UncertaintyTypeEnum):
             self.per_value_uncertainty_type = UncertaintyTypeEnum(self.per_value_uncertainty_type)
 
@@ -536,12 +583,6 @@ class Uncertainty(YAMLRoot):
 
         if self.model_aggregate_uncertainty_missing_reason is not None and not isinstance(self.model_aggregate_uncertainty_missing_reason, MissingReasonEnum):
             self.model_aggregate_uncertainty_missing_reason = MissingReasonEnum(self.model_aggregate_uncertainty_missing_reason)
-
-        if self.quality_flag_field_name is not None and not isinstance(self.quality_flag_field_name, str):
-            self.quality_flag_field_name = str(self.quality_flag_field_name)
-
-        if self.quality_flag_field_name_missing_reason is not None and not isinstance(self.quality_flag_field_name_missing_reason, MissingReasonEnum):
-            self.quality_flag_field_name_missing_reason = MissingReasonEnum(self.quality_flag_field_name_missing_reason)
 
         if self.quality_flag_vocabulary is not None and not isinstance(self.quality_flag_vocabulary, str):
             self.quality_flag_vocabulary = str(self.quality_flag_vocabulary)
@@ -1070,8 +1111,8 @@ class DepositMetadata(YAMLRoot):
 class EnvironmentalExposureRecord(YAMLRoot):
     """
     A single environmental-exposure record sidecar: the complete metadata graph that travels alongside a value (or
-    value series) emitted by an upstream tool. Composes variable identity, spatial / temporal reference, source
-    dataset, exposure model, uncertainty, linkage, tool run, provenance chain, optional derived-heat-metric
+    value series) emitted by an upstream tool. Composes variable identity, data layout, spatial / temporal reference,
+    source dataset, exposure model, uncertainty, linkage, tool run, provenance chain, optional derived-heat-metric
     methodology, health-data-layer linkage hooks, and FAIR-deposit metadata.
     """
     _inherited_slots: ClassVar[list[str]] = []
@@ -1082,19 +1123,20 @@ class EnvironmentalExposureRecord(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = ENVAR.EnvironmentalExposureRecord
 
     subject: str = None
-    observation_type: Union[dict, VariableIdentity] = None
-    location: Union[dict, SpatialReference] = None
-    temporality: Union[dict, TemporalReference] = None
-    methodology: Union[dict, ExposureModel] = None
+    variable_identity: Union[dict, VariableIdentity] = None
+    spatial_reference: Union[dict, SpatialReference] = None
+    temporal_reference: Union[dict, TemporalReference] = None
+    exposure_model: Union[dict, ExposureModel] = None
+    data_layout: Union[dict, DataLayout] = None
+    source_dataset: Union[dict, SourceDataset] = None
+    tool_run: Union[dict, ToolRun] = None
+    linkage_method: Union[dict, LinkageMethod] = None
     schema_version: str = None
     provenance_id: str = None
     phi_status: Union[str, "PhiStatusEnum"] = None
-    source_dataset: Union[dict, SourceDataset] = None
-    linkage_method: Union[dict, LinkageMethod] = None
-    tool_run: Union[dict, ToolRun] = None
     uncertainty: Optional[Union[dict, Uncertainty]] = None
-    provenance_chain: Optional[Union[dict, ProvenanceChain]] = None
     derived_heat_metric: Optional[Union[dict, DerivedHeatMetric]] = None
+    provenance_chain: Optional[Union[dict, ProvenanceChain]] = None
     health_layer_linkage: Optional[Union[dict, HealthLayerLinkage]] = None
     deposit_metadata: Optional[Union[dict, DepositMetadata]] = None
 
@@ -1104,25 +1146,45 @@ class EnvironmentalExposureRecord(YAMLRoot):
         if not isinstance(self.subject, str):
             self.subject = str(self.subject)
 
-        if self._is_empty(self.observation_type):
-            self.MissingRequiredField("observation_type")
-        if not isinstance(self.observation_type, VariableIdentity):
-            self.observation_type = VariableIdentity(**as_dict(self.observation_type))
+        if self._is_empty(self.variable_identity):
+            self.MissingRequiredField("variable_identity")
+        if not isinstance(self.variable_identity, VariableIdentity):
+            self.variable_identity = VariableIdentity(**as_dict(self.variable_identity))
 
-        if self._is_empty(self.location):
-            self.MissingRequiredField("location")
-        if not isinstance(self.location, SpatialReference):
-            self.location = SpatialReference(**as_dict(self.location))
+        if self._is_empty(self.spatial_reference):
+            self.MissingRequiredField("spatial_reference")
+        if not isinstance(self.spatial_reference, SpatialReference):
+            self.spatial_reference = SpatialReference(**as_dict(self.spatial_reference))
 
-        if self._is_empty(self.temporality):
-            self.MissingRequiredField("temporality")
-        if not isinstance(self.temporality, TemporalReference):
-            self.temporality = TemporalReference(**as_dict(self.temporality))
+        if self._is_empty(self.temporal_reference):
+            self.MissingRequiredField("temporal_reference")
+        if not isinstance(self.temporal_reference, TemporalReference):
+            self.temporal_reference = TemporalReference(**as_dict(self.temporal_reference))
 
-        if self._is_empty(self.methodology):
-            self.MissingRequiredField("methodology")
-        if not isinstance(self.methodology, ExposureModel):
-            self.methodology = ExposureModel(**as_dict(self.methodology))
+        if self._is_empty(self.exposure_model):
+            self.MissingRequiredField("exposure_model")
+        if not isinstance(self.exposure_model, ExposureModel):
+            self.exposure_model = ExposureModel(**as_dict(self.exposure_model))
+
+        if self._is_empty(self.data_layout):
+            self.MissingRequiredField("data_layout")
+        if not isinstance(self.data_layout, DataLayout):
+            self.data_layout = DataLayout(**as_dict(self.data_layout))
+
+        if self._is_empty(self.source_dataset):
+            self.MissingRequiredField("source_dataset")
+        if not isinstance(self.source_dataset, SourceDataset):
+            self.source_dataset = SourceDataset(**as_dict(self.source_dataset))
+
+        if self._is_empty(self.tool_run):
+            self.MissingRequiredField("tool_run")
+        if not isinstance(self.tool_run, ToolRun):
+            self.tool_run = ToolRun(**as_dict(self.tool_run))
+
+        if self._is_empty(self.linkage_method):
+            self.MissingRequiredField("linkage_method")
+        if not isinstance(self.linkage_method, LinkageMethod):
+            self.linkage_method = LinkageMethod(**as_dict(self.linkage_method))
 
         if self._is_empty(self.schema_version):
             self.MissingRequiredField("schema_version")
@@ -1139,29 +1201,14 @@ class EnvironmentalExposureRecord(YAMLRoot):
         if not isinstance(self.phi_status, PhiStatusEnum):
             self.phi_status = PhiStatusEnum(self.phi_status)
 
-        if self._is_empty(self.source_dataset):
-            self.MissingRequiredField("source_dataset")
-        if not isinstance(self.source_dataset, SourceDataset):
-            self.source_dataset = SourceDataset(**as_dict(self.source_dataset))
-
-        if self._is_empty(self.linkage_method):
-            self.MissingRequiredField("linkage_method")
-        if not isinstance(self.linkage_method, LinkageMethod):
-            self.linkage_method = LinkageMethod(**as_dict(self.linkage_method))
-
-        if self._is_empty(self.tool_run):
-            self.MissingRequiredField("tool_run")
-        if not isinstance(self.tool_run, ToolRun):
-            self.tool_run = ToolRun(**as_dict(self.tool_run))
-
         if self.uncertainty is not None and not isinstance(self.uncertainty, Uncertainty):
             self.uncertainty = Uncertainty(**as_dict(self.uncertainty))
 
-        if self.provenance_chain is not None and not isinstance(self.provenance_chain, ProvenanceChain):
-            self.provenance_chain = ProvenanceChain(**as_dict(self.provenance_chain))
-
         if self.derived_heat_metric is not None and not isinstance(self.derived_heat_metric, DerivedHeatMetric):
             self.derived_heat_metric = DerivedHeatMetric(**as_dict(self.derived_heat_metric))
+
+        if self.provenance_chain is not None and not isinstance(self.provenance_chain, ProvenanceChain):
+            self.provenance_chain = ProvenanceChain(**as_dict(self.provenance_chain))
 
         if self.health_layer_linkage is not None and not isinstance(self.health_layer_linkage, HealthLayerLinkage):
             self.health_layer_linkage = HealthLayerLinkage(**as_dict(self.health_layer_linkage))
@@ -1186,16 +1233,17 @@ class DailyMaxTemperatureRecord(EnvironmentalExposureRecord):
     class_model_uri: ClassVar[URIRef] = ENVAR.DailyMaxTemperatureRecord
 
     subject: str = None
-    observation_type: Union[dict, VariableIdentity] = None
-    location: Union[dict, SpatialReference] = None
-    temporality: Union[dict, TemporalReference] = None
-    methodology: Union[dict, ExposureModel] = None
+    variable_identity: Union[dict, VariableIdentity] = None
+    spatial_reference: Union[dict, SpatialReference] = None
+    temporal_reference: Union[dict, TemporalReference] = None
+    exposure_model: Union[dict, ExposureModel] = None
+    data_layout: Union[dict, DataLayout] = None
+    source_dataset: Union[dict, SourceDataset] = None
+    tool_run: Union[dict, ToolRun] = None
+    linkage_method: Union[dict, LinkageMethod] = None
     schema_version: str = None
     provenance_id: str = None
     phi_status: Union[str, "PhiStatusEnum"] = None
-    source_dataset: Union[dict, SourceDataset] = None
-    linkage_method: Union[dict, LinkageMethod] = None
-    tool_run: Union[dict, ToolRun] = None
 
 @dataclass(repr=False)
 class DailyMinTemperatureRecord(EnvironmentalExposureRecord):
@@ -1211,16 +1259,17 @@ class DailyMinTemperatureRecord(EnvironmentalExposureRecord):
     class_model_uri: ClassVar[URIRef] = ENVAR.DailyMinTemperatureRecord
 
     subject: str = None
-    observation_type: Union[dict, VariableIdentity] = None
-    location: Union[dict, SpatialReference] = None
-    temporality: Union[dict, TemporalReference] = None
-    methodology: Union[dict, ExposureModel] = None
+    variable_identity: Union[dict, VariableIdentity] = None
+    spatial_reference: Union[dict, SpatialReference] = None
+    temporal_reference: Union[dict, TemporalReference] = None
+    exposure_model: Union[dict, ExposureModel] = None
+    data_layout: Union[dict, DataLayout] = None
+    source_dataset: Union[dict, SourceDataset] = None
+    tool_run: Union[dict, ToolRun] = None
+    linkage_method: Union[dict, LinkageMethod] = None
     schema_version: str = None
     provenance_id: str = None
     phi_status: Union[str, "PhiStatusEnum"] = None
-    source_dataset: Union[dict, SourceDataset] = None
-    linkage_method: Union[dict, LinkageMethod] = None
-    tool_run: Union[dict, ToolRun] = None
 
 @dataclass(repr=False)
 class WetBulbGlobeTemperatureOutdoorRecord(EnvironmentalExposureRecord):
@@ -1237,16 +1286,17 @@ class WetBulbGlobeTemperatureOutdoorRecord(EnvironmentalExposureRecord):
     class_model_uri: ClassVar[URIRef] = ENVAR.WetBulbGlobeTemperatureOutdoorRecord
 
     subject: str = None
-    observation_type: Union[dict, VariableIdentity] = None
-    location: Union[dict, SpatialReference] = None
-    temporality: Union[dict, TemporalReference] = None
-    methodology: Union[dict, ExposureModel] = None
+    variable_identity: Union[dict, VariableIdentity] = None
+    spatial_reference: Union[dict, SpatialReference] = None
+    temporal_reference: Union[dict, TemporalReference] = None
+    exposure_model: Union[dict, ExposureModel] = None
+    data_layout: Union[dict, DataLayout] = None
+    source_dataset: Union[dict, SourceDataset] = None
+    tool_run: Union[dict, ToolRun] = None
+    linkage_method: Union[dict, LinkageMethod] = None
     schema_version: str = None
     provenance_id: str = None
     phi_status: Union[str, "PhiStatusEnum"] = None
-    source_dataset: Union[dict, SourceDataset] = None
-    linkage_method: Union[dict, LinkageMethod] = None
-    tool_run: Union[dict, ToolRun] = None
     derived_heat_metric: Union[dict, DerivedHeatMetric] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1273,16 +1323,17 @@ class ExtremeHeatDayFlagRecord(EnvironmentalExposureRecord):
     class_model_uri: ClassVar[URIRef] = ENVAR.ExtremeHeatDayFlagRecord
 
     subject: str = None
-    observation_type: Union[dict, VariableIdentity] = None
-    location: Union[dict, SpatialReference] = None
-    temporality: Union[dict, TemporalReference] = None
-    methodology: Union[dict, ExposureModel] = None
+    variable_identity: Union[dict, VariableIdentity] = None
+    spatial_reference: Union[dict, SpatialReference] = None
+    temporal_reference: Union[dict, TemporalReference] = None
+    exposure_model: Union[dict, ExposureModel] = None
+    data_layout: Union[dict, DataLayout] = None
+    source_dataset: Union[dict, SourceDataset] = None
+    tool_run: Union[dict, ToolRun] = None
+    linkage_method: Union[dict, LinkageMethod] = None
     schema_version: str = None
     provenance_id: str = None
     phi_status: Union[str, "PhiStatusEnum"] = None
-    source_dataset: Union[dict, SourceDataset] = None
-    linkage_method: Union[dict, LinkageMethod] = None
-    tool_run: Union[dict, ToolRun] = None
     derived_heat_metric: Union[dict, DerivedHeatMetric] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1302,8 +1353,8 @@ class MicroschemaDefinition(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/MicroschemaDefinition"]
-    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/MicroschemaDefinition"
+    class_class_uri: ClassVar[URIRef] = MSPROFILE["MicroschemaDefinition"]
+    class_class_curie: ClassVar[str] = "msprofile:MicroschemaDefinition"
     class_name: ClassVar[str] = "MicroschemaDefinition"
     class_model_uri: ClassVar[URIRef] = ENVAR.MicroschemaDefinition
 
@@ -1364,8 +1415,8 @@ class ValueMicroschemaDefinition(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/ValueMicroschemaDefinition"]
-    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/ValueMicroschemaDefinition"
+    class_class_uri: ClassVar[URIRef] = MSPROFILE["ValueMicroschemaDefinition"]
+    class_class_curie: ClassVar[str] = "msprofile:ValueMicroschemaDefinition"
     class_name: ClassVar[str] = "ValueMicroschemaDefinition"
     class_model_uri: ClassVar[URIRef] = ENVAR.ValueMicroschemaDefinition
 
@@ -1377,8 +1428,8 @@ class Quantity(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/Quantity"]
-    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/Quantity"
+    class_class_uri: ClassVar[URIRef] = MSPROFILE["Quantity"]
+    class_class_curie: ClassVar[str] = "msprofile:Quantity"
     class_name: ClassVar[str] = "Quantity"
     class_model_uri: ClassVar[URIRef] = ENVAR.Quantity
 
@@ -1410,8 +1461,8 @@ class Timepoint(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/Timepoint"]
-    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/Timepoint"
+    class_class_uri: ClassVar[URIRef] = MSPROFILE["Timepoint"]
+    class_class_curie: ClassVar[str] = "msprofile:Timepoint"
     class_name: ClassVar[str] = "Timepoint"
     class_model_uri: ClassVar[URIRef] = ENVAR.Timepoint
 
@@ -1443,8 +1494,8 @@ class TimeInterval(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/TimeInterval"]
-    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/TimeInterval"
+    class_class_uri: ClassVar[URIRef] = MSPROFILE["TimeInterval"]
+    class_class_curie: ClassVar[str] = "msprofile:TimeInterval"
     class_name: ClassVar[str] = "TimeInterval"
     class_model_uri: ClassVar[URIRef] = ENVAR.TimeInterval
 
@@ -1472,8 +1523,8 @@ class CodedValue(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML["linkml-microschema-profile/CodedValue"]
-    class_class_curie: ClassVar[str] = "linkml:linkml-microschema-profile/CodedValue"
+    class_class_uri: ClassVar[URIRef] = MSPROFILE["CodedValue"]
+    class_class_curie: ClassVar[str] = "msprofile:CodedValue"
     class_name: ClassVar[str] = "CodedValue"
     class_model_uri: ClassVar[URIRef] = ENVAR.CodedValue
 
@@ -1586,6 +1637,22 @@ class ConceptStatusEnum(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="ConceptStatusEnum",
         description="""Status of a variable's representation in the target health-data vocabulary named by `target_concept_vocabulary` (e.g. the OHDSI Standardised Vocabulary, the BioData Catalyst model). `existing` = a concept id is available now; `proposed` = a submission is in flight; `gap` = no concept exists and none is proposed.""",
+    )
+
+class TableOrientationEnum(EnumDefinitionImpl):
+    """
+    How variables map onto columns in the companion data file.
+    """
+    wide = PermissibleValue(
+        text="wide",
+        description="One column per variable; column name identifies the variable.")
+    long = PermissibleValue(
+        text="long",
+        description="""One shared value column; the variable is discriminated by a row value in a variable column (tidy format).""")
+
+    _defn = EnumDefinition(
+        name="TableOrientationEnum",
+        description="How variables map onto columns in the companion data file.",
     )
 
 class ExtractionMethodEnum(EnumDefinitionImpl):
@@ -2387,6 +2454,36 @@ slots.value_range_plausible_min = Slot(uri=ENVAR.value_range_plausible_min, name
 slots.value_range_plausible_max = Slot(uri=ENVAR.value_range_plausible_max, name="value_range_plausible_max", curie=ENVAR.curie('value_range_plausible_max'),
                    model_uri=ENVAR.value_range_plausible_max, domain=None, range=Optional[float])
 
+slots.table_orientation = Slot(uri=ENVAR.table_orientation, name="table_orientation", curie=ENVAR.curie('table_orientation'),
+                   model_uri=ENVAR.table_orientation, domain=None, range=Optional[Union[str, "TableOrientationEnum"]])
+
+slots.value_column = Slot(uri=ENVAR.value_column, name="value_column", curie=ENVAR.curie('value_column'),
+                   model_uri=ENVAR.value_column, domain=None, range=Optional[str])
+
+slots.variable_column = Slot(uri=ENVAR.variable_column, name="variable_column", curie=ENVAR.curie('variable_column'),
+                   model_uri=ENVAR.variable_column, domain=None, range=Optional[str])
+
+slots.variable_key = Slot(uri=ENVAR.variable_key, name="variable_key", curie=ENVAR.curie('variable_key'),
+                   model_uri=ENVAR.variable_key, domain=None, range=Optional[str])
+
+slots.subject_column = Slot(uri=ENVAR.subject_column, name="subject_column", curie=ENVAR.curie('subject_column'),
+                   model_uri=ENVAR.subject_column, domain=None, range=Optional[str])
+
+slots.time_column = Slot(uri=ENVAR.time_column, name="time_column", curie=ENVAR.curie('time_column'),
+                   model_uri=ENVAR.time_column, domain=None, range=Optional[str])
+
+slots.value_uncertainty_column = Slot(uri=ENVAR.value_uncertainty_column, name="value_uncertainty_column", curie=ENVAR.curie('value_uncertainty_column'),
+                   model_uri=ENVAR.value_uncertainty_column, domain=None, range=Optional[str])
+
+slots.value_uncertainty_column_missing_reason = Slot(uri=ENVAR.value_uncertainty_column_missing_reason, name="value_uncertainty_column_missing_reason", curie=ENVAR.curie('value_uncertainty_column_missing_reason'),
+                   model_uri=ENVAR.value_uncertainty_column_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+
+slots.quality_flag_column = Slot(uri=ENVAR.quality_flag_column, name="quality_flag_column", curie=ENVAR.curie('quality_flag_column'),
+                   model_uri=ENVAR.quality_flag_column, domain=None, range=Optional[str])
+
+slots.quality_flag_column_missing_reason = Slot(uri=ENVAR.quality_flag_column_missing_reason, name="quality_flag_column_missing_reason", curie=ENVAR.curie('quality_flag_column_missing_reason'),
+                   model_uri=ENVAR.quality_flag_column_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+
 slots.native_spatial_resolution_m = Slot(uri=ENVAR.native_spatial_resolution_m, name="native_spatial_resolution_m", curie=ENVAR.curie('native_spatial_resolution_m'),
                    model_uri=ENVAR.native_spatial_resolution_m, domain=None, range=Optional[float])
 
@@ -2522,12 +2619,6 @@ slots.exposure_model_cross_validation_r2_missing_reason = Slot(uri=ENVAR.exposur
 slots.exposure_model_known_biases = Slot(uri=ENVAR.exposure_model_known_biases, name="exposure_model_known_biases", curie=ENVAR.curie('exposure_model_known_biases'),
                    model_uri=ENVAR.exposure_model_known_biases, domain=None, range=Optional[Union[str, list[str]]])
 
-slots.exposure_model_uncertainty_field = Slot(uri=ENVAR.exposure_model_uncertainty_field, name="exposure_model_uncertainty_field", curie=ENVAR.curie('exposure_model_uncertainty_field'),
-                   model_uri=ENVAR.exposure_model_uncertainty_field, domain=None, range=Optional[str])
-
-slots.exposure_model_uncertainty_field_missing_reason = Slot(uri=ENVAR.exposure_model_uncertainty_field_missing_reason, name="exposure_model_uncertainty_field_missing_reason", curie=ENVAR.curie('exposure_model_uncertainty_field_missing_reason'),
-                   model_uri=ENVAR.exposure_model_uncertainty_field_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
 slots.exposure_model_ensemble_member_count = Slot(uri=ENVAR.exposure_model_ensemble_member_count, name="exposure_model_ensemble_member_count", curie=ENVAR.curie('exposure_model_ensemble_member_count'),
                    model_uri=ENVAR.exposure_model_ensemble_member_count, domain=None, range=Optional[int])
 
@@ -2539,12 +2630,6 @@ slots.bias_correction_applied = Slot(uri=ENVAR.bias_correction_applied, name="bi
 
 slots.bias_correction_applied_missing_reason = Slot(uri=ENVAR.bias_correction_applied_missing_reason, name="bias_correction_applied_missing_reason", curie=ENVAR.curie('bias_correction_applied_missing_reason'),
                    model_uri=ENVAR.bias_correction_applied_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
-slots.per_value_uncertainty_field_name = Slot(uri=ENVAR.per_value_uncertainty_field_name, name="per_value_uncertainty_field_name", curie=ENVAR.curie('per_value_uncertainty_field_name'),
-                   model_uri=ENVAR.per_value_uncertainty_field_name, domain=None, range=Optional[str])
-
-slots.per_value_uncertainty_field_name_missing_reason = Slot(uri=ENVAR.per_value_uncertainty_field_name_missing_reason, name="per_value_uncertainty_field_name_missing_reason", curie=ENVAR.curie('per_value_uncertainty_field_name_missing_reason'),
-                   model_uri=ENVAR.per_value_uncertainty_field_name_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
 slots.per_value_uncertainty_type = Slot(uri=ENVAR.per_value_uncertainty_type, name="per_value_uncertainty_type", curie=ENVAR.curie('per_value_uncertainty_type'),
                    model_uri=ENVAR.per_value_uncertainty_type, domain=None, range=Optional[Union[str, "UncertaintyTypeEnum"]])
@@ -2563,12 +2648,6 @@ slots.model_aggregate_uncertainty = Slot(uri=ENVAR.model_aggregate_uncertainty, 
 
 slots.model_aggregate_uncertainty_missing_reason = Slot(uri=ENVAR.model_aggregate_uncertainty_missing_reason, name="model_aggregate_uncertainty_missing_reason", curie=ENVAR.curie('model_aggregate_uncertainty_missing_reason'),
                    model_uri=ENVAR.model_aggregate_uncertainty_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
-
-slots.quality_flag_field_name = Slot(uri=ENVAR.quality_flag_field_name, name="quality_flag_field_name", curie=ENVAR.curie('quality_flag_field_name'),
-                   model_uri=ENVAR.quality_flag_field_name, domain=None, range=Optional[str])
-
-slots.quality_flag_field_name_missing_reason = Slot(uri=ENVAR.quality_flag_field_name_missing_reason, name="quality_flag_field_name_missing_reason", curie=ENVAR.curie('quality_flag_field_name_missing_reason'),
-                   model_uri=ENVAR.quality_flag_field_name_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
 slots.quality_flag_vocabulary = Slot(uri=ENVAR.quality_flag_vocabulary, name="quality_flag_vocabulary", curie=ENVAR.curie('quality_flag_vocabulary'),
                    model_uri=ENVAR.quality_flag_vocabulary, domain=None, range=Optional[str])
@@ -2828,6 +2907,36 @@ slots.dcat_distribution_url = Slot(uri=ENVAR.dcat_distribution_url, name="dcat_d
 slots.dcat_distribution_url_missing_reason = Slot(uri=ENVAR.dcat_distribution_url_missing_reason, name="dcat_distribution_url_missing_reason", curie=ENVAR.curie('dcat_distribution_url_missing_reason'),
                    model_uri=ENVAR.dcat_distribution_url_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
+slots.exposure_description = Slot(uri=ENVAR.exposure_description, name="exposure_description", curie=ENVAR.curie('exposure_description'),
+                   model_uri=ENVAR.exposure_description, domain=None, range=Optional[str])
+
+slots.variable_specific_extensions = Slot(uri=ENVAR.variable_specific_extensions, name="variable_specific_extensions", curie=ENVAR.curie('variable_specific_extensions'),
+                   model_uri=ENVAR.variable_specific_extensions, domain=None, range=Optional[str])
+
+slots.dataset_and_provenance = Slot(uri=ENVAR.dataset_and_provenance, name="dataset_and_provenance", curie=ENVAR.curie('dataset_and_provenance'),
+                   model_uri=ENVAR.dataset_and_provenance, domain=None, range=Optional[str])
+
+slots.health_data_integration = Slot(uri=ENVAR.health_data_integration, name="health_data_integration", curie=ENVAR.curie('health_data_integration'),
+                   model_uri=ENVAR.health_data_integration, domain=None, range=Optional[str])
+
+slots.record_bookkeeping = Slot(uri=ENVAR.record_bookkeeping, name="record_bookkeeping", curie=ENVAR.curie('record_bookkeeping'),
+                   model_uri=ENVAR.record_bookkeeping, domain=None, range=Optional[str])
+
+slots.variable_identity = Slot(uri=ENVAR.variable_identity, name="variable_identity", curie=ENVAR.curie('variable_identity'),
+                   model_uri=ENVAR.variable_identity, domain=None, range=Union[dict, VariableIdentity])
+
+slots.spatial_reference = Slot(uri=ENVAR.spatial_reference, name="spatial_reference", curie=ENVAR.curie('spatial_reference'),
+                   model_uri=ENVAR.spatial_reference, domain=None, range=Union[dict, SpatialReference])
+
+slots.temporal_reference = Slot(uri=ENVAR.temporal_reference, name="temporal_reference", curie=ENVAR.curie('temporal_reference'),
+                   model_uri=ENVAR.temporal_reference, domain=None, range=Union[dict, TemporalReference])
+
+slots.exposure_model = Slot(uri=ENVAR.exposure_model, name="exposure_model", curie=ENVAR.curie('exposure_model'),
+                   model_uri=ENVAR.exposure_model, domain=None, range=Union[dict, ExposureModel])
+
+slots.data_layout = Slot(uri=ENVAR.data_layout, name="data_layout", curie=ENVAR.curie('data_layout'),
+                   model_uri=ENVAR.data_layout, domain=None, range=Union[dict, DataLayout])
+
 slots.source_dataset = Slot(uri=ENVAR.source_dataset, name="source_dataset", curie=ENVAR.curie('source_dataset'),
                    model_uri=ENVAR.source_dataset, domain=None, range=Union[dict, SourceDataset])
 
@@ -2852,67 +2961,67 @@ slots.health_layer_linkage = Slot(uri=ENVAR.health_layer_linkage, name="health_l
 slots.deposit_metadata = Slot(uri=ENVAR.deposit_metadata, name="deposit_metadata", curie=ENVAR.curie('deposit_metadata'),
                    model_uri=ENVAR.deposit_metadata, domain=None, range=Optional[Union[dict, DepositMetadata]])
 
-slots.profile_version = Slot(uri=LINKML['linkml-microschema-profile/profile_version'], name="profile_version", curie=LINKML.curie('linkml-microschema-profile/profile_version'),
+slots.profile_version = Slot(uri=MSPROFILE.profile_version, name="profile_version", curie=MSPROFILE.curie('profile_version'),
                    model_uri=ENVAR.profile_version, domain=None, range=Optional[str])
 
-slots.domain_of_use = Slot(uri=LINKML['linkml-microschema-profile/domain_of_use'], name="domain_of_use", curie=LINKML.curie('linkml-microschema-profile/domain_of_use'),
+slots.domain_of_use = Slot(uri=MSPROFILE.domain_of_use, name="domain_of_use", curie=MSPROFILE.curie('domain_of_use'),
                    model_uri=ENVAR.domain_of_use, domain=None, range=Optional[Union[str, list[str]]])
 
-slots.subject = Slot(uri=LINKML['linkml-microschema-profile/subject'], name="subject", curie=LINKML.curie('linkml-microschema-profile/subject'),
+slots.subject = Slot(uri=MSPROFILE.subject, name="subject", curie=MSPROFILE.curie('subject'),
                    model_uri=ENVAR.subject, domain=None, range=str)
 
-slots.observation_type = Slot(uri=LINKML['linkml-microschema-profile/observation_type'], name="observation_type", curie=LINKML.curie('linkml-microschema-profile/observation_type'),
+slots.observation_type = Slot(uri=MSPROFILE.observation_type, name="observation_type", curie=MSPROFILE.curie('observation_type'),
                    model_uri=ENVAR.observation_type, domain=None, range=str)
 
-slots.location = Slot(uri=LINKML['linkml-microschema-profile/location'], name="location", curie=LINKML.curie('linkml-microschema-profile/location'),
+slots.location = Slot(uri=MSPROFILE.location, name="location", curie=MSPROFILE.curie('location'),
                    model_uri=ENVAR.location, domain=None, range=str)
 
-slots.temporality = Slot(uri=LINKML['linkml-microschema-profile/temporality'], name="temporality", curie=LINKML.curie('linkml-microschema-profile/temporality'),
+slots.temporality = Slot(uri=MSPROFILE.temporality, name="temporality", curie=MSPROFILE.curie('temporality'),
                    model_uri=ENVAR.temporality, domain=None, range=str)
 
-slots.methodology = Slot(uri=LINKML['linkml-microschema-profile/methodology'], name="methodology", curie=LINKML.curie('linkml-microschema-profile/methodology'),
+slots.methodology = Slot(uri=MSPROFILE.methodology, name="methodology", curie=MSPROFILE.curie('methodology'),
                    model_uri=ENVAR.methodology, domain=None, range=str)
 
-slots.observation_result = Slot(uri=LINKML['linkml-microschema-profile/observation_result'], name="observation_result", curie=LINKML.curie('linkml-microschema-profile/observation_result'),
+slots.observation_result = Slot(uri=MSPROFILE.observation_result, name="observation_result", curie=MSPROFILE.curie('observation_result'),
                    model_uri=ENVAR.observation_result, domain=None, range=Union[dict, ValueMicroschemaDefinition])
 
-slots.quantity_value = Slot(uri=LINKML['linkml-microschema-profile/quantity_value'], name="quantity_value", curie=LINKML.curie('linkml-microschema-profile/quantity_value'),
+slots.quantity_value = Slot(uri=MSPROFILE.quantity_value, name="quantity_value", curie=MSPROFILE.curie('quantity_value'),
                    model_uri=ENVAR.quantity_value, domain=None, range=Decimal)
 
 slots.quantity_unit = Slot(uri=SCHEMA.unitCode, name="quantity_unit", curie=SCHEMA.curie('unitCode'),
                    model_uri=ENVAR.quantity_unit, domain=None, range=Union[str, URIorCURIE])
 
-slots.comparator = Slot(uri=LINKML['linkml-microschema-profile/comparator'], name="comparator", curie=LINKML.curie('linkml-microschema-profile/comparator'),
+slots.comparator = Slot(uri=MSPROFILE.comparator, name="comparator", curie=MSPROFILE.curie('comparator'),
                    model_uri=ENVAR.comparator, domain=None, range=Optional[Union[str, "ComparatorEnum"]])
 
-slots.datetime = Slot(uri=LINKML['linkml-microschema-profile/datetime'], name="datetime", curie=LINKML.curie('linkml-microschema-profile/datetime'),
+slots.datetime = Slot(uri=MSPROFILE.datetime, name="datetime", curie=MSPROFILE.curie('datetime'),
                    model_uri=ENVAR.datetime, domain=None, range=Optional[Union[str, XSDDateTime]])
 
-slots.relative_to_event = Slot(uri=LINKML['linkml-microschema-profile/relative_to_event'], name="relative_to_event", curie=LINKML.curie('linkml-microschema-profile/relative_to_event'),
+slots.relative_to_event = Slot(uri=MSPROFILE.relative_to_event, name="relative_to_event", curie=MSPROFILE.curie('relative_to_event'),
                    model_uri=ENVAR.relative_to_event, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.offset = Slot(uri=LINKML['linkml-microschema-profile/offset'], name="offset", curie=LINKML.curie('linkml-microschema-profile/offset'),
+slots.offset = Slot(uri=MSPROFILE.offset, name="offset", curie=MSPROFILE.curie('offset'),
                    model_uri=ENVAR.offset, domain=None, range=Optional[Union[dict, Quantity]])
 
-slots.subject_age = Slot(uri=LINKML['linkml-microschema-profile/subject_age'], name="subject_age", curie=LINKML.curie('linkml-microschema-profile/subject_age'),
+slots.subject_age = Slot(uri=MSPROFILE.subject_age, name="subject_age", curie=MSPROFILE.curie('subject_age'),
                    model_uri=ENVAR.subject_age, domain=None, range=Optional[Union[dict, Quantity]])
 
-slots.interval_start = Slot(uri=LINKML['linkml-microschema-profile/interval_start'], name="interval_start", curie=LINKML.curie('linkml-microschema-profile/interval_start'),
+slots.interval_start = Slot(uri=MSPROFILE.interval_start, name="interval_start", curie=MSPROFILE.curie('interval_start'),
                    model_uri=ENVAR.interval_start, domain=None, range=Optional[Union[dict, Timepoint]])
 
-slots.interval_end = Slot(uri=LINKML['linkml-microschema-profile/interval_end'], name="interval_end", curie=LINKML.curie('linkml-microschema-profile/interval_end'),
+slots.interval_end = Slot(uri=MSPROFILE.interval_end, name="interval_end", curie=MSPROFILE.curie('interval_end'),
                    model_uri=ENVAR.interval_end, domain=None, range=Optional[Union[dict, Timepoint]])
 
-slots.duration = Slot(uri=LINKML['linkml-microschema-profile/duration'], name="duration", curie=LINKML.curie('linkml-microschema-profile/duration'),
+slots.duration = Slot(uri=MSPROFILE.duration, name="duration", curie=MSPROFILE.curie('duration'),
                    model_uri=ENVAR.duration, domain=None, range=Optional[Union[dict, Quantity]])
 
-slots.code = Slot(uri=LINKML['linkml-microschema-profile/code'], name="code", curie=LINKML.curie('linkml-microschema-profile/code'),
+slots.code = Slot(uri=MSPROFILE.code, name="code", curie=MSPROFILE.curie('code'),
                    model_uri=ENVAR.code, domain=None, range=Union[str, URIorCURIE])
 
-slots.code_label = Slot(uri=LINKML['linkml-microschema-profile/code_label'], name="code_label", curie=LINKML.curie('linkml-microschema-profile/code_label'),
+slots.code_label = Slot(uri=MSPROFILE.code_label, name="code_label", curie=MSPROFILE.curie('code_label'),
                    model_uri=ENVAR.code_label, domain=None, range=Optional[str])
 
-slots.code_system = Slot(uri=LINKML['linkml-microschema-profile/code_system'], name="code_system", curie=LINKML.curie('linkml-microschema-profile/code_system'),
+slots.code_system = Slot(uri=MSPROFILE.code_system, name="code_system", curie=MSPROFILE.curie('code_system'),
                    model_uri=ENVAR.code_system, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.modelAggregateUncertainty__cv_r2 = Slot(uri=ENVAR.cv_r2, name="modelAggregateUncertainty__cv_r2", curie=ENVAR.curie('cv_r2'),
@@ -2938,6 +3047,12 @@ slots.VariableIdentity_concept_status = Slot(uri=ENVAR.concept_status, name="Var
 
 slots.VariableIdentity_value_data_type = Slot(uri=ENVAR.value_data_type, name="VariableIdentity_value_data_type", curie=ENVAR.curie('value_data_type'),
                    model_uri=ENVAR.VariableIdentity_value_data_type, domain=VariableIdentity, range=Union[str, "DataTypeEnum"])
+
+slots.DataLayout_table_orientation = Slot(uri=ENVAR.table_orientation, name="DataLayout_table_orientation", curie=ENVAR.curie('table_orientation'),
+                   model_uri=ENVAR.DataLayout_table_orientation, domain=DataLayout, range=Union[str, "TableOrientationEnum"])
+
+slots.DataLayout_value_column = Slot(uri=ENVAR.value_column, name="DataLayout_value_column", curie=ENVAR.curie('value_column'),
+                   model_uri=ENVAR.DataLayout_value_column, domain=DataLayout, range=str)
 
 slots.SpatialReference_crs = Slot(uri=ENVAR.crs, name="SpatialReference_crs", curie=ENVAR.curie('crs'),
                    model_uri=ENVAR.SpatialReference_crs, domain=SpatialReference, range=str)
@@ -2987,20 +3102,17 @@ slots.EquationInput_input_role = Slot(uri=ENVAR.input_role, name="EquationInput_
 slots.EquationInput_input_provenance_id = Slot(uri=ENVAR.input_provenance_id, name="EquationInput_input_provenance_id", curie=ENVAR.curie('input_provenance_id'),
                    model_uri=ENVAR.EquationInput_input_provenance_id, domain=EquationInput, range=str)
 
-slots.EnvironmentalExposureRecord_subject = Slot(uri=LINKML['linkml-microschema-profile/subject'], name="EnvironmentalExposureRecord_subject", curie=LINKML.curie('linkml-microschema-profile/subject'),
+slots.EnvironmentalExposureRecord_subject = Slot(uri=MSPROFILE.subject, name="EnvironmentalExposureRecord_subject", curie=MSPROFILE.curie('subject'),
                    model_uri=ENVAR.EnvironmentalExposureRecord_subject, domain=EnvironmentalExposureRecord, range=str)
 
-slots.EnvironmentalExposureRecord_observation_type = Slot(uri=LINKML['linkml-microschema-profile/observation_type'], name="EnvironmentalExposureRecord_observation_type", curie=LINKML.curie('linkml-microschema-profile/observation_type'),
-                   model_uri=ENVAR.EnvironmentalExposureRecord_observation_type, domain=EnvironmentalExposureRecord, range=Union[dict, VariableIdentity])
+slots.EnvironmentalExposureRecord_schema_version = Slot(uri=ENVAR.schema_version, name="EnvironmentalExposureRecord_schema_version", curie=ENVAR.curie('schema_version'),
+                   model_uri=ENVAR.EnvironmentalExposureRecord_schema_version, domain=EnvironmentalExposureRecord, range=str)
 
-slots.EnvironmentalExposureRecord_location = Slot(uri=LINKML['linkml-microschema-profile/location'], name="EnvironmentalExposureRecord_location", curie=LINKML.curie('linkml-microschema-profile/location'),
-                   model_uri=ENVAR.EnvironmentalExposureRecord_location, domain=EnvironmentalExposureRecord, range=Union[dict, SpatialReference])
+slots.EnvironmentalExposureRecord_provenance_id = Slot(uri=ENVAR.provenance_id, name="EnvironmentalExposureRecord_provenance_id", curie=ENVAR.curie('provenance_id'),
+                   model_uri=ENVAR.EnvironmentalExposureRecord_provenance_id, domain=EnvironmentalExposureRecord, range=str)
 
-slots.EnvironmentalExposureRecord_temporality = Slot(uri=LINKML['linkml-microschema-profile/temporality'], name="EnvironmentalExposureRecord_temporality", curie=LINKML.curie('linkml-microschema-profile/temporality'),
-                   model_uri=ENVAR.EnvironmentalExposureRecord_temporality, domain=EnvironmentalExposureRecord, range=Union[dict, TemporalReference])
-
-slots.EnvironmentalExposureRecord_methodology = Slot(uri=LINKML['linkml-microschema-profile/methodology'], name="EnvironmentalExposureRecord_methodology", curie=LINKML.curie('linkml-microschema-profile/methodology'),
-                   model_uri=ENVAR.EnvironmentalExposureRecord_methodology, domain=EnvironmentalExposureRecord, range=Union[dict, ExposureModel])
+slots.EnvironmentalExposureRecord_phi_status = Slot(uri=ENVAR.phi_status, name="EnvironmentalExposureRecord_phi_status", curie=ENVAR.curie('phi_status'),
+                   model_uri=ENVAR.EnvironmentalExposureRecord_phi_status, domain=EnvironmentalExposureRecord, range=Union[str, "PhiStatusEnum"])
 
 slots.WetBulbGlobeTemperatureOutdoorRecord_derived_heat_metric = Slot(uri=ENVAR.derived_heat_metric, name="WetBulbGlobeTemperatureOutdoorRecord_derived_heat_metric", curie=ENVAR.curie('derived_heat_metric'),
                    model_uri=ENVAR.WetBulbGlobeTemperatureOutdoorRecord_derived_heat_metric, domain=WetBulbGlobeTemperatureOutdoorRecord, range=Union[dict, DerivedHeatMetric])

@@ -27,11 +27,14 @@ imports:
 classes:
 
   ToolRun:
+    title: Tool Run
     description: >-
       A single tool invocation that produced an output from one or more
       inputs: tool name and version, container image (where applicable),
       arguments, environment, run timestamp and duration, input / output
       hashes and row counts, and an optional log excerpt.
+    see_also:
+    - https://www.w3.org/TR/prov-o/
     annotations:
       domain_of_use: environmental_exposure
     class_uri: prov:Activity
@@ -60,10 +63,14 @@ classes:
         required: true
 
   ProvenanceChain:
+    title: Provenance Chain
     description: >-
       The ordered list of all upstream `ToolRun`s whose outputs were inputs
       to this run, terminating in a typed root. Patterned after W3C PROV
       (`prov:wasDerivedFrom`, `prov:wasGeneratedBy`).
+    see_also:
+    - https://www.w3.org/TR/prov-o/
+    - https://www.w3.org/TR/prov-primer/
     annotations:
       domain_of_use: environmental_exposure
     class_uri: prov:Bundle
@@ -79,120 +86,344 @@ classes:
 slots:
 
   tool_name:
+    title: Tool Name
     range: string
     description: >-
       Tool name, e.g. `daymet`, `narr`, `pm`, `amadeus`, `geocoder`.
+    examples:
+    - value: daymet
+      description: DeGAUSS Daymet extraction tool
+    see_also:
+    - https://degauss.org/
 
     annotations:
       tier: core
+      justification: >-
+        Without the tool name, a consumer cannot tell which piece of software
+        produced the value, so the run cannot be re-executed and the tool's
+        known behaviours and biases cannot be looked up. It is the entry point
+        for every reproducibility check on the run.
+      explanation: >-
+        This simply records which program was used — like noting the make and
+        model of an appliance before describing its settings. Everything else
+        about the run only makes sense once you know what tool ran.
   tool_version:
+    title: Tool Version
     range: string
     description: Semver tool version. Mandatory.
+    examples:
+    - value: "1.0.0"
+    see_also:
+    - https://semver.org/
 
     annotations:
       tier: core
+      justification: >-
+        Two versions of the same tool can produce different outputs from
+        identical inputs, so "we ran daymet" without a version is not
+        reproducible. It is mandatory because it is the cheapest and most
+        decisive reproducibility anchor after the tool name.
+      explanation: >-
+        Software changes over time, and a version number labels one specific
+        edition of it — like the edition of a book. Recording it says exactly
+        which edition of the tool did the work.
   tool_description:
+    title: Tool Description
     range: string
     description: >-
       One-line tool description (from the tool's `dht` env var or equivalent).
+    examples:
+    - value: DeGAUSS Daymet extraction container
+    see_also:
+    - https://degauss.org/
 
     annotations:
       tier: optional
+      justification: >-
+        A one-line description lets a reader understand what the tool does
+        without leaving the record or resolving the tool name against external
+        documentation. Omitting it costs readability, not reproducibility.
+      explanation: >-
+        A short plain-language note on the tool's job, for example "extracts
+        daily temperature for a list of addresses". It saves the reader a
+        lookup elsewhere.
   container_image_repository:
+    title: Container Image Repository
     range: string
     description: >-
       Container image repository, e.g. `ghcr.io/degauss-org/daymet`. Null for
       non-containerised tools.
+    examples:
+    - value: ghcr.io/degauss-org/daymet
+    see_also:
+    - https://degauss.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        The repository says where the packaged software lives, so anyone can
+        pull the same container and re-run the step. Without it the image
+        digest has nothing to be resolved against, and re-execution requires
+        guessing where the tool came from.
+      explanation: >-
+        Containers are self-contained software bundles, and the repository is
+        the public shelf address where a bundle is published — effectively the
+        download location of the exact software package used.
   container_image_repository_missing_reason:
+    title: Reason Image Repository Is Missing
     range: MissingReasonEnum
     description: Reason `container_image_repository` is null.
+    examples:
+    - value: not_applicable
+      description: e.g. the tool is not containerised
 
     annotations:
       tier: optional
+      justification: >-
+        A blank repository is ambiguous — it could mean "the tool is not
+        containerised" or "we forgot to record it". Stating the reason turns a
+        silent gap into checkable information; a blank is a bug, a
+        null-with-reason is information.
+      explanation: >-
+        When the repository field is deliberately empty, this note says why —
+        for example, the tool simply was not run inside a container. An
+        explained blank can be trusted; an unexplained one is a question mark.
   container_image_digest:
+    title: Container Image Digest
     range: string
     description: >-
       SHA256 of the container image actually used (not just the tag).
       Reproducibility-critical.
+    examples:
+    - value: "sha256:a8b3c2d1e0f9..."
+    see_also:
+    - https://github.com/opencontainers/image-spec
 
     annotations:
       tier: recommended
+      justification: >-
+        Image tags are mutable, so "same tag" does not mean same code; only
+        the digest pins the exact bytes that ran. It is the strongest
+        reproducibility anchor available for a containerised run.
+      explanation: >-
+        A digest is an exact serial number for the software bundle actually
+        used — stronger than a version label, which can be reused for
+        different contents. If the bundle changes at all, the serial number
+        changes.
   container_image_digest_missing_reason:
+    title: Reason Image Digest Is Missing
     range: MissingReasonEnum
     description: Reason `container_image_digest` is null.
+    examples:
+    - value: available_but_not_extracted
+      description: e.g. the runner did not resolve the tag to a digest
 
     annotations:
       tier: optional
+      justification: >-
+        Without a stated reason, a missing digest is indistinguishable from a
+        pipeline bug; with one (e.g. the runner never resolved the tag) the
+        gap is auditable and fixable rather than silent.
+      explanation: >-
+        This note explains why the software bundle's exact serial number was
+        not recorded — often the runner only kept the human-friendly version
+        label and never looked up the precise identifier behind it.
   run_arguments:
+    title: Run Arguments
     range: string
     description: >-
       The exact argument map passed at invocation, serialised as a JSON
       string.
+    examples:
+    - value: '{"variables": "tmax"}'
 
     annotations:
       tier: recommended
+      justification: >-
+        The same tool run with different arguments produces different outputs;
+        without the exact argument map, re-running the tool reproduces the
+        tool, not the result. Recording it verbatim removes all guesswork
+        about settings.
+      explanation: >-
+        These are the settings the program was started with — like the knob
+        positions on a machine. Writing them down means someone else can set
+        the knobs identically before pressing start.
   run_timestamp_utc:
+    title: Run Timestamp (UTC)
     range: datetime
     description: When the run started (UTC).
+    examples:
+    - value: "2026-05-23T14:18:42Z"
+    see_also:
+    - https://www.w3.org/TR/prov-o/
 
     annotations:
       tier: recommended
+      justification: >-
+        The timestamp orders runs within the provenance chain and lets
+        auditors match the record against external logs and the state of
+        upstream data sources at that moment. Without it, "which run produced
+        this file" can become undecidable.
+      explanation: >-
+        Simply when the program started, expressed on a single worldwide clock
+        (UTC) so that times recorded on different machines in different time
+        zones line up.
   run_duration_seconds:
+    title: Run Duration (Seconds)
     range: float
     description: How long the run took, in seconds.
+    examples:
+    - value: "37"
 
     annotations:
       tier: optional
+      justification: >-
+        Duration is a cheap sanity signal — a step that normally takes an hour
+        finishing in two seconds hints at silent failure or truncated input.
+        Omitting it loses a diagnostic, not reproducibility.
+      explanation: >-
+        How long the program ran, in seconds. A wildly unusual run time is
+        often the first clue that something went wrong even when the tool
+        reported success.
   run_environment:
+    title: Run Environment
     range: AnyValue
     inlined: true
     description: >-
       Host OS, Docker / podman version, R / Python version, key library
       versions, as a native key/value object.
+    examples:
+    - object:
+        os: "Ubuntu 22.04"
+        container_runtime: "docker 24.0.7"
+        r_version: "4.3.1"
 
     annotations:
       tier: optional
+      justification: >-
+        Library and runtime versions can change numeric results even when the
+        tool version is fixed; recording the environment explains
+        otherwise-mysterious differences between re-runs. For
+        non-containerised tools it is the only record of the software stack.
+      explanation: >-
+        A snapshot of the computer setup around the tool — operating system,
+        language versions, key libraries. Like noting the oven and altitude
+        alongside a recipe, because the surroundings can change the outcome.
   input_file_sha256:
+    title: Input File SHA-256 Hash
     range: string
     description: SHA256 of the input file (CSV / parquet).
+    examples:
+    - value: "9f8e7d6c5b4a..."
+    see_also:
+    - https://doi.org/10.6028/NIST.FIPS.180-4
 
     annotations:
       tier: recommended
+      justification: >-
+        The input hash lets anyone verify they are re-running on
+        byte-identical inputs; without it, a "reproduction" may quietly use
+        different data, and disagreements can no longer be traced to inputs
+        versus code.
+      explanation: >-
+        A SHA-256 hash is a fingerprint of a file — if even one byte changes,
+        the fingerprint changes completely. Comparing fingerprints proves two
+        files are exactly the same without inspecting their contents.
   input_row_count:
+    title: Input Row Count
     range: integer
     description: Number of rows in the input.
+    examples:
+    - value: "3"
+      description: one row per cohort address
 
     annotations:
       tier: recommended
+      justification: >-
+        The row count is a coarse but instant integrity check — a truncated or
+        partially delivered input shows up immediately as the wrong count. It
+        also anchors the input side of input/output cardinality checks.
+      explanation: >-
+        Just the number of lines of data that went in. If you expected 3
+        addresses and the count says 2, something was lost before the tool
+        ever ran.
   output_file_sha256:
+    title: Output File SHA-256 Hash
     range: string
     description: SHA256 of the output file (CSV / parquet).
+    examples:
+    - value: "1c2d3e4f5a6b..."
+    see_also:
+    - https://doi.org/10.6028/NIST.FIPS.180-4
 
     annotations:
       tier: recommended
+      justification: >-
+        The output hash proves the companion data file is the one this
+        metadata describes; without it, a swapped or regenerated file can
+        silently detach the values from their provenance.
+      explanation: >-
+        A fingerprint of the result file — change one byte and the fingerprint
+        changes. It ties this metadata record to exactly one version of the
+        data it describes.
   output_row_count:
+    title: Output Row Count
     range: integer
     description: Number of rows in the output.
+    examples:
+    - value: "459"
+      description: 3 subjects × 153 days
 
     annotations:
       tier: recommended
+      justification: >-
+        The expected output cardinality (e.g. 3 subjects × 153 days = 459
+        rows) is checkable at a glance; a mismatch flags dropped subjects or
+        dates before any analysis runs on the data.
+      explanation: >-
+        The number of lines of data produced. Outputs often have a predictable
+        size, so a wrong count is an early warning that rows went missing
+        along the way.
   run_log_excerpt:
+    title: Run Log Excerpt
     range: string
     description: >-
       Last ~50 lines of the run log, where useful for debugging or audit.
+    examples:
+    - value: "[2026-05-23 14:19:19] daymet 1.0.0 finished: wrote 459 rows to /output/tmax.csv (0 errors, 0 warnings)"
 
     annotations:
       tier: optional
+      justification: >-
+        The log tail captures warnings and error summaries that no structured
+        field carries; without it, diagnosing a suspect run means hunting for
+        logs that may no longer exist. Omission costs auditability, not
+        reproducibility.
+      explanation: >-
+        The last few lines the program printed while running — its own account
+        of what it did and whether anything looked wrong. Keeping a snippet is
+        like stapling the receipt to the record.
   run_log_excerpt_missing_reason:
+    title: Reason Log Excerpt Is Missing
     range: MissingReasonEnum
     description: Reason `run_log_excerpt` is null.
+    examples:
+    - value: available_but_not_extracted
+      description: e.g. logs exist on the runner but are not captured by the pipeline
 
     annotations:
       tier: optional
+      justification: >-
+        Stating why the log excerpt is absent (e.g. logs exist on the runner
+        but are not captured) distinguishes a deliberate omission from data
+        loss and tells auditors where to look. A blank is a bug; a
+        null-with-reason is information.
+      explanation: >-
+        A note explaining why no log snippet is attached — often the logs live
+        on the machine that ran the job and were simply never copied into the
+        record.
   provenance_chain_steps:
+    title: Provenance Chain Steps
     range: ToolRun
     multivalued: true
     inlined: true
@@ -200,24 +431,66 @@ slots:
     description: >-
       Ordered list of upstream `ToolRun`s, from oldest to most recent, whose
       outputs were inputs to this run.
+    examples:
+    - object:
+        tool_name: geocoder
+        tool_version: "3.3.0"
+        run_timestamp_utc: "2026-05-23T14:02:11Z"
+        output_file_sha256: "5b6c7d8e9f0a..."
+      description: a single upstream geocoding step preceding the daymet run
+    see_also:
+    - https://www.w3.org/TR/prov-o/
 
     annotations:
       tier: recommended
+      justification: >-
+        A value like a daily temperature is usually the end of several runs
+        (geocode, then extract); without the ordered steps a consumer can
+        verify only the last hop, and any upstream error is invisible. The
+        chain lets anyone walk the full derivation back to its root.
+      explanation: >-
+        A step-by-step history of every program run that led to this data,
+        oldest first — like a parcel's tracking history showing each station
+        it passed through on the way to you.
   provenance_chain_terminus_type:
+    title: Provenance Chain Terminus Type
     range: ProvenanceChainTerminusEnum
     description: The kind of root of the chain.
+    examples:
+    - value: raw_source_download
 
     annotations:
       tier: recommended
+      justification: >-
+        A chain that just stops is unverifiable — stating whether it ends at a
+        raw source download, synthetic data, or a pre-existing curated dataset
+        tells consumers what kind of trust the root deserves, and makes the
+        no-orphaned-steps validation rule checkable.
+      explanation: >-
+        This says what the very first link of the history is — freshly
+        downloaded raw data, simulated data, or an existing curated dataset.
+        Different starting points deserve different levels of scrutiny.
   chain_compatibility_assertions:
+    title: Chain Compatibility Assertions
     range: string
     multivalued: true
     description: >-
       Declarations that two chain steps are compatible (e.g.
       `daymet@1.0.0` expects `geocoder@>=3.0.0` output column schema).
       Optional but enables strict-mode validation.
+    examples:
+    - object: "daymet@1.0.0 expects geocoder@>=3.0.0 output column schema"
     annotations:
       tier: optional
+      justification: >-
+        Version bumps in one chain step can silently break the assumptions of
+        the next (e.g. a changed output column schema); explicit compatibility
+        declarations make such mismatches machine-checkable in strict mode
+        instead of surfacing later as wrong values.
+      explanation: >-
+        These are notes saying "step B was built to accept what step A
+        produces" — like declaring that a plug and a socket follow the same
+        standard, so a checker can catch mismatched pairs automatically.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -226,6 +499,7 @@ slots:
 enums:
 
   ProvenanceChainTerminusEnum:
+    title: Provenance Chain Terminus
     description: The kind of root of a provenance chain.
     permissible_values:
       raw_source_download:

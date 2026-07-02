@@ -38,12 +38,15 @@ imports:
 classes:
 
   AnyValue:
+    title: Any Value
     class_uri: linkml:Any
     description: >-
       An arbitrary passthrough object (open-ended key/value map) whose keys are
       not fixed by this schema — e.g. ACDD global attributes or a run-environment
       map. Lets such payloads be carried as native objects rather than opaque
       JSON strings.
+    see_also:
+    - https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
 
 #────────────────────────────────────────────────────────────────
 # SHARED SLOTS
@@ -52,43 +55,109 @@ classes:
 slots:
 
   schema_version:
+    title: Schema Version
     range: string
     description: >-
       The version of the EnVar micro-schema this document conforms to. Required
       on every sidecar so downstream consumers can branch on schema evolution.
+    examples:
+    - value: "0.1"
+    see_also:
+    - https://semver.org/
     required: true
 
     annotations:
       tier: core
+      justification: >-
+        Downstream consumers must branch on schema evolution: a parser built
+        for one version will silently misread or wrongly reject sidecars
+        written against another. Without this slot there is no way to tell
+        which iteration of the schema a document targets.
+      explanation: >-
+        Schemas change over time, like editions of a paper form. This is the
+        edition number stamped on the document, so anyone reading it knows
+        exactly which version of the form was filled in and can interpret
+        the fields accordingly.
   provenance_id:
+    title: Record Identifier
     range: string
     description: >-
       Stable identifier for this sidecar / record (ULID recommended). This is
       the value the downstream health-data layer's source-value field carries
       to link a row back to its provenance (for OMOP, that field is
       `external_exposure.exposure_source_value`).
+    examples:
+    - value: 01HFA7K8R3M6XP-daymet-deposit
+      description: ULID-based sidecar identifier for the Daymet Tmax deposit
+    see_also:
+    - https://github.com/ulid/spec
+    - https://ohdsi.github.io/CommonDataModel/
     required: true
 
     annotations:
       tier: core
+      justification: >-
+        This identifier is what the downstream health-data layer's
+        source-value field carries (for OMOP,
+        `external_exposure.exposure_source_value`); it is the only hook that
+        links an exposure value in the health layer back to its full
+        spatial, temporal, and model provenance. Omit it and the value
+        becomes untraceable — its metadata can never be recovered.
+      explanation: >-
+        A unique serial number for this metadata document, like the tracking
+        number on a parcel. Wherever the data value ends up, that number
+        lets you look up exactly where it came from and how it was made.
   phi_status:
+    title: PHI Status
     range: PhiStatusEnum
     description: >-
       Whether the sidecar carries any Protected Health Information. A
       record-level safety assertion; by design, sidecars are PHI-free.
+    examples:
+    - value: no_phi
+    see_also:
+    - https://www.hhs.gov/hipaa/for-professionals/privacy/index.html
     required: true
 
     annotations:
       tier: core
+      justification: >-
+        Sidecars are designed to be PHI-free, and this slot is the explicit
+        machine-readable assertion of that. Without it, every sharing,
+        deposit, or export step must treat the document as potentially
+        containing patient data and re-review it manually before it can
+        leave a protected environment.
+      explanation: >-
+        PHI (protected health information) means private medical details
+        about an identifiable person. This flag is a written promise on the
+        document saying "no private patient information inside", so it can
+        be passed around and published safely.
   missing_reason:
+    title: Reason Value Is Missing
     range: MissingReasonEnum
     description: >-
       Controlled reason a nullable slot is null. Every nullable slot in the
       EnVar schemas should be paired with a *_missing_reason slot taking this
       range. CF-Conventions "missing_value with reason" pattern lifted to the
       metadata layer.
+    examples:
+    - value: not_provided_by_source
+      description: the source product genuinely does not produce this information
+    see_also:
+    - https://cfconventions.org/
     annotations:
       tier: optional
+      justification: >-
+        An unexplained empty field is ambiguous: it could be a terminal gap
+        in the source product, a fixable extraction gap, or a pipeline bug
+        that dropped data. Recording the reason lets completeness checkers
+        and roadmap planning tell these apart instead of treating every
+        blank as equally hopeless.
+      explanation: >-
+        When a box on a form is left empty, it helps to know why — was the
+        question not applicable, did nobody ask it, or did the answer get
+        lost on the way? This slot records that "why" instead of leaving a
+        silent blank.
 
 #────────────────────────────────────────────────────────────────
 # SHARED ENUMS
@@ -97,6 +166,7 @@ slots:
 enums:
 
   MissingReasonEnum:
+    title: Missing-Value Reason
     description: >-
       Controlled reasons that a slot value is missing. Distinguishes a slot
       the source genuinely does not produce (terminal) from one we could
@@ -118,6 +188,7 @@ enums:
         description: This slot does not apply to this variable / record.
 
   DataTypeEnum:
+    title: Value Data Type
     description: The data type of an exposure value.
     permissible_values:
       continuous_numeric:
@@ -132,6 +203,7 @@ enums:
         description: Date-stamped event (e.g. wildfire smoke plume).
 
   PhiStatusEnum:
+    title: PHI Status
     description: PHI content of the sidecar.
     permissible_values:
       no_phi:
@@ -144,12 +216,16 @@ enums:
           design PHI-free.
 
   ConceptStatusEnum:
+    title: Concept Status
     description: >-
       Status of a variable's representation in the target health-data
       vocabulary named by `target_concept_vocabulary` (e.g. the OHDSI
       Standardised Vocabulary, the BioData Catalyst model). `existing` = a
       concept id is available now; `proposed` = a submission is in flight;
       `gap` = no concept exists and none is proposed.
+    see_also:
+    - https://athena.ohdsi.org/
+    - https://biodatacatalyst.nhlbi.nih.gov/
     permissible_values:
       existing:
         description: A concept id is available in the target vocabulary.

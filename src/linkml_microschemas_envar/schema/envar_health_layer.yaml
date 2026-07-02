@@ -27,12 +27,16 @@ imports:
 classes:
 
   HealthLayerLinkage:
+    title: Health-Layer Linkage
     description: >-
       Hooks the sidecar uses to be findable from a downstream health-data
       layer (OMOP, BioData Catalyst, …). These are *not* clinical metadata —
       they are the hooks the exposure record needs so a health-side row can
       resolve back to its provenance. The target layer is named in
       `health_layer_target`, so no single model is privileged. One per record.
+    see_also:
+    - https://ohdsi.github.io/CommonDataModel/
+    - https://biodatacatalyst.nhlbi.nih.gov/
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -42,11 +46,15 @@ classes:
     - cohort_size_anchored_missing_reason
 
   DepositMetadata:
+    title: Deposit Metadata
     description: >-
       Deposit-time slots required when the sidecar travels alongside a
       published FAIR object (Zenodo / Dryad / C-HER / etc.). Most slots are
       pulled from other modules; this class names the required-for-deposit
       subset and adds a few deposit-specific slots.
+    see_also:
+    - https://www.go-fair.org/fair-principles/
+    - https://zenodo.org/
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -67,98 +75,295 @@ classes:
 slots:
 
   health_layer_target:
+    title: Target Health-Data Layer
     range: HealthLayerTargetEnum
     description: >-
       The downstream health-data layer this sidecar links into. Names the
       target so `health_layer_link_field` is interpreted against the right
       model.
+    examples:
+    - value: omop_external_exposure
+      description: OMOP CDM via the OHDSI GIS `external_exposure` table extension
+    see_also:
+    - https://ohdsi.github.io/CommonDataModel/
 
     annotations:
       tier: recommended
+      justification: >-
+        Without naming the target layer, `health_layer_link_field` is
+        ambiguous — a consumer cannot know which data model the link field
+        belongs to, so the exposure record cannot be reliably resolved from
+        the health side. Naming the target in a slot (rather than baking it
+        into slot names) is also what keeps the schema neutral across health
+        data models.
+      explanation: >-
+        Health records are stored in different standard formats — for
+        example OMOP, a widely used common format for health records, so
+        tools written for one hospital's data work on another's. This slot
+        simply says which of those formats this exposure record is meant to
+        plug into.
   health_layer_link_field:
+    title: Health-Layer Link Field
     range: string
     description: >-
       Name of the field in the target health-data layer that carries
       `provenance_id`. For OMOP this is `external_exposure.exposure_source_value`
       (the default); other layers name their own field.
+    examples:
+    - value: exposure_source_value
+      description: the OMOP `external_exposure` field that carries `provenance_id`
+    see_also:
+    - https://ohdsi.github.io/CommonDataModel/
 
     annotations:
       tier: recommended
+      justification: >-
+        This is the join key declaration: it names the exact field in the
+        health-data layer that holds this record's `provenance_id`. Without
+        it, exposure rows cannot be joined back to patients in the health
+        data model, and a health-side row cannot resolve to its exposure
+        provenance.
+      explanation: >-
+        Think of the exposure record and the patient database as two
+        spreadsheets that need to be matched up. This slot names the column
+        in the patient-side spreadsheet that holds the matching ID, so
+        anyone can connect the two tables without guessing.
   cohort_size_anchored:
+    title: Anchored Cohort Size
     range: integer
     description: >-
       Number of distinct persons this exposure record was extracted for.
       Helps downstream estimate the volume of health-layer rows the sidecar
       describes.
+    examples:
+    - value: "3"
+      description: three cohort members in the worked Phoenix example
 
     annotations:
       tier: optional
+      justification: >-
+        Gives downstream consumers a volume expectation: without it, a
+        health-layer loader cannot sanity-check whether the number of
+        exposure rows it receives matches the number of persons the record
+        was extracted for, so silent truncation or duplication goes
+        unnoticed.
+      explanation: >-
+        This is simply a head count: how many different people this
+        exposure record covers. It lets whoever receives the data check
+        that nothing went missing along the way.
   cohort_size_anchored_missing_reason:
+    title: Reason Cohort Size Is Missing
     range: MissingReasonEnum
     description: Reason `cohort_size_anchored` is null.
+    examples:
+    - value: available_but_not_extracted
+      description: the pipeline could count anchored persons but does not yet surface it
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "the cohort size is genuinely unknown" from "the
+        pipeline just did not record it". Without the reason, a null count
+        is uninterpretable and downstream users cannot tell whether to
+        chase the number or accept its absence.
+      explanation: >-
+        When the head count is missing, this slot says why — for example,
+        the tool could have counted but did not, or counting simply does
+        not apply. An explained blank is far more useful than a silent one.
   deposit_doi:
+    title: Deposit DOI (Digital Object Identifier)
     range: string
     description: >-
       DOI assigned by the deposit repository (e.g. Zenodo).
+    examples:
+    - value: "10.5281/zenodo.9999999"
+      description: illustrative Zenodo DOI from the worked Daymet Tmax example
+    see_also:
+    - https://www.doi.org/
+    - https://zenodo.org/
 
     annotations:
       tier: optional
+      justification: >-
+        The DOI is the permanent, citable identifier of the published
+        deposit — the F in FAIR. Without it the record cannot be cited,
+        found in catalogues, or re-retrieved once the original download
+        link rots.
+      explanation: >-
+        A DOI is a permanent ID for a published dataset, like an ISBN for a
+        book. Whatever happens to the hosting website, the DOI keeps
+        pointing to the dataset, so people can always find and cite it.
   deposit_doi_missing_reason:
+    title: Reason Deposit DOI Is Missing
     range: MissingReasonEnum
     description: Reason `deposit_doi` is null (e.g. pre-deposit).
+    examples:
+    - value: under_investigation
+      description: sidecar circulated pre-deposit; DOI pending
 
     annotations:
       tier: optional
+      justification: >-
+        Separates "this record was never deposited" from "the DOI is
+        pending". Without it, a missing DOI is ambiguous and a consumer
+        cannot tell whether a citable identifier will ever exist for this
+        record.
+      explanation: >-
+        If the permanent dataset ID is missing, this slot explains why —
+        for instance the record is circulating before publication and the
+        ID has not been issued yet.
   deposit_repository:
+    title: Deposit Repository
     range: DepositRepositoryEnum
     description: Repository hosting the deposit.
+    examples:
+    - value: zenodo
+    see_also:
+    - https://zenodo.org/
 
     annotations:
       tier: optional
+      justification: >-
+        Names where the deposited object actually lives, which determines
+        access routes, retention guarantees, and how the DOI resolves.
+        Without it, the deposit's accessibility (the A in FAIR) rests on
+        the DOI alone and cannot be assessed.
+      explanation: >-
+        A deposit repository is a public archive for research data — a
+        place like Zenodo where a dataset is published with a permanent ID
+        and kept available long-term. This slot records which archive was
+        used.
   deposit_repository_missing_reason:
+    title: Reason Deposit Repository Is Missing
     range: MissingReasonEnum
     description: Reason `deposit_repository` is null.
+    examples:
+    - value: not_applicable
+      description: the record is not published as a standalone FAIR deposit
 
     annotations:
       tier: optional
+      justification: >-
+        Makes an absent repository name interpretable: most records are
+        never deposited, and this slot records that this is deliberate
+        rather than an oversight, so completeness checks do not raise false
+        alarms.
+      explanation: >-
+        If no archive is named, this slot says why — most often because the
+        record was never meant to be published as a standalone dataset in
+        the first place.
   deposit_license_spdx:
+    title: Deposit License (SPDX Identifier)
     range: string
     description: >-
       SPDX identifier of the license under which the *derived* exposure
       record (not the source) is published.
+    examples:
+    - value: CC-BY-4.0
+    see_also:
+    - https://spdx.org/licenses/
 
     annotations:
       tier: optional
+      justification: >-
+        States, in a machine-readable form, what a reuser is legally
+        allowed to do with the published exposure record. Without it, reuse
+        of the deposit is legally uncertain and cautious downstream users
+        must treat the data as all-rights-reserved — the R in FAIR fails.
+      explanation: >-
+        A license is the legal permission slip attached to the data — for
+        example "you may reuse this if you credit the authors". SPDX is
+        just a standard list of short codes for licenses (like CC-BY-4.0),
+        so software can read the terms without a lawyer.
   deposit_redistribution_constraints_inherited:
+    title: Inherited Redistribution Constraints
     range: string
     multivalued: true
     description: >-
       Constraints from any input source that pass through to the deposit.
+    examples:
+    - value: "no redistribution of raw PRISM grids"
+      description: >-
+        one inherited pass-through constraint (list element); an empty list
+        is also valid and asserts that no constraints pass through
+    see_also:
+    - https://spdx.org/licenses/
 
     annotations:
       tier: optional
+      justification: >-
+        A derived product can carry restrictions from its inputs even when
+        its own license is permissive; without recording them, a deposit
+        may violate an upstream license — for example by redistributing
+        grids the source forbids sharing. An explicit empty list positively
+        asserts that nothing passes through.
+      explanation: >-
+        Datasets built from other datasets can inherit rules from their
+        ingredients, the way a recipe using someone's secret sauce may come
+        with strings attached. This slot lists any such inherited rules so
+        nobody accidentally breaks them when sharing the result.
   recommended_citation:
+    title: Recommended Citation
     range: string
     description: >-
       One-line recommended citation derived from the slots above.
+    examples:
+    - value: >-
+        EnVar exposure record for cohort:phoenix_aki_2022 daily Tmax (Daymet
+        V4), 2026. Deposited at Zenodo, doi:10.5281/zenodo.9999999.
 
     annotations:
       tier: optional
+      justification: >-
+        A ready-made citation lowers the barrier to correct attribution:
+        without it, reusers assemble citations by hand, producing
+        inconsistent references that break citation tracking and deprive
+        the producers of credit for the deposit.
+      explanation: >-
+        This is the one-line "how to credit us" text, like the suggested
+        citation on the back of a report. Anyone reusing the dataset can
+        copy it verbatim into their paper.
   dcat_distribution_url:
+    title: Data-Catalog (DCAT) Distribution URL
     range: uri
     description: >-
       DCAT-compatible distribution URL for catalogue integration.
+    examples:
+    - value: "https://zenodo.org/record/9999999/files/tmax_phoenix.parquet"
+    see_also:
+    - https://www.w3.org/TR/vocab-dcat-3/
 
     annotations:
       tier: optional
+      justification: >-
+        This is the machine-actionable download hook for data catalogues:
+        with it, the deposit can be indexed and fetched by DCAT-speaking
+        catalogue software without human mediation. Without it, the record
+        is findable by humans (via the DOI) but invisible to automated
+        catalogue harvesting.
+      explanation: >-
+        DCAT is a standard way for data catalogues — searchable indexes of
+        datasets, like a library catalogue — to describe where a file can
+        be downloaded. This slot holds that direct download address so
+        catalogue software can list and fetch the data automatically.
   dcat_distribution_url_missing_reason:
+    title: Reason Distribution URL Is Missing
     range: MissingReasonEnum
     description: Reason `dcat_distribution_url` is null.
+    examples:
+    - value: not_applicable
+      description: the record is not registered in a DCAT catalogue
     annotations:
       tier: optional
+      justification: >-
+        Records whether the absence of a catalogue link is deliberate (the
+        record is simply not catalogued) or a gap to be filled, so
+        automated FAIR-ness assessments do not misreport an intentional
+        omission as missing metadata.
+      explanation: >-
+        If there is no catalogue download link, this slot explains why —
+        usually because the dataset was never registered in a data
+        catalogue at all.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -167,9 +372,13 @@ slots:
 enums:
 
   HealthLayerTargetEnum:
+    title: Health-Layer Target
     description: >-
       The downstream health-data layer a sidecar links into. Open by design;
       extend as new targets are supported.
+    see_also:
+    - https://ohdsi.github.io/CommonDataModel/
+    - https://biodatacatalyst.nhlbi.nih.gov/
     permissible_values:
       omop_external_exposure:
         description: >-
@@ -180,7 +389,11 @@ enums:
         description: Another health-data layer named out of band.
 
   DepositRepositoryEnum:
+    title: Deposit Repository
     description: Repository hosting a FAIR deposit.
+    see_also:
+    - https://zenodo.org/
+    - https://www.go-fair.org/fair-principles/
     permissible_values:
       zenodo:
         description: Zenodo.

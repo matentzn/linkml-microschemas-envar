@@ -31,16 +31,20 @@ imports:
 classes:
 
   DailyMaxTemperatureRecord:
+    title: Daily Maximum Temperature Record
     is_a: EnvironmentalExposureRecord
     description: >-
       Canonical record for daily maximum 2 m air temperature (Tmax).
       Pins `standard_name = CF:air_temperature`, `cf_cell_methods =
       "time: maximum"`, `units_ucum = Cel`, `value_data_type =
       continuous_numeric`.
+    see_also:
+      - https://cfconventions.org/standard-names.html
+      - https://ucum.org/
     rules:
       - postconditions:
           slot_conditions:
-            observation_type:
+            variable_identity:
               any_of:
                 - range: VariableIdentity
         description: >-
@@ -52,20 +56,28 @@ classes:
           decisions".)
 
   DailyMinTemperatureRecord:
+    title: Daily Minimum Temperature Record
     is_a: EnvironmentalExposureRecord
     description: >-
       Canonical record for daily minimum 2 m air temperature (Tmin). Pins
       `standard_name = CF:air_temperature`, `cf_cell_methods =
       "time: minimum"`, `units_ucum = Cel`, `value_data_type =
       continuous_numeric`.
+    see_also:
+      - https://cfconventions.org/standard-names.html
+      - https://ucum.org/
 
   WetBulbGlobeTemperatureOutdoorRecord:
+    title: Outdoor WBGT Record
     is_a: EnvironmentalExposureRecord
     description: >-
       Canonical record for outdoor WBGT under the Liljegren 2008
       formulation. Pins `heat_metric_family = wbgt_outdoor`,
       `equation_variant = liljegren_2008`, `indoor_outdoor = outdoor`,
       `units_ucum = Cel`, `value_data_type = continuous_numeric`.
+    see_also:
+      - https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature
+      - https://doi.org/10.1038/s41597-022-01405-3
     slot_usage:
       derived_heat_metric:
         required: true
@@ -81,6 +93,7 @@ classes:
           indoor_outdoor = outdoor.
 
   ExtremeHeatDayFlagRecord:
+    title: Extreme-Heat-Day Flag Record
     is_a: EnvironmentalExposureRecord
     description: >-
       Canonical record for a daily binary extreme-heat-day flag, defined

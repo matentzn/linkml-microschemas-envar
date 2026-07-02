@@ -3,17 +3,21 @@ name: envar-record
 title: EnVar Microschemas — Environmental Exposure Record
 version: "0.1.0"
 description: |-
-  Top-level composite class. Binds the imported LinkML Microschema Profile
-  slots (`subject`, `observation_type`, `location`, `temporality`,
-  `methodology`, `observation_result`) to envar-specific complex ranges and
-  adds the envar top-level slots that compose the full sidecar. Covers
-  §1.1 of envar-heat-scenario-requirements.md.
+  Top-level composite class. Uses readable domain names for the LinkML
+  Microschema Profile anatomy (`variable_identity`, `spatial_reference`,
+  `temporal_reference`, `exposure_model`); each maps back to its profile
+  slot (`observation_type`, `location`, `temporality`, `methodology`) via
+  `implements` / `exact_mappings` — `instantiates` conformance does not
+  constrain slot names. `subject` is used verbatim; `observation_result`
+  is intentionally unbound. Adds the envar top-level slots that compose
+  the full sidecar. Covers §1.1 of envar-heat-scenario-requirements.md.
 license: Apache-2.0
 
 prefixes:
   envar: https://w3id.org/linkml/microschemas/envar/
   linkml: https://w3id.org/linkml/
   prov: http://www.w3.org/ns/prov#
+  msprofile: https://w3id.org/linkml/linkml-microschema-profile/
 default_prefix: envar
 default_range: string
 
@@ -21,6 +25,7 @@ imports:
 - linkml:types
 - envar_common
 - envar_variable
+- envar_layout
 - envar_spatial
 - envar_temporal
 - envar_source
@@ -38,91 +43,86 @@ imports:
 classes:
 
   EnvironmentalExposureRecord:
+    title: Environmental Exposure Record
     tree_root: true
     instantiates:
     - MicroschemaDefinition
     description: >-
       A single environmental-exposure record sidecar: the complete metadata
       graph that travels alongside a value (or value series) emitted by an
-      upstream tool. Composes variable identity, spatial / temporal
-      reference, source dataset, exposure model, uncertainty, linkage,
-      tool run, provenance chain, optional derived-heat-metric methodology,
-      health-data-layer linkage hooks, and FAIR-deposit metadata.
+      upstream tool. Composes variable identity, data layout, spatial /
+      temporal reference, source dataset, exposure model, uncertainty,
+      linkage, tool run, provenance chain, optional derived-heat-metric
+      methodology, health-data-layer linkage hooks, and FAIR-deposit
+      metadata.
+    see_also:
+    - https://github.com/linkml/linkml-microschema-profile
     annotations:
       domain_of_use: environmental_exposure
+    # Slots are listed in slot_group order — see the grouping slots at the
+    # top of the SLOTS section below.
     slots:
     - subject
-    - observation_type
-    - location
-    - temporality
-    - methodology
+    - variable_identity
+    - spatial_reference
+    - temporal_reference
+    - exposure_model
+    - uncertainty
+    - derived_heat_metric
+    - data_layout
+    - source_dataset
+    - tool_run
+    - provenance_chain
+    - linkage_method
+    - health_layer_linkage
+    - deposit_metadata
     - schema_version
     - provenance_id
     - phi_status
-    - source_dataset
-    - uncertainty
-    - linkage_method
-    - tool_run
-    - provenance_chain
-    - derived_heat_metric
-    - health_layer_linkage
-    - deposit_metadata
     slot_usage:
       subject:
+        title: Subject (Patient or Cohort)
+        slot_group: exposure_description
         description: >-
           The patient or cohort the exposure value is attached to. Carried
           as an opaque identifier; PHI must not appear here.
         range: string
+        examples:
+        - value: "cohort:phoenix_aki_2022"
+          description: an opaque cohort handle — no PHI
         annotations:
           tier: core
-      observation_type:
-        # Readable domain name for the profile-abstract `observation_type`.
-        # See issue_naming.md: documents the scientist-facing name; does NOT
-        # change the validated key (input must still use `observation_type`).
-        aliases:
-        - variable_identity
-        description: >-
-          The variable identity object — what physical quantity is being
-          captured. Bound to VariableIdentity (see envar_variable).
-        range: VariableIdentity
-        inlined: true
-        annotations:
-          tier: core
-      location:
-        aliases:
-        - spatial_reference
-        description: >-
-          Spatial reference object describing the native grid and extraction.
-          Bound to SpatialReference (see envar_spatial).
-        range: SpatialReference
-        inlined: true
-        annotations:
-          tier: core
-      temporality:
-        aliases:
-        - temporal_reference
-        description: >-
-          Temporal reference object describing resolution, aggregation, and
-          day-boundary convention. Bound to TemporalReference (see
-          envar_temporal).
-        range: TemporalReference
-        inlined: true
-        annotations:
-          tier: core
-      methodology:
-        aliases:
-        - exposure_model
-        description: >-
-          The exposure-model object describing how values were produced.
-          Bound to ExposureModel (see envar_model). Other methodology-
-          adjacent concerns (source dataset, tool run, provenance chain,
-          derived heat metric) are surfaced as separate envar-extension
-          slots; the profile's single `methodology` slot is narrowed to the
-          model itself.
-        range: ExposureModel
-        inlined: true
-        annotations:
-          tier: core
+          justification: >-
+            An exposure value is meaningless without knowing whose exposure
+            it is. The opaque handle is what lets the sidecar be joined back
+            to the right cohort or patient in the health-data layer while
+            staying PHI-free.
+          explanation: >-
+            Who (or what group) the values belong to — a study cohort or an
+            individual patient, named by an anonymous code rather than
+            anything identifying.
+          # Surfaced in docs/schema_overview.md as a labelled callout — this
+          # is a design question we want community feedback on, not a settled
+          # field.
+          open_question: >-
+            `subject` is the only field in this group that is not a per-value
+            predicate: every other field explains an individual value, but a
+            single scalar subject is dataset-scoped and cannot distribute over
+            the sidecar's rows (per-row subject identity lives in
+            `subject_column`). Under review — should it be dropped, or demoted
+            to a dataset-level cohort handle? Feedback welcome.
+      schema_version:
+        slot_group: record_bookkeeping
+      provenance_id:
+        slot_group: record_bookkeeping
+      phi_status:
+        slot_group: record_bookkeeping
+      # The other profile anatomy slots are NOT used verbatim: the record
+      # defines readable envar slots (variable_identity, spatial_reference,
+      # temporal_reference, exposure_model) that map to the profile slots
+      # via implements / exact_mappings — see the SLOTS section below and
+      # the design-decision notes in this directory's README.md.
+      #
       # observation_result is intentionally NOT bound at the top level: a
       # per-batch sidecar carries values in the accompanying CSV / parquet
       # file, never inline. The profile's required observation_result is
@@ -134,71 +134,529 @@ classes:
 
 slots:
 
+  # ── Grouping slots (display only) ─────────────────────────────
+  # `is_grouping_slot` slots carry no values and are attached to no class;
+  # the record's slots reference them via `slot_group` so documentation
+  # (scripts/gen_schema_overview.py) can render the record in thematic
+  # subtables. Purely presentational — no effect on validation or codegen.
+
+  exposure_description:
+    title: Exposure Description
+    is_grouping_slot: true
+    description: >-
+      What was measured, for whom, where, when, and how — the generic
+      scientific anatomy shared by every exposure record, whatever the
+      variable.
+    annotations:
+      justification: >-
+        Groups the per-value scientific predicates (what, where, when, how,
+        how well) into one reading unit, so a reviewer can assess the
+        exposure claim itself before engaging with file mechanics,
+        provenance, or publication concerns.
+      explanation: >-
+        Think of this as the "science" section of the record: it collects
+        everything that describes the measurement itself — what quantity it
+        is, where and when it applies, and how it was estimated.
+  variable_specific_extensions:
+    title: Variable-Specific Extensions
+    is_grouping_slot: true
+    description: >-
+      Methodology blocks that only apply to particular variable families —
+      present when the variable calls for them, omitted otherwise. Today
+      that is derived heat metrics; future families (air quality, pollen,
+      …) plug in here the same way.
+    annotations:
+      justification: >-
+        Separates methodology blocks that only exist for certain variable
+        families from the universal anatomy, so a reader knows their
+        absence is normal for other variables rather than a completeness
+        failure — and future families gain an obvious plug-in point.
+      explanation: >-
+        Some variables need extra paperwork. A heat index, for example, is
+        computed from temperature and humidity with a particular formula,
+        so it carries an extra methodology block; a plain temperature
+        record does not. This section is where those variable-specific
+        extras live.
+  dataset_and_provenance:
+    title: Dataset & Provenance
+    is_grouping_slot: true
+    description: >-
+      Where the values live and come from — the companion file's column
+      layout, the upstream product, and the exact tool runs that produced
+      the values.
+    annotations:
+      justification: >-
+        Collects the record's pointers to the physical data (column
+        bindings) and its computational history (upstream product, tool
+        runs) in one place, so reproducibility and file-mechanics questions
+        are answered together rather than scattered among the scientific
+        fields.
+      explanation: >-
+        This section answers two practical questions: where exactly are the
+        numbers (which columns of which companion file), and where did they
+        come from (which upstream dataset, and which software runs produced
+        them)?
+  health_data_integration:
+    title: Health-Data Integration & Publication
+    is_grouping_slot: true
+    description: >-
+      How the record meets patient data and travels onward — the
+      gridded-to-patient join, the downstream health-layer hooks, and the
+      FAIR deposit.
+    annotations:
+      justification: >-
+        Groups everything about the record's contact with people and
+        publication — the gridded-to-patient join, the health-data-layer
+        hooks, and the FAIR deposit — because these concerns share
+        reviewers (data governance, health informatics) distinct from the
+        scientists reading the exposure description.
+      explanation: >-
+        Environmental values only become health data when they are attached
+        to patients and shared onward. This section covers that last mile:
+        how a place-based value was joined to a person, how it plugs into
+        health databases, and how it is published.
+  record_bookkeeping:
+    title: Record Identity & Safety
+    is_grouping_slot: true
+    description: >-
+      Sidecar bookkeeping — the schema version the record conforms to, its
+      stable identifier, and the record-level PHI safety assertion.
+    annotations:
+      justification: >-
+        Isolates the sidecar's own metadata (schema version, stable
+        identifier, PHI assertion) from the exposure content, so version
+        pinning and safety review can be done without reading the
+        scientific fields.
+      explanation: >-
+        Housekeeping about the record itself rather than the measurement:
+        which version of the schema it follows, its permanent identifier,
+        and a statement that it contains no private patient information.
+
+  # ── Readable renames of the profile anatomy slots ─────────────
+  # Each implements (and exactly maps to) its LinkML Microschema Profile
+  # counterpart. `instantiates: MicroschemaDefinition` is a metaclass
+  # relation and does not constrain slot names, so the readable names are
+  # profile-conformant. Decision recorded in issue_naming.md.
+
+  variable_identity:
+    title: Variable Identity
+    slot_group: exposure_description
+    implements:
+    - msprofile:observation_type
+    exact_mappings:
+    - msprofile:observation_type
+    aliases:
+    - observation_type
+    range: VariableIdentity
+    inlined: true
+    required: true
+    description: >-
+      The variable identity object — what physical quantity is being
+      captured. Bound to VariableIdentity (see envar_variable). Readable
+      rename of the profile's `observation_type` anatomy slot.
+    examples:
+    - object:
+        variable_name: tmax
+        standard_name: CF:air_temperature
+        cf_cell_methods: "time: maximum"
+        units_ucum: Cel
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://cfconventions.org/
+    - https://ucum.org/
+    annotations:
+      tier: core
+      justification: >-
+        Without a standard variable identity, "tmax" in one file and "TMAX"
+        in another cannot be recognised as the same physical quantity, and
+        unit mix-ups (Celsius vs Fahrenheit vs Kelvin) go undetected —
+        pooling and cross-study comparison silently break.
+      explanation: >-
+        This block pins down exactly what was measured. Instead of relying
+        on a nickname like "tmax", it uses shared vocabularies to say
+        "daily maximum air temperature, in degrees Celsius", so any tool or
+        researcher reads it the same way.
+  spatial_reference:
+    title: Spatial Reference
+    slot_group: exposure_description
+    implements:
+    - msprofile:location
+    exact_mappings:
+    - msprofile:location
+    aliases:
+    - location
+    range: SpatialReference
+    inlined: true
+    required: true
+    description: >-
+      Spatial reference object describing the native grid and extraction.
+      Bound to SpatialReference (see envar_spatial). Readable rename of
+      the profile's `location` anatomy slot.
+    examples:
+    - object:
+        native_spatial_resolution_m: 1000
+        crs: "EPSG:4326"
+        extraction_method: inverse_distance_weighted_4_nearest_cells
+        target_geography_type: point_residence
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://epsg.io/
+    annotations:
+      tier: core
+      justification: >-
+        A value without its grid, coordinate system, and extraction method
+        cannot be located or compared: a 1 km neighbourhood average and a
+        ~31 km regional average look identical as numbers but describe very
+        different exposures, and the extraction cannot be re-run without
+        the method.
+      explanation: >-
+        This block says where the number applies and how it was pulled out
+        of a map. Environmental data usually comes as a grid of cells
+        covering a region; this records how big those cells are and how the
+        value for a specific place was picked from them.
+  temporal_reference:
+    title: Temporal Reference
+    slot_group: exposure_description
+    implements:
+    - msprofile:temporality
+    exact_mappings:
+    - msprofile:temporality
+    aliases:
+    - temporality
+    range: TemporalReference
+    inlined: true
+    required: true
+    description: >-
+      Temporal reference object describing resolution, aggregation, and
+      day-boundary convention. Bound to TemporalReference (see
+      envar_temporal). Readable rename of the profile's `temporality`
+      anatomy slot.
+    examples:
+    - object:
+        temporal_resolution: daily
+        temporal_aggregation_method: maximum
+        day_boundary_convention: local_midnight
+        calendar: gregorian
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://cfconventions.org/
+    annotations:
+      tier: core
+      justification: >-
+        A "daily maximum" is ambiguous without the day-boundary convention:
+        Daymet days end at local midnight while PRISM days end at 12:00
+        GMT, so the same calendar date can cover different physical hours —
+        the most-omitted detail in the heat literature and a known source
+        of cross-product disagreement.
+      explanation: >-
+        This block explains the time ruler behind each value: how long a
+        period each number summarises (a day, a month), how it was
+        summarised (maximum, mean), and — surprisingly important — when a
+        "day" is considered to start and end.
+  exposure_model:
+    title: Exposure Model
+    slot_group: exposure_description
+    implements:
+    - msprofile:methodology
+    exact_mappings:
+    - msprofile:methodology
+    aliases:
+    - methodology
+    range: ExposureModel
+    inlined: true
+    required: true
+    description: >-
+      The exposure-model object describing how values were produced.
+      Bound to ExposureModel (see envar_model). Readable rename of the
+      profile's `methodology` anatomy slot, narrowed to the model itself:
+      other methodology-adjacent concerns (source dataset, tool run,
+      provenance chain, derived heat metric) are surfaced as separate
+      envar-extension slots.
+    examples:
+    - object:
+        exposure_model_type: spatial_interpolation
+        exposure_model_inputs:
+        - GHCN-Daily station observations
+        exposure_model_paper_doi: 10.3334/ORNLDAAC/2129
+        bias_correction_applied: none
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    annotations:
+      tier: core
+      justification: >-
+        The same quantity can be estimated by station interpolation,
+        satellite retrieval, or model reanalysis, each with different
+        inputs and biases; without the model description, values from
+        different products get pooled as if equivalent and their
+        systematic differences stay invisible.
+      explanation: >-
+        Most exposure values are not direct readings from an instrument at
+        someone's house — they are estimates computed from weather
+        stations, satellites, or models. This block says which estimation
+        method produced the numbers and what went into it.
+
+  # ── Envar-extension slots (no profile equivalent) ─────────────
+
+  data_layout:
+    title: Data Layout
+    slot_group: dataset_and_provenance
+    range: DataLayout
+    inlined: true
+    required: true
+    description: >-
+      Data-layout object binding this sidecar to the columns of the
+      companion data file — see envar_layout. Required: without it a
+      consumer cannot locate the values the sidecar describes.
+    examples:
+    - object:
+        table_orientation: wide
+        value_column: tmax
+        subject_column: subject_id
+        time_column: date
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+
+    annotations:
+      tier: core
+      justification: >-
+        The sidecar describes values that live in a companion CSV/parquet
+        file; without the column bindings a consumer cannot tell which
+        column holds the values, subjects, or dates, so the metadata is
+        unanchored and the data unusable — hence the slot is required.
+      explanation: >-
+        The actual numbers live in a separate data table that travels with
+        this record. This block is the map between the two: it names which
+        column holds the values, which holds the person identifier, which
+        holds the date, and so on.
   source_dataset:
+    title: Source Dataset
+    slot_group: dataset_and_provenance
     range: SourceDataset
     inlined: true
     required: true
     description: Source dataset object — see envar_source.
+    examples:
+    - object:
+        source_dataset_name: Daymet V4 Daily Surface Weather Data
+        source_dataset_short_code: daymet_v4
+        source_dataset_doi: 10.3334/ORNLDAAC/2129
+        source_license_spdx: public-domain-us-gov
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://spdx.org/licenses/
+    - https://www.doi.org/
 
     annotations:
       tier: core
+      justification: >-
+        Without the upstream product's identity, version, DOI, and license,
+        the record cannot be cited, its documented biases cannot be looked
+        up, and reuse terms are unknown — and two records built from
+        different product versions cannot be told apart.
+      explanation: >-
+        Exposure values are derived from a published data product (for
+        example Daymet, a daily weather dataset). This block names that
+        product precisely — including its version, citation, and license —
+        so anyone can find it and check its documentation.
   uncertainty:
+    title: Uncertainty
+    slot_group: exposure_description
     range: Uncertainty
     inlined: true
     description: Uncertainty object — see envar_uncertainty.
+    examples:
+    - object:
+        per_value_uncertainty_type: standard_error
+        per_value_uncertainty_units_ucum: Cel
+        missing_data_handling_method: spatiotemporal_interpolation
+        data_completeness_pct: 100
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
 
     annotations:
       tier: recommended
+      justification: >-
+        Exposure values are model estimates with error; without recorded
+        per-value or aggregate uncertainty and missing-data handling,
+        downstream analyses treat estimates as exact, and
+        exposure-measurement error propagates invisibly into health-effect
+        estimates.
+      explanation: >-
+        No estimate is perfect. This block says how far off the numbers
+        might be and what was done about gaps in the data, so users know
+        how much confidence to place in each value.
   linkage_method:
+    title: Linkage Method
+    slot_group: health_data_integration
     range: LinkageMethod
     inlined: true
     required: true
     description: Linkage-method object — see envar_linkage.
+    examples:
+    - object:
+        linkage_strategy: point_extraction_at_residence
+        address_period_alignment: address_history_from_emr
+        clinical_date_assignment_convention: local_midnight
+        lag_alignment_applied: none
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
 
     annotations:
       tier: core
+      justification: >-
+        Attaching a place-based value to a person is a lossy, choice-laden
+        step (geocoding, point vs buffer extraction, date alignment) — the
+        "linkage descriptor" gap the GECC/EIRENE forum names as central.
+        Without it, two studies using the same data product can differ
+        solely through undocumented joins.
+      explanation: >-
+        Environmental data describes places, but health research is about
+        people. This block records how the value for a place was attached
+        to a particular person — for example, by looking up the map cell
+        containing their home address — since that step involves real
+        choices that affect the result.
   tool_run:
+    title: Tool Run
+    slot_group: dataset_and_provenance
     range: ToolRun
     inlined: true
     required: true
     description: The current ToolRun — see envar_toolrun.
+    examples:
+    - object:
+        tool_name: daymet
+        tool_version: "1.0.0"
+        container_image_repository: ghcr.io/degauss-org/daymet
+        run_timestamp_utc: "2026-05-23T14:18:42Z"
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
 
     annotations:
       tier: core
+      justification: >-
+        Without the exact tool name, version, container image, parameters,
+        and timestamp, the record cannot be re-run: "we used the daymet
+        tool" is not reproducible, but a pinned container invocation is.
+      explanation: >-
+        This block is the receipt for the software step that produced the
+        values: which program ran, which exact version, with what settings,
+        and when. With it, someone else can re-run the same step and get
+        the same numbers.
   provenance_chain:
+    title: Provenance Chain
+    slot_group: dataset_and_provenance
     range: ProvenanceChain
     inlined: true
     description: >-
       Ordered W3C-PROV-style chain of upstream tool runs — see
       envar_toolrun. Recommended (not required): a record is reproducible in
       principle without the full chain, but real reproduction needs it.
+    examples:
+    - object:
+        provenance_chain_terminus_type: raw_source_download
+        provenance_chain_steps:
+        - tool_name: geocoder
+          tool_version: "3.3.0"
+          run_timestamp_utc: "2026-05-23T14:02:11Z"
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://www.w3.org/TR/prov-o/
 
     annotations:
       tier: recommended
+      justification: >-
+        The final tool run is rarely the whole story — downloads, geocoding,
+        and intermediate transforms precede it; without the ordered chain
+        back to the raw source, end-to-end reproduction and error tracing
+        are impossible even when the last step is pinned.
+      explanation: >-
+        Data usually passes through several tools before the final value
+        appears — download, geocode, extract. This block lists those
+        earlier steps in order, like a chain of custody reaching back to
+        the original raw source.
   derived_heat_metric:
+    title: Derived Heat Metric
+    slot_group: variable_specific_extensions
     range: DerivedHeatMetric
     inlined: true
     description: >-
       Heat-metric methodology, present when the variable is a derived heat
       metric — see envar_heat_metric. Omitted for non-heat variables.
+    examples:
+    - object:
+        heat_metric_family: wbgt_outdoor
+        equation_variant: liljegren_2008
+        indoor_outdoor: outdoor
+        solar_radiation_basis: surface_downwelling_shortwave_flux
+      description: illustrative outdoor-WBGT methodology block — not part of the tmax scenario, where this slot is omitted
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Heat metrics like WBGT or Heat Index can be computed by several
+        non-equivalent equations from different inputs, and heat-wave flags
+        depend on the threshold definition; the heat-epidemiology
+        literature flags these choices as the main sources of cross-study
+        disagreement, so omitting the block for a heat metric makes the
+        record uncomparable.
+      explanation: >-
+        Some heat measures are not read from a thermometer but calculated
+        from several ingredients (temperature, humidity, wind, sunshine)
+        using a chosen formula. This block records which formula and
+        ingredients were used — it is only needed when the variable is one
+        of these computed heat metrics.
   health_layer_linkage:
+    title: Health-Layer Linkage
+    slot_group: health_data_integration
     range: HealthLayerLinkage
     inlined: true
     description: >-
       Downstream health-data-layer linkage hooks (OMOP, BDC, …) — see
       envar_health_layer. Optional: its members are Recommended/Optional, and
       the Core PHI assertion lives at the record root (`phi_status`).
+    examples:
+    - object:
+        health_layer_target: omop_external_exposure
+        health_layer_link_field: exposure_source_value
+        cohort_size_anchored: 3
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://ohdsi.github.io/CommonDataModel/
+    - https://biodatacatalyst.nhlbi.nih.gov/
 
     annotations:
       tier: recommended
+      justification: >-
+        Naming the downstream health-data layer (OMOP, BDC, …) and the join
+        field makes the exposure record findable from the clinical side;
+        without it the sidecar and the health records it serves drift
+        apart, and the link must be reconstructed by hand.
+      explanation: >-
+        Health studies keep patient data in large standard databases. This
+        block notes which of those systems the exposure values were wired
+        into and through which field, so someone browsing the health data
+        can find their way back to this record.
   deposit_metadata:
+    title: FAIR Deposit Metadata
+    slot_group: health_data_integration
     range: DepositMetadata
     inlined: true
     description: >-
       FAIR-deposit metadata, present when the sidecar is intended to travel
       with a published deposit — see envar_health_layer.
+    examples:
+    - object:
+        deposit_doi: 10.5281/zenodo.9999999
+        deposit_repository: zenodo
+        deposit_license_spdx: CC-BY-4.0
+      description: abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance
+    see_also:
+    - https://www.go-fair.org/fair-principles/
     annotations:
       tier: optional
+      justification: >-
+        When the sidecar travels with a published deposit, the DOI,
+        repository, and license are what make the object findable, citable,
+        and legally reusable — omitting them strands a public artifact
+        without citation or reuse terms. Optional because most records are
+        never deposited.
+      explanation: >-
+        If this record and its data are published in a public archive (such
+        as Zenodo), this block holds the publication details: the permanent
+        DOI link, where it lives, and the license saying how others may use
+        it.

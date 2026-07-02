@@ -9,11 +9,12 @@ description: |-
   and the surrounding provenance metadata needed to load them into OMOP
   external_exposure with full reproducibility.
 
-  This umbrella schema imports the thirteen modules that together define the
+  This umbrella schema imports the fourteen modules that together define the
   EnVar metadata layer:
 
     - envar_common         shared enums and slots
     - envar_variable       variable identity (CF, UCUM, target-vocab concept, ECTO, ENVO)
+    - envar_layout         data layout (column bindings into the companion data file)
     - envar_spatial        spatial reference, extraction
     - envar_temporal       temporal reference, day-boundary convention
     - envar_source         upstream source dataset
@@ -37,6 +38,7 @@ imports:
   - linkml:types
   - envar_common
   - envar_variable
+  - envar_layout
   - envar_spatial
   - envar_temporal
   - envar_source

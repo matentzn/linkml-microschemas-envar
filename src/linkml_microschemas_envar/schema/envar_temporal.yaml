@@ -27,11 +27,15 @@ imports:
 classes:
 
   TemporalReference:
+    title: Temporal Reference
     description: >-
       Temporal provenance of an environmental exposure value: native temporal
       grain, aggregation rule, day-boundary convention, coverage of the source
       product, the extraction window the run actually pulled, and calendar.
       One per record.
+    see_also:
+    - https://cfconventions.org/
+    - https://en.wikipedia.org/wiki/ISO_8601
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -59,70 +63,215 @@ classes:
 slots:
 
   temporal_resolution:
+    title: Temporal Resolution
     range: TemporalResolutionEnum
     description: Native temporal grain of the values.
+    examples:
+    - value: daily
+      description: Daymet Tmax — one value per day.
+    - value: annual
+      description: ACAG satellite PM2.5 — one value per year.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#time-coordinate
 
     annotations:
       tier: core
+      justification: >-
+        A daily value and an annual value of the same variable are different
+        exposures with different health associations; without the native grain
+        an analyst cannot tell whether a series supports an acute (day-level)
+        analysis or only a chronic one, and silent resampling between products
+        goes undetected.
+      explanation: >-
+        How often does this dataset produce a number — one per hour, one per
+        day, one per year? A daily temperature and a yearly average
+        temperature are very different things, so you need to know which kind
+        of value you are looking at before comparing anything.
   temporal_aggregation_method:
+    title: Temporal Aggregation Method
     range: TemporalAggregationMethodEnum
     description: >-
       How the value summarises sub-period values. Maps 1:1 to CF cell_methods.
+    examples:
+    - value: maximum
+      description: "Daily Tmax — `time: maximum` in CF."
+    - value: mean
+      description: "Annual-mean PM2.5 — `time: mean` in CF."
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods
 
     annotations:
       tier: core
+      justification: >-
+        "Daily maximum" and "daily mean" temperature are different exposures
+        with different health associations, and this is the field that
+        separates them. Omitting it lets two studies silently compare a
+        maximum against a mean and reach opposite conclusions about the same
+        heat event.
+      explanation: >-
+        Within each time window there are many raw measurements; this says
+        which single number was kept — the highest, the average, the total.
+        The hottest moment of a day and the average across the whole day can
+        differ by many degrees, so it matters which one the value represents.
   temporal_aggregation_window_seconds:
+    title: Aggregation Window (seconds)
     range: integer
     description: >-
       Redundant with `temporal_resolution` but explicit for machine use; e.g.
       86400 for daily, 3600 for hourly.
+    examples:
+    - value: "86400"
+      description: Daily window (Daymet Tmax).
+    - value: "31536000"
+      description: Annual window (satellite PM2.5).
 
     annotations:
       tier: recommended
+      justification: >-
+        A machine-checkable twin of `temporal_resolution`: an explicit numeric
+        window (86400 for daily) lets validators verify the declared grain
+        arithmetically instead of interpreting an enum label, catching a
+        mislabelled resolution before it corrupts a temporal join.
+      explanation: >-
+        The same "how long is one time step" answer, but written as a plain
+        number of seconds — a day is 86,400 seconds. Computers can check and
+        compare numbers much more reliably than words like "daily", so the
+        redundancy is deliberate.
   day_boundary_convention:
+    title: Day-Boundary Convention
     range: DayBoundaryConventionEnum
     description: >-
       Where the 24-hour day window starts. **Mandatory.** Daymet =
       `local_midnight`; PRISM = `24h_ending_1200_GMT`; NARR / ERA5 sub-daily =
       `utc_midnight`. The single most-omitted slot in the literature and a
       known source of cross-study disagreement.
+    examples:
+    - value: local_midnight
+      description: Daymet convention — day starts at local midnight.
+    - value: not_applicable
+      description: Annual PM2.5 aggregate — no day boundary is meaningful.
+    see_also:
+    - https://daymet.ornl.gov/
+    - https://prism.oregonstate.edu/
+    - https://psl.noaa.gov/data/gridded/data.narr.html
 
     annotations:
       tier: core
+      justification: >-
+        The single most-omitted slot in the environmental-health literature
+        and a known source of cross-study disagreement: Daymet's local-midnight
+        day and PRISM's 24h-ending-1200-GMT day slice the same thermometer
+        readings differently, so the "daily Tmax" for the same calendar date
+        can differ between products and lagged analyses can shift by a whole
+        day. It is also the exposure-side half of the day-boundary cross-check
+        against the clinical-side `clinical_date_assignment_convention`.
+      explanation: >-
+        When does "Tuesday" start and end for this dataset — midnight local
+        time, midnight in London, or noon-to-noon? Different products
+        genuinely disagree, which changes which hot afternoon lands on which
+        day.
   temporal_coverage_start:
+    title: Temporal Coverage Start
     range: date
     description: Start of the source product's full temporal coverage.
+    examples:
+    - value: "1980-01-01"
+      description: Daymet V4 coverage starts in 1980.
 
     annotations:
       tier: recommended
+      justification: >-
+        Distinguishes out-of-coverage from missing: without the product's
+        coverage start, a gap before 1980 in a Daymet-derived series looks
+        like missing data rather than a request outside the product's
+        lifetime, and imputation or exclusion decisions go wrong.
+      explanation: >-
+        The earliest date the source dataset has any data for at all. If you
+        ask for a date before this, the answer is not "missing" — the dataset
+        simply never covered that time.
   temporal_coverage_end:
+    title: Temporal Coverage End
     range: date
     description: >-
       End of the source product's coverage. May be an "ongoing" sentinel for
       live products.
+    examples:
+    - value: "2024-12-31"
+      description: End of Daymet V4 coverage at extraction time.
 
     annotations:
       tier: recommended
+      justification: >-
+        Distinguishes out-of-coverage from missing at the recent end, and —
+        because live products keep growing — pins down which vintage of the
+        product this run saw, so a later re-run against a longer series can
+        be recognised as a different extract.
+      explanation: >-
+        The latest date the source dataset covers; some products are still
+        being extended. Asking for a date after this returns nothing — not
+        because data is missing, but because it does not exist yet.
   extraction_window_start:
+    title: Extraction Window Start
     range: date
     description: Actual start date the run extracted.
+    examples:
+    - value: "2022-07-18"
+      description: Day before the Phoenix index date, for lag analysis.
 
     annotations:
       tier: recommended
+      justification: >-
+        Records the dates this run actually pulled, as opposed to what the
+        product offers; without it a reproducer cannot re-request the same
+        slice, and a lag analysis cannot verify that the pre-event days (e.g.
+        the day before the index date) were actually in the extract.
+      explanation: >-
+        Of everything the dataset covers, this is the first date this
+        particular job actually downloaded — like noting which pages of a
+        big book you photocopied.
   extraction_window_end:
+    title: Extraction Window End
     range: date
     description: Actual end date the run extracted.
+    examples:
+    - value: "2022-07-20"
+      description: Day after the Phoenix index date, for lag analysis.
 
     annotations:
       tier: recommended
+      justification: >-
+        The closing bracket of the slice this run actually pulled; without it
+        a reproducer cannot re-request the same window, and a lag analysis
+        cannot verify that the post-event days it needs were actually
+        extracted rather than silently truncated.
+      explanation: >-
+        Of everything the dataset covers, this is the last date this
+        particular job actually downloaded — the end of the photocopied page
+        range.
   calendar:
+    title: Calendar (CF)
     range: CalendarEnum
     description: >-
       CF calendar. `gregorian` is the default; only matters when a source uses
       a non-standard calendar (some climate model output does).
+    examples:
+    - value: gregorian
+      description: The default; used by Daymet and ACAG PM2.5 alike.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#calendar
 
     annotations:
       tier: recommended
+      justification: >-
+        Some climate-model output uses non-standard calendars (365-day noleap,
+        360-day); joining such a series to real-world Gregorian clinical dates
+        without converting shifts daily values progressively through the year
+        — a silent, cumulative misalignment.
+      explanation: >-
+        Most data uses the ordinary calendar, but some climate models
+        simplify — for example pretending every year has exactly 365 days (no
+        leap days) or twelve 30-day months. If you line those dates up against
+        a real calendar without converting, they slowly drift out of sync.
 #────────────────────────────────────────────────────────────────
 # ENUMS
 #────────────────────────────────────────────────────────────────
@@ -130,6 +279,7 @@ slots:
 enums:
 
   TemporalResolutionEnum:
+    title: Temporal Resolution
     description: Native temporal grain of the source product.
     permissible_values:
       instantaneous:
@@ -149,8 +299,11 @@ enums:
         description: One value per year.
 
   TemporalAggregationMethodEnum:
+    title: Temporal Aggregation Method
     description: >-
       How sub-period values were aggregated. CF `cell_methods` aligned.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods
     permissible_values:
       mean:
         description: Arithmetic mean over the window.
@@ -166,6 +319,7 @@ enums:
         description: A point-in-time sample with no aggregation applied.
 
   DayBoundaryConventionEnum:
+    title: Day-Boundary Convention
     description: >-
       Where the 24-hour day window starts. The single most-omitted slot in the
       environmental-health literature.
@@ -195,7 +349,10 @@ enums:
           the sub-daily window is not a meaningful concept (SPEC §5).
 
   CalendarEnum:
+    title: CF Calendar
     description: CF `calendar` values.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#calendar
     permissible_values:
       gregorian:
         description: Standard mixed Julian / Gregorian calendar (default).

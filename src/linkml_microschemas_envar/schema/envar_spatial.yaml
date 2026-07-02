@@ -26,11 +26,15 @@ imports:
 classes:
 
   SpatialReference:
+    title: Spatial Reference
     description: >-
       Spatial provenance of an environmental exposure value: the native grid /
       footprint of the source product, the CRS, the geographic extent, the
       extraction rule used to attach a value to a patient location, and the
       target geography type. One per record.
+    see_also:
+    - https://epsg.io/
+    - https://en.wikipedia.org/wiki/Coordinate_reference_system
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -60,90 +64,266 @@ classes:
 slots:
 
   native_spatial_resolution_m:
+    title: Native Spatial Resolution (m)
     range: float
     description: >-
       Native spatial resolution of the source product in metres. Daymet = 1000,
       GridMET ≈ 4000, NARR ≈ 32000.
+    examples:
+    - value: "1000"
+      description: Daymet V4 1 km grid
+    see_also:
+    - https://daymet.ornl.gov/
+    - https://www.climatologylab.org/gridmet.html
+    - https://psl.noaa.gov/data/gridded/data.narr.html
 
     annotations:
       tier: core
+      justification: >-
+        Exposure misclassification scales directly with cell size: a value from
+        a 32 km NARR cell averages over an entire metro area while a 1 km Daymet
+        cell resolves a neighbourhood. Without the resolution, downstream users
+        cannot judge how precise a per-patient exposure really is or whether two
+        studies' values are comparable.
+      explanation: >-
+        Gridded environmental data divides the world into square tiles, like
+        pixels in a photo, and reports one value per tile. This field says how
+        wide each tile is in metres — small tiles give a sharp picture of local
+        conditions, big tiles give a blurry average over a large area.
   native_spatial_resolution_descriptor:
+    title: Native Resolution Descriptor
     range: string
     description: >-
       Human-readable label for the native resolution, e.g. "1 km regular grid",
       "H3 hex zoom 8", "census tract polygon", "point station".
+    examples:
+    - value: "1 km regular grid"
+      description: Daymet V4 native grid
 
     annotations:
       tier: recommended
+      justification: >-
+        The numeric resolution alone cannot distinguish a regular grid from hex
+        cells, polygons, or point stations, and these layouts imply different
+        extraction and error behaviour. Omitting the label leaves the geometry
+        of the source data ambiguous even when the cell size is known.
+      explanation: >-
+        A short plain-English phrase saying what the map data actually looks
+        like — evenly spaced square tiles, honeycomb-shaped cells, irregular
+        neighbourhood outlines, or individual measuring stations dotted around.
   crs:
+    title: Coordinate Reference System (CRS)
     range: string
     description: >-
       Coordinate reference system as an EPSG identifier or PROJ string.
       Mandatory. E.g. `EPSG:4326` for Daymet, `EPSG:5072` for NARR Lambert
       Conformal Conic.
+    examples:
+    - value: "EPSG:4326"
+      description: WGS 84, used by the Daymet and ACAG PM2.5 scenarios
+    see_also:
+    - https://epsg.io/
+    - https://proj.org/
 
     annotations:
       tier: core
+      justification: >-
+        Without the CRS the grid cannot be placed on the Earth correctly: the
+        same coordinate pair points to different physical locations under
+        different reference systems, so a mismatched or missing CRS silently
+        shifts every location and attaches exposure values to the wrong places.
+      explanation: >-
+        A coordinate reference system is the agreed way of turning numbers into
+        places on the Earth — the same pair of coordinates means different
+        spots under different systems. Naming the system (usually as a short
+        EPSG code) tells software exactly which convention the numbers follow.
   spatial_extent_bbox:
+    title: Product Bounding Box
     range: float
     multivalued: true
     description: >-
       Bounding box of the source *product* (not the extracted subset), as
       `[min_lon, min_lat, max_lon, max_lat]`.
+    examples:
+    - value: "[-131.104, 14.075, -52.95, 53.038]"
+      description: >-
+        Daymet V4 product bounding box (CONUS + Hawaii + Puerto Rico); one
+        float per list element, ordered min_lon, min_lat, max_lon, max_lat
+    see_also:
+    - https://datatracker.ietf.org/doc/html/rfc7946#section-5
 
     annotations:
       tier: recommended
+      justification: >-
+        The product footprint distinguishes "no value here" (the location lies
+        outside the product's coverage) from "missing value" (the product covers
+        it but the value is absent). Without it, out-of-extent patients look
+        like data gaps and can be silently misinterpreted.
+      explanation: >-
+        A bounding box is a rectangle drawn on the map that just barely
+        contains all the data — four numbers giving its western, southern,
+        eastern, and northern edges. Anything outside that rectangle was never
+        covered by the dataset in the first place.
   spatial_extent_descriptor:
+    title: Product Extent Description
     range: string
     description: >-
       Human-readable description of the product extent, e.g.
       "CONUS + Hawaii + Puerto Rico", "global land surface 60°S-80°N".
+    examples:
+    - value: "CONUS + Hawaii + Puerto Rico"
+      description: Daymet V4 product extent
 
     annotations:
       tier: recommended
+      justification: >-
+        The numeric bounding box is precise but opaque; a human-readable extent
+        lets reviewers and data users sanity-check coverage at a glance (e.g.
+        spotting that Alaska is not included) without decoding coordinates.
+      explanation: >-
+        A plain-English description of where in the world the dataset has data
+        — for example "the continental United States plus Hawaii and Puerto
+        Rico" — so you can tell at a glance whether your study area is covered.
   extraction_method:
+    title: Extraction Method
     range: ExtractionMethodEnum
     description: >-
       How a gridded value was extracted at the patient's coordinates. Default
       for DeGAUSS daymet / narr is `inverse_distance_weighted_4_nearest_cells`.
+    examples:
+    - value: inverse_distance_weighted_4_nearest_cells
+      description: DeGAUSS default for point extraction (Daymet Tmax scenario)
+    - value: area_weighted_polygon_mean
+      description: polygon aggregation (ACAG PM2.5 tract scenario)
+    see_also:
+    - https://degauss.org/
 
     annotations:
       tier: core
+      justification: >-
+        This is the single biggest lever in turning a grid into a per-person
+        value: different extraction methods yield different exposure values at
+        the very same point. If the method is unknown, exposure values are not
+        reproducible and cannot be compared across studies or tool runs.
+      explanation: >-
+        A patient's home almost never sits exactly at the centre of a data
+        tile, so a rule is needed to pick or blend nearby tile values into one
+        number for that spot — take the closest tile, average the four nearest
+        ones, and so on. This field records which rule was used.
   extraction_buffer_m:
+    title: Extraction Buffer Radius (m)
     range: float
     description: >-
       Radius of any spatial buffer applied (e.g. greenspace at 500 / 1500 /
       2500 m). Null when no buffer is applied.
+    examples:
+    - value: "500"
+      description: 500 m greenspace buffer; null in the Daymet Tmax scenario (no buffer)
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        For buffer-based strategies the radius is a hyperparameter that changes
+        the assigned exposure — greenspace within 500 m and within 2500 m of a
+        home are different quantities. Omitting it makes buffer-derived values
+        unreproducible and incomparable across analyses.
+      explanation: >-
+        Some exposures are summarised over a circle drawn around the patient's
+        home rather than at the exact address — for example, how much green
+        space lies within walking distance. This field gives the radius of that
+        circle in metres; a bigger circle averages over more surroundings.
   extraction_buffer_m_missing_reason:
+    title: Reason Buffer Radius Is Missing
     range: MissingReasonEnum
     description: Reason `extraction_buffer_m` is null.
+    examples:
+    - value: not_applicable
+      description: no buffer is used for point extraction (Daymet Tmax scenario)
 
     annotations:
       tier: optional
+      justification: >-
+        An empty buffer field is ambiguous: it could mean no buffer was used or
+        that the radius was simply not recorded. Stating the reason makes the
+        absence deliberate and checkable, so validators and reviewers do not
+        flag a legitimate point extraction as incomplete metadata.
+      explanation: >-
+        When the circle-radius field above is left empty, this field says why —
+        most often because no circle was drawn at all and the value was taken
+        straight at the address. It turns a silent blank into an explicit,
+        trustworthy statement.
   population_weighting_source:
+    title: Population Weighting Source
     range: string
     description: >-
       Census vintage used for population weighting (e.g. the Spangler et al.
       WBGT product is population-weighted from gridMET). Null when no weighting
       is applied.
+    examples:
+    - value: "GPW v4 (2020)"
+      description: Gridded Population of the World v4, used in the ACAG PM2.5 scenario
+    see_also:
+    - https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html
+    - https://www.climatologylab.org/gridmet.html
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Population-weighted values depend on which population dataset and
+        census vintage supplied the weights; the same grid weighted by 2010
+        versus 2020 populations gives different exposures. Without the source,
+        a weighted value cannot be reproduced or compared with other weighted
+        products.
+      explanation: >-
+        Some datasets average their tiles by giving more weight to places where
+        more people live, so the number reflects what a typical resident
+        experiences rather than a plain average over land. This field names
+        the population map (and its year) that was used for that weighting.
   population_weighting_source_missing_reason:
+    title: Reason Population Weighting Is Missing
     range: MissingReasonEnum
     description: Reason `population_weighting_source` is null.
+    examples:
+    - value: not_applicable
+      description: no population weighting applied (Daymet Tmax scenario)
 
     annotations:
       tier: optional
+      justification: >-
+        A blank weighting source is ambiguous between "no weighting was
+        applied" and "the source was not recorded". Recording the reason keeps
+        unweighted products from looking like incompletely documented weighted
+        ones and lets automated checks pass legitimately null records.
+      explanation: >-
+        When the population-weighting field above is empty, this field explains
+        why — usually because the dataset is a plain average with no
+        population weighting at all. It makes the emptiness intentional rather
+        than an oversight.
   target_geography_type:
+    title: Target Geography Type
     range: TargetGeographyTypeEnum
     description: >-
       Geographic unit the exposure value is attached to.
+    examples:
+    - value: point_residence
+      description: patient's exact residence coordinates (Daymet Tmax scenario)
+    - value: census_tract
+      description: tract-level aggregate (ACAG PM2.5 scenario)
+    see_also:
+    - https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html
     annotations:
       tier: core
+      justification: >-
+        An exposure pinned to an exact residence and one averaged over a whole
+        county are fundamentally different quantities with different privacy
+        and misclassification profiles. Without the target geography, users
+        cannot tell how localised the value is or link it correctly to health
+        records held at a given geographic level.
+      explanation: >-
+        This says what kind of place the value belongs to: one specific home
+        address, a neighbourhood-sized census area, a ZIP-code area, a whole
+        county, and so on. The bigger the unit, the more the number is a shared
+        average rather than a personal measurement.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -152,6 +332,7 @@ slots:
 enums:
 
   ExtractionMethodEnum:
+    title: Extraction Method
     description: >-
       How a gridded value was extracted at a target location.
     permissible_values:
@@ -172,8 +353,12 @@ enums:
         description: Direct lookup at a point station observation.
 
   TargetGeographyTypeEnum:
+    title: Target Geography Type
     description: >-
       Geographic unit the exposure is attached to.
+    see_also:
+    - https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html
+    - https://h3geo.org/
     permissible_values:
       point_residence:
         description: Attached to the patient's exact lat / lon.

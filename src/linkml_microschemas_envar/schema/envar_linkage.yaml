@@ -29,6 +29,7 @@ imports:
 classes:
 
   LinkageMethod:
+    title: Linkage Method
     description: >-
       How a gridded environmental value gets attached to a patient: the
       resolution of the patient's spatiotemporal trajectory down to the
@@ -37,6 +38,8 @@ classes:
       patient location-over-time is modelled (the spatial axis), and the
       clinical-date-assignment convention, partial-day attribution, and lag
       alignment (the temporal axis). One per record.
+    see_also:
+    - https://degauss.org/
     annotations:
       domain_of_use: environmental_exposure
     slots:
@@ -69,82 +72,224 @@ classes:
 slots:
 
   linkage_strategy:
+    title: Linkage Strategy
     range: LinkageStrategyEnum
     description: How a gridded value is attached to a patient location.
+    examples:
+    - value: point_extraction_at_residence
+      description: extract the grid-cell value at the geocoded residence (Daymet tmax scenario)
+    - value: population_weighted_area_to_residence
+      description: population-weighted aggregation over the residence tract (ACAG PM2.5 scenario)
 
     annotations:
       tier: core
+      justification: >-
+        The strategy determines which grid cells or stations contribute to a
+        patient's value: point extraction, buffer aggregation, and
+        population weighting can assign materially different exposures to
+        the same address. Without it the person-level value cannot be
+        reproduced or compared across studies — this is the "linkage
+        descriptor" gap named by the GECC/EIRENE forum.
+      explanation: >-
+        Environmental data comes as a map of values, but health data belongs
+        to people. This slot records the rule used to pick a person's value
+        off that map — for example reading the value exactly at their home,
+        or averaging the values in a circle around it.
   linkage_buffer_radius_m:
+    title: Buffer Radius (Metres)
     range: float
     description: >-
       Buffer radius in metres for buffer-aggregation strategies.
+    examples:
+    - value: "500"
+      description: 500 m buffer around the geocoded residence
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        For buffer strategies the radius defines the exposure footprint: a
+        500 m and a 5 km buffer around the same residence can average over
+        very different air or heat conditions, so the assigned value is not
+        reproducible without it.
+      explanation: >-
+        When exposure is averaged over a circle drawn around a person's
+        home, this is how wide that circle is, in metres.
   linkage_buffer_radius_m_missing_reason:
+    title: Reason Buffer Radius Is Missing
     range: MissingReasonEnum
     description: Reason `linkage_buffer_radius_m` is null.
+    examples:
+    - value: not_applicable
+      description: strategy is point extraction, so no buffer radius applies
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "no buffer applies because the strategy is point
+        extraction" from "the radius was simply not recorded" — without it a
+        null radius is ambiguous and the linkage cannot be audited.
+      explanation: >-
+        When the circle-width field is empty, this says why — for example
+        because no circle was used at all.
   linkage_buffer_aggregation_method:
+    title: Buffer Aggregation Method
     range: BufferAggregationEnum
     description: >-
       Aggregation method applied within the buffer (mean / max / median /
       area-weighted mean).
+    examples:
+    - value: area_weighted_mean
+      description: area-weighted mean over the aggregation area (ACAG PM2.5 scenario)
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        Within the same buffer, mean, max, and area-weighted mean yield
+        different exposure values; omitting the method makes the assigned
+        value irreproducible and cross-study comparisons unsafe.
+      explanation: >-
+        If several map values fall inside the circle around a home, they
+        must be boiled down to one number. This records how — for example by
+        taking the average, or the highest value.
   linkage_buffer_aggregation_method_missing_reason:
+    title: Reason Buffer Aggregation Is Missing
     range: MissingReasonEnum
     description: Reason `linkage_buffer_aggregation_method` is null.
+    examples:
+    - value: not_applicable
+      description: strategy is point extraction, so no buffer aggregation applies
 
     annotations:
       tier: optional
+      justification: >-
+        Separates "not applicable — no buffer aggregation was performed"
+        from an undocumented gap; without the reason a null method leaves
+        the linkage unauditable.
+      explanation: >-
+        When the how-values-were-combined field is empty, this says why.
   linkage_max_distance_to_station_m:
+    title: Maximum Distance to Station (Metres)
     range: float
     description: >-
       Maximum distance to a station for nearest-station strategies; values
       beyond this distance get null.
+    examples:
+    - value: "50000"
+      description: stations farther than 50 km from the residence yield null
 
     annotations:
       tier: conditionally_core
+      justification: >-
+        For nearest-station strategies this cutoff decides whether a distant
+        monitor still counts as "nearby"; beyond it the assignment is
+        meaningless and should be null. Without the cutoff, values assigned
+        from stations tens of kilometres away are indistinguishable from
+        tight matches, silently degrading exposure quality.
+      explanation: >-
+        Some methods take the reading from the closest measuring station.
+        This is the farthest a station may be from the home before the match
+        is considered too unreliable and no value is assigned.
   linkage_max_distance_to_station_m_missing_reason:
+    title: Reason Station Distance Is Missing
     range: MissingReasonEnum
     description: Reason `linkage_max_distance_to_station_m` is null.
+    examples:
+    - value: not_applicable
+      description: strategy is gridded extraction, not nearest-station
 
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes "not applicable — the data is gridded, not
+        station-based" from an undocumented cutoff; a bare null hides
+        whether unlimited-distance station matches were allowed.
+      explanation: >-
+        When the maximum-station-distance field is empty, this says why.
   geocoding_precision_propagated:
+    title: Propagated Geocoding Precision
     range: GeocodingPrecisionEnum
     description: >-
       Quality category propagated from the upstream geocoder (DeGAUSS
       `precision` column).
+    examples:
+    - value: range
+      description: street-centerline point interpolated within an address-range segment
+    see_also:
+    - https://degauss.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        Geocoding precision determines whether "residence" means the actual
+        house or a ZIP-code centroid kilometres away — which changes which
+        grid cell the patient falls in and therefore their assigned
+        exposure. Propagating it lets analysts filter or down-weight
+        coarsely located records.
+      explanation: >-
+        Geocoding means turning a street address into map coordinates, and
+        it does not always land on the exact house — sometimes only on the
+        street, the ZIP area, or the city. This records how exact the
+        landing was.
   geocoding_score_propagated:
+    title: Propagated Geocoding Score
     range: float
     description: >-
       Geocoder score (0-1) propagated from the upstream geocoder so the
       exposure record knows the spatial precision of its anchor.
+    examples:
+    - value: "0.95"
+    see_also:
+    - https://degauss.org/
 
     annotations:
       tier: recommended
+      justification: >-
+        The score quantifies how confident the geocoder was in its address
+        match; without it downstream analysts cannot apply quality cutoffs,
+        and poorly matched addresses contaminate the exposure assignment
+        invisibly.
+      explanation: >-
+        When software converts an address into map coordinates it also rates
+        its own confidence, from 0 to 1. This carries that rating along with
+        the exposure record.
   geocoding_score_propagated_missing_reason:
+    title: Reason Geocoding Score Is Missing
     range: MissingReasonEnum
     description: Reason `geocoding_score_propagated` is null.
+    examples:
+    - value: upstream_data_not_propagated
+      description: the geocoder emitted a score but the pipeline dropped it
 
     annotations:
       tier: optional
+      justification: >-
+        Records whether the score was never produced or was produced but
+        dropped by the pipeline — the difference between an upstream
+        limitation and a fixable ETL gap.
+      explanation: >-
+        When the geocoder-confidence field is empty, this says why.
   address_period_alignment:
+    title: Address Period Alignment
     range: AddressPeriodAlignmentEnum
     description: >-
       How the patient's location-over-time (the spatial axis of trajectory
       resolution) was modelled.
+    examples:
+    - value: address_history_from_emr
+      description: an EMR-sourced address history covers the observation period
     annotations:
       tier: recommended
+      justification: >-
+        Assuming a single static address smears home-location exposure
+        across days the patient was actually elsewhere; how
+        location-over-time was modelled changes which days get which values
+        and can bias exposure estimates.
+      explanation: >-
+        People move house and travel, so "where the patient was" changes
+        over time. This records whether the study used one fixed address, a
+        full address history, or accounted for known trips away from home.
   clinical_date_assignment_convention:
+    title: Clinical Date Assignment Convention
     range: ClinicalDateAssignmentEnum
     description: >-
       The clinical-side mirror of `day_boundary_convention` (envar_temporal):
@@ -154,49 +299,136 @@ slots:
       boundary-hour events to the wrong day, which is what makes the Core
       `day_boundary_convention` checkable at all. Metadata *about the join* —
       never the clinical timestamp itself; carries no PHI.
+    examples:
+    - value: local_midnight
+      description: matches the exposure-side day_boundary_convention (Daymet tmax scenario)
+    - value: date_only_no_time
+      description: clinical record carried only a date, so no boundary rule applies (ACAG PM2.5 scenario)
     annotations:
       tier: conditionally_core
+      justification: >-
+        If the clinical side collapsed timestamps to dates with a different
+        day-boundary rule than the exposure side, events near midnight are
+        silently joined to the wrong day's exposure; recording both rules is
+        what makes that mismatch detectable at all.
+      explanation: >-
+        A hospital visit at 11 pm can count as "today" or "tomorrow"
+        depending on which clock and cutoff you use. This records the rule
+        the clinical data used to turn a timestamp into a calendar date.
   clinical_date_assignment_convention_missing_reason:
+    title: Reason Date Convention Is Missing
     range: MissingReasonEnum
     description: Reason `clinical_date_assignment_convention` is null.
+    examples:
+    - value: available_but_not_extracted
+      description: the clinical system documents its convention but the pipeline does not yet surface it
     annotations:
       tier: optional
+      justification: >-
+        Distinguishes a convention that is undocumented at the source from
+        one the pipeline has not yet extracted — which determines whether
+        the day-boundary cross-check can ever be completed.
+      explanation: >-
+        When the clinical date-rule field is empty, this says why.
   partial_day_attribution_rule:
+    title: Partial-Day Attribution Rule
     range: PartialDayAttributionEnum
     description: >-
       How boundary / transition days of the patient's trajectory (trip start /
       end, travel days) are attributed when location changes within a day. The
       temporal partner to the `known_travel_interval` address alignment.
+    examples:
+    - value: not_applicable
+      description: no trajectory transitions occur in the observation period
     annotations:
       tier: recommended
+      justification: >-
+        On a transition day the patient is in two places; whether that day
+        is credited to the origin, the destination, both, or excluded
+        changes which exposure value the day receives, and an undocumented
+        rule makes the linkage irreproducible.
+      explanation: >-
+        If someone leaves on a trip mid-day, which place's environment
+        "counts" for that day? This records the choice — the place they
+        left, the place they arrived, both, or neither.
   partial_day_attribution_rule_missing_reason:
+    title: Reason Attribution Rule Is Missing
     range: MissingReasonEnum
     description: Reason `partial_day_attribution_rule` is null.
+    examples:
+    - value: not_provided_by_source
+      description: the trajectory source does not document transition-day handling
     annotations:
       tier: optional
+      justification: >-
+        Separates "not applicable — the patient never changed location" from
+        an undocumented handling of travel days; without it a null rule
+        cannot be audited.
+      explanation: >-
+        When the travel-day rule field is empty, this says why.
   lag_alignment_applied:
+    title: Lag Alignment Applied
     range: LagAlignmentEnum
     description: >-
       Whether and how values were lag-aligned to a clinical event. Relocated
       from envar_temporal: lag alignment attaches a value to an event (a
       linkage concern), not an intrinsic temporal property. See
       `lag_alignment_specifier` for the concrete lag value(s).
+    examples:
+    - value: none
+      description: values are at native dates; no lag alignment applied
+    see_also:
+    - https://cran.r-project.org/package=dlnm
     annotations:
       tier: recommended
+      justification: >-
+        If values were already shifted relative to the clinical event and
+        this is not recorded, an analyst may apply the lag again —
+        double-lagging is a silent analytic error that misdates every
+        exposure.
+      explanation: >-
+        Health effects can trail exposure by days — a heat wave today may
+        send someone to hospital next week — so analyses sometimes pair a
+        clinical event with earlier exposure values. This records whether
+        such a shift was already built into the data.
   lag_alignment_specifier:
+    title: Lag Alignment Specifier
     range: string
     description: >-
       Free-form specifier paired with `lag_alignment_applied` to capture the
       concrete lag values (e.g. `"3"` for a 3-day lag, or `"0-21"` for a
       distributed lag from 0 to 21 days). Empty when `lag_alignment_applied`
       = `none`.
+    examples:
+    - value: "0-3"
+      description: distributed lag from 0 to 3 days before the clinical event (with lag_alignment_applied = distributed_lag)
     annotations:
       tier: optional
+      justification: >-
+        Knowing that a lag was applied is useless without the concrete
+        value(s); a 3-day lag and a distributed lag over 0-21 days define
+        entirely different exposure windows and cannot be reconstructed
+        after the fact.
+      explanation: >-
+        This spells out exactly how many days the exposure values were
+        shifted relative to the clinical event — for example 3 days, or a
+        whole range like 0 to 21 days.
   lag_alignment_applied_missing_reason:
+    title: Reason Lag Alignment Is Missing
     range: MissingReasonEnum
     description: Reason `lag_alignment_applied` is null.
+    examples:
+    - value: under_investigation
+      description: lag-alignment documentation for this ETL is still being populated
     annotations:
       tier: optional
+      justification: >-
+        Records why the lag-alignment status is unknown; without it analysts
+        cannot tell whether the data is safely unlagged or the documentation
+        simply has not caught up, leaving the double-lagging risk open.
+      explanation: >-
+        When the lag field is empty, this says why — for example because the
+        documentation is still being written.
 
 #────────────────────────────────────────────────────────────────
 # ENUMS
@@ -205,6 +437,7 @@ slots:
 enums:
 
   LinkageStrategyEnum:
+    title: Linkage Strategy
     description: How a gridded value is attached to a patient location.
     permissible_values:
       point_extraction_at_residence:
@@ -225,6 +458,7 @@ enums:
           patient's residence.
 
   BufferAggregationEnum:
+    title: Buffer Aggregation Method
     description: Aggregation within a buffer.
     permissible_values:
       mean:
@@ -237,8 +471,11 @@ enums:
         description: Area-weighted mean of values in the buffer.
 
   GeocodingPrecisionEnum:
+    title: Geocoding Precision
     description: >-
       Geocoder precision category, mirroring DeGAUSS `geocoder.precision`.
+    see_also:
+    - https://degauss.org/
     permissible_values:
       range:
         description: >-
@@ -256,6 +493,7 @@ enums:
         description: Precision is unknown.
 
   AddressPeriodAlignmentEnum:
+    title: Address Period Alignment
     description: >-
       How the patient's location-over-time (the spatial axis of trajectory
       resolution) was modelled.
@@ -274,6 +512,7 @@ enums:
         description: A synthetic residence period was constructed for the patient.
 
   ClinicalDateAssignmentEnum:
+    title: Clinical Date Assignment
     description: >-
       The clinical-side mirror of `DayBoundaryConventionEnum` (envar_temporal):
       which timezone / day-boundary rule was used to collapse the clinical
@@ -296,6 +535,7 @@ enums:
         description: The clinical-date-assignment convention is unknown.
 
   PartialDayAttributionEnum:
+    title: Partial-Day Attribution
     description: >-
       How boundary / transition days of the patient's trajectory (trip start /
       end, travel days) are attributed when location changes within a day.
@@ -316,6 +556,7 @@ enums:
           the rule does not apply.
 
   LagAlignmentEnum:
+    title: Lag Alignment
     description: >-
       Whether the values have been pre-aligned to a clinical event window in
       this ETL. Companion slot `lag_alignment_specifier` captures the concrete

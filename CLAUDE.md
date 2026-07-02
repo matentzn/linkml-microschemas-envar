@@ -31,12 +31,13 @@ The substantive content is the LinkML schema set under `src/linkml_microschemas_
 
 ### Schema layout (microschema-per-concern)
 
-`linkml_microschemas_envar.yaml` is an umbrella that imports thirteen sibling modules. Each module isolates one concern:
+`linkml_microschemas_envar.yaml` is an umbrella that imports fourteen sibling modules. Each module isolates one concern:
 
 | Module | Class(es) | Concern |
 |---|---|---|
 | `envar_common.yaml` | enums + shared slots | `MissingReasonEnum`, `DataTypeEnum`, `ConceptStatusEnum`, `PhiStatusEnum`; shared `schema_version`, `provenance_id`, `phi_status`; imports the **LinkML Microschema Profile** |
 | `envar_variable.yaml` | `VariableIdentity` | CF standard name, UCUM, target-vocabulary concept id + status, ECTO, ENVO |
+| `envar_layout.yaml` | `DataLayout` | column bindings into the companion data file (value/subject/time/uncertainty/QA columns, wide-vs-long orientation) |
 | `envar_spatial.yaml` | `SpatialReference` | grid, CRS, extraction method |
 | `envar_temporal.yaml` | `TemporalReference` | resolution, day-boundary convention, calendar |
 | `envar_source.yaml` | `SourceDataset` | upstream product identity, DOI, license |
@@ -49,9 +50,9 @@ The substantive content is the LinkML schema set under `src/linkml_microschemas_
 | `envar_record.yaml` | `EnvironmentalExposureRecord` | top composite — binds profile slots to envar ranges |
 | `envar_examples.yaml` | `DailyMaxTemperatureRecord`, `DailyMinTemperatureRecord`, `WetBulbGlobeTemperatureOutdoorRecord`, `ExtremeHeatDayFlagRecord` | concrete record subclasses |
 
-### Key design decision: profile-slot names at the top level
+### Key design decision: readable top-level names, mapped to the profile
 
-`EnvironmentalExposureRecord` `instantiates: MicroschemaDefinition` from the [LinkML Microschema Profile](https://github.com/linkml/linkml-microschema-profile). Five of the six profile anatomy slots (`subject`, `observation_type`, `location`, `temporality`, `methodology`) are used **verbatim** at the top level, with envar-specific classes bound as their ranges via `slot_usage`. The sixth, `observation_result`, is intentionally **not** bound: a batch sidecar carries values in the companion data file, and the profile marks `observation_result` required — keeping it would force every record to inline an (abstract-ranged) value and breaks `linkml-run-examples` (which instantiates the Python dataclass, where the optional override does not propagate). It was therefore dropped from the record's slot list. Envar concerns with no profile equivalent (`source_dataset`, `linkage_method`, `tool_run`, `provenance_chain`, `derived_heat_metric`, `health_layer_linkage`, `deposit_metadata`, `uncertainty`, and the record-root `phi_status`) are added as additional top-level slots. The full rationale and known drawbacks are documented in `src/linkml_microschemas_envar/schema/README.md` — read that before renaming top-level slots or restructuring `EnvironmentalExposureRecord`.
+`EnvironmentalExposureRecord` `instantiates: MicroschemaDefinition` from the [LinkML Microschema Profile](https://github.com/linkml/linkml-microschema-profile). `instantiates` is a metaclass relationship — it does not constrain slot names — so the record uses **readable domain names** for the profile anatomy: `variable_identity`, `spatial_reference`, `temporal_reference`, `exposure_model` (mapped to the profile's `observation_type`, `location`, `temporality`, `methodology` via slot-level `implements`/`exact_mappings` with the `msprofile:` prefix). Only `subject` is used verbatim. `observation_result` is intentionally **not** bound: a batch sidecar carries values in the companion data file, and the profile marks `observation_result` required — keeping it would force every record to inline an (abstract-ranged) value and breaks `linkml-run-examples` (which instantiates the Python dataclass, where the optional override does not propagate). It was therefore dropped from the record's slot list. Do not try to rename via the metamodel's `alias` in `slot_usage` — `gen-python` rejects it (see `issue_naming.md`). Envar concerns with no profile equivalent (`data_layout`, `source_dataset`, `linkage_method`, `tool_run`, `provenance_chain`, `derived_heat_metric`, `health_layer_linkage`, `deposit_metadata`, `uncertainty`, and the record-root `phi_status`) are added as additional top-level slots. `variable_name` in `VariableIdentity` is pure identity; the column binding into the companion data file lives in `data_layout` (`DataLayout.value_column` etc.), which is required — see `issue_data_layout_split.md`. The full rationale and known drawbacks are documented in `src/linkml_microschemas_envar/schema/README.md` — read that before renaming top-level slots or restructuring `EnvironmentalExposureRecord`.
 
 ### Edit-vs-generated boundary
 

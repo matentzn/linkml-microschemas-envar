@@ -3065,9 +3065,55 @@ class ModelAggregateUncertainty(ConfiguredBaseModel):
                       'https://en.wikipedia.org/wiki/Coefficient_of_determination'],
          'title': 'Model Aggregate Uncertainty'})
 
-    cv_r2: Optional[float] = Field(default=None, title="Cross-Validated R²", description="""Cross-validated R² for the model as a whole.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ModelAggregateUncertainty']} })
-    cv_rmse: Optional[float] = Field(default=None, title="Cross-Validated RMSE", description="""Cross-validated RMSE for the model as a whole.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ModelAggregateUncertainty']} })
-    reported_in: Optional[str] = Field(default=None, title="Reporting Reference", description="""DOI / citation where the aggregate uncertainty is reported.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ModelAggregateUncertainty']} })
+    cv_r2: Optional[float] = Field(default=None, title="Cross-Validated R²", description="""Cross-validated R² for the model as a whole.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'A 0-to-1 score of how well the '
+                                                  "model's predictions matched reality "
+                                                  'on data it was not trained on — 1 '
+                                                  'is perfect, 0 is no better than '
+                                                  'always guessing the average. '
+                                                  '"Cross-validated" means the test '
+                                                  'used held-out data, so the score is '
+                                                  'honest.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'The single most comparable '
+                                                    'headline number for model skill. '
+                                                    'Without it a consumer cannot '
+                                                    'weigh this product against an '
+                                                    'alternative, or decide whether '
+                                                    'the model is good enough for the '
+                                                    'health analysis at hand.'}},
+         'domain_of': ['ModelAggregateUncertainty'],
+         'examples': [{'description': 'Di et al. ensemble PM2.5', 'value': '0.86'}]} })
+    cv_rmse: Optional[float] = Field(default=None, title="Cross-Validated RMSE", description="""Cross-validated RMSE for the model as a whole.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Root-mean-square error — the '
+                                                  "typical size of the model's "
+                                                  'mistakes, in the same units as the '
+                                                  'value itself (e.g. °C or µg/m³). '
+                                                  'Smaller is better.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'R² alone hides how large the '
+                                                    'errors actually are. RMSE states '
+                                                    "the typical error in the value's "
+                                                    'own units, which is what '
+                                                    'determines whether model error is '
+                                                    'negligible or fatal for a given '
+                                                    'effect size.'}},
+         'domain_of': ['ModelAggregateUncertainty']} })
+    reported_in: Optional[str] = Field(default=None, title="Reporting Reference", description="""DOI / citation where the aggregate uncertainty is reported.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Where these numbers come from — the '
+                                                  'paper or report (ideally a DOI) so '
+                                                  'a reader can check them at the '
+                                                  'source.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'Uncertainty numbers copied into a '
+                                                    'sidecar are only as trustworthy '
+                                                    'as their source. Without the '
+                                                    'reference the metrics cannot be '
+                                                    'verified, attributed, or updated '
+                                                    'when the producer revises them.'}},
+         'domain_of': ['ModelAggregateUncertainty'],
+         'examples': [{'description': 'DOI of the methods paper reporting the metrics',
+                       'value': '10.1016/j.envint.2019.104909'}]} })
 
 
 class LinkageMethod(ConfiguredBaseModel):
@@ -4795,7 +4841,61 @@ class EnvironmentalExposureRecord(ConfiguredBaseModel):
                                           'slot_group': 'record_bookkeeping'},
                         'schema_version': {'name': 'schema_version',
                                            'slot_group': 'record_bookkeeping'},
-                        'subject': {'annotations': {'open_question': {'tag': 'open_question',
+                        'subject': {'annotations': {'explanation': {'tag': 'explanation',
+                                                                    'value': 'Who (or '
+                                                                             'what '
+                                                                             'group) '
+                                                                             'the '
+                                                                             'values '
+                                                                             'belong '
+                                                                             'to — a '
+                                                                             'study '
+                                                                             'cohort '
+                                                                             'or an '
+                                                                             'individual '
+                                                                             'patient, '
+                                                                             'named by '
+                                                                             'an '
+                                                                             'anonymous '
+                                                                             'code '
+                                                                             'rather '
+                                                                             'than '
+                                                                             'anything '
+                                                                             'identifying.'},
+                                                    'justification': {'tag': 'justification',
+                                                                      'value': 'An '
+                                                                               'exposure '
+                                                                               'value '
+                                                                               'is '
+                                                                               'meaningless '
+                                                                               'without '
+                                                                               'knowing '
+                                                                               'whose '
+                                                                               'exposure '
+                                                                               'it is. '
+                                                                               'The '
+                                                                               'opaque '
+                                                                               'handle '
+                                                                               'is '
+                                                                               'what '
+                                                                               'lets '
+                                                                               'the '
+                                                                               'sidecar '
+                                                                               'be '
+                                                                               'joined '
+                                                                               'back '
+                                                                               'to the '
+                                                                               'right '
+                                                                               'cohort '
+                                                                               'or '
+                                                                               'patient '
+                                                                               'in the '
+                                                                               'health-data '
+                                                                               'layer '
+                                                                               'while '
+                                                                               'staying '
+                                                                               'PHI-free.'},
+                                                    'open_question': {'tag': 'open_question',
                                                                       'value': '`subject` '
                                                                                'is the '
                                                                                'only '
@@ -4854,6 +4954,9 @@ class EnvironmentalExposureRecord(ConfiguredBaseModel):
                                                    'value is attached to. Carried as '
                                                    'an opaque identifier; PHI must not '
                                                    'appear here.',
+                                    'examples': [{'description': 'an opaque cohort '
+                                                                 'handle — no PHI',
+                                                  'value': 'cohort:phoenix_aki_2022'}],
                                     'name': 'subject',
                                     'range': 'string',
                                     'slot_group': 'exposure_description',
@@ -4861,7 +4964,21 @@ class EnvironmentalExposureRecord(ConfiguredBaseModel):
          'title': 'Environmental Exposure Record',
          'tree_root': True})
 
-    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'open_question': {'tag': 'open_question',
+    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Who (or what group) the values '
+                                                  'belong to — a study cohort or an '
+                                                  'individual patient, named by an '
+                                                  'anonymous code rather than anything '
+                                                  'identifying.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'An exposure value is meaningless '
+                                                    'without knowing whose exposure it '
+                                                    'is. The opaque handle is what '
+                                                    'lets the sidecar be joined back '
+                                                    'to the right cohort or patient in '
+                                                    'the health-data layer while '
+                                                    'staying PHI-free.'},
+                         'open_question': {'tag': 'open_question',
                                            'value': '`subject` is the only field in '
                                                     'this group that is not a '
                                                     'per-value predicate: every other '
@@ -4877,6 +4994,8 @@ class EnvironmentalExposureRecord(ConfiguredBaseModel):
                                                     'Feedback welcome.'},
                          'tier': {'tag': 'tier', 'value': 'core'}},
          'domain_of': ['EnvironmentalExposureRecord', 'MicroschemaDefinition'],
+         'examples': [{'description': 'an opaque cohort handle — no PHI',
+                       'value': 'cohort:phoenix_aki_2022'}],
          'slot_group': 'exposure_description'} })
     variable_identity: VariableIdentity = Field(default=..., title="Variable Identity", description="""The variable identity object — what physical quantity is being captured. Bound to VariableIdentity (see envar_variable). Readable rename of the profile's `observation_type` anatomy slot.""", json_schema_extra = { "linkml_meta": {'aliases': ['observation_type'],
          'annotations': {'explanation': {'tag': 'explanation',
@@ -5457,12 +5576,28 @@ class DailyMaxTemperatureRecord(EnvironmentalExposureRecord):
                                    'is not yet expressed — see schema README "Design '
                                    'decisions".)',
                     'postconditions': {'slot_conditions': {'variable_identity': {'any_of': [{'range': 'VariableIdentity'}],
-                                                                                 'name': 'variable_identity'}}}}],
+                                                                                 'name': 'variable_identity'}}},
+                    'preconditions': {'slot_conditions': {'variable_identity': {'name': 'variable_identity',
+                                                                                'value_presence': 'PRESENT'}}}}],
          'see_also': ['https://cfconventions.org/standard-names.html',
                       'https://ucum.org/'],
          'title': 'Daily Maximum Temperature Record'})
 
-    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'open_question': {'tag': 'open_question',
+    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Who (or what group) the values '
+                                                  'belong to — a study cohort or an '
+                                                  'individual patient, named by an '
+                                                  'anonymous code rather than anything '
+                                                  'identifying.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'An exposure value is meaningless '
+                                                    'without knowing whose exposure it '
+                                                    'is. The opaque handle is what '
+                                                    'lets the sidecar be joined back '
+                                                    'to the right cohort or patient in '
+                                                    'the health-data layer while '
+                                                    'staying PHI-free.'},
+                         'open_question': {'tag': 'open_question',
                                            'value': '`subject` is the only field in '
                                                     'this group that is not a '
                                                     'per-value predicate: every other '
@@ -5478,6 +5613,8 @@ class DailyMaxTemperatureRecord(EnvironmentalExposureRecord):
                                                     'Feedback welcome.'},
                          'tier': {'tag': 'tier', 'value': 'core'}},
          'domain_of': ['EnvironmentalExposureRecord', 'MicroschemaDefinition'],
+         'examples': [{'description': 'an opaque cohort handle — no PHI',
+                       'value': 'cohort:phoenix_aki_2022'}],
          'slot_group': 'exposure_description'} })
     variable_identity: VariableIdentity = Field(default=..., title="Variable Identity", description="""The variable identity object — what physical quantity is being captured. Bound to VariableIdentity (see envar_variable). Readable rename of the profile's `observation_type` anatomy slot.""", json_schema_extra = { "linkml_meta": {'aliases': ['observation_type'],
          'annotations': {'explanation': {'tag': 'explanation',
@@ -5963,7 +6100,21 @@ class DailyMinTemperatureRecord(EnvironmentalExposureRecord):
                       'https://ucum.org/'],
          'title': 'Daily Minimum Temperature Record'})
 
-    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'open_question': {'tag': 'open_question',
+    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Who (or what group) the values '
+                                                  'belong to — a study cohort or an '
+                                                  'individual patient, named by an '
+                                                  'anonymous code rather than anything '
+                                                  'identifying.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'An exposure value is meaningless '
+                                                    'without knowing whose exposure it '
+                                                    'is. The opaque handle is what '
+                                                    'lets the sidecar be joined back '
+                                                    'to the right cohort or patient in '
+                                                    'the health-data layer while '
+                                                    'staying PHI-free.'},
+                         'open_question': {'tag': 'open_question',
                                            'value': '`subject` is the only field in '
                                                     'this group that is not a '
                                                     'per-value predicate: every other '
@@ -5979,6 +6130,8 @@ class DailyMinTemperatureRecord(EnvironmentalExposureRecord):
                                                     'Feedback welcome.'},
                          'tier': {'tag': 'tier', 'value': 'core'}},
          'domain_of': ['EnvironmentalExposureRecord', 'MicroschemaDefinition'],
+         'examples': [{'description': 'an opaque cohort handle — no PHI',
+                       'value': 'cohort:phoenix_aki_2022'}],
          'slot_group': 'exposure_description'} })
     variable_identity: VariableIdentity = Field(default=..., title="Variable Identity", description="""The variable identity object — what physical quantity is being captured. Bound to VariableIdentity (see envar_variable). Readable rename of the profile's `observation_type` anatomy slot.""", json_schema_extra = { "linkml_meta": {'aliases': ['observation_type'],
          'annotations': {'explanation': {'tag': 'explanation',
@@ -6465,14 +6618,30 @@ class WetBulbGlobeTemperatureOutdoorRecord(EnvironmentalExposureRecord):
                                    'equation_variant = liljegren_2008, and '
                                    'indoor_outdoor = outdoor.',
                     'postconditions': {'slot_conditions': {'derived_heat_metric': {'any_of': [{'range': 'DerivedHeatMetric'}],
-                                                                                   'name': 'derived_heat_metric'}}}}],
+                                                                                   'name': 'derived_heat_metric'}}},
+                    'preconditions': {'slot_conditions': {'derived_heat_metric': {'name': 'derived_heat_metric',
+                                                                                  'value_presence': 'PRESENT'}}}}],
          'see_also': ['https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature',
                       'https://doi.org/10.1038/s41597-022-01405-3'],
          'slot_usage': {'derived_heat_metric': {'name': 'derived_heat_metric',
                                                 'required': True}},
          'title': 'Outdoor WBGT Record'})
 
-    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'open_question': {'tag': 'open_question',
+    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Who (or what group) the values '
+                                                  'belong to — a study cohort or an '
+                                                  'individual patient, named by an '
+                                                  'anonymous code rather than anything '
+                                                  'identifying.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'An exposure value is meaningless '
+                                                    'without knowing whose exposure it '
+                                                    'is. The opaque handle is what '
+                                                    'lets the sidecar be joined back '
+                                                    'to the right cohort or patient in '
+                                                    'the health-data layer while '
+                                                    'staying PHI-free.'},
+                         'open_question': {'tag': 'open_question',
                                            'value': '`subject` is the only field in '
                                                     'this group that is not a '
                                                     'per-value predicate: every other '
@@ -6488,6 +6657,8 @@ class WetBulbGlobeTemperatureOutdoorRecord(EnvironmentalExposureRecord):
                                                     'Feedback welcome.'},
                          'tier': {'tag': 'tier', 'value': 'core'}},
          'domain_of': ['EnvironmentalExposureRecord', 'MicroschemaDefinition'],
+         'examples': [{'description': 'an opaque cohort handle — no PHI',
+                       'value': 'cohort:phoenix_aki_2022'}],
          'slot_group': 'exposure_description'} })
     variable_identity: VariableIdentity = Field(default=..., title="Variable Identity", description="""The variable identity object — what physical quantity is being captured. Bound to VariableIdentity (see envar_variable). Readable rename of the profile's `observation_type` anatomy slot.""", json_schema_extra = { "linkml_meta": {'aliases': ['observation_type'],
          'annotations': {'explanation': {'tag': 'explanation',
@@ -6975,12 +7146,28 @@ class ExtremeHeatDayFlagRecord(EnvironmentalExposureRecord):
                                    'and supply percentile_reference_period_start / '
                                    '_end and percentile_reference_geographic_scope.',
                     'postconditions': {'slot_conditions': {'derived_heat_metric': {'any_of': [{'range': 'DerivedHeatMetric'}],
-                                                                                   'name': 'derived_heat_metric'}}}}],
+                                                                                   'name': 'derived_heat_metric'}}},
+                    'preconditions': {'slot_conditions': {'derived_heat_metric': {'name': 'derived_heat_metric',
+                                                                                  'value_presence': 'PRESENT'}}}}],
          'slot_usage': {'derived_heat_metric': {'name': 'derived_heat_metric',
                                                 'required': True}},
          'title': 'Extreme-Heat-Day Flag Record'})
 
-    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'open_question': {'tag': 'open_question',
+    subject: str = Field(default=..., title="Subject (Patient or Cohort)", description="""The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Who (or what group) the values '
+                                                  'belong to — a study cohort or an '
+                                                  'individual patient, named by an '
+                                                  'anonymous code rather than anything '
+                                                  'identifying.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'An exposure value is meaningless '
+                                                    'without knowing whose exposure it '
+                                                    'is. The opaque handle is what '
+                                                    'lets the sidecar be joined back '
+                                                    'to the right cohort or patient in '
+                                                    'the health-data layer while '
+                                                    'staying PHI-free.'},
+                         'open_question': {'tag': 'open_question',
                                            'value': '`subject` is the only field in '
                                                     'this group that is not a '
                                                     'per-value predicate: every other '
@@ -6996,6 +7183,8 @@ class ExtremeHeatDayFlagRecord(EnvironmentalExposureRecord):
                                                     'Feedback welcome.'},
                          'tier': {'tag': 'tier', 'value': 'core'}},
          'domain_of': ['EnvironmentalExposureRecord', 'MicroschemaDefinition'],
+         'examples': [{'description': 'an opaque cohort handle — no PHI',
+                       'value': 'cohort:phoenix_aki_2022'}],
          'slot_group': 'exposure_description'} })
     variable_identity: VariableIdentity = Field(default=..., title="Variable Identity", description="""The variable identity object — what physical quantity is being captured. Bound to VariableIdentity (see envar_variable). Readable rename of the profile's `observation_type` anatomy slot.""", json_schema_extra = { "linkml_meta": {'aliases': ['observation_type'],
          'annotations': {'explanation': {'tag': 'explanation',

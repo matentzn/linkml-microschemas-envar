@@ -234,9 +234,11 @@ _test-examples: _ensure_examples_output
     --schema {{source_schema_path}} > examples/output/README.md
 
 # Add the merged model to docs/schema.
+# Uses gen-linkml (not gen-yaml): gen-yaml's dumper cannot serialise the
+# curated `object:` examples on slots (yaml RepresenterError on JsonObj).
 _gen-yaml:
   -mkdir -p {{distrib_schema_path}}
-  uv run gen-yaml {{source_schema_path}} > {{distrib_schema_path}}/{{schema_name}}.yaml
+  uv run gen-linkml --format yaml {{source_schema_path}} > {{distrib_schema_path}}/{{schema_name}}.yaml
 
 # Overridable recipe to add project-specific artifacts to the distribution schema path
 _add-artifacts:

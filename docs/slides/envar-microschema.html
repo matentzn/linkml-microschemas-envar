@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EnVar environmental-exposure microschema — PLAN + SPEC walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0e14;
+    --bg2:#10161f;
+    --panel:#141c27;
+    --panel2:#192330;
+    --ink:#eef3f9;
+    --muted:#8d9bad;
+    --faint:#5d6b7d;
+    --line:rgba(255,255,255,.09);
+    --line2:rgba(255,255,255,.16);
+
+    --core:#ff4d5e;       /* Core */
+    --reco:#ffb454;       /* Recommended */
+    --opt:#4cc9f0;        /* Optional */
+    --cond:#b794f6;       /* Conditionally-Core */
+
+    --heat:#ff6b35;
+    --hot:#ef233c;
+    --cool:#39d8c8;
+    --thermal:linear-gradient(115deg,#ffd166 0%,#ff8a3d 38%,#ff4d5e 68%,#ef233c 100%);
+
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"IBM Plex Sans",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---- atmosphere ---- */
+  .atmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .atmos::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(900px 600px at 82% 8%, rgba(255,107,53,.13), transparent 60%),
+      radial-gradient(800px 700px at 10% 92%, rgba(57,216,200,.10), transparent 60%),
+      radial-gradient(1100px 800px at 50% 50%, rgba(80,120,200,.05), transparent 70%);
+  }
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .gridlines{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;mask:radial-gradient(circle at 50% 50%,#000 30%,transparent 85%);-webkit-mask:radial-gradient(circle at 50% 50%,#000 30%,transparent 85%)}
+
+  /* ---- deck mechanics ---- */
+  #deck{position:relative;z-index:2;height:100vh;width:100vw}
+  .slide{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(28px,5.5vw,96px);
+    opacity:0;visibility:hidden;
+    transform:translateY(22px) scale(.992);
+    transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1);
+    overflow:hidden;
+  }
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  .slide.past{transform:translateY(-22px) scale(.992)}
+  .wrap{width:min(1180px,100%);margin:0 auto;max-height:100%}
+
+  /* ---- staggered entrance ---- */
+  .slide.active .stag{animation:rise .62s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active .stag:nth-child(1){animation-delay:.05s}
+  .slide.active .stag:nth-child(2){animation-delay:.11s}
+  .slide.active .stag:nth-child(3){animation-delay:.17s}
+  .slide.active .stag:nth-child(4){animation-delay:.23s}
+  .slide.active .stag:nth-child(5){animation-delay:.29s}
+  .slide.active .stag:nth-child(6){animation-delay:.35s}
+  .slide.active .stag:nth-child(7){animation-delay:.41s}
+  .slide.active .stag:nth-child(8){animation-delay:.47s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  /* ---- type ---- */
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.05;letter-spacing:-.01em}
+  .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cool);margin-bottom:1.3rem;font-weight:500}
+  .kicker.warm{color:var(--heat)}
+  h1.title{font-size:clamp(2.4rem,6.4vw,5.4rem);font-weight:900;line-height:.98;letter-spacing:-.025em}
+  h2{font-size:clamp(1.6rem,3.9vw,3.1rem)}
+  h3{font-size:clamp(1.1rem,2.2vw,1.6rem)}
+  p{color:var(--muted);font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.55;max-width:64ch}
+  p.lead{color:var(--ink);font-weight:300;font-size:clamp(1.1rem,1.8vw,1.45rem);max-width:60ch}
+  strong{color:var(--ink);font-weight:600}
+  em{font-style:italic;color:#cbd6e4}
+  .grad{background:var(--thermal);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cool-ink{color:var(--cool)}
+
+  /* ---- bits ---- */
+  .eyebrow-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+  .rule{height:1px;background:linear-gradient(90deg,var(--line2),transparent);margin:1.5rem 0;border:0}
+  ul.clean{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-top:1.3rem}
+  ul.clean li{position:relative;padding-left:1.5rem;color:var(--muted);font-size:clamp(.98rem,1.35vw,1.14rem);line-height:1.45;max-width:66ch}
+  ul.clean li::before{content:"";position:absolute;left:0;top:.58em;width:7px;height:7px;border-radius:50%;background:var(--cool);box-shadow:0 0 12px var(--cool)}
+  ul.clean li strong{color:var(--ink)}
+
+  .cols{display:grid;gap:clamp(1rem,2.2vw,2rem)}
+  .c2{grid-template-columns:1fr 1fr}
+  .c3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.c2,.c3{grid-template-columns:1fr}}
+
+  .card{background:linear-gradient(160deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:clamp(1rem,1.9vw,1.5rem);position:relative;overflow:hidden}
+  .card .ico{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--faint);text-transform:uppercase}
+  .card h3{margin:.4rem 0 .5rem;font-size:clamp(1.05rem,1.8vw,1.35rem)}
+  .card p{font-size:.95rem;max-width:none}
+
+  /* tier badges */
+  .badge{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.32em .7em;border-radius:999px;border:1px solid currentColor;line-height:1}
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .b-core{color:var(--core)} .b-reco{color:var(--reco)} .b-opt{color:var(--opt)} .b-cond{color:var(--cond)}
+
+  /* code / yaml */
+  .code{font-family:var(--mono);background:linear-gradient(180deg,#0c1119,#0a0e15);border:1px solid var(--line);border-radius:13px;font-size:clamp(.72rem,1.02vw,.9rem);line-height:1.6;overflow:hidden}
+  .code .bar{display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .code .bar .dot{width:10px;height:10px;border-radius:50%}
+  .code .bar .fname{font-size:.7rem;color:var(--muted);margin-left:.4rem;letter-spacing:.04em}
+  .code pre{padding:.9rem 1.1rem;overflow:auto;max-height:60vh}
+  .code pre::-webkit-scrollbar{height:8px;width:8px}
+  .code pre::-webkit-scrollbar-thumb{background:var(--line2);border-radius:6px}
+  .k{color:var(--cool)}        /* key */
+  .s{color:#9fe6a0}            /* string/value */
+  .n{color:#ffd479}           /* number */
+  .cm{color:var(--faint)}      /* comment */
+  .gap{color:var(--core);font-weight:600}
+  .ok{color:#6ee7a8}
+  .hl{background:rgba(255,77,94,.14);display:inline-block;border-radius:4px;padding:0 .25em;margin:0 -.25em}
+  .hlg{background:rgba(110,231,168,.14);display:inline-block;border-radius:4px;padding:0 .25em;margin:0 -.25em}
+
+  /* stat / gauge */
+  .stat{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,5.4vw,4rem);line-height:1;letter-spacing:-.03em}
+
+  .meter{display:flex;flex-direction:column;gap:.5rem}
+  .meter .track{height:12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
+  .meter .fill{height:100%;border-radius:999px}
+  .meter .row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:.82rem}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;font-size:clamp(.78rem,1.1vw,.96rem)}
+  th,td{text-align:left;padding:.58rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:500}
+  td{color:var(--muted)} td strong{color:var(--ink)}
+  td .mono,.mono{font-family:var(--mono);color:#cbd6e4;font-size:.92em}
+
+  .flow{display:flex;align-items:stretch;gap:.5rem;flex-wrap:wrap}
+  .flow .node{flex:1;min-width:130px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center}
+  .flow .node .t{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .flow .node .m{font-weight:600;color:var(--ink);margin-top:.3rem;font-size:1rem}
+  .flow .node.sidecar{border-color:var(--heat);box-shadow:0 0 0 1px rgba(255,107,53,.3),0 18px 40px -24px rgba(255,107,53,.6)}
+  .flow .arrow{align-self:center;color:var(--faint);font-family:var(--mono)}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--cool);border:1px solid var(--line2);border-radius:999px;padding:.3em .8em;margin:.2rem .3rem .2rem 0}
+
+  .two-pane{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.4vw,2.2rem);align-items:start}
+  @media(max-width:880px){.two-pane{grid-template-columns:1fr}}
+
+  .footnote{font-family:var(--mono);font-size:.7rem;color:var(--faint);margin-top:1.1rem;letter-spacing:.02em;line-height:1.5}
+  .tier-legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.5rem}
+  .callout{border-left:3px solid var(--heat);background:rgba(255,107,53,.06);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin-top:1.4rem}
+  .callout p{color:var(--ink);max-width:60ch}
+
+  /* ---- chrome ---- */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--thermal);z-index:50;transition:width .5s cubic-bezier(.2,.7,.2,1);box-shadow:0 0 14px rgba(255,107,53,.5)}
+  .chrome{position:fixed;z-index:40;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--faint)}
+  #brand{top:26px;left:30px;display:flex;align-items:center;gap:.6rem}
+  #brand .dotm{width:9px;height:9px;border-radius:50%;background:var(--thermal);box-shadow:0 0 10px var(--heat)}
+  #brand b{color:var(--ink);font-weight:600;letter-spacing:.16em}
+  #counter{bottom:24px;right:30px;color:var(--muted)}
+  #counter b{color:var(--ink)}
+  #hint{bottom:24px;left:30px}
+  #hint kbd{font-family:var(--mono);background:var(--panel);border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:.12em .45em;color:var(--ink);font-size:.7rem}
+  .nav-zone{position:fixed;top:0;bottom:0;width:16%;z-index:30;cursor:pointer}
+  #navPrev{left:0} #navNext{right:0}
+  @media(max-width:820px){#hint{display:none}}
+</style>
+</head>
+<body>
+<div class="atmos"></div>
+<div class="gridlines"></div>
+<div class="grain"></div>
+<div id="progress"></div>
+
+<div class="chrome" id="brand"><span class="dotm"></span><b>EnVar</b><span>· microschema</span></div>
+<div class="chrome" id="counter"><b id="cur">01</b> / <span id="tot">45</span></div>
+<div class="chrome" id="hint"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen</div>
+<div class="nav-zone" id="navPrev"></div>
+<div class="nav-zone" id="navNext"></div>
+
+<main id="deck">
+
+  <!-- 1 — TITLE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Environmental-exposure microschema · first community draft</div>
+      <h1 class="title stag">A unified, tiered<br>metadata layer for<br><span class="grad">environmental exposures.</span></h1>
+      <p class="lead stag" style="margin-top:1.6rem">Every pipeline that joins an environmental value to a patient record already carries metadata. Each does it differently, and none agree on what "complete" means. EnVar proposes one representation and a community-reviewed set of requirement tiers.</p>
+      <div class="stag" style="margin-top:1.8rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+        <span class="pill">PLAN.md + SPEC.md</span>
+        <span class="pill">TMAX + PM2.5</span>
+        <span class="pill">a technical walkthrough</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 — THE PROBLEM -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The problem</div>
+      <h2 class="stag">Geo-joining a value drops the context that makes it interpretable</h2>
+      <p class="stag" style="margin-top:1rem">When a gridded environmental value (a daily maximum temperature, a PM2.5 concentration) is attached to a patient record, the value travels but its derivation does not. A downstream analyst cannot reproduce or correctly interpret it from the data alone.</p>
+      <div class="cols c3 stag" style="margin-top:1.6rem">
+        <div class="card"><div class="ico">Lost — provenance</div><p>which product, which version, which model and its known biases</p></div>
+        <div class="card"><div class="ico">Lost — geometry</div><p>grid resolution, CRS, extraction rule, geography type</p></div>
+        <div class="card"><div class="ico">Lost — semantics</div><p>day-boundary convention, aggregation method, units</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — TWO STUDIES -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">A concrete failure</div>
+      <h2 class="stag">Two studies, same county and summer, opposite results</h2>
+      <div class="cols c2 stag" style="margin-top:1.6rem">
+        <div class="card"><div class="ico">Study A — Daymet</div><h3>Significant association</h3><p>Extreme-heat days linked to emergency admissions.</p></div>
+        <div class="card"><div class="ico">Study B — PRISM</div><h3>Null result</h3><p>Same source family of temperature data. No association.</p></div>
+      </div>
+      <p class="stag" style="margin-top:1.4rem">Both analyses are competent. The choices that produced the difference were never recorded in either dataset.</p>
+    </div>
+  </section>
+
+  <!-- 4 — WHY THEY DISAGREED -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Why they disagreed</div>
+      <h2 class="stag">Two undocumented choices</h2>
+      <div class="cols c2 stag" style="margin-top:1.6rem">
+        <div class="card" style="border-color:rgba(255,107,53,.3)">
+          <div class="ico" style="color:var(--heat)">Definition of "a day"</div>
+          <p style="margin-top:.5rem">A: <span class="mono">local midnight → local midnight</span> (Daymet). B: <span class="mono">24 h ending 12:00 GMT</span> (PRISM). The same afternoon lands on different calendar days, so the two "daily maxima" are different series.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,107,53,.3)">
+          <div class="ico" style="color:var(--heat)">Definition of "extreme"</div>
+          <p style="margin-top:.5rem">A: 95th percentile of <span class="mono">1971–2000</span>. B: 95th percentile of <span class="mono">2000–2019</span>. In a warming climate these are different thresholds and flag different days.</p>
+        </div>
+      </div>
+      <p class="footnote stag">Day-boundary convention is the most-omitted field in the heat-epidemiology literature. At least seven heat-wave definitions are in active use; none are convertible after the fact.</p>
+    </div>
+  </section>
+
+  <!-- 5 — EVERYONE HAS A SIDECAR -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">The current state — not a vacuum</div>
+      <h2 class="stag">Every pipeline already carries metadata</h2>
+      <p class="lead stag" style="margin-top:1.2rem">The problem is not that metadata is missing. It is that each system records it in its own representation, at a different granularity, with different gaps — and no shared definition of what "enough" is.</p>
+      <p class="stag" style="margin-top:1.2rem">The next slides show what five real systems emit today.</p>
+    </div>
+  </section>
+
+  <!-- 6 — COMPARISON TABLE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">What exists today</div>
+      <h2 class="stag">Five representations, five granularities</h2>
+      <table class="stag" style="margin-top:1.3rem">
+        <thead><tr><th>System</th><th>Representation</th><th>Granularity</th><th>Main gap</th></tr></thead>
+        <tbody>
+          <tr><td><strong>OMOP <span class="mono">external_exposure</span></strong></td><td>relational table</td><td>per person × exposure × period</td><td>single value + unit; no resolution, method, model, uncertainty</td></tr>
+          <tr><td><strong>GAIA / gaiaCatalog</strong></td><td>3 JSON files / dataset</td><td>dataset</td><td>Schema.org, not CF/ontology-aligned; not variable-level</td></tr>
+          <tr><td><strong>DeGAUSS</strong></td><td>output columns + run image</td><td>per geocoded row</td><td>linkage captured; source/model metadata thin</td></tr>
+          <tr><td><strong>Amadeus</strong></td><td>free-text + file hashes</td><td>output file</td><td>no version, no day-boundary, no model class</td></tr>
+          <tr><td><strong>NetCDF (ACDD/CF)</strong></td><td>global attributes in file</td><td>source product</td><td>producer-level; nothing about exposure assignment</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote stag">Also: C-HER (ORNL exposomic platform — next slide), FHIR-PIT (Dhall/YAML config), ICEES (custom binned-feature YAML).</p>
+    </div>
+  </section>
+
+  <!-- 7 — OMOP TABLE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Example · OMOP</div>
+      <h2 class="stag">The <span class="mono" style="font-size:.7em">external_exposure</span> table</h2>
+      <div class="two-pane stag" style="margin-top:1.4rem">
+        <div class="code">
+          <div class="bar"><span class="dot" style="background:var(--cool)"></span><span class="fname">external_exposure (proposed OMOP extension)</span></div>
+<pre><span class="k">person_id</span>             <span class="cm"># who</span>
+<span class="k">location_id</span>           <span class="cm"># where (aggregated geography)</span>
+<span class="k">exposure_concept_id</span>   <span class="cm"># what exposure</span>
+<span class="k">exposure_start_date</span>
+<span class="k">exposure_end_date</span>
+<span class="k">value_as_number</span>       <span class="cm"># the value</span>
+<span class="k">unit_concept_id</span>       <span class="cm"># the unit</span></pre>
+        </div>
+        <div>
+          <p>Carries the value, a concept id, a period and a unit. This is a <strong>single-value model</strong>.</p>
+          <ul class="clean">
+            <li>no grid resolution or CRS</li>
+            <li>no extraction or linkage rule</li>
+            <li>no model type, biases, or uncertainty</li>
+            <li>many exposures have no concept id at all</li>
+          </ul>
+        </div>
+      </div>
+      <p class="footnote stag">The table is a proposed CDM extension, not yet ratified. EnVar's <span class="mono">provenance_id</span> is what its <span class="mono">exposure_source_value</span> would hold.</p>
+    </div>
+  </section>
+
+  <!-- 8 — GAIA -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Example · GAIA / gaiaCatalog</div>
+      <h2 class="stag">Three metadata files per dataset</h2>
+      <div class="cols c3 stag" style="margin-top:1.4rem">
+        <div class="card"><div class="ico">discovery</div><h3><span class="mono" style="font-size:.7em">meta_dcat_*.json</span></h3><p>DCAT record for catalogue search.</p></div>
+        <div class="card"><div class="ico">processing</div><h3><span class="mono" style="font-size:.7em">meta_etl_*.json</span></h3><p>custom ETL instructions for ingest.</p></div>
+        <div class="card"><div class="ico">linked data</div><h3><span class="mono" style="font-size:.7em">meta_json-ld_*.json</span></h3><p>Schema.org JSON-LD for the catalogue.</p></div>
+      </div>
+      <div class="callout stag"><p>GAIA describes metadata at the <strong>dataset</strong> level ("PM2.5, CMAQ, US, 2000–2020, 12 km"). EnVar describes it at the <strong>variable-value</strong> level ("this value is an annual mean in µg/m³ at tract level, population-weighted from 12 km CMAQ"). They are complementary — and LinkML emits the JSON-LD GAIA consumes.</p></div>
+    </div>
+  </section>
+
+  <!-- 9 — WHAT AMADEUS EMITS TODAY -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker warm" style="margin:0">Example · what a pipeline emits today</span></div>
+      <h2 class="stag" style="margin-top:.6rem">Amadeus → GridMET, as shipped</h2>
+      <p class="stag" style="margin:.7rem 0 1rem">A real output today: the value, a free-text acknowledgement, and file hashes. The day-boundary and product version are not recorded.</p>
+      <div class="code stag">
+        <div class="bar"><span class="dot" style="background:var(--core)"></span><span class="fname">today — free text + hashes</span></div>
+<pre><span class="k">variable</span>: <span class="s">tmmx</span>
+<span class="k">acknowledgement</span>: <span class="s">"Data provided by the University of Idaho; GridMET via Amadeus."</span>
+<span class="k">input_file_sha256</span>: <span class="s">3a1b9c…</span>
+<span class="k">output_file_sha256</span>: <span class="s">7f2e4d…</span>
+<span class="cm"># not recorded: source version, day-boundary, model class, CRS, extraction rule</span></pre>
+      </div>
+      <p class="footnote stag">Reconstructed from the Amadeus minimum scenario. This is the baseline EnVar measures against.</p>
+    </div>
+  </section>
+
+  <!-- 10 — DEGAUSS / NETCDF -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Example · two more representations</div>
+      <h2 class="stag">DeGAUSS and the NetCDF file itself</h2>
+      <div class="two-pane stag" style="margin-top:1.3rem">
+        <div class="card">
+          <div class="ico">DeGAUSS — per geocoded row</div>
+          <p style="margin-top:.5rem">Privacy-preserving geocoder + geomarker container; runs locally. Emits the linkage well:</p>
+          <ul class="clean" style="margin-top:.6rem">
+            <li><span class="mono">geocoding precision</span> + <span class="mono">score</span></li>
+            <li>the geomarker value columns</li>
+            <li>the run container image</li>
+          </ul>
+          <p style="margin-top:.6rem">Source-product and model metadata stay thin.</p>
+        </div>
+        <div class="card">
+          <div class="ico">NetCDF — ACDD / CF attributes</div>
+          <p style="margin-top:.5rem">Climate files embed global attributes inside the file:</p>
+          <div class="code" style="margin-top:.6rem;font-size:.8rem">
+<pre><span class="k">title</span>: <span class="s">"Daymet Daily Surface Weather"</span>
+<span class="k">institution</span>: <span class="s">"ORNL DAAC"</span>
+<span class="k">Conventions</span>: <span class="s">"CF-1.6, ACDD-1.3"</span>
+<span class="k">source</span>: <span class="s">"GHCN-Daily stations"</span></pre>
+          </div>
+          <p style="margin-top:.6rem">Producer-level. Says nothing about how a value was assigned to a person.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — C-HER -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Example · ORNL C-HER</div>
+      <h2 class="stag">The one system that already enforces a bar</h2>
+      <div class="two-pane stag" style="margin-top:1.3rem">
+        <div>
+          <div class="ico" style="font-family:var(--mono);color:var(--faint);letter-spacing:.14em;font-size:.68rem;text-transform:uppercase">What it is</div>
+          <p style="margin-top:.5rem">ORNL's <strong>Centralized Health and Exposomic Resource</strong> (Hanson). <strong>30+ spatially indexed exposomic datasets</strong> — air quality, climate, water, built environment, social context — unified with population health data.</p>
+          <p class="footnote" style="margin-top:.7rem">Preprint: arXiv:2511.03750. Internal data formats are not publicly documented — itself an argument for a shared representation.</p>
+        </div>
+        <div>
+          <div class="ico" style="font-family:var(--mono);color:var(--heat);letter-spacing:.14em;font-size:.68rem;text-transform:uppercase">The precedent EnVar generalises</div>
+          <ul class="clean" style="margin-top:.5rem">
+            <li><strong>Registration-time completeness gate</strong> — a resource is not "metadata-complete" until its required fields are filled.</li>
+            <li>EnVar's tiered checker is the same move, made variable-level and tier-aware.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout stag"><p>Working relationship: <strong>advisory</strong>; C-HER datasets are EnVar's ETL validation set; monthly standards reviews align C-HER, GAIA, and EnVar.</p></div>
+    </div>
+  </section>
+
+  <!-- 12 — THE GAP -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The common gap</div>
+      <h2 class="stag">No shared representation, no shared bar</h2>
+      <ul class="clean stag" style="margin-top:1.4rem">
+        <li><strong>Different representations</strong> — relational table, JSON-LD, file attributes, free text, container output.</li>
+        <li><strong>Different granularities</strong> — dataset vs variable vs value vs row.</li>
+        <li><strong>Different, undeclared gaps</strong> — each drops different fields; none state what they omit.</li>
+        <li><strong>No agreed requirement set</strong> — nothing says which fields a record must have to be reproducible.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 12 — WHAT ENVAR ADDS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">The proposal</div>
+      <h2 class="stag">One representation + tiered requirements + a checker</h2>
+      <div class="cols c3 stag" style="margin-top:1.6rem">
+        <div class="card"><div class="ico">1 — representation</div><h3>A variable-level sidecar</h3><p>A LinkML schema covering identity, space, time, source, model, linkage, provenance. Exports to JSON Schema, SHACL, OWL.</p></div>
+        <div class="card"><div class="ico">2 — requirements</div><h3>Community-reviewed tiers</h3><p>Core / Recommended / Optional, annotated on each slot — a shared, machine-readable bar for "complete".</p></div>
+        <div class="card"><div class="ico">3 — measurement</div><h3>A completeness checker</h3><p>Scores any sidecar against the tiers. Reads tiers from the schema, so it can't disagree with the spec.</p></div>
+      </div>
+      <p class="footnote stag">A sidecar carries no PHI. It stops at the hook that links to the patient data and never holds clinical data itself.</p>
+    </div>
+  </section>
+
+  <!-- 13 — DESIGN GOAL -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The design goal — it governs every element decision</div>
+      <h2 class="stag" style="max-width:24ch">Reproducible from raw data plus metadata alone, without access to the pipeline.</h2>
+      <hr class="rule stag" />
+      <p class="stag">An element is in the schema only if its absence would block <strong>reproduction</strong>, <strong>correct interpretation</strong>, or <strong>discovery</strong>. The tiers (next) record how much its absence blocks.</p>
+    </div>
+  </section>
+
+  <!-- 14 — THREE TIERS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">The question is not what can be captured, but what must be</div>
+      <h2 class="stag">Three requirement tiers</h2>
+      <div class="cols c3 stag" style="margin-top:1.6rem">
+        <div class="card"><span class="badge b-core">Core</span><h3 style="margin-top:.7rem">The minimum</h3><p>Without it the record is meaningless. Missing → <span style="color:var(--core)">BLOCKING</span>.</p></div>
+        <div class="card"><span class="badge b-reco">Recommended</span><h3 style="margin-top:.7rem">The ideal</h3><p>Reproducible in principle without it; real reproduction needs it. Missing → ⚠ warning.</p></div>
+        <div class="card"><span class="badge b-opt">Optional</span><h3 style="margin-top:.7rem">The maximum</h3><p>Enriches discovery and cross-linking, not reproduction. Missing → noted.</p></div>
+      </div>
+      <p class="footnote stag">The tier assignment in SPEC.md is a strawman authored to be challenged. The workshop moves elements between tiers.</p>
+    </div>
+  </section>
+
+  <!-- 15 — CONDITIONALLY CORE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">A fourth tier</div>
+      <h2 class="stag"><span class="badge b-cond" style="font-size:.8rem;vertical-align:middle">Conditionally-Core</span></h2>
+      <p class="lead stag" style="margin-top:1.3rem">Optional in general; mandatory once a stated context holds.</p>
+      <div class="cols c2 stag" style="margin-top:1.4rem">
+        <div class="card"><div class="ico">Context: derived heat metric</div><p style="margin-top:.4rem"><span class="mono cool-ink">equation_variant</span>, <span class="mono cool-ink">indoor_outdoor</span>, <span class="mono cool-ink">heat_wave_threshold_definition</span>, percentile reference period become required.</p></div>
+        <div class="card"><div class="ico">Context: buffer / station / ensemble</div><p style="margin-top:.4rem">buffer radius, max station distance, ensemble member count become required when those strategies are used.</p></div>
+      </div>
+      <p class="footnote stag">Encoded as LinkML rules: when the context predicate is true, the associated slots are required.</p>
+    </div>
+  </section>
+
+  <!-- 16 — NULL WITH REASON -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">A required pattern</div>
+      <h2 class="stag">Null with reason</h2>
+      <p class="stag" style="margin:.8rem 0 1.2rem">Every nullable element, when null, must carry a reason from a controlled vocabulary. A blank is a validation error; a null-with-reason is information.</p>
+      <div class="two-pane stag">
+        <div class="code">
+          <div class="bar"><span class="dot" style="background:var(--core)"></span><span class="fname">blank — rejected</span></div>
+<pre><span class="k">target_concept_id</span>:</pre>
+        </div>
+        <div class="code">
+          <div class="bar"><span class="dot" style="background:#6ee7a8"></span><span class="fname">null + reason — valid</span></div>
+<pre><span class="k">target_concept_id</span>: <span class="cm">null</span>
+<span class="k">target_concept_id_missing_reason</span>: <span class="s">not_provided_by_source</span></pre>
+        </div>
+      </div>
+      <p class="footnote stag">Vocabulary: <span class="mono">not_provided_by_source · available_but_not_extracted · upstream_data_not_propagated · under_investigation · not_applicable</span>.</p>
+    </div>
+  </section>
+
+  <!-- 17 — DATA MODEL -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The data model</div>
+      <h2 class="stag">One record composes typed modules, one per concern</h2>
+      <div class="stag" style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem">
+        <span class="pill">VariableIdentity</span><span class="pill">DataLayout</span><span class="pill">SpatialReference</span><span class="pill">TemporalReference</span><span class="pill">SourceDataset</span><span class="pill">ExposureModel</span><span class="pill">Uncertainty</span><span class="pill">LinkageMethod</span><span class="pill">ToolRun + ProvenanceChain</span><span class="pill">DerivedHeatMetric</span><span class="pill">HealthLayerLinkage + DepositMetadata</span>
+      </div>
+      <p class="stag" style="margin-top:1.4rem">Fourteen LinkML modules under one umbrella class, <span class="mono cool-ink">EnvironmentalExposureRecord</span>. A module may be omitted when not applicable (no heat metric on a non-heat variable) without breaking validation.</p>
+    </div>
+  </section>
+
+  <!-- 18 — MODULE MAP 1 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Module map · 1 of 2</div>
+      <h2 class="stag">Identity, place, time, source</h2>
+      <table class="stag" style="margin-top:1.3rem">
+        <thead><tr><th>Module</th><th>Concern</th><th>Example value</th></tr></thead>
+        <tbody>
+          <tr><td><strong>VariableIdentity</strong></td><td>quantity, units, vocabularies</td><td><span class="mono">CF:air_temperature · Cel</span></td></tr>
+          <tr><td><strong>DataLayout</strong></td><td>column bindings into the companion data file</td><td><span class="mono">wide · value_column=tmax</span></td></tr>
+          <tr><td><strong>SpatialReference</strong></td><td>grid, CRS, extent, extraction footprint</td><td><span class="mono">1000 m · EPSG:4326</span></td></tr>
+          <tr><td><strong>TemporalReference</strong></td><td>resolution, aggregation, day-boundary, coverage</td><td><span class="mono">daily · local_midnight</span></td></tr>
+          <tr><td><strong>SourceDataset</strong></td><td>upstream product the values come from</td><td><span class="mono">Daymet V4 R1</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 19 — MODULE MAP 2 -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Module map · 2 of 2</div>
+      <h2 class="stag">Model, linkage, provenance, hooks</h2>
+      <table class="stag" style="margin-top:1.3rem">
+        <thead><tr><th>Module</th><th>Concern</th><th>Example value</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ExposureModel</strong></td><td>model class, inputs, known biases</td><td><span class="mono">spatial_interpolation</span></td></tr>
+          <tr><td><strong>Uncertainty</strong></td><td>per-value &amp; aggregate uncertainty, missing-data handling</td><td><span class="mono">tmax_stderr · 0.8</span></td></tr>
+          <tr><td><strong>LinkageMethod</strong></td><td>how a gridded value attaches to a location</td><td><span class="mono">point_extraction_at_residence</span></td></tr>
+          <tr><td><strong>ToolRun + ProvenanceChain</strong></td><td>exact invocation + ordered upstream runs</td><td><span class="mono">geocoder → daymet</span></td></tr>
+          <tr><td><strong>DerivedHeatMetric</strong></td><td>equation variant, indoor/outdoor, percentile baseline</td><td><span class="mono">liljegren_2008</span></td></tr>
+          <tr><td><strong>HealthLayerLinkage + Deposit</strong></td><td>health-side hooks (OMOP, BDC, …) + FAIR-deposit subset</td><td><span class="mono">provenance_id</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 20 — WORKED EXAMPLE INTRO -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Worked example</div>
+      <h1 class="title stag" style="font-size:clamp(2.2rem,5.6vw,4.6rem)">Phoenix.<br><span class="grad">19 July 2022.</span></h1>
+      <p class="lead stag" style="margin-top:1.4rem">Daily maximum temperature for a small cohort, extracted from Daymet V4. The same physical value, written as three sidecars across three real ecosystems.</p>
+      <div class="tier-legend stag">
+        <span class="badge b-core">Core</span><span class="badge b-reco">Recommended</span><span class="badge b-opt">Optional</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 — SCENARIO 1 MIN -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker warm" style="margin:0">① Amadeus → GridMET</span><span class="badge b-core">Core INCOMPLETE</span></div>
+      <h2 class="stag" style="margin-top:.6rem">Minimum — what ships today</h2>
+      <p class="stag" style="margin:.6rem 0 .9rem">Value, free-text acknowledgement, file hashes. Several Core fields absent, recorded as null-with-reason.</p>
+      <div class="code stag">
+        <div class="bar"><span class="dot" style="background:var(--core)"></span><span class="dot" style="background:#3a4452"></span><span class="dot" style="background:#3a4452"></span><span class="fname">EnvironmentalExposureRecord-tmax_core_missing.yaml</span></div>
+<pre><span class="k">variable_identity</span>: { <span class="k">standard_name</span>: <span class="s">CF:air_temperature</span>, <span class="k">units_ucum</span>: <span class="s">Cel</span> }
+<span class="k">temporal_reference</span>:
+  <span class="k">temporal_aggregation_method</span>: <span class="s">maximum</span>
+  <span class="k">day_boundary_convention</span>: <span class="gap">null</span>        <span class="cm"># CORE GAP</span>
+  <span class="k">day_boundary_convention_missing_reason</span>: <span class="s">not_provided_by_source</span>
+<span class="k">source_dataset</span>:
+  <span class="k">source_dataset_version</span>: <span class="gap">null</span>           <span class="cm"># CORE GAP</span>
+<span class="k">data_row</span>: { <span class="k">date</span>: <span class="s">2022-07-19</span>, <span class="k">value</span>: <span class="n">45.1</span>, <span class="k">unit</span>: <span class="s">Cel</span> }</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22 — SCENARIO 2 IDEAL -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--reco)">② DeGAUSS → Daymet</span><span class="badge b-reco">Core COMPLETE</span></div>
+      <h2 class="stag" style="margin-top:.6rem">Core + most Recommended present</h2>
+      <p class="stag" style="margin:.6rem 0 .9rem">Source DOI and version, model paper and biases, geocoder precision/score, container digest, provenance chain.</p>
+      <div class="code stag">
+        <div class="bar"><span class="dot" style="background:#6ee7a8"></span><span class="dot" style="background:#6ee7a8"></span><span class="dot" style="background:var(--reco)"></span><span class="fname">EnvironmentalExposureRecord-tmax_recommended.yaml</span></div>
+<pre><span class="k">temporal_reference</span>: { <span class="k">day_boundary_convention</span>: <span class="hlg"><span class="s">local_midnight</span></span> }
+<span class="k">source_dataset</span>: { <span class="k">source_dataset_doi</span>: <span class="s">"10.3334/ORNLDAAC/2129"</span>, <span class="k">source_dataset_version</span>: <span class="s">"V4 R1"</span> }
+<span class="k">exposure_model</span>:
+  <span class="k">exposure_model_type</span>: <span class="s">spatial_interpolation</span>
+  <span class="k">exposure_model_known_biases</span>: [ <span class="s">"warm-season warm bias…"</span> ]
+<span class="k">linkage_method</span>: { <span class="k">geocoding_precision_propagated</span>: <span class="s">range</span>, <span class="k">geocoding_score_propagated</span>: <span class="n">0.95</span> }
+<span class="k">tool_run</span>: { <span class="k">container_image_digest</span>: <span class="s">"sha256:a8b3c2d1e0f9…"</span> }
+<span class="k">data_row</span>: { <span class="k">date</span>: <span class="s">2022-07-19</span>, <span class="k">value</span>: <span class="n">46.7</span>, <span class="k">unit</span>: <span class="s">Cel</span> }</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 — CAN YOU REPRODUCE IT? (NEW) -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Testing the claim</div>
+      <h2 class="stag">Can you reproduce it from the sidecar alone?</h2>
+      <div class="two-pane stag" style="margin-top:1.3rem">
+        <div>
+          <div class="ico" style="font-family:var(--mono);color:#6ee7a8;letter-spacing:.12em;font-size:.7rem;text-transform:uppercase">The sidecar specifies enough to re-run and byte-verify</div>
+          <ul class="clean" style="margin-top:.7rem">
+            <li>which product + version (<span class="mono">version</span>, <span class="mono">doi</span>)</li>
+            <li>the exact tool + image (<span class="mono">tool_version</span>, <span class="mono">container_image_digest</span>)</li>
+            <li>the exact invocation (<span class="mono">run_arguments</span>)</li>
+            <li>extraction, day-boundary, linkage parameters</li>
+            <li>verify the result by <span class="mono">input/output_file_sha256</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="ico" style="font-family:var(--mono);color:var(--core);letter-spacing:.12em;font-size:.7rem;text-transform:uppercase">It does not guarantee — three external conditions must hold</div>
+          <ul class="clean" style="margin-top:.7rem">
+            <li style="--c:var(--core)">the raw source is still retrievable</li>
+            <li>the container image still resolves from its digest</li>
+            <li>the computation is deterministic (no unseeded randomness)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout stag"><p>Honest claim: the sidecar makes the analysis <strong>reconstructable and byte-verifiable in principle</strong> — not push-button reproducible. It records the conditions reproduction depends on; it cannot enforce that they still hold.</p></div>
+    </div>
+  </section>
+
+  <!-- 24 — SCENARIO 3 MAX -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--opt)">③ OMOP / GAIA deposit</span><span class="badge b-opt">Core + Reco + Optional</span></div>
+      <h2 class="stag" style="margin-top:.6rem">Maximal — enriched and deposited</h2>
+      <p class="stag" style="margin:.6rem 0 .9rem">Same Daymet lineage, assembled into an OMOP/GAIA deposit: ontology IRIs, ACDD passthrough, per-value uncertainty, FAIR-deposit block. Nothing null without reason.</p>
+      <div class="code stag">
+        <div class="bar"><span class="dot" style="background:#6ee7a8"></span><span class="dot" style="background:#6ee7a8"></span><span class="dot" style="background:#6ee7a8"></span><span class="fname">EnvironmentalExposureRecord-tmax_ideal.yaml</span></div>
+<pre><span class="k">variable_identity</span>: { <span class="k">concept_mappings</span>: [<span class="s">ECTO:0000012</span>, <span class="s">ENVO:03000049</span>] }
+<span class="k">uncertainty</span>: { <span class="k">per_value_uncertainty_field_name</span>: <span class="s">tmax_stderr</span>, <span class="k">per_value_uncertainty_type</span>: <span class="s">standard_error</span> }
+<span class="k">deposit_metadata</span>:
+  <span class="k">deposit_doi</span>: <span class="s">"10.5281/zenodo.9999999"</span>
+  <span class="k">deposit_license_spdx</span>: <span class="s">CC-BY-4.0</span>
+  <span class="k">dcat_distribution_url</span>: <span class="s">"https://zenodo.org/…/tmax_phoenix.parquet"</span>
+<span class="k">data_row</span>: { <span class="k">value</span>: <span class="n">46.7</span>, <span class="k">tmax_stderr</span>: <span class="n">0.8</span> }</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 25 — GRADIENT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">The completeness gradient</div>
+      <h2 class="stag">Same value, three ecosystems, three records</h2>
+      <div class="cols c3 stag" style="margin-top:1.6rem">
+        <div class="card" style="border-color:rgba(255,77,94,.3)"><span class="badge b-core">① Amadeus</span><div class="stat" style="margin-top:.9rem;color:var(--core)">45.1°</div><p style="margin-top:.4rem">Value + hashes. Blocking Core gaps.</p></div>
+        <div class="card" style="border-color:rgba(255,180,84,.3)"><span class="badge b-reco">② DeGAUSS</span><div class="stat" style="margin-top:.9rem;color:var(--reco)">46.7°</div><p style="margin-top:.4rem">Core + most Recommended.</p></div>
+        <div class="card" style="border-color:rgba(76,201,240,.3)"><span class="badge b-opt">③ OMOP/GAIA</span><div class="stat" style="margin-top:.9rem;color:var(--opt)">46.7°</div><p style="margin-top:.4rem">Everything, deposited.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 26 — CHECKER OUTPUT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The completeness checker</div>
+      <h2 class="stag">A score read straight from the schema</h2>
+      <p class="stag" style="margin:.7rem 0 1rem">Input a sidecar; it reports present, missing, and a readiness score. Tiers come from the schema annotations, so the score cannot disagree with the spec.</p>
+      <div class="code stag">
+        <div class="bar"><span class="dot" style="background:var(--heat)"></span><span class="fname">$ uv run envar-check EnvironmentalExposureRecord-tmax_core_missing.yaml</span></div>
+<pre><span class="gap">Core         5/8   ✗</span>
+<span class="n">Recommended  1/9   ⚠</span>   missing: source_dataset_doi, container_image_digest, …
+<span class="k">Optional     0/7</span>
+<span class="cm">─────────────────────────────────────────────</span>
+Reproducibility-readiness: <span class="gap">31%</span>
+<span class="gap">BLOCKING (Core missing): day_boundary_convention, source_dataset_version</span></pre>
+      </div>
+      <p class="footnote stag">Illustrative output — the checker is a Week-1 deliverable. It mirrors C-HER's registration-time completeness gate and gaiaCatalog's SHACL required/recommended split.</p>
+    </div>
+  </section>
+
+  <!-- 27 — CLIMB -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Readiness across the three ecosystems</div>
+      <h2 class="stag">The same value, scored</h2>
+      <div class="stag" style="margin-top:1.8rem;display:flex;flex-direction:column;gap:1.3rem">
+        <div class="meter">
+          <div class="row"><span><span class="badge b-core">①</span> Amadeus → GridMET</span><span style="color:var(--core)">31%</span></div>
+          <div class="track"><div class="fill" style="width:31%;background:var(--core)"></div></div>
+        </div>
+        <div class="meter">
+          <div class="row"><span><span class="badge b-reco">②</span> DeGAUSS → Daymet</span><span style="color:var(--reco)">82%</span></div>
+          <div class="track"><div class="fill" style="width:82%;background:var(--reco)"></div></div>
+        </div>
+        <div class="meter">
+          <div class="row"><span><span class="badge b-opt">③</span> OMOP / GAIA deposit</span><span style="color:var(--opt)">100%</span></div>
+          <div class="track"><div class="fill" style="width:100%;background:linear-gradient(90deg,var(--opt),var(--cool))"></div></div>
+        </div>
+      </div>
+      <p class="footnote stag">Illustrative readiness scores. The same three-rung progression runs for PM2.5: EPA monitor → Di et al. ML surface → ACAG satellite deposit.</p>
+    </div>
+  </section>
+
+  <!-- 28 — DEEP: DAY BOUNDARY -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker warm" style="margin:0">Element detail</span><span class="badge b-core">Core</span></div>
+      <h2 class="stag" style="margin-top:.6rem"><span class="mono" style="font-size:.62em;color:var(--cool)">day_boundary_convention</span></h2>
+      <p class="stag" style="margin:.8rem 0 1rem">Daymet uses local midnight; PRISM uses 24 h ending 12:00 GMT. A "daily maximum" depends on the window chosen, and cross-product comparison is sensitive to it.</p>
+      <div class="stag" style="display:flex;flex-wrap:wrap;gap:.4rem">
+        <span class="pill">local_midnight</span><span class="pill">utc_midnight</span><span class="pill">ending_1200_gmt</span><span class="pill">solar_noon_centered</span><span class="pill">observation_dependent</span>
+      </div>
+      <p class="footnote stag">Proposed as Core deliberately, as the field whose omission breaks the most studies. SPEC flags it for the community to downgrade if they disagree.</p>
+    </div>
+  </section>
+
+  <!-- 29 — DEEP: EXTRACTION -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--cool)">Element detail · grid → person</span><span class="badge b-core">Core</span></div>
+      <h2 class="stag" style="margin-top:.6rem"><span class="mono" style="font-size:.6em;color:var(--cool)">extraction_method</span> + <span class="mono" style="font-size:.6em;color:var(--cool)">linkage_strategy</span></h2>
+      <p class="stag" style="margin:.7rem 0 .9rem">The largest single lever in exposure assignment: the same point gets a different value depending on the rule.</p>
+      <table class="stag">
+        <thead><tr><th>extraction_method</th><th>behaviour</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">nearest_cell</span></td><td>take the cell the point falls in</td></tr>
+          <tr><td><span class="mono">inverse_distance_weighted_4_nearest_cells</span></td><td>distance-weight the 4 nearest cells</td></tr>
+          <tr><td><span class="mono">area_weighted_polygon_mean</span></td><td>average over a polygon (tract, ZCTA)</td></tr>
+          <tr><td><span class="mono">population_weighted_mean</span></td><td>weight cells by where people live</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote stag">LinkageMethod is the "linkage descriptor" the GECC/EIRENE forum names as the central gap. Buffer radius and max-station-distance are Conditionally-Core where those strategies apply.</p>
+    </div>
+  </section>
+
+  <!-- 30 — DEEP: MODEL TYPE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker warm" style="margin:0">Element detail · error structure</span><span class="badge b-core">Core</span></div>
+      <h2 class="stag" style="margin-top:.6rem"><span class="mono" style="font-size:.6em;color:var(--cool)">exposure_model_type</span></h2>
+      <p class="stag" style="margin:.7rem 0 .9rem">A measured value, an interpolated value, and an ML-predicted value have different error structures and cannot be pooled naively. This field separates them.</p>
+      <div class="stag" style="display:flex;flex-wrap:wrap;gap:.4rem">
+        <span class="pill">direct_measurement</span><span class="pill">spatial_interpolation</span><span class="pill">reanalysis</span><span class="pill">statistical_blend</span><span class="pill">chemical_transport_model</span><span class="pill">ensemble_machine_learning</span><span class="pill">single_machine_learning</span><span class="pill">equation_derived</span><span class="pill">satellite_retrieval</span>
+      </div>
+      <p class="footnote stag">Daymet = interpolation; Di et al. PM2.5 = ensemble ML (CV R² 0.86); ACAG = satellite retrieval.</p>
+    </div>
+  </section>
+
+  <!-- 31 — DEEP: EQUATION VARIANT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--cond)">Element detail · derived heat metrics</span><span class="badge b-cond">Conditionally-Core</span></div>
+      <h2 class="stag" style="margin-top:.6rem"><span class="mono" style="font-size:.62em;color:var(--cool)">equation_variant</span></h2>
+      <p class="stag" style="margin:.7rem 0 1rem">For wet-bulb globe temperature the approximations diverge materially from the reference model — beyond 2–3 °C in hot-humid conditions. For a derived metric, the equation used must be recorded.</p>
+      <div class="cols c3 stag">
+        <div class="card"><div class="ico">WBGT</div><p style="margin-top:.4rem"><span class="mono">liljegren_2008 · acsm_simplified · bernard_simplified</span></p></div>
+        <div class="card"><div class="ico">Heat Index</div><p style="margin-top:.4rem"><span class="mono">rothfusz_1990_nws · steadman_1979</span> — undefined below ~80 °F / 40 % RH</p></div>
+        <div class="card"><div class="ico">UTCI</div><p style="margin-top:.4rem"><span class="mono">brode_2012_polynomial</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 32 — DEEP: PERCENTILE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--cond)">Element detail · what counts as extreme</span><span class="badge b-cond">Conditionally-Core</span></div>
+      <h2 class="stag" style="margin-top:.6rem">Percentile reference period</h2>
+      <p class="stag" style="margin:.7rem 0 1.2rem">"95th percentile" over <span class="mono">1971–2000</span> vs <span class="mono">2000–2019</span> is a different threshold in a warming climate; it flags different days and shifts the mortality estimate.</p>
+      <div class="two-pane stag">
+        <div class="card"><div class="ico">Required for heat-wave flags</div><p style="margin-top:.4rem">At least seven definitions in use, none convertible after the fact. Capture threshold definition, min consecutive days, reference period start/end.</p></div>
+        <div class="card"><div class="ico">Scope &amp; window</div><p style="margin-top:.4rem"><span class="mono">local_tract · county · climate_region · national</span>; seasonal window <span class="mono">warm_season_may_sep</span>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 33 — PROVENANCE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--cool)">Element detail · provenance</span><span class="badge b-reco">Recommended</span></div>
+      <h2 class="stag" style="margin-top:.6rem">Provenance chain, patterned on W3C PROV</h2>
+      <div class="flow stag" style="margin-top:1.8rem">
+        <div class="node"><div class="t">terminus</div><div class="m">raw_source_download</div></div>
+        <div class="arrow">───▶</div>
+        <div class="node"><div class="t">step</div><div class="m">geocoder 3.3.0</div></div>
+        <div class="arrow">───▶</div>
+        <div class="node sidecar"><div class="t" style="color:var(--heat)">tool_run</div><div class="m">daymet 1.0.0</div></div>
+      </div>
+      <p class="stag" style="margin-top:1.8rem">A connected DAG terminating at a typed root, no orphaned steps. Reproducibility anchors: <span class="mono cool-ink">container_image_digest</span> (SHA256, not a tag), input/output hashes, exact <span class="mono cool-ink">run_arguments</span>.</p>
+    </div>
+  </section>
+
+  <!-- 34 — PM2.5 GENERALISATION -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Generalisation check</div>
+      <h2 class="stag">PM2.5 — same frame, different stresses</h2>
+      <p class="stag" style="margin:.7rem 0 0">PM2.5 reuses the entire frame but exercises different elements than heat: ML/satellite model types instead of interpolation, an annual-vs-daily averaging distinction, a different linkage story.</p>
+      <div class="cols c3 stag" style="margin-top:1.5rem">
+        <div class="card"><div class="ico">Model type</div><h3>Non-interpolation</h3><p>monitor → ensemble ML → satellite retrieval.</p></div>
+        <div class="card"><div class="ico">Averaging window</div><h3>Daily vs annual</h3><p>Acute (~2-day) and chronic (annual) PM2.5 are distinct exposures. Made explicit.</p></div>
+        <div class="card"><div class="ico">Concept status</div><h3>gap → proposed</h3><p>PM2.5 sits in the OHDSI Exposome vocabulary effort; no single canonical id yet.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 35 — PM2.5 EXAMPLE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="eyebrow-row stag"><span class="kicker" style="margin:0;color:var(--reco)">PM2.5 · Di et al. ensemble ML</span><span class="badge b-reco">Core COMPLETE</span></div>
+      <h2 class="stag" style="margin-top:.6rem">A modeled-surface exposure</h2>
+      <div class="code stag" style="margin-top:1rem">
+        <div class="bar"><span class="dot" style="background:#6ee7a8"></span><span class="dot" style="background:#6ee7a8"></span><span class="dot" style="background:var(--reco)"></span><span class="fname">EnvironmentalExposureRecord-pm25_recommended.yaml</span></div>
+<pre><span class="k">variable_identity</span>:
+  <span class="k">standard_name</span>: <span class="s">CF:mass_concentration_of_pm2p5_…_in_air</span>
+  <span class="k">units_ucum</span>: <span class="s">ug/m3</span>
+  <span class="k">target_concept_vocabulary</span>: <span class="s">omop</span>
+  <span class="k">concept_status</span>: <span class="hlg"><span class="s">proposed</span></span>
+<span class="k">temporal_reference</span>: { <span class="k">temporal_aggregation_method</span>: <span class="s">mean</span>, <span class="k">day_boundary_convention</span>: <span class="s">utc_midnight</span> }
+<span class="k">exposure_model</span>:
+  <span class="k">exposure_model_type</span>: <span class="hlg"><span class="s">ensemble_machine_learning</span></span>
+  <span class="k">exposure_model_cross_validation_r2</span>: <span class="n">0.86</span>
+  <span class="k">exposure_model_ensemble_member_count</span>: <span class="n">3</span>
+<span class="k">data_row</span>: { <span class="k">date</span>: <span class="s">2016-07-19</span>, <span class="k">value</span>: <span class="n">9.7</span>, <span class="k">unit</span>: <span class="s">ug/m3</span> }</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 36 — PM2.5 DELTAS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">PM2.5 — the deltas</div>
+      <h2 class="stag">Where a pollutant stresses the schema</h2>
+      <table class="stag" style="margin-top:1.3rem">
+        <thead><tr><th>Aspect</th><th>TMAX</th><th>PM2.5</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Model type</strong></td><td><span class="mono">spatial_interpolation</span></td><td><span class="mono">ensemble_ML → satellite</span></td></tr>
+          <tr><td><strong>Aggregation</strong></td><td>daily maximum</td><td><span class="mono">daily mean vs annual mean</span></td></tr>
+          <tr><td><strong>Day boundary</strong></td><td>the headline trap</td><td>applies daily; <span class="mono">not_applicable</span> annually</td></tr>
+          <tr><td><strong>Linkage</strong></td><td>point extraction</td><td>nearest-station vs pop-weighted area</td></tr>
+          <tr><td><strong>Concept status</strong></td><td><span class="mono">gap</span></td><td><span class="mono">proposed</span></td></tr>
+        </tbody>
+      </table>
+      <p class="footnote stag">Confirms Core elements can be contextually <span class="mono">not_applicable</span> without being dropped, and the frame holds beyond heat.</p>
+    </div>
+  </section>
+
+  <!-- 37 — METHOD -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">How the element set was derived</div>
+      <h2 class="stag">Re-derived from source requirements</h2>
+      <ul class="clean stag" style="margin-top:1.4rem">
+        <li><strong>Re-derive</strong> from the naked requirements — 70+ slots across 13 sections, each with a stated source-of-truth.</li>
+        <li><strong>Ground in evidence</strong> — every Core and high-controversy element carries a PMID / DOI / standard URL.</li>
+        <li><strong>Add PM2.5</strong> — extend with what a pollutant needs that heat does not exercise.</li>
+        <li><strong>Reconcile against the prototype</strong> — element by element, where the set matches, adds, drops, or renames the existing 13-module schema.</li>
+      </ul>
+      <p class="footnote stag">New work for v0.2: tier annotations, reference annotations, and the top-level naming decision — not a structural rebuild.</p>
+    </div>
+  </section>
+
+  <!-- 38 — EVIDENCE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Evidence</div>
+      <h2 class="stag">The schema carries its own references</h2>
+      <p class="stag" style="margin:.7rem 0 1.1rem">Citations live inline in SPEC.md and as <span class="mono cool-ink">see_also</span> annotations on the LinkML slots, so the evidence travels with the field.</p>
+      <div class="cols c3 stag">
+        <div class="card"><div class="ico">Heat &amp; methods</div><p style="margin-top:.3rem">Gasparrini 2015 · Liljegren 2008 · Anderson 2011/2013 · Kong &amp; Huber 2022</p></div>
+        <div class="card"><div class="ico">Data products</div><p style="margin-top:.3rem">Thornton 2022 (Daymet) · Abatzoglou 2013 (GridMET) · Hersbach 2020 (ERA5)</p></div>
+        <div class="card"><div class="ico">PM2.5</div><p style="margin-top:.3rem">Di 2019 · van Donkelaar 2021 · Dockery 1993 · Pope 2002 · Di 2017</p></div>
+      </div>
+      <p class="footnote stag">Core and controversial elements cited now; full per-element pass deferred until the community trims the set.</p>
+    </div>
+  </section>
+
+  <!-- 39 — STAKEHOLDERS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Where it plugs in</div>
+      <h2 class="stag">Each existing system maps to one part</h2>
+      <table class="stag" style="margin-top:1.3rem">
+        <thead><tr><th>System</th><th>Relationship to EnVar</th></tr></thead>
+        <tbody>
+          <tr><td><strong>OMOP <span class="mono">external_exposure</span></strong></td><td>EnVar fills the metadata the table cannot carry; links via <span class="mono">provenance_id</span></td></tr>
+          <tr><td><strong>GAIA / gaiaCatalog</strong></td><td>dataset-level vs EnVar's variable-level; LinkML emits the JSON-LD it consumes</td></tr>
+          <tr><td><strong>C-HER (ORNL)</strong></td><td>advisory partner; its datasets are EnVar's ETL test set; the tiered checker generalises its registration-time completeness gate</td></tr>
+          <tr><td><strong>Amadeus / DeGAUSS</strong></td><td>their output is the input the schema standardises and scores</td></tr>
+          <tr><td><strong>GECC / EIRENE · GA4GH</strong></td><td>LinkageMethod = the "linkage descriptor"; an <span class="mono">ECTO:</span> entry in <span class="mono">concept_mappings</span> = Phenopackets hook</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 40 — THE ASK -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Community session</div>
+      <h2 class="stag">Five judgements per element</h2>
+      <div class="cols c2 stag" style="margin-top:1.5rem">
+        <ul class="clean">
+          <li><strong>1 · Core?</strong> mandatory, or the record is meaningless</li>
+          <li><strong>2 · Necessary for reproducibility?</strong> Recommended</li>
+          <li><strong>3 · Nice-to-have?</strong> Optional</li>
+        </ul>
+        <ul class="clean">
+          <li><strong>4 · Well described?</strong> is the definition clear and correct</li>
+          <li><strong>5 · Missing?</strong> what belongs here that isn't</li>
+        </ul>
+      </div>
+      <p class="stag" style="margin-top:1.4rem">Output: a tier-reclassification list + a missing-element list, folded into schema v0.2 and a revised SPEC.</p>
+    </div>
+  </section>
+
+  <!-- 41 — PROVOCATIONS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Two calls to ratify or overturn</div>
+      <h2 class="stag">The decisions most worth debating</h2>
+      <div class="cols c2 stag" style="margin-top:1.5rem">
+        <div class="card" style="border-color:rgba(255,77,94,.3)"><span class="badge b-core">Call 1</span><h3 style="margin-top:.6rem"><span class="mono" style="font-size:.55em">day_boundary_convention</span> as Core</h3><p>The field whose omission breaks the most studies. Too strict?</p></div>
+        <div class="card" style="border-color:rgba(183,148,246,.3)"><span class="badge b-cond">Call 2</span><h3 style="margin-top:.6rem"><span class="mono" style="font-size:.55em">equation_variant</span> as Conditionally-Core</h3><p>Liljegren vs ACSM WBGT differ by 2–3 °C. Conditional, or flatly Core?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 42 — ROADMAP -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Roadmap</div>
+      <h2 class="stag">From draft to v0.2</h2>
+      <table class="stag" style="margin-top:1.3rem">
+        <thead><tr><th>When</th><th>Milestone</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">Week 0</span></td><td>PLAN + SPEC + six scenario sidecars + workshop narrative; internal review</td></tr>
+          <tr><td><span class="mono">Week 1</span></td><td>completeness checker against the six scenarios; Core/controversial references inlined</td></tr>
+          <tr><td><span class="mono">Week 2</span></td><td>pre-read circulated; scoring sheet set up</td></tr>
+          <tr><td><span class="mono">Week 3</span></td><td>community evaluation session</td></tr>
+          <tr><td><span class="mono">Week 4</span></td><td>schema v0.2 + revised SPEC; full citation pass scheduled</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 43 — OPEN DECISIONS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Open decisions</div>
+      <h2 class="stag">Unresolved, for the session</h2>
+      <ul class="clean stag" style="margin-top:1.4rem">
+        <li><strong>Tier granularity</strong> — keep Conditionally-Core visible, or fold into per-element notes?</li>
+        <li><strong>Top-level naming</strong> — profile-conformant abstract slots vs readable domain names?</li>
+        <li><strong>Capture mechanism</strong> — shared spreadsheet vs GitHub-issue-per-module?</li>
+        <li><strong>Full citation pass</strong> — multi-agent literature sweep vs hand-curated, once scope settles?</li>
+        <li><strong>Registry host</strong> — standalone static site vs completeness badges into gaiaCatalog?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 44 — CLOSE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker warm stag">Summary</div>
+      <h2 class="stag" style="max-width:22ch">One representation, tiered requirements, a checker that scores any sidecar against them.</h2>
+      <p class="stag" style="margin-top:1.4rem">The goal is a community-blessed minimum a producer can emit and a consumer can trust — small enough to maintain, complete enough to reconstruct.</p>
+      <hr class="rule stag" />
+      <p class="stag"><span class="mono" style="color:var(--faint)">EnVar environmental-exposure microschema · first community draft · PLAN.md + SPEC.md</span></p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let i = 0;
+  const progress = document.getElementById('progress');
+  const cur = document.getElementById('cur');
+  document.getElementById('tot').textContent = String(total).padStart(2,'0');
+
+  function render(){
+    slides.forEach((s,n)=>{
+      s.classList.toggle('active', n===i);
+      s.classList.toggle('past', n<i);
+    });
+    progress.style.width = ((i)/(total-1)*100)+'%';
+    cur.textContent = String(i+1).padStart(2,'0');
+    location.hash = i+1;
+  }
+  function go(n){ i = Math.max(0, Math.min(total-1, n)); render(); }
+  function next(){ go(i+1); }
+  function prev(){ go(i-1); }
+
+  document.addEventListener('keydown', e=>{
+    if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){ e.preventDefault(); next(); }
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+  });
+  document.getElementById('navNext').addEventListener('click', next);
+  document.getElementById('navPrev').addEventListener('click', prev);
+
+  let tx=0;
+  document.addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>55){ dx<0?next():prev(); }
+  },{passive:true});
+
+  const start = parseInt(location.hash.replace('#',''));
+  if(start>=1 && start<=total) i=start-1;
+  render();
+</script>
+</body>
+</html>

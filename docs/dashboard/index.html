@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EnVar · Metadata Completeness Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe5;
+  --paper-2:#efe8da;
+  --card:#fbf8f1;
+  --ink:#1d1a15;
+  --ink-2:#4a443a;
+  --ink-3:#8a8170;
+  --rule:#ddd3c0;
+  --rule-strong:#c7bba1;
+  /* thermal ramp */
+  --cool:#3f6b8c;
+  --temperate:#caa04e;
+  --warm:#d4762a;
+  --ember:#b23416;
+  --blocked:#a8311b;
+  --ok:#3f6b4c;
+  --shadow:0 1px 0 rgba(0,0,0,.04), 0 18px 40px -28px rgba(40,28,12,.55);
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Archivo", -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(212,118,42,.10), transparent 60%),
+    radial-gradient(900px 500px at -5% 0%, rgba(63,107,140,.10), transparent 55%);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:5rem;
+}
+/* faint paper grain */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 1.6rem}
+
+/* ---------- Masthead ---------- */
+header{padding:3rem 0 1.4rem}
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ember);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule-strong)}
+.masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+h1{
+  font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,5.2vw,4rem);
+  line-height:.98;letter-spacing:-.01em;font-optical-sizing:auto;max-width:14ch;
+}
+h1 em{font-style:italic;font-weight:500;color:var(--warm)}
+.lede{
+  font-family:var(--serif);font-weight:400;font-size:1.06rem;color:var(--ink-2);
+  max-width:42ch;line-height:1.45;
+}
+.gh{color:var(--ink-3);transition:color .2s;flex-shrink:0}
+.gh:hover{color:var(--ink)}
+
+/* ---------- Stat strip ---------- */
+.strip{
+  display:flex;gap:0;margin:2rem 0 1.2rem;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);flex-wrap:wrap;
+}
+.stat{padding:.9rem 1.6rem .9rem 0;margin-right:1.6rem;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:none}
+.stat b{font-family:var(--serif);font-weight:600;font-size:1.5rem;display:block;line-height:1}
+.stat span{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- Legend ---------- */
+.legend{display:flex;gap:1.4rem;flex-wrap:wrap;margin:.4rem 0 1.6rem;font-size:.82rem;color:var(--ink-2)}
+.legend .key{display:flex;align-items:center;gap:.45rem}
+.swatch{width:1.5rem;height:.5rem;border-radius:2px}
+.swatch.core{background:var(--ember)}
+.swatch.rec{background:var(--warm)}
+.swatch.opt{background:var(--temperate)}
+.note{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);margin-left:auto;align-self:center}
+
+/* ---------- Table ---------- */
+.ledger{width:100%;border-collapse:collapse}
+.ledger thead th{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);text-align:left;font-weight:500;padding:.6rem .8rem;border-bottom:1.5px solid var(--rule-strong);
+  white-space:nowrap;
+}
+.ledger thead th.num{text-align:right}
+.row-main{cursor:pointer;transition:background .15s}
+.row-main>td{padding:1.1rem .8rem;border-bottom:1px solid var(--rule);vertical-align:middle}
+.row-main:hover{background:var(--card)}
+.row-main.open{background:var(--card)}
+
+.scen{display:flex;align-items:center;gap:.85rem}
+.rank{
+  font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--ink-3);
+  width:1.6rem;text-align:center;flex-shrink:0;
+}
+.scen-body h3{font-family:var(--serif);font-weight:600;font-size:1.08rem;letter-spacing:-.01em}
+.scen-body .sub{font-size:.8rem;color:var(--ink-3)}
+.scen-body .sub code{font-family:var(--mono);font-size:.74rem}
+
+.tierbadge{
+  display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.18rem .5rem;border-radius:3px;font-weight:500;border:1px solid transparent;
+}
+.tierbadge.min{color:var(--cool);background:rgba(63,107,140,.10);border-color:rgba(63,107,140,.3)}
+.tierbadge.ideal{color:var(--warm);background:rgba(212,118,42,.12);border-color:rgba(212,118,42,.35)}
+.tierbadge.max{color:#fff;background:var(--ember)}
+
+.fact{font-family:var(--mono);font-size:.8rem;color:var(--ink-2)}
+.fact.gap{color:var(--blocked);font-weight:500}
+.fact.gap::before{content:"⚠ ";}
+
+/* tier meter */
+.meter{display:flex;flex-direction:column;gap:.28rem;min-width:96px}
+.meter .seg{display:flex;gap:2px}
+.meter .seg i{height:7px;flex:1;background:var(--rule);border-radius:1px}
+.meter.core .seg i.on{background:var(--ember)}
+.meter.rec .seg i.on{background:var(--warm)}
+.meter.opt .seg i.on{background:var(--temperate)}
+.meter .lab{font-family:var(--mono);font-size:.72rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* readiness */
+.ready{text-align:right;min-width:120px}
+.ready .pct{font-family:var(--serif);font-weight:600;font-size:1.7rem;line-height:1;font-variant-numeric:tabular-nums}
+.ready .bar{height:6px;border-radius:3px;margin-top:.4rem;background:var(--rule);overflow:hidden}
+.ready .bar i{display:block;height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--cool),var(--temperate) 55%,var(--ember))}
+.stamp{
+  display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;
+  color:var(--blocked);border:1px solid var(--blocked);border-radius:3px;padding:.1rem .35rem;margin-top:.4rem;
+  transform:rotate(-1.5deg);
+}
+.stamp.ok{color:var(--ok);border-color:var(--ok)}
+
+/* ---------- Drawer ---------- */
+.row-detail>td{padding:0;border-bottom:1px solid var(--rule)}
+.drawer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.row-detail.open .drawer{max-height:760px}
+.drawer-inner{padding:1.4rem 1rem 2rem 3.4rem;display:grid;grid-template-columns:1.4fr 1fr;gap:2.2rem}
+.drawer h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.8rem}
+.modgrid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem .9rem}
+.mod{display:flex;gap:.55rem;align-items:flex-start;font-size:.82rem}
+.dot{width:.7rem;height:.7rem;border-radius:50%;margin-top:.35rem;flex-shrink:0;border:1.5px solid}
+.dot.full{background:var(--ok);border-color:var(--ok)}
+.dot.partial{background:var(--temperate);border-color:var(--warm)}
+.dot.absent{background:transparent;border-color:var(--rule-strong)}
+.mod .mname{font-weight:500}
+.mod .mnote{color:var(--ink-3);font-size:.76rem;display:block;line-height:1.35}
+
+.aside .measure{
+  background:var(--paper-2);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin-bottom:1.1rem;
+}
+.measure .v{font-family:var(--serif);font-weight:600;font-size:2.1rem;line-height:1}
+.measure .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.blocklist{list-style:none;font-family:var(--mono);font-size:.76rem}
+.blocklist li{padding:.2rem 0;color:var(--blocked)}
+.blocklist li::before{content:"▸ "}
+.blocklist.clean li{color:var(--ok)}
+.links{margin-top:1rem;display:flex;flex-direction:column;gap:.3rem;font-size:.8rem}
+.links a{color:var(--warm);text-decoration:none;border-bottom:1px solid rgba(212,118,42,.3)}
+.links a:hover{border-bottom-color:var(--warm)}
+.purpose{font-style:italic;font-family:var(--serif);color:var(--ink-2);margin-top:.4rem;font-size:.92rem}
+
+footer{margin-top:2.6rem;padding-top:1.2rem;border-top:1px solid var(--rule);font-size:.78rem;color:var(--ink-3)}
+footer a{color:var(--ink-2)}
+.disclaim{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);margin-top:.5rem;max-width:70ch;line-height:1.5}
+
+/* load-in stagger */
+.row-main{opacity:0;transform:translateY(6px);animation:rise .5s ease forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+@media(max-width:760px){
+  .drawer-inner{grid-template-columns:1fr;padding-left:1rem}
+  .modgrid{grid-template-columns:1fr}
+  .ledger thead th.hide,.row-main td.hide{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">EnVar · environmental-exposure microschema</div>
+    <div class="masthead">
+      <div>
+        <h1>Metadata Completeness <em>Ledger</em></h1>
+      </div>
+      <p class="lede">Every row is one exposure sidecar, ETL'd into the microschema. Watch reproducibility climb from the metadata we get today to the metadata a result actually needs.</p>
+      <a class="gh" href="https://github.com/monarch-initiative/linkml-microschemas-envar" aria-label="GitHub repository">
+        <svg width="26" height="26" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+    </div>
+
+    <div class="strip" id="strip"></div>
+
+    <div class="legend">
+      <span class="key"><span class="swatch core"></span> Core — blocks reproduction if absent</span>
+      <span class="key"><span class="swatch rec"></span> Recommended — needed for real reproduction</span>
+      <span class="key"><span class="swatch opt"></span> Optional — enriches discovery</span>
+      <span class="note">click any row to open the module breakdown</span>
+    </div>
+  </header>
+
+  <table class="ledger">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th class="hide">Tier</th>
+        <th class="hide">Native res.</th>
+        <th class="hide">Day boundary</th>
+        <th class="num">Core</th>
+        <th class="num hide">Recommended</th>
+        <th class="num hide">Optional</th>
+        <th class="num">Reproducibility</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <footer>
+    <p>Variable: TMAX (daily maximum near-surface air temperature) · scored against the EnVar microschema tier annotations · companion to <a href="../">the LinkML element docs</a>, <a href="https://github.com/monarch-initiative/linkml-microschemas-envar/blob/main/SPEC.md">SPEC.md</a> and <a href="https://github.com/monarch-initiative/linkml-microschemas-envar/blob/main/PLAN.md">PLAN.md</a>.</p>
+    <p class="disclaim">Draft. Per-row scores are precomputed and embedded for illustration — the <code>uv run</code> completeness checker that reads tiers directly from the schema is not yet built (PLAN.md §6). Denominators (Core 8 / Recommended 9 / Optional 7) are the TMAX-relevant slot counts; readiness = 0.5·core + 0.4·recommended + 0.1·optional.</p>
+  </footer>
+</div>
+
+<script>
+const SCENARIOS = [
+  {
+    id:"tmax-min", rank:1, tier:"Minimum", tierClass:"min", variable:"TMAX",
+    title:"Amadeus → GridMET 4 km", source:"GridMET (U. Idaho)", code:"gridmet",
+    resolution:"≈ 4 km", dayBoundary:null, value:"45.1", unit:"°C", date:"2022-07-19",
+    file:"tests/data/invalid/EnvironmentalExposureRecord-tmax_core_missing.yaml",
+    scores:{core:[6,8], recommended:[1,9], optional:[0,7]}, readiness:42,
+    blocking:["day_boundary_convention","source_dataset_version"],
+    purpose:"The “before” picture — today's free-text + hash metadata. Deliberately scores poorly; this is what motivates the schema.",
+    modules:[
+      {n:"Variable identity",s:"partial",note:"CF name + UCUM present; no ontology IRIs, concept id is a known gap"},
+      {n:"Data layout",s:"partial",note:"orientation + value column only; no subject/time bindings"},
+      {n:"Spatial reference",s:"full",note:"grid, CRS, nearest-cell extraction"},
+      {n:"Temporal reference",s:"partial",note:"day-boundary convention NOT recorded — the core gap"},
+      {n:"Source dataset",s:"partial",note:"name only; no version, DOI or citation"},
+      {n:"Exposure model",s:"partial",note:"model type only (statistical blend)"},
+      {n:"Uncertainty",s:"absent",note:"not propagated by the pipeline"},
+      {n:"Linkage method",s:"absent",note:"no geocoder precision / address alignment"},
+      {n:"Tool run",s:"partial",note:"input/output hashes; no container digest or args"},
+      {n:"Provenance chain",s:"absent",note:"upstream chain not captured"},
+      {n:"Health-layer link",s:"partial",note:"target table named (omop_external_exposure)"},
+      {n:"FAIR deposit",s:"absent",note:"not deposited"}
+    ]
+  },
+  {
+    id:"tmax-ideal", rank:2, tier:"Ideal", tierClass:"ideal", variable:"TMAX",
+    title:"DeGAUSS → Daymet 1 km", source:"Daymet V4 (ORNL DAAC)", code:"daymet_v4",
+    resolution:"1 km", dayBoundary:"local_midnight", value:"46.7", unit:"°C", date:"2022-07-19",
+    file:"tests/data/valid/EnvironmentalExposureRecord-tmax_recommended.yaml",
+    scores:{core:[8,8], recommended:[8,9], optional:[1,7]}, readiness:87,
+    blocking:[],
+    purpose:"Point-at-residence extraction with full lineage — reproducible from raw data + this metadata alone.",
+    modules:[
+      {n:"Variable identity",s:"full",note:"CF + UCUM + plausible range; ECTO null-with-reason"},
+      {n:"Data layout",s:"full",note:"orientation + value/subject/time column bindings"},
+      {n:"Spatial reference",s:"full",note:"1 km grid, CRS, IDW-4 extraction, extent"},
+      {n:"Temporal reference",s:"full",note:"day_boundary = local_midnight, calendar, coverage window"},
+      {n:"Source dataset",s:"full",note:"DOI, version, APA citation, SPDX license, format"},
+      {n:"Exposure model",s:"full",note:"interpolation, paper DOI, known biases listed"},
+      {n:"Uncertainty",s:"partial",note:"completeness 100%; per-value field null-with-reason"},
+      {n:"Linkage method",s:"full",note:"geocoder precision + score + address history"},
+      {n:"Tool run",s:"full",note:"container digest, run args, timestamps, row counts"},
+      {n:"Provenance chain",s:"full",note:"geocoder step recorded back to raw download"},
+      {n:"Health-layer link",s:"full",note:"target table + link field"},
+      {n:"FAIR deposit",s:"absent",note:"not yet deposited (Optional here)"}
+    ]
+  },
+  {
+    id:"tmax-max", rank:3, tier:"Maximal", tierClass:"max", variable:"TMAX",
+    title:"EnVar-enriched deposit", source:"Daymet V4 → Zenodo/GAIA", code:"daymet_v4",
+    resolution:"1 km", dayBoundary:"local_midnight", value:"46.7", unit:"°C", date:"2022-07-19",
+    file:"tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml",
+    scores:{core:[8,8], recommended:[9,9], optional:[6,7]}, readiness:99,
+    blocking:[],
+    purpose:"The theoretical maximum — ontology IRIs, ACDD passthrough, per-value uncertainty, BibTeX, and a citable FAIR deposit.",
+    modules:[
+      {n:"Variable identity",s:"full",note:"ECTO + ENVO cross-references (concept_mappings)"},
+      {n:"Data layout",s:"full",note:"adds per-value uncertainty column binding (tmax_stderr)"},
+      {n:"Spatial reference",s:"full",note:"adds bounding box; explicit buffer reasoning"},
+      {n:"Temporal reference",s:"full",note:"adds coverage + extraction windows"},
+      {n:"Source dataset",s:"full",note:"adds BibTeX, ACDD attributes, homogenisation status"},
+      {n:"Exposure model",s:"full",note:"adds uncertainty field, ensemble/bias-correction fields"},
+      {n:"Uncertainty",s:"full",note:"per-value standard error + units captured"},
+      {n:"Linkage method",s:"full",note:"full geocoder + cohort anchoring"},
+      {n:"Tool run",s:"full",note:"adds run environment + duration"},
+      {n:"Provenance chain",s:"full",note:"geocoder step with output hash"},
+      {n:"Health-layer link",s:"full",note:"cohort size anchored"},
+      {n:"FAIR deposit",s:"full",note:"DOI, license, recommended citation, DCAT distribution URL"}
+    ]
+  }
+];
+
+const segs = (got,of)=>Array.from({length:of},(_,i)=>`<i class="${i<got?'on':''}"></i>`).join("");
+const meter = (cls,[got,of])=>`<div class="meter ${cls}"><div class="seg">${segs(got,of)}</div><span class="lab">${got} / ${of}</span></div>`;
+
+// stat strip
+document.getElementById("strip").innerHTML = `
+  <div class="stat"><b>${SCENARIOS.length}</b><span>TMAX scenarios</span></div>
+  <div class="stat"><b>3</b><span>tiers · min → max</span></div>
+  <div class="stat"><b>11</b><span>microschema modules</span></div>
+  <div class="stat"><b>v0.1</b><span>schema draft</span></div>
+`;
+
+const rows = document.getElementById("rows");
+SCENARIOS.forEach((s,idx)=>{
+  const blocked = s.blocking.length>0;
+  const dayCell = s.dayBoundary
+    ? `<span class="fact">${s.dayBoundary}</span>`
+    : `<span class="fact gap">not recorded</span>`;
+  const stamp = blocked
+    ? `<span class="stamp">Blocked</span>`
+    : `<span class="stamp ok">Reproducible</span>`;
+
+  const main = document.createElement("tr");
+  main.className = "row-main";
+  main.style.animationDelay = (idx*90)+"ms";
+  main.innerHTML = `
+    <td>
+      <div class="scen">
+        <span class="rank">${s.rank}</span>
+        <div class="scen-body">
+          <h3>${s.title}</h3>
+          <div class="sub">${s.source} · <code>${s.code}</code></div>
+        </div>
+      </div>
+    </td>
+    <td class="hide"><span class="tierbadge ${s.tierClass}">${s.tier}</span></td>
+    <td class="hide"><span class="fact">${s.resolution}</span></td>
+    <td class="hide">${dayCell}</td>
+    <td>${meter("core",s.scores.core)}</td>
+    <td class="num hide">${meter("rec",s.scores.recommended)}</td>
+    <td class="num hide">${meter("opt",s.scores.optional)}</td>
+    <td>
+      <div class="ready">
+        <div class="pct">${s.readiness}<span style="font-size:.9rem">%</span></div>
+        <div class="bar"><i style="width:${s.readiness}%"></i></div>
+        ${stamp}
+      </div>
+    </td>`;
+
+  const detail = document.createElement("tr");
+  detail.className = "row-detail";
+  const mods = s.modules.map(m=>`
+    <div class="mod">
+      <span class="dot ${m.s}"></span>
+      <span><span class="mname">${m.n}</span><span class="mnote">${m.note}</span></span>
+    </div>`).join("");
+  const blockHtml = blocked
+    ? `<ul class="blocklist">${s.blocking.map(b=>`<li>${b}</li>`).join("")}</ul>`
+    : `<ul class="blocklist clean"><li>no Core gaps</li></ul>`;
+  detail.innerHTML = `
+    <td colspan="8">
+      <div class="drawer"><div class="drawer-inner">
+        <div>
+          <h4>Module coverage</h4>
+          <div class="modgrid">${mods}</div>
+          <p class="purpose">${s.purpose}</p>
+        </div>
+        <div class="aside">
+          <div class="measure"><div class="k">${s.variable} · ${s.date}</div><div class="v">${s.value}<span style="font-size:1rem"> ${s.unit}</span></div></div>
+          <h4>Blocking Core gaps</h4>
+          ${blockHtml}
+          <div class="links">
+            <a href="https://github.com/monarch-initiative/linkml-microschemas-envar/blob/main/${s.file}">▸ source sidecar (${s.file.split('/').pop()})</a>
+            <a href="https://github.com/monarch-initiative/linkml-microschemas-envar/blob/main/SPEC.md">▸ tier rationale (SPEC.md)</a>
+          </div>
+        </div>
+      </div></div>
+    </td>`;
+
+  main.addEventListener("click",()=>{
+    const open = detail.classList.toggle("open");
+    main.classList.toggle("open",open);
+  });
+
+  rows.appendChild(main);
+  rows.appendChild(detail);
+});
+</script>
+</body>
+</html>

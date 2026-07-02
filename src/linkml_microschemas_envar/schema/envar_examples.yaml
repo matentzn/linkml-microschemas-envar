@@ -42,7 +42,14 @@ classes:
       - https://cfconventions.org/standard-names.html
       - https://ucum.org/
     rules:
-      - postconditions:
+      # preconditions are semantically vacuous (the slot is required anyway)
+      # but must be present: gen-doc's class template crashes on a rule
+      # without preconditions (linkml docgen jinja bug).
+      - preconditions:
+          slot_conditions:
+            variable_identity:
+              value_presence: PRESENT
+        postconditions:
           slot_conditions:
             variable_identity:
               any_of:
@@ -82,7 +89,12 @@ classes:
       derived_heat_metric:
         required: true
     rules:
-      - postconditions:
+      # vacuous preconditions — see note on DailyMaxTemperatureRecord.
+      - preconditions:
+          slot_conditions:
+            derived_heat_metric:
+              value_presence: PRESENT
+        postconditions:
           slot_conditions:
             derived_heat_metric:
               any_of:
@@ -105,7 +117,12 @@ classes:
       derived_heat_metric:
         required: true
     rules:
-      - postconditions:
+      # vacuous preconditions — see note on DailyMaxTemperatureRecord.
+      - preconditions:
+          slot_conditions:
+            derived_heat_metric:
+              value_presence: PRESENT
+        postconditions:
           slot_conditions:
             derived_heat_metric:
               any_of:

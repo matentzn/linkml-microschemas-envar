@@ -60,9 +60,9 @@ a metric has more than one input — mirroring the existing treatment of
 ## Caveats (as with the sibling scenarios)
 
 - These files use readable domain-grouped top-level keys (`variable_identity`,
-  `spatial_reference`, …) rather than the prototype's profile slot names
-  (`observation_type`, `location`, …) — the open naming question in `SPEC.md`.
-  They are illustrative and will be aligned in schema v0.2.
+  `spatial_reference`, …), which are now the schema's canonical names (the
+  naming question in `SPEC.md` was resolved in favour of the readable names).
+  They remain illustrative rather than validated.
 - `cf_standard_name: heat_index` is **not** an official CF Standard Name — none
   exists for Heat Index; the slot is required, so a flagged placeholder is used.
 - Hashes, digests, and numeric values are representative, not from a real run.

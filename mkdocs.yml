@@ -61,14 +61,19 @@ watch:
 
 nav:
   - Home: index.md
+  - Schema overview: overview/index.html
   - Schema: elements/index.md
   - Architecture: architecture.md
   - Related approaches: related-approaches.md
   - Completeness ledger: dashboard/index.html
   - About: about.md
 
+# schema_overview.md is the *source* for the styled rendering deployed at
+# overview/index.html (see scripts/render_schema_overview_html.py); exclude
+# it so the site does not carry a second, cramped mkdocs rendering of it.
 exclude_docs: |
   /templates-linkml/
+  /schema_overview.md
 
 site_url: https://monarch-initiative.github.io/linkml-microschemas-envar
 repo_url: https://github.com/monarch-initiative/linkml-microschemas-envar

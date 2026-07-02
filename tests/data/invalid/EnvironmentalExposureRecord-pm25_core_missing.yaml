@@ -1,7 +1,7 @@
 schema_version: "0.1"
 provenance_id: "01HXEPAAQS00000000000PM25MON"
 
-observation_type:
+variable_identity:
   variable_name: pm25
   variable_label: "24-hour mean fine particulate matter (PM2.5) mass concentration"
   standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
@@ -13,7 +13,11 @@ observation_type:
   target_concept_id_missing_reason: not_provided_by_source
   concept_status: gap
 
-location:
+data_layout:
+  table_orientation: wide
+  value_column: pm25
+
+spatial_reference:
   native_spatial_resolution_descriptor: "point station (FRM/FEM monitor)"
   crs: "EPSG:4326"
   extraction_method: point_station_lookup
@@ -21,7 +25,7 @@ location:
   # CORE GAP: nearest-station assignment has no documented max distance, so
   # the spatial precision of the assignment is unknown.
 
-temporality:
+temporal_reference:
   temporal_resolution: daily
   temporal_aggregation_method: mean
   # CORE GAP: AQS daily summaries are local-standard-time; not recorded here.
@@ -35,7 +39,7 @@ source_dataset:
   source_access_url: "https://www.epa.gov/aqs"
   source_license_spdx: public-domain-us-gov
 
-methodology:
+exposure_model:
   exposure_model_type: direct_measurement
 
 linkage_method:

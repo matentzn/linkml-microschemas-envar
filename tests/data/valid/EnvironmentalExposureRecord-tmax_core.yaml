@@ -7,24 +7,28 @@ provenance_id: "01HFA7K8R3M6XP-daymet-core"
 phi_status: no_phi
 subject: "cohort:phoenix_aki_2022"
 
-observation_type:
+variable_identity:
   variable_name: tmax
   standard_name: CF:air_temperature
   units_ucum: Cel
   concept_status: gap
   value_data_type: continuous_numeric
 
-location:
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+
+spatial_reference:
   crs: "EPSG:4326"
   extraction_method: inverse_distance_weighted_4_nearest_cells
   target_geography_type: point_residence
 
-temporality:
+temporal_reference:
   temporal_resolution: daily
   temporal_aggregation_method: maximum
   day_boundary_convention: local_midnight
 
-methodology:
+exposure_model:
   exposure_model_type: spatial_interpolation
 
 source_dataset:

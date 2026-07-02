@@ -1,7 +1,7 @@
 schema_version: "0.1"
 provenance_id: "01HXAMADEUS0000000000GRIDMET"
 
-observation_type:
+variable_identity:
   variable_name: tmmx                      # GridMET's native column name
   variable_label: "daily maximum near-surface air temperature"
   standard_name: CF:air_temperature
@@ -13,14 +13,18 @@ observation_type:
   target_concept_id_missing_reason: not_provided_by_source
   concept_status: gap
 
-location:
+data_layout:
+  table_orientation: wide
+  value_column: tmmx
+
+spatial_reference:
   native_spatial_resolution_m: 4000
   native_spatial_resolution_descriptor: "~4 km regular grid"
   crs: "EPSG:4326"
   extraction_method: nearest_cell
   target_geography_type: point_residence
 
-temporality:
+temporal_reference:
   temporal_resolution: daily
   temporal_aggregation_method: maximum
   # CORE GAP: GridMET blends UTC-referenced NLDAS-2 with PRISM normals; the
@@ -37,7 +41,7 @@ source_dataset:
   source_acknowledgement_freetext: >-
     Data provided by the University of Idaho; GridMET via Amadeus.
 
-methodology:
+exposure_model:
   exposure_model_type: statistical_blend
 
 tool_run:

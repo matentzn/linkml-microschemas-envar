@@ -1,7 +1,7 @@
 schema_version: "0.1"
 provenance_id: "01HFA7K8R3M6XP-daymet"
 
-observation_type:
+variable_identity:
   variable_name: tmax
   variable_label: "daily maximum air temperature at 2 m"
   standard_name: CF:air_temperature
@@ -17,7 +17,15 @@ observation_type:
   concept_status: gap
   # concept_mappings omitted — available but not extracted
 
-location:
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+  subject_column: subject_id
+  time_column: date
+  value_uncertainty_column:
+  value_uncertainty_column_missing_reason: available_but_not_extracted
+
+spatial_reference:
   native_spatial_resolution_m: 1000
   native_spatial_resolution_descriptor: "1 km regular grid"
   crs: "EPSG:4326"
@@ -25,7 +33,7 @@ location:
   extraction_method: inverse_distance_weighted_4_nearest_cells
   target_geography_type: point_residence
 
-temporality:
+temporal_reference:
   temporal_resolution: daily
   temporal_aggregation_method: maximum
   temporal_aggregation_window_seconds: 86400
@@ -50,7 +58,7 @@ source_dataset:
   source_native_format: netcdf4_cf
   source_access_url: "https://daymet.ornl.gov/"
 
-methodology:
+exposure_model:
   exposure_model_type: spatial_interpolation
   exposure_model_inputs:
   - "GHCN-Daily station observations"
@@ -58,12 +66,8 @@ methodology:
   exposure_model_known_biases:
   - "warm-season warm bias documented in some western US regions"
   - "interpolation degrades in sparse-station areas"
-  exposure_model_uncertainty_field:
-  exposure_model_uncertainty_field_missing_reason: available_but_not_extracted
 
 uncertainty:
-  per_value_uncertainty_field_name:
-  per_value_uncertainty_field_name_missing_reason: available_but_not_extracted
   missing_data_handling_method: spatiotemporal_interpolation
   data_completeness_pct: 100
 
@@ -97,5 +101,5 @@ health_layer_linkage:
   health_layer_link_field: exposure_source_value
 subject: "cohort:phoenix_aki_2022"
 # Companion data row (in the accompanying CSV/parquet, not the sidecar):
-#   date: "2022-07-19"  value: 46.7  unit: Cel
+#   subject_id: "cohort:phoenix_aki_2022"  date: "2022-07-19"  tmax: 46.7
 phi_status: no_phi

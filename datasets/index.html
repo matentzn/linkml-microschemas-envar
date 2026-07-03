@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnVar example datasets — computed completeness</title>
+<style>
+:root {
+  --paper:#faf6ee; --panel:#fffdf8; --ink:#26221a; --muted:#7a715f;
+  --rule:#d9d0bd; --core:#c2452d; --recommended:#d98324; --optional:#3d7a68;
+  --blocked:#a31f1f; --valid:#3d7a68;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink);
+  font:15px/1.55 Georgia,'Times New Roman',serif; }
+.wrap { max-width:1080px; margin:0 auto; padding:2.2rem 1.2rem 4rem; }
+h1 { font-size:1.9rem; margin:0 0 .3rem; letter-spacing:.01em; }
+.subtitle { color:var(--muted); margin:0 0 1.6rem; max-width:64ch; }
+.subtitle code { font-size:.85em; }
+h2.group { font-size:1.12rem; border-bottom:2px solid var(--ink);
+  padding-bottom:.25rem; margin:2.2rem 0 .2rem; }
+p.group-note { color:var(--muted); margin:.2rem 0 .8rem; font-style:italic; }
+.dataset { background:var(--panel); border:1px solid var(--rule);
+  border-radius:6px; margin:.55rem 0; overflow:hidden; }
+.dataset-head { display:flex; align-items:center; gap:1rem; padding:.6rem .9rem;
+  cursor:pointer; flex-wrap:wrap; }
+.dataset-head:hover { background:#f5efe2; }
+.head-main { display:flex; align-items:center; gap:.55rem; flex:1 1 22rem; min-width:0; }
+.disclosure { color:var(--muted); width:1em; flex:none; }
+.ds-name { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.86rem;
+  overflow-wrap:anywhere; }
+.ds-var { background:#efe7d4; border-radius:3px; padding:0 .45em;
+  font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.78rem; }
+.badge { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.7rem;
+  border-radius:3px; padding:.1em .5em; letter-spacing:.05em; flex:none; }
+.badge.blocked { background:var(--blocked); color:#fff; }
+.badge.invalid { background:#f3d9d9; color:var(--blocked); }
+.badge.valid { background:#e2ede8; color:var(--valid); }
+.head-meters { display:flex; flex-direction:column; gap:2px; flex:0 0 17rem; }
+.meter { display:flex; align-items:center; gap:.45rem;
+  font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.68rem; }
+.meter-label { width:6.4em; color:var(--muted); text-align:right; }
+.meter-track { flex:1; height:7px; background:#eee5d2; border-radius:4px; overflow:hidden; }
+.meter-fill { display:block; height:100%; border-radius:4px; }
+.meter-fill.core { background:var(--core); }
+.meter-fill.recommended { background:var(--recommended); }
+.meter-fill.optional { background:var(--optional); }
+.meter-count { width:3.4em; color:var(--muted); }
+.readiness { text-align:right; flex:0 0 5.6rem; }
+.readiness-num { font-size:1.45rem; font-weight:700; display:block; line-height:1.1; }
+.readiness-label { color:var(--muted); font-size:.7rem; letter-spacing:.08em;
+  text-transform:uppercase; }
+.readiness-blocked .readiness-num { color:var(--blocked); text-decoration:line-through; }
+.drawer { border-top:1px solid var(--rule); padding: .8rem .9rem 1rem; }
+.tabs { display:flex; gap:.4rem; margin-bottom:.7rem; }
+.tab { font:inherit; font-size:.8rem; border:1px solid var(--rule);
+  background:transparent; border-radius:4px; padding:.2em .8em; cursor:pointer; }
+.tab.active { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+table.modules { border-collapse:collapse; width:100%; font-size:.82rem; margin:.4rem 0 .9rem; }
+table.modules th, table.modules td { border:1px solid var(--rule);
+  padding:.28em .55em; text-align:left; vertical-align:top; }
+table.modules th { background:#f1ead9; font-size:.72rem; letter-spacing:.05em;
+  text-transform:uppercase; }
+td.state-full { color:var(--valid); font-weight:700; }
+td.state-partial { color:var(--recommended); font-weight:700; }
+td.state-absent { color:var(--blocked); font-weight:700; }
+td.missing-list { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.72rem;
+  color:var(--muted); }
+.blocking-line { color:var(--blocked); }
+details.validation { margin:.4rem 0; font-size:.85rem; }
+pre.yaml { background:#292520; color:#efe8d8; padding:1rem; border-radius:6px;
+  font-size:.74rem; line-height:1.45; overflow:auto; max-height:34rem; }
+.src-path { color:var(--muted); font-size:.8rem; }
+footer { margin-top:2.5rem; color:var(--muted); font-size:.8rem;
+  border-top:1px solid var(--rule); padding-top:.8rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Example datasets</h1>
+<p class="subtitle">Every sidecar shipped with this repository, scored live by the
+metadata-completeness checker against the schema's <code>tier</code> annotations
+(<code>core</code> / <code>recommended</code> / <code>optional</code> /
+<code>conditionally_core</code>). Click a row to see what is present, what is
+missing, and the sidecar itself. Readiness =
+100&nbsp;·&nbsp;(0.5·core + 0.4·recommended + 0.1·optional). A missing Core slot
+stamps the record <strong>BLOCKED</strong>. Regenerated by
+<code>just gen-datasets-ledger</code>; 15 datasets,
+5 blocked.</p>
+<h2 class="group">Worked example</h2><p class="group-note">The canonical worked sidecar: Daymet TMAX over Phoenix, 2022-07-19.</p>
+<article class="dataset" id="ds-0">
+  <header class="dataset-head" onclick="toggle(0)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-0">▸</span>
+      <span class="ds-name">daymet_tmax_phoenix_2022_07_19</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 33/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">33/33</span></div><div class="meter" title="Recommended: 45/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:80%"></span></span><span class="meter-count">45/56</span></div><div class="meter" title="Optional: 3/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:10%"></span></span><span class="meter-count">3/30</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">83%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-0" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(0,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(0,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-0-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>14/16</td><td class='missing-list'>uncertainty, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>5/8</td><td class='missing-list'>variable_column, variable_key, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>4/7</td><td class='missing-list'>exposure_model_cross_validation_r2, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>7/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>9/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>spatial_extent_bbox, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>10/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-full">full</td><td>13/13</td><td class='missing-list'>—</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (11):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, missing_data_handling_method, model_aggregate_uncertainty, per_value_uncertainty_type, per_value_uncertainty_units_ucum, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, uncertainty</p><p><strong>Optional missing (27):</strong> chain_compatibility_assertions, cohort_size_anchored, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, variable_column, variable_key</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): target_concept_id, value_uncertainty_column</p>
+      <p class="src-path">Source: <code>examples/daymet_tmax_phoenix_2022_07_19.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-0-source" hidden>
+      <pre class="yaml"># Worked example: Daymet V4 Tmax sidecar for Phoenix on 2022-07-19.
+# Replicates the JSON block in ../../../pipeline/heat-omop-slice/envar-heat-scenario.md §4,
+# restructured to use the readable top-level names (subject / variable_identity /
+# spatial_reference / temporal_reference / exposure_model), each mapped to its
+# LinkML Microschema Profile slot. See src/linkml_microschemas_envar/schema/README.md
+# &quot;Design decisions&quot; for the rationale and known drawbacks.
+---
+schema_version: &quot;0.1.0&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-daymet&quot;
+phi_status: no_phi
+
+subject: &quot;cohort:phoenix_aki_2022&quot;
+
+variable_identity:
+  variable_name: tmax
+  variable_label: &quot;daily maximum air temperature at 2 m&quot;
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  units_display: &quot;°C&quot;
+  target_concept_vocabulary: omop
+  target_concept_id: null
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+  concept_mappings:
+    - ECTO:0000012
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+  subject_column: subject_id
+  time_column: date
+  value_uncertainty_column:
+  value_uncertainty_column_missing_reason: available_but_not_extracted
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: &quot;1 km regular grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_descriptor: &quot;CONUS + Hawaii + Puerto Rico&quot;
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight
+  temporal_coverage_start: &quot;1980-01-01&quot;
+  temporal_coverage_end: &quot;2024-12-31&quot;
+  extraction_window_start: &quot;2018-05-01&quot;
+  extraction_window_end: &quot;2022-09-30&quot;
+  calendar: gregorian
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+    - &quot;GHCN-Daily station observations&quot;
+  exposure_model_paper_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  exposure_model_known_biases:
+    - &quot;warm-season warm bias documented in some western US regions&quot;
+    - &quot;interpolation degrades in sparse-station areas&quot;
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+  source_producer_institution: &quot;NASA ORNL DAAC&quot;
+  source_citation_apa: &gt;-
+    Thornton, M.M. et al. (2022). Daymet: Daily Surface Weather Data on a
+    1-km Grid for North America, Version 4 R1. ORNL DAAC.
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: &quot;https://daymet.ornl.gov/&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+  clinical_date_assignment_convention: local_midnight    # matches exposure-side day_boundary_convention
+  partial_day_attribution_rule: not_applicable
+  lag_alignment_applied: none
+
+tool_run:
+  tool_name: daymet
+  tool_version: &quot;1.0.0&quot;
+  container_image_repository: &quot;ghcr.io/degauss-org/daymet&quot;
+  container_image_digest: &quot;sha256:a8b3c2...&quot;
+  run_arguments: &#x27;{&quot;variables&quot;: &quot;tmax&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-23T14:18:42Z&quot;
+  input_file_sha256: &quot;9f8e7d...&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;1c2d3e...&quot;
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+    - tool_name: geocoder
+      tool_version: &quot;3.3.0&quot;
+      run_timestamp_utc: &quot;2026-05-23T14:02:11Z&quot;
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+</pre>
+    </div>
+  </div>
+</article><h2 class="group">TMAX completeness gradient</h2><p class="group-note">The same record at three curation levels — watch the readiness climb.</p>
+<article class="dataset" id="ds-1">
+  <header class="dataset-head" onclick="toggle(1)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-1">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-tmax_core</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 33/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">33/33</span></div><div class="meter" title="Recommended: 0/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:0%"></span></span><span class="meter-count">0/56</span></div><div class="meter" title="Optional: 0/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/30</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">50%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-1" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(1,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(1,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-1-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>12/16</td><td class='missing-list'>uncertainty, provenance_chain, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>1/7</td><td class='missing-list'>exposure_model_inputs, exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>1/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_precision_propagated, geocoding_score_propagated, address_period_alignment, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>provenance_chain_steps, provenance_chain_terminus_type, chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>2/14</td><td class='missing-list'>source_dataset_short_code, source_dataset_doi, source_dataset_temporal_coverage, source_dataset_spatial_extent, source_producer_institution, source_citation_apa, source_citation_bibtex, source_license_spdx, source_access_url, source_native_format, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>4/9</td><td class='missing-list'>native_spatial_resolution_descriptor, spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>3/9</td><td class='missing-list'>temporal_aggregation_window_seconds, temporal_coverage_start, temporal_coverage_end, extraction_window_start, extraction_window_end, calendar</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>2/14</td><td class='missing-list'>tool_description, container_image_repository, container_image_digest, run_arguments, run_timestamp_utc, run_duration_seconds, run_environment, input_file_sha256, input_row_count, output_file_sha256, output_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>6/13</td><td class='missing-list'>variable_label, units_display, target_concept_vocabulary, target_concept_id, concept_mappings, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (56):</strong> address_period_alignment, bias_correction_applied, calendar, container_image_digest, container_image_repository, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_inputs, exposure_model_known_biases, exposure_model_paper_doi, extraction_window_end, extraction_window_start, geocoding_precision_propagated, geocoding_score_propagated, health_layer_link_field, health_layer_linkage, health_layer_target, input_file_sha256, input_row_count, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, native_spatial_resolution_descriptor, output_file_sha256, output_row_count, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, provenance_chain, provenance_chain_steps, provenance_chain_terminus_type, run_arguments, run_timestamp_utc, source_access_url, source_citation_apa, source_dataset_doi, source_dataset_short_code, source_dataset_spatial_extent, source_dataset_temporal_coverage, source_license_spdx, source_native_format, source_producer_institution, spatial_extent_bbox, spatial_extent_descriptor, subject_column, target_concept_id, target_concept_vocabulary, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, time_column, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column, variable_label</p><p><strong>Optional missing (30):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>tests/data/valid/EnvironmentalExposureRecord-tmax_core.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-1-source" hidden>
+      <pre class="yaml"># TMAX — CORE tier (the minimum that still validates).
+# Exactly the required Core fields, nothing more. Contrast with the
+# `core_missing` counter-example under tests/data/invalid/, which drops some of
+# these required fields and therefore fails validation.
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-daymet-core&quot;
+phi_status: no_phi
+subject: &quot;cohort:phoenix_aki_2022&quot;
+
+variable_identity:
+  variable_name: tmax
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  concept_status: gap
+  value_data_type: continuous_numeric
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+
+tool_run:
+  tool_name: daymet
+  tool_version: &quot;1.0.0&quot;
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-2">
+  <header class="dataset-head" onclick="toggle(2)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-2">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-tmax_recommended</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 33/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">33/33</span></div><div class="meter" title="Recommended: 46/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:82%"></span></span><span class="meter-count">46/56</span></div><div class="meter" title="Optional: 1/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:3%"></span></span><span class="meter-count">1/30</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">83%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-2" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(2,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(2,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-2-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>15/16</td><td class='missing-list'>deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>5/8</td><td class='missing-list'>variable_column, variable_key, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>4/7</td><td class='missing-list'>exposure_model_cross_validation_r2, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>4/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>9/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>spatial_extent_bbox, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>10/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-partial">partial</td><td>2/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>12/13</td><td class='missing-list'>concept_mappings</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (10):</strong> bias_correction_applied, exposure_model_cross_validation_r2, lag_alignment_applied, model_aggregate_uncertainty, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox</p><p><strong>Optional missing (29):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, variable_column, variable_key</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): target_concept_id, value_uncertainty_column</p>
+      <p class="src-path">Source: <code>tests/data/valid/EnvironmentalExposureRecord-tmax_recommended.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-2-source" hidden>
+      <pre class="yaml">schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-daymet&quot;
+
+variable_identity:
+  variable_name: tmax
+  variable_label: &quot;daily maximum air temperature at 2 m&quot;
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  units_display: &quot;°C&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+  # concept_mappings omitted — available but not extracted
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+  subject_column: subject_id
+  time_column: date
+  value_uncertainty_column:
+  value_uncertainty_column_missing_reason: available_but_not_extracted
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: &quot;1 km regular grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_descriptor: &quot;CONUS + Hawaii + Puerto Rico&quot;
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight        # the field the opening story turns on
+  temporal_coverage_start: &quot;1980-01-01&quot;
+  temporal_coverage_end: &quot;2024-12-31&quot;
+  extraction_window_start: &quot;2022-07-18&quot;
+  extraction_window_end: &quot;2022-07-20&quot;
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+  source_producer_institution: &quot;NASA ORNL DAAC&quot;
+  source_citation_apa: &gt;-
+    Thornton, M.M., Shrestha, R., Wei, Y., Thornton, P.E., Kao, S.-C., &amp;
+    Wilson, B.E. (2022). Daymet: Daily Surface Weather Data on a 1-km Grid
+    for North America, Version 4 R1. ORNL DAAC, Oak Ridge, Tennessee, USA.
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: &quot;https://daymet.ornl.gov/&quot;
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - &quot;GHCN-Daily station observations&quot;
+  exposure_model_paper_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  exposure_model_known_biases:
+  - &quot;warm-season warm bias documented in some western US regions&quot;
+  - &quot;interpolation degrades in sparse-station areas&quot;
+
+uncertainty:
+  missing_data_handling_method: spatiotemporal_interpolation
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet
+  tool_version: &quot;1.0.0&quot;
+  container_image_repository: &quot;ghcr.io/degauss-org/daymet&quot;
+  container_image_digest: &quot;sha256:a8b3c2d1e0f9...&quot;
+  run_arguments: &#x27;{&quot;variables&quot;: &quot;tmax&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-23T14:18:42Z&quot;
+  input_file_sha256: &quot;9f8e7d6c5b4a...&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;1c2d3e4f5a6b...&quot;
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    run_timestamp_utc: &quot;2026-05-23T14:02:11Z&quot;
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+subject: &quot;cohort:phoenix_aki_2022&quot;
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   subject_id: &quot;cohort:phoenix_aki_2022&quot;  date: &quot;2022-07-19&quot;  tmax: 46.7
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-3">
+  <header class="dataset-head" onclick="toggle(3)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-3">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-tmax_ideal</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 33/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">33/33</span></div><div class="meter" title="Recommended: 55/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:98%"></span></span><span class="meter-count">55/56</span></div><div class="meter" title="Optional: 18/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:60%"></span></span><span class="meter-count">18/30</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">95%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-3" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(3,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(3,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-3-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-full">full</td><td>16/16</td><td class='missing-list'>—</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>6/8</td><td class='missing-list'>variable_column, variable_key</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-partial">partial</td><td>5/6</td><td class='missing-list'>deposit_redistribution_constraints_inherited</td></tr><tr><td><code>exposure_model</code></td><td class="state-full">full</td><td>7/7</td><td class='missing-list'>—</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-full">full</td><td>3/3</td><td class='missing-list'>—</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>7/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>13/14</td><td class='missing-list'>source_homogenisation_status</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>8/9</td><td class='missing-list'>population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>13/14</td><td class='missing-list'>run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-partial">partial</td><td>4/6</td><td class='missing-list'>model_aggregate_uncertainty, quality_flag_vocabulary</td></tr><tr><td><code>variable_identity</code></td><td class="state-full">full</td><td>13/13</td><td class='missing-list'>—</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (1):</strong> model_aggregate_uncertainty</p><p><strong>Optional missing (12):</strong> chain_compatibility_assertions, deposit_redistribution_constraints_inherited, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_vocabulary, run_log_excerpt, source_homogenisation_status, variable_column, variable_key</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): exposure_model_cross_validation_r2, exposure_model_ensemble_member_count, extraction_buffer_m, quality_flag_column, target_concept_id</p>
+      <p class="src-path">Source: <code>tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-3-source" hidden>
+      <pre class="yaml">schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-daymet-deposit&quot;
+
+variable_identity:
+  variable_name: tmax
+  variable_label: &quot;daily maximum air temperature at 2 m&quot;
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  units_display: &quot;°C&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+  concept_mappings:
+    - ECTO:0000012   # exposure to temperature
+    - ENVO:03000049  # temperature of air (illustrative)
+    # no LOINC / SNOMED — not applicable to an ambient environmental variable
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+  subject_column: subject_id
+  time_column: date
+  value_uncertainty_column: tmax_stderr
+  quality_flag_column:
+  quality_flag_column_missing_reason: not_provided_by_source
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: &quot;1 km regular grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_bbox: [-131.104, 14.075, -52.95, 53.038]
+  spatial_extent_descriptor: &quot;CONUS + Hawaii + Puerto Rico&quot;
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  extraction_buffer_m:
+  extraction_buffer_m_missing_reason: not_applicable
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight
+  temporal_coverage_start: &quot;1980-01-01&quot;
+  temporal_coverage_end: &quot;2024-12-31&quot;
+  extraction_window_start: &quot;2022-07-18&quot;
+  extraction_window_end: &quot;2022-07-20&quot;
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+  source_dataset_temporal_coverage: &quot;1980-01-01/2024-12-31&quot;
+  source_dataset_spatial_extent: &quot;CONUS, Hawaii, Puerto Rico&quot;
+  source_producer_institution: &quot;NASA ORNL DAAC&quot;
+  source_citation_apa: &gt;-
+    Thornton, M.M., Shrestha, R., Wei, Y., Thornton, P.E., Kao, S.-C., &amp;
+    Wilson, B.E. (2022). Daymet: Daily Surface Weather Data on a 1-km Grid
+    for North America, Version 4 R1. ORNL DAAC, Oak Ridge, Tennessee, USA.
+  source_citation_bibtex: &gt;-
+    @misc{daymet_v4_r1, title={Daymet: Daily Surface Weather Data on a 1-km
+    Grid for North America, Version 4 R1}, author={Thornton, M.M. and others},
+    year={2022}, publisher={ORNL DAAC}, doi={10.3334/ORNLDAAC/2129}}
+  source_license_spdx: public-domain-us-gov
+  source_access_url: &quot;https://daymet.ornl.gov/&quot;
+  source_native_format: netcdf4_cf
+  source_acdd_attributes:
+    title: &quot;Daymet Daily Surface Weather Data&quot;
+    institution: &quot;ORNL DAAC&quot;
+    Conventions: &quot;CF-1.6, ACDD-1.3&quot;
+    source: &quot;GHCN-Daily station observations&quot;
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - &quot;GHCN-Daily station observations&quot;
+  exposure_model_paper_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  exposure_model_cross_validation_r2:
+  exposure_model_cross_validation_r2_missing_reason: not_provided_by_source
+  exposure_model_known_biases:
+  - &quot;warm-season warm bias documented in some western US regions&quot;
+  - &quot;interpolation degrades in sparse-station areas&quot;
+  exposure_model_ensemble_member_count:
+  exposure_model_ensemble_member_count_missing_reason: not_applicable
+  bias_correction_applied: none
+
+uncertainty:
+  per_value_uncertainty_type: standard_error
+  per_value_uncertainty_units_ucum: Cel
+  missing_data_handling_method: spatiotemporal_interpolation
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+  clinical_date_assignment_convention: local_midnight    # matches exposure-side day_boundary_convention
+  partial_day_attribution_rule: not_applicable
+  lag_alignment_applied: none
+
+tool_run:
+  tool_name: daymet
+  tool_version: &quot;1.0.0&quot;
+  tool_description: &quot;DeGAUSS Daymet extraction container&quot;
+  container_image_repository: &quot;ghcr.io/degauss-org/daymet&quot;
+  container_image_digest: &quot;sha256:a8b3c2d1e0f9...&quot;
+  run_arguments: &#x27;{&quot;variables&quot;: &quot;tmax&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-23T14:18:42Z&quot;
+  run_duration_seconds: 37
+  run_environment:
+    os: &quot;Ubuntu 22.04&quot;
+    container_runtime: &quot;docker 24.0.7&quot;
+    r_version: &quot;4.3.1&quot;
+  input_file_sha256: &quot;9f8e7d6c5b4a...&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;1c2d3e4f5a6b...&quot;
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    run_timestamp_utc: &quot;2026-05-23T14:02:11Z&quot;
+    output_file_sha256: &quot;5b6c7d8e9f0a...&quot;
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+  cohort_size_anchored: 3
+deposit_metadata:
+  deposit_doi: &quot;10.5281/zenodo.9999999&quot;
+  deposit_repository: zenodo
+  deposit_license_spdx: CC-BY-4.0
+  deposit_redistribution_constraints_inherited: []
+  recommended_citation: &gt;-
+    EnVar exposure record for cohort:phoenix_aki_2022 daily Tmax (Daymet V4),
+    2026. Deposited at Zenodo, doi:10.5281/zenodo.9999999.
+  dcat_distribution_url: &quot;https://zenodo.org/record/9999999/files/tmax_phoenix.parquet&quot;
+
+subject: &quot;cohort:phoenix_aki_2022&quot;
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: &quot;2022-07-19&quot;  value: 46.7  unit: Cel  tmax_stderr: 0.8
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article><h2 class="group">PM2.5 completeness gradient</h2><p class="group-note">The generalisation check: a different variable, the same gradient.</p>
+<article class="dataset" id="ds-4">
+  <header class="dataset-head" onclick="toggle(4)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-4">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-pm25_core</span>
+      <span class="ds-var">pm25</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 34/34"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">34/34</span></div><div class="meter" title="Recommended: 0/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:0%"></span></span><span class="meter-count">0/56</span></div><div class="meter" title="Optional: 0/29"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/29</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">50%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-4" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(4,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(4,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-4-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>12/16</td><td class='missing-list'>uncertainty, provenance_chain, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>2/7</td><td class='missing-list'>exposure_model_inputs, exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>1/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_precision_propagated, geocoding_score_propagated, address_period_alignment, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>provenance_chain_steps, provenance_chain_terminus_type, chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>2/14</td><td class='missing-list'>source_dataset_short_code, source_dataset_doi, source_dataset_temporal_coverage, source_dataset_spatial_extent, source_producer_institution, source_citation_apa, source_citation_bibtex, source_license_spdx, source_access_url, source_native_format, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>4/9</td><td class='missing-list'>native_spatial_resolution_descriptor, spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>3/9</td><td class='missing-list'>temporal_aggregation_window_seconds, temporal_coverage_start, temporal_coverage_end, extraction_window_start, extraction_window_end, calendar</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>2/14</td><td class='missing-list'>tool_description, container_image_repository, container_image_digest, run_arguments, run_timestamp_utc, run_duration_seconds, run_environment, input_file_sha256, input_row_count, output_file_sha256, output_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>6/13</td><td class='missing-list'>variable_label, units_display, target_concept_vocabulary, target_concept_id, concept_mappings, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (56):</strong> address_period_alignment, bias_correction_applied, calendar, container_image_digest, container_image_repository, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_inputs, exposure_model_known_biases, exposure_model_paper_doi, extraction_window_end, extraction_window_start, geocoding_precision_propagated, geocoding_score_propagated, health_layer_link_field, health_layer_linkage, health_layer_target, input_file_sha256, input_row_count, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, native_spatial_resolution_descriptor, output_file_sha256, output_row_count, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, provenance_chain, provenance_chain_steps, provenance_chain_terminus_type, run_arguments, run_timestamp_utc, source_access_url, source_citation_apa, source_dataset_doi, source_dataset_short_code, source_dataset_spatial_extent, source_dataset_temporal_coverage, source_license_spdx, source_native_format, source_producer_institution, spatial_extent_bbox, spatial_extent_descriptor, subject_column, target_concept_id, target_concept_vocabulary, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, time_column, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column, variable_label</p><p><strong>Optional missing (29):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>tests/data/valid/EnvironmentalExposureRecord-pm25_core.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-4-source" hidden>
+      <pre class="yaml"># PM2.5 — CORE tier (the minimum that still validates).
+# Exactly the required Core fields, nothing more. Contrast with the
+# `core_missing` counter-example under tests/data/invalid/.
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HXDIENSEMBLEML00000PM25-core&quot;
+phi_status: no_phi
+subject: &quot;cohort:phoenix_aki_2022&quot;
+
+variable_identity:
+  variable_name: pm25
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: &quot;time: mean&quot;
+  units_ucum: ug/m3
+  concept_status: proposed
+  value_data_type: continuous_numeric
+
+data_layout:
+  table_orientation: wide
+  value_column: pm25
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean
+  day_boundary_convention: utc_midnight
+
+exposure_model:
+  exposure_model_type: ensemble_machine_learning
+  exposure_model_ensemble_member_count: 3
+
+source_dataset:
+  source_dataset_name: &quot;Di et al. ensemble PM2.5 (contiguous US)&quot;
+  source_dataset_version: &quot;v1.0&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+
+tool_run:
+  tool_name: pm25_extract
+  tool_version: &quot;1.0.0&quot;
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-5">
+  <header class="dataset-head" onclick="toggle(5)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-5">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-pm25_recommended</span>
+      <span class="ds-var">pm25_daily</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 34/34"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">34/34</span></div><div class="meter" title="Recommended: 50/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:89%"></span></span><span class="meter-count">50/56</span></div><div class="meter" title="Optional: 2/29"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:7%"></span></span><span class="meter-count">2/29</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">86%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-5" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(5,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(5,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-5-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>15/16</td><td class='missing-list'>deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>5/8</td><td class='missing-list'>variable_column, variable_key, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>6/7</td><td class='missing-list'>bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-full">full</td><td>3/3</td><td class='missing-list'>—</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>4/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>9/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>spatial_extent_bbox, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>10/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-partial">partial</td><td>5/6</td><td class='missing-list'>quality_flag_vocabulary</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>12/13</td><td class='missing-list'>concept_mappings</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (6):</strong> bias_correction_applied, lag_alignment_applied, partial_day_attribution_rule, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox</p><p><strong>Optional missing (27):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, variable_column, variable_key</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): target_concept_id</p>
+      <p class="src-path">Source: <code>tests/data/valid/EnvironmentalExposureRecord-pm25_recommended.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-5-source" hidden>
+      <pre class="yaml">schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HXDIENSEMBLEML00000PM25SURF&quot;
+
+variable_identity:
+  variable_name: pm25_daily
+  variable_label: &quot;daily mean fine particulate matter (PM2.5) mass concentration, modeled&quot;
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: &quot;time: mean&quot;
+  units_ucum: ug/m3
+  units_display: &quot;µg/m³&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: 0
+  value_range_plausible_max: 1000
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: proposed   # PM2.5 within OHDSI GIS/Exposome vocabulary effort
+  # concept_mappings omitted — available but not extracted
+
+data_layout:
+  table_orientation: wide
+  value_column: pm25_daily
+  subject_column: subject_id
+  time_column: date
+  value_uncertainty_column: pm25_monthly_se
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: &quot;1 km modeled grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_descriptor: &quot;contiguous United States&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: utc_midnight
+  temporal_coverage_start: &quot;2000-01-01&quot;
+  temporal_coverage_end: &quot;2016-12-31&quot;
+  extraction_window_start: &quot;2016-07-01&quot;
+  extraction_window_end: &quot;2016-07-31&quot;
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: &quot;Di et al. ensemble PM2.5 daily predictions, contiguous US, 1 km&quot;
+  source_dataset_short_code: di_pm25_ensemble
+  source_dataset_doi: &quot;10.1016/j.envint.2019.104909&quot;
+  source_dataset_version: &quot;v1 (2000-2016)&quot;
+  source_producer_institution: &quot;Harvard T.H. Chan School of Public Health / NASA SEDAC&quot;
+  source_citation_apa: &gt;-
+    Di, Q., Amini, H., Shi, L., et al. (2019). An ensemble-based model of
+    PM2.5 concentration across the contiguous United States with high
+    spatiotemporal resolution. Environment International, 130, 104909.
+  source_license_spdx: CC-BY-4.0
+  source_access_url: &quot;https://www.epa.gov/aqs&quot;
+  source_native_format: netcdf4_cf
+
+exposure_model:
+  exposure_model_type: ensemble_machine_learning
+  exposure_model_inputs:
+  - &quot;EPA AQS monitor observations&quot;
+  - &quot;MAIAC satellite AOD&quot;
+  - &quot;GEOS-Chem chemical transport model output&quot;
+  - &quot;meteorology, land-use, and elevation covariates&quot;
+  exposure_model_paper_doi: &quot;10.1016/j.envint.2019.104909&quot;
+  exposure_model_cross_validation_r2: 0.86
+  exposure_model_known_biases:
+  - &quot;underprediction of high-concentration peaks (smoothing toward the mean)&quot;
+  - &quot;larger error in sparsely-monitored rural and western regions&quot;
+  exposure_model_ensemble_member_count: 3
+
+uncertainty:
+  per_value_uncertainty_type: ensemble_std_dev
+  per_value_uncertainty_units_ucum: ug/m3
+  model_aggregate_uncertainty:
+    cv_r2: 0.86
+    reported_in: &quot;10.1016/j.envint.2019.104909&quot;
+  missing_data_handling_method: none
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: street
+  geocoding_score_propagated: 0.91
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: aqdh_pm25_extract
+  tool_version: &quot;2.1.0&quot;
+  container_image_repository: &quot;ghcr.io/example/aqdh-pm25&quot;
+  container_image_digest: &quot;sha256:dd4477aa1199...&quot;
+  run_arguments: &#x27;{&quot;variable&quot;: &quot;pm25&quot;, &quot;window&quot;: &quot;2016-07&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-24T09:11:03Z&quot;
+  input_file_sha256: &quot;ab12cd34...&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;ef56ab78...&quot;
+  output_row_count: 93
+
+provenance_chain:
+  provenance_chain_terminus_type: pre_existing_curated_dataset
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    run_timestamp_utc: &quot;2026-05-24T09:01:55Z&quot;
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+  cohort_size_anchored: 3
+subject: &quot;cohort:phoenix_aki_2022&quot;
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   subject_id: &quot;cohort:phoenix_aki_2022&quot;  date: &quot;2016-07-19&quot;  pm25_daily: 9.7  pm25_monthly_se: 1.3
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-6">
+  <header class="dataset-head" onclick="toggle(6)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-6">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-pm25_ideal</span>
+      <span class="ds-var">pm25_annual</span>
+      <span class="badge valid">validates</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 37/37"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">37/37</span></div><div class="meter" title="Recommended: 56/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:100%"></span></span><span class="meter-count">56/56</span></div><div class="meter" title="Optional: 17/26"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:65%"></span></span><span class="meter-count">17/26</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">96%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-6" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(6,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(6,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-6-analysis">
+      
+      
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-full">full</td><td>16/16</td><td class='missing-list'>—</td></tr><tr><td><code>data_layout</code></td><td class="state-full">full</td><td>8/8</td><td class='missing-list'>—</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-partial">partial</td><td>5/6</td><td class='missing-list'>deposit_redistribution_constraints_inherited</td></tr><tr><td><code>exposure_model</code></td><td class="state-full">full</td><td>7/7</td><td class='missing-list'>—</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-full">full</td><td>3/3</td><td class='missing-list'>—</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>8/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_max_distance_to_station_m, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>13/14</td><td class='missing-list'>source_homogenisation_status</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>8/9</td><td class='missing-list'>extraction_buffer_m</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>13/14</td><td class='missing-list'>run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-partial">partial</td><td>5/6</td><td class='missing-list'>quality_flag_vocabulary</td></tr><tr><td><code>variable_identity</code></td><td class="state-full">full</td><td>13/13</td><td class='missing-list'>—</td></tr></tbody>
+      </table>
+      <p><strong>Optional missing (9):</strong> chain_compatibility_assertions, deposit_redistribution_constraints_inherited, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_radius_m, linkage_max_distance_to_station_m, quality_flag_vocabulary, run_log_excerpt, source_homogenisation_status</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): exposure_model_ensemble_member_count, quality_flag_column, target_concept_id</p>
+      <p class="src-path">Source: <code>tests/data/valid/EnvironmentalExposureRecord-pm25_ideal.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-6-source" hidden>
+      <pre class="yaml">schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HXACAGSATELLITE0000PM25ANN&quot;
+
+variable_identity:
+  variable_name: pm25_annual
+  variable_label: &quot;annual mean fine particulate matter (PM2.5) mass concentration, satellite-derived&quot;
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: &quot;time: mean&quot;
+  units_ucum: ug/m3
+  units_display: &quot;µg/m³&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: 0
+  value_range_plausible_max: 500
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: proposed
+  concept_mappings:
+    - ECTO:7000117   # exposure to fine respirable suspended particulate matter
+    - ENVO:01000415  # fine respirable suspended particulate matter
+    # no LOINC / SNOMED — not applicable to an ambient environmental variable
+
+# Long-format companion file: one shared `value` column, variables
+# discriminated by the `variable` column.
+data_layout:
+  table_orientation: long
+  value_column: value
+  variable_column: variable
+  variable_key: pm25_annual
+  subject_column: tract_id
+  time_column: year
+  value_uncertainty_column: pm25_uncertainty
+  quality_flag_column:
+  quality_flag_column_missing_reason: not_provided_by_source
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: &quot;~0.01° (~1 km) geophysical+GWR grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_bbox: [-180.0, -55.0, 180.0, 70.0]
+  spatial_extent_descriptor: &quot;global land surface&quot;
+  extraction_method: area_weighted_polygon_mean
+  population_weighting_source: &quot;GPW v4 (2020)&quot;
+  target_geography_type: census_tract
+
+temporal_reference:
+  temporal_resolution: annual
+  temporal_aggregation_method: mean
+  temporal_aggregation_window_seconds: 31536000
+  day_boundary_convention: not_applicable    # annual aggregate; no day boundary
+  temporal_coverage_start: &quot;1998-01-01&quot;
+  temporal_coverage_end: &quot;2022-12-31&quot;
+  extraction_window_start: &quot;2019-01-01&quot;
+  extraction_window_end: &quot;2019-12-31&quot;
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: &quot;ACAG Surface PM2.5 (V5.GL), satellite-derived global estimates&quot;
+  source_dataset_short_code: acag_pm25_v5gl
+  source_dataset_doi: &quot;10.1021/acs.est.1c05309&quot;
+  source_dataset_version: &quot;V5.GL.04&quot;
+  source_dataset_temporal_coverage: &quot;1998-01-01/2022-12-31&quot;
+  source_dataset_spatial_extent: &quot;global land surface&quot;
+  source_producer_institution: &quot;Atmospheric Composition Analysis Group (Washington University in St. Louis)&quot;
+  source_citation_apa: &gt;-
+    van Donkelaar, A., Hammer, M.S., Bindle, L., et al. (2021). Monthly
+    Global Estimates of Fine Particulate Matter and Their Uncertainty.
+    Environmental Science &amp; Technology, 55(22), 15287-15300.
+  source_citation_bibtex: &gt;-
+    @article{vandonkelaar2021, title={Monthly Global Estimates of Fine
+    Particulate Matter and Their Uncertainty}, author={van Donkelaar, A. and
+    others}, journal={Environ. Sci. Technol.}, volume={55}, number={22},
+    pages={15287--15300}, year={2021}, doi={10.1021/acs.est.1c05309}}
+  source_license_spdx: CC-BY-4.0
+  source_access_url: &quot;https://sites.wustl.edu/acag/datasets/surface-pm2-5/&quot;
+  source_native_format: netcdf4_cf
+  source_acdd_attributes:
+    title: &quot;ACAG Surface PM2.5 V5.GL&quot;
+    institution: &quot;Atmospheric Composition Analysis Group, Washington University in St. Louis&quot;
+    Conventions: &quot;CF-1.8, ACDD-1.3&quot;
+    source: &quot;MODIS/MISR/SeaWiFS AOD + GEOS-Chem + GWR calibration to monitors&quot;
+
+exposure_model:
+  exposure_model_type: satellite_retrieval
+  exposure_model_inputs:
+  - &quot;satellite aerosol optical depth (MODIS, MISR, SeaWiFS)&quot;
+  - &quot;GEOS-Chem chemical transport model&quot;
+  - &quot;geographically weighted regression calibration to ground monitors&quot;
+  exposure_model_paper_doi: &quot;10.1021/acs.est.1c05309&quot;
+  exposure_model_cross_validation_r2: 0.90
+  exposure_model_known_biases:
+  - &quot;AOD-to-surface conversion uncertainty highest in arid and high-altitude regions&quot;
+  - &quot;sparse-monitor regions rely more heavily on the geophysical prior&quot;
+  exposure_model_ensemble_member_count:
+  exposure_model_ensemble_member_count_missing_reason: not_applicable
+  bias_correction_applied: other
+
+uncertainty:
+  per_value_uncertainty_type: prediction_interval
+  per_value_uncertainty_units_ucum: ug/m3
+  model_aggregate_uncertainty:
+    cv_r2: 0.90
+    reported_in: &quot;10.1021/acs.est.1c05309&quot;
+  missing_data_handling_method: none
+  data_completeness_pct: 100
+
+linkage_method:
+  linkage_strategy: population_weighted_area_to_residence
+  linkage_buffer_aggregation_method: area_weighted_mean
+  geocoding_precision_propagated: street
+  geocoding_score_propagated: 0.93
+  address_period_alignment: address_history_from_emr
+  clinical_date_assignment_convention: date_only_no_time    # annual aggregate; date-only clinical join
+  partial_day_attribution_rule: not_applicable
+  lag_alignment_applied: none
+
+tool_run:
+  tool_name: acag_pm25_extract
+  tool_version: &quot;1.4.2&quot;
+  tool_description: &quot;ACAG V5.GL annual PM2.5 tract aggregation&quot;
+  container_image_repository: &quot;ghcr.io/example/acag-pm25&quot;
+  container_image_digest: &quot;sha256:99aabb22ccdd...&quot;
+  run_arguments: &#x27;{&quot;variable&quot;: &quot;pm25&quot;, &quot;year&quot;: 2019, &quot;aggregation&quot;: &quot;tract_pop_weighted&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-24T10:42:18Z&quot;
+  run_duration_seconds: 51
+  run_environment:
+    os: &quot;Ubuntu 22.04&quot;
+    container_runtime: &quot;docker 24.0.7&quot;
+    python_version: &quot;3.11.6&quot;
+  input_file_sha256: &quot;1122334455...&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;6677889900...&quot;
+  output_row_count: 3
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    run_timestamp_utc: &quot;2026-05-24T10:30:02Z&quot;
+    output_file_sha256: &quot;aa11bb22cc33...&quot;
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+  cohort_size_anchored: 3
+deposit_metadata:
+  deposit_doi: &quot;10.5281/zenodo.8888888&quot;
+  deposit_repository: zenodo
+  deposit_license_spdx: CC-BY-4.0
+  deposit_redistribution_constraints_inherited: []
+  recommended_citation: &gt;-
+    EnVar exposure record for cohort:phoenix_aki_2022 annual-mean PM2.5
+    (ACAG V5.GL), 2019. Deposited at Zenodo, doi:10.5281/zenodo.8888888.
+  dcat_distribution_url: &quot;https://zenodo.org/record/8888888/files/pm25_annual_tract.parquet&quot;
+
+subject: &quot;cohort:phoenix_aki_2022&quot;
+# Companion data row (in the accompanying CSV/parquet, not the sidecar; long
+# format — this record&#x27;s rows are those with variable == pm25_annual):
+#   tract_id: &quot;04013-1125&quot;  year: 2019  variable: pm25_annual  value: 8.2  pm25_uncertainty: 1.1
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article><h2 class="group">Heat Index scenario (derived metric with two upstream inputs)</h2><p class="group-note">A derived heat metric: the conditionally-core equation slots switch on.</p>
+<article class="dataset" id="ds-7">
+  <header class="dataset-head" onclick="toggle(7)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-7">▸</span>
+      <span class="ds-name">heat_index_input_a_tmax_daymet</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 33/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">33/33</span></div><div class="meter" title="Recommended: 32/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:57%"></span></span><span class="meter-count">32/56</span></div><div class="meter" title="Optional: 1/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:3%"></span></span><span class="meter-count">1/30</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">73%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-7" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(7,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(7,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-7-analysis">
+      
+      <details class='validation'><summary>2 validation problem(s)</summary><ul><li>Additional properties are not allowed (&#x27;data_row&#x27; was unexpected) in /</li><li>&#x27;subject&#x27; is a required property in /</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>13/16</td><td class='missing-list'>uncertainty, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>4/7</td><td class='missing-list'>exposure_model_cross_validation_r2, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>4/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>spatial_extent_bbox, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, input_file_sha256, input_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>10/13</td><td class='missing-list'>target_concept_vocabulary, target_concept_id, concept_mappings</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (24):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, health_layer_link_field, health_layer_linkage, health_layer_target, input_file_sha256, input_row_count, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, source_citation_apa, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, subject_column, target_concept_id, target_concept_vocabulary, time_column, uncertainty, value_uncertainty_column</p><p><strong>Optional missing (29):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>examples/scenarios/heat_index/heat_index_input_a_tmax_daymet.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-7-source" hidden>
+      <pre class="yaml"># Heat Index demo — input A: the dry-bulb air-temperature parent sidecar.
+# Daymet V4, 1 km grid, local-midnight day boundary, daily MAXIMUM.
+# Referenced by heat_index_derived.yaml via equation_inputs[input_role=air_temperature].
+# This is the FINER, local-midnight, max-aggregated input.
+---
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-daymet-tmax&quot;
+
+variable_identity:
+  variable_name: tmax
+  variable_label: &quot;daily maximum air temperature at 2 m&quot;
+  standard_name: CF:air_temperature
+  concept_status: proposed
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  units_display: &quot;°C&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 60
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  native_spatial_resolution_descriptor: &quot;1 km regular grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_descriptor: &quot;CONUS + Hawaii + Puerto Rico&quot;
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: local_midnight        # &lt;-- diverges from input B (era5 = utc)
+  temporal_coverage_start: &quot;1980-01-01&quot;
+  temporal_coverage_end: &quot;2024-12-31&quot;
+  extraction_window_start: &quot;2022-07-18&quot;
+  extraction_window_end: &quot;2022-07-20&quot;
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+  source_producer_institution: &quot;NASA ORNL DAAC&quot;
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: &quot;https://daymet.ornl.gov/&quot;
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - &quot;GHCN-Daily station observations&quot;
+  exposure_model_paper_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  exposure_model_known_biases:
+  - &quot;warm-season warm bias documented in some western US regions&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet
+  tool_version: &quot;1.0.0&quot;
+  container_image_repository: &quot;ghcr.io/degauss-org/daymet&quot;
+  container_image_digest: &quot;sha256:a8b3c2d1e0f9...&quot;
+  run_arguments: &#x27;{&quot;variables&quot;: &quot;tmax&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-23T14:18:42Z&quot;
+  output_file_sha256: &quot;1c2d3e4f5a6b...&quot;
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    run_timestamp_utc: &quot;2026-05-23T14:02:11Z&quot;
+
+data_row:
+  subject: &quot;cohort:phoenix_aki_2022&quot;
+  date: &quot;2022-07-19&quot;
+  value: 46.7
+  unit: Cel
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-8">
+  <header class="dataset-head" onclick="toggle(8)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-8">▸</span>
+      <span class="ds-name">heat_index_input_b_rh_era5</span>
+      <span class="ds-var">rh</span>
+      <span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 33/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">33/33</span></div><div class="meter" title="Recommended: 31/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:55%"></span></span><span class="meter-count">31/56</span></div><div class="meter" title="Optional: 1/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:3%"></span></span><span class="meter-count">1/30</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">72%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-8" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(8,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(8,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-8-analysis">
+      
+      <details class='validation'><summary>3 validation problem(s)</summary><ul><li>Additional properties are not allowed (&#x27;data_row&#x27; was unexpected) in /</li><li>&#x27;utc&#x27; is not one of [&#x27;local_midnight&#x27;, &#x27;utc_midnight&#x27;, &#x27;ending_1200_gmt&#x27;, &#x27;solar_noon_centered&#x27;, &#x27;observation_dependent&#x27;, &#x27;not_applicable&#x27;] in /temporal_reference/day_boundary_convention</li><li>&#x27;subject&#x27; is a required property in /</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>13/16</td><td class='missing-list'>uncertainty, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>3/7</td><td class='missing-list'>exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>4/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>spatial_extent_bbox, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-full">full</td><td>9/9</td><td class='missing-list'>—</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, input_file_sha256, input_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>10/13</td><td class='missing-list'>target_concept_vocabulary, target_concept_id, concept_mappings</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (25):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_paper_doi, health_layer_link_field, health_layer_linkage, health_layer_target, input_file_sha256, input_row_count, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, source_citation_apa, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, subject_column, target_concept_id, target_concept_vocabulary, time_column, uncertainty, value_uncertainty_column</p><p><strong>Optional missing (29):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>examples/scenarios/heat_index/heat_index_input_b_rh_era5.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-8-source" hidden>
+      <pre class="yaml"># Heat Index demo — input B: the relative-humidity parent sidecar.
+# ERA5 reanalysis, ~31 km (0.25°) grid, UTC day boundary, daily MEAN.
+# Referenced by heat_index_derived.yaml via equation_inputs[input_role=relative_humidity].
+# This is the COARSER, utc, mean-aggregated input. Every line marked &quot;&lt;-- diverges&quot;
+# is a divergence from input A that the single output number would otherwise hide.
+---
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-era5-rh&quot;
+
+variable_identity:
+  variable_name: rh
+  variable_label: &quot;daily mean near-surface relative humidity&quot;
+  standard_name: CF:relative_humidity
+  concept_status: proposed
+  cf_cell_methods: &quot;time: mean&quot;
+  units_ucum: &quot;%&quot;
+  units_display: &quot;%&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: 0
+  value_range_plausible_max: 100
+
+data_layout:
+  table_orientation: wide
+  value_column: rh
+
+spatial_reference:
+  native_spatial_resolution_m: 31000               # &lt;-- diverges from input A (1000 m)
+  native_spatial_resolution_descriptor: &quot;~31 km (0.25°) reanalysis grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_descriptor: &quot;global&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean                # &lt;-- diverges from input A (maximum)
+  temporal_aggregation_window_seconds: 86400
+  day_boundary_convention: utc                     # &lt;-- diverges from input A (local_midnight)
+  temporal_coverage_start: &quot;1940-01-01&quot;
+  temporal_coverage_end: &quot;2024-12-31&quot;
+  extraction_window_start: &quot;2022-07-18&quot;
+  extraction_window_end: &quot;2022-07-20&quot;
+  calendar: gregorian
+
+source_dataset:
+  source_dataset_name: &quot;ERA5 hourly data on single levels&quot;
+  source_dataset_short_code: era5
+  source_dataset_doi: &quot;10.24381/cds.adbb2d47&quot;
+  source_dataset_version: &quot;ERA5&quot;
+  source_producer_institution: &quot;ECMWF / Copernicus Climate Change Service (C3S)&quot;
+  source_license_spdx: &quot;Copernicus-Licence&quot;
+  source_native_format: grib1
+  source_access_url: &quot;https://cds.climate.copernicus.eu/&quot;
+
+exposure_model:
+  exposure_model_type: reanalysis
+  exposure_model_inputs:
+  - &quot;ECMWF IFS 4D-Var assimilation of multi-source observations&quot;
+  exposure_model_known_biases:
+  - &quot;near-surface humidity biased in arid regions&quot;
+  - &quot;coarse grid smooths sub-grid humidity gradients&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: era5_extract
+  tool_version: &quot;0.4.2&quot;
+  container_image_repository: &quot;ghcr.io/envar-org/era5-extract&quot;
+  container_image_digest: &quot;sha256:f4e3d2c1b0a9...&quot;
+  run_arguments: &#x27;{&quot;variable&quot;: &quot;relative_humidity&quot;, &quot;statistic&quot;: &quot;daily_mean&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-23T14:21:09Z&quot;
+  output_file_sha256: &quot;7a6b5c4d3e2f...&quot;
+  output_row_count: 459
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    run_timestamp_utc: &quot;2026-05-23T14:02:11Z&quot;
+
+data_row:
+  subject: &quot;cohort:phoenix_aki_2022&quot;
+  date: &quot;2022-07-19&quot;
+  value: 18.0
+  unit: &quot;%&quot;
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-9">
+  <header class="dataset-head" onclick="toggle(9)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-9">▸</span>
+      <span class="ds-name">heat_index_derived</span>
+      <span class="ds-var">heat_index</span>
+      <span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 40/40"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:100%"></span></span><span class="meter-count">40/40</span></div><div class="meter" title="Recommended: 28/62"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:45%"></span></span><span class="meter-count">28/62</span></div><div class="meter" title="Optional: 2/36"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:6%"></span></span><span class="meter-count">2/36</span></div></div>
+    <div class="readiness">
+      <span class="readiness-num">69%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-9" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(9,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(9,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-9-analysis">
+      
+      <details class='validation'><summary>2 validation problem(s)</summary><ul><li>Additional properties are not allowed (&#x27;data_row&#x27; was unexpected) in /</li><li>&#x27;subject&#x27; is a required property in /</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>14/17</td><td class='missing-list'>uncertainty, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>derived_heat_metric</code></td><td class="state-partial">partial</td><td>8/18</td><td class='missing-list'>wind_speed_measurement_height_m, solar_radiation_basis, heat_wave_threshold_definition, heat_wave_threshold_specifier, heat_wave_min_consecutive_days, percentile_reference_period_start, percentile_reference_period_end, percentile_reference_geographic_scope, percentile_reference_seasonal_window, metric_temporal_aggregation_rule</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>3/7</td><td class='missing-list'>exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>4/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>6/14</td><td class='missing-list'>source_dataset_doi, source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_access_url, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>spatial_extent_bbox, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>7/9</td><td class='missing-list'>temporal_coverage_start, temporal_coverage_end</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, input_file_sha256, input_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>10/13</td><td class='missing-list'>target_concept_vocabulary, target_concept_id, concept_mappings</td></tr></tbody>
+      </table>
+      <p><strong>Recommended missing (34):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_paper_doi, health_layer_link_field, health_layer_linkage, health_layer_target, input_file_sha256, input_row_count, lag_alignment_applied, metric_temporal_aggregation_rule, missing_data_handling_method, model_aggregate_uncertainty, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, percentile_reference_geographic_scope, percentile_reference_seasonal_window, solar_radiation_basis, source_access_url, source_citation_apa, source_dataset_doi, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, subject_column, target_concept_id, target_concept_vocabulary, temporal_coverage_end, temporal_coverage_start, time_column, uncertainty, value_uncertainty_column, wind_speed_measurement_height_m</p><p><strong>Optional missing (34):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, heat_wave_min_consecutive_days, heat_wave_threshold_definition, heat_wave_threshold_specifier, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, percentile_reference_period_end, percentile_reference_period_start, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>examples/scenarios/heat_index/heat_index_derived.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-9-source" hidden>
+      <pre class="yaml"># Heat Index demo — the DERIVED metric sidecar (Option B decomposition).
+#
+# Heat Index (Rothfusz/NWS) computed from TWO physical-state inputs that come
+# from DIFFERENT products and diverge in resolution, day-boundary convention,
+# and temporal aggregation:
+#
+#   input A  air_temperature   daymet_v4  1 km    local_midnight  maximum
+#   input B  relative_humidity era5       ~31 km  utc             mean
+#
+# Under Option B the two inputs are NOT inlined as light descriptors; each is a
+# full upstream sidecar (heat_index_input_a_*.yaml, heat_index_input_b_*.yaml),
+# referenced below by provenance_id through `equation_inputs` and listed as a
+# step in `provenance_chain`. The divergence then stays explicit and a
+# completeness checker can WARN on it instead of it vanishing into &quot;HI = 44 °C&quot;.
+---
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HFA7K8R3M6XP-heatindex&quot;
+
+variable_identity:
+  variable_name: heat_index
+  variable_label: &quot;daily maximum NWS Heat Index&quot;
+  standard_name: ENVAR:heat_index   # local registry term — CF defines no Heat Index standard name
+  concept_status: proposed
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  units_display: &quot;°C&quot;
+  value_data_type: continuous_numeric
+  value_range_plausible_min: -50
+  value_range_plausible_max: 80
+
+data_layout:
+  table_orientation: wide
+  value_column: heat_index
+
+spatial_reference:
+  # Resolution INHERITED from the coarser input (era5, ~31 km), not the 1 km TMAX.
+  native_spatial_resolution_m: 31000
+  native_spatial_resolution_descriptor: &gt;-
+    effective ~31 km — limited by the coarser relative-humidity input (era5);
+    see equation_inputs and the per-input sidecars
+  crs: &quot;EPSG:4326&quot;
+  spatial_extent_descriptor: &quot;Phoenix metro&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  temporal_aggregation_window_seconds: 86400
+  # The two inputs disagree on the day boundary (local_midnight vs utc); this
+  # record carries the air-temperature convention but the mismatch is real and
+  # is recorded via the decomposed input sidecars rather than hidden here.
+  day_boundary_convention: local_midnight
+  extraction_window_start: &quot;2022-07-18&quot;
+  extraction_window_end: &quot;2022-07-20&quot;
+  calendar: gregorian
+
+source_dataset:
+  # The derived metric is itself a new sidecar; its &quot;source&quot; is the derivation,
+  # with the true upstream products carried by the referenced input sidecars.
+  source_dataset_name: &quot;EnVar-derived NWS Heat Index&quot;
+  source_dataset_short_code: envar_heat_index
+  source_dataset_version: &quot;0.1&quot;
+  source_producer_institution: &quot;EnVar pipeline&quot;
+  source_license_spdx: Apache-2.0
+  source_native_format: parquet
+
+exposure_model:
+  exposure_model_type: equation_derived
+  exposure_model_inputs:
+  - &quot;air_temperature (see equation_inputs / provenance_id 01HFA7K8R3M6XP-daymet-tmax)&quot;
+  - &quot;relative_humidity (see equation_inputs / provenance_id 01HFA7K8R3M6XP-era5-rh)&quot;
+  exposure_model_known_biases:
+  - &quot;inherits the coarser ~31 km humidity resolution&quot;
+  - &quot;inputs use different day-boundary conventions (local_midnight vs utc)&quot;
+
+derived_heat_metric:
+  heat_metric_family: heat_index
+  equation_variant: rothfusz_1990_nws
+  indoor_outdoor: outdoor
+  equation_validity_range: &#x27;{&quot;min_temperature_F&quot;: 80, &quot;min_relative_humidity_pct&quot;: 40}&#x27;
+  equation_inputs:
+  - input_role: air_temperature
+    input_provenance_id: &quot;01HFA7K8R3M6XP-daymet-tmax&quot;
+    input_source_short_code: daymet_v4
+  - input_role: relative_humidity
+    input_provenance_id: &quot;01HFA7K8R3M6XP-era5-rh&quot;
+    input_source_short_code: era5
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  geocoding_score_propagated: 0.95
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: envar_heat_index
+  tool_version: &quot;0.1.0&quot;
+  container_image_repository: &quot;ghcr.io/envar-org/heat-index&quot;
+  container_image_digest: &quot;sha256:c1d2e3f4a5b6...&quot;
+  run_arguments: &#x27;{&quot;equation&quot;: &quot;rothfusz_1990_nws&quot;, &quot;indoor_outdoor&quot;: &quot;outdoor&quot;}&#x27;
+  run_timestamp_utc: &quot;2026-05-23T14:25:30Z&quot;
+  output_file_sha256: &quot;2b3c4d5e6f7a...&quot;
+  output_row_count: 459
+
+# Both upstream derivations are steps in the chain — this is the B linkage that
+# equation_inputs indexes into. The chain terminates once per parent product.
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: daymet
+    tool_version: &quot;1.0.0&quot;
+    run_timestamp_utc: &quot;2026-05-23T14:18:42Z&quot;
+    output_file_sha256: &quot;1c2d3e4f5a6b...&quot;
+  - tool_name: era5_extract
+    tool_version: &quot;0.4.2&quot;
+    run_timestamp_utc: &quot;2026-05-23T14:21:09Z&quot;
+    output_file_sha256: &quot;7a6b5c4d3e2f...&quot;
+
+data_row:
+  subject: &quot;cohort:phoenix_aki_2022&quot;
+  date: &quot;2022-07-19&quot;
+  value: 44.0
+  unit: Cel
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article><h2 class="group">Standard coverage — real pipeline runs, translated (TMAX)</h2><p class="group-note">Strict EnVar translations of real Amadeus, DeGAUSS and GAIA-OMOP runs (sidecars emitted 2026-06-25 by the three-way pipeline in the EnVar sibling repo): only what each pipeline actually emitted is mapped, so the meters show each standard&#x27;s true coverage of the variables of interest — and where none of them reaches the Core floor alone.</p>
+<article class="dataset" id="ds-10">
+  <header class="dataset-head" onclick="toggle(10)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-10">▸</span>
+      <span class="ds-name">amadeus_gridmet_tmmx</span>
+      <span class="ds-var">tmmx</span>
+      <span class="badge blocked">BLOCKED</span><span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 31/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:94%"></span></span><span class="meter-count">31/33</span></div><div class="meter" title="Recommended: 24/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:43%"></span></span><span class="meter-count">24/56</span></div><div class="meter" title="Optional: 0/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/30</span></div></div>
+    <div class="readiness readiness-blocked">
+      <span class="readiness-num">64%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-10" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(10,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(10,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-10-analysis">
+      <p class="blocking-line"><strong>BLOCKING (Core missing):</strong> concept_status, value_data_type</p>
+      <details class='validation'><summary>2 validation problem(s)</summary><ul><li>&#x27;concept_status&#x27; is a required property in /variable_identity</li><li>&#x27;value_data_type&#x27; is a required property in /variable_identity</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>13/16</td><td class='missing-list'>uncertainty, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>4/8</td><td class='missing-list'>variable_column, variable_key, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>2/7</td><td class='missing-list'>exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>3/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_score_propagated, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>1/3</td><td class='missing-list'>provenance_chain_steps, chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>4/9</td><td class='missing-list'>native_spatial_resolution_descriptor, spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>temporal_aggregation_window_seconds, temporal_coverage_start, temporal_coverage_end</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>10/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>4/13</td><td class='missing-list'>variable_label, units_display, target_concept_vocabulary, target_concept_id, concept_status, concept_mappings, value_data_type, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Core missing (2):</strong> concept_status, value_data_type</p><p><strong>Recommended missing (32):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_paper_doi, geocoding_score_propagated, health_layer_link_field, health_layer_linkage, health_layer_target, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, native_spatial_resolution_descriptor, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, provenance_chain_steps, source_citation_apa, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, spatial_extent_descriptor, target_concept_id, target_concept_vocabulary, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column, variable_label</p><p><strong>Optional missing (30):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>examples/scenarios/standards/amadeus_gridmet_tmmx.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-10-source" hidden>
+      <pre class="yaml"># Amadeus → gridMET 4 km TMAX — EnVar translation of a REAL pipeline run.
+#
+# Translated from ~/ws/projects/EnVar/examples/heat/amadeus/outputs/envar/
+# gridmet_tmmx.provenance.yaml (emitted 2026-06-25 by the amadeus 2.0.0 R
+# package running inside the envar-amadeus:4.4 container; translated
+# 2026-07-03). Field-for-field mapping of what the pipeline actually emitted —
+# slots the pipeline does not supply are OMITTED, not papered over, so the
+# completeness checker shows Amadeus&#x27;s true coverage. Translator-added
+# envelope only: schema_version, subject, phi_status, and data_layout (which
+# describes the pipeline&#x27;s own output CSV, outputs/gridmet_tmmx.csv).
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;SH16BKV29EX1K6462TF5RHFJFM-gridmet&quot;
+subject: &quot;cohort:envar_heat_demo_2022&quot;
+phi_status: no_phi
+
+variable_identity:
+  variable_name: tmmx
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  # Amadeus also documented the native-unit conversion (K -&gt; Cel,
+  # subtract 273.15) — the schema has no slot for it; see the packing note
+  # in the source sidecar.
+
+data_layout:
+  table_orientation: wide
+  value_column: value_celsius
+  subject_column: person_id
+  time_column: date
+
+spatial_reference:
+  native_spatial_resolution_m: 4000
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+  calendar: gregorian
+  extraction_window_start: &quot;2022-07-15&quot;
+  extraction_window_end: &quot;2022-07-22&quot;
+
+source_dataset:
+  source_dataset_name: &quot;gridMET (METDATA)&quot;
+  source_dataset_short_code: gridmet
+  source_dataset_doi: &quot;10.1002/joc.3413&quot;
+  source_dataset_version: current
+  source_producer_institution: &quot;University of Idaho Climatology Lab&quot;
+  source_license_spdx: CC0-1.0
+  source_native_format: netcdf4_cf
+  source_access_url: &quot;https://www.climatologylab.org/gridmet.html&quot;
+
+exposure_model:
+  exposure_model_type: statistical_blend
+  exposure_model_inputs:
+  - &quot;PRISM monthly normals&quot;
+  - &quot;NLDAS-2 sub-daily reanalysis&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: amadeus
+  tool_version: &quot;2.0.0&quot;
+  container_image_repository: envar-amadeus
+  container_image_digest: &quot;sha256:339832bf73f9c9e25e28dc40cdab7ce089121df8ce51eac6075dd00db77da3a8&quot;
+  run_arguments: &gt;-
+    amadeus::calculate_covariates(&quot;gridmet&quot;, locs = patient_locations,
+    variables = &quot;tmmx&quot;, date_start = &quot;2022-07-15&quot;, date_end = &quot;2022-07-22&quot;)
+  run_timestamp_utc: &quot;2026-06-25T08:33:31Z&quot;
+  input_file_sha256: &quot;12cb1bca74dde87d45cabf09ef0af7d13e08589629a75ed15d5ae727470f7fb6&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;6677711bb8698788a939bf39772e52f182a4e70d331c472ffef19e64f28f4919&quot;
+  output_row_count: 24
+
+# The source sidecar&#x27;s provenance_chain was empty: the amadeus run itself
+# downloads the raw GridMET NetCDF from THREDDS.
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-11">
+  <header class="dataset-head" onclick="toggle(11)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-11">▸</span>
+      <span class="ds-name">degauss_daymet_tmax</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge blocked">BLOCKED</span><span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 31/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:94%"></span></span><span class="meter-count">31/33</span></div><div class="meter" title="Recommended: 24/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:43%"></span></span><span class="meter-count">24/56</span></div><div class="meter" title="Optional: 0/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/30</span></div></div>
+    <div class="readiness readiness-blocked">
+      <span class="readiness-num">64%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-11" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(11,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(11,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-11-analysis">
+      <p class="blocking-line"><strong>BLOCKING (Core missing):</strong> concept_status, value_data_type</p>
+      <details class='validation'><summary>2 validation problem(s)</summary><ul><li>&#x27;concept_status&#x27; is a required property in /variable_identity</li><li>&#x27;value_data_type&#x27; is a required property in /variable_identity</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>13/16</td><td class='missing-list'>uncertainty, health_layer_linkage, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>4/8</td><td class='missing-list'>variable_column, variable_key, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>2/7</td><td class='missing-list'>exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>health_layer_target, health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>3/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_score_propagated, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>4/9</td><td class='missing-list'>native_spatial_resolution_descriptor, spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>temporal_aggregation_window_seconds, temporal_coverage_start, temporal_coverage_end</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>9/14</td><td class='missing-list'>tool_description, run_arguments, run_duration_seconds, run_environment, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>4/13</td><td class='missing-list'>variable_label, units_display, target_concept_vocabulary, target_concept_id, concept_status, concept_mappings, value_data_type, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Core missing (2):</strong> concept_status, value_data_type</p><p><strong>Recommended missing (32):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_paper_doi, geocoding_score_propagated, health_layer_link_field, health_layer_linkage, health_layer_target, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, native_spatial_resolution_descriptor, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, run_arguments, source_citation_apa, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, spatial_extent_descriptor, target_concept_id, target_concept_vocabulary, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column, variable_label</p><p><strong>Optional missing (30):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>examples/scenarios/standards/degauss_daymet_tmax.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-11-source" hidden>
+      <pre class="yaml"># DeGAUSS → Daymet 1 km TMAX — EnVar translation of a REAL pipeline run.
+#
+# Translated from ~/ws/projects/EnVar/examples/heat/degauss/outputs/envar/
+# cohort_addresses_geocoded_daymet.provenance.json (emitted 2026-06-25 by the
+# ghcr.io/degauss-org/daymet:1.0.0 container, geocoding via
+# ghcr.io/degauss-org/geocoder:3.3.0; translated 2026-07-03). Field-for-field
+# mapping of what the pipeline actually emitted — slots the pipeline does not
+# supply are OMITTED so the completeness checker shows DeGAUSS&#x27;s true
+# coverage. Translator-added envelope only: schema_version, subject,
+# phi_status, and data_layout (describing the pipeline&#x27;s own output CSV,
+# outputs/cohort_addresses_geocoded_daymet.csv). Note the chain: the source
+# sidecar carries the geocoder step as a full nested sidecar (its own
+# source_dataset and linkage); the schema&#x27;s provenance_chain_steps keep only
+# its ToolRun portion.
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;01KVYYF39VGAXAG0DMRCHHGAJA-daymet&quot;
+subject: &quot;cohort:envar_heat_demo_2022&quot;
+phi_status: no_phi
+
+variable_identity:
+  variable_name: tmax
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+  subject_column: person_id
+  time_column: date
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+  calendar: gregorian
+  extraction_window_start: &quot;2022-07-15&quot;
+  extraction_window_end: &quot;2022-07-22&quot;
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+  source_producer_institution: &quot;NASA ORNL DAAC&quot;
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: &quot;https://daymet.ornl.gov/&quot;
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - &quot;GHCN-Daily station observations&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet
+  tool_version: &quot;1.0.0&quot;
+  container_image_repository: &quot;ghcr.io/degauss-org/daymet&quot;
+  container_image_digest: &quot;sha256:bfe282259823b7fa92ea9b41e77b51defe455d704a8b6a142c0fe5f58c78cc72&quot;
+  run_timestamp_utc: &quot;2026-06-25T08:31:11Z&quot;
+  input_file_sha256: &quot;fa4b4684edaab06f452eb538108650744bd3b28aee28a37b1ac49fdad1488578&quot;
+  input_row_count: 3
+  output_file_sha256: &quot;8093b669a977013b00541f7f2564bed826e4746520c3ff20267435259a3afcc9&quot;
+  output_row_count: 24
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    container_image_repository: &quot;ghcr.io/degauss-org/geocoder&quot;
+    container_image_digest: &quot;sha256:ec9b75eff7cd7432efcc84d3e7d55b593cc06e0cd2868b512dbc70ef99a1fdc6&quot;
+    run_timestamp_utc: &quot;2026-06-25T08:31:11Z&quot;
+    input_file_sha256: &quot;b285ec7e176006b0d6f107378099ef8be707b249b56753faa35e92d82bdb6e99&quot;
+    input_row_count: 3
+    output_file_sha256: &quot;3a4ec454a15a88ec654a888ea7266f365768994bca2f06e562cbface2ceb5ba7&quot;
+    output_row_count: 3
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-12">
+  <header class="dataset-head" onclick="toggle(12)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-12">▸</span>
+      <span class="ds-name">omop_gaia_daymet_tmax</span>
+      <span class="ds-var">tmax</span>
+      <span class="badge blocked">BLOCKED</span><span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 32/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:97%"></span></span><span class="meter-count">32/33</span></div><div class="meter" title="Recommended: 29/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:52%"></span></span><span class="meter-count">29/56</span></div><div class="meter" title="Optional: 0/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/30</span></div></div>
+    <div class="readiness readiness-blocked">
+      <span class="readiness-num">69%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-12" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(12,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(12,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-12-analysis">
+      <p class="blocking-line"><strong>BLOCKING (Core missing):</strong> value_data_type</p>
+      <details class='validation'><summary>1 validation problem(s)</summary><ul><li>&#x27;value_data_type&#x27; is a required property in /variable_identity</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>14/16</td><td class='missing-list'>uncertainty, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>4/8</td><td class='missing-list'>variable_column, variable_key, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>2/7</td><td class='missing-list'>exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>3/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_score_propagated, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-partial">partial</td><td>2/3</td><td class='missing-list'>chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>8/14</td><td class='missing-list'>source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>4/9</td><td class='missing-list'>native_spatial_resolution_descriptor, spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>6/9</td><td class='missing-list'>temporal_aggregation_window_seconds, temporal_coverage_start, temporal_coverage_end</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>9/14</td><td class='missing-list'>tool_description, run_duration_seconds, run_environment, output_file_sha256, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>7/13</td><td class='missing-list'>variable_label, units_display, concept_mappings, value_data_type, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Core missing (1):</strong> value_data_type</p><p><strong>Recommended missing (27):</strong> bias_correction_applied, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_paper_doi, geocoding_score_propagated, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, native_spatial_resolution_descriptor, output_file_sha256, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, source_citation_apa, source_dataset_spatial_extent, source_dataset_temporal_coverage, spatial_extent_bbox, spatial_extent_descriptor, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column, variable_label</p><p><strong>Optional missing (30):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      
+      <p class="src-path">Source: <code>examples/scenarios/standards/omop_gaia_daymet_tmax.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-12-source" hidden>
+      <pre class="yaml"># GAIA-OMOP → Daymet single-pixel TMAX — EnVar translation of a REAL run.
+#
+# Translated from ~/ws/projects/EnVar/examples/heat/omop-gaia/outputs/envar/
+# daymet.provenance.json + geocoder.provenance.json + MANIFEST.json (emitted
+# 2026-06-25 by the real gaia-db container pipeline: DeGAUSS geocoder →
+# Daymet single-pixel API → working.envar_spatial_join_perday →
+# external_exposure.csv; translated 2026-07-03). Field-for-field mapping of
+# what the pipeline actually emitted — omissions are real gaps. This is the
+# only pipeline of the three that emits a health-layer concept binding:
+# external_exposure.exposure_concept_id carries the proposed concept and
+# exposure_source_value carries this sidecar&#x27;s provenance_id, so
+# target_concept_*/concept_status and health_layer_linkage are source-emitted
+# here, not translator inventions. Translator-added envelope only:
+# schema_version, subject, phi_status, and data_layout (describing the
+# pipeline&#x27;s own OMOP export, outputs/external_exposure.csv).
+# The Daymet single-pixel API returns the value of the 1 km cell containing
+# the point, mapped to extraction_method: nearest_cell.
+schema_version: &quot;0.1&quot;
+provenance_id: &quot;NWWRFHEMRXQZ4WNHBPKJKKM6YS-omop-gaia-daymet&quot;
+subject: &quot;cohort:envar_heat_demo_2022&quot;
+phi_status: no_phi
+
+variable_identity:
+  variable_name: tmax
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  target_concept_vocabulary: omop
+  target_concept_id: &quot;proposed:daily-max-air-temperature&quot;
+  concept_status: proposed
+
+data_layout:
+  table_orientation: wide
+  value_column: value_as_number
+  subject_column: person_id
+  time_column: exposure_start_date
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+  calendar: gregorian
+  extraction_window_start: &quot;2022-07-15&quot;
+  extraction_window_end: &quot;2022-07-22&quot;
+
+source_dataset:
+  source_dataset_name: &quot;Daymet V4 Daily Surface Weather Data&quot;
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: &quot;10.3334/ORNLDAAC/2129&quot;
+  source_dataset_version: &quot;V4 R1&quot;
+  source_producer_institution: &quot;NASA ORNL DAAC&quot;
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: &quot;https://daymet.ornl.gov/single-pixel/&quot;
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - &quot;GHCN-Daily station observations&quot;
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: unknown
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet-singlepixel
+  tool_version: &quot;v4-r1&quot;
+  run_arguments: &gt;-
+    GET https://daymet.ornl.gov/single-pixel/api/data (3 requests,
+    1.5 s delay); spatial join via working.envar_spatial_join_perday
+    inside the gaia-db:envar-heat container
+  run_timestamp_utc: &quot;2026-06-25T08:35:40Z&quot;
+  input_file_sha256: &quot;425508d90c2fb841e768a91a64249c01b49c747d3a0237ac566ac52a38f20be4&quot;
+  input_row_count: 3
+  output_row_count: 24
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: &quot;3.3.0&quot;
+    container_image_repository: &quot;ghcr.io/degauss-org/geocoder&quot;
+    container_image_digest: &quot;sha256:ec9b75eff7cd7432efcc84d3e7d55b593cc06e0cd2868b512dbc70ef99a1fdc6&quot;
+    run_timestamp_utc: &quot;2026-06-25T08:35:40Z&quot;
+    input_file_sha256: &quot;36d1124609b3c9f49229c5992e8faa954d625196e62f9909ec6cc4914187a820&quot;
+    input_row_count: 3
+    output_row_count: 3
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value
+</pre>
+    </div>
+  </div>
+</article><h2 class="group">Counter-examples (must fail)</h2><p class="group-note">Core fields deliberately dropped: the checker stamps them BLOCKED.</p>
+<article class="dataset" id="ds-13">
+  <header class="dataset-head" onclick="toggle(13)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-13">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-tmax_core_missing</span>
+      <span class="ds-var">tmmx</span>
+      <span class="badge blocked">BLOCKED</span><span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 29/33"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:88%"></span></span><span class="meter-count">29/33</span></div><div class="meter" title="Recommended: 9/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:16%"></span></span><span class="meter-count">9/56</span></div><div class="meter" title="Optional: 0/30"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/30</span></div></div>
+    <div class="readiness readiness-blocked">
+      <span class="readiness-num">50%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-13" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(13,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(13,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-13-analysis">
+      <p class="blocking-line"><strong>BLOCKING (Core missing):</strong> day_boundary_convention, linkage_method, linkage_strategy, source_dataset_version</p>
+      <details class='validation'><summary>6 validation problem(s)</summary><ul><li>Additional properties are not allowed (&#x27;day_boundary_convention_missing_reason&#x27; was unexpected) in /temporal_reference</li><li>None is not of type &#x27;string&#x27; in /temporal_reference/day_boundary_convention</li><li>None is not one of [&#x27;local_midnight&#x27;, &#x27;utc_midnight&#x27;, &#x27;ending_1200_gmt&#x27;, &#x27;solar_noon_centered&#x27;, &#x27;observation_dependent&#x27;, &#x27;not_applicable&#x27;] in /temporal_reference/day_boundary_convention</li><li>Additional properties are not allowed (&#x27;source_acknowledgement_freetext&#x27;, &#x27;source_dataset_version_missing_reason&#x27; were unexpected) in /source_dataset</li><li>None is not of type &#x27;string&#x27; in /source_dataset/source_dataset_version</li><li>&#x27;linkage_method&#x27; is a required property in /</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>12/16</td><td class='missing-list'>uncertainty, provenance_chain, linkage_method, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>1/7</td><td class='missing-list'>exposure_model_inputs, exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-partial">partial</td><td>1/3</td><td class='missing-list'>health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-absent">absent</td><td>0/11</td><td class='missing-list'>linkage_strategy, linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_precision_propagated, geocoding_score_propagated, address_period_alignment, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>provenance_chain_steps, provenance_chain_terminus_type, chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>2/14</td><td class='missing-list'>source_dataset_doi, source_dataset_version, source_dataset_temporal_coverage, source_dataset_spatial_extent, source_producer_institution, source_citation_apa, source_citation_bibtex, source_license_spdx, source_access_url, source_native_format, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>5/9</td><td class='missing-list'>spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>2/9</td><td class='missing-list'>temporal_aggregation_window_seconds, day_boundary_convention, temporal_coverage_start, temporal_coverage_end, extraction_window_start, extraction_window_end, calendar</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>4/14</td><td class='missing-list'>tool_description, container_image_repository, container_image_digest, run_arguments, run_timestamp_utc, run_duration_seconds, run_environment, input_row_count, output_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>9/13</td><td class='missing-list'>units_display, concept_mappings, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Core missing (4):</strong> day_boundary_convention, linkage_method, linkage_strategy, source_dataset_version</p><p><strong>Recommended missing (47):</strong> address_period_alignment, bias_correction_applied, calendar, container_image_digest, container_image_repository, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_inputs, exposure_model_known_biases, exposure_model_paper_doi, extraction_window_end, extraction_window_start, geocoding_precision_propagated, geocoding_score_propagated, health_layer_link_field, input_row_count, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, output_row_count, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, provenance_chain, provenance_chain_steps, provenance_chain_terminus_type, run_arguments, run_timestamp_utc, source_access_url, source_citation_apa, source_dataset_doi, source_dataset_spatial_extent, source_dataset_temporal_coverage, source_license_spdx, source_native_format, source_producer_institution, spatial_extent_bbox, spatial_extent_descriptor, subject_column, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, time_column, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column</p><p><strong>Optional missing (30):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, linkage_max_distance_to_station_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): target_concept_id</p>
+      <p class="src-path">Source: <code>tests/data/invalid/EnvironmentalExposureRecord-tmax_core_missing.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-13-source" hidden>
+      <pre class="yaml">schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HXAMADEUS0000000000GRIDMET&quot;
+
+variable_identity:
+  variable_name: tmmx                      # GridMET&#x27;s native column name
+  variable_label: &quot;daily maximum near-surface air temperature&quot;
+  standard_name: CF:air_temperature
+  cf_cell_methods: &quot;time: maximum&quot;
+  units_ucum: Cel
+  value_data_type: continuous_numeric
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+
+data_layout:
+  table_orientation: wide
+  value_column: tmmx
+
+spatial_reference:
+  native_spatial_resolution_m: 4000
+  native_spatial_resolution_descriptor: &quot;~4 km regular grid&quot;
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  # CORE GAP: GridMET blends UTC-referenced NLDAS-2 with PRISM normals; the
+  # Amadeus output does not record which day-boundary convention applies.
+  day_boundary_convention:
+  day_boundary_convention_missing_reason: not_provided_by_source
+
+source_dataset:
+  source_dataset_name: &quot;GridMET (University of Idaho gridded surface meteorology)&quot;
+  source_dataset_short_code: gridmet
+  # CORE GAP: version not surfaced by the Amadeus acknowledgement string.
+  source_dataset_version:
+  source_dataset_version_missing_reason: not_provided_by_source
+  source_acknowledgement_freetext: &gt;-
+    Data provided by the University of Idaho; GridMET via Amadeus.
+
+exposure_model:
+  exposure_model_type: statistical_blend
+
+tool_run:
+  tool_name: amadeus
+  tool_version: &quot;1.3.2&quot;
+  input_file_sha256: &quot;3a1b9c...&quot;
+  output_file_sha256: &quot;7f2e4d...&quot;
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+subject: &quot;cohort:demo_min&quot;
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: &quot;2022-07-19&quot;  value: 45.1  unit: Cel
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article>
+<article class="dataset" id="ds-14">
+  <header class="dataset-head" onclick="toggle(14)">
+    <div class="head-main">
+      <span class="disclosure" id="disc-14">▸</span>
+      <span class="ds-name">EnvironmentalExposureRecord-pm25_core_missing</span>
+      <span class="ds-var">pm25</span>
+      <span class="badge blocked">BLOCKED</span><span class="badge invalid">fails validation</span>
+    </div>
+    <div class="head-meters"><div class="meter" title="Core: 30/34"><span class="meter-label">Core</span><span class="meter-track"><span class="meter-fill core" style="width:88%"></span></span><span class="meter-count">30/34</span></div><div class="meter" title="Recommended: 10/56"><span class="meter-label">Recommended</span><span class="meter-track"><span class="meter-fill recommended" style="width:18%"></span></span><span class="meter-count">10/56</span></div><div class="meter" title="Optional: 0/29"><span class="meter-label">Optional</span><span class="meter-track"><span class="meter-fill optional" style="width:0%"></span></span><span class="meter-count">0/29</span></div></div>
+    <div class="readiness readiness-blocked">
+      <span class="readiness-num">51%</span>
+      <span class="readiness-label">readiness</span>
+    </div>
+  </header>
+  <div class="drawer" id="drawer-14" hidden>
+    <div class="tabs">
+      <button class="tab active" onclick="showtab(14,'analysis',this)">Analysis</button>
+      <button class="tab" onclick="showtab(14,'source',this)">Sidecar YAML</button>
+    </div>
+    <div class="tabpane" id="pane-14-analysis">
+      <p class="blocking-line"><strong>BLOCKING (Core missing):</strong> day_boundary_convention, linkage_max_distance_to_station_m, native_spatial_resolution_m, source_dataset_version</p>
+      <details class='validation'><summary>5 validation problem(s)</summary><ul><li>Additional properties are not allowed (&#x27;day_boundary_convention_missing_reason&#x27; was unexpected) in /temporal_reference</li><li>None is not of type &#x27;string&#x27; in /temporal_reference/day_boundary_convention</li><li>None is not one of [&#x27;local_midnight&#x27;, &#x27;utc_midnight&#x27;, &#x27;ending_1200_gmt&#x27;, &#x27;solar_noon_centered&#x27;, &#x27;observation_dependent&#x27;, &#x27;not_applicable&#x27;] in /temporal_reference/day_boundary_convention</li><li>&#x27;source_dataset_version&#x27; is a required property in /source_dataset</li><li>Additional properties are not allowed (&#x27;tool_version_missing_reason&#x27; was unexpected) in /tool_run</li></ul></details>
+      <table class="modules">
+        <thead><tr><th>Module</th><th>State</th><th>Present</th><th>Missing slots</th></tr></thead>
+        <tbody><tr><td><code>(record root)</code></td><td class="state-partial">partial</td><td>13/16</td><td class='missing-list'>uncertainty, provenance_chain, deposit_metadata</td></tr><tr><td><code>data_layout</code></td><td class="state-partial">partial</td><td>2/8</td><td class='missing-list'>variable_column, variable_key, subject_column, time_column, value_uncertainty_column, quality_flag_column</td></tr><tr><td><code>deposit_metadata</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>deposit_doi, deposit_repository, deposit_license_spdx, deposit_redistribution_constraints_inherited, recommended_citation, dcat_distribution_url</td></tr><tr><td><code>exposure_model</code></td><td class="state-partial">partial</td><td>1/7</td><td class='missing-list'>exposure_model_inputs, exposure_model_paper_doi, exposure_model_cross_validation_r2, exposure_model_known_biases, exposure_model_ensemble_member_count, bias_correction_applied</td></tr><tr><td><code>health_layer_linkage</code></td><td class="state-partial">partial</td><td>1/3</td><td class='missing-list'>health_layer_link_field, cohort_size_anchored</td></tr><tr><td><code>linkage_method</code></td><td class="state-partial">partial</td><td>1/11</td><td class='missing-list'>linkage_buffer_radius_m, linkage_buffer_aggregation_method, linkage_max_distance_to_station_m, geocoding_precision_propagated, geocoding_score_propagated, address_period_alignment, clinical_date_assignment_convention, partial_day_attribution_rule, lag_alignment_applied, lag_alignment_specifier</td></tr><tr><td><code>provenance_chain</code></td><td class="state-absent">absent</td><td>0/3</td><td class='missing-list'>provenance_chain_steps, provenance_chain_terminus_type, chain_compatibility_assertions</td></tr><tr><td><code>source_dataset</code></td><td class="state-partial">partial</td><td>5/14</td><td class='missing-list'>source_dataset_doi, source_dataset_version, source_dataset_temporal_coverage, source_dataset_spatial_extent, source_citation_apa, source_citation_bibtex, source_native_format, source_homogenisation_status, source_acdd_attributes</td></tr><tr><td><code>spatial_reference</code></td><td class="state-partial">partial</td><td>4/9</td><td class='missing-list'>native_spatial_resolution_m, spatial_extent_bbox, spatial_extent_descriptor, extraction_buffer_m, population_weighting_source</td></tr><tr><td><code>temporal_reference</code></td><td class="state-partial">partial</td><td>2/9</td><td class='missing-list'>temporal_aggregation_window_seconds, day_boundary_convention, temporal_coverage_start, temporal_coverage_end, extraction_window_start, extraction_window_end, calendar</td></tr><tr><td><code>tool_run</code></td><td class="state-partial">partial</td><td>2/14</td><td class='missing-list'>tool_description, container_image_repository, container_image_digest, run_arguments, run_timestamp_utc, run_duration_seconds, run_environment, input_file_sha256, input_row_count, output_file_sha256, output_row_count, run_log_excerpt</td></tr><tr><td><code>uncertainty</code></td><td class="state-absent">absent</td><td>0/6</td><td class='missing-list'>per_value_uncertainty_type, per_value_uncertainty_units_ucum, model_aggregate_uncertainty, quality_flag_vocabulary, missing_data_handling_method, data_completeness_pct</td></tr><tr><td><code>variable_identity</code></td><td class="state-partial">partial</td><td>9/13</td><td class='missing-list'>units_display, concept_mappings, value_range_plausible_min, value_range_plausible_max</td></tr></tbody>
+      </table>
+      <p><strong>Core missing (4):</strong> day_boundary_convention, linkage_max_distance_to_station_m, native_spatial_resolution_m, source_dataset_version</p><p><strong>Recommended missing (46):</strong> address_period_alignment, bias_correction_applied, calendar, container_image_digest, container_image_repository, data_completeness_pct, exposure_model_cross_validation_r2, exposure_model_inputs, exposure_model_known_biases, exposure_model_paper_doi, extraction_window_end, extraction_window_start, geocoding_precision_propagated, geocoding_score_propagated, health_layer_link_field, input_file_sha256, input_row_count, lag_alignment_applied, missing_data_handling_method, model_aggregate_uncertainty, output_file_sha256, output_row_count, partial_day_attribution_rule, per_value_uncertainty_type, per_value_uncertainty_units_ucum, provenance_chain, provenance_chain_steps, provenance_chain_terminus_type, run_arguments, run_timestamp_utc, source_citation_apa, source_dataset_doi, source_dataset_spatial_extent, source_dataset_temporal_coverage, source_native_format, spatial_extent_bbox, spatial_extent_descriptor, subject_column, temporal_aggregation_window_seconds, temporal_coverage_end, temporal_coverage_start, time_column, uncertainty, value_range_plausible_max, value_range_plausible_min, value_uncertainty_column</p><p><strong>Optional missing (29):</strong> chain_compatibility_assertions, clinical_date_assignment_convention, cohort_size_anchored, concept_mappings, dcat_distribution_url, deposit_doi, deposit_license_spdx, deposit_metadata, deposit_redistribution_constraints_inherited, deposit_repository, exposure_model_ensemble_member_count, extraction_buffer_m, lag_alignment_specifier, linkage_buffer_aggregation_method, linkage_buffer_radius_m, population_weighting_source, quality_flag_column, quality_flag_vocabulary, recommended_citation, run_duration_seconds, run_environment, run_log_excerpt, source_acdd_attributes, source_citation_bibtex, source_homogenisation_status, tool_description, units_display, variable_column, variable_key</p>
+      <p><strong>Explained nulls</strong> (absent, but documented with a <code>*_missing_reason</code> — counted as present): target_concept_id</p>
+      <p class="src-path">Source: <code>tests/data/invalid/EnvironmentalExposureRecord-pm25_core_missing.yaml</code></p>
+    </div>
+    <div class="tabpane" id="pane-14-source" hidden>
+      <pre class="yaml">schema_version: &quot;0.1&quot;
+provenance_id: &quot;01HXEPAAQS00000000000PM25MON&quot;
+
+variable_identity:
+  variable_name: pm25
+  variable_label: &quot;24-hour mean fine particulate matter (PM2.5) mass concentration&quot;
+  standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: &quot;time: mean&quot;
+  units_ucum: ug/m3
+  value_data_type: continuous_numeric
+  target_concept_vocabulary: omop
+  target_concept_id:
+  target_concept_id_missing_reason: not_provided_by_source
+  concept_status: gap
+
+data_layout:
+  table_orientation: wide
+  value_column: pm25
+
+spatial_reference:
+  native_spatial_resolution_descriptor: &quot;point station (FRM/FEM monitor)&quot;
+  crs: &quot;EPSG:4326&quot;
+  extraction_method: point_station_lookup
+  target_geography_type: point_residence
+  # CORE GAP: nearest-station assignment has no documented max distance, so
+  # the spatial precision of the assignment is unknown.
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: mean
+  # CORE GAP: AQS daily summaries are local-standard-time; not recorded here.
+  day_boundary_convention:
+  day_boundary_convention_missing_reason: not_provided_by_source
+
+source_dataset:
+  source_dataset_name: &quot;US EPA Air Quality System (AQS)&quot;
+  source_dataset_short_code: epa_aqs
+  source_producer_institution: &quot;US Environmental Protection Agency&quot;
+  source_access_url: &quot;https://www.epa.gov/aqs&quot;
+  source_license_spdx: public-domain-us-gov
+
+exposure_model:
+  exposure_model_type: direct_measurement
+
+linkage_method:
+  linkage_strategy: nearest_station_with_max_distance
+  # CORE-adjacent GAP: max distance not set, so far-from-monitor patients are
+  # silently assigned a possibly-irrelevant value.
+  linkage_max_distance_to_station_m:
+  linkage_max_distance_to_station_m_missing_reason: not_provided_by_source
+
+tool_run:
+  tool_name: epa_aqs_api
+  tool_version: &quot;unknown&quot;
+  tool_version_missing_reason: not_provided_by_source
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+subject: &quot;cohort:demo_min_pm&quot;
+# Companion data row (in the accompanying CSV/parquet, not the sidecar):
+#   date: &quot;2022-07-19&quot;  value: 12.4  unit: ug/m3
+phi_status: no_phi
+</pre>
+    </div>
+  </div>
+</article>
+<footer>Generated from the schema tier annotations by
+<code>scripts/gen_datasets_ledger.py</code> — numbers are computed, not curated.
+The <a href="../dashboard/index.html">completeness ledger</a> shows the
+hand-authored illustrative scenarios this page replaces with live data.</footer>
+</div>
+<script>
+function toggle(i) {
+  const d = document.getElementById('drawer-' + i);
+  const disc = document.getElementById('disc-' + i);
+  d.hidden = !d.hidden;
+  disc.textContent = d.hidden ? '\u25b8' : '\u25be';
+}
+function showtab(i, which, btn) {
+  document.getElementById('pane-' + i + '-analysis').hidden = which !== 'analysis';
+  document.getElementById('pane-' + i + '-source').hidden = which !== 'source';
+  btn.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

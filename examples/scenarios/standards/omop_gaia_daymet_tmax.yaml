@@ -1,0 +1,98 @@
+# GAIA-OMOP → Daymet single-pixel TMAX — EnVar translation of a REAL run.
+#
+# Translated from ~/ws/projects/EnVar/examples/heat/omop-gaia/outputs/envar/
+# daymet.provenance.json + geocoder.provenance.json + MANIFEST.json (emitted
+# 2026-06-25 by the real gaia-db container pipeline: DeGAUSS geocoder →
+# Daymet single-pixel API → working.envar_spatial_join_perday →
+# external_exposure.csv; translated 2026-07-03). Field-for-field mapping of
+# what the pipeline actually emitted — omissions are real gaps. This is the
+# only pipeline of the three that emits a health-layer concept binding:
+# external_exposure.exposure_concept_id carries the proposed concept and
+# exposure_source_value carries this sidecar's provenance_id, so
+# target_concept_*/concept_status and health_layer_linkage are source-emitted
+# here, not translator inventions. Translator-added envelope only:
+# schema_version, subject, phi_status, and data_layout (describing the
+# pipeline's own OMOP export, outputs/external_exposure.csv).
+# The Daymet single-pixel API returns the value of the 1 km cell containing
+# the point, mapped to extraction_method: nearest_cell.
+schema_version: "0.1"
+provenance_id: "NWWRFHEMRXQZ4WNHBPKJKKM6YS-omop-gaia-daymet"
+subject: "cohort:envar_heat_demo_2022"
+phi_status: no_phi
+
+variable_identity:
+  variable_name: tmax
+  standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+  target_concept_vocabulary: omop
+  target_concept_id: "proposed:daily-max-air-temperature"
+  concept_status: proposed
+
+data_layout:
+  table_orientation: wide
+  value_column: value_as_number
+  subject_column: person_id
+  time_column: exposure_start_date
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  crs: "EPSG:4326"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+  calendar: gregorian
+  extraction_window_start: "2022-07-15"
+  extraction_window_end: "2022-07-22"
+
+source_dataset:
+  source_dataset_name: "Daymet V4 Daily Surface Weather Data"
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: "10.3334/ORNLDAAC/2129"
+  source_dataset_version: "V4 R1"
+  source_producer_institution: "NASA ORNL DAAC"
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: "https://daymet.ornl.gov/single-pixel/"
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - "GHCN-Daily station observations"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: unknown
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet-singlepixel
+  tool_version: "v4-r1"
+  run_arguments: >-
+    GET https://daymet.ornl.gov/single-pixel/api/data (3 requests,
+    1.5 s delay); spatial join via working.envar_spatial_join_perday
+    inside the gaia-db:envar-heat container
+  run_timestamp_utc: "2026-06-25T08:35:40Z"
+  input_file_sha256: "425508d90c2fb841e768a91a64249c01b49c747d3a0237ac566ac52a38f20be4"
+  input_row_count: 3
+  output_row_count: 24
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    container_image_repository: "ghcr.io/degauss-org/geocoder"
+    container_image_digest: "sha256:ec9b75eff7cd7432efcc84d3e7d55b593cc06e0cd2868b512dbc70ef99a1fdc6"
+    run_timestamp_utc: "2026-06-25T08:35:40Z"
+    input_file_sha256: "36d1124609b3c9f49229c5992e8faa954d625196e62f9909ec6cc4914187a820"
+    input_row_count: 3
+    output_row_count: 3
+
+health_layer_linkage:
+  health_layer_target: omop_external_exposure
+  health_layer_link_field: exposure_source_value

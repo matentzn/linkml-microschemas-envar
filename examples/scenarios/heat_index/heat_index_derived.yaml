@@ -20,11 +20,17 @@ variable_identity:
   variable_name: heat_index
   variable_label: "daily maximum NWS Heat Index"
   standard_name: ENVAR:heat_index   # local registry term — CF defines no Heat Index standard name
+  concept_status: proposed
+  cf_cell_methods: "time: maximum"
   units_ucum: Cel
   units_display: "°C"
   value_data_type: continuous_numeric
   value_range_plausible_min: -50
   value_range_plausible_max: 80
+
+data_layout:
+  table_orientation: wide
+  value_column: heat_index
 
 spatial_reference:
   # Resolution INHERITED from the coarser input (era5, ~31 km), not the 1 km TMAX.

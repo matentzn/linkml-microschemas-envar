@@ -1,0 +1,88 @@
+# DeGAUSS → Daymet 1 km TMAX — EnVar translation of a REAL pipeline run.
+#
+# Translated from ~/ws/projects/EnVar/examples/heat/degauss/outputs/envar/
+# cohort_addresses_geocoded_daymet.provenance.json (emitted 2026-06-25 by the
+# ghcr.io/degauss-org/daymet:1.0.0 container, geocoding via
+# ghcr.io/degauss-org/geocoder:3.3.0; translated 2026-07-03). Field-for-field
+# mapping of what the pipeline actually emitted — slots the pipeline does not
+# supply are OMITTED so the completeness checker shows DeGAUSS's true
+# coverage. Translator-added envelope only: schema_version, subject,
+# phi_status, and data_layout (describing the pipeline's own output CSV,
+# outputs/cohort_addresses_geocoded_daymet.csv). Note the chain: the source
+# sidecar carries the geocoder step as a full nested sidecar (its own
+# source_dataset and linkage); the schema's provenance_chain_steps keep only
+# its ToolRun portion.
+schema_version: "0.1"
+provenance_id: "01KVYYF39VGAXAG0DMRCHHGAJA-daymet"
+subject: "cohort:envar_heat_demo_2022"
+phi_status: no_phi
+
+variable_identity:
+  variable_name: tmax
+  standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
+  subject_column: person_id
+  time_column: date
+
+spatial_reference:
+  native_spatial_resolution_m: 1000
+  crs: "EPSG:4326"
+  extraction_method: inverse_distance_weighted_4_nearest_cells
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+  calendar: gregorian
+  extraction_window_start: "2022-07-15"
+  extraction_window_end: "2022-07-22"
+
+source_dataset:
+  source_dataset_name: "Daymet V4 Daily Surface Weather Data"
+  source_dataset_short_code: daymet_v4
+  source_dataset_doi: "10.3334/ORNLDAAC/2129"
+  source_dataset_version: "V4 R1"
+  source_producer_institution: "NASA ORNL DAAC"
+  source_license_spdx: public-domain-us-gov
+  source_native_format: netcdf4_cf
+  source_access_url: "https://daymet.ornl.gov/"
+
+exposure_model:
+  exposure_model_type: spatial_interpolation
+  exposure_model_inputs:
+  - "GHCN-Daily station observations"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: daymet
+  tool_version: "1.0.0"
+  container_image_repository: "ghcr.io/degauss-org/daymet"
+  container_image_digest: "sha256:bfe282259823b7fa92ea9b41e77b51defe455d704a8b6a142c0fe5f58c78cc72"
+  run_timestamp_utc: "2026-06-25T08:31:11Z"
+  input_file_sha256: "fa4b4684edaab06f452eb538108650744bd3b28aee28a37b1ac49fdad1488578"
+  input_row_count: 3
+  output_file_sha256: "8093b669a977013b00541f7f2564bed826e4746520c3ff20267435259a3afcc9"
+  output_row_count: 24
+
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download
+  provenance_chain_steps:
+  - tool_name: geocoder
+    tool_version: "3.3.0"
+    container_image_repository: "ghcr.io/degauss-org/geocoder"
+    container_image_digest: "sha256:ec9b75eff7cd7432efcc84d3e7d55b593cc06e0cd2868b512dbc70ef99a1fdc6"
+    run_timestamp_utc: "2026-06-25T08:31:11Z"
+    input_file_sha256: "b285ec7e176006b0d6f107378099ef8be707b249b56753faa35e92d82bdb6e99"
+    input_row_count: 3
+    output_file_sha256: "3a4ec454a15a88ec654a888ea7266f365768994bca2f06e562cbface2ceb5ba7"
+    output_row_count: 3

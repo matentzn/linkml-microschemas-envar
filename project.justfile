@@ -11,3 +11,11 @@ gen-schema-overview:
 # Render docs/schema_overview.md as a standalone HTML page (tmp/schema_overview.html)
 render-schema-overview: gen-schema-overview
     uv run python scripts/render_schema_overview_html.py
+
+# Score sidecar(s) against the schema tier annotations (completeness checker)
+check +FILES:
+    uv run python -m linkml_microschemas_envar.checker {{FILES}}
+
+# Regenerate docs/datasets/index.html — the computed example-dataset ledger
+gen-datasets-ledger:
+    uv run python scripts/gen_datasets_ledger.py

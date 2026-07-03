@@ -10,6 +10,7 @@ subject: "cohort:phoenix_aki_2022"
 variable_identity:
   variable_name: tmax
   standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
   units_ucum: Cel
   concept_status: gap
   value_data_type: continuous_numeric
@@ -19,6 +20,7 @@ data_layout:
   value_column: tmax
 
 spatial_reference:
+  native_spatial_resolution_m: 1000
   crs: "EPSG:4326"
   extraction_method: inverse_distance_weighted_4_nearest_cells
   target_geography_type: point_residence

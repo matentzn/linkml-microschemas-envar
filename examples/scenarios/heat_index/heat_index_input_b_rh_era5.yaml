@@ -11,12 +11,17 @@ variable_identity:
   variable_name: rh
   variable_label: "daily mean near-surface relative humidity"
   standard_name: CF:relative_humidity
+  concept_status: proposed
   cf_cell_methods: "time: mean"
   units_ucum: "%"
   units_display: "%"
   value_data_type: continuous_numeric
   value_range_plausible_min: 0
   value_range_plausible_max: 100
+
+data_layout:
+  table_orientation: wide
+  value_column: rh
 
 spatial_reference:
   native_spatial_resolution_m: 31000               # <-- diverges from input A (1000 m)

@@ -66,6 +66,7 @@ nav:
   - Architecture: architecture.md
   - Related approaches: related-approaches.md
   - Completeness ledger: dashboard/index.html
+  - Example datasets: datasets/index.html
   - About: about.md
 
 # schema_overview.md is the *source* for the styled rendering deployed at

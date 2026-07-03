@@ -59,6 +59,7 @@ skip = [
   "pyproject.toml",
   "uv.lock",
   "project/*",
+  "docs/datasets/index.html",
   "src/linkml_microschemas_envar/datamodel/linkml_microschemas_envar_pydantic.py",
   "src/linkml_microschemas_envar/datamodel/linkml_microschemas_envar.py",
 ]
@@ -77,6 +78,7 @@ extend-exclude = [
   "uv.lock",
   "pyproject.toml",
   "project/*",
+  "docs/datasets/index.html",
   "src/linkml_microschemas_envar/datamodel/linkml_microschemas_envar_pydantic.py",
   "src/linkml_microschemas_envar/datamodel/linkml_microschemas_envar.py",
 ]

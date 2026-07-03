@@ -9,6 +9,7 @@ subject: "cohort:phoenix_aki_2022"
 variable_identity:
   variable_name: pm25
   standard_name: CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air
+  cf_cell_methods: "time: mean"
   units_ucum: ug/m3
   concept_status: proposed
   value_data_type: continuous_numeric
@@ -18,6 +19,7 @@ data_layout:
   value_column: pm25
 
 spatial_reference:
+  native_spatial_resolution_m: 1000
   crs: "EPSG:4326"
   extraction_method: nearest_cell
   target_geography_type: point_residence
@@ -29,6 +31,7 @@ temporal_reference:
 
 exposure_model:
   exposure_model_type: ensemble_machine_learning
+  exposure_model_ensemble_member_count: 3
 
 source_dataset:
   source_dataset_name: "Di et al. ensemble PM2.5 (contiguous US)"

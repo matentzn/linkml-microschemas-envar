@@ -10,12 +10,17 @@ variable_identity:
   variable_name: tmax
   variable_label: "daily maximum air temperature at 2 m"
   standard_name: CF:air_temperature
+  concept_status: proposed
   cf_cell_methods: "time: maximum"
   units_ucum: Cel
   units_display: "°C"
   value_data_type: continuous_numeric
   value_range_plausible_min: -50
   value_range_plausible_max: 60
+
+data_layout:
+  table_orientation: wide
+  value_column: tmax
 
 spatial_reference:
   native_spatial_resolution_m: 1000

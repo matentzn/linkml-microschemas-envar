@@ -1,0 +1,83 @@
+# Amadeus → gridMET 4 km TMAX — EnVar translation of a REAL pipeline run.
+#
+# Translated from ~/ws/projects/EnVar/examples/heat/amadeus/outputs/envar/
+# gridmet_tmmx.provenance.yaml (emitted 2026-06-25 by the amadeus 2.0.0 R
+# package running inside the envar-amadeus:4.4 container; translated
+# 2026-07-03). Field-for-field mapping of what the pipeline actually emitted —
+# slots the pipeline does not supply are OMITTED, not papered over, so the
+# completeness checker shows Amadeus's true coverage. Translator-added
+# envelope only: schema_version, subject, phi_status, and data_layout (which
+# describes the pipeline's own output CSV, outputs/gridmet_tmmx.csv).
+schema_version: "0.1"
+provenance_id: "SH16BKV29EX1K6462TF5RHFJFM-gridmet"
+subject: "cohort:envar_heat_demo_2022"
+phi_status: no_phi
+
+variable_identity:
+  variable_name: tmmx
+  standard_name: CF:air_temperature
+  cf_cell_methods: "time: maximum"
+  units_ucum: Cel
+  # Amadeus also documented the native-unit conversion (K -> Cel,
+  # subtract 273.15) — the schema has no slot for it; see the packing note
+  # in the source sidecar.
+
+data_layout:
+  table_orientation: wide
+  value_column: value_celsius
+  subject_column: person_id
+  time_column: date
+
+spatial_reference:
+  native_spatial_resolution_m: 4000
+  crs: "EPSG:4326"
+  extraction_method: nearest_cell
+  target_geography_type: point_residence
+
+temporal_reference:
+  temporal_resolution: daily
+  temporal_aggregation_method: maximum
+  day_boundary_convention: local_midnight
+  calendar: gregorian
+  extraction_window_start: "2022-07-15"
+  extraction_window_end: "2022-07-22"
+
+source_dataset:
+  source_dataset_name: "gridMET (METDATA)"
+  source_dataset_short_code: gridmet
+  source_dataset_doi: "10.1002/joc.3413"
+  source_dataset_version: current
+  source_producer_institution: "University of Idaho Climatology Lab"
+  source_license_spdx: CC0-1.0
+  source_native_format: netcdf4_cf
+  source_access_url: "https://www.climatologylab.org/gridmet.html"
+
+exposure_model:
+  exposure_model_type: statistical_blend
+  exposure_model_inputs:
+  - "PRISM monthly normals"
+  - "NLDAS-2 sub-daily reanalysis"
+
+linkage_method:
+  linkage_strategy: point_extraction_at_residence
+  geocoding_precision_propagated: range
+  address_period_alignment: address_history_from_emr
+
+tool_run:
+  tool_name: amadeus
+  tool_version: "2.0.0"
+  container_image_repository: envar-amadeus
+  container_image_digest: "sha256:339832bf73f9c9e25e28dc40cdab7ce089121df8ce51eac6075dd00db77da3a8"
+  run_arguments: >-
+    amadeus::calculate_covariates("gridmet", locs = patient_locations,
+    variables = "tmmx", date_start = "2022-07-15", date_end = "2022-07-22")
+  run_timestamp_utc: "2026-06-25T08:33:31Z"
+  input_file_sha256: "12cb1bca74dde87d45cabf09ef0af7d13e08589629a75ed15d5ae727470f7fb6"
+  input_row_count: 3
+  output_file_sha256: "6677711bb8698788a939bf39772e52f182a4e70d331c472ffef19e64f28f4919"
+  output_row_count: 24
+
+# The source sidecar's provenance_chain was empty: the amadeus run itself
+# downloads the raw GridMET NetCDF from THREDDS.
+provenance_chain:
+  provenance_chain_terminus_type: raw_source_download

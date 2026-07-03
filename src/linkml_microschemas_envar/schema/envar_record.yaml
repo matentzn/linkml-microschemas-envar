@@ -236,7 +236,7 @@ slots:
   # Each implements (and exactly maps to) its LinkML Microschema Profile
   # counterpart. `instantiates: MicroschemaDefinition` is a metaclass
   # relation and does not constrain slot names, so the readable names are
-  # profile-conformant. Decision recorded in issue_naming.md.
+  # profile-conformant. Rationale in this directory's README.md.
 
   variable_identity:
     title: Variable Identity

@@ -176,8 +176,8 @@ classDiagram
 **readable envar slots** — the validated key is the domain name; the profile name is
 carried via slot-level `implements` / `exact_mappings` (and recorded as an `alias`).
 `instantiates: MicroschemaDefinition` is a metaclass relation and does not constrain
-slot names, so this is profile-conformant (decision recorded in the schema `README.md`
-and `issue_naming.md`):
+slot names, so this is profile-conformant (decision recorded in the schema
+`README.md`):
 
 | Record slot (validated key) | Profile slot (`implements`) | `range` | tier |
 |---|---|---|---|
@@ -216,7 +216,7 @@ Four conventions run through every module — know these and the rest is mechani
   names (`variable_identity`, `spatial_reference`, …); each maps to its profile anatomy
   slot via `implements` / `exact_mappings` — `instantiates` does not constrain slot
   names, so this is profile-conformant. Resolved 2026-07, still open to workshop
-  challenge (see `README.md` and `issue_naming.md`).
+  challenge (see the schema `README.md`).
 - **Tiers as annotations.** Every slot carries `annotations: {tier: core | recommended |
   optional | conditionally_core}`. This is the **single source of truth** the completeness
   checker reads — the schema *is* the requirement spec.

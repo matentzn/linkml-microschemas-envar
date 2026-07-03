@@ -24,8 +24,8 @@ Notes:
 - **Naming.** These use the readable domain top-level keys (`variable_identity`,
   `spatial_reference`, `temporal_reference`, `exposure_model`), which are now the
   schema's canonical names; each maps to its LinkML Microschema Profile anatomy
-  slot via `implements` (decision recorded in
-  [`../../../issue_naming.md`](../../../issue_naming.md)).
+  slot via `implements` (decision recorded in the schema
+  [`README.md`](../../../src/linkml_microschemas_envar/schema/README.md)).
 - **No inline value / no PHI.** Records bind no `observation_result`; the value(s)
   live in the companion CSV/parquet (shown as a trailing comment). Subjects are
   opaque cohort handles.

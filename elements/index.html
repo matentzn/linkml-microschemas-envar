@@ -689,111 +689,111 @@ EnVar metadata layer:</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="AnyValue/">AnyValue</a></td>
+<td><a href="classes/AnyValue/">AnyValue</a></td>
 <td>An arbitrary passthrough object (open-ended key/value map) whose keys are not...</td>
 </tr>
 <tr>
-<td><a href="CodedValue/">CodedValue</a></td>
+<td><a href="classes/CodedValue/">CodedValue</a></td>
 <td>A value from a controlled vocabulary</td>
 </tr>
 <tr>
-<td><a href="DataLayout/">DataLayout</a></td>
+<td><a href="classes/DataLayout/">DataLayout</a></td>
 <td>How the companion data file (CSV / parquet) is laid out and how this record's...</td>
 </tr>
 <tr>
-<td><a href="DepositMetadata/">DepositMetadata</a></td>
+<td><a href="classes/DepositMetadata/">DepositMetadata</a></td>
 <td>Deposit-time slots required when the sidecar travels alongside a published FA...</td>
 </tr>
 <tr>
-<td><a href="DerivedHeatMetric/">DerivedHeatMetric</a></td>
+<td><a href="classes/DerivedHeatMetric/">DerivedHeatMetric</a></td>
 <td>Methodology slots specific to derived heat metrics (WBGT, Heat Index, UTCI, a...</td>
 </tr>
 <tr>
-<td><a href="EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
+<td><a href="classes/EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
 <td>A single environmental-exposure record sidecar: the complete metadata graph t...</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="classes/DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
 <td>Canonical record for daily maximum 2 m air temperature (Tmax)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="classes/DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
 <td>Canonical record for daily minimum 2 m air temperature (Tmin)</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="classes/ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
 <td>Canonical record for a daily binary extreme-heat-day flag, defined against a ...</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="classes/WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
 <td>Canonical record for outdoor WBGT under the Liljegren 2008 formulation</td>
 </tr>
 <tr>
-<td><a href="EquationInput/">EquationInput</a></td>
+<td><a href="classes/EquationInput/">EquationInput</a></td>
 <td>A single physical-state input to a derived heat metric, recorded as a typed r...</td>
 </tr>
 <tr>
-<td><a href="ExposureModel/">ExposureModel</a></td>
+<td><a href="classes/ExposureModel/">ExposureModel</a></td>
 <td>The model class that produced the values (interpolation, reanalysis, ML, stat...</td>
 </tr>
 <tr>
-<td><a href="HealthLayerLinkage/">HealthLayerLinkage</a></td>
+<td><a href="classes/HealthLayerLinkage/">HealthLayerLinkage</a></td>
 <td>Hooks the sidecar uses to be findable from a downstream health-data layer (OM...</td>
 </tr>
 <tr>
-<td><a href="LinkageMethod/">LinkageMethod</a></td>
+<td><a href="classes/LinkageMethod/">LinkageMethod</a></td>
 <td>How a gridded environmental value gets attached to a patient: the resolution ...</td>
 </tr>
 <tr>
-<td><a href="MicroschemaDefinition/">MicroschemaDefinition</a></td>
+<td><a href="classes/MicroschemaDefinition/">MicroschemaDefinition</a></td>
 <td>A metaclass for classes that conform to the Microschema profile</td>
 </tr>
 <tr>
-<td><a href="ModelAggregateUncertainty/">ModelAggregateUncertainty</a></td>
+<td><a href="classes/ModelAggregateUncertainty/">ModelAggregateUncertainty</a></td>
 <td>Whole-model uncertainty summary — cross-validation metrics and the reference ...</td>
 </tr>
 <tr>
-<td><a href="ProvenanceChain/">ProvenanceChain</a></td>
+<td><a href="classes/ProvenanceChain/">ProvenanceChain</a></td>
 <td>The ordered list of all upstream <code>ToolRun</code>s whose outputs were inputs to this...</td>
 </tr>
 <tr>
-<td><a href="Quantity/">Quantity</a></td>
+<td><a href="classes/Quantity/">Quantity</a></td>
 <td>A numerical value with unit</td>
 </tr>
 <tr>
-<td><a href="SourceDataset/">SourceDataset</a></td>
+<td><a href="classes/SourceDataset/">SourceDataset</a></td>
 <td>The upstream gridded / station product the exposure values originate from</td>
 </tr>
 <tr>
-<td><a href="SpatialReference/">SpatialReference</a></td>
+<td><a href="classes/SpatialReference/">SpatialReference</a></td>
 <td>Spatial provenance of an environmental exposure value: the native grid / foot...</td>
 </tr>
 <tr>
-<td><a href="TemporalReference/">TemporalReference</a></td>
+<td><a href="classes/TemporalReference/">TemporalReference</a></td>
 <td>Temporal provenance of an environmental exposure value: native temporal grain...</td>
 </tr>
 <tr>
-<td><a href="TimeInterval/">TimeInterval</a></td>
+<td><a href="classes/TimeInterval/">TimeInterval</a></td>
 <td>A period between two timepoints</td>
 </tr>
 <tr>
-<td><a href="Timepoint/">Timepoint</a></td>
+<td><a href="classes/Timepoint/">Timepoint</a></td>
 <td>A point in time, potentially relative</td>
 </tr>
 <tr>
-<td><a href="ToolRun/">ToolRun</a></td>
+<td><a href="classes/ToolRun/">ToolRun</a></td>
 <td>A single tool invocation that produced an output from one or more inputs: too...</td>
 </tr>
 <tr>
-<td><a href="Uncertainty/">Uncertainty</a></td>
+<td><a href="classes/Uncertainty/">Uncertainty</a></td>
 <td>Uncertainty and quality character of a value series: per-value uncertainty ty...</td>
 </tr>
 <tr>
-<td><a href="ValueMicroschemaDefinition/">ValueMicroschemaDefinition</a></td>
+<td><a href="classes/ValueMicroschemaDefinition/">ValueMicroschemaDefinition</a></td>
 <td>A microschema representing a typed value with optional unit/system</td>
 </tr>
 <tr>
-<td><a href="VariableIdentity/">VariableIdentity</a></td>
+<td><a href="classes/VariableIdentity/">VariableIdentity</a></td>
 <td>The identity and semantics of an environmental exposure variable — what physi...</td>
 </tr>
 </tbody>
@@ -808,847 +808,847 @@ EnVar metadata layer:</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="address_period_alignment/">address_period_alignment</a></td>
+<td><a href="slots/address_period_alignment/">address_period_alignment</a></td>
 <td>How the patient's location-over-time (the spatial axis of trajectory resoluti...</td>
 </tr>
 <tr>
-<td><a href="bias_correction_applied/">bias_correction_applied</a></td>
+<td><a href="slots/bias_correction_applied/">bias_correction_applied</a></td>
 <td>Whether and how bias correction has been applied</td>
 </tr>
 <tr>
-<td><a href="bias_correction_applied_missing_reason/">bias_correction_applied_missing_reason</a></td>
+<td><a href="slots/bias_correction_applied_missing_reason/">bias_correction_applied_missing_reason</a></td>
 <td>Reason <code>bias_correction_applied</code> is null</td>
 </tr>
 <tr>
-<td><a href="calendar/">calendar</a></td>
+<td><a href="slots/calendar/">calendar</a></td>
 <td>CF calendar</td>
 </tr>
 <tr>
-<td><a href="cf_cell_methods/">cf_cell_methods</a></td>
+<td><a href="slots/cf_cell_methods/">cf_cell_methods</a></td>
 <td>CF <code>cell_methods</code> string describing how the value summarises sub-period value...</td>
 </tr>
 <tr>
-<td><a href="chain_compatibility_assertions/">chain_compatibility_assertions</a></td>
+<td><a href="slots/chain_compatibility_assertions/">chain_compatibility_assertions</a></td>
 <td>Declarations that two chain steps are compatible (e</td>
 </tr>
 <tr>
-<td><a href="clinical_date_assignment_convention/">clinical_date_assignment_convention</a></td>
+<td><a href="slots/clinical_date_assignment_convention/">clinical_date_assignment_convention</a></td>
 <td>The clinical-side mirror of <code>day_boundary_convention</code> (envar_temporal): which...</td>
 </tr>
 <tr>
-<td><a href="clinical_date_assignment_convention_missing_reason/">clinical_date_assignment_convention_missing_reason</a></td>
+<td><a href="slots/clinical_date_assignment_convention_missing_reason/">clinical_date_assignment_convention_missing_reason</a></td>
 <td>Reason <code>clinical_date_assignment_convention</code> is null</td>
 </tr>
 <tr>
-<td><a href="code/">code</a></td>
+<td><a href="slots/code/">code</a></td>
 <td>The code value as a CURIE</td>
 </tr>
 <tr>
-<td><a href="code_label/">code_label</a></td>
+<td><a href="slots/code_label/">code_label</a></td>
 <td>Human-readable label for the code</td>
 </tr>
 <tr>
-<td><a href="code_system/">code_system</a></td>
+<td><a href="slots/code_system/">code_system</a></td>
 <td>The code system URI</td>
 </tr>
 <tr>
-<td><a href="cohort_size_anchored/">cohort_size_anchored</a></td>
+<td><a href="slots/cohort_size_anchored/">cohort_size_anchored</a></td>
 <td>Number of distinct persons this exposure record was extracted for</td>
 </tr>
 <tr>
-<td><a href="cohort_size_anchored_missing_reason/">cohort_size_anchored_missing_reason</a></td>
+<td><a href="slots/cohort_size_anchored_missing_reason/">cohort_size_anchored_missing_reason</a></td>
 <td>Reason <code>cohort_size_anchored</code> is null</td>
 </tr>
 <tr>
-<td><a href="comparator/">comparator</a></td>
+<td><a href="slots/comparator/">comparator</a></td>
 <td>Comparison operator (less than, greater than, etc</td>
 </tr>
 <tr>
-<td><a href="concept_mappings/">concept_mappings</a></td>
+<td><a href="slots/concept_mappings/">concept_mappings</a></td>
 <td>Cross-references binding this variable to other vocabularies and ontologies, ...</td>
 </tr>
 <tr>
-<td><a href="concept_status/">concept_status</a></td>
+<td><a href="slots/concept_status/">concept_status</a></td>
 <td>Status of this variable's coverage in the target health-data vocabulary (`exi...</td>
 </tr>
 <tr>
-<td><a href="container_image_digest/">container_image_digest</a></td>
+<td><a href="slots/container_image_digest/">container_image_digest</a></td>
 <td>SHA256 of the container image actually used (not just the tag)</td>
 </tr>
 <tr>
-<td><a href="container_image_digest_missing_reason/">container_image_digest_missing_reason</a></td>
+<td><a href="slots/container_image_digest_missing_reason/">container_image_digest_missing_reason</a></td>
 <td>Reason <code>container_image_digest</code> is null</td>
 </tr>
 <tr>
-<td><a href="container_image_repository/">container_image_repository</a></td>
+<td><a href="slots/container_image_repository/">container_image_repository</a></td>
 <td>Container image repository, e</td>
 </tr>
 <tr>
-<td><a href="container_image_repository_missing_reason/">container_image_repository_missing_reason</a></td>
+<td><a href="slots/container_image_repository_missing_reason/">container_image_repository_missing_reason</a></td>
 <td>Reason <code>container_image_repository</code> is null</td>
 </tr>
 <tr>
-<td><a href="crs/">crs</a></td>
+<td><a href="slots/crs/">crs</a></td>
 <td>Coordinate reference system as an EPSG identifier or PROJ string</td>
 </tr>
 <tr>
-<td><a href="cv_r2/">cv_r2</a></td>
+<td><a href="slots/cv_r2/">cv_r2</a></td>
 <td>Cross-validated R² for the model as a whole</td>
 </tr>
 <tr>
-<td><a href="cv_rmse/">cv_rmse</a></td>
+<td><a href="slots/cv_rmse/">cv_rmse</a></td>
 <td>Cross-validated RMSE for the model as a whole</td>
 </tr>
 <tr>
-<td><a href="data_completeness_pct/">data_completeness_pct</a></td>
+<td><a href="slots/data_completeness_pct/">data_completeness_pct</a></td>
 <td>Percent of (location, date) cells in the extracted window that have a non-mis...</td>
 </tr>
 <tr>
-<td><a href="data_completeness_pct_missing_reason/">data_completeness_pct_missing_reason</a></td>
+<td><a href="slots/data_completeness_pct_missing_reason/">data_completeness_pct_missing_reason</a></td>
 <td>Reason <code>data_completeness_pct</code> is null</td>
 </tr>
 <tr>
-<td><a href="data_layout/">data_layout</a></td>
+<td><a href="slots/data_layout/">data_layout</a></td>
 <td>Data-layout object binding this sidecar to the columns of the companion data ...</td>
 </tr>
 <tr>
-<td><a href="dataset_and_provenance/">dataset_and_provenance</a></td>
+<td><a href="slots/dataset_and_provenance/">dataset_and_provenance</a></td>
 <td>Where the values live and come from — the companion file's column layout, the...</td>
 </tr>
 <tr>
-<td><a href="datetime/">datetime</a></td>
+<td><a href="slots/datetime/">datetime</a></td>
 <td>Absolute timestamp</td>
 </tr>
 <tr>
-<td><a href="day_boundary_convention/">day_boundary_convention</a></td>
+<td><a href="slots/day_boundary_convention/">day_boundary_convention</a></td>
 <td>Where the 24-hour day window starts</td>
 </tr>
 <tr>
-<td><a href="dcat_distribution_url/">dcat_distribution_url</a></td>
+<td><a href="slots/dcat_distribution_url/">dcat_distribution_url</a></td>
 <td>DCAT-compatible distribution URL for catalogue integration</td>
 </tr>
 <tr>
-<td><a href="dcat_distribution_url_missing_reason/">dcat_distribution_url_missing_reason</a></td>
+<td><a href="slots/dcat_distribution_url_missing_reason/">dcat_distribution_url_missing_reason</a></td>
 <td>Reason <code>dcat_distribution_url</code> is null</td>
 </tr>
 <tr>
-<td><a href="deposit_doi/">deposit_doi</a></td>
+<td><a href="slots/deposit_doi/">deposit_doi</a></td>
 <td>DOI assigned by the deposit repository (e</td>
 </tr>
 <tr>
-<td><a href="deposit_doi_missing_reason/">deposit_doi_missing_reason</a></td>
+<td><a href="slots/deposit_doi_missing_reason/">deposit_doi_missing_reason</a></td>
 <td>Reason <code>deposit_doi</code> is null (e</td>
 </tr>
 <tr>
-<td><a href="deposit_license_spdx/">deposit_license_spdx</a></td>
+<td><a href="slots/deposit_license_spdx/">deposit_license_spdx</a></td>
 <td>SPDX identifier of the license under which the <em>derived</em> exposure record (not...</td>
 </tr>
 <tr>
-<td><a href="deposit_metadata/">deposit_metadata</a></td>
+<td><a href="slots/deposit_metadata/">deposit_metadata</a></td>
 <td>FAIR-deposit metadata, present when the sidecar is intended to travel with a ...</td>
 </tr>
 <tr>
-<td><a href="deposit_redistribution_constraints_inherited/">deposit_redistribution_constraints_inherited</a></td>
+<td><a href="slots/deposit_redistribution_constraints_inherited/">deposit_redistribution_constraints_inherited</a></td>
 <td>Constraints from any input source that pass through to the deposit</td>
 </tr>
 <tr>
-<td><a href="deposit_repository/">deposit_repository</a></td>
+<td><a href="slots/deposit_repository/">deposit_repository</a></td>
 <td>Repository hosting the deposit</td>
 </tr>
 <tr>
-<td><a href="deposit_repository_missing_reason/">deposit_repository_missing_reason</a></td>
+<td><a href="slots/deposit_repository_missing_reason/">deposit_repository_missing_reason</a></td>
 <td>Reason <code>deposit_repository</code> is null</td>
 </tr>
 <tr>
-<td><a href="derived_heat_metric/">derived_heat_metric</a></td>
+<td><a href="slots/derived_heat_metric/">derived_heat_metric</a></td>
 <td>Heat-metric methodology, present when the variable is a derived heat metric —...</td>
 </tr>
 <tr>
-<td><a href="domain_of_use/">domain_of_use</a></td>
+<td><a href="slots/domain_of_use/">domain_of_use</a></td>
 <td>Domains where this microschema is applicable</td>
 </tr>
 <tr>
-<td><a href="duration/">duration</a></td>
+<td><a href="slots/duration/">duration</a></td>
 <td>Duration as alternative to start/end</td>
 </tr>
 <tr>
-<td><a href="equation_inputs/">equation_inputs</a></td>
+<td><a href="slots/equation_inputs/">equation_inputs</a></td>
 <td>Typed per-input references for a multi-input derived metric (Heat Index from ...</td>
 </tr>
 <tr>
-<td><a href="equation_validity_range/">equation_validity_range</a></td>
+<td><a href="slots/equation_validity_range/">equation_validity_range</a></td>
 <td>Validity-range conditions for the equation, serialised as a JSON string</td>
 </tr>
 <tr>
-<td><a href="equation_validity_range_missing_reason/">equation_validity_range_missing_reason</a></td>
+<td><a href="slots/equation_validity_range_missing_reason/">equation_validity_range_missing_reason</a></td>
 <td>Reason <code>equation_validity_range</code> is null</td>
 </tr>
 <tr>
-<td><a href="equation_variant/">equation_variant</a></td>
+<td><a href="slots/equation_variant/">equation_variant</a></td>
 <td>For derived heat metrics, the equation variant used</td>
 </tr>
 <tr>
-<td><a href="equation_variant_missing_reason/">equation_variant_missing_reason</a></td>
+<td><a href="slots/equation_variant_missing_reason/">equation_variant_missing_reason</a></td>
 <td>Reason <code>equation_variant</code> is null</td>
 </tr>
 <tr>
-<td><a href="exposure_description/">exposure_description</a></td>
+<td><a href="slots/exposure_description/">exposure_description</a></td>
 <td>What was measured, for whom, where, when, and how — the generic scientific an...</td>
 </tr>
 <tr>
-<td><a href="exposure_model/">exposure_model</a></td>
+<td><a href="slots/exposure_model/">exposure_model</a></td>
 <td>The exposure-model object describing how values were produced</td>
 </tr>
 <tr>
-<td><a href="exposure_model_cross_validation_r2/">exposure_model_cross_validation_r2</a></td>
+<td><a href="slots/exposure_model_cross_validation_r2/">exposure_model_cross_validation_r2</a></td>
 <td>Model cross-validation R², where reported by the producer</td>
 </tr>
 <tr>
-<td><a href="exposure_model_cross_validation_r2_missing_reason/">exposure_model_cross_validation_r2_missing_reason</a></td>
+<td><a href="slots/exposure_model_cross_validation_r2_missing_reason/">exposure_model_cross_validation_r2_missing_reason</a></td>
 <td>Reason <code>exposure_model_cross_validation_r2</code> is null</td>
 </tr>
 <tr>
-<td><a href="exposure_model_ensemble_member_count/">exposure_model_ensemble_member_count</a></td>
+<td><a href="slots/exposure_model_ensemble_member_count/">exposure_model_ensemble_member_count</a></td>
 <td>For ensemble products, the number of members</td>
 </tr>
 <tr>
-<td><a href="exposure_model_ensemble_member_count_missing_reason/">exposure_model_ensemble_member_count_missing_reason</a></td>
+<td><a href="slots/exposure_model_ensemble_member_count_missing_reason/">exposure_model_ensemble_member_count_missing_reason</a></td>
 <td>Reason <code>exposure_model_ensemble_member_count</code> is null</td>
 </tr>
 <tr>
-<td><a href="exposure_model_inputs/">exposure_model_inputs</a></td>
+<td><a href="slots/exposure_model_inputs/">exposure_model_inputs</a></td>
 <td>Inputs to the model</td>
 </tr>
 <tr>
-<td><a href="exposure_model_known_biases/">exposure_model_known_biases</a></td>
+<td><a href="slots/exposure_model_known_biases/">exposure_model_known_biases</a></td>
 <td>Free-text flags of known issues, e</td>
 </tr>
 <tr>
-<td><a href="exposure_model_paper_doi/">exposure_model_paper_doi</a></td>
+<td><a href="slots/exposure_model_paper_doi/">exposure_model_paper_doi</a></td>
 <td>DOI of the methods paper describing the model (Thornton et al</td>
 </tr>
 <tr>
-<td><a href="exposure_model_paper_doi_missing_reason/">exposure_model_paper_doi_missing_reason</a></td>
+<td><a href="slots/exposure_model_paper_doi_missing_reason/">exposure_model_paper_doi_missing_reason</a></td>
 <td>Reason <code>exposure_model_paper_doi</code> is null</td>
 </tr>
 <tr>
-<td><a href="exposure_model_type/">exposure_model_type</a></td>
+<td><a href="slots/exposure_model_type/">exposure_model_type</a></td>
 <td>The class of model that produced the values</td>
 </tr>
 <tr>
-<td><a href="extraction_buffer_m/">extraction_buffer_m</a></td>
+<td><a href="slots/extraction_buffer_m/">extraction_buffer_m</a></td>
 <td>Radius of any spatial buffer applied (e</td>
 </tr>
 <tr>
-<td><a href="extraction_buffer_m_missing_reason/">extraction_buffer_m_missing_reason</a></td>
+<td><a href="slots/extraction_buffer_m_missing_reason/">extraction_buffer_m_missing_reason</a></td>
 <td>Reason <code>extraction_buffer_m</code> is null</td>
 </tr>
 <tr>
-<td><a href="extraction_method/">extraction_method</a></td>
+<td><a href="slots/extraction_method/">extraction_method</a></td>
 <td>How a gridded value was extracted at the patient's coordinates</td>
 </tr>
 <tr>
-<td><a href="extraction_window_end/">extraction_window_end</a></td>
+<td><a href="slots/extraction_window_end/">extraction_window_end</a></td>
 <td>Actual end date the run extracted</td>
 </tr>
 <tr>
-<td><a href="extraction_window_start/">extraction_window_start</a></td>
+<td><a href="slots/extraction_window_start/">extraction_window_start</a></td>
 <td>Actual start date the run extracted</td>
 </tr>
 <tr>
-<td><a href="geocoding_precision_propagated/">geocoding_precision_propagated</a></td>
+<td><a href="slots/geocoding_precision_propagated/">geocoding_precision_propagated</a></td>
 <td>Quality category propagated from the upstream geocoder (DeGAUSS <code>precision</code> c...</td>
 </tr>
 <tr>
-<td><a href="geocoding_score_propagated/">geocoding_score_propagated</a></td>
+<td><a href="slots/geocoding_score_propagated/">geocoding_score_propagated</a></td>
 <td>Geocoder score (0-1) propagated from the upstream geocoder so the exposure re...</td>
 </tr>
 <tr>
-<td><a href="geocoding_score_propagated_missing_reason/">geocoding_score_propagated_missing_reason</a></td>
+<td><a href="slots/geocoding_score_propagated_missing_reason/">geocoding_score_propagated_missing_reason</a></td>
 <td>Reason <code>geocoding_score_propagated</code> is null</td>
 </tr>
 <tr>
-<td><a href="health_data_integration/">health_data_integration</a></td>
+<td><a href="slots/health_data_integration/">health_data_integration</a></td>
 <td>How the record meets patient data and travels onward — the gridded-to-patient...</td>
 </tr>
 <tr>
-<td><a href="health_layer_link_field/">health_layer_link_field</a></td>
+<td><a href="slots/health_layer_link_field/">health_layer_link_field</a></td>
 <td>Name of the field in the target health-data layer that carries `provenance_id...</td>
 </tr>
 <tr>
-<td><a href="health_layer_linkage/">health_layer_linkage</a></td>
+<td><a href="slots/health_layer_linkage/">health_layer_linkage</a></td>
 <td>Downstream health-data-layer linkage hooks (OMOP, BDC, …) — see envar_health_...</td>
 </tr>
 <tr>
-<td><a href="health_layer_target/">health_layer_target</a></td>
+<td><a href="slots/health_layer_target/">health_layer_target</a></td>
 <td>The downstream health-data layer this sidecar links into</td>
 </tr>
 <tr>
-<td><a href="heat_metric_family/">heat_metric_family</a></td>
+<td><a href="slots/heat_metric_family/">heat_metric_family</a></td>
 <td>The family of heat metric this variable represents</td>
 </tr>
 <tr>
-<td><a href="heat_wave_min_consecutive_days/">heat_wave_min_consecutive_days</a></td>
+<td><a href="slots/heat_wave_min_consecutive_days/">heat_wave_min_consecutive_days</a></td>
 <td>Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3)</td>
 </tr>
 <tr>
-<td><a href="heat_wave_min_consecutive_days_missing_reason/">heat_wave_min_consecutive_days_missing_reason</a></td>
+<td><a href="slots/heat_wave_min_consecutive_days_missing_reason/">heat_wave_min_consecutive_days_missing_reason</a></td>
 <td>Reason <code>heat_wave_min_consecutive_days</code> is null</td>
 </tr>
 <tr>
-<td><a href="heat_wave_threshold_definition/">heat_wave_threshold_definition</a></td>
+<td><a href="slots/heat_wave_threshold_definition/">heat_wave_threshold_definition</a></td>
 <td>For heat-wave flags, the definition of the threshold (absolute, percentile-lo...</td>
 </tr>
 <tr>
-<td><a href="heat_wave_threshold_definition_missing_reason/">heat_wave_threshold_definition_missing_reason</a></td>
+<td><a href="slots/heat_wave_threshold_definition_missing_reason/">heat_wave_threshold_definition_missing_reason</a></td>
 <td>Reason <code>heat_wave_threshold_definition</code> is null</td>
 </tr>
 <tr>
-<td><a href="heat_wave_threshold_specifier/">heat_wave_threshold_specifier</a></td>
+<td><a href="slots/heat_wave_threshold_specifier/">heat_wave_threshold_specifier</a></td>
 <td>Free-form specifier paired with <code>heat_wave_threshold_definition</code> to capture t...</td>
 </tr>
 <tr>
-<td><a href="indoor_outdoor/">indoor_outdoor</a></td>
+<td><a href="slots/indoor_outdoor/">indoor_outdoor</a></td>
 <td>Indoor / outdoor regime</td>
 </tr>
 <tr>
-<td><a href="input_file_sha256/">input_file_sha256</a></td>
+<td><a href="slots/input_file_sha256/">input_file_sha256</a></td>
 <td>SHA256 of the input file (CSV / parquet)</td>
 </tr>
 <tr>
-<td><a href="input_provenance_id/">input_provenance_id</a></td>
+<td><a href="slots/input_provenance_id/">input_provenance_id</a></td>
 <td>The <code>provenance_id</code> of the upstream sidecar that fully describes this input —...</td>
 </tr>
 <tr>
-<td><a href="input_role/">input_role</a></td>
+<td><a href="slots/input_role/">input_role</a></td>
 <td>The standard-name local token of this input's physical quantity (the same qua...</td>
 </tr>
 <tr>
-<td><a href="input_row_count/">input_row_count</a></td>
+<td><a href="slots/input_row_count/">input_row_count</a></td>
 <td>Number of rows in the input</td>
 </tr>
 <tr>
-<td><a href="input_source_short_code/">input_source_short_code</a></td>
+<td><a href="slots/input_source_short_code/">input_source_short_code</a></td>
 <td>Human-readable short code of the input's source product (e</td>
 </tr>
 <tr>
-<td><a href="interval_end/">interval_end</a></td>
+<td><a href="slots/interval_end/">interval_end</a></td>
 <td>End of the interval</td>
 </tr>
 <tr>
-<td><a href="interval_start/">interval_start</a></td>
+<td><a href="slots/interval_start/">interval_start</a></td>
 <td>Start of the interval</td>
 </tr>
 <tr>
-<td><a href="lag_alignment_applied/">lag_alignment_applied</a></td>
+<td><a href="slots/lag_alignment_applied/">lag_alignment_applied</a></td>
 <td>Whether and how values were lag-aligned to a clinical event</td>
 </tr>
 <tr>
-<td><a href="lag_alignment_applied_missing_reason/">lag_alignment_applied_missing_reason</a></td>
+<td><a href="slots/lag_alignment_applied_missing_reason/">lag_alignment_applied_missing_reason</a></td>
 <td>Reason <code>lag_alignment_applied</code> is null</td>
 </tr>
 <tr>
-<td><a href="lag_alignment_specifier/">lag_alignment_specifier</a></td>
+<td><a href="slots/lag_alignment_specifier/">lag_alignment_specifier</a></td>
 <td>Free-form specifier paired with <code>lag_alignment_applied</code> to capture the concre...</td>
 </tr>
 <tr>
-<td><a href="linkage_buffer_aggregation_method/">linkage_buffer_aggregation_method</a></td>
+<td><a href="slots/linkage_buffer_aggregation_method/">linkage_buffer_aggregation_method</a></td>
 <td>Aggregation method applied within the buffer (mean / max / median / area-weig...</td>
 </tr>
 <tr>
-<td><a href="linkage_buffer_aggregation_method_missing_reason/">linkage_buffer_aggregation_method_missing_reason</a></td>
+<td><a href="slots/linkage_buffer_aggregation_method_missing_reason/">linkage_buffer_aggregation_method_missing_reason</a></td>
 <td>Reason <code>linkage_buffer_aggregation_method</code> is null</td>
 </tr>
 <tr>
-<td><a href="linkage_buffer_radius_m/">linkage_buffer_radius_m</a></td>
+<td><a href="slots/linkage_buffer_radius_m/">linkage_buffer_radius_m</a></td>
 <td>Buffer radius in metres for buffer-aggregation strategies</td>
 </tr>
 <tr>
-<td><a href="linkage_buffer_radius_m_missing_reason/">linkage_buffer_radius_m_missing_reason</a></td>
+<td><a href="slots/linkage_buffer_radius_m_missing_reason/">linkage_buffer_radius_m_missing_reason</a></td>
 <td>Reason <code>linkage_buffer_radius_m</code> is null</td>
 </tr>
 <tr>
-<td><a href="linkage_max_distance_to_station_m/">linkage_max_distance_to_station_m</a></td>
+<td><a href="slots/linkage_max_distance_to_station_m/">linkage_max_distance_to_station_m</a></td>
 <td>Maximum distance to a station for nearest-station strategies; values beyond t...</td>
 </tr>
 <tr>
-<td><a href="linkage_max_distance_to_station_m_missing_reason/">linkage_max_distance_to_station_m_missing_reason</a></td>
+<td><a href="slots/linkage_max_distance_to_station_m_missing_reason/">linkage_max_distance_to_station_m_missing_reason</a></td>
 <td>Reason <code>linkage_max_distance_to_station_m</code> is null</td>
 </tr>
 <tr>
-<td><a href="linkage_method/">linkage_method</a></td>
+<td><a href="slots/linkage_method/">linkage_method</a></td>
 <td>Linkage-method object — see envar_linkage</td>
 </tr>
 <tr>
-<td><a href="linkage_strategy/">linkage_strategy</a></td>
+<td><a href="slots/linkage_strategy/">linkage_strategy</a></td>
 <td>How a gridded value is attached to a patient location</td>
 </tr>
 <tr>
-<td><a href="location/">location</a></td>
+<td><a href="slots/location/">location</a></td>
 <td>Spatial metadata specifying where the observation was made - geolocation, pla...</td>
 </tr>
 <tr>
-<td><a href="methodology/">methodology</a></td>
+<td><a href="slots/methodology/">methodology</a></td>
 <td>Information about how an observation was made - method, instrument, reagent k...</td>
 </tr>
 <tr>
-<td><a href="metric_temporal_aggregation_rule/">metric_temporal_aggregation_rule</a></td>
+<td><a href="slots/metric_temporal_aggregation_rule/">metric_temporal_aggregation_rule</a></td>
 <td>For heat-wave flags, how multi-day exposures are stamped on individual days (...</td>
 </tr>
 <tr>
-<td><a href="metric_temporal_aggregation_rule_missing_reason/">metric_temporal_aggregation_rule_missing_reason</a></td>
+<td><a href="slots/metric_temporal_aggregation_rule_missing_reason/">metric_temporal_aggregation_rule_missing_reason</a></td>
 <td>Reason <code>metric_temporal_aggregation_rule</code> is null</td>
 </tr>
 <tr>
-<td><a href="missing_data_handling_method/">missing_data_handling_method</a></td>
+<td><a href="slots/missing_data_handling_method/">missing_data_handling_method</a></td>
 <td>How the source handles missing values (e</td>
 </tr>
 <tr>
-<td><a href="missing_data_handling_method_missing_reason/">missing_data_handling_method_missing_reason</a></td>
+<td><a href="slots/missing_data_handling_method_missing_reason/">missing_data_handling_method_missing_reason</a></td>
 <td>Reason <code>missing_data_handling_method</code> is null</td>
 </tr>
 <tr>
-<td><a href="missing_reason/">missing_reason</a></td>
+<td><a href="slots/missing_reason/">missing_reason</a></td>
 <td>Controlled reason a nullable slot is null</td>
 </tr>
 <tr>
-<td><a href="model_aggregate_uncertainty/">model_aggregate_uncertainty</a></td>
+<td><a href="slots/model_aggregate_uncertainty/">model_aggregate_uncertainty</a></td>
 <td>Summary statistics for the model as a whole — cross-validation metrics and wh...</td>
 </tr>
 <tr>
-<td><a href="model_aggregate_uncertainty_missing_reason/">model_aggregate_uncertainty_missing_reason</a></td>
+<td><a href="slots/model_aggregate_uncertainty_missing_reason/">model_aggregate_uncertainty_missing_reason</a></td>
 <td>Reason <code>model_aggregate_uncertainty</code> is null</td>
 </tr>
 <tr>
-<td><a href="native_spatial_resolution_descriptor/">native_spatial_resolution_descriptor</a></td>
+<td><a href="slots/native_spatial_resolution_descriptor/">native_spatial_resolution_descriptor</a></td>
 <td>Human-readable label for the native resolution, e</td>
 </tr>
 <tr>
-<td><a href="native_spatial_resolution_m/">native_spatial_resolution_m</a></td>
+<td><a href="slots/native_spatial_resolution_m/">native_spatial_resolution_m</a></td>
 <td>Native spatial resolution of the source product in metres</td>
 </tr>
 <tr>
-<td><a href="observation_result/">observation_result</a></td>
+<td><a href="slots/observation_result/">observation_result</a></td>
 <td>The outcome of the observation type - answer, value, result, determination</td>
 </tr>
 <tr>
-<td><a href="observation_type/">observation_type</a></td>
+<td><a href="slots/observation_type/">observation_type</a></td>
 <td>Question being asked, measurement being taken, quality being observed</td>
 </tr>
 <tr>
-<td><a href="offset/">offset</a></td>
+<td><a href="slots/offset/">offset</a></td>
 <td>Offset from event (e</td>
 </tr>
 <tr>
-<td><a href="output_file_sha256/">output_file_sha256</a></td>
+<td><a href="slots/output_file_sha256/">output_file_sha256</a></td>
 <td>SHA256 of the output file (CSV / parquet)</td>
 </tr>
 <tr>
-<td><a href="output_row_count/">output_row_count</a></td>
+<td><a href="slots/output_row_count/">output_row_count</a></td>
 <td>Number of rows in the output</td>
 </tr>
 <tr>
-<td><a href="partial_day_attribution_rule/">partial_day_attribution_rule</a></td>
+<td><a href="slots/partial_day_attribution_rule/">partial_day_attribution_rule</a></td>
 <td>How boundary / transition days of the patient's trajectory (trip start / end,...</td>
 </tr>
 <tr>
-<td><a href="partial_day_attribution_rule_missing_reason/">partial_day_attribution_rule_missing_reason</a></td>
+<td><a href="slots/partial_day_attribution_rule_missing_reason/">partial_day_attribution_rule_missing_reason</a></td>
 <td>Reason <code>partial_day_attribution_rule</code> is null</td>
 </tr>
 <tr>
-<td><a href="per_value_uncertainty_type/">per_value_uncertainty_type</a></td>
+<td><a href="slots/per_value_uncertainty_type/">per_value_uncertainty_type</a></td>
 <td>Kind of per-value uncertainty captured in the column named by `DataLayout</td>
 </tr>
 <tr>
-<td><a href="per_value_uncertainty_type_missing_reason/">per_value_uncertainty_type_missing_reason</a></td>
+<td><a href="slots/per_value_uncertainty_type_missing_reason/">per_value_uncertainty_type_missing_reason</a></td>
 <td>Reason <code>per_value_uncertainty_type</code> is null</td>
 </tr>
 <tr>
-<td><a href="per_value_uncertainty_units_ucum/">per_value_uncertainty_units_ucum</a></td>
+<td><a href="slots/per_value_uncertainty_units_ucum/">per_value_uncertainty_units_ucum</a></td>
 <td>Units of the per-value uncertainty in UCUM syntax</td>
 </tr>
 <tr>
-<td><a href="per_value_uncertainty_units_ucum_missing_reason/">per_value_uncertainty_units_ucum_missing_reason</a></td>
+<td><a href="slots/per_value_uncertainty_units_ucum_missing_reason/">per_value_uncertainty_units_ucum_missing_reason</a></td>
 <td>Reason <code>per_value_uncertainty_units_ucum</code> is null</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_geographic_scope/">percentile_reference_geographic_scope</a></td>
+<td><a href="slots/percentile_reference_geographic_scope/">percentile_reference_geographic_scope</a></td>
 <td>Geographic scope over which the reference distribution was computed</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_geographic_scope_missing_reason/">percentile_reference_geographic_scope_missing_reason</a></td>
+<td><a href="slots/percentile_reference_geographic_scope_missing_reason/">percentile_reference_geographic_scope_missing_reason</a></td>
 <td>Reason <code>percentile_reference_geographic_scope</code> is null</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_period_end/">percentile_reference_period_end</a></td>
+<td><a href="slots/percentile_reference_period_end/">percentile_reference_period_end</a></td>
 <td>End of the reference distribution</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_period_end_missing_reason/">percentile_reference_period_end_missing_reason</a></td>
+<td><a href="slots/percentile_reference_period_end_missing_reason/">percentile_reference_period_end_missing_reason</a></td>
 <td>Reason <code>percentile_reference_period_end</code> is null</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_period_start/">percentile_reference_period_start</a></td>
+<td><a href="slots/percentile_reference_period_start/">percentile_reference_period_start</a></td>
 <td>Start of the reference distribution used for percentile-based thresholds</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_period_start_missing_reason/">percentile_reference_period_start_missing_reason</a></td>
+<td><a href="slots/percentile_reference_period_start_missing_reason/">percentile_reference_period_start_missing_reason</a></td>
 <td>Reason <code>percentile_reference_period_start</code> is null</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_seasonal_window/">percentile_reference_seasonal_window</a></td>
+<td><a href="slots/percentile_reference_seasonal_window/">percentile_reference_seasonal_window</a></td>
 <td>Seasonal window over which the reference was computed</td>
 </tr>
 <tr>
-<td><a href="percentile_reference_seasonal_window_missing_reason/">percentile_reference_seasonal_window_missing_reason</a></td>
+<td><a href="slots/percentile_reference_seasonal_window_missing_reason/">percentile_reference_seasonal_window_missing_reason</a></td>
 <td>Reason <code>percentile_reference_seasonal_window</code> is null</td>
 </tr>
 <tr>
-<td><a href="phi_status/">phi_status</a></td>
+<td><a href="slots/phi_status/">phi_status</a></td>
 <td>Whether the sidecar carries any Protected Health Information</td>
 </tr>
 <tr>
-<td><a href="population_weighting_source/">population_weighting_source</a></td>
+<td><a href="slots/population_weighting_source/">population_weighting_source</a></td>
 <td>Census vintage used for population weighting (e</td>
 </tr>
 <tr>
-<td><a href="population_weighting_source_missing_reason/">population_weighting_source_missing_reason</a></td>
+<td><a href="slots/population_weighting_source_missing_reason/">population_weighting_source_missing_reason</a></td>
 <td>Reason <code>population_weighting_source</code> is null</td>
 </tr>
 <tr>
-<td><a href="profile_version/">profile_version</a></td>
+<td><a href="slots/profile_version/">profile_version</a></td>
 <td>Version of microschema profile this conforms to</td>
 </tr>
 <tr>
-<td><a href="provenance_chain/">provenance_chain</a></td>
+<td><a href="slots/provenance_chain/">provenance_chain</a></td>
 <td>Ordered W3C-PROV-style chain of upstream tool runs — see envar_toolrun</td>
 </tr>
 <tr>
-<td><a href="provenance_chain_steps/">provenance_chain_steps</a></td>
+<td><a href="slots/provenance_chain_steps/">provenance_chain_steps</a></td>
 <td>Ordered list of upstream <code>ToolRun</code>s, from oldest to most recent, whose output...</td>
 </tr>
 <tr>
-<td><a href="provenance_chain_terminus_type/">provenance_chain_terminus_type</a></td>
+<td><a href="slots/provenance_chain_terminus_type/">provenance_chain_terminus_type</a></td>
 <td>The kind of root of the chain</td>
 </tr>
 <tr>
-<td><a href="provenance_id/">provenance_id</a></td>
+<td><a href="slots/provenance_id/">provenance_id</a></td>
 <td>Stable identifier for this sidecar / record (ULID recommended)</td>
 </tr>
 <tr>
-<td><a href="quality_flag_column/">quality_flag_column</a></td>
+<td><a href="slots/quality_flag_column/">quality_flag_column</a></td>
 <td>Name of any per-value QA flag column</td>
 </tr>
 <tr>
-<td><a href="quality_flag_column_missing_reason/">quality_flag_column_missing_reason</a></td>
+<td><a href="slots/quality_flag_column_missing_reason/">quality_flag_column_missing_reason</a></td>
 <td>Reason <code>quality_flag_column</code> is null</td>
 </tr>
 <tr>
-<td><a href="quality_flag_vocabulary/">quality_flag_vocabulary</a></td>
+<td><a href="slots/quality_flag_vocabulary/">quality_flag_vocabulary</a></td>
 <td>Reference to the QA flag vocabulary (e</td>
 </tr>
 <tr>
-<td><a href="quality_flag_vocabulary_missing_reason/">quality_flag_vocabulary_missing_reason</a></td>
+<td><a href="slots/quality_flag_vocabulary_missing_reason/">quality_flag_vocabulary_missing_reason</a></td>
 <td>Reason <code>quality_flag_vocabulary</code> is null</td>
 </tr>
 <tr>
-<td><a href="quantity_unit/">quantity_unit</a></td>
+<td><a href="slots/quantity_unit/">quantity_unit</a></td>
 <td>Unit (UCUM, UO, QUDT, etc</td>
 </tr>
 <tr>
-<td><a href="quantity_value/">quantity_value</a></td>
+<td><a href="slots/quantity_value/">quantity_value</a></td>
 <td>The numeric value</td>
 </tr>
 <tr>
-<td><a href="recommended_citation/">recommended_citation</a></td>
+<td><a href="slots/recommended_citation/">recommended_citation</a></td>
 <td>One-line recommended citation derived from the slots above</td>
 </tr>
 <tr>
-<td><a href="record_bookkeeping/">record_bookkeeping</a></td>
+<td><a href="slots/record_bookkeeping/">record_bookkeeping</a></td>
 <td>Sidecar bookkeeping — the schema version the record conforms to, its stable i...</td>
 </tr>
 <tr>
-<td><a href="relative_to_event/">relative_to_event</a></td>
+<td><a href="slots/relative_to_event/">relative_to_event</a></td>
 <td>Event this is relative to</td>
 </tr>
 <tr>
-<td><a href="reported_in/">reported_in</a></td>
+<td><a href="slots/reported_in/">reported_in</a></td>
 <td>DOI / citation where the aggregate uncertainty is reported</td>
 </tr>
 <tr>
-<td><a href="run_arguments/">run_arguments</a></td>
+<td><a href="slots/run_arguments/">run_arguments</a></td>
 <td>The exact argument map passed at invocation, serialised as a JSON string</td>
 </tr>
 <tr>
-<td><a href="run_duration_seconds/">run_duration_seconds</a></td>
+<td><a href="slots/run_duration_seconds/">run_duration_seconds</a></td>
 <td>How long the run took, in seconds</td>
 </tr>
 <tr>
-<td><a href="run_environment/">run_environment</a></td>
+<td><a href="slots/run_environment/">run_environment</a></td>
 <td>Host OS, Docker / podman version, R / Python version, key library versions, a...</td>
 </tr>
 <tr>
-<td><a href="run_log_excerpt/">run_log_excerpt</a></td>
+<td><a href="slots/run_log_excerpt/">run_log_excerpt</a></td>
 <td>Last ~50 lines of the run log, where useful for debugging or audit</td>
 </tr>
 <tr>
-<td><a href="run_log_excerpt_missing_reason/">run_log_excerpt_missing_reason</a></td>
+<td><a href="slots/run_log_excerpt_missing_reason/">run_log_excerpt_missing_reason</a></td>
 <td>Reason <code>run_log_excerpt</code> is null</td>
 </tr>
 <tr>
-<td><a href="run_timestamp_utc/">run_timestamp_utc</a></td>
+<td><a href="slots/run_timestamp_utc/">run_timestamp_utc</a></td>
 <td>When the run started (UTC)</td>
 </tr>
 <tr>
-<td><a href="schema_version/">schema_version</a></td>
+<td><a href="slots/schema_version/">schema_version</a></td>
 <td>The version of the EnVar micro-schema this document conforms to</td>
 </tr>
 <tr>
-<td><a href="solar_radiation_basis/">solar_radiation_basis</a></td>
+<td><a href="slots/solar_radiation_basis/">solar_radiation_basis</a></td>
 <td>For WBGT / UTCI inputs, the basis used for solar radiation</td>
 </tr>
 <tr>
-<td><a href="solar_radiation_basis_missing_reason/">solar_radiation_basis_missing_reason</a></td>
+<td><a href="slots/solar_radiation_basis_missing_reason/">solar_radiation_basis_missing_reason</a></td>
 <td>Reason <code>solar_radiation_basis</code> is null</td>
 </tr>
 <tr>
-<td><a href="source_access_url/">source_access_url</a></td>
+<td><a href="slots/source_access_url/">source_access_url</a></td>
 <td>Landing-page URL for the dataset (not a download link, which rots)</td>
 </tr>
 <tr>
-<td><a href="source_acdd_attributes/">source_acdd_attributes</a></td>
+<td><a href="slots/source_acdd_attributes/">source_acdd_attributes</a></td>
 <td>Passthrough of ACDD (Attribute Convention for Data Discovery) global attribut...</td>
 </tr>
 <tr>
-<td><a href="source_acdd_attributes_missing_reason/">source_acdd_attributes_missing_reason</a></td>
+<td><a href="slots/source_acdd_attributes_missing_reason/">source_acdd_attributes_missing_reason</a></td>
 <td>Reason <code>source_acdd_attributes</code> is null</td>
 </tr>
 <tr>
-<td><a href="source_citation_apa/">source_citation_apa</a></td>
+<td><a href="slots/source_citation_apa/">source_citation_apa</a></td>
 <td>Full APA-style citation for the source dataset</td>
 </tr>
 <tr>
-<td><a href="source_citation_bibtex/">source_citation_bibtex</a></td>
+<td><a href="slots/source_citation_bibtex/">source_citation_bibtex</a></td>
 <td>BibTeX entry for the source dataset, machine-parseable</td>
 </tr>
 <tr>
-<td><a href="source_citation_bibtex_missing_reason/">source_citation_bibtex_missing_reason</a></td>
+<td><a href="slots/source_citation_bibtex_missing_reason/">source_citation_bibtex_missing_reason</a></td>
 <td>Reason <code>source_citation_bibtex</code> is null</td>
 </tr>
 <tr>
-<td><a href="source_dataset/">source_dataset</a></td>
+<td><a href="slots/source_dataset/">source_dataset</a></td>
 <td>Source dataset object — see envar_source</td>
 </tr>
 <tr>
-<td><a href="source_dataset_doi/">source_dataset_doi</a></td>
+<td><a href="slots/source_dataset_doi/">source_dataset_doi</a></td>
 <td>DOI of the source dataset</td>
 </tr>
 <tr>
-<td><a href="source_dataset_doi_missing_reason/">source_dataset_doi_missing_reason</a></td>
+<td><a href="slots/source_dataset_doi_missing_reason/">source_dataset_doi_missing_reason</a></td>
 <td>Reason <code>source_dataset_doi</code> is null</td>
 </tr>
 <tr>
-<td><a href="source_dataset_name/">source_dataset_name</a></td>
+<td><a href="slots/source_dataset_name/">source_dataset_name</a></td>
 <td>Full name of the source product, e</td>
 </tr>
 <tr>
-<td><a href="source_dataset_short_code/">source_dataset_short_code</a></td>
+<td><a href="slots/source_dataset_short_code/">source_dataset_short_code</a></td>
 <td>Short code keying into the EnVar source registry, e</td>
 </tr>
 <tr>
-<td><a href="source_dataset_spatial_extent/">source_dataset_spatial_extent</a></td>
+<td><a href="slots/source_dataset_spatial_extent/">source_dataset_spatial_extent</a></td>
 <td>Human-readable spatial extent of the product, e</td>
 </tr>
 <tr>
-<td><a href="source_dataset_temporal_coverage/">source_dataset_temporal_coverage</a></td>
+<td><a href="slots/source_dataset_temporal_coverage/">source_dataset_temporal_coverage</a></td>
 <td>Source product temporal coverage as an ISO 8601 interval string `<start>/&lt;end...</td>
 </tr>
 <tr>
-<td><a href="source_dataset_version/">source_dataset_version</a></td>
+<td><a href="slots/source_dataset_version/">source_dataset_version</a></td>
 <td>Source product version</td>
 </tr>
 <tr>
-<td><a href="source_homogenisation_status/">source_homogenisation_status</a></td>
+<td><a href="slots/source_homogenisation_status/">source_homogenisation_status</a></td>
 <td>For station-based products, whether values have been homogenised</td>
 </tr>
 <tr>
-<td><a href="source_homogenisation_status_missing_reason/">source_homogenisation_status_missing_reason</a></td>
+<td><a href="slots/source_homogenisation_status_missing_reason/">source_homogenisation_status_missing_reason</a></td>
 <td>Reason <code>source_homogenisation_status</code> is null</td>
 </tr>
 <tr>
-<td><a href="source_license_spdx/">source_license_spdx</a></td>
+<td><a href="slots/source_license_spdx/">source_license_spdx</a></td>
 <td>SPDX identifier of the source license, e</td>
 </tr>
 <tr>
-<td><a href="source_native_format/">source_native_format</a></td>
+<td><a href="slots/source_native_format/">source_native_format</a></td>
 <td>Format the source ships in</td>
 </tr>
 <tr>
-<td><a href="source_producer_institution/">source_producer_institution</a></td>
+<td><a href="slots/source_producer_institution/">source_producer_institution</a></td>
 <td>Producer institution, e</td>
 </tr>
 <tr>
-<td><a href="spatial_extent_bbox/">spatial_extent_bbox</a></td>
+<td><a href="slots/spatial_extent_bbox/">spatial_extent_bbox</a></td>
 <td>Bounding box of the source <em>product</em> (not the extracted subset), as `[min_lon...</td>
 </tr>
 <tr>
-<td><a href="spatial_extent_descriptor/">spatial_extent_descriptor</a></td>
+<td><a href="slots/spatial_extent_descriptor/">spatial_extent_descriptor</a></td>
 <td>Human-readable description of the product extent, e</td>
 </tr>
 <tr>
-<td><a href="spatial_reference/">spatial_reference</a></td>
+<td><a href="slots/spatial_reference/">spatial_reference</a></td>
 <td>Spatial reference object describing the native grid and extraction</td>
 </tr>
 <tr>
-<td><a href="standard_name/">standard_name</a></td>
+<td><a href="slots/standard_name/">standard_name</a></td>
 <td>The standard-name identifier for the physical quantity, as a CURIE so the sch...</td>
 </tr>
 <tr>
-<td><a href="subject/">subject</a></td>
+<td><a href="slots/subject/">subject</a></td>
 <td>Entity being measured, observed, or interviewed - person, animal, specimen, o...</td>
 </tr>
 <tr>
-<td><a href="subject_age/">subject_age</a></td>
+<td><a href="slots/subject_age/">subject_age</a></td>
 <td>Age of the subject at this timepoint (e</td>
 </tr>
 <tr>
-<td><a href="subject_column/">subject_column</a></td>
+<td><a href="slots/subject_column/">subject_column</a></td>
 <td>Name of the column carrying the opaque subject / cohort identifier the record...</td>
 </tr>
 <tr>
-<td><a href="table_orientation/">table_orientation</a></td>
+<td><a href="slots/table_orientation/">table_orientation</a></td>
 <td>Whether the companion file is wide (one column per variable) or long (one `va...</td>
 </tr>
 <tr>
-<td><a href="target_concept_id/">target_concept_id</a></td>
+<td><a href="slots/target_concept_id/">target_concept_id</a></td>
 <td>Concept identifier for the variable in the vocabulary named by `target_concep...</td>
 </tr>
 <tr>
-<td><a href="target_concept_id_missing_reason/">target_concept_id_missing_reason</a></td>
+<td><a href="slots/target_concept_id_missing_reason/">target_concept_id_missing_reason</a></td>
 <td>Reason <code>target_concept_id</code> is null</td>
 </tr>
 <tr>
-<td><a href="target_concept_vocabulary/">target_concept_vocabulary</a></td>
+<td><a href="slots/target_concept_vocabulary/">target_concept_vocabulary</a></td>
 <td>The downstream health-data vocabulary that <code>target_concept_id</code> and `concept_s...</td>
 </tr>
 <tr>
-<td><a href="target_geography_type/">target_geography_type</a></td>
+<td><a href="slots/target_geography_type/">target_geography_type</a></td>
 <td>Geographic unit the exposure value is attached to</td>
 </tr>
 <tr>
-<td><a href="temporal_aggregation_method/">temporal_aggregation_method</a></td>
+<td><a href="slots/temporal_aggregation_method/">temporal_aggregation_method</a></td>
 <td>How the value summarises sub-period values</td>
 </tr>
 <tr>
-<td><a href="temporal_aggregation_window_seconds/">temporal_aggregation_window_seconds</a></td>
+<td><a href="slots/temporal_aggregation_window_seconds/">temporal_aggregation_window_seconds</a></td>
 <td>Redundant with <code>temporal_resolution</code> but explicit for machine use; e</td>
 </tr>
 <tr>
-<td><a href="temporal_coverage_end/">temporal_coverage_end</a></td>
+<td><a href="slots/temporal_coverage_end/">temporal_coverage_end</a></td>
 <td>End of the source product's coverage</td>
 </tr>
 <tr>
-<td><a href="temporal_coverage_start/">temporal_coverage_start</a></td>
+<td><a href="slots/temporal_coverage_start/">temporal_coverage_start</a></td>
 <td>Start of the source product's full temporal coverage</td>
 </tr>
 <tr>
-<td><a href="temporal_reference/">temporal_reference</a></td>
+<td><a href="slots/temporal_reference/">temporal_reference</a></td>
 <td>Temporal reference object describing resolution, aggregation, and day-boundar...</td>
 </tr>
 <tr>
-<td><a href="temporal_resolution/">temporal_resolution</a></td>
+<td><a href="slots/temporal_resolution/">temporal_resolution</a></td>
 <td>Native temporal grain of the values</td>
 </tr>
 <tr>
-<td><a href="temporality/">temporality</a></td>
+<td><a href="slots/temporality/">temporality</a></td>
 <td>Temporal metadata specifying when an observation was made</td>
 </tr>
 <tr>
-<td><a href="time_column/">time_column</a></td>
+<td><a href="slots/time_column/">time_column</a></td>
 <td>Name of the column carrying the observation date / timestamp (e</td>
 </tr>
 <tr>
-<td><a href="tool_description/">tool_description</a></td>
+<td><a href="slots/tool_description/">tool_description</a></td>
 <td>One-line tool description (from the tool's <code>dht</code> env var or equivalent)</td>
 </tr>
 <tr>
-<td><a href="tool_name/">tool_name</a></td>
+<td><a href="slots/tool_name/">tool_name</a></td>
 <td>Tool name, e</td>
 </tr>
 <tr>
-<td><a href="tool_run/">tool_run</a></td>
+<td><a href="slots/tool_run/">tool_run</a></td>
 <td>The current ToolRun — see envar_toolrun</td>
 </tr>
 <tr>
-<td><a href="tool_version/">tool_version</a></td>
+<td><a href="slots/tool_version/">tool_version</a></td>
 <td>Semver tool version</td>
 </tr>
 <tr>
-<td><a href="uncertainty/">uncertainty</a></td>
+<td><a href="slots/uncertainty/">uncertainty</a></td>
 <td>Uncertainty object — see envar_uncertainty</td>
 </tr>
 <tr>
-<td><a href="units_display/">units_display</a></td>
+<td><a href="slots/units_display/">units_display</a></td>
 <td>Human-readable unit string for display purposes, e</td>
 </tr>
 <tr>
-<td><a href="units_ucum/">units_ucum</a></td>
+<td><a href="slots/units_ucum/">units_ucum</a></td>
 <td>The unit expressed in UCUM syntax, e</td>
 </tr>
 <tr>
-<td><a href="value_column/">value_column</a></td>
+<td><a href="slots/value_column/">value_column</a></td>
 <td>Name of the column carrying this record's exposure values, e</td>
 </tr>
 <tr>
-<td><a href="value_data_type/">value_data_type</a></td>
+<td><a href="slots/value_data_type/">value_data_type</a></td>
 <td>The data type of the stored exposure value</td>
 </tr>
 <tr>
-<td><a href="value_range_plausible_max/">value_range_plausible_max</a></td>
+<td><a href="slots/value_range_plausible_max/">value_range_plausible_max</a></td>
 <td>Physical / domain upper bound for plausible values (e</td>
 </tr>
 <tr>
-<td><a href="value_range_plausible_min/">value_range_plausible_min</a></td>
+<td><a href="slots/value_range_plausible_min/">value_range_plausible_min</a></td>
 <td>Physical / domain lower bound for plausible values (e</td>
 </tr>
 <tr>
-<td><a href="value_uncertainty_column/">value_uncertainty_column</a></td>
+<td><a href="slots/value_uncertainty_column/">value_uncertainty_column</a></td>
 <td>Name of the column carrying per-value uncertainty (e</td>
 </tr>
 <tr>
-<td><a href="value_uncertainty_column_missing_reason/">value_uncertainty_column_missing_reason</a></td>
+<td><a href="slots/value_uncertainty_column_missing_reason/">value_uncertainty_column_missing_reason</a></td>
 <td>Reason <code>value_uncertainty_column</code> is null</td>
 </tr>
 <tr>
-<td><a href="variable_column/">variable_column</a></td>
+<td><a href="slots/variable_column/">variable_column</a></td>
 <td>For long orientation: name of the column that discriminates variables (e</td>
 </tr>
 <tr>
-<td><a href="variable_identity/">variable_identity</a></td>
+<td><a href="slots/variable_identity/">variable_identity</a></td>
 <td>The variable identity object — what physical quantity is being captured</td>
 </tr>
 <tr>
-<td><a href="variable_key/">variable_key</a></td>
+<td><a href="slots/variable_key/">variable_key</a></td>
 <td>For long orientation: the value in <code>variable_column</code> that selects this record...</td>
 </tr>
 <tr>
-<td><a href="variable_label/">variable_label</a></td>
+<td><a href="slots/variable_label/">variable_label</a></td>
 <td>Human-readable label, e</td>
 </tr>
 <tr>
-<td><a href="variable_name/">variable_name</a></td>
+<td><a href="slots/variable_name/">variable_name</a></td>
 <td>Short machine-readable name for the variable, usually the name the upstream t...</td>
 </tr>
 <tr>
-<td><a href="variable_specific_extensions/">variable_specific_extensions</a></td>
+<td><a href="slots/variable_specific_extensions/">variable_specific_extensions</a></td>
 <td>Methodology blocks that only apply to particular variable families — present ...</td>
 </tr>
 <tr>
-<td><a href="wind_speed_measurement_height_m/">wind_speed_measurement_height_m</a></td>
+<td><a href="slots/wind_speed_measurement_height_m/">wind_speed_measurement_height_m</a></td>
 <td>For WBGT and UTCI inputs, the wind-speed measurement height in metres</td>
 </tr>
 <tr>
-<td><a href="wind_speed_measurement_height_m_missing_reason/">wind_speed_measurement_height_m_missing_reason</a></td>
+<td><a href="slots/wind_speed_measurement_height_m_missing_reason/">wind_speed_measurement_height_m_missing_reason</a></td>
 <td>Reason <code>wind_speed_measurement_height_m</code> is null</td>
 </tr>
 </tbody>
@@ -1663,135 +1663,135 @@ EnVar metadata layer:</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="AddressPeriodAlignmentEnum/">AddressPeriodAlignmentEnum</a></td>
+<td><a href="enums/AddressPeriodAlignmentEnum/">AddressPeriodAlignmentEnum</a></td>
 <td>How the patient's location-over-time (the spatial axis of trajectory resoluti...</td>
 </tr>
 <tr>
-<td><a href="BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a></td>
+<td><a href="enums/BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a></td>
 <td>Whether and how bias correction has been applied</td>
 </tr>
 <tr>
-<td><a href="BufferAggregationEnum/">BufferAggregationEnum</a></td>
+<td><a href="enums/BufferAggregationEnum/">BufferAggregationEnum</a></td>
 <td>Aggregation within a buffer</td>
 </tr>
 <tr>
-<td><a href="CalendarEnum/">CalendarEnum</a></td>
+<td><a href="enums/CalendarEnum/">CalendarEnum</a></td>
 <td>CF <code>calendar</code> values</td>
 </tr>
 <tr>
-<td><a href="ClinicalDateAssignmentEnum/">ClinicalDateAssignmentEnum</a></td>
+<td><a href="enums/ClinicalDateAssignmentEnum/">ClinicalDateAssignmentEnum</a></td>
 <td>The clinical-side mirror of <code>DayBoundaryConventionEnum</code> (envar_temporal): whi...</td>
 </tr>
 <tr>
-<td><a href="ComparatorEnum/">ComparatorEnum</a></td>
+<td><a href="enums/ComparatorEnum/">ComparatorEnum</a></td>
 <td>Comparator for quantity values</td>
 </tr>
 <tr>
-<td><a href="ConceptStatusEnum/">ConceptStatusEnum</a></td>
+<td><a href="enums/ConceptStatusEnum/">ConceptStatusEnum</a></td>
 <td>Status of a variable's representation in the target health-data vocabulary na...</td>
 </tr>
 <tr>
-<td><a href="DataTypeEnum/">DataTypeEnum</a></td>
+<td><a href="enums/DataTypeEnum/">DataTypeEnum</a></td>
 <td>The data type of an exposure value</td>
 </tr>
 <tr>
-<td><a href="DayBoundaryConventionEnum/">DayBoundaryConventionEnum</a></td>
+<td><a href="enums/DayBoundaryConventionEnum/">DayBoundaryConventionEnum</a></td>
 <td>Where the 24-hour day window starts</td>
 </tr>
 <tr>
-<td><a href="DepositRepositoryEnum/">DepositRepositoryEnum</a></td>
+<td><a href="enums/DepositRepositoryEnum/">DepositRepositoryEnum</a></td>
 <td>Repository hosting a FAIR deposit</td>
 </tr>
 <tr>
-<td><a href="EquationVariantEnum/">EquationVariantEnum</a></td>
+<td><a href="enums/EquationVariantEnum/">EquationVariantEnum</a></td>
 <td>Equation variant for a derived heat metric</td>
 </tr>
 <tr>
-<td><a href="ExposureModelTypeEnum/">ExposureModelTypeEnum</a></td>
+<td><a href="enums/ExposureModelTypeEnum/">ExposureModelTypeEnum</a></td>
 <td>The class of model that produced the values</td>
 </tr>
 <tr>
-<td><a href="ExtractionMethodEnum/">ExtractionMethodEnum</a></td>
+<td><a href="enums/ExtractionMethodEnum/">ExtractionMethodEnum</a></td>
 <td>How a gridded value was extracted at a target location</td>
 </tr>
 <tr>
-<td><a href="GeocodingPrecisionEnum/">GeocodingPrecisionEnum</a></td>
+<td><a href="enums/GeocodingPrecisionEnum/">GeocodingPrecisionEnum</a></td>
 <td>Geocoder precision category, mirroring DeGAUSS `geocoder</td>
 </tr>
 <tr>
-<td><a href="HealthLayerTargetEnum/">HealthLayerTargetEnum</a></td>
+<td><a href="enums/HealthLayerTargetEnum/">HealthLayerTargetEnum</a></td>
 <td>The downstream health-data layer a sidecar links into</td>
 </tr>
 <tr>
-<td><a href="HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a></td>
+<td><a href="enums/HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a></td>
 <td>Family of heat metric</td>
 </tr>
 <tr>
-<td><a href="HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a></td>
+<td><a href="enums/HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a></td>
 <td>How the heat-wave threshold is defined</td>
 </tr>
 <tr>
-<td><a href="HomogenisationStatusEnum/">HomogenisationStatusEnum</a></td>
+<td><a href="enums/HomogenisationStatusEnum/">HomogenisationStatusEnum</a></td>
 <td>For station-based products, the homogenisation status of values across the re...</td>
 </tr>
 <tr>
-<td><a href="IndoorOutdoorEnum/">IndoorOutdoorEnum</a></td>
+<td><a href="enums/IndoorOutdoorEnum/">IndoorOutdoorEnum</a></td>
 <td>Indoor / outdoor regime for derived heat metrics</td>
 </tr>
 <tr>
-<td><a href="LagAlignmentEnum/">LagAlignmentEnum</a></td>
+<td><a href="enums/LagAlignmentEnum/">LagAlignmentEnum</a></td>
 <td>Whether the values have been pre-aligned to a clinical event window in this E...</td>
 </tr>
 <tr>
-<td><a href="LinkageStrategyEnum/">LinkageStrategyEnum</a></td>
+<td><a href="enums/LinkageStrategyEnum/">LinkageStrategyEnum</a></td>
 <td>How a gridded value is attached to a patient location</td>
 </tr>
 <tr>
-<td><a href="MissingDataHandlingEnum/">MissingDataHandlingEnum</a></td>
+<td><a href="enums/MissingDataHandlingEnum/">MissingDataHandlingEnum</a></td>
 <td>How the source handles missing values</td>
 </tr>
 <tr>
-<td><a href="MissingReasonEnum/">MissingReasonEnum</a></td>
+<td><a href="enums/MissingReasonEnum/">MissingReasonEnum</a></td>
 <td>Controlled reasons that a slot value is missing</td>
 </tr>
 <tr>
-<td><a href="PartialDayAttributionEnum/">PartialDayAttributionEnum</a></td>
+<td><a href="enums/PartialDayAttributionEnum/">PartialDayAttributionEnum</a></td>
 <td>How boundary / transition days of the patient's trajectory (trip start / end,...</td>
 </tr>
 <tr>
-<td><a href="PhiStatusEnum/">PhiStatusEnum</a></td>
+<td><a href="enums/PhiStatusEnum/">PhiStatusEnum</a></td>
 <td>PHI content of the sidecar</td>
 </tr>
 <tr>
-<td><a href="ProvenanceChainTerminusEnum/">ProvenanceChainTerminusEnum</a></td>
+<td><a href="enums/ProvenanceChainTerminusEnum/">ProvenanceChainTerminusEnum</a></td>
 <td>The kind of root of a provenance chain</td>
 </tr>
 <tr>
-<td><a href="SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a></td>
+<td><a href="enums/SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a></td>
 <td>Basis used for the solar-radiation input to a heat metric</td>
 </tr>
 <tr>
-<td><a href="SourceNativeFormatEnum/">SourceNativeFormatEnum</a></td>
+<td><a href="enums/SourceNativeFormatEnum/">SourceNativeFormatEnum</a></td>
 <td>Format the source ships in</td>
 </tr>
 <tr>
-<td><a href="TableOrientationEnum/">TableOrientationEnum</a></td>
+<td><a href="enums/TableOrientationEnum/">TableOrientationEnum</a></td>
 <td>How variables map onto columns in the companion data file</td>
 </tr>
 <tr>
-<td><a href="TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a></td>
+<td><a href="enums/TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a></td>
 <td>Geographic unit the exposure is attached to</td>
 </tr>
 <tr>
-<td><a href="TemporalAggregationMethodEnum/">TemporalAggregationMethodEnum</a></td>
+<td><a href="enums/TemporalAggregationMethodEnum/">TemporalAggregationMethodEnum</a></td>
 <td>How sub-period values were aggregated</td>
 </tr>
 <tr>
-<td><a href="TemporalResolutionEnum/">TemporalResolutionEnum</a></td>
+<td><a href="enums/TemporalResolutionEnum/">TemporalResolutionEnum</a></td>
 <td>Native temporal grain of the source product</td>
 </tr>
 <tr>
-<td><a href="UncertaintyTypeEnum/">UncertaintyTypeEnum</a></td>
+<td><a href="enums/UncertaintyTypeEnum/">UncertaintyTypeEnum</a></td>
 <td>Kind of per-value uncertainty</td>
 </tr>
 </tbody>
@@ -1806,79 +1806,79 @@ EnVar metadata layer:</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="Boolean/">Boolean</a></td>
+<td><a href="types/Boolean/">Boolean</a></td>
 <td>A binary (true or false) value</td>
 </tr>
 <tr>
-<td><a href="Curie/">Curie</a></td>
+<td><a href="types/Curie/">Curie</a></td>
 <td>a compact URI</td>
 </tr>
 <tr>
-<td><a href="Date/">Date</a></td>
+<td><a href="types/Date/">Date</a></td>
 <td>a date (year, month and day) in an idealized calendar</td>
 </tr>
 <tr>
-<td><a href="DateOrDatetime/">DateOrDatetime</a></td>
+<td><a href="types/DateOrDatetime/">DateOrDatetime</a></td>
 <td>Either a date or a datetime</td>
 </tr>
 <tr>
-<td><a href="Datetime/">Datetime</a></td>
+<td><a href="types/Datetime/">Datetime</a></td>
 <td>The combination of a date and time</td>
 </tr>
 <tr>
-<td><a href="Decimal/">Decimal</a></td>
+<td><a href="types/Decimal/">Decimal</a></td>
 <td>A real number with arbitrary precision that conforms to the xsd:decimal speci...</td>
 </tr>
 <tr>
-<td><a href="Double/">Double</a></td>
+<td><a href="types/Double/">Double</a></td>
 <td>A real number that conforms to the xsd:double specification</td>
 </tr>
 <tr>
-<td><a href="Float/">Float</a></td>
+<td><a href="types/Float/">Float</a></td>
 <td>A real number that conforms to the xsd:float specification</td>
 </tr>
 <tr>
-<td><a href="Integer/">Integer</a></td>
+<td><a href="types/Integer/">Integer</a></td>
 <td>An integer</td>
 </tr>
 <tr>
-<td><a href="Jsonpath/">Jsonpath</a></td>
+<td><a href="types/Jsonpath/">Jsonpath</a></td>
 <td>A string encoding a JSON Path</td>
 </tr>
 <tr>
-<td><a href="Jsonpointer/">Jsonpointer</a></td>
+<td><a href="types/Jsonpointer/">Jsonpointer</a></td>
 <td>A string encoding a JSON Pointer</td>
 </tr>
 <tr>
-<td><a href="Ncname/">Ncname</a></td>
+<td><a href="types/Ncname/">Ncname</a></td>
 <td>Prefix part of CURIE</td>
 </tr>
 <tr>
-<td><a href="Nodeidentifier/">Nodeidentifier</a></td>
+<td><a href="types/Nodeidentifier/">Nodeidentifier</a></td>
 <td>A URI, CURIE or BNODE that represents a node in a model</td>
 </tr>
 <tr>
-<td><a href="Objectidentifier/">Objectidentifier</a></td>
+<td><a href="types/Objectidentifier/">Objectidentifier</a></td>
 <td>A URI or CURIE that represents an object in the model</td>
 </tr>
 <tr>
-<td><a href="Sparqlpath/">Sparqlpath</a></td>
+<td><a href="types/Sparqlpath/">Sparqlpath</a></td>
 <td>A string encoding a SPARQL Property Path</td>
 </tr>
 <tr>
-<td><a href="String/">String</a></td>
+<td><a href="types/String/">String</a></td>
 <td>A character string</td>
 </tr>
 <tr>
-<td><a href="Time/">Time</a></td>
+<td><a href="types/Time/">Time</a></td>
 <td>A time object represents a (local) time of day, independent of any particular...</td>
 </tr>
 <tr>
-<td><a href="Uri/">Uri</a></td>
+<td><a href="types/Uri/">Uri</a></td>
 <td>a complete URI</td>
 </tr>
 <tr>
-<td><a href="Uriorcurie/">Uriorcurie</a></td>
+<td><a href="types/Uriorcurie/">Uriorcurie</a></td>
 <td>a URI or a CURIE</td>
 </tr>
 </tbody>

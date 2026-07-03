@@ -17,7 +17,13 @@ LINKML_SCHEMA_SOURCE_DIR="src/linkml_microschemas_envar/schema"
 LINKML_GENERATORS_CONFIG_YAML=config.yaml
 
 ## pass args if gendoc ignores config.yaml (i.e. --no-mergeimports)
-LINKML_GENERATORS_DOC_ARGS=
+## --subfolder-type-separation keeps class pages (Uncertainty.md) and slot
+## pages (uncertainty.md) in separate folders so they cannot collide on
+## case-insensitive filesystems (macOS/Windows local previews)
+## --template-directory points gen-doc at the customized slot page template
+## (docs/templates-linkml/slot.md.jinja2), which surfaces the tier /
+## justification / explanation annotations as proper sections
+LINKML_GENERATORS_DOC_ARGS="--subfolder-type-separation --template-directory docs/templates-linkml"
 
 ## pass args to workaround genowl rdfs config bug (linkml#1453)
 ##   (i.e. --no-type-objects --no-metaclasses --metadata-profile=rdfs)

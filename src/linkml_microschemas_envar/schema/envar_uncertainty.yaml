@@ -83,6 +83,9 @@ classes:
         title: Cross-Validated RMSE
         range: float
         description: Cross-validated RMSE for the model as a whole.
+        examples:
+        - value: "1.89"
+          description: Di et al. ensemble PM2.5, in µg/m³ (same model as the cv_r2 example)
         annotations:
           justification: >-
             R² alone hides how large the errors actually are. RMSE states

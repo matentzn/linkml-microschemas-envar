@@ -100,7 +100,7 @@ update: _update-template _update-linkml
 [group('project management')]
 clean: _wsl2_compat_check _clean_project
   rm -rf tmp
-  rm -rf {{docdir}}/*.md
+  rm -rf {{docdir}}/*
 
 # (Re-)Generate project and documentation locally
 # (render-schema-overview lives in project.justfile; it regenerates
@@ -224,7 +224,6 @@ _test-python: gen-python
 # Run example tests
 _test-examples: _ensure_examples_output
   uv run linkml-run-examples \
-    --input-formats json \
     --input-formats yaml \
     --output-formats json \
     --output-formats yaml \

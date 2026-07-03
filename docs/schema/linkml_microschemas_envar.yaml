@@ -9464,6 +9464,10 @@ classes:
               better.
         description: Cross-validated RMSE for the model as a whole.
         title: Cross-Validated RMSE
+        examples:
+        - value: '1.89'
+          description: Di et al. ensemble PM2.5, in µg/m³ (same model as the cv_r2
+            example)
         from_schema: https://w3id.org/linkml/microschemas/envar/uncertainty
         owner: ModelAggregateUncertainty
         domain_of:

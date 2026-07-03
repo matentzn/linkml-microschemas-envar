@@ -28,6 +28,7 @@ One exposure record composes a graph of typed objects, one module per concern. A
 |---|---|---|
 | `EnvironmentalExposureRecord` | Top composite; identity + links to the value(s) | one per (variable, run) |
 | `VariableIdentity` | What physical quantity, in what units, bound to which vocabularies | one per record |
+| `DataLayout` | Column bindings from the sidecar into the companion data file (value / subject / time / uncertainty / QA columns) plus wide-vs-long orientation | one per record |
 | `SpatialReference` | Native grid, CRS, extent, extraction footprint | one per record |
 | `TemporalReference` | Resolution, aggregation, day-boundary convention, coverage | one per record |
 | `SourceDataset` | The upstream product the values originate from | one per record |
@@ -65,7 +66,7 @@ Columns: **Element** · **Tier** · **Type / vocabulary** · **Definition & why 
 
 | Element | Tier | Type / vocab | Definition & why it matters | Ref |
 |---|---|---|---|---|
-| `variable_name` | Core | string | The literal column name the tool emitted (`tmax`, `tmmx`). Without it you cannot find the value in the data file. | tool |
+| `variable_name` | Core | string | The short machine name of the variable as the upstream tool emitted it (`tmax`, `tmmx`). Pure identity — locating the values in the data file is `DataLayout.value_column`'s job (§4.11), so this stays meaningful even when the file is long-format and the value column is literally named `value`. | tool |
 | `variable_label` | Recommended | string | Human-readable label. Disambiguates for a reader; not machine-critical. | — |
 | `standard_name` | Core | CURIE | The cross-agency identifier for the physical quantity, as a prefixed CURIE so no single naming authority is baked into the slot. Use a CF Standard Name where one exists (`CF:air_temperature`); for health-relevant quantities CF never defined (Heat Index, WBGT) mint a project term (`ENVAR:heat_index`) or reuse an ontology term. The prefix carries the authority. Without it the variable is not interoperable. | [CF] |
 | `cf_cell_methods` | Core | CF cell_methods | How the value summarises sub-period values; `time: maximum` is what makes this *Tmax* rather than Tmean. Omitting it loses the distinction between a daily max and a daily mean. | [CF] |
@@ -213,6 +214,29 @@ record-root assertion (it applies to the whole sidecar, not just linkage).
 | `deposit_*` (DOI, repository, license, citation, DCAT url) | Optional | mixed | The required-for-deposit subset for the published-FAIR-object case. Optional because most records never get deposited. | [SPDX]/[DOI] |
 | `schema_version` | Core | string | The schema version this document targets; downstream branches on it for evolution. | EnVar |
 
+### 4.11 `DataLayout`
+
+The binding between the sidecar and the companion data file. `VariableIdentity`
+says *what* the variable is; `DataLayout` says *where in the file* its values
+live. The split matters as soon as the file is not wide-format: in long/tidy
+data the value column is literally named `value` and a record's rows are
+selected by a discriminator column, which identity slots cannot express.
+Required at the record root — without it a consumer cannot locate the values
+the sidecar describes.
+
+| Element | Tier | Type / vocab | Definition & why it matters | Ref |
+|---|---|---|---|---|
+| `table_orientation` | Core | enum | `wide` \| `long`. Every other binding is read relative to the orientation; without it the bindings are uninterpretable. | EnVar |
+| `value_column` | Core | string | The column carrying this record's values. The record carries no inline observation result, so this is the only pointer to the values. | EnVar |
+| `variable_column` | Conditionally-Core (long) | string | The discriminator column in long format; without it the shared value column is ambiguous. | EnVar |
+| `variable_key` | Conditionally-Core (long) | string | The label that selects this record's rows in `variable_column`. | EnVar |
+| `subject_column` | Recommended | string | The join key back to the health-data layer. | EnVar |
+| `time_column` | Recommended | string | Places each value in time for lag/window analyses. | EnVar |
+| `value_uncertainty_column` | Recommended | string (null+reason) | Binds the per-value uncertainty most pipelines silently drop. | EnVar |
+| `value_uncertainty_column_missing_reason` | Optional | enum | Distinguishes "unavailable upstream" from "lost". | EnVar |
+| `quality_flag_column` | Optional | string (null+reason) | CF `ancillary_variables` analogue for per-value QA flags. | [CF] |
+| `quality_flag_column_missing_reason` | Optional | enum | Documents why no QA-flag column is bound. | EnVar |
+
 ---
 
 ## 5. PM2.5 — generalisation check (the deltas)
@@ -285,11 +309,11 @@ Two assignments we most want ratified or overturned: **`day_boundary_convention`
 
 ## 9. Reconciliation with the existing prototype
 
-The repository already contains a 13-module LinkML implementation (`src/linkml_microschemas_envar/schema/`). This spec was **re-derived from the source requirements** (`envar-heat-scenario-requirements.md`) and the primer, then reconciled against that prototype. Findings:
+The repository already contains a 14-module LinkML implementation (`src/linkml_microschemas_envar/schema/`). This spec was **re-derived from the source requirements** (`envar-heat-scenario-requirements.md`) and the primer, then reconciled against that prototype. Findings:
 
 | Area | Status | Action for v0.2 |
 |---|---|---|
-| Module set (`VariableIdentity`, `SpatialReference`, … `DerivedHeatMetric`, `HealthLayerLinkage`) | **Match.** The prototype's modules correspond 1:1 to §2. | none |
+| Module set (`VariableIdentity`, `SpatialReference`, … `DerivedHeatMetric`, `HealthLayerLinkage`) | **Match.** The prototype's modules correspond 1:1 to §2, including `DataLayout` (added when the sidecar-to-file column binding was split out of `VariableIdentity`; §4.11). | none |
 | Element coverage | **Near-complete match.** The §4 elements are present in the prototype's modules (it was built from the same requirements). | spot-check a few PM2.5-stressed elements (`exposure_model_ensemble_member_count`, annual-vs-daily aggregation) are present and correctly typed |
 | **Tier annotations** | **Done (v0.2).** Every slot now carries an `annotations.tier` of `core` / `recommended` / `optional` / `conditionally_core` (the §4 strawman), and the LinkML `required:` flags were relaxed so only Core slots are hard-required — the two now agree. | Completeness checker reads `annotations.tier` directly (Approach A). |
 | **Health-layer de-coupling** | **Done (v0.2).** `OmopLinkage`→`HealthLayerLinkage`; `omop_concept_*`→`target_concept_*`/`concept_status`; the link field is generalised and the target named in `health_layer_target`; `phi_status` moved to the record root; the privileged `OMOP:` prefix dropped. | none — the schema now privileges no single health-data model (OMOP is one `health_layer_target` value). |

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Related approaches — how EnVar differs from its neighbours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,500&family=Public+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f4f1ea; --bg2:#ece6d9; --panel:#faf8f2;
+    --ink:#1a2030; --muted:#5a6575; --faint:#8b94a2;
+    --line:rgba(26,32,48,.12); --line2:rgba(26,32,48,.22);
+    --accent:#1f4fd6; --accent2:#c2410c; --accent3:#0f766e; --accent4:#7c3aed;
+    --grad:linear-gradient(115deg,var(--accent),var(--accent4));
+    --serif:"Spectral",Georgia,serif;
+    --sans:"Public Sans",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow:hidden;-webkit-font-smoothing:antialiased}
+
+  .atmos{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .atmos::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(900px 600px at 84% 6%, color-mix(in srgb,var(--accent) 12%, transparent), transparent 60%),
+    radial-gradient(820px 700px at 8% 94%, color-mix(in srgb,var(--accent2) 10%, transparent), transparent 60%)}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .gridlines{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:62px 62px;mask:radial-gradient(circle at 50% 50%,#000 25%,transparent 82%);-webkit-mask:radial-gradient(circle at 50% 50%,#000 25%,transparent 82%)}
+
+  #deck{position:relative;z-index:2;height:100vh;width:100vw}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,5.5vw,96px);opacity:0;visibility:hidden;transform:translateY(22px) scale(.992);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1);overflow:hidden}
+  .slide.active{opacity:1;visibility:visible;transform:none}
+  .slide.past{transform:translateY(-22px) scale(.992)}
+  .wrap{width:min(1180px,100%);margin:0 auto;max-height:100%}
+
+  .slide.active .stag{animation:rise .62s cubic-bezier(.2,.7,.2,1) both}
+  .slide.active .stag:nth-child(1){animation-delay:.05s}
+  .slide.active .stag:nth-child(2){animation-delay:.11s}
+  .slide.active .stag:nth-child(3){animation-delay:.17s}
+  .slide.active .stag:nth-child(4){animation-delay:.23s}
+  .slide.active .stag:nth-child(5){animation-delay:.29s}
+  .slide.active .stag:nth-child(6){animation-delay:.35s}
+  .slide.active .stag:nth-child(7){animation-delay:.41s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.06;letter-spacing:-.01em}
+  .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;font-weight:500}
+  .kicker.alt{color:var(--accent2)}
+  h1.title{font-size:clamp(2.4rem,6.4vw,5.2rem);font-weight:800;line-height:1;letter-spacing:-.025em}
+  h2{font-size:clamp(1.6rem,3.8vw,3rem)}
+  h3{font-size:clamp(1.1rem,2.1vw,1.55rem)}
+  p{color:var(--muted);font-size:clamp(1rem,1.4vw,1.18rem);line-height:1.55;max-width:64ch}
+  p.lead{color:var(--ink);font-weight:300;font-size:clamp(1.1rem,1.8vw,1.45rem);max-width:60ch}
+  strong{color:var(--ink);font-weight:600}
+  em{font-style:italic;color:color-mix(in srgb,var(--ink) 78%, var(--accent))}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .accent-ink{color:var(--accent)}
+
+  .eyebrow-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+  .rule{height:1px;background:linear-gradient(90deg,var(--line2),transparent);margin:1.4rem 0;border:0}
+  ul.clean{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-top:1.2rem}
+  ul.clean li{position:relative;padding-left:1.5rem;color:var(--muted);font-size:clamp(.98rem,1.35vw,1.14rem);line-height:1.45;max-width:66ch}
+  ul.clean li::before{content:"";position:absolute;left:0;top:.56em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  ul.clean li strong{color:var(--ink)}
+
+  .cols{display:grid;gap:clamp(1rem,2.2vw,2rem)}
+  .c2{grid-template-columns:1fr 1fr}
+  .c3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.c2,.c3{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(1rem,1.9vw,1.5rem);position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(26,32,48,.03),0 18px 36px -30px rgba(26,32,48,.5)}
+  .card .ico{font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;color:var(--faint);text-transform:uppercase}
+  .card h3{margin:.4rem 0 .5rem;font-size:clamp(1.05rem,1.8vw,1.32rem)}
+  .card p{font-size:.95rem;max-width:none}
+
+  .badge{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.32em .7em;border-radius:999px;border:1px solid currentColor;line-height:1}
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .b1{color:var(--accent)} .b2{color:var(--accent2)} .b3{color:var(--accent3)} .b4{color:var(--accent4)}
+
+  .code{font-family:var(--mono);background:#10141d;border:1px solid #232a36;border-radius:13px;font-size:clamp(.72rem,1.02vw,.9rem);line-height:1.6;overflow:hidden;color:#d7e0ec;box-shadow:0 20px 44px -30px rgba(26,32,48,.7)}
+  .code .bar{display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-bottom:1px solid #232a36;background:rgba(255,255,255,.02)}
+  .code .bar .dot{width:10px;height:10px;border-radius:50%}
+  .code .bar .fname{font-size:.7rem;color:#9aa6b6;margin-left:.4rem;letter-spacing:.04em}
+  .code pre{padding:.9rem 1.1rem;overflow:auto;max-height:58vh}
+  .code pre::-webkit-scrollbar{height:8px;width:8px}
+  .code pre::-webkit-scrollbar-thumb{background:#2c3440;border-radius:6px}
+  .k{color:#7aa2ff} .s{color:#9fe6a0} .n{color:#ffd479} .cm{color:#6b7686}
+  .hlg{background:rgba(110,231,168,.18);border-radius:4px;padding:0 .25em;margin:0 -.25em}
+
+  table{width:100%;border-collapse:collapse;font-size:clamp(.78rem,1.1vw,.96rem)}
+  th,td{text-align:left;padding:.56rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);font-weight:500}
+  td{color:var(--muted)} td strong{color:var(--ink)}
+  tr.hi td{background:color-mix(in srgb,var(--accent) 8%, transparent)}
+  td .mono,.mono{font-family:var(--mono);color:color-mix(in srgb,var(--ink) 75%, var(--accent));font-size:.92em}
+
+  .flow{display:flex;align-items:stretch;gap:.5rem;flex-wrap:wrap}
+  .flow .node{flex:1;min-width:130px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.9rem;text-align:center}
+  .flow .node .t{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+  .flow .node .m{font-weight:600;color:var(--ink);margin-top:.3rem;font-size:1rem}
+  .flow .node.hl{border-color:var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 30%, transparent)}
+  .flow .arrow{align-self:center;color:var(--faint);font-family:var(--mono)}
+
+  .pill{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--accent);border:1px solid var(--line2);border-radius:999px;padding:.3em .8em;margin:.2rem .3rem .2rem 0}
+  .two-pane{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.4vw,2.2rem);align-items:start}
+  @media(max-width:880px){.two-pane{grid-template-columns:1fr}}
+  .footnote{font-family:var(--mono);font-size:.7rem;color:var(--faint);margin-top:1.1rem;letter-spacing:.02em;line-height:1.5}
+  .callout{border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%, transparent);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin-top:1.3rem}
+  .callout.alt{border-left-color:var(--accent2);background:color-mix(in srgb,var(--accent2) 9%, transparent)}
+  .callout p{color:var(--ink);max-width:64ch}
+  .quote{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.5rem,3.6vw,2.7rem);line-height:1.22;color:var(--ink);max-width:24ch}
+  .divider{justify-content:center}
+  .divider .big{font-family:var(--serif);font-weight:800;font-size:clamp(3rem,12vw,9rem);line-height:.9;letter-spacing:-.03em;color:color-mix(in srgb,var(--ink) 14%, transparent)}
+
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--grad);z-index:50;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+  .chrome{position:fixed;z-index:40;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--faint)}
+  #brand{top:26px;left:30px;display:flex;align-items:center;gap:.6rem}
+  #brand .dotm{width:9px;height:9px;border-radius:50%;background:var(--grad)}
+  #brand b{color:var(--ink);font-weight:600;letter-spacing:.16em}
+  #counter{bottom:24px;right:30px;color:var(--muted)}
+  #counter b{color:var(--ink)}
+  #hint{bottom:24px;left:30px}
+  #hint kbd{font-family:var(--mono);background:var(--panel);border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:.12em .45em;color:var(--ink);font-size:.7rem}
+  .nav-zone{position:fixed;top:0;bottom:0;width:16%;z-index:30;cursor:pointer}
+  #navPrev{left:0} #navNext{right:0}
+  @media(max-width:820px){#hint{display:none}}
+</style>
+</head>
+<body>
+<div class="atmos"></div>
+<div class="gridlines"></div>
+<div class="grain"></div>
+<div id="progress"></div>
+
+<div class="chrome" id="brand"><span class="dotm"></span><b>EnVar</b><span>· related approaches</span></div>
+<div class="chrome" id="counter"><b id="cur">01</b> / <span id="tot">24</span></div>
+<div class="chrome" id="hint"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen</div>
+<div class="nav-zone" id="navPrev"></div>
+<div class="nav-zone" id="navNext"></div>
+
+<main id="deck">
+
+  <!-- 1 — TITLE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">EnVar · orientation</div>
+      <h1 class="title stag">Related<br><span class="grad">approaches.</span></h1>
+      <p class="lead stag" style="margin-top:1.5rem">Five systems, one map. By the end you'll be able to say exactly how an EnVar sidecar differs from each of its neighbours — and why none of them replace it.</p>
+    </div>
+  </section>
+
+  <!-- 2 — ROADMAP -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">What you'll understand</div>
+      <h2 class="stag">The route</h2>
+      <ul class="clean stag">
+        <li>The one question this all answers — <em>"isn't EnVar just like X?"</em></li>
+        <li>What an EnVar sidecar actually <strong>is</strong>, in one sentence</li>
+        <li>The <strong>two axes</strong> that separate it from everything else</li>
+        <li>Four neighbours up close: <strong>GAIA · DeGAUSS · Amadeus · CODATA Essential Variables</strong></li>
+        <li>One map that places all five — and a self-check at the end</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 — THE QUESTION -->
+  <section class="slide">
+    <div class="wrap">
+      <blockquote class="quote stag">"Isn't this just the same as <span class="grad">X</span>?"</blockquote>
+      <p class="lead stag" style="margin-top:1.5rem">Each neighbour overlaps with <strong>part</strong> of EnVar. But each operates at a different <strong>granularity</strong>, or for a different <strong>purpose</strong>.</p>
+      <p class="stag" style="margin-top:.8rem">This deck draws those lines so the overlaps stop being confusing.</p>
+    </div>
+  </section>
+
+  <!-- 4 — WHAT ENVAR IS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">First, the thing we're comparing against</div>
+      <h2 class="stag" style="max-width:20ch">An EnVar sidecar is an <span class="grad">instance-level provenance record.</span></h2>
+      <p class="lead stag" style="margin-top:1.3rem">One document per <span class="mono">(variable, run)</span>, describing how a <em>specific</em> environmental value was produced — in enough detail to <strong>reproduce</strong> it from raw data plus the sidecar alone, and to check whether two values may legitimately be <strong>pooled</strong>.</p>
+    </div>
+  </section>
+
+  <!-- 5 — THE KEY WORD -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker alt stag">The word that does the work</div>
+      <h2 class="stag">It describes one <span class="grad">instance</span> — not a catalogue</h2>
+      <div class="cols c3 stag" style="margin-top:1.6rem">
+        <div class="card"><div class="ico">it does NOT</div><h3>Catalogue datasets</h3><p>That's discovery — a different job.</p></div>
+        <div class="card"><div class="ico">it does NOT</div><h3>Define which variables matter</h3><p>That's a prioritisation framework.</p></div>
+        <div class="card"><div class="ico">it does NOT</div><h3>Geocode addresses</h3><p>That's a computation tool.</p></div>
+      </div>
+      <p class="stag" style="margin-top:1.3rem">It records the <strong>methodological identity</strong> of a value that has <em>already been produced</em>.</p>
+    </div>
+  </section>
+
+  <!-- 6 — TWO AXES -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">How to tell any two of these apart</div>
+      <h2 class="stag">Two axes separate everything</h2>
+      <div class="cols c2 stag" style="margin-top:1.5rem">
+        <div class="card"><div class="ico">Axis 1</div><h3>Unit of description</h3><p>What is <em>one record</em> about? A whole dataset, a variable <em>type</em>, a geocoded row, or one produced value?</p></div>
+        <div class="card"><div class="ico">Axis 2</div><h3>Purpose</h3><p>Do you want to <em>find</em> it, <em>define</em> it, <em>compute</em> it, or <em>reproduce / pool</em> it?</p></div>
+      </div>
+      <p class="footnote stag">Keep these two questions in mind for every system that follows.</p>
+    </div>
+  </section>
+
+  <!-- 7 — THE MAP -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The orientation map</div>
+      <h2 class="stag">All five, on the two axes</h2>
+      <table class="stag" style="margin-top:1.2rem">
+        <thead><tr><th>Approach</th><th>Unit of description</th><th>Primary purpose</th><th>Carries derivation?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GAIA</strong></td><td>a dataset</td><td>discovery</td><td>no — dataset-level</td></tr>
+          <tr><td><strong>DeGAUSS</strong></td><td>a geocoded row</td><td>compute the linkage</td><td>partially</td></tr>
+          <tr><td><strong>Amadeus</strong></td><td>a downloaded file</td><td>access + cite the source</td><td>minimal</td></tr>
+          <tr><td><strong>Essential Variables</strong></td><td>a variable <em>type</em></td><td>commensurability</td><td>at the concept layer</td></tr>
+          <tr class="hi"><td><strong>EnVar</strong></td><td>one produced value series</td><td>reproducibility + poolability</td><td><strong>yes — the whole point</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="footnote stag">We'll now walk the first four and see why each row reads the way it does.</p>
+    </div>
+  </section>
+
+  <!-- 8 — DIVIDER GAIA -->
+  <section class="slide divider">
+    <div class="wrap">
+      <div class="big stag">01</div>
+      <div class="kicker stag" style="margin-top:1rem">GAIA catalog files</div>
+      <h2 class="stag">The dataset catalogue</h2>
+    </div>
+  </section>
+
+  <!-- 9 — GAIA WHAT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">What it is</div>
+      <h2 class="stag">A catalogue, three files per dataset</h2>
+      <p class="stag" style="margin:.7rem 0 1rem">The GAIA toolchain (OHDSI GIS Working Group) catalogues place-based exposure datasets. Each one carries:</p>
+      <table class="stag">
+        <thead><tr><th>File</th><th>Standard</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">meta_dcat_*.json</span></td><td>DCAT</td><td>discovery record for catalogue search</td></tr>
+          <tr><td><span class="mono">meta_etl_*.json</span></td><td>custom</td><td>ETL instructions for ingest</td></tr>
+          <tr><td><span class="mono">meta_json-ld_*.json</span></td><td>Schema.org JSON-LD</td><td>linked-data description</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 10 — GAIA GRANULARITY -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Granularity — the crate vs the item</div>
+      <h2 class="stag">One card describes a whole product</h2>
+      <div class="two-pane stag" style="margin-top:1.2rem">
+        <div class="card"><div class="ico">A GAIA card says</div><p style="margin-top:.4rem"><em>"PM2.5, CMAQ, US, 2000–2020, 12 km."</em></p><p style="margin-top:.6rem">Built to help you <strong>find</strong> a dataset — the label on the whole crate.</p></div>
+        <div class="card" style="border-color:color-mix(in srgb,var(--accent) 35%, var(--line))"><div class="ico">An EnVar sidecar says</div><p style="margin-top:.4rem"><em>"this value is an annual mean in µg/m³ at tract level, population-weighted from the 12 km grid."</em></p><p style="margin-top:.6rem">Describes <strong>one item</strong> taken out of the crate and assigned to a person.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — GAIA VS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">So how do they differ?</div>
+      <h2 class="stag">The run-time fields can't live on a dataset card</h2>
+      <p class="stag" style="margin:.7rem 0 0"><span class="mono">extraction_method</span>, <span class="mono">day_boundary_convention</span>, <span class="mono">geocoding_precision</span>, <span class="mono">container_image_digest</span> are properties of the <strong>extraction run</strong> — they don't exist at the dataset level, so they can't sit on a GAIA card.</p>
+      <div class="callout stag"><p><strong>Complementary, not competing.</strong> Use GAIA to discover the product, EnVar to describe each value you extract. And because EnVar is authored in LinkML, it can emit the same Schema.org JSON-LD GAIA consumes — so the detail flows <em>up</em> into the catalogue.</p></div>
+    </div>
+  </section>
+
+  <!-- 12 — DIVIDER DEGAUSS -->
+  <section class="slide divider">
+    <div class="wrap">
+      <div class="big stag">02</div>
+      <div class="kicker stag" style="margin-top:1rem">DeGAUSS</div>
+      <h2 class="stag">The geocoding tool</h2>
+    </div>
+  </section>
+
+  <!-- 13 — DEGAUSS WHAT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">What it is</div>
+      <h2 class="stag">A privacy-preserving geocoder, in a container</h2>
+      <ul class="clean stag">
+        <li>Geocodes a patient address and appends geomarker columns — including the extracted environmental value.</li>
+        <li>Runs as versioned <strong>Docker containers inside the institution</strong> — no PHI leaves the site.</li>
+        <li>Records the geocoding <strong>precision</strong> and <strong>match score</strong>, and the exact image used.</li>
+      </ul>
+      <p class="footnote stag">Granularity: per geocoded row — metadata about <em>this linkage event</em>.</p>
+    </div>
+  </section>
+
+  <!-- 14 — DEGAUSS VS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">So how do they differ?</div>
+      <h2 class="stag">A producer, not a description of what it did</h2>
+      <p class="stag" style="margin:.6rem 0 1rem">Not alternatives — the EnVar "ideal" TMAX example <em>is</em> a DeGAUSS → Daymet run. DeGAUSS is strong where it acts and silent on the rest:</p>
+      <table class="stag">
+        <thead><tr><th>Axis</th><th>DeGAUSS records</th><th>EnVar adds</th></tr></thead>
+        <tbody>
+          <tr><td>Linkage</td><td>precision, score, image</td><td>normalised <span class="mono">LinkageMethod</span> slots</td></tr>
+          <tr><td>Source</td><td>(implicit in container)</td><td>version, DOI, license</td></tr>
+          <tr><td>Model</td><td>—</td><td>class, biases, CV R²</td></tr>
+          <tr><td>Temporal</td><td>—</td><td>day-boundary, aggregation</td></tr>
+          <tr><td>Tiering</td><td>—</td><td>Core/Recommended/Optional + score</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote stag">DeGAUSS guarantees reproducible <em>computation</em>; EnVar guarantees the <em>choices it made</em> are written down in a standard, scoreable form.</p>
+    </div>
+  </section>
+
+  <!-- 15 — DIVIDER AMADEUS -->
+  <section class="slide divider">
+    <div class="wrap">
+      <div class="big stag">03</div>
+      <div class="kicker stag" style="margin-top:1rem">Amadeus</div>
+      <h2 class="stag">The data-access layer</h2>
+    </div>
+  </section>
+
+  <!-- 16 — AMADEUS WHAT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">What it is</div>
+      <h2 class="stag">An R package for accessing environmental data</h2>
+      <p class="stag" style="margin:.7rem 0 0">Amadeus (NIEHS, Messier group) pulls and processes large environmental datasets — GridMET, NARR, MERRA-2, MODIS, EPA AQS, and ~20 more. When it downloads, it can attach an <strong>acknowledgement string</strong> and <strong>file hashes</strong>.</p>
+      <p class="footnote stag">Granularity: per downloaded file — it answers "where did these bytes come from, and how do I cite them."</p>
+    </div>
+  </section>
+
+  <!-- 17 — AMADEUS VS -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">So how do they differ? · same value, two representations</div>
+      <h2 class="stag">Amadeus is the "before" picture</h2>
+      <div class="code stag" style="margin-top:1rem">
+        <div class="bar"><span class="dot" style="background:#c2410c"></span><span class="fname">what Amadeus emits today</span></div>
+<pre><span class="k">acknowledgement</span>: <span class="s">"Data provided by the University of Idaho; GridMET via Amadeus."</span>
+<span class="k">input_file_sha256</span>: <span class="s">3a1b9c…</span>
+<span class="k">output_file_sha256</span>: <span class="s">7f2e4d…</span>
+<span class="cm"># EnVar then demands the rest, or records why it's missing:</span>
+<span class="k">source_dataset_version</span>, <span class="k">day_boundary_convention</span>, <span class="k">extraction_method</span>, <span class="k">exposure_model_type</span> …</pre>
+      </div>
+      <p class="stag" style="margin-top:1rem">Useful, and genuinely thin. EnVar <strong>standardises and extends</strong> what an Amadeus run should emit — and reports what is still missing.</p>
+    </div>
+  </section>
+
+  <!-- 18 — DIVIDER CODATA -->
+  <section class="slide divider">
+    <div class="wrap">
+      <div class="big stag">04</div>
+      <div class="kicker stag" style="margin-top:1rem">CODATA Essential Variables</div>
+      <h2 class="stag">The concept layer</h2>
+    </div>
+  </section>
+
+  <!-- 19 — EV WHAT -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">What it is</div>
+      <h2 class="stag">Curated sets of variables worth observing</h2>
+      <div class="cols c3 stag" style="margin-top:1.4rem">
+        <div class="card"><div class="ico">GCOS</div><h3>ECV</h3><p>Essential <strong>Climate</strong> Variables</p></div>
+        <div class="card"><div class="ico">GOOS</div><h3>EOV</h3><p>Essential <strong>Ocean</strong> Variables</p></div>
+        <div class="card"><div class="ico">GEO BON</div><h3>EBV</h3><p>Essential <strong>Biodiversity</strong> Variables</p></div>
+      </div>
+      <p class="stag" style="margin-top:1.2rem">CODATA generalised these into a family of frameworks — and noticed the interesting part isn't the variable <em>lists</em>, it's the <strong>data-description semantics underneath</strong>: what lets you decide whether two measurements of "the same" variable may be combined.</p>
+    </div>
+  </section>
+
+  <!-- 20 — THE CASCADE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The key structure · DDI-CDI variable cascade</div>
+      <h2 class="stag">Three layers of "variable"</h2>
+      <table class="stag" style="margin-top:1.1rem">
+        <thead><tr><th>Layer</th><th>Means</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mono">ConceptualVariable</span></td><td>what is measured & why</td><td>air temperature as a heat stressor</td></tr>
+          <tr><td><span class="mono">RepresentedVariable</span></td><td>value domain + units</td><td><span class="mono">air_temperature</span>, °C</td></tr>
+          <tr class="hi"><td><span class="mono">InstanceVariable</span></td><td>this column, this file, this run</td><td>the <span class="mono">tmax</span> value from Daymet V4 R1</td></tr>
+        </tbody>
+      </table>
+      <p class="stag" style="margin-top:1.1rem">Essential Variables live at the <strong>top two</strong> layers. <span class="accent-ink">EnVar lives at the bottom one</span> — the <span class="mono">InstanceVariable</span> detail an EV definition deliberately doesn't carry.</p>
+    </div>
+  </section>
+
+  <!-- 21 — SAME MOVE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The relationship</div>
+      <h2 class="stag">Same move, opposite ends of one cascade</h2>
+      <table class="stag" style="margin-top:1.1rem">
+        <thead><tr><th></th><th>Essential Variables / CDIF</th><th>EnVar sidecar</th></tr></thead>
+        <tbody>
+          <tr><td>Entry layer</td><td>conceptual — "what is the claim?"</td><td>instance — "how was this number made?"</td></tr>
+          <tr><td>Direction</td><td>top-down (hypothesis → evidence)</td><td>bottom-up (bytes → identity)</td></tr>
+          <tr><td>Answers</td><td>"do we mean the same variable?"</td><td>"may I pool <em>these two values</em>?"</td></tr>
+        </tbody>
+      </table>
+      <div class="callout alt stag"><p>The shared thesis is <strong>commensurability</strong>. <span class="mono">43.91 °C</span> (Daymet) vs <span class="mono">42.65 °C</span> (GridMET) for the same patient-day is a commensurability failure wearing the costume of two equal numbers — answered at the layer where the method differences actually live.</p></div>
+    </div>
+  </section>
+
+  <!-- 22 — POSTURE -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">The takeaway on CODATA</div>
+      <h2 class="stag">Speak the vocabulary, don't adopt the toolchain</h2>
+      <p class="stag" style="margin:.7rem 0 0">EnVar is not a competitor to CDIF — it's the missing instance-layer detail that makes a CDIF document <strong>safe to pool</strong>. A CDIF document can say <em>"<span class="mono">temp_c</span> is air temperature"</em>; it cannot say <em>"…extracted by inverse-distance-weighting four cells, on a local-midnight day boundary, from Daymet V4 R1."</em> That second sentence is EnVar.</p>
+      <p class="footnote stag">Cheap, high-leverage alignment: expose an I-ADOPT projection of each variable, and label which cascade layer each field sits on (CF/UCUM → RepresentedVariable; provenance → InstanceVariable).</p>
+    </div>
+  </section>
+
+  <!-- 23 — CONSOLIDATION -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker stag">Put it all together</div>
+      <h2 class="stag">The whole map, on one row each</h2>
+      <table class="stag" style="margin-top:1.1rem">
+        <thead><tr><th></th><th>Describes</th><th>Answers</th><th>Layer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GAIA</strong></td><td>a dataset</td><td>"where do I find it?"</td><td>catalogue</td></tr>
+          <tr><td><strong>DeGAUSS</strong></td><td>a geocoded row</td><td>"compute the linkage reproducibly?"</td><td>tool run</td></tr>
+          <tr><td><strong>Amadeus</strong></td><td>a downloaded file</td><td>"where did the bytes come from?"</td><td>data access</td></tr>
+          <tr><td><strong>Essential Variables</strong></td><td>a variable concept</td><td>"do we mean the same thing?"</td><td>conceptual</td></tr>
+          <tr class="hi"><td><strong>EnVar</strong></td><td>one produced value series</td><td>"reproduce &amp; pool this?"</td><td><strong>instance</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="footnote stag">None is redundant with EnVar; EnVar replaces none. It fills the instance/provenance layer the others leave underspecified — and exports into their formats.</p>
+    </div>
+  </section>
+
+  <!-- 24 — RECAP / SELF-CHECK -->
+  <section class="slide">
+    <div class="wrap">
+      <div class="kicker alt stag">Check yourself</div>
+      <h2 class="stag">Can you answer each in one line?</h2>
+      <ul class="clean stag">
+        <li><strong>vs GAIA?</strong> dataset card (find it) vs one value's provenance (reproduce it) — complementary via JSON-LD.</li>
+        <li><strong>vs DeGAUSS?</strong> a producer of values vs a standard description of what the producer did.</li>
+        <li><strong>vs Amadeus?</strong> acknowledgement + hashes (the "before") vs the full, scoreable record.</li>
+        <li><strong>vs Essential Variables?</strong> the concept layer ("same variable?") vs the instance layer ("pool these values?").</li>
+      </ul>
+      <p class="lead stag" style="margin-top:1.3rem">One line to keep: EnVar fills the <span class="grad">instance layer</span> the others leave underspecified.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let i = 0;
+  const progress = document.getElementById('progress');
+  const cur = document.getElementById('cur');
+  document.getElementById('tot').textContent = String(total).padStart(2,'0');
+
+  function render(){
+    slides.forEach((s,n)=>{ s.classList.toggle('active', n===i); s.classList.toggle('past', n<i); });
+    progress.style.width = (i/(total-1)*100)+'%';
+    cur.textContent = String(i+1).padStart(2,'0');
+    location.hash = i+1;
+  }
+  function go(n){ i = Math.max(0, Math.min(total-1, n)); render(); }
+  function next(){ go(i+1); } function prev(){ go(i-1); }
+
+  document.addEventListener('keydown', e=>{
+    if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){ e.preventDefault(); next(); }
+    else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+    else if(e.key==='Home'){ go(0); } else if(e.key==='End'){ go(total-1); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+  });
+  document.getElementById('navNext').addEventListener('click', next);
+  document.getElementById('navPrev').addEventListener('click', prev);
+  let tx=0;
+  document.addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>55){ dx<0?next():prev(); } },{passive:true});
+  const start = parseInt(location.hash.replace('#',''));
+  if(start>=1 && start<=total) i=start-1;
+  render();
+</script>
+</body>
+</html>

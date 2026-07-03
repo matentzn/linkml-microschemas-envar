@@ -555,8 +555,8 @@ with envar-specific top-level slots. All composed objects are <code>inlined: tru
 <strong>readable envar slots</strong> — the validated key is the domain name; the profile name is
 carried via slot-level <code>implements</code> / <code>exact_mappings</code> (and recorded as an <code>alias</code>).
 <code>instantiates: MicroschemaDefinition</code> is a metaclass relation and does not constrain
-slot names, so this is profile-conformant (decision recorded in the schema <code>README.md</code>
-and <code>issue_naming.md</code>):</p>
+slot names, so this is profile-conformant (decision recorded in the schema
+<code>README.md</code>):</p>
 <table>
 <thead>
 <tr>
@@ -626,7 +626,7 @@ deep slot-condition pinning on an inlined object; see the schema <code>README.md
   names (<code>variable_identity</code>, <code>spatial_reference</code>, …); each maps to its profile anatomy
   slot via <code>implements</code> / <code>exact_mappings</code> — <code>instantiates</code> does not constrain slot
   names, so this is profile-conformant. Resolved 2026-07, still open to workshop
-  challenge (see <code>README.md</code> and <code>issue_naming.md</code>).</li>
+  challenge (see the schema <code>README.md</code>).</li>
 <li><strong>Tiers as annotations.</strong> Every slot carries <code>annotations: {tier: core | recommended |
   optional | conditionally_core}</code>. This is the <strong>single source of truth</strong> the completeness
   checker reads — the schema <em>is</em> the requirement spec.</li>

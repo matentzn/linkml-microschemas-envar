@@ -91,7 +91,7 @@ rejected: `linkml-validate`, `gen-json-schema`, and `gen-pydantic` honour
 `alias`, but `gen-python` (the dataclass generator used by `just test`)
 rejects `alias` in `slot_usage`, and re-declaring the imported profile
 slot locally fails with conflicting-URI errors. Full trail in
-`issue_naming.md`.
+`issues/issue_naming.md`.
 
 ### Known drawbacks
 

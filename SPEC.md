@@ -1,6 +1,6 @@
 # SPEC — EnVar environmental-exposure microschema (TMAX + PM2.5), v0.1 draft
 
-**Status:** draft for community review. The tier assignments below are a **strawman authored to be challenged** — see [`PLAN.md`](PLAN.md) and the workshop materials in [`docs/workshop/`](docs/workshop/).
+**Status:** draft for community review. The tier assignments below are a **strawman authored to be challenged** — see [`PLAN.md`](PLAN.md).
 **Companion data:** the worked sidecars under [`tests/data/valid/`](tests/data/valid/) — a `core` → `recommended` → `ideal` gradient per variable, all passing validation — plus the `core_missing` counter-examples under [`tests/data/invalid/`](tests/data/invalid/) showing what an incomplete (invalid) record looks like.
 **Scope:** TMAX (daily maximum near-surface air temperature) fully worked; PM2.5 (fine particulate matter) as a generalisation check. The general `EnvironmentalExposureRecord` frame underlies both.
 
@@ -38,7 +38,7 @@ One exposure record composes a graph of typed objects, one module per concern. A
 | `DerivedHeatMetric` | Equation variant, indoor/outdoor, percentile baseline (heat indices only) | where applicable |
 | `HealthLayerLinkage` + `DepositMetadata` | Health-data-layer findability hooks (OMOP, BDC, …; no single model privileged) + the subset needed to publish as a FAIR (findable, accessible, interoperable, reusable) data deposit | one per record |
 
-Naming note: this spec presents the top-level keys with **readable domain names** (`variable_identity`, `spatial_reference`, …). The current prototype schema instead uses the LinkML Microschema Profile's abstract slot names (`observation_type`, `location`, `temporality`, …). Which to adopt is an open question — see §9.
+Naming note: the top-level keys use **readable domain names** (`variable_identity`, `spatial_reference`, `temporal_reference`, `exposure_model`), and the schema now matches: each maps to its LinkML Microschema Profile anatomy slot (`observation_type`, `location`, `temporality`, `methodology`) via slot-level `implements`/`exact_mappings` — `instantiates` conformance does not constrain slot names. Decided 2026-07; rationale and mechanism in the schema README and `issues/issue_naming.md`.
 
 ---
 
@@ -263,7 +263,7 @@ The PM2.5 records (`tests/data/valid/EnvironmentalExposureRecord-pm25_{core,reco
 5. A `CF:`-prefixed `standard_name` + `cf_cell_methods` + `units_ucum` should be a CF-consistent triple; the validator **warns** on inconsistency (e.g. `CF:air_temperature` + `time: maximum` + `mol/mol`). The check applies only when `standard_name` uses the `CF:` prefix; locally-minted `ENVAR:` terms are exempt.
 6. `provenance_chain` must be a connected directed acyclic graph (a DAG — steps link in one direction and never loop) terminating at a `provenance_chain_terminus_type` — no orphaned steps.
 7. **Conditionally-Core enforcement:** when a context predicate holds (derived metric present; percentile threshold; buffer/nearest-station strategy; ensemble model; station-based source), the associated Conditionally-Core elements become required.
-8. **Day-boundary cross-check (declaration-consistency).** When a lagged or event-matched analysis is declared (`lag_alignment_applied != none`), `clinical_date_assignment_convention` is required (Conditionally-Core), and the checker **warns** when it is absent or names a day boundary that disagrees with `temporality.day_boundary_convention` (e.g. exposure-side `local_midnight` vs clinical-side `utc_midnight`). This is a metadata-consistency check only — the clinical timestamps sit across the PHI line and are never read; the rule compares the two *declared conventions*, not the data.
+8. **Day-boundary cross-check (declaration-consistency).** When a lagged or event-matched analysis is declared (`lag_alignment_applied != none`), `clinical_date_assignment_convention` is required (Conditionally-Core), and the checker **warns** when it is absent or names a day boundary that disagrees with `temporal_reference.day_boundary_convention` (e.g. exposure-side `local_midnight` vs clinical-side `utc_midnight`). This is a metadata-consistency check only — the clinical timestamps sit across the PHI line and are never read; the rule compares the two *declared conventions*, not the data.
 9. **Cross-input consistency (multi-input derived metrics).** When `derived_heat_metric.equation_inputs` has more than one entry, the checker dereferences each `input_provenance_id` and **warns** when the referenced input sidecars disagree on `day_boundary_convention`, `temporal_aggregation_method`/window, or `native_spatial_resolution_m` — e.g. a Heat Index built from a 1 km local-midnight daily *max* temperature and a ~31 km UTC daily *mean* humidity. The divergence is permitted but must be recorded via the decomposed input sidecars (Option B), not absorbed silently into the single output value. This is the input-internal analogue of rule 8. Worked example: `examples/scenarios/heat_index/`.
 10. The schema exports to LinkML's standard targets (JSON Schema, SHACL, OWL, Markdown) without error.
 
@@ -271,7 +271,7 @@ The PM2.5 records (`tests/data/valid/EnvironmentalExposureRecord-pm25_{core,reco
 
 ## 8. The questions for the community
 
-For each element above, the evaluation session collects five judgements (see `docs/workshop/narrative.md`):
+For each element above, the evaluation session collects five judgements:
 
 1. **Core?** — mandatory, or the record is meaningless.
 2. **Necessary for reproducibility?** — Recommended.
@@ -293,17 +293,20 @@ The repository already contains a 13-module LinkML implementation (`src/linkml_m
 | Element coverage | **Near-complete match.** The §4 elements are present in the prototype's modules (it was built from the same requirements). | spot-check a few PM2.5-stressed elements (`exposure_model_ensemble_member_count`, annual-vs-daily aggregation) are present and correctly typed |
 | **Tier annotations** | **Done (v0.2).** Every slot now carries an `annotations.tier` of `core` / `recommended` / `optional` / `conditionally_core` (the §4 strawman), and the LinkML `required:` flags were relaxed so only Core slots are hard-required — the two now agree. | Completeness checker reads `annotations.tier` directly (Approach A). |
 | **Health-layer de-coupling** | **Done (v0.2).** `OmopLinkage`→`HealthLayerLinkage`; `omop_concept_*`→`target_concept_*`/`concept_status`; the link field is generalised and the target named in `health_layer_target`; `phi_status` moved to the record root; the privileged `OMOP:` prefix dropped. | none — the schema now privileges no single health-data model (OMOP is one `health_layer_target` value). |
-| **Reference annotations** | **Missing.** Citations are not yet attached to slots. | Add `see_also` / annotation references (the verified §10 list) to the Core and controversial slots now; full pass later. |
-| **Top-level naming** | **Divergence (by design choice).** The prototype uses profile slot names (`observation_type`, `location`, `temporality`, `methodology`, `observation_result`) at the top level; this spec and the example sidecars use domain names (`variable_identity`, …). | **Open question for the workshop.** Documented trade-off in the schema README; decide and align examples either way. |
-| Example data | **Resolved.** Relocated to `tests/data/valid/` (passing `core`/`recommended`/`ideal` gradient) and `tests/data/invalid/` (`core_missing` counter-examples), and converted to the profile slot names so they validate; readable names recorded as `aliases` (see `issue_naming.md`). `observation_result` is no longer bound at the record root (values live in the companion data file). | none — top-level *schema* naming is still an open workshop question, but the examples now validate. |
+| **Reference annotations** | **Done (v0.2, first pass).** Every slot now carries a uniform documentation bundle: curated `examples` (values drawn from the ideal-tier scenario records so they stay coherent across modules), a `justification` annotation (why the slot earns its place — the per-slot version of the §4 "why it matters" column), an `explanation` annotation (plain-language, for readers with no climate/health-informatics background), and `see_also` references where a canonical external URL exists (standards chapters, dataset pages, DOIs). Conventions documented in the schema README. | The exhaustive per-claim *verified-citation* pass (PMIDs for every Recommended/Optional element) remains scheduled per PLAN §5. |
+| **`cf_cell_methods` generality** | **Resolved (2026-07): stays CF-specific.** The vocabulary-neutral capture of aggregation semantics is the required `temporal_aggregation_method` enum; `cf_cell_methods` preserves the verbatim CF expression for round-tripping and the rule-5 consistency check. `cell_methods` is an expression mini-language with no cross-vocabulary equivalent, so "generalising" it would mean an unspecified free string or a home-grown grammar. Rationale recorded as a `comments:` block on the slot (envar_variable.yaml). | none |
+| **Top-level naming** | **Resolved (readable names).** The schema now uses the readable domain names (`variable_identity`, `spatial_reference`, `temporal_reference`, `exposure_model`) at the top level, each mapped to its profile anatomy slot via slot-level `implements`/`exact_mappings` (`instantiates` does not constrain slot names). | none — decision recorded in the schema README and `issues/issue_naming.md`; examples and spec now agree. |
+| Example data | **Resolved.** Relocated to `tests/data/valid/` (passing `core`/`recommended`/`ideal` gradient) and `tests/data/invalid/` (`core_missing` counter-examples). Now written with the readable top-level names, matching the schema; the profile names are recorded as `aliases` on the renamed slots. `observation_result` is no longer bound at the record root (values live in the companion data file). | none. |
 | Conditionally-Core as a first-class tier | **New.** The prototype/requirements treat several slots as "mandatory in context" in prose; this spec elevates that to a named tier. | Encode the context predicates as LinkML rules (§7.7). |
 | **Temporal-linkage symmetry** | **New (v0.2).** Spatial and temporal linkage are two projections of one trajectory-resolution step; the prototype modelled the spatial axis but scattered the temporal one. | `lag_alignment_applied` relocated `TemporalReference`→`LinkageMethod`; added `clinical_date_assignment_convention` (the clinical-side mirror of the Core `day_boundary_convention`) and `partial_day_attribution_rule`; `address_period_alignment` extended with `known_travel_interval`; day-boundary cross-check added (§7.8). Folds in the GECC "linkage descriptor" gap on the temporal axis. |
 
 Net: the prototype is a faithful implementation of the requirements. Of the
 substantive v0.2 work, **(a) tier annotations and the health-layer
-de-coupling are done**; what remains is **(b) reference annotations** and
-**(c) the top-level naming decision** (a workshop question) — not a structural
-rebuild.
+de-coupling are done**, **(b) the per-slot documentation bundle (examples +
+justification + explanation + see_also first pass) is done**, and **(c) the
+top-level naming decision is resolved** (readable names; still open to
+workshop challenge). What remains is the exhaustive verified-citation pass
+(§5) — not a structural rebuild.
 
 ---
 

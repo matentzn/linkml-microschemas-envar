@@ -1,7 +1,7 @@
 # PLAN — EnVar environmental-exposure microschema, first community draft
 
 **Status:** draft for internal review, then community circulation.
-**Companion documents:** [`SPEC.md`](SPEC.md) (the element-by-element specification), the worked records under [`tests/data/valid/`](tests/data/valid/) (with counter-examples in [`tests/data/invalid/`](tests/data/invalid/)), and the workshop materials under [`docs/workshop/`](docs/workshop/).
+**Companion documents:** [`SPEC.md`](SPEC.md) (the element-by-element specification) and the worked records under [`tests/data/valid/`](tests/data/valid/) (with counter-examples in [`tests/data/invalid/`](tests/data/invalid/)).
 **Owner:** Nico Matentzoglu (EnVar implementation lead), TIS Lab (Haendel / Thessen), UNC.
 
 ---
@@ -55,7 +55,7 @@ Per the decision to **re-derive rather than rubber-stamp**, the element set in `
 3. **Add PM2.5.** Extend the set with the elements PM2.5 needs that heat does not exercise (ensemble-ML model type, cross-validation R², averaging-window semantics, satellite retrieval provenance).
 4. **Reconcile against the existing prototype.** The repository already contains a 13-module LinkML implementation. `SPEC.md`'s reconciliation appendix records, element by element, where the re-derived set **matches**, **adds to**, **drops from**, or **renames** the existing schema — so the prototype can be updated deliberately, not silently.
 
-The reconciliation appendix is also where we surface the **one open design question the existing schema already flags**: whether the top-level record should use the LinkML Microschema Profile's abstract slot names (`subject`, `observation_type`, `location`, `temporality`, `methodology`, `observation_result`) or readable domain names (`variable_identity`, `spatial_reference`, …). The profile-conformant naming is a deliberate choice with documented adoption-friction costs; the workshop is the right venue to confirm or revisit it.
+The reconciliation appendix also records the resolution of the **top-level naming question** the existing schema flagged: the record now uses readable domain names (`variable_identity`, `spatial_reference`, `temporal_reference`, `exposure_model`) rather than the profile's abstract slot names — `instantiates: MicroschemaDefinition` is a metaclass relation that does not constrain slot names, so each readable slot maps to its profile counterpart via slot-level `implements`/`exact_mappings` instead. Rationale, history, and the rejected `alias` route are recorded in the schema README and `issues/issue_naming.md`.
 
 ---
 
@@ -82,6 +82,7 @@ The community asked (implicitly, via Nico's brief) for each element to be **vali
 - **Now (this draft):** every Core element and every high-controversy element (day-boundary, WBGT equation variance, Heat-Index validity range, percentile-reference sensitivity, model-type-affects-uncertainty, PM2.5 averaging-window) carries a verified reference. References are verified to resolve (PubMed / doi.org / CrossRef / standards body) before inclusion; unverifiable claims are marked rather than dropped.
 - **Scheduled (tracked task):** a **full per-element citation pass** extending verified references to every Recommended and Optional element, and across the remaining priority variables. This is deliberately deferred until after the community has weighed in on scope — citing 70 elements exhaustively before the community trims the set is over-investment (see the "absorptive capacity" risk, §10).
 - Citations live **inline in `SPEC.md`** and are also encoded as `see_also` / annotation references on the LinkML slots, so the schema itself carries its evidence base.
+- **Done (2026-07, first pass):** every slot now carries `see_also` references where a canonical external URL exists, plus a uniform documentation bundle of curated `examples` (values drawn from the ideal-tier scenario records), a `justification` annotation (why the slot earns its place), and an `explanation` annotation (plain-language, for non-specialists — workshop pre-read friendly). Conventions are documented in the schema README ("Per-slot documentation conventions"). The exhaustive per-element *verified-citation* pass (PMIDs/DOIs for every Recommended and Optional element) remains the scheduled task above.
 
 > **Optional escalation:** a deeper multi-agent literature sweep (the `study` / Perplexity workflow) can be run for the full pass when scope is settled. It is not needed for the first community round.
 
@@ -135,7 +136,7 @@ The passing gradient lives under `tests/data/valid/` (the `core` / `recommended`
 **Pre-read (sent ~1 week ahead):** `SPEC.md`, the two worked variables, the six scenario sidecars, and a sample checker report.
 
 **Run of show:**
-1. **Frame (10 min).** The reproducibility-from-metadata thesis and the three tiers. Use the workshop narrative in [`docs/workshop/narrative.md`](docs/workshop/narrative.md).
+1. **Frame (10 min).** The reproducibility-from-metadata thesis and the three tiers.
 2. **Ground it (10 min).** Run the completeness checker live on the three TMAX scenarios — minimum → ideal → maximal — so the abstract tiers become a moving number on a real Daymet/Phoenix record.
 3. **Walk TMAX module by module (30–40 min).** For each element, collect the **five questions** on a shared scoring sheet (one row per element):
    1. Is this **Core** (mandatory)?
@@ -170,7 +171,7 @@ The passing gradient lives under `tests/data/valid/` (the `core` / `recommended`
 
 | When | Milestone |
 |---|---|
-| Week 0 (now) | PLAN.md + SPEC.md + six scenario sidecars + workshop narrative drafted; internal review. |
+| Week 0 (now) | PLAN.md + SPEC.md + six scenario sidecars drafted; internal review. |
 | Week 1 | Completeness checker (Phase 1) working against the six scenarios; references for Core/controversial elements verified and inlined. |
 | Week 2 | Pre-read circulated to invitees; logistics + scoring sheet set up. |
 | Week 3 | Community evaluation session. |

@@ -737,7 +737,12 @@ where it pays off), and is honest by construction (asserted vs verified).</p>
 <p>On each Core and Recommended slot, extend the existing <code>annotations:</code> block (which
 already carries <code>tier</code> / <code>justification</code> / <code>explanation</code>) with a <code>covered_by</code> payload
 holding one entry per standard. Standards keyed by short id:
-<code>gaia</code>, <code>degauss</code>, <code>amadeus</code>, <code>cher</code>, <code>codata</code>.</p>
+<code>omop_gaia</code>, <code>degauss</code>, <code>amadeus</code>, <code>cher</code>, <code>codata</code>.</p>
+<p><code>omop_gaia</code> is deliberately one combined id, not two. GAIA is the <strong>ETL/catalogue
+system</strong>; the actual produced <em>data series</em> is expressed in <strong>OMOP</strong> (<code>external_exposure</code>
+and friends). GAIA alone does not carry the value series, so coverage is judged against
+the whole ETL-plus-destination stack. The <code>omop_</code> prefix leaves room for a future
+<code>omop_x</code> should another OMOP-targeting pipeline need its own column.</p>
 <p>Each entry records:</p>
 <table>
 <thead>
@@ -831,7 +836,7 @@ instance layer.</p>
 <li><strong>Standards:</strong> GAIA, DeGAUSS, Amadeus, C-HER, CODATA/Essential Variables.</li>
 <li><strong>Slots:</strong> Core + Recommended only.</li>
 <li><strong>Seed data:</strong></li>
-<li>DeGAUSS / Amadeus / GAIA <code>verified</code> entries lifted from the existing
+<li>DeGAUSS / Amadeus / <code>omop_gaia</code> <code>verified</code> entries lifted from the existing
     <code>~/ws/projects/EnVar/examples/heat/COMPARISON.md</code> and <code>omop-gaia/envar/COVERED.md</code>.</li>
 <li>C-HER <code>asserted</code> from <code>~/ws/notes/niehs_standards/surveys/_raw/relatedwork/projects_inventory.md §3.2</code>
     (limited public documentation of formats — most entries will be <code>absent</code>/<code>asserted</code>
@@ -846,7 +851,7 @@ instance layer.</p>
   repo's current <code>variable_identity</code> / <code>data_layout</code> naming, so <code>evidence:</code> links
   resolve and COVERED.md-style reports regenerate against the live schema.</li>
 <li><strong>Approach 1 crosswalks.</strong> Build real source LinkML schemas + linkml-map for
-  degauss / amadeus / gaia, upgrading those <code>covered_by</code> entries <code>asserted → verified</code>
+  degauss / amadeus / omop_gaia, upgrading those <code>covered_by</code> entries <code>asserted → verified</code>
   and unlocking foreign-format <em>validation</em> ("check data produced in a different file
   format").</li>
 </ul>

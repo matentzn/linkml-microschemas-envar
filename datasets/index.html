@@ -15,6 +15,11 @@ body { margin:0; background:var(--paper); color:var(--ink);
   font:15px/1.55 Georgia,'Times New Roman',serif; }
 .wrap { max-width:1080px; margin:0 auto; padding:2.2rem 1.2rem 4rem; }
 h1 { font-size:1.9rem; margin:0 0 .3rem; letter-spacing:.01em; }
+nav.crumbs { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.74rem;
+  margin:0 0 1rem; }
+nav.crumbs a { color:var(--core); text-decoration:none; font-weight:600; }
+nav.crumbs a:hover { color:var(--recommended); }
+nav.crumbs span { color:var(--rule); margin:0 .45rem; }
 .subtitle { color:var(--muted); margin:0 0 1.6rem; max-width:64ch; }
 .subtitle code { font-size:.85em; }
 h2.group { font-size:1.12rem; border-bottom:2px solid var(--ink);
@@ -78,6 +83,9 @@ footer { margin-top:2.5rem; color:var(--muted); font-size:.8rem;
 <body>
 <div class="wrap">
 <h1>Example datasets</h1>
+<nav class="crumbs" aria-label="Site">
+<a href="../">&larr; Docs home</a><span>&middot;</span><a href="../overview/">Schema overview</a><span>&middot;</span><a href="../elements/">Element reference</a><span>&middot;</span><a href="../dashboard/">Completeness ledger</a>
+</nav>
 <p class="subtitle">Every sidecar shipped with this repository, scored live by the
 metadata-completeness checker against the schema's <code>tier</code> annotations
 (<code>core</code> / <code>recommended</code> / <code>optional</code> /

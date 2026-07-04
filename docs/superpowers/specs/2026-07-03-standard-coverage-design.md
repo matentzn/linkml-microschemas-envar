@@ -61,7 +61,13 @@ where it pays off), and is honest by construction (asserted vs verified).
 On each Core and Recommended slot, extend the existing `annotations:` block (which
 already carries `tier` / `justification` / `explanation`) with a `covered_by` payload
 holding one entry per standard. Standards keyed by short id:
-`gaia`, `degauss`, `amadeus`, `cher`, `codata`.
+`omop_gaia`, `degauss`, `amadeus`, `cher`, `codata`.
+
+`omop_gaia` is deliberately one combined id, not two. GAIA is the **ETL/catalogue
+system**; the actual produced *data series* is expressed in **OMOP** (`external_exposure`
+and friends). GAIA alone does not carry the value series, so coverage is judged against
+the whole ETL-plus-destination stack. The `omop_` prefix leaves room for a future
+`omop_x` should another OMOP-targeting pipeline need its own column.
 
 Each entry records:
 
@@ -136,7 +142,7 @@ instance layer.
 - **Standards:** GAIA, DeGAUSS, Amadeus, C-HER, CODATA/Essential Variables.
 - **Slots:** Core + Recommended only.
 - **Seed data:**
-  - DeGAUSS / Amadeus / GAIA `verified` entries lifted from the existing
+  - DeGAUSS / Amadeus / `omop_gaia` `verified` entries lifted from the existing
     `~/ws/projects/EnVar/examples/heat/COMPARISON.md` and `omop-gaia/envar/COVERED.md`.
   - C-HER `asserted` from `~/ws/notes/niehs_standards/surveys/_raw/relatedwork/projects_inventory.md §3.2`
     (limited public documentation of formats — most entries will be `absent`/`asserted`
@@ -151,7 +157,7 @@ instance layer.
   repo's current `variable_identity` / `data_layout` naming, so `evidence:` links
   resolve and COVERED.md-style reports regenerate against the live schema.
 - **Approach 1 crosswalks.** Build real source LinkML schemas + linkml-map for
-  degauss / amadeus / gaia, upgrading those `covered_by` entries `asserted → verified`
+  degauss / amadeus / omop_gaia, upgrading those `covered_by` entries `asserted → verified`
   and unlocking foreign-format *validation* ("check data produced in a different file
   format").
 

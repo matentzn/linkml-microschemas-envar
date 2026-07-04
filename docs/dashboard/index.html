@@ -62,6 +62,10 @@ h1{
   line-height:.98;letter-spacing:-.01em;font-optical-sizing:auto;max-width:14ch;
 }
 h1 em{font-style:italic;font-weight:500;color:var(--warm)}
+nav.crumbs{font-family:var(--mono);font-size:.74rem;margin-top:.55rem}
+nav.crumbs a{color:var(--ember);text-decoration:none;font-weight:600}
+nav.crumbs a:hover{color:var(--warm)}
+nav.crumbs span{color:var(--rule-strong);margin:0 .45rem}
 .lede{
   font-family:var(--serif);font-weight:400;font-size:1.06rem;color:var(--ink-2);
   max-width:42ch;line-height:1.45;
@@ -195,6 +199,9 @@ footer a{color:var(--ink-2)}
     <div class="masthead">
       <div>
         <h1>Metadata Completeness <em>Ledger</em></h1>
+        <nav class="crumbs" aria-label="Site">
+          <a href="../">← Docs home</a><span>·</span><a href="../overview/">Schema overview</a><span>·</span><a href="../elements/">Element reference</a><span>·</span><a href="../datasets/">Example datasets</a>
+        </nav>
       </div>
       <p class="lede">Every row is one exposure sidecar, ETL'd into the microschema. Watch reproducibility climb from the metadata we get today to the metadata a result actually needs.</p>
       <a class="gh" href="https://github.com/monarch-initiative/linkml-microschemas-envar" aria-label="GitHub repository">

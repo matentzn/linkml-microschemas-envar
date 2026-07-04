@@ -200,11 +200,23 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../dashboard/">
+<a class="md-nav__link" href="../../../reverse-gap-survey/">
 <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../standards-index/">
+<span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -266,6 +278,43 @@
       
     </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rules">
+<span class="md-ellipsis">
+      
+        Rules
+      
+    </span>
+</a>
+<nav aria-label="Rules" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
@@ -501,6 +550,8 @@
 
 
 
+      LinkageMethod : linkage_working_crs
+
       LinkageMethod : partial_day_attribution_rule
 
 
@@ -576,6 +627,12 @@
 <td><a href="../../slots/linkage_max_distance_to_station_m_missing_reason/">linkage_max_distance_to_station_m_missing_reason</a></td>
 <td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
 <td>Reason <code>linkage_max_distance_to_station_m</code> is null</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/linkage_working_crs/">linkage_working_crs</a></td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Coordinate reference system the point-to-cell join was actually executed in, ...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -689,6 +746,83 @@
 </tr>
 </tbody>
 </table>
+<h2 id="rules">Rules</h2>
+<h3 id="_1"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'linkage_strategy': {'equals_string': 'buffer_aggregation_around_residence'}}</code></td>
+<td><code>{'linkage_buffer_radius_m': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'linkage_strategy': {'equals_string_in': ['buffer_aggregation_around_residence', 'area_membership_residence_in_polygon', 'population_weighted_area_to_residence']}}</code></td>
+<td><code>{'linkage_buffer_aggregation_method': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'linkage_strategy': {'equals_string': 'nearest_station_with_max_distance'}}</code></td>
+<td><code>{'linkage_max_distance_to_station_m': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'lag_alignment_applied': {'equals_string_in': ['lag_n_days', 'distributed_lag']}}</code></td>
+<td><code>{'clinical_date_assignment_convention': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://degauss.org/">https://degauss.org/</a></li>
@@ -759,6 +893,7 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_buffer_aggregation_method_missing_reason</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_max_distance_to_station_m</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_max_distance_to_station_m_missing_reason</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_working_crs</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geocoding_precision_propagated</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geocoding_score_propagated</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geocoding_score_propagated_missing_reason</span>
@@ -774,6 +909,65 @@
 <span class="w">  </span><span class="nt">linkage_strategy</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_strategy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">buffer_aggregation_around_residence</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_buffer_radius_m</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_buffer_radius_m</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Buffer</span><span class="nv"> </span><span class="s">aggregation</span><span class="nv"> </span><span class="s">needs</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">radius:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">buffer</span><span class="nv"> </span><span class="s">size</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">hyperparameter</span>
+<span class="w">    </span><span class="s">that</span><span class="nv"> </span><span class="s">changes</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">cells</span><span class="nv"> </span><span class="s">contribute</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span>
+<span class="w">    </span><span class="s">"buffer</span><span class="nv"> </span><span class="s">strategies").'</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_strategy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
+<span class="w">        </span><span class="nt">equals_string_in</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">buffer_aggregation_around_residence</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">area_membership_residence_in_polygon</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">population_weighted_area_to_residence</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_buffer_aggregation_method</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_buffer_aggregation_method</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategies that aggregate over an area (buffer, polygon membership,</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">population-weighted area) must state how cell values were combined (tier conditionally_core</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">context "buffer/area strategies").</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_strategy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nearest_station_with_max_distance</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_max_distance_to_station_m</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_max_distance_to_station_m</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nearest-station linkage must state its distance cutoff — without it</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">"nearest" is unbounded and irreproducible (tier conditionally_core context "station</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">strategies").</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">lag_alignment_applied</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lag_alignment_applied</span>
+<span class="w">        </span><span class="nt">equals_string_in</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lag_n_days</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">distributed_lag</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">clinical_date_assignment_convention</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clinical_date_assignment_convention</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Day-boundary</span><span class="nv"> </span><span class="s">cross-check,</span><span class="nv"> </span><span class="s">SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">8:</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">lagged</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">event-matched</span>
+<span class="w">    </span><span class="s">analysis</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">declared,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">clinical-side</span><span class="nv"> </span><span class="s">date</span><span class="nv"> </span><span class="s">convention</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">required</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">two</span>
+<span class="w">    </span><span class="s">declared</span><span class="nv"> </span><span class="s">day</span><span class="nv"> </span><span class="s">rulers</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">compared</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"lag_alignment_applied</span>
+<span class="w">    </span><span class="s">!=</span><span class="nv"> </span><span class="s">none").'</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -995,6 +1189,46 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LinkageMethod</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">linkage_working_crs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_working_crs</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Reprojection</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">move</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">point</span><span class="nv"> </span><span class="s">across</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">cell</span><span class="nv"> </span><span class="s">boundary:</span><span class="nv"> </span><span class="s">two</span><span class="nv"> </span><span class="s">runs</span><span class="nv"> </span><span class="s">with</span>
+<span class="w">          </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">CRS</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">working</span><span class="nv"> </span><span class="s">CRS</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">linkages</span><span class="nv"> </span><span class="s">that</span>
+<span class="w">          </span><span class="s">can</span><span class="nv"> </span><span class="s">assign</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">exposures</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">address.</span><span class="nv"> </span><span class="s">Recording</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">working</span>
+<span class="w">          </span><span class="s">CRS</span><span class="nv"> </span><span class="s">makes</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">join</span><span class="nv"> </span><span class="s">reproducible</span><span class="nv"> </span><span class="s">rather</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">deployment-dependent.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Before matching patient locations to map tiles, software sometimes</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">converts all coordinates into a different mapping system that is better</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">for measuring areas. This names that intermediate system, because the choice</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">can nudge a location into a neighbouring tile.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Coordinate reference system the point-to-cell join was actually executed</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">in, as an EPSG identifier or PROJ string, when it differs from the native `SpatialReference.crs`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">— e.g. reprojecting WGS84 points into an equal-area CRS before the spatial join.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Linkage Working CRS</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">GAIA</span><span class="se">''</span><span class="s">s</span>
+<span class="w">      </span><span class="s">ETL</span><span class="nv"> </span><span class="s">descriptor</span><span class="nv"> </span><span class="s">carries</span><span class="nv"> </span><span class="s">both</span><span class="nv"> </span><span class="s">`epsg`</span><span class="nv"> </span><span class="s">(native,</span><span class="nv"> </span><span class="s">4326)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`local_epsg`</span><span class="nv"> </span><span class="s">(5070)</span><span class="nv"> </span><span class="s">—</span>
+<span class="w">      </span><span class="s">the</span><span class="nv"> </span><span class="s">working</span><span class="nv"> </span><span class="s">CRS</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">PostGIS</span><span class="nv"> </span><span class="s">join</span><span class="nv"> </span><span class="s">actually</span><span class="nv"> </span><span class="s">executes</span><span class="nv"> </span><span class="s">in.</span><span class="nv"> </span><span class="s">EnVar</span><span class="nv"> </span><span class="s">had</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">one</span>
+<span class="w">      </span><span class="s">`crs`</span><span class="nv"> </span><span class="s">slot,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">second</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">had</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">home;</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">survey</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">verdict</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">working</span><span class="nv"> </span><span class="s">CRS</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">linkage</span><span class="nv"> </span><span class="s">hyperparameter,</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">duplicate</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">CRS.'</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EPSG:5070</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CONUS Albers equal-area, the `local_epsg` the GAIA spatial join</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">runs in</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://epsg.io/5070</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LinkageMethod</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LinkageMethod</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">geocoding_precision_propagated</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geocoding_precision_propagated</span>
 <span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
@@ -1315,6 +1549,65 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LinkageMethod</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_strategy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">buffer_aggregation_around_residence</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_buffer_radius_m</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_buffer_radius_m</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Buffer</span><span class="nv"> </span><span class="s">aggregation</span><span class="nv"> </span><span class="s">needs</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">radius:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">buffer</span><span class="nv"> </span><span class="s">size</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">hyperparameter</span>
+<span class="w">    </span><span class="s">that</span><span class="nv"> </span><span class="s">changes</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">cells</span><span class="nv"> </span><span class="s">contribute</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span>
+<span class="w">    </span><span class="s">"buffer</span><span class="nv"> </span><span class="s">strategies").'</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_strategy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
+<span class="w">        </span><span class="nt">equals_string_in</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">buffer_aggregation_around_residence</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">area_membership_residence_in_polygon</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">population_weighted_area_to_residence</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_buffer_aggregation_method</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_buffer_aggregation_method</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Strategies that aggregate over an area (buffer, polygon membership,</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">population-weighted area) must state how cell values were combined (tier conditionally_core</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">context "buffer/area strategies").</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_strategy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_strategy</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nearest_station_with_max_distance</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">linkage_max_distance_to_station_m</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkage_max_distance_to_station_m</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nearest-station linkage must state its distance cutoff — without it</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">"nearest" is unbounded and irreproducible (tier conditionally_core context "station</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">strategies").</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">lag_alignment_applied</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lag_alignment_applied</span>
+<span class="w">        </span><span class="nt">equals_string_in</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lag_n_days</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">distributed_lag</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">clinical_date_assignment_convention</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">clinical_date_assignment_convention</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Day-boundary</span><span class="nv"> </span><span class="s">cross-check,</span><span class="nv"> </span><span class="s">SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">8:</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">lagged</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">event-matched</span>
+<span class="w">    </span><span class="s">analysis</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">declared,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">clinical-side</span><span class="nv"> </span><span class="s">date</span><span class="nv"> </span><span class="s">convention</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">required</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">two</span>
+<span class="w">    </span><span class="s">declared</span><span class="nv"> </span><span class="s">day</span><span class="nv"> </span><span class="s">rulers</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">compared</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"lag_alignment_applied</span>
+<span class="w">    </span><span class="s">!=</span><span class="nv"> </span><span class="s">none").'</span>
 </code></pre></div>
 </details>
 </div>

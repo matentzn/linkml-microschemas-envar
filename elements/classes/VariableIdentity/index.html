@@ -200,11 +200,23 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../dashboard/">
+<a class="md-nav__link" href="../../../reverse-gap-survey/">
 <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../standards-index/">
+<span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -266,6 +278,31 @@
       
     </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rules">
+<span class="md-ellipsis">
+      
+        Rules
+      
+    </span>
+</a>
+<nav aria-label="Rules" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
@@ -376,6 +413,12 @@
 
 
 
+      VariableIdentity : native_units_ucum
+
+      VariableIdentity : native_value_offset
+
+      VariableIdentity : native_value_scale_factor
+
       VariableIdentity : standard_name
 
       VariableIdentity : target_concept_id
@@ -392,6 +435,8 @@
 
 
       VariableIdentity : target_concept_vocabulary
+
+      VariableIdentity : unit_conversion_formula
 
       VariableIdentity : units_display
 
@@ -463,6 +508,30 @@
 <td><a href="../../slots/units_display/">units_display</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
 <td>Human-readable unit string for display purposes, e</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/native_units_ucum/">native_units_ucum</a></td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>UCUM unit of the values as the <em>source product stores them</em>, when that differ...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/native_value_scale_factor/">native_value_scale_factor</a></td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>CF-style packing multiplier applied when decoding the source's stored integer...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/native_value_offset/">native_value_offset</a></td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>CF-style packing offset applied when decoding the source's stored integers to...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/unit_conversion_formula/">unit_conversion_formula</a></td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>The conversion from the source's native representation to the values in the c...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -558,6 +627,45 @@
 </tr>
 </tbody>
 </table>
+<h2 id="rules">Rules</h2>
+<h3 id="_1"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'standard_name': {'pattern': '^CF:'}}</code></td>
+<td><code>{'cf_cell_methods': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'native_units_ucum': {'value_presence': 'PRESENT'}}</code></td>
+<td><code>{'unit_conversion_formula': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://cfconventions.org/standard-names.html">https://cfconventions.org/standard-names.html</a></li>
@@ -626,6 +734,10 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cf_cell_methods</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">units_ucum</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">units_display</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_units_ucum</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_scale_factor</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_offset</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit_conversion_formula</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_concept_vocabulary</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_concept_id</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_concept_id_missing_reason</span>
@@ -650,6 +762,35 @@
 <span class="w">  </span><span class="nt">value_data_type</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_data_type</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">standard_name</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard_name</span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^CF:'</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cf_cell_methods</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cf_cell_methods</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF-based products (a `CF:`-prefixed `standard_name`) must preserve</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">the verbatim `cell_methods` string — the context of SPEC.md validation rule 5</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">and of the `conditionally_core` tier on `cf_cell_methods`. Non-CF products are</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">exempt; their aggregation semantics live in the required `temporal_aggregation_method`.</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">native_units_ucum</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_units_ucum</span>
+<span class="w">        </span><span class="nt">value_presence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRESENT</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">unit_conversion_formula</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit_conversion_formula</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Declaring</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">declaring</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">conversion:</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`native_units_ucum`</span>
+<span class="w">    </span><span class="s">says</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">stored</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">`units_ucum`,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">math</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">bridged</span>
+<span class="w">    </span><span class="s">them</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">written</span><span class="nv"> </span><span class="s">down</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">sidecar</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">traced</span><span class="nv"> </span><span class="s">back</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">    </span><span class="s">source</span><span class="nv"> </span><span class="s">bytes</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">declared").'</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -791,14 +932,18 @@
 <span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
 <span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A daily maximum and a daily mean of the same quantity carry the same</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">standard name and units; only the aggregation statement tells them apart.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Keeping the verbatim CF string also enables round-tripping against CF/NetCDF</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">source products and the CF-consistency triple check over `standard_name`</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">+ `cf_cell_methods` + `units_ucum`.</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">daily</span><span class="nv"> </span><span class="s">maximum</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">daily</span><span class="nv"> </span><span class="s">mean</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">quantity</span><span class="nv"> </span><span class="s">carry</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span>
+<span class="w">          </span><span class="s">standard</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">units;</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">aggregation</span><span class="nv"> </span><span class="s">statement</span><span class="nv"> </span><span class="s">tells</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">apart.</span>
+<span class="w">          </span><span class="s">Keeping</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">verbatim</span><span class="nv"> </span><span class="s">CF</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">also</span><span class="nv"> </span><span class="s">enables</span><span class="nv"> </span><span class="s">round-tripping</span><span class="nv"> </span><span class="s">against</span><span class="nv"> </span><span class="s">CF/NetCDF</span>
+<span class="w">          </span><span class="s">source</span><span class="nv"> </span><span class="s">products</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">CF-consistency</span><span class="nv"> </span><span class="s">triple</span><span class="nv"> </span><span class="s">check</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">`standard_name`</span>
+<span class="w">          </span><span class="s">+</span><span class="nv"> </span><span class="s">`cf_cell_methods`</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">`units_ucum`.</span><span class="nv"> </span><span class="s">Conditionally-Core</span><span class="nv"> </span><span class="s">because</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">slot</span>
+<span class="w">          </span><span class="s">is</span><span class="nv"> </span><span class="s">CF-specific</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">design:</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">mandatory</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">`standard_name`</span><span class="nv"> </span><span class="s">uses</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">          </span><span class="s">`CF:`</span><span class="nv"> </span><span class="s">prefix</span><span class="nv"> </span><span class="s">(the</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">SPEC.md</span><span class="nv"> </span><span class="s">validation</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">5),</span><span class="nv"> </span><span class="s">while</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">non-CF</span>
+<span class="w">          </span><span class="s">product</span><span class="nv"> </span><span class="s">genuinely</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">verbatim</span><span class="nv"> </span><span class="s">`cell_methods`</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">preserve</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">its</span>
+<span class="w">          </span><span class="s">vocabulary-neutral</span><span class="nv"> </span><span class="s">aggregation</span><span class="nv"> </span><span class="s">semantics</span><span class="nv"> </span><span class="s">live</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">required</span><span class="nv"> </span><span class="s">`temporal_aggregation_method`.'</span>
 <span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
 <span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">"daily</span><span class="nv"> </span><span class="s">temperature"</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">day</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">highest</span><span class="nv"> </span><span class="s">reading,</span><span class="nv"> </span><span class="s">its</span>
@@ -891,6 +1036,157 @@
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Display Units</span>
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">°C</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">native_units_ucum</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_units_ucum</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value of 308 and a value of 35 can be the same temperature. When</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the source stores different units (or packed integers) than the companion</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">file carries, the native unit is the anchor that lets a consumer check the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">conversion and re-read the source bytes; without it the sidecar's values</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">cannot be traced back to the product.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data producers often store numbers in different units than the ones</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">shown to users — Kelvin instead of Celsius, or compressed integers that</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">need unpacking. This field records the unit the source actually uses, so</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">anyone going back to the original files knows what the raw numbers mean.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UCUM unit of the values as the *source product stores them*, when</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">that differs from `units_ucum` (the unit of the values in the companion data</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">file). Omit when the source already stores values in `units_ucum` — absence</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">means "no conversion happened". Declaring it makes `unit_conversion_formula`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">required.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Units (UCUM)</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">all</span>
+<span class="w">      </span><span class="s">three</span><span class="nv"> </span><span class="s">worked</span><span class="nv"> </span><span class="s">pipelines</span><span class="nv"> </span><span class="s">surfaced</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">independently</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">Amadeus</span><span class="nv"> </span><span class="s">ships</span><span class="nv"> </span><span class="s">`value_kelvin`/`value_celsius`</span>
+<span class="w">      </span><span class="s">twin</span><span class="nv"> </span><span class="s">columns,</span><span class="nv"> </span><span class="s">GAIA</span><span class="nv"> </span><span class="s">stores</span><span class="nv"> </span><span class="s">°C</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">K→°C</span><span class="nv"> </span><span class="s">math,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">DeGAUSS</span><span class="nv"> </span><span class="s">converts</span>
+<span class="w">      </span><span class="s">inside</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">container</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">unit</span><span class="nv"> </span><span class="s">never</span><span class="nv"> </span><span class="s">appears</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">any</span><span class="nv"> </span><span class="s">output.</span><span class="nv"> </span><span class="s">The</span><span class="nv"> </span><span class="s">Amadeus</span>
+<span class="w">      </span><span class="s">translation</span><span class="nv"> </span><span class="s">had</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">park</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">unit</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">YAML</span><span class="nv"> </span><span class="s">comment</span><span class="nv"> </span><span class="s">because</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">schema</span>
+<span class="w">      </span><span class="s">had</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">slot</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">it;</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GAIA</span><span class="nv"> </span><span class="s">scenario</span><span class="nv"> </span><span class="s">prototyped</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">key</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">hand-added</span>
+<span class="w">      </span><span class="s">`envar:*`</span><span class="nv"> </span><span class="s">PropertyValue</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">JSON-LD</span><span class="nv"> </span><span class="s">catalog</span><span class="nv"> </span><span class="s">entry</span><span class="nv"> </span><span class="s">before</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">existed</span><span class="nv"> </span><span class="s">here.'</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">K</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gridMET tmmx stores Kelvin; the Amadeus scenario emits Celsius</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">native_value_scale_factor</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_scale_factor</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Anyone re-reading the source grid directly (rather than the companion</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">file) must unpack stored integers with exactly this factor; a wrong or missing</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">factor yields physically plausible but wrong values, the worst kind of error.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Big datasets often save space by storing small whole numbers that must</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">be multiplied by a constant to get the real measurement. This is that constant.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF-style packing multiplier applied when decoding the source's stored</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">integers to physical values (`physical = stored × scale_factor + add_offset`).</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Only meaningful alongside `native_units_ucum`.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Value Scale Factor</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">THREDDS</span><span class="nv"> </span><span class="s">metadata</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Amadeus</span><span class="nv"> </span><span class="s">flow</span><span class="nv"> </span><span class="s">fetches</span><span class="nv"> </span><span class="s">declares</span><span class="nv"> </span><span class="s">`scale_factor</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">0.1`,</span><span class="nv"> </span><span class="s">`add_offset</span>
+<span class="w">      </span><span class="s">=</span><span class="nv"> </span><span class="s">220.0`,</span><span class="nv"> </span><span class="s">`_Unsigned`</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">packed</span><span class="nv"> </span><span class="s">int16</span><span class="nv"> </span><span class="s">→</span><span class="nv"> </span><span class="s">Kelvin</span><span class="nv"> </span><span class="s">decode</span><span class="nv"> </span><span class="s">convention.</span><span class="nv"> </span><span class="s">The</span><span class="nv"> </span><span class="s">survey</span>
+<span class="w">      </span><span class="s">rated</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">most</span><span class="nv"> </span><span class="s">load-bearing</span><span class="nv"> </span><span class="s">no-home</span><span class="nv"> </span><span class="s">field</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">found:</span><span class="nv"> </span><span class="s">mis-decoding</span>
+<span class="w">      </span><span class="s">produces</span><span class="nv"> </span><span class="s">garbage</span><span class="nv"> </span><span class="s">temperatures,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">nothing</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">sidecar</span><span class="nv"> </span><span class="s">recorded</span><span class="nv"> </span><span class="s">it.'</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'0.1'</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gridMET tmmx packs Kelvin as unsigned int16 with scale 0.1</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<span class="w">  </span><span class="nt">native_value_offset</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_offset</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The offset half of the unpacking convention; without it the scale factor</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">alone still decodes to the wrong physical value.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'The</span><span class="nv"> </span><span class="s">second</span><span class="nv"> </span><span class="s">constant</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">space-saving</span><span class="nv"> </span><span class="s">trick:</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">multiplying</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">          </span><span class="s">stored</span><span class="nv"> </span><span class="s">number,</span><span class="nv"> </span><span class="s">add</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">get</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">real</span><span class="nv"> </span><span class="s">measurement.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF-style packing offset applied when decoding the source's stored</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">integers to physical values (`physical = stored × scale_factor + add_offset`).</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Only meaningful alongside `native_units_ucum`.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Value Offset</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07) together</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">with `native_value_scale_factor` — the other half of the packed-value decode</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">convention the Amadeus THREDDS metadata declares and the sidecar previously</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">lost.</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'220.0'</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gridMET tmmx packing offset (unpacks to true Kelvin)</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<span class="w">  </span><span class="nt">unit_conversion_formula</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit_conversion_formula</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Twin value columns and silent container conversions are how factor-of-1.8</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">unit errors enter exposure analyses undetected. Once native units are declared,</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the bridging math is the only record of how the file's values relate to</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the source's — it is what makes the conversion checkable rather than trusted.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When the original data used different units, this spells out the exact</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">arithmetic that turned them into the numbers in the data file — like showing</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">your work in a calculation, so others can check it.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The conversion from the source's native representation to the values</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">in the companion data file, written out, e.g. `Cel = K - 273.15` or `K = stored</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">× 0.1 + 220.0; Cel = K - 273.15`. Required whenever `native_units_ucum` is declared.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unit Conversion Formula</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">Amadeus</span><span class="nv"> </span><span class="s">translation</span><span class="nv"> </span><span class="s">carried</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">exact</span><span class="nv"> </span><span class="s">math</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">YAML</span><span class="nv"> </span><span class="s">comment</span><span class="nv"> </span><span class="s">("the</span><span class="nv"> </span><span class="s">schema</span>
+<span class="w">      </span><span class="s">has</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">slot</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">it"),</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">GAIA</span><span class="nv"> </span><span class="s">scenario</span><span class="nv"> </span><span class="s">hand-added</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">`envar:unit_conversion`</span>
+<span class="w">      </span><span class="s">PropertyValue.</span><span class="nv"> </span><span class="s">The</span><span class="nv"> </span><span class="s">comparison</span><span class="nv"> </span><span class="s">table</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">EnVar</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">repo</span><span class="nv"> </span><span class="s">(COMPARISON.md</span>
+<span class="w">      </span><span class="s">§E)</span><span class="nv"> </span><span class="s">lists</span><span class="nv"> </span><span class="s">"K→°C</span><span class="nv"> </span><span class="s">conversion</span><span class="nv"> </span><span class="s">math</span><span class="nv"> </span><span class="s">recorded:</span><span class="nv"> </span><span class="s">❌"</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">every</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">slot</span>
+<span class="w">      </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">fix.'</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">K = stored * 0.1 + 220.0; Cel = K - 273.15</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gridMET tmmx unpack-then-convert chain in the Amadeus scenario</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1155,6 +1451,35 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">standard_name</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard_name</span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^CF:'</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cf_cell_methods</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cf_cell_methods</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF-based products (a `CF:`-prefixed `standard_name`) must preserve</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">the verbatim `cell_methods` string — the context of SPEC.md validation rule 5</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">and of the `conditionally_core` tier on `cf_cell_methods`. Non-CF products are</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">exempt; their aggregation semantics live in the required `temporal_aggregation_method`.</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">native_units_ucum</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_units_ucum</span>
+<span class="w">        </span><span class="nt">value_presence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRESENT</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">unit_conversion_formula</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit_conversion_formula</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Declaring</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">declaring</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">conversion:</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`native_units_ucum`</span>
+<span class="w">    </span><span class="s">says</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">stored</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">`units_ucum`,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">math</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">bridged</span>
+<span class="w">    </span><span class="s">them</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">written</span><span class="nv"> </span><span class="s">down</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">sidecar</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">traced</span><span class="nv"> </span><span class="s">back</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">    </span><span class="s">source</span><span class="nv"> </span><span class="s">bytes</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">declared").'</span>
 </code></pre></div>
 </details>
 </div>

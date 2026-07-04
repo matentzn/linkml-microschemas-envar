@@ -200,11 +200,23 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../dashboard/">
+<a class="md-nav__link" href="../../../reverse-gap-survey/">
 <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../standards-index/">
+<span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -434,7 +446,7 @@
 <tbody>
 <tr>
 <td><a href="../../slots/native_spatial_resolution_m/">native_spatial_resolution_m</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>1 <br/> <a href="../../types/Float/">Float</a></td>
 <td>Native spatial resolution of the source product in metres</td>
 <td>direct</td>
 </tr>
@@ -624,6 +636,9 @@
 <span class="w">  </span><span class="nt">extraction_method</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extraction_method</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">native_spatial_resolution_m</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_spatial_resolution_m</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">target_geography_type</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_geography_type</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -651,6 +666,9 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">extraction_method</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extraction_method</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">native_spatial_resolution_m</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_spatial_resolution_m</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">target_geography_type</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_geography_type</span>
@@ -691,6 +709,7 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">native_spatial_resolution_descriptor</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_spatial_resolution_descriptor</span>
 <span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
@@ -858,6 +877,11 @@
 <span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
 <span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">      </span><span class="nt">tier_context</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier_context</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cross-module — Core iff linkage_method.linkage_strategy is buffer_aggregation_around_residence.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Not expressible as a class rule (rules cannot reach across classes), so</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.</span>
 <span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
 <span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">For buffer-based strategies the radius is a hyperparameter that changes</span>
@@ -917,6 +941,12 @@
 <span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
 <span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">      </span><span class="nt">tier_context</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier_context</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cross-module — Core iff spatial_reference.extraction_method is population_weighted_mean</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">OR linkage_method.linkage_strategy is population_weighted_area_to_residence.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">The disjunction spans two classes, so it is not expressible as a class rule;</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.</span>
 <span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
 <span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Population-weighted values depend on which population dataset and census</span>

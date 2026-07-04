@@ -17,6 +17,10 @@
          <lastmod>2026-07-04</lastmod>
     </url>
     <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/reverse-gap-survey/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/</loc>
          <lastmod>2026-07-04</lastmod>
     </url>
@@ -641,6 +645,10 @@
          <lastmod>2026-07-04</lastmod>
     </url>
     <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_working_crs/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/location/</loc>
          <lastmod>2026-07-04</lastmod>
     </url>
@@ -669,6 +677,10 @@
          <lastmod>2026-07-04</lastmod>
     </url>
     <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/missing_value_sentinel/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/model_aggregate_uncertainty/</loc>
          <lastmod>2026-07-04</lastmod>
     </url>
@@ -682,6 +694,22 @@
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_spatial_resolution_m/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_units_ucum/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_value_column/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_value_offset/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_value_scale_factor/</loc>
          <lastmod>2026-07-04</lastmod>
     </url>
     <url>
@@ -1045,6 +1073,10 @@
          <lastmod>2026-07-04</lastmod>
     </url>
     <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/unit_conversion_formula/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/units_display/</loc>
          <lastmod>2026-07-04</lastmod>
     </url>
@@ -1186,6 +1218,10 @@
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/slides/architecture-speaker-notes/</loc>
+         <lastmod>2026-07-04</lastmod>
+    </url>
+    <url>
+         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/standards-index/</loc>
          <lastmod>2026-07-04</lastmod>
     </url>
     <url>

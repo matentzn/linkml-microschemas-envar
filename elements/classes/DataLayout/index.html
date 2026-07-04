@@ -200,11 +200,23 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../../dashboard/">
+<a class="md-nav__link" href="../../../reverse-gap-survey/">
 <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../standards-index/">
+<span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -266,6 +278,25 @@
       
     </span>
 </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rules">
+<span class="md-ellipsis">
+      
+        Rules
+      
+    </span>
+</a>
+<nav aria-label="Rules" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+</span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
@@ -352,6 +383,8 @@
 <pre class="mermaid"><code> classDiagram
     class DataLayout
     click DataLayout href "../../classes/DataLayout/"
+      DataLayout : native_value_column
+
       DataLayout : quality_flag_column
 
       DataLayout : quality_flag_column_missing_reason
@@ -449,6 +482,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../../slots/native_value_column/">native_value_column</a></td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of a second column carrying the same values in the source's <em>native</em> uni...</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../../slots/value_uncertainty_column/">value_uncertainty_column</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
 <td>Name of the column carrying per-value uncertainty (e</td>
@@ -517,6 +556,26 @@
 </tr>
 </tbody>
 </table>
+<h2 id="rules">Rules</h2>
+<h3 id="_1"></h3>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+<th>Elseconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'table_orientation': {'equals_string': 'long'}}</code></td>
+<td><code>{'variable_column': {'required': True}, 'variable_key': {'required': True}}</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="annotations">Annotations</h3>
 <table>
@@ -578,6 +637,7 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject_column</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_column</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_column</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column_missing_reason</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column</span>
@@ -589,6 +649,24 @@
 <span class="w">  </span><span class="nt">value_column</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">table_orientation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">variable_column</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">variable_key</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Long-format</span><span class="nv"> </span><span class="s">layouts</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">discriminator:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">shared</span>
+<span class="w">    </span><span class="s">value</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">interpretable</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">discriminates</span>
+<span class="w">    </span><span class="s">variables</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`variable_key`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">selects</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span>
+<span class="w">    </span><span class="s">(SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">7;</span><span class="nv"> </span><span class="s">tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"long</span><span class="nv"> </span><span class="s">orientation").'</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -803,6 +881,43 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">native_value_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When a producer ships both unit representations, binding only one leaves</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an unexplained column in the data file and hides the cheapest available</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">cross-check (recomputing one column from the other via `unit_conversion_formula`).</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some data files helpfully include the same measurement twice, in two</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">units — like a column in Kelvin next to one in Celsius. This names that</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">second column so it is accounted for rather than mysterious.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of a second column carrying the same values in the source's</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">*native* units (`VariableIdentity.native_units_ucum`), when the companion file</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">ships both, e.g. Amadeus's `value_kelvin` next to `value_celsius`. `value_column`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">stays the binding for the values in `units_ucum`; this binds the native-unit</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">twin.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Value Column</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">Amadeus</span><span class="nv"> </span><span class="s">pipeline</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">CSV</span><span class="nv"> </span><span class="s">carries</span><span class="nv"> </span><span class="s">`value_kelvin`</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`value_celsius`</span><span class="nv"> </span><span class="s">twin</span>
+<span class="w">      </span><span class="s">columns,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`DataLayout`</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">bind</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native-unit</span><span class="nv"> </span><span class="s">copy</span>
+<span class="w">      </span><span class="s">had</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">home</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">very</span><span class="nv"> </span><span class="s">existence</span><span class="nv"> </span><span class="s">went</span><span class="nv"> </span><span class="s">unrecorded.</span><span class="nv"> </span><span class="s">Rider</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native-unit</span>
+<span class="w">      </span><span class="s">conversion</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">envar_variable</span><span class="nv"> </span><span class="s">(`native_units_ucum`,</span><span class="nv"> </span><span class="s">`unit_conversion_formula`).'</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_kelvin</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Amadeus gridMET output ships Kelvin and Celsius side by side</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">value_uncertainty_column</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column</span>
 <span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
@@ -917,6 +1032,24 @@
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">table_orientation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">variable_column</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">variable_key</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Long-format</span><span class="nv"> </span><span class="s">layouts</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">discriminator:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">shared</span>
+<span class="w">    </span><span class="s">value</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">interpretable</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">discriminates</span>
+<span class="w">    </span><span class="s">variables</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`variable_key`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">selects</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span>
+<span class="w">    </span><span class="s">(SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">7;</span><span class="nv"> </span><span class="s">tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"long</span><span class="nv"> </span><span class="s">orientation").'</span>
 </code></pre></div>
 </details>
 </div>

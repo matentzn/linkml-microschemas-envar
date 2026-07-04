@@ -505,14 +505,41 @@
   
   
     <li class="md-nav__item">
-      <a href="../dashboard/" class="md-nav__link">
+      <a href="../reverse-gap-survey/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standards-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -1211,6 +1238,10 @@ EnVar metadata layer:</p>
 <td>How a gridded value is attached to a patient location</td>
 </tr>
 <tr>
+<td><a href="slots/linkage_working_crs/">linkage_working_crs</a></td>
+<td>Coordinate reference system the point-to-cell join was actually executed in, ...</td>
+</tr>
+<tr>
 <td><a href="slots/location/">location</a></td>
 <td>Spatial metadata specifying where the observation was made - geolocation, pla...</td>
 </tr>
@@ -1239,6 +1270,10 @@ EnVar metadata layer:</p>
 <td>Controlled reason a nullable slot is null</td>
 </tr>
 <tr>
+<td><a href="slots/missing_value_sentinel/">missing_value_sentinel</a></td>
+<td>The stored value that means "missing" in the source product's files, verbatim...</td>
+</tr>
+<tr>
 <td><a href="slots/model_aggregate_uncertainty/">model_aggregate_uncertainty</a></td>
 <td>Summary statistics for the model as a whole — cross-validation metrics and wh...</td>
 </tr>
@@ -1253,6 +1288,22 @@ EnVar metadata layer:</p>
 <tr>
 <td><a href="slots/native_spatial_resolution_m/">native_spatial_resolution_m</a></td>
 <td>Native spatial resolution of the source product in metres</td>
+</tr>
+<tr>
+<td><a href="slots/native_units_ucum/">native_units_ucum</a></td>
+<td>UCUM unit of the values as the <em>source product stores them</em>, when that differ...</td>
+</tr>
+<tr>
+<td><a href="slots/native_value_column/">native_value_column</a></td>
+<td>Name of a second column carrying the same values in the source's <em>native</em> uni...</td>
+</tr>
+<tr>
+<td><a href="slots/native_value_offset/">native_value_offset</a></td>
+<td>CF-style packing offset applied when decoding the source's stored integers to...</td>
+</tr>
+<tr>
+<td><a href="slots/native_value_scale_factor/">native_value_scale_factor</a></td>
+<td>CF-style packing multiplier applied when decoding the source's stored integer...</td>
 </tr>
 <tr>
 <td><a href="slots/observation_result/">observation_result</a></td>
@@ -1613,6 +1664,10 @@ EnVar metadata layer:</p>
 <tr>
 <td><a href="slots/uncertainty/">uncertainty</a></td>
 <td>Uncertainty object — see envar_uncertainty</td>
+</tr>
+<tr>
+<td><a href="slots/unit_conversion_formula/">unit_conversion_formula</a></td>
+<td>The conversion from the source's native representation to the values in the c...</td>
 </tr>
 <tr>
 <td><a href="slots/units_display/">units_display</a></td>

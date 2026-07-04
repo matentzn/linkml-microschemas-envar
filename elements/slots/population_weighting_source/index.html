@@ -399,14 +399,41 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dashboard/" class="md-nav__link">
+      <a href="../../../reverse-gap-survey/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../standards-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -770,6 +797,10 @@
 <td>conditionally_core</td>
 </tr>
 <tr>
+<td>tier_context</td>
+<td>cross-module — Core iff spatial_reference.extraction_method is population_weighted_mean OR linkage_method.linkage_strategy is population_weighted_area_to_residence. The disjunction spans two classes, so it is not expressible as a class rule; the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.</td>
+</tr>
+<tr>
 <td>justification</td>
 <td>Population-weighted values depend on which population dataset and census vintage supplied the weights; the same grid weighted by 2010 versus 2020 populations gives different exposures. Without the source, a weighted value cannot be reproduced or compared with other weighted products.</td>
 </tr>
@@ -809,6 +840,12 @@
 <span class="w">  </span><span class="nt">tier</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">  </span><span class="nt">tier_context</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier_context</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cross-module — Core iff spatial_reference.extraction_method is population_weighted_mean</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">OR linkage_method.linkage_strategy is population_weighted_area_to_residence.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">The disjunction spans two classes, so it is not expressible as a class rule;</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.</span>
 <span class="w">  </span><span class="nt">justification</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Population-weighted values depend on which population dataset and census</span>

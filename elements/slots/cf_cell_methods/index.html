@@ -399,14 +399,41 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dashboard/" class="md-nav__link">
+      <a href="../../../reverse-gap-survey/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Completeness ledger
+    Reverse gap survey
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../standards-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Standards index
   
 
     
@@ -688,9 +715,9 @@
 
 <h1 id="slot-cf-cell-methods-cf_cell_methods">Slot: CF Cell Methods (cf_cell_methods)</h1>
 <p><em>CF <code>cell_methods</code> string describing how the value summarises sub-period values, e.g. <code>time: maximum</code> for Tmax, <code>time: mean</code> for daily mean.</em></p>
-<p><strong>Tier:</strong> <code>core</code></p>
+<p><strong>Tier:</strong> <code>conditionally_core</code></p>
 <h2 id="why-this-slot-matters">Why this slot matters</h2>
-<p>A daily maximum and a daily mean of the same quantity carry the same standard name and units; only the aggregation statement tells them apart. Keeping the verbatim CF string also enables round-tripping against CF/NetCDF source products and the CF-consistency triple check over <code>standard_name</code> + <code>cf_cell_methods</code> + <code>units_ucum</code>.</p>
+<p>A daily maximum and a daily mean of the same quantity carry the same standard name and units; only the aggregation statement tells them apart. Keeping the verbatim CF string also enables round-tripping against CF/NetCDF source products and the CF-consistency triple check over <code>standard_name</code> + <code>cf_cell_methods</code> + <code>units_ucum</code>. Conditionally-Core because the slot is CF-specific by design: it is mandatory when <code>standard_name</code> uses the <code>CF:</code> prefix (the context of SPEC.md validation rule 5), while a non-CF product genuinely has no verbatim <code>cell_methods</code> string to preserve — its vocabulary-neutral aggregation semantics live in the required <code>temporal_aggregation_method</code>.</p>
 <h2 id="in-plain-terms">In plain terms</h2>
 <p>A "daily temperature" value could be the day's highest reading, its average, or its lowest — very different numbers. This short standard phrase (like "time: maximum") records which one it is, in the exact wording that climate-data software already understands.</p>
 <div>
@@ -784,11 +811,11 @@
 <tbody>
 <tr>
 <td>tier</td>
-<td>core</td>
+<td>conditionally_core</td>
 </tr>
 <tr>
 <td>justification</td>
-<td>A daily maximum and a daily mean of the same quantity carry the same standard name and units; only the aggregation statement tells them apart. Keeping the verbatim CF string also enables round-tripping against CF/NetCDF source products and the CF-consistency triple check over <code>standard_name</code> + <code>cf_cell_methods</code> + <code>units_ucum</code>.</td>
+<td>A daily maximum and a daily mean of the same quantity carry the same standard name and units; only the aggregation statement tells them apart. Keeping the verbatim CF string also enables round-tripping against CF/NetCDF source products and the CF-consistency triple check over <code>standard_name</code> + <code>cf_cell_methods</code> + <code>units_ucum</code>. Conditionally-Core because the slot is CF-specific by design: it is mandatory when <code>standard_name</code> uses the <code>CF:</code> prefix (the context of SPEC.md validation rule 5), while a non-CF product genuinely has no verbatim <code>cell_methods</code> string to preserve — its vocabulary-neutral aggregation semantics live in the required <code>temporal_aggregation_method</code>.</td>
 </tr>
 <tr>
 <td>explanation</td>
@@ -825,14 +852,18 @@
 <span class="nt">annotations</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">tier</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
 <span class="w">  </span><span class="nt">justification</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A daily maximum and a daily mean of the same quantity carry the same standard</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">name and units; only the aggregation statement tells them apart. Keeping the</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">verbatim CF string also enables round-tripping against CF/NetCDF source products</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and the CF-consistency triple check over `standard_name` + `cf_cell_methods`</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">+ `units_ucum`.</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;A</span><span class="nv"> </span><span class="s">daily</span><span class="nv"> </span><span class="s">maximum</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">daily</span><span class="nv"> </span><span class="s">mean</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">quantity</span><span class="nv"> </span><span class="s">carry</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">same</span><span class="nv"> </span><span class="s">standard</span>
+<span class="w">      </span><span class="s">name</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">units;</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">aggregation</span><span class="nv"> </span><span class="s">statement</span><span class="nv"> </span><span class="s">tells</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">apart.</span><span class="nv"> </span><span class="s">Keeping</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">verbatim</span><span class="nv"> </span><span class="s">CF</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">also</span><span class="nv"> </span><span class="s">enables</span><span class="nv"> </span><span class="s">round-tripping</span><span class="nv"> </span><span class="s">against</span><span class="nv"> </span><span class="s">CF/NetCDF</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">products</span>
+<span class="w">      </span><span class="s">and</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">CF-consistency</span><span class="nv"> </span><span class="s">triple</span><span class="nv"> </span><span class="s">check</span><span class="nv"> </span><span class="s">over</span><span class="nv"> </span><span class="s">`standard_name`</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">`cf_cell_methods`</span>
+<span class="w">      </span><span class="s">+</span><span class="nv"> </span><span class="s">`units_ucum`.</span><span class="nv"> </span><span class="s">Conditionally-Core</span><span class="nv"> </span><span class="s">because</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">slot</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">CF-specific</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">design:</span>
+<span class="w">      </span><span class="s">it</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">mandatory</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">`standard_name`</span><span class="nv"> </span><span class="s">uses</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">`CF:`</span><span class="nv"> </span><span class="s">prefix</span><span class="nv"> </span><span class="s">(the</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">SPEC.md</span>
+<span class="w">      </span><span class="s">validation</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">5),</span><span class="nv"> </span><span class="s">while</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">non-CF</span><span class="nv"> </span><span class="s">product</span><span class="nv"> </span><span class="s">genuinely</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">verbatim</span><span class="nv"> </span><span class="s">`cell_methods`</span>
+<span class="w">      </span><span class="s">string</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">preserve</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">vocabulary-neutral</span><span class="nv"> </span><span class="s">aggregation</span><span class="nv"> </span><span class="s">semantics</span><span class="nv"> </span><span class="s">live</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">required</span><span class="nv"> </span><span class="s">`temporal_aggregation_method`.&#39;</span>
 <span class="w">  </span><span class="nt">explanation</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;A</span><span class="nv"> </span><span class="s">&quot;daily</span><span class="nv"> </span><span class="s">temperature&quot;</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">day</span><span class="se">&#39;&#39;</span><span class="s">s</span><span class="nv"> </span><span class="s">highest</span><span class="nv"> </span><span class="s">reading,</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">average,</span>

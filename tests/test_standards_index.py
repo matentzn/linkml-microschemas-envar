@@ -96,8 +96,12 @@ def _covered_candidates() -> set[str]:
     return covered
 
 
-@pytest.mark.parametrize("_", [None])
-def test_every_todo_candidate_has_a_verdict(_):
+def test_every_todo_candidate_has_a_verdict():
+    if not TODO.exists():
+        pytest.skip(
+            "todo.md is a local-only scratch file (gitignored); "
+            "the candidate-coverage gate only runs where it is present."
+        )
     missing = _todo_candidates() - _covered_candidates()
     assert not missing, (
         "todo.md candidates with no verdict in standards.yaml "

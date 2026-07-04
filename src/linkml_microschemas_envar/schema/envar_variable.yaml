@@ -51,6 +51,10 @@ classes:
     - cf_cell_methods
     - units_ucum
     - units_display
+    - native_units_ucum
+    - native_value_scale_factor
+    - native_value_offset
+    - unit_conversion_formula
     - target_concept_vocabulary
     - target_concept_id
     - target_concept_id_missing_reason
@@ -70,6 +74,35 @@ classes:
         required: true
       value_data_type:
         required: true
+    rules:
+    - description: >-
+        CF-based products (a `CF:`-prefixed `standard_name`) must preserve the
+        verbatim `cell_methods` string — the context of SPEC.md validation
+        rule 5 and of the `conditionally_core` tier on `cf_cell_methods`.
+        Non-CF products are exempt; their aggregation semantics live in the
+        required `temporal_aggregation_method`.
+      preconditions:
+        slot_conditions:
+          standard_name:
+            pattern: "^CF:"
+      postconditions:
+        slot_conditions:
+          cf_cell_methods:
+            required: true
+    - description: >-
+        Declaring native units is declaring a conversion: once
+        `native_units_ucum` says the source stored something other than
+        `units_ucum`, the math that bridged them must be written down or the
+        sidecar's values cannot be traced back to the source bytes (tier
+        conditionally_core context "native units declared").
+      preconditions:
+        slot_conditions:
+          native_units_ucum:
+            value_presence: PRESENT
+      postconditions:
+        slot_conditions:
+          unit_conversion_formula:
+            required: true
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -188,13 +221,19 @@ slots:
     - https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods
 
     annotations:
-      tier: core
+      tier: conditionally_core
       justification: >-
         A daily maximum and a daily mean of the same quantity carry the same
         standard name and units; only the aggregation statement tells them
         apart. Keeping the verbatim CF string also enables round-tripping
         against CF/NetCDF source products and the CF-consistency triple check
         over `standard_name` + `cf_cell_methods` + `units_ucum`.
+        Conditionally-Core because the slot is CF-specific by design: it is
+        mandatory when `standard_name` uses the `CF:` prefix (the context of
+        SPEC.md validation rule 5), while a non-CF product genuinely has no
+        verbatim `cell_methods` string to preserve — its vocabulary-neutral
+        aggregation semantics live in the required
+        `temporal_aggregation_method`.
       explanation: >-
         A "daily temperature" value could be the day's highest reading, its
         average, or its lowest — very different numbers. This short standard
@@ -245,6 +284,138 @@ slots:
         The pretty version of the unit for people to read, like "°C". The
         machine version (`Cel`) is stored separately; this one exists purely
         for showing on screen or in print.
+  native_units_ucum:
+    title: Native Units (UCUM)
+    range: string
+    description: >-
+      UCUM unit of the values as the *source product stores them*, when that
+      differs from `units_ucum` (the unit of the values in the companion data
+      file). Omit when the source already stores values in `units_ucum` —
+      absence means "no conversion happened". Declaring it makes
+      `unit_conversion_formula` required.
+    examples:
+    - value: K
+      description: gridMET tmmx stores Kelvin; the Amadeus scenario emits Celsius
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07): all three worked pipelines surfaced the same gap
+      independently — Amadeus ships `value_kelvin`/`value_celsius` twin
+      columns, GAIA stores °C with no record of the K→°C math, and DeGAUSS
+      converts inside the container so the native unit never appears in any
+      output. The Amadeus translation had to park the native unit in a YAML
+      comment because the schema had no slot for it; the GAIA scenario
+      prototyped exactly this key as a hand-added `envar:*` PropertyValue in
+      its JSON-LD catalog entry before it existed here.
+    see_also:
+    - https://ucum.org/
+
+    annotations:
+      tier: recommended
+      justification: >-
+        A value of 308 and a value of 35 can be the same temperature. When
+        the source stores different units (or packed integers) than the
+        companion file carries, the native unit is the anchor that lets a
+        consumer check the conversion and re-read the source bytes; without
+        it the sidecar's values cannot be traced back to the product.
+      explanation: >-
+        Data producers often store numbers in different units than the ones
+        shown to users — Kelvin instead of Celsius, or compressed integers
+        that need unpacking. This field records the unit the source actually
+        uses, so anyone going back to the original files knows what the raw
+        numbers mean.
+  native_value_scale_factor:
+    title: Native Value Scale Factor
+    range: float
+    description: >-
+      CF-style packing multiplier applied when decoding the source's stored
+      integers to physical values (`physical = stored × scale_factor +
+      add_offset`). Only meaningful alongside `native_units_ucum`.
+    examples:
+    - value: "0.1"
+      description: gridMET tmmx packs Kelvin as unsigned int16 with scale 0.1
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07): the THREDDS metadata the Amadeus flow fetches declares
+      `scale_factor = 0.1`, `add_offset = 220.0`, `_Unsigned` — the packed
+      int16 → Kelvin decode convention. The survey rated this the single
+      most load-bearing no-home field it found: mis-decoding produces
+      garbage temperatures, and nothing in the sidecar recorded it.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data
+
+    annotations:
+      tier: optional
+      justification: >-
+        Anyone re-reading the source grid directly (rather than the companion
+        file) must unpack stored integers with exactly this factor; a wrong
+        or missing factor yields physically plausible but wrong values, the
+        worst kind of error.
+      explanation: >-
+        Big datasets often save space by storing small whole numbers that
+        must be multiplied by a constant to get the real measurement. This
+        is that constant.
+  native_value_offset:
+    title: Native Value Offset
+    range: float
+    description: >-
+      CF-style packing offset applied when decoding the source's stored
+      integers to physical values (`physical = stored × scale_factor +
+      add_offset`). Only meaningful alongside `native_units_ucum`.
+    examples:
+    - value: "220.0"
+      description: gridMET tmmx packing offset (unpacks to true Kelvin)
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07) together with `native_value_scale_factor` — the other half of
+      the packed-value decode convention the Amadeus THREDDS metadata
+      declares and the sidecar previously lost.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data
+
+    annotations:
+      tier: optional
+      justification: >-
+        The offset half of the unpacking convention; without it the scale
+        factor alone still decodes to the wrong physical value.
+      explanation: >-
+        The second constant in the space-saving trick: after multiplying the
+        stored number, add this to get the real measurement.
+  unit_conversion_formula:
+    title: Unit Conversion Formula
+    range: string
+    description: >-
+      The conversion from the source's native representation to the values in
+      the companion data file, written out, e.g. `Cel = K - 273.15` or
+      `K = stored × 0.1 + 220.0; Cel = K - 273.15`. Required whenever
+      `native_units_ucum` is declared.
+    examples:
+    - value: "K = stored * 0.1 + 220.0; Cel = K - 273.15"
+      description: gridMET tmmx unpack-then-convert chain in the Amadeus scenario
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07): the Amadeus translation carried this exact math only as a
+      YAML comment ("the schema has no slot for it"), and the GAIA scenario
+      hand-added it as an `envar:unit_conversion` PropertyValue. The
+      comparison table in the EnVar pipeline repo (COMPARISON.md §E) lists
+      "K→°C conversion math recorded: ❌" for every pipeline — this slot is
+      the fix.
+
+    annotations:
+      tier: conditionally_core
+      justification: >-
+        Twin value columns and silent container conversions are how
+        factor-of-1.8 unit errors enter exposure analyses undetected. Once
+        native units are declared, the bridging math is the only record of
+        how the file's values relate to the source's — it is what makes the
+        conversion checkable rather than trusted.
+      explanation: >-
+        When the original data used different units, this spells out the
+        exact arithmetic that turned them into the numbers in the data file
+        — like showing your work in a calculation, so others can check it.
   target_concept_vocabulary:
     title: Target Concept Vocabulary
     range: string

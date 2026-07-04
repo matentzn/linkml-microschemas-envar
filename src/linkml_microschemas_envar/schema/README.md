@@ -143,6 +143,15 @@ order inside the slot definition:
 5. **`annotations`** — the EnVar-specific tags, in this order:
    - `tier` — `core` / `recommended` / `optional` / `conditionally_core`;
      machine-read by the completeness checker (SPEC.md §3).
+   - `tier_context` — only on the few `conditionally_core` slots whose
+     context is *not* encoded in the schema itself: the two cross-class
+     contexts evaluated in the checker's `RESIDUAL_CONTEXT_PREDICATES`, and
+     the not-machine-decidable case (`source_homogenisation_status`). All
+     other conditionally-core contexts are LinkML class `rules` on the
+     owning class (preconditions limited to `equals_string` /
+     `equals_string_in` / `pattern` / `value_presence`) or `required: true` inside a
+     conditional block — write new contexts there, not as checker lambdas;
+     `tests/test_schema.py` enforces this.
    - `justification` — 1–2 sentences on *why the slot earns its place*: the
      concrete analytical, reproducibility, or legal consequence of omitting
      it. This is the per-slot version of SPEC.md's "why it matters" column.
@@ -154,7 +163,7 @@ order inside the slot definition:
 deliberately: LinkML has no mechanism for adding true metaslots without
 forking the metamodel, and annotations are exactly its extension point for
 this (the `tier` tag set the precedent). Anything reading the schema
-programmatically (dashboard, docs generation, completeness checker) can pick
+programmatically (datasets ledger, docs generation, completeness checker) can pick
 them up from `annotations`, same as `tier`.
 
 ## How to validate

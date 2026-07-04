@@ -54,6 +54,8 @@ classes:
         required: true
       extraction_method:
         required: true
+      native_spatial_resolution_m:
+        required: true
       target_geography_type:
         required: true
 
@@ -222,6 +224,11 @@ slots:
 
     annotations:
       tier: conditionally_core
+      tier_context: >-
+        cross-module — Core iff linkage_method.linkage_strategy is
+        buffer_aggregation_around_residence. Not expressible as a class rule
+        (rules cannot reach across classes), so the checker evaluates it in
+        RESIDUAL_CONTEXT_PREDICATES.
       justification: >-
         For buffer-based strategies the radius is a hyperparameter that changes
         the assigned exposure — greenspace within 500 m and within 2500 m of a
@@ -268,6 +275,12 @@ slots:
 
     annotations:
       tier: conditionally_core
+      tier_context: >-
+        cross-module — Core iff spatial_reference.extraction_method is
+        population_weighted_mean OR linkage_method.linkage_strategy is
+        population_weighted_area_to_residence. The disjunction spans two
+        classes, so it is not expressible as a class rule; the checker
+        evaluates it in RESIDUAL_CONTEXT_PREDICATES.
       justification: >-
         Population-weighted values depend on which population dataset and
         census vintage supplied the weights; the same grid weighted by 2010

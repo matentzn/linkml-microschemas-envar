@@ -50,6 +50,19 @@ classes:
     slot_usage:
       exposure_model_type:
         required: true
+    rules:
+    - description: >-
+        Ensemble products must state their member count — ensemble spread is
+        meaningless without knowing how many realisations it summarises
+        (tier conditionally_core context "ensemble models").
+      preconditions:
+        slot_conditions:
+          exposure_model_type:
+            equals_string: ensemble_machine_learning
+      postconditions:
+        slot_conditions:
+          exposure_model_ensemble_member_count:
+            required: true
 
 #────────────────────────────────────────────────────────────────
 # SLOTS

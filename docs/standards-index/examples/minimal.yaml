@@ -1,0 +1,28 @@
+entries:
+  - id: dcat
+    name: DCAT
+    full_name: Data Catalog Vocabulary
+    standard_class: general_standard
+    spec_url: https://www.w3.org/TR/vocab-dcat-3/
+    governance: W3C Recommendation
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: General dataset-discovery metadata standard used by GAIA catalog files.
+    envar_relation: Overlaps source_dataset discovery; complementary, operates at dataset layer not instance layer.
+    evidence:
+      - https://www.w3.org/TR/vocab-dcat-3/
+    reconciliation: already_catalogued
+    reconciliation_ref: projects_inventory.md §1.1 (GAIA meta_dcat)
+    source_candidates: []
+triaged:
+  - id: geonames
+    name: GeoNames
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Gazetteer of place names, not an exposure-metadata standard.
+    source_candidates:
+      - GeoNames

@@ -362,6 +362,11 @@ slots:
 
     annotations:
       tier: conditionally_core
+      tier_context: >-
+        not machine-decidable — the stated context is "station-based
+        products", which cannot be read reliably off the sidecar (no slot
+        declares station-ness). No rule and no checker predicate; the slot
+        scores as Optional out of context by design.
       justification: >-
         Using a non-homogenised station product (e.g. GHCN-Daily) for trend
         work without saying so is a known trap: station moves and instrument

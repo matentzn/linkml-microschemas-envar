@@ -19,3 +19,8 @@ check +FILES:
 # Regenerate docs/datasets/index.html — the computed example-dataset ledger
 gen-datasets-ledger:
     uv run python scripts/gen_datasets_ledger.py
+
+# Validate the standards registry and regenerate docs/standards-index/index.md
+standards-index:
+    uv run linkml-validate -s docs/standards-index/standards_index.schema.yaml -C StandardsIndex docs/standards-index/standards.yaml
+    uv run python scripts/gen_standards_index.py

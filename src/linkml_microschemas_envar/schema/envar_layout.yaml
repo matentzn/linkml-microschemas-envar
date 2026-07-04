@@ -43,6 +43,7 @@ classes:
     - variable_key
     - subject_column
     - time_column
+    - native_value_column
     - value_uncertainty_column
     - value_uncertainty_column_missing_reason
     - quality_flag_column
@@ -52,6 +53,23 @@ classes:
         required: true
       value_column:
         required: true
+    rules:
+    - description: >-
+        Long-format layouts must name the variable discriminator: the shared
+        value column is only interpretable once `variable_column` says which
+        column discriminates variables and `variable_key` says which row
+        value selects this record's rows (SPEC.md rule 7; tier
+        conditionally_core context "long orientation").
+      preconditions:
+        slot_conditions:
+          table_orientation:
+            equals_string: long
+      postconditions:
+        slot_conditions:
+          variable_column:
+            required: true
+          variable_key:
+            required: true
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -112,6 +130,38 @@ slots:
         numbers live — for example a column headed `tmax` holding daily
         maximum temperatures, or a generic column headed `value` in a long
         table.
+  native_value_column:
+    title: Native Value Column
+    range: string
+    description: >-
+      Name of a second column carrying the same values in the source's
+      *native* units (`VariableIdentity.native_units_ucum`), when the
+      companion file ships both, e.g. Amadeus's `value_kelvin` next to
+      `value_celsius`. `value_column` stays the binding for the values in
+      `units_ucum`; this binds the native-unit twin.
+    examples:
+    - value: value_kelvin
+      description: Amadeus gridMET output ships Kelvin and Celsius side by side
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07): the Amadeus pipeline's native CSV carries `value_kelvin` and
+      `value_celsius` twin columns, and `DataLayout` could bind exactly one
+      of them — the native-unit copy had no home and its very existence went
+      unrecorded. Rider on the native-unit conversion record in
+      envar_variable (`native_units_ucum`, `unit_conversion_formula`).
+
+    annotations:
+      tier: optional
+      justification: >-
+        When a producer ships both unit representations, binding only one
+        leaves an unexplained column in the data file and hides the cheapest
+        available cross-check (recomputing one column from the other via
+        `unit_conversion_formula`).
+      explanation: >-
+        Some data files helpfully include the same measurement twice, in two
+        units — like a column in Kelvin next to one in Celsius. This names
+        that second column so it is accounted for rather than mysterious.
   variable_column:
     title: Variable Column
     range: string

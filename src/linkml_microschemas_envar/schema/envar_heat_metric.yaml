@@ -73,6 +73,45 @@ classes:
         required: true
       indoor_outdoor:
         required: true
+      equation_variant:
+        required: true
+      equation_inputs:
+        required: true
+      equation_validity_range:
+        required: true
+    rules:
+    - description: >-
+        Heat-wave-flag metrics must state which of the (at least seven,
+        mutually unconvertible) heat-wave definitions was used and the
+        minimum consecutive-days criterion (tier conditionally_core context
+        "heat-wave flavoured metrics").
+      preconditions:
+        slot_conditions:
+          heat_metric_family:
+            equals_string: heat_wave_flag
+      postconditions:
+        slot_conditions:
+          heat_wave_threshold_definition:
+            required: true
+          heat_wave_min_consecutive_days:
+            required: true
+    - description: >-
+        Percentile-based heat-wave thresholds are meaningless without their
+        reference period — the same percentile over different baselines flags
+        different days (tier conditionally_core context "percentile-based
+        thresholds").
+      preconditions:
+        slot_conditions:
+          heat_wave_threshold_definition:
+            equals_string_in:
+            - percentile_local
+            - percentile_climatological
+      postconditions:
+        slot_conditions:
+          percentile_reference_period_start:
+            required: true
+          percentile_reference_period_end:
+            required: true
 
   EquationInput:
     title: Equation Input

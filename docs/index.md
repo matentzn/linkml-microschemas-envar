@@ -5,5 +5,5 @@ LinkML microschemas for environmental exposure variables (EnVar): a PHI-free met
 - [Schema overview](overview/index.html) — a plain-language, full-width tour of everything the schema captures (start here)
 - [Architecture](architecture.md) — how the microschema modules compose (assumes LinkML fluency)
 - [Related approaches](related-approaches.md) — how EnVar differs from GAIA, DeGAUSS, Amadeus, and CODATA Essential Variables
-- [Completeness ledger](dashboard/index.html) — the core → recommended → ideal tier gradient on worked records
+- [Example datasets](datasets/index.html) — every worked sidecar scored by the completeness checker, core → recommended → ideal
 - Auto-generated [schema documentation](elements/index.md)

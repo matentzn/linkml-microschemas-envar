@@ -1,5 +1,5 @@
 # Auto generated from linkml_microschemas_envar.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-07-02T21:50:31
+# Generation date: 2026-07-04T12:34:28
 # Schema: linkml-microschemas-envar
 #
 # id: https://w3id.org/linkml/microschemas/envar
@@ -122,6 +122,10 @@ class VariableIdentity(YAMLRoot):
     variable_label: Optional[str] = None
     cf_cell_methods: Optional[str] = None
     units_display: Optional[str] = None
+    native_units_ucum: Optional[str] = None
+    native_value_scale_factor: Optional[float] = None
+    native_value_offset: Optional[float] = None
+    unit_conversion_formula: Optional[str] = None
     target_concept_vocabulary: Optional[str] = None
     target_concept_id: Optional[str] = None
     target_concept_id_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
@@ -163,6 +167,18 @@ class VariableIdentity(YAMLRoot):
 
         if self.units_display is not None and not isinstance(self.units_display, str):
             self.units_display = str(self.units_display)
+
+        if self.native_units_ucum is not None and not isinstance(self.native_units_ucum, str):
+            self.native_units_ucum = str(self.native_units_ucum)
+
+        if self.native_value_scale_factor is not None and not isinstance(self.native_value_scale_factor, float):
+            self.native_value_scale_factor = float(self.native_value_scale_factor)
+
+        if self.native_value_offset is not None and not isinstance(self.native_value_offset, float):
+            self.native_value_offset = float(self.native_value_offset)
+
+        if self.unit_conversion_formula is not None and not isinstance(self.unit_conversion_formula, str):
+            self.unit_conversion_formula = str(self.unit_conversion_formula)
 
         if self.target_concept_vocabulary is not None and not isinstance(self.target_concept_vocabulary, str):
             self.target_concept_vocabulary = str(self.target_concept_vocabulary)
@@ -206,6 +222,7 @@ class DataLayout(YAMLRoot):
     variable_key: Optional[str] = None
     subject_column: Optional[str] = None
     time_column: Optional[str] = None
+    native_value_column: Optional[str] = None
     value_uncertainty_column: Optional[str] = None
     value_uncertainty_column_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     quality_flag_column: Optional[str] = None
@@ -233,6 +250,9 @@ class DataLayout(YAMLRoot):
 
         if self.time_column is not None and not isinstance(self.time_column, str):
             self.time_column = str(self.time_column)
+
+        if self.native_value_column is not None and not isinstance(self.native_value_column, str):
+            self.native_value_column = str(self.native_value_column)
 
         if self.value_uncertainty_column is not None and not isinstance(self.value_uncertainty_column, str):
             self.value_uncertainty_column = str(self.value_uncertainty_column)
@@ -263,10 +283,10 @@ class SpatialReference(YAMLRoot):
     class_name: ClassVar[str] = "SpatialReference"
     class_model_uri: ClassVar[URIRef] = ENVAR.SpatialReference
 
+    native_spatial_resolution_m: float = None
     crs: str = None
     extraction_method: Union[str, "ExtractionMethodEnum"] = None
     target_geography_type: Union[str, "TargetGeographyTypeEnum"] = None
-    native_spatial_resolution_m: Optional[float] = None
     native_spatial_resolution_descriptor: Optional[str] = None
     spatial_extent_bbox: Optional[Union[float, list[float]]] = empty_list()
     spatial_extent_descriptor: Optional[str] = None
@@ -276,6 +296,11 @@ class SpatialReference(YAMLRoot):
     population_weighting_source_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.native_spatial_resolution_m):
+            self.MissingRequiredField("native_spatial_resolution_m")
+        if not isinstance(self.native_spatial_resolution_m, float):
+            self.native_spatial_resolution_m = float(self.native_spatial_resolution_m)
+
         if self._is_empty(self.crs):
             self.MissingRequiredField("crs")
         if not isinstance(self.crs, str):
@@ -290,9 +315,6 @@ class SpatialReference(YAMLRoot):
             self.MissingRequiredField("target_geography_type")
         if not isinstance(self.target_geography_type, TargetGeographyTypeEnum):
             self.target_geography_type = TargetGeographyTypeEnum(self.target_geography_type)
-
-        if self.native_spatial_resolution_m is not None and not isinstance(self.native_spatial_resolution_m, float):
-            self.native_spatial_resolution_m = float(self.native_spatial_resolution_m)
 
         if self.native_spatial_resolution_descriptor is not None and not isinstance(self.native_spatial_resolution_descriptor, str):
             self.native_spatial_resolution_descriptor = str(self.native_spatial_resolution_descriptor)
@@ -562,6 +584,7 @@ class Uncertainty(YAMLRoot):
     quality_flag_vocabulary_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     missing_data_handling_method: Optional[Union[str, "MissingDataHandlingEnum"]] = None
     missing_data_handling_method_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    missing_value_sentinel: Optional[str] = None
     data_completeness_pct: Optional[float] = None
     data_completeness_pct_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
 
@@ -595,6 +618,9 @@ class Uncertainty(YAMLRoot):
 
         if self.missing_data_handling_method_missing_reason is not None and not isinstance(self.missing_data_handling_method_missing_reason, MissingReasonEnum):
             self.missing_data_handling_method_missing_reason = MissingReasonEnum(self.missing_data_handling_method_missing_reason)
+
+        if self.missing_value_sentinel is not None and not isinstance(self.missing_value_sentinel, str):
+            self.missing_value_sentinel = str(self.missing_value_sentinel)
 
         if self.data_completeness_pct is not None and not isinstance(self.data_completeness_pct, float):
             self.data_completeness_pct = float(self.data_completeness_pct)
@@ -658,6 +684,7 @@ class LinkageMethod(YAMLRoot):
     linkage_buffer_aggregation_method_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     linkage_max_distance_to_station_m: Optional[float] = None
     linkage_max_distance_to_station_m_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
+    linkage_working_crs: Optional[str] = None
     geocoding_precision_propagated: Optional[Union[str, "GeocodingPrecisionEnum"]] = None
     geocoding_score_propagated: Optional[float] = None
     geocoding_score_propagated_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
@@ -693,6 +720,9 @@ class LinkageMethod(YAMLRoot):
 
         if self.linkage_max_distance_to_station_m_missing_reason is not None and not isinstance(self.linkage_max_distance_to_station_m_missing_reason, MissingReasonEnum):
             self.linkage_max_distance_to_station_m_missing_reason = MissingReasonEnum(self.linkage_max_distance_to_station_m_missing_reason)
+
+        if self.linkage_working_crs is not None and not isinstance(self.linkage_working_crs, str):
+            self.linkage_working_crs = str(self.linkage_working_crs)
 
         if self.geocoding_precision_propagated is not None and not isinstance(self.geocoding_precision_propagated, GeocodingPrecisionEnum):
             self.geocoding_precision_propagated = GeocodingPrecisionEnum(self.geocoding_precision_propagated)
@@ -864,11 +894,11 @@ class DerivedHeatMetric(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = ENVAR.DerivedHeatMetric
 
     heat_metric_family: Union[str, "HeatMetricFamilyEnum"] = None
+    equation_variant: Union[str, "EquationVariantEnum"] = None
+    equation_inputs: Union[Union[dict, "EquationInput"], list[Union[dict, "EquationInput"]]] = None
+    equation_validity_range: str = None
     indoor_outdoor: Union[str, "IndoorOutdoorEnum"] = None
-    equation_variant: Optional[Union[str, "EquationVariantEnum"]] = None
     equation_variant_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
-    equation_inputs: Optional[Union[Union[dict, "EquationInput"], list[Union[dict, "EquationInput"]]]] = empty_list()
-    equation_validity_range: Optional[str] = None
     equation_validity_range_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
     wind_speed_measurement_height_m: Optional[float] = None
     wind_speed_measurement_height_m_missing_reason: Optional[Union[str, "MissingReasonEnum"]] = None
@@ -896,21 +926,27 @@ class DerivedHeatMetric(YAMLRoot):
         if not isinstance(self.heat_metric_family, HeatMetricFamilyEnum):
             self.heat_metric_family = HeatMetricFamilyEnum(self.heat_metric_family)
 
+        if self._is_empty(self.equation_variant):
+            self.MissingRequiredField("equation_variant")
+        if not isinstance(self.equation_variant, EquationVariantEnum):
+            self.equation_variant = EquationVariantEnum(self.equation_variant)
+
+        if self._is_empty(self.equation_inputs):
+            self.MissingRequiredField("equation_inputs")
+        self._normalize_inlined_as_list(slot_name="equation_inputs", slot_type=EquationInput, key_name="input_role", keyed=False)
+
+        if self._is_empty(self.equation_validity_range):
+            self.MissingRequiredField("equation_validity_range")
+        if not isinstance(self.equation_validity_range, str):
+            self.equation_validity_range = str(self.equation_validity_range)
+
         if self._is_empty(self.indoor_outdoor):
             self.MissingRequiredField("indoor_outdoor")
         if not isinstance(self.indoor_outdoor, IndoorOutdoorEnum):
             self.indoor_outdoor = IndoorOutdoorEnum(self.indoor_outdoor)
 
-        if self.equation_variant is not None and not isinstance(self.equation_variant, EquationVariantEnum):
-            self.equation_variant = EquationVariantEnum(self.equation_variant)
-
         if self.equation_variant_missing_reason is not None and not isinstance(self.equation_variant_missing_reason, MissingReasonEnum):
             self.equation_variant_missing_reason = MissingReasonEnum(self.equation_variant_missing_reason)
-
-        self._normalize_inlined_as_list(slot_name="equation_inputs", slot_type=EquationInput, key_name="input_role", keyed=False)
-
-        if self.equation_validity_range is not None and not isinstance(self.equation_validity_range, str):
-            self.equation_validity_range = str(self.equation_validity_range)
 
         if self.equation_validity_range_missing_reason is not None and not isinstance(self.equation_validity_range_missing_reason, MissingReasonEnum):
             self.equation_validity_range_missing_reason = MissingReasonEnum(self.equation_validity_range_missing_reason)
@@ -2430,6 +2466,18 @@ slots.units_ucum = Slot(uri=ENVAR.units_ucum, name="units_ucum", curie=ENVAR.cur
 slots.units_display = Slot(uri=ENVAR.units_display, name="units_display", curie=ENVAR.curie('units_display'),
                    model_uri=ENVAR.units_display, domain=None, range=Optional[str])
 
+slots.native_units_ucum = Slot(uri=ENVAR.native_units_ucum, name="native_units_ucum", curie=ENVAR.curie('native_units_ucum'),
+                   model_uri=ENVAR.native_units_ucum, domain=None, range=Optional[str])
+
+slots.native_value_scale_factor = Slot(uri=ENVAR.native_value_scale_factor, name="native_value_scale_factor", curie=ENVAR.curie('native_value_scale_factor'),
+                   model_uri=ENVAR.native_value_scale_factor, domain=None, range=Optional[float])
+
+slots.native_value_offset = Slot(uri=ENVAR.native_value_offset, name="native_value_offset", curie=ENVAR.curie('native_value_offset'),
+                   model_uri=ENVAR.native_value_offset, domain=None, range=Optional[float])
+
+slots.unit_conversion_formula = Slot(uri=ENVAR.unit_conversion_formula, name="unit_conversion_formula", curie=ENVAR.curie('unit_conversion_formula'),
+                   model_uri=ENVAR.unit_conversion_formula, domain=None, range=Optional[str])
+
 slots.target_concept_vocabulary = Slot(uri=ENVAR.target_concept_vocabulary, name="target_concept_vocabulary", curie=ENVAR.curie('target_concept_vocabulary'),
                    model_uri=ENVAR.target_concept_vocabulary, domain=None, range=Optional[str])
 
@@ -2459,6 +2507,9 @@ slots.table_orientation = Slot(uri=ENVAR.table_orientation, name="table_orientat
 
 slots.value_column = Slot(uri=ENVAR.value_column, name="value_column", curie=ENVAR.curie('value_column'),
                    model_uri=ENVAR.value_column, domain=None, range=Optional[str])
+
+slots.native_value_column = Slot(uri=ENVAR.native_value_column, name="native_value_column", curie=ENVAR.curie('native_value_column'),
+                   model_uri=ENVAR.native_value_column, domain=None, range=Optional[str])
 
 slots.variable_column = Slot(uri=ENVAR.variable_column, name="variable_column", curie=ENVAR.curie('variable_column'),
                    model_uri=ENVAR.variable_column, domain=None, range=Optional[str])
@@ -2658,6 +2709,9 @@ slots.quality_flag_vocabulary_missing_reason = Slot(uri=ENVAR.quality_flag_vocab
 slots.missing_data_handling_method = Slot(uri=ENVAR.missing_data_handling_method, name="missing_data_handling_method", curie=ENVAR.curie('missing_data_handling_method'),
                    model_uri=ENVAR.missing_data_handling_method, domain=None, range=Optional[Union[str, "MissingDataHandlingEnum"]])
 
+slots.missing_value_sentinel = Slot(uri=ENVAR.missing_value_sentinel, name="missing_value_sentinel", curie=ENVAR.curie('missing_value_sentinel'),
+                   model_uri=ENVAR.missing_value_sentinel, domain=None, range=Optional[str])
+
 slots.missing_data_handling_method_missing_reason = Slot(uri=ENVAR.missing_data_handling_method_missing_reason, name="missing_data_handling_method_missing_reason", curie=ENVAR.curie('missing_data_handling_method_missing_reason'),
                    model_uri=ENVAR.missing_data_handling_method_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
 
@@ -2687,6 +2741,9 @@ slots.linkage_max_distance_to_station_m = Slot(uri=ENVAR.linkage_max_distance_to
 
 slots.linkage_max_distance_to_station_m_missing_reason = Slot(uri=ENVAR.linkage_max_distance_to_station_m_missing_reason, name="linkage_max_distance_to_station_m_missing_reason", curie=ENVAR.curie('linkage_max_distance_to_station_m_missing_reason'),
                    model_uri=ENVAR.linkage_max_distance_to_station_m_missing_reason, domain=None, range=Optional[Union[str, "MissingReasonEnum"]])
+
+slots.linkage_working_crs = Slot(uri=ENVAR.linkage_working_crs, name="linkage_working_crs", curie=ENVAR.curie('linkage_working_crs'),
+                   model_uri=ENVAR.linkage_working_crs, domain=None, range=Optional[str])
 
 slots.geocoding_precision_propagated = Slot(uri=ENVAR.geocoding_precision_propagated, name="geocoding_precision_propagated", curie=ENVAR.curie('geocoding_precision_propagated'),
                    model_uri=ENVAR.geocoding_precision_propagated, domain=None, range=Optional[Union[str, "GeocodingPrecisionEnum"]])
@@ -3060,6 +3117,9 @@ slots.SpatialReference_crs = Slot(uri=ENVAR.crs, name="SpatialReference_crs", cu
 slots.SpatialReference_extraction_method = Slot(uri=ENVAR.extraction_method, name="SpatialReference_extraction_method", curie=ENVAR.curie('extraction_method'),
                    model_uri=ENVAR.SpatialReference_extraction_method, domain=SpatialReference, range=Union[str, "ExtractionMethodEnum"])
 
+slots.SpatialReference_native_spatial_resolution_m = Slot(uri=ENVAR.native_spatial_resolution_m, name="SpatialReference_native_spatial_resolution_m", curie=ENVAR.curie('native_spatial_resolution_m'),
+                   model_uri=ENVAR.SpatialReference_native_spatial_resolution_m, domain=SpatialReference, range=float)
+
 slots.SpatialReference_target_geography_type = Slot(uri=ENVAR.target_geography_type, name="SpatialReference_target_geography_type", curie=ENVAR.curie('target_geography_type'),
                    model_uri=ENVAR.SpatialReference_target_geography_type, domain=SpatialReference, range=Union[str, "TargetGeographyTypeEnum"])
 
@@ -3095,6 +3155,15 @@ slots.DerivedHeatMetric_heat_metric_family = Slot(uri=ENVAR.heat_metric_family, 
 
 slots.DerivedHeatMetric_indoor_outdoor = Slot(uri=ENVAR.indoor_outdoor, name="DerivedHeatMetric_indoor_outdoor", curie=ENVAR.curie('indoor_outdoor'),
                    model_uri=ENVAR.DerivedHeatMetric_indoor_outdoor, domain=DerivedHeatMetric, range=Union[str, "IndoorOutdoorEnum"])
+
+slots.DerivedHeatMetric_equation_variant = Slot(uri=ENVAR.equation_variant, name="DerivedHeatMetric_equation_variant", curie=ENVAR.curie('equation_variant'),
+                   model_uri=ENVAR.DerivedHeatMetric_equation_variant, domain=DerivedHeatMetric, range=Union[str, "EquationVariantEnum"])
+
+slots.DerivedHeatMetric_equation_inputs = Slot(uri=ENVAR.equation_inputs, name="DerivedHeatMetric_equation_inputs", curie=ENVAR.curie('equation_inputs'),
+                   model_uri=ENVAR.DerivedHeatMetric_equation_inputs, domain=DerivedHeatMetric, range=Union[Union[dict, "EquationInput"], list[Union[dict, "EquationInput"]]])
+
+slots.DerivedHeatMetric_equation_validity_range = Slot(uri=ENVAR.equation_validity_range, name="DerivedHeatMetric_equation_validity_range", curie=ENVAR.curie('equation_validity_range'),
+                   model_uri=ENVAR.DerivedHeatMetric_equation_validity_range, domain=DerivedHeatMetric, range=str)
 
 slots.EquationInput_input_role = Slot(uri=ENVAR.input_role, name="EquationInput_input_role", curie=ENVAR.curie('input_role'),
                    model_uri=ENVAR.EquationInput_input_role, domain=EquationInput, range=str)

@@ -1,0 +1,941 @@
+entries:
+  # ============================================================
+  # Geospatial / earth-science tier
+  # ============================================================
+  - id: iso-19115
+    name: ISO 19115
+    full_name: "ISO 19115-1:2014 Geographic information — Metadata — Part 1: Fundamentals"
+    standard_class: general_standard
+    spec_url: https://www.iso.org/standard/53798.html
+    governance: ISO TC 211 International Standard
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: Primary geospatial dataset discovery standard; mandatory under EU INSPIRE; covers gridded exposure product documentation at dataset level.
+    envar_relation: Overlaps source_dataset and spatial_reference; complementary at dataset layer, silent at instance/linkage levels.
+    evidence:
+      - https://www.iso.org/standard/53798.html
+      - https://committee.iso.org/sites/tc211/home/projects/projects---complete-list/iso-19115-1.html
+    reconciliation: new
+    source_candidates: []
+    notes: "Part 2 covers imagery/gridded data; ISO 19139 is the XML encoding; ISO 19115-3 is the XML implementation standard. ISO page is paywalled — URL confirmed via ISO TC211 and OGC announcement pages."
+
+  - id: iso-19156-om
+    name: OGC Observations, Measurements, and Samples
+    full_name: "OGC Observations, Measurements, and Samples (OMS) 3.0 / ISO 19156:2023"
+    standard_class: general_standard
+    spec_url: https://www.ogc.org/standard/om/
+    governance: OGC / ISO TC 211 International Standard
+    unit_of_description: produced_value
+    primary_purpose: define
+    layer: instance
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: Defines individual observation model including procedure, feature-of-interest, and result; structural basis for instance-level provenance of environmental observations.
+    envar_relation: Overlaps variable_identity, spatial_reference, temporal_reference, and exposure_model; complementary — closest general standard to EnVar's instance-level observation model.
+    evidence:
+      - https://www.ogc.org/standard/om/
+    reconciliation: new
+    source_candidates: []
+
+  - id: sosa-ssn
+    name: SOSA/SSN
+    full_name: Semantic Sensor Network Ontology (SOSA/SSN)
+    standard_class: general_standard
+    spec_url: https://www.w3.org/TR/vocab-ssn/
+    governance: W3C Recommendation 2017 / OGC joint
+    unit_of_description: produced_value
+    primary_purpose: define
+    layer: instance
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: OWL/RDF vocabulary for sensors, platforms, observations, and procedures; nearest general standard to instance-level provenance for modeled environmental exposures.
+    envar_relation: Overlaps variable_identity, exposure_model, and provenance_chain; complementary — sosa:usedProcedure maps to EnVar exposure_model.
+    evidence:
+      - https://www.w3.org/TR/vocab-ssn/
+    reconciliation: new
+    source_candidates: []
+
+  - id: cf-conventions
+    name: CF Conventions
+    full_name: Climate and Forecast Metadata Conventions
+    standard_class: general_standard
+    spec_url: https://cfconventions.org/
+    governance: UCAR / Unidata / ESIP community standard
+    unit_of_description: variable_type
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: De facto standard for NetCDF variable metadata in all major gridded exposure products (gridMET, Daymet, ERA5, PRISM); cell_methods captures temporal aggregation.
+    envar_relation: Overlaps variable_identity and temporal_reference; complementary — CF standard_name is the primary slot in EnVar VariableIdentity.cf_standard_name.
+    evidence:
+      - https://cfconventions.org/
+    reconciliation: new
+    source_candidates:
+      - "Climate Forecast Standard Name Table (CF)"
+    notes: The CF standard_name table is a controlled vocabulary (triaged); the CF Conventions document specifying coordinate metadata and cell_methods IS the metadata standard covered here.
+
+  - id: acdd
+    name: ACDD
+    full_name: Attribute Convention for Dataset Discovery 1.3
+    standard_class: general_standard
+    spec_url: https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
+    governance: ESIP / UCAR community standard
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: Recommended alongside CF Conventions for NetCDF dataset-level discovery attributes; used by gridded exposure products deposited in THREDDS and data repositories.
+    envar_relation: Overlaps source_dataset (geospatial_resolution, temporal_resolution, creator, institution); complementary at dataset level.
+    evidence:
+      - https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
+    reconciliation: new
+    source_candidates: []
+
+  - id: stac
+    name: STAC
+    full_name: SpatioTemporal Asset Catalog
+    standard_class: general_standard
+    spec_url: https://stacspec.org/
+    governance: community spec (stacspec.org working group)
+    unit_of_description: file
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: STAC 1.0.0 is widely adopted for geospatial raster catalogs including gridded climate/exposure products; processing extension can carry lineage metadata.
+    envar_relation: Overlaps source_dataset and spatial_reference; complementary — STAC items provide asset-level discovery linking to EnVar-documented datasets.
+    evidence:
+      - https://stacspec.org/
+    reconciliation: new
+    source_candidates: []
+
+  - id: ogc-api-records
+    name: OGC API Records
+    full_name: "OGC API — Records Part 1 (Core)"
+    standard_class: general_standard
+    spec_url: https://ogcapi.ogc.org/records/
+    governance: OGC Published Standard 1.0.0
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: REST API standard for metadata catalog records; emerging replacement for CSW in geospatial portals serving environmental datasets.
+    envar_relation: Overlaps source_dataset discovery; complementary — OGC API Records surfaces datasets whose instance-level detail is captured in an EnVar sidecar.
+    evidence:
+      - https://ogcapi.ogc.org/records/
+    reconciliation: new
+    source_candidates: []
+
+  - id: wmo-wigos
+    name: WMO WIGOS Metadata Standard
+    full_name: "WIGOS Metadata Standard (WMO-No. 1192)"
+    standard_class: general_standard
+    spec_url: https://library.wmo.int/records/item/55626-wigos-metadata-standard
+    governance: World Meteorological Organization
+    unit_of_description: dataset
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: WMO standard for observing-station and instrument metadata underpinning gridded reanalysis products; relevant for in-situ data lineage in exposure datasets.
+    envar_relation: Overlaps source_dataset and exposure_model (instrument inputs); complementary at station/instrument layer.
+    evidence:
+      - https://library.wmo.int/records/item/55626-wigos-metadata-standard
+    reconciliation: new
+    source_candidates:
+      - "World Meteorological Office (WMO)"
+    notes: WMO-No. 1160 is the Manual on WIGOS; WMO-No. 1192 is the dedicated WIGOS Metadata Standard.
+
+  # ============================================================
+  # FAIR packaging / provenance tier
+  # ============================================================
+  - id: prov-o
+    name: PROV-O
+    full_name: "PROV-O: The PROV Ontology"
+    standard_class: general_standard
+    spec_url: https://www.w3.org/TR/prov-o/
+    governance: W3C Recommendation 2013
+    unit_of_description: produced_value
+    primary_purpose: reproduce_pool
+    layer: instance
+    carries_derivation_metadata: carried
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: Foundational W3C provenance ontology modelling entity derivation, agent attribution, and activity chains at instance level; directly underpins EnVar ProvenanceChain design.
+    envar_relation: Directly overlaps provenance_chain and tool_run; complementary — EnVar ProvenanceChain is a domain-constrained PROV-O profile.
+    evidence:
+      - https://www.w3.org/TR/prov-o/
+    reconciliation: new
+    source_candidates: []
+
+  - id: ro-crate
+    name: RO-Crate
+    full_name: Research Object Crate
+    standard_class: general_standard
+    spec_url: https://www.researchobject.org/ro-crate/specification.html
+    governance: RDA Research Object Alliance / community spec
+    unit_of_description: file
+    primary_purpose: reproduce_pool
+    layer: instance
+    carries_derivation_metadata: carried
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: FAIR packaging spec (v1.3 current); WorkflowRun profile captures computational workflow provenance including tool versions, parameters, inputs/outputs; directly relevant to EnVar tool_run documentation.
+    envar_relation: Overlaps tool_run and provenance_chain; complementary — RO-Crate WorkflowRun profile is the closest existing standard to EnVar's reproducibility intent at file/package level.
+    evidence:
+      - https://www.researchobject.org/ro-crate/specification.html
+    reconciliation: new
+    source_candidates: []
+
+  - id: dcat
+    name: DCAT
+    full_name: Data Catalog Vocabulary
+    standard_class: general_standard
+    spec_url: https://www.w3.org/TR/vocab-dcat-3/
+    governance: W3C Recommendation 2024
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: General dataset-discovery standard; mandated for EU open data portals; basis for DCAT-AP and GeoDCAT-AP profiles; used in GAIA catalog files.
+    envar_relation: Overlaps source_dataset discovery; complementary, operates at dataset layer not instance layer.
+    evidence:
+      - https://www.w3.org/TR/vocab-dcat-3/
+    reconciliation: already_catalogued
+    reconciliation_ref: projects_inventory.md §1.1 (GAIA meta_dcat)
+    source_candidates: []
+
+  - id: datacite
+    name: DataCite Metadata Schema
+    full_name: DataCite Metadata Schema 4.7
+    standard_class: general_standard
+    spec_url: https://schema.datacite.org/
+    governance: DataCite consortium
+    unit_of_description: dataset
+    primary_purpose: cite
+    layer: discovery
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: DOI citation schema for research datasets; relatedIdentifier supports lineage chains but no structured provenance model; relevant for deposit_metadata.
+    envar_relation: Overlaps deposit_metadata and source_dataset citation; complementary — DataCite DOI is the persistent identifier for upstream products an EnVar sidecar documents.
+    evidence:
+      - https://schema.datacite.org/
+    reconciliation: new
+    source_candidates: []
+
+  - id: frictionless
+    name: Frictionless Data Package
+    full_name: Frictionless Data Package / Data Resource Specification
+    standard_class: general_standard
+    spec_url: https://specs.frictionlessdata.io/
+    governance: Open Knowledge Foundation / Frictionless Data Initiative
+    unit_of_description: file
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: Lightweight schema for tabular data packages; useful for documenting CSV exposure output files alongside an EnVar sidecar but lacks provenance depth.
+    envar_relation: Overlaps data_layout for CSV/tabular exposure outputs; complementary — could describe the companion data file that an EnVar sidecar annotates.
+    evidence:
+      - https://specs.frictionlessdata.io/
+    reconciliation: new
+    source_candidates: []
+
+  - id: schema-org
+    name: schema.org / science-on-schema.org
+    full_name: "schema.org Dataset + science-on-schema.org guidelines"
+    standard_class: general_standard
+    spec_url: https://science-on-schema.org/
+    governance: schema.org W3C community group / ESIP-RDA science-on-schema.org
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: Powers Google Dataset Search discovery for scientific datasets including gridded exposure products; variableMeasured and measurementTechnique provide shallow provenance.
+    envar_relation: Overlaps source_dataset discovery and variable_identity (variableMeasured); complementary — landing page markup linking to EnVar-documented datasets.
+    evidence:
+      - https://schema.org/Dataset
+    reconciliation: new
+    source_candidates: []
+
+  - id: ddi
+    name: DDI
+    full_name: Data Documentation Initiative (ISO/PAS 25955:2026)
+    standard_class: general_standard
+    spec_url: https://ddialliance.org/
+    governance: DDI Alliance / ISO/PAS 25955:2026
+    unit_of_description: variable_type
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: Social-science survey documentation standard with strong variable-level metadata; cross-domain expansion via DDI-CDI makes it relevant for environmental health survey linkage studies.
+    envar_relation: Overlaps variable_identity at study/variable level; complementary — DDI variable metadata maps to EnVar VariableIdentity for survey-linked exposure assessments.
+    evidence:
+      - https://ddialliance.org/
+    reconciliation: new
+    source_candidates: []
+
+  - id: croissant
+    name: Croissant
+    full_name: Croissant ML Dataset Format
+    standard_class: general_standard
+    spec_url: https://mlcommons.org/croissant/
+    governance: MLCommons / Google / Hugging Face community
+    unit_of_description: dataset
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: ML dataset metadata vocabulary (v1.1); GeoCroissant extension covers geospatial ML datasets overlapping with gridded exposure products used as training data.
+    envar_relation: Overlaps source_dataset and data_layout for ML training use of exposure datasets; complementary but ML-focused.
+    evidence:
+      - https://mlcommons.org/croissant/
+    reconciliation: new
+    source_candidates: []
+
+  - id: cdif
+    name: CDIF
+    full_name: Cross-Domain Interoperability Framework
+    standard_class: general_standard
+    spec_url: https://codata.org/initiatives/making-data-work/cdif/
+    governance: CODATA / RDA WorldFAIR project
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: Emerging FAIR interoperability framework (v1.1, May 2024) using schema.org, DCAT, and DDI-CDI for cross-domain data sharing; relevant as macro-framework but not yet widely deployed.
+    envar_relation: Overlaps source_dataset at discovery and cross-domain linkage level; complementary — EnVar could serve as a domain profile within a CDIF-governed ecosystem.
+    evidence:
+      - https://codata.org/initiatives/making-data-work/cdif/
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # Clinical / health tier
+  # ============================================================
+  - id: omop-cdm
+    name: OMOP CDM
+    full_name: OMOP Common Data Model (including Exposome Extension)
+    standard_class: general_standard
+    spec_url: https://ohdsi.github.io/CommonDataModel/
+    governance: OHDSI consortium
+    unit_of_description: geocoded_row
+    primary_purpose: reproduce_pool
+    layer: linkage
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: Primary CDM for observational health research; Exposome Extension provides structured schema for linking gridded exposures to patient rows with provenance fields.
+    envar_relation: Directly overlaps health_layer_linkage and deposit_metadata; EnVar health_layer_linkage.target_cdm targets OMOP; competing at schema level but complementary as output consumer.
+    evidence:
+      - https://ohdsi.github.io/CommonDataModel/
+    reconciliation: new
+    source_candidates: []
+
+  - id: hl7-fhir
+    name: HL7 FHIR
+    full_name: "HL7 FHIR R5 — Environmental / Exposome Profiles"
+    standard_class: general_standard
+    spec_url: https://www.hl7.org/fhir/
+    governance: HL7 International
+    unit_of_description: geocoded_row
+    primary_purpose: define
+    layer: linkage
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: peripheral
+    relevance_reason: FHIR Observation resources can carry individual environmental exposure values; environmental exposome IGs are in active development but not yet stable enough to build registries against.
+    envar_relation: Overlaps health_layer_linkage at the clinical record level; complementary — FHIR can receive exposure values from an EnVar-documented pipeline.
+    evidence:
+      - https://www.hl7.org/fhir/
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # Observation database / exposure-science tier
+  # ============================================================
+  - id: odm2
+    name: ODM2
+    full_name: Observations Data Model 2
+    standard_class: general_standard
+    spec_url: http://www.odm2.org/
+    governance: CUAHSI / community (Horsburgh et al. 2016)
+    unit_of_description: produced_value
+    primary_purpose: reproduce_pool
+    layer: instance
+    carries_derivation_metadata: carried
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: Most complete open standard for instance-level environmental observation provenance; method, equipment, QA, and uncertainty metadata per observation; designed for in-situ data but extensible.
+    envar_relation: Overlaps variable_identity, exposure_model, uncertainty, and tool_run; most competitive standard with EnVar for in-situ data; EnVar extends scope to gridded/modeled exposures and health linkage.
+    evidence:
+      - http://www.odm2.org/
+    reconciliation: new
+    source_candidates:
+      - "ODM2"
+
+  - id: waterml
+    name: WaterML 2.0
+    full_name: "OGC WaterML 2.0 (Parts 1–4)"
+    standard_class: general_standard
+    spec_url: https://www.ogc.org/standard/waterml/
+    governance: OGC International Standard
+    unit_of_description: produced_value
+    primary_purpose: define
+    layer: instance
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: peripheral
+    relevance_reason: OGC XML encoding for hydrological time-series with procedure and quality metadata; overlaps with exposure data for water-quality environmental health studies.
+    envar_relation: Overlaps variable_identity and temporal_reference for water-quality exposures; complementary — WaterML serializes observations that an EnVar sidecar documents.
+    evidence:
+      - https://www.ogc.org/standard/waterml/
+    reconciliation: new
+    source_candidates: []
+
+  - id: codata-ev
+    name: CODATA / GEO Essential Variables
+    full_name: CODATA and GEO Essential Variables framework
+    standard_class: general_standard
+    spec_url: https://codata.org/
+    governance: CODATA / Group on Earth Observations (GEO)
+    unit_of_description: variable_type
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: absent
+    domain_specificity: env_health_specific
+    relevance: peripheral
+    relevance_reason: Defines minimum variable sets for Earth, climate, and health monitoring; shapes which variables appear in exposure datasets but carries no instance-level provenance.
+    envar_relation: Overlaps variable_identity (what to measure); complementary — Essential Variables inform target_vocab_concept in EnVar VariableIdentity.
+    evidence:
+      - https://codata.org/
+      - https://www.earthobservations.org/
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # NASA / GCMD
+  # ============================================================
+  - id: gcmd-dif
+    name: NASA/GCMD DIF
+    full_name: "NASA GCMD Directory Interchange Format (DIF) 10.x"
+    standard_class: general_standard
+    spec_url: https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/directory-interchange-format-standard
+    governance: NASA EOSDIS / Global Change Master Directory
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: peripheral
+    relevance_reason: NASA Earth science dataset metadata format; relevant for NASA-derived exposure products (MERRA-2, MODIS-based datasets); ISO 19115-compatible.
+    envar_relation: Overlaps source_dataset for NASA-hosted exposure products; complementary — DIF records discovery metadata for datasets whose EnVar sidecar provides instance-level detail.
+    evidence:
+      - https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/directory-interchange-format-standard
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # Geospatial query / linked data
+  # ============================================================
+  - id: geosparql
+    name: GeoSPARQL
+    full_name: "GeoSPARQL 1.1 — A Geographic Query Language for RDF Data"
+    standard_class: general_standard
+    spec_url: https://www.ogc.org/standard/geosparql/
+    governance: OGC International Standard
+    unit_of_description: produced_value
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: OGC RDF vocabulary and SPARQL extension for geospatial features; useful alongside SOSA/SSN for Linked Data representations of exposure data but not itself a metadata format.
+    envar_relation: Overlaps spatial_reference for Linked Data encoding; complementary — GeoSPARQL geo:hasGeometry carries the geometry referenced by EnVar SpatialReference.
+    evidence:
+      - https://www.ogc.org/standard/geosparql/
+    reconciliation: new
+    source_candidates:
+      - "GeoSPARQL: OGC RDF Geospatial query language"
+
+  # ============================================================
+  # Pipeline sidecars
+  # ============================================================
+  - id: degauss
+    name: DeGAUSS
+    full_name: DeGAUSS Geocoding and Geomarker Sidecar
+    standard_class: pipeline_sidecar
+    spec_url: https://degauss.org/
+    governance: Cincinnati Children's Hospital GRAPPH lab (single-project)
+    unit_of_description: geocoded_row
+    primary_purpose: reproduce_pool
+    layer: linkage
+    carries_derivation_metadata: carried
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: De facto sidecar for pediatric environmental health geocoding pipelines; records Docker image hash, version, and geomarker parameters per geocoded address row.
+    envar_relation: Directly overlaps linkage_method and health_layer_linkage; DeGAUSS container invocation metadata is the primary reference implementation for EnVar LinkageMethod in pediatric cohort studies.
+    evidence:
+      - https://degauss.org/
+    reconciliation: new
+    source_candidates: []
+
+  - id: gridded-product-sidecars
+    name: gridMET / Daymet / PRISM sidecars
+    full_name: Project-local download sidecars for gridded exposure products
+    standard_class: pipeline_sidecar
+    spec_url: https://www.climatologylab.org/gridmet.html
+    governance: single-project / no governance body
+    unit_of_description: file
+    primary_purpose: reproduce_pool
+    layer: instance
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: peripheral
+    relevance_reason: Per-project README/script sidecars documenting download query, geographic extent, date range, and variable; no shared specification, non-interoperable across pipelines.
+    envar_relation: The gap that EnVar source_dataset and tool_run are designed to replace; competing in intent, complementary until EnVar adoption grows.
+    reconciliation: new
+    source_candidates: []
+
+triaged:
+  # ============================================================
+  # Vocabularies / ontologies / thesauri
+  # ============================================================
+  - id: cgi-vocab
+    name: CGI Vocabularies Register
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Controlled vocabulary register for geoscience terms; not a metadata format.
+    source_candidates:
+      - "CGI Vocabularies Register"
+
+  - id: gcmd-keywords
+    name: GCMD Science Keywords
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Pure controlled vocabulary for tagging NASA Earth science datasets; not a metadata format.
+    source_candidates:
+      - "GCMD Science Keywords"
+
+  - id: usgs-thesaurus
+    name: USGS Thesaurus
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Pure thesaurus for USGS subject terms; not a metadata format.
+    source_candidates:
+      - "USGS Thesaurus"
+
+  - id: agrovoc
+    name: AGROVOC
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: SKOS thesaurus for agriculture and food; not a metadata format.
+    source_candidates:
+      - "AGROVOC"
+
+  - id: sweet
+    name: SWEET
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: OWL ontology for earth and environmental science concepts; pure vocabulary, not a metadata format.
+    source_candidates:
+      - "Semantic Web for Earth and Environment Technology Ontology (SWEET)"
+
+  - id: envthes
+    name: Environmental Thesaurus
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: SKOS thesaurus for environmental terms; pure vocabulary.
+    source_candidates:
+      - "Environmental Thesaurus (EnvThes)"
+
+  - id: envo
+    name: Environment Ontology
+    kind: vocabulary
+    relevance: peripheral
+    relevance_reason: OBO ontology for environmental features and biomes; used for concept annotation in SOSA/SSN and EnVar VariableIdentity but is a vocabulary, not a metadata format.
+    source_candidates:
+      - "Environment Ontology (EnvO)"
+
+  - id: svo
+    name: Scientific Variables Ontology
+    kind: vocabulary
+    relevance: peripheral
+    relevance_reason: Ontology for decomposing scientific variable names into components; relevant to variable identity in exposure research but is a vocabulary, not a metadata format.
+    source_candidates:
+      - "Scientific Variables Ontology (SVO)"
+
+  - id: darwin-core
+    name: Darwin Core
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Biodiversity observations vocabulary; not designed for environmental-exposure metadata.
+    source_candidates:
+      - "Darwin Core (DwC)"
+
+  - id: qudt
+    name: QUDT
+    kind: vocabulary
+    relevance: peripheral
+    relevance_reason: Quantities, Units, Dimensions, and Types ontology; used for unit annotation in exposure data alongside EnVar but is a vocabulary, not a metadata format.
+    source_candidates:
+      - "QUDT"
+
+  - id: eu-vocabularies
+    name: EU Vocabularies
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Controlled vocabularies for EU institutions; not environmental-exposure metadata standards.
+    source_candidates:
+      - "EU Vocabularies"
+
+  - id: geonames
+    name: GeoNames
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Geographic names gazetteer; not an exposure-metadata standard.
+    source_candidates:
+      - "GeoNames"
+
+  - id: getty-geo
+    name: Getty Thesaurus of Geographic Names
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Pure geographic names vocabulary.
+    source_candidates:
+      - "Getty Thesaurus of Geographic Names"
+
+  - id: ecso
+    name: ECSO Ecosystems Ontology
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: OWL ontology for ecosystem descriptions; pure vocabulary.
+    source_candidates:
+      - "ECSO (Ecosystems Ontology)"
+
+  - id: geocore-ont
+    name: GeoCore Ontology
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Core vocabulary for geospatial data concepts; not an adopted metadata format standard.
+    source_candidates:
+      - "GeoCore Ontology"
+
+  - id: astronomical-env-ont
+    name: Astronomical Environment Ontology
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Out of domain for terrestrial environmental-exposure data.
+    source_candidates:
+      - "Astronomical Environment Ontology"
+
+  - id: cab-thesaurus
+    name: CAB Thesaurus
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: CABI agriculture and environment thesaurus; pure vocabulary.
+    source_candidates:
+      - "CAB Thesaurus"
+
+  - id: aquatic-thesaurus
+    name: Aquatic Sciences and Fisheries Thesaurus
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Pure vocabulary for aquatic and fisheries domain.
+    source_candidates:
+      - "Aquatic Sciences and Fisheries Thesaurus"
+
+  - id: worldbank-thesaurus
+    name: WorldBank Thesaurus
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Pure vocabulary for World Bank subject terms.
+    source_candidates:
+      - "WorldBank Thesaurus"
+
+  - id: tern-cv
+    name: TERN Controlled Vocabularies
+    kind: vocabulary
+    relevance: peripheral
+    relevance_reason: Australia's TERN SOSA/SSN-based controlled vocabularies for ecosystem observation; the underlying TERN data model is a SOSA/SSN profile (in-scope tier) but the standalone CV set is a vocabulary.
+    source_candidates:
+      - "Australia’s Terrestrial Ecosystem Research Network. TERN Controlled Vocabularies."
+
+  - id: csdms-names
+    name: CSDMS Standard Names
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Variable naming convention for earth surface models; vocabulary-level, not a metadata format.
+    source_candidates:
+      - "Community Surface Dynamics Modeling System (CSDMS)  Standard Names"
+
+  - id: iode-param
+    name: IODE Ocean Data Portal parameter dictionary
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Vocabulary/parameter list for oceanographic data; not a metadata format standard.
+    source_candidates:
+      - "IODE Ocean Data Portal parameter dictionary"
+
+  - id: agi-glossary
+    name: AGI Glossary of Geology
+    kind: vocabulary
+    relevance: out_of_scope
+    relevance_reason: Pure geological glossary; not a metadata format.
+    source_candidates:
+      - "American Geological Institute Glossary of Geology"
+
+  # ============================================================
+  # Platforms / portals / registries
+  # ============================================================
+  - id: gcmd-platform
+    name: Global Change Master Directory
+    kind: project_or_platform
+    relevance: peripheral
+    relevance_reason: NASA Earth science dataset catalog platform; relevant as the origin of the DIF metadata standard (covered in entries as gcmd-dif) but not itself a metadata standard.
+    source_candidates:
+      - "Global Change Master Directory (GCMD)"
+
+  - id: nerc-nvs
+    name: NERC Vocabulary Server
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: BODC/NERC vocabulary management service; not a metadata format.
+    source_candidates:
+      - "NERC Vocabulary Server (NVS)"
+
+  - id: esip-cor
+    name: ESIP Community Ontology Repository
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Vocabulary registry and hosting service; not a metadata format.
+    source_candidates:
+      - "ESIP Community Ontology Repository (COR)"
+
+  - id: bioportal
+    name: BioPortal
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Biomedical ontology repository hosting SWEET, ENVO, and others; not a metadata format.
+    source_candidates:
+      - "BioPortal (contains copies of SWEET, ENVO, others)"
+
+  - id: ecoportal
+    name: EcoPortal
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Ecology ontology portal; not a metadata format.
+    source_candidates:
+      - "EcoPortal"
+
+  - id: agroportal
+    name: Agroportal
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Agronomic ontology portal; not a metadata format.
+    source_candidates:
+      - "Agroportal"
+
+  - id: gbif-vocab
+    name: GBIF Vocabulary Service
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Biodiversity vocabulary service; not a metadata format for environmental-exposure data.
+    source_candidates:
+      - "GBIF Vocabulary Service"
+
+  - id: mmi-orr
+    name: MMI Ontology Registry and Repository
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Marine metadata vocabulary registry; not a metadata format.
+    source_candidates:
+      - "MMI Ontology Registry and Repository"
+
+  - id: research-vocab-au
+    name: Research Vocabularies Australia
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: National vocabulary service for Australian research; not a metadata format.
+    source_candidates:
+      - "Research Vocabularies Australia"
+
+  - id: marine-mmi
+    name: Marine Metadata Interoperability Project
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Community project for marine metadata vocabulary management; not itself a metadata standard.
+    source_candidates:
+      - "Marine Metadata Interoperability Project"
+
+  - id: bartoc
+    name: BARTOC
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Registry of thesauri and ontologies; not a metadata standard.
+    source_candidates:
+      - "Basic Register of Thesauri, Ontologies & Classifications (BARTOC)"
+
+  - id: bco-dmo
+    name: BCO-DMO
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Biological and Chemical Oceanography Data Management Office repository; platform, not a standard.
+    source_candidates:
+      - "BCO-DMO"
+
+  - id: four-tu-researchdata
+    name: 4TU.ResearchData
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Dutch research data repository; platform, not a metadata standard.
+    source_candidates:
+      - "4TU.ResearchData"
+
+  - id: ontobee
+    name: Ontobee
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Ontology browser and SPARQL endpoint; not a metadata standard.
+    source_candidates:
+      - "Ontobee"
+
+  - id: obo-foundry
+    name: OBO Foundry
+    kind: project_or_platform
+    relevance: out_of_scope
+    relevance_reason: Ontology community framework and registry; not a metadata format.
+    source_candidates:
+      - "OBO Foundry"
+
+  # ============================================================
+  # Out-of-domain / other
+  # ============================================================
+  - id: rruff
+    name: RRUFF
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Mineral Raman spectra database; out of domain for environmental-exposure data.
+    source_candidates:
+      - "RRUFF"
+
+  - id: worms
+    name: WoRMS
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: World Register of Marine Species; taxonomy database, not an exposure-metadata standard.
+    source_candidates:
+      - "WoRMS"
+
+  - id: mindat
+    name: MINDAT
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Mineralogy and geology database; out of domain.
+    source_candidates:
+      - "MINDAT"
+
+  - id: collections-desc
+    name: Collections Descriptions
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: TDWG biodiversity collection descriptions; out of scope for environmental-exposure metadata.
+    source_candidates:
+      - "Collections Descriptions"
+
+  - id: mids
+    name: MIDS
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Minimum Information about a Digital Specimen (TDWG); natural history specimen metadata; out of scope.
+    source_candidates:
+      - "MIDS"
+
+  - id: efg
+    name: EFG
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Extension for Geosciences (biodiversity natural history collections); out of domain.
+    source_candidates:
+      - "EFG"
+
+  - id: orbital-space-models
+    name: Orbital Space Domain Knowledge Models
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Space domain ontologies and vocabularies; out of domain for terrestrial exposure data.
+    source_candidates:
+      - "Orbital Space Domain Knowledge Models (vocabularies, ontologies, metadata sets)"
+
+  - id: anzsrc
+    name: ANZSRC 2020
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Australian and New Zealand Standard Research Classification; research classification scheme, not an environmental-exposure metadata standard.
+    source_candidates:
+      - "Australian and New Zealand Standard Research Classification (ANZSRC), 2020"
+
+  - id: cmecs
+    name: Coastal and Marine Ecological Classification Standard
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Habitat classification scheme for coastal and marine environments; not a metadata format for environmental-exposure data.
+    source_candidates:
+      - "Coastal and Marine Ecological Classification Standard (CMECS)"
+
+  - id: vocab-repos-catalog
+    name: vocabularies repositories catalog
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Generic category label in source list, not a specific standard.
+    source_candidates:
+      - "vocabularies repositories catalog"
+
+  - id: vocab-resources
+    name: vocabulary resources
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Generic category label in source list, not a specific standard.
+    source_candidates:
+      - "vocabulary resources"
+
+  - id: sem-interop-paper
+    name: Semantic interoperability in environmental sciences survey
+    kind: other
+    relevance: peripheral
+    relevance_reason: Survey paper on semantic interoperability in environmental sciences; relevant background literature but not a metadata standard.
+    source_candidates:
+      - "Assessing semantic interoperability in environmental sciences: variety of approaches and semantic artefacts"
+
+  - id: ont-resources-ehs
+    name: Ontology Resources for Environmental Health Sciences
+    kind: other
+    relevance: out_of_scope
+    relevance_reason: Survey/article on ontology resources for environmental health; not a metadata standard.
+    source_candidates:
+      - "Ontology Resources for the Environmental Health Sciences"

@@ -70,6 +70,58 @@ def test_conditionally_core_context_switches(checker):
     assert "variable_key" in report.blocking
 
 
+def test_lagged_analysis_requires_clinical_date_convention(checker):
+    """SPEC rule 8: lag_alignment_applied != none makes the clinical-side
+    day convention Core; an unlagged analysis leaves it Optional."""
+    lagged = {"linkage_method": {"lag_alignment_applied": "lag_n_days"}}
+    assert "clinical_date_assignment_convention" in checker.check(lagged).blocking
+    unlagged = {"linkage_method": {"lag_alignment_applied": "none"}}
+    assert "clinical_date_assignment_convention" not in checker.check(unlagged).blocking
+
+
+def test_linkage_strategy_switches_its_parameters(checker):
+    station = {"linkage_method": {"linkage_strategy": "nearest_station_with_max_distance"}}
+    report = checker.check(station)
+    assert "linkage_max_distance_to_station_m" in report.blocking
+    assert "linkage_buffer_radius_m" not in report.blocking
+    buffer = {"linkage_method": {"linkage_strategy": "buffer_aggregation_around_residence"}}
+    report = checker.check(buffer)
+    assert "linkage_buffer_radius_m" in report.blocking
+    assert "linkage_buffer_aggregation_method" in report.blocking
+    # residual cross-module predicate: buffer linkage also demands the
+    # spatial extraction buffer radius
+    assert "extraction_buffer_m" in report.blocking
+
+
+def test_population_weighting_context_is_cross_module(checker):
+    """Either half of the two-class disjunction puts the slot in context."""
+    spatial_half = {"spatial_reference": {"extraction_method": "population_weighted_mean"}}
+    assert "population_weighting_source" in checker.check(spatial_half).blocking
+    linkage_half = {"linkage_method": {"linkage_strategy": "population_weighted_area_to_residence"}}
+    assert "population_weighting_source" in checker.check(linkage_half).blocking
+    neither = {"spatial_reference": {"extraction_method": "nearest_cell"}}
+    assert "population_weighting_source" not in checker.check(neither).blocking
+
+
+def test_declared_native_units_require_conversion_formula(checker):
+    """Declaring native units (value_presence rule) makes the conversion
+    formula Core; products with no conversion stay untouched."""
+    declared = {"variable_identity": {"native_units_ucum": "K"}}
+    assert "unit_conversion_formula" in checker.check(declared).blocking
+    undeclared = {"variable_identity": {"units_ucum": "Cel"}}
+    assert "unit_conversion_formula" not in checker.check(undeclared).blocking
+
+
+def test_cf_cell_methods_core_only_for_cf_products(checker):
+    """A CF:-prefixed standard_name makes cf_cell_methods Core; ENVAR does not."""
+    cf_product = {"variable_identity": {"standard_name": "CF:air_temperature"}}
+    report = checker.check(cf_product)
+    assert "cf_cell_methods" in report.blocking
+    non_cf_product = {"variable_identity": {"standard_name": "ENVAR:heat_index"}}
+    report = checker.check(non_cf_product)
+    assert "cf_cell_methods" not in report.blocking
+
+
 def test_missing_reason_explains_recommended_but_not_core(checker):
     instance = {
         # recommended slot absent + reason -> explained (counts as present)

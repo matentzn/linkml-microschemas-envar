@@ -15,10 +15,17 @@ Scoring policy (mirrors SPEC.md §3 and specs/SPEC_DASHBOARD.md §4):
   (SPEC §3 "null with reason") — and is scored as present but reported
   separately.
 - ``conditionally_core`` slots are optional in general and Core in their
-  stated context. The context predicates are not yet encoded in the schema
-  (SPEC §7.7), so this module carries them in ``CONTEXT_PREDICATES``;
-  a conditionally-core slot with no predicate, or out of context, is scored
-  as Optional. In context it is scored as Core, including BLOCKING.
+  stated context. The contexts are single-sourced from the schema (SPEC
+  §7.7): a slot is in context when (a) it is hard-required inside its owning
+  class (block-presence contexts, e.g. the equation slots inside
+  ``DerivedHeatMetric``), or (b) a LinkML class ``rule`` on the owning class
+  requires it and the rule's precondition holds for the instance. The only
+  predicates still carried in Python are ``RESIDUAL_CONTEXT_PREDICATES`` —
+  contexts that span two classes, which class rules cannot express; each
+  such slot carries a ``tier_context`` annotation in the schema saying so.
+  A conditionally-core slot with no context of any kind (annotated
+  ``tier_context: not machine-decidable``), or out of context, is scored as
+  Optional. In context it is scored as Core, including BLOCKING.
 - readiness = 100 · (0.5·core_frac + 0.4·recommended_frac + 0.1·optional_frac).
 - Any missing Core (or in-context conditionally-core) slot lands in
   ``blocking`` and stamps the report BLOCKED.
@@ -31,6 +38,7 @@ available (it is a dev dependency; the installed package only requires
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable
@@ -56,60 +64,21 @@ def _block(instance: dict, name: str) -> dict:
     return value if isinstance(value, dict) else {}
 
 
-def _contains(value: Any, needle: str) -> bool:
-    return needle in str(value or "")
-
-
-# Context predicates for conditionally-core slots: slot name -> predicate over
-# the whole record instance. True means "this record is in the slot's stated
-# context", making the slot Core for this record. These encode the prose
-# contexts of SPEC.md §4 until they exist as LinkML rules (SPEC §7.7).
-CONTEXT_PREDICATES: dict[str, Callable[[dict], bool]] = {
-    # envar_layout — long format needs the discriminator column + key
-    "variable_column": lambda r: _block(r, "data_layout").get("table_orientation") == "long",
-    "variable_key": lambda r: _block(r, "data_layout").get("table_orientation") == "long",
-    # envar_heat_metric — a derived heat metric must document its equation
-    "equation_variant": lambda r: bool(_block(r, "derived_heat_metric")),
-    "equation_inputs": lambda r: bool(_block(r, "derived_heat_metric")),
-    "input_role": lambda r: bool(_block(r, "derived_heat_metric")),
-    "input_provenance_id": lambda r: bool(_block(r, "derived_heat_metric")),
-    "equation_validity_range": lambda r: bool(_block(r, "derived_heat_metric")),
-    "indoor_outdoor": lambda r: bool(_block(r, "derived_heat_metric")),
-    # heat-wave flavoured metrics only
-    "heat_wave_threshold_definition": lambda r: _contains(_block(r, "derived_heat_metric"), "heat_wave"),
-    "heat_wave_min_consecutive_days": lambda r: _contains(_block(r, "derived_heat_metric"), "heat_wave"),
-    # percentile-based thresholds must state their reference period
-    "percentile_reference_period_start": lambda r: _contains(
-        _block(r, "derived_heat_metric").get("heat_wave_threshold_definition"), "percentile"
+# Residual context predicates: only contexts that span two classes, which
+# LinkML class rules cannot express (rules see one class's own slots). Each
+# slot listed here carries a matching ``tier_context`` annotation in the
+# schema. Everything else is read from the schema's rules / required flags.
+# source_homogenisation_status appears in neither place: its context
+# ("station-based product") is not machine-decidable, and its tier_context
+# annotation says so — it scores as Optional out of context.
+RESIDUAL_CONTEXT_PREDICATES: dict[str, Callable[[dict], bool]] = {
+    "extraction_buffer_m": lambda r: (
+        _block(r, "linkage_method").get("linkage_strategy") == "buffer_aggregation_around_residence"
     ),
-    "percentile_reference_period_end": lambda r: _contains(
-        _block(r, "derived_heat_metric").get("heat_wave_threshold_definition"), "percentile"
-    ),
-    # envar_model — ensemble models must state their member count
-    "exposure_model_ensemble_member_count": lambda r: _contains(
-        _block(r, "exposure_model").get("exposure_model_type"), "ensemble"
-    ),
-    # envar_linkage — buffer/station strategies need their parameters.
-    # clinical_date_assignment_convention has no predicate: its stated context
-    # ("when linking to clinical events") is not decidable from the sidecar
-    # alone, so it scores as Optional until SPEC §7.7 encodes the rule.
-    "linkage_buffer_radius_m": lambda r: _contains(_block(r, "linkage_method").get("linkage_strategy"), "buffer"),
-    "linkage_buffer_aggregation_method": lambda r: (
-        _contains(_block(r, "linkage_method").get("linkage_strategy"), "buffer")
-        or _contains(_block(r, "linkage_method").get("linkage_strategy"), "area")
-    ),
-    "linkage_max_distance_to_station_m": lambda r: _contains(
-        _block(r, "linkage_method").get("linkage_strategy"), "station"
-    ),
-    # envar_spatial — buffer extraction / population weighting parameters
-    "extraction_buffer_m": lambda r: _contains(_block(r, "spatial_reference").get("extraction_method"), "buffer"),
     "population_weighting_source": lambda r: (
-        _contains(_block(r, "spatial_reference").get("extraction_method"), "population_weighted")
-        or _contains(_block(r, "linkage_method").get("linkage_strategy"), "population_weighted")
+        _block(r, "spatial_reference").get("extraction_method") == "population_weighted_mean"
+        or _block(r, "linkage_method").get("linkage_strategy") == "population_weighted_area_to_residence"
     ),
-    # envar_source — source_homogenisation_status (station-derived products
-    # only) carries no predicate: "is this station-derived" is not reliably
-    # decidable from instance text, so it scores as Optional out of context.
 }
 
 # Modules that SPEC.md §2 marks as omissible when not applicable. When the
@@ -181,8 +150,74 @@ class CompletenessChecker:
         self.target_class = target_class
         self._validator = None
         self._validation_available: bool | None = None
+        self._rule_index = self._build_rule_index()
 
     # -- schema side ---------------------------------------------------------
+
+    def _build_rule_index(self) -> dict[str, list[tuple[str, list]]]:
+        """target slot -> [(owning class, [(precondition slot, expr), ...])].
+
+        One entry per class rule whose postcondition requires the slot; the
+        expr objects are the precondition slot_conditions (equals_string /
+        equals_string_in / pattern / value_presence), AND-ed within a rule,
+        OR-ed across rules — mirroring the JSON-Schema allOf-of-if/then the
+        generator emits.
+        """
+        index: dict[str, list[tuple[str, list]]] = {}
+        for cls_name, cls in self.schemaview.all_classes().items():
+            for rule in cls.rules or []:
+                if rule.preconditions is None or rule.postconditions is None:
+                    continue
+                conditions = list((rule.preconditions.slot_conditions or {}).items())
+                for target, expr in (rule.postconditions.slot_conditions or {}).items():
+                    if getattr(expr, "required", False):
+                        index.setdefault(target, []).append((cls_name, conditions))
+        return index
+
+    @staticmethod
+    def _slot_condition_holds(expr, value: Any) -> bool:
+        """Evaluate one precondition slot_condition against an instance value.
+
+        A missing value never matches (except for ``value_presence: ABSENT``),
+        mirroring the generated JSON Schema (the ``if`` requires the
+        precondition slot). Unsupported condition kinds never match — the
+        schema-side invariant test pins the supported vocabulary.
+        """
+        presence = getattr(expr, "value_presence", None)
+        if presence is not None:
+            return value is None if str(presence) == "ABSENT" else value is not None
+        if value is None:
+            return False
+        text = str(value)
+        if expr.equals_string is not None:
+            return text == expr.equals_string
+        if expr.equals_string_in:
+            return text in list(expr.equals_string_in)
+        if expr.pattern is not None:
+            return re.search(expr.pattern, text) is not None
+        return False
+
+    def _in_context(self, name: str, owner: str, module: str, instance: dict) -> bool:
+        """Resolve a conditionally-core slot's context from the schema.
+
+        (a) hard-required inside its owning class = block-presence context
+        (the slot only reaches the universe when its module is present);
+        (b) a class rule on the owning class requires it and the rule's
+        precondition holds against the owning module's block;
+        (c) a residual cross-module predicate. Otherwise out of context.
+        """
+        if self.schemaview.induced_slot(name, owner).required:
+            return True
+        block = instance if not module else _block(instance, module)
+        for cls_name, conditions in self._rule_index.get(name, ()):
+            if cls_name != owner:
+                continue
+            if conditions and all(
+                self._slot_condition_holds(expr, block.get(cond_slot)) for cond_slot, expr in conditions
+            ):
+                return True
+        predicate = RESIDUAL_CONTEXT_PREDICATES.get(name)
+        return bool(predicate(instance)) if predicate else False
 
     def tier_of(self, slot) -> str | None:
         annotation = None
@@ -279,8 +314,7 @@ class CompletenessChecker:
             in_context: bool | None = None
             effective_tier = tier
             if tier == CONDITIONALLY_CORE:
-                predicate = CONTEXT_PREDICATES.get(name)
-                in_context = bool(predicate(instance)) if predicate else False
+                in_context = self._in_context(name, owner, module, instance)
                 effective_tier = CORE if in_context else OPTIONAL
             present = name in found
             # Null-with-reason is information for Recommended/Optional slots,

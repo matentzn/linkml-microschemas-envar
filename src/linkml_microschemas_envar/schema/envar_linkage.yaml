@@ -50,6 +50,7 @@ classes:
     - linkage_buffer_aggregation_method_missing_reason
     - linkage_max_distance_to_station_m
     - linkage_max_distance_to_station_m_missing_reason
+    - linkage_working_crs
     - geocoding_precision_propagated
     - geocoding_score_propagated
     - geocoding_score_propagated_missing_reason
@@ -64,6 +65,61 @@ classes:
     slot_usage:
       linkage_strategy:
         required: true
+    rules:
+    - description: >-
+        Buffer aggregation needs its radius: the buffer size is a
+        hyperparameter that changes which cells contribute to the value
+        (tier conditionally_core context "buffer strategies").
+      preconditions:
+        slot_conditions:
+          linkage_strategy:
+            equals_string: buffer_aggregation_around_residence
+      postconditions:
+        slot_conditions:
+          linkage_buffer_radius_m:
+            required: true
+    - description: >-
+        Strategies that aggregate over an area (buffer, polygon membership,
+        population-weighted area) must state how cell values were combined
+        (tier conditionally_core context "buffer/area strategies").
+      preconditions:
+        slot_conditions:
+          linkage_strategy:
+            equals_string_in:
+            - buffer_aggregation_around_residence
+            - area_membership_residence_in_polygon
+            - population_weighted_area_to_residence
+      postconditions:
+        slot_conditions:
+          linkage_buffer_aggregation_method:
+            required: true
+    - description: >-
+        Nearest-station linkage must state its distance cutoff — without it
+        "nearest" is unbounded and irreproducible (tier conditionally_core
+        context "station strategies").
+      preconditions:
+        slot_conditions:
+          linkage_strategy:
+            equals_string: nearest_station_with_max_distance
+      postconditions:
+        slot_conditions:
+          linkage_max_distance_to_station_m:
+            required: true
+    - description: >-
+        Day-boundary cross-check, SPEC.md rule 8: when a lagged or
+        event-matched analysis is declared, the clinical-side date convention
+        is required so the two declared day rulers can be compared (tier
+        conditionally_core context "lag_alignment_applied != none").
+      preconditions:
+        slot_conditions:
+          lag_alignment_applied:
+            equals_string_in:
+            - lag_n_days
+            - distributed_lag
+      postconditions:
+        slot_conditions:
+          clinical_date_assignment_convention:
+            required: true
 
 #────────────────────────────────────────────────────────────────
 # SLOTS
@@ -205,6 +261,41 @@ slots:
         whether unlimited-distance station matches were allowed.
       explanation: >-
         When the maximum-station-distance field is empty, this says why.
+  linkage_working_crs:
+    title: Linkage Working CRS
+    range: string
+    description: >-
+      Coordinate reference system the point-to-cell join was actually
+      executed in, as an EPSG identifier or PROJ string, when it differs
+      from the native `SpatialReference.crs` — e.g. reprojecting WGS84
+      points into an equal-area CRS before the spatial join.
+    examples:
+    - value: "EPSG:5070"
+      description: CONUS Albers equal-area, the `local_epsg` the GAIA spatial join runs in
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07): GAIA's ETL descriptor carries both `epsg` (native, 4326)
+      and `local_epsg` (5070) — the working CRS its PostGIS join actually
+      executes in. EnVar had exactly one `crs` slot, so the second one had
+      no home; the survey's verdict was that the working CRS is a linkage
+      hyperparameter, not a duplicate of the native CRS.
+    see_also:
+    - https://epsg.io/5070
+
+    annotations:
+      tier: optional
+      justification: >-
+        Reprojection can move a point across a cell boundary: two runs with
+        the same native CRS but different working CRS are different linkages
+        that can assign different exposures to the same address. Recording
+        the working CRS makes the join reproducible rather than
+        deployment-dependent.
+      explanation: >-
+        Before matching patient locations to map tiles, software sometimes
+        converts all coordinates into a different mapping system that is
+        better for measuring areas. This names that intermediate system,
+        because the choice can nudge a location into a neighbouring tile.
   geocoding_precision_propagated:
     title: Propagated Geocoding Precision
     range: GeocodingPrecisionEnum

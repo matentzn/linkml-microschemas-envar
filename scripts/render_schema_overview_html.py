@@ -2,7 +2,7 @@
 """Render ``docs/schema_overview.md`` as a standalone HTML page.
 
 Writes ``docs/overview/index.html``, which mkdocs deploys verbatim (like
-``docs/dashboard/index.html``) and the site nav links as "Schema overview".
+``docs/datasets/index.html``) and the site nav links as "Schema overview".
 The page keeps its own full-width layout because the overview's five-column
 field tables do not fit mkdocs-material's content column. Typeset as a
 scientific field monograph — warm paper ground, ink-dark serif prose, a
@@ -233,7 +233,7 @@ table.fields[data-cols="5"] td:nth-child(4) {{ font-size: 0.8rem; }}
     <div class="kicker">EnVar Microschemas · Schema Overview</div>
     <h1>{title}</h1>
     <nav class="crumbs" aria-label="Site">
-      <a href="../">← Docs home</a><span>·</span><a href="../elements/">Element reference</a><span>·</span><a href="../dashboard/">Completeness ledger</a><span>·</span><a href="../datasets/">Example datasets</a>
+      <a href="../">← Docs home</a><span>·</span><a href="../elements/">Element reference</a><span>·</span><a href="../datasets/">Example datasets</a>
     </nav>
     <div class="colophon">Rendered from <code>docs/schema_overview.md</code> as part of <code>just site</code> — regenerate with <code>just render-schema-overview</code>.</div>
   </header>

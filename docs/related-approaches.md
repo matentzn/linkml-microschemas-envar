@@ -188,6 +188,10 @@ None of these is redundant with EnVar, and EnVar does not replace any of them. E
 LinkML, it can export into the formats the others already consume (Schema.org JSON-LD for GAIA, the
 DDI-CDI/Croissant vocabulary for CDIF).
 
+This page and the coverage matrix ask what each standard is missing that EnVar has. The
+[reverse gap survey](reverse-gap-survey.md) asks the opposite — which fields these systems
+natively record that EnVar has no slot for — with a verdict (add / absorb / out of scope) per field.
+
 ### References
 
 - GAIA: <https://github.com/OHDSI/gaiaCatalog>

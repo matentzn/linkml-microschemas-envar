@@ -27,13 +27,21 @@ variable_identity:
   standard_name: CF:air_temperature
   cf_cell_methods: "time: maximum"
   units_ucum: Cel
-  # Amadeus also documented the native-unit conversion (K -> Cel,
-  # subtract 273.15) — the schema has no slot for it; see the packing note
-  # in the source sidecar.
+  # Native-unit conversion as documented by the run's THREDDS capture
+  # (outputs/gridmet_tmmx.cf_metadata.json: units=K, scale_factor=0.1,
+  # add_offset=220.0). Until 2026-07 this lived here as a comment because
+  # the schema had no slot for it — the reverse gap survey
+  # (docs/reverse-gap-survey.md) added these slots.
+  native_units_ucum: K
+  native_value_scale_factor: 0.1
+  native_value_offset: 220.0
+  unit_conversion_formula: "K = stored * 0.1 + 220.0; Cel = K - 273.15"
 
 data_layout:
   table_orientation: wide
   value_column: value_celsius
+  # the pipeline's CSV ships the Kelvin twin column alongside value_celsius
+  native_value_column: value_kelvin
   subject_column: person_id
   time_column: date
 
@@ -60,6 +68,11 @@ source_dataset:
   source_license_spdx: CC0-1.0
   source_native_format: netcdf4_cf
   source_access_url: "https://www.climatologylab.org/gridmet.html"
+
+uncertainty:
+  # declared by the run's THREDDS capture (_FillValue / missing_value);
+  # slot added by the reverse gap survey (docs/reverse-gap-survey.md)
+  missing_value_sentinel: "32767"
 
 exposure_model:
   exposure_model_type: statistical_blend

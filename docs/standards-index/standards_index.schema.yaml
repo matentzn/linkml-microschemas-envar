@@ -1,0 +1,167 @@
+id: https://w3id.org/linkml/microschemas/envar/standards-index
+name: envar-standards-index
+title: EnVar Standards Index
+description: |-
+  Standalone registry schema for the EnVar standards index — the catalogue of
+  metadata standards and structured-metadata formats for environmental-exposure
+  data. Deliberately NOT imported into the linkml_microschemas_envar umbrella
+  and NOT part of `just gen-project`.
+license: Apache-2.0
+
+prefixes:
+  envar: https://w3id.org/linkml/microschemas/envar/
+  linkml: https://w3id.org/linkml/
+default_prefix: envar
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  StandardsIndex:
+    tree_root: true
+    description: Container for all standard entries and the triaged-out tail.
+    attributes:
+      entries:
+        range: StandardEntry
+        multivalued: true
+        inlined_as_list: true
+      triaged:
+        range: TriageEntry
+        multivalued: true
+        inlined_as_list: true
+
+  StandardEntry:
+    description: One metadata standard or structured-metadata format.
+    slots:
+      - id
+      - name
+      - full_name
+      - standard_class
+      - spec_url
+      - governance
+      - unit_of_description
+      - primary_purpose
+      - layer
+      - carries_derivation_metadata
+      - domain_specificity
+      - relevance
+      - relevance_reason
+      - envar_relation
+      - vocabularies_used
+      - evidence
+      - reconciliation
+      - reconciliation_ref
+      - source_candidates
+      - notes
+
+  TriageEntry:
+    description: A candidate ruled out of the first-class index, kept for auditability.
+    slots:
+      - id
+      - name
+      - kind
+      - relevance
+      - relevance_reason
+      - source_candidates
+      - ref
+      - notes
+
+slots:
+  id:
+    identifier: true
+    description: Short slug.
+  name:
+    required: true
+  full_name: {}
+  standard_class:
+    range: StandardClassEnum
+    description: Whether this is a general standard or a per-pipeline sidecar.
+  spec_url: {}
+  governance:
+    description: Standards body plus maturity (ISO / W3C / OGC / RDA / CODATA / community / single-project).
+  unit_of_description:
+    range: UnitOfDescriptionEnum
+  primary_purpose:
+    range: PrimaryPurposeEnum
+  layer:
+    range: LayerEnum
+  carries_derivation_metadata:
+    range: CarriesDerivationEnum
+  domain_specificity:
+    range: DomainSpecificityEnum
+  relevance:
+    range: RelevanceEnum
+    required: true
+  relevance_reason:
+    required: true
+    description: One line justifying the relevance verdict.
+  envar_relation:
+    description: Which EnVar concern(s) it overlaps; complementary vs competing.
+  vocabularies_used:
+    multivalued: true
+    description: Controlled vocabularies / ontologies the standard leans on.
+  evidence:
+    multivalued: true
+    description: Verified source URLs.
+  reconciliation:
+    range: ReconciliationEnum
+  reconciliation_ref:
+    description: Pointer into the niehs inventory / study REPORT.
+  kind:
+    range: TriageKindEnum
+  ref:
+    description: Optional pointer (URL or file) for a triaged candidate.
+  source_candidates:
+    multivalued: true
+    description: Verbatim todo.md candidate strings this entry accounts for.
+  notes: {}
+
+enums:
+  StandardClassEnum:
+    permissible_values:
+      general_standard:
+      pipeline_sidecar:
+  UnitOfDescriptionEnum:
+    permissible_values:
+      dataset:
+      variable_type:
+      geocoded_row:
+      produced_value:
+      file:
+  PrimaryPurposeEnum:
+    permissible_values:
+      find:
+      define:
+      compute:
+      reproduce_pool:
+      cite:
+  LayerEnum:
+    permissible_values:
+      discovery:
+      conceptual:
+      instance:
+      linkage:
+  CarriesDerivationEnum:
+    permissible_values:
+      carried:
+      partial:
+      absent:
+  DomainSpecificityEnum:
+    permissible_values:
+      env_health_specific:
+      general_purpose:
+  RelevanceEnum:
+    permissible_values:
+      in_scope:
+      peripheral:
+      out_of_scope:
+  ReconciliationEnum:
+    permissible_values:
+      new:
+      already_catalogued:
+  TriageKindEnum:
+    permissible_values:
+      vocabulary:
+      project_or_platform:
+      other:

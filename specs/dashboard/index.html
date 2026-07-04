@@ -200,7 +200,7 @@ footer a{color:var(--ink-2)}
       <div>
         <h1>Metadata Completeness <em>Ledger</em></h1>
         <nav class="crumbs" aria-label="Site">
-          <a href="../">← Docs home</a><span>·</span><a href="../overview/">Schema overview</a><span>·</span><a href="../elements/">Element reference</a><span>·</span><a href="../datasets/">Example datasets</a>
+          Retired design artefact (2026-07) — superseded by the computed example-dataset ledger at <code>docs/datasets/index.html</code>; kept next to <code>specs/SPEC_DASHBOARD.md</code>, no longer part of the published site
         </nav>
       </div>
       <p class="lede">Every row is one exposure sidecar, ETL'd into the microschema. Watch reproducibility climb from the metadata we get today to the metadata a result actually needs.</p>
@@ -237,7 +237,7 @@ footer a{color:var(--ink-2)}
 
   <footer>
     <p>Variable: TMAX (daily maximum near-surface air temperature) · scored against the EnVar microschema tier annotations · companion to <a href="../">the LinkML element docs</a>, <a href="https://github.com/monarch-initiative/linkml-microschemas-envar/blob/main/SPEC.md">SPEC.md</a> and <a href="https://github.com/monarch-initiative/linkml-microschemas-envar/blob/main/PLAN.md">PLAN.md</a>.</p>
-    <p class="disclaim">Draft. Per-row scores are precomputed and embedded for illustration — the <code>uv run</code> completeness checker that reads tiers directly from the schema is not yet built (PLAN.md §6). Denominators (Core 8 / Recommended 9 / Optional 7) are the TMAX-relevant slot counts; readiness = 0.5·core + 0.4·recommended + 0.1·optional.</p>
+    <p class="disclaim">Retired design artefact (2026-07). Per-row scores are hand-embedded and illustrative. The real completeness checker now exists (<code>src/linkml_microschemas_envar/checker.py</code>, <code>just check &lt;sidecar&gt;</code>) and feeds the computed example-dataset ledger (<code>docs/datasets/index.html</code>), which supersedes this page — retired rather than regenerated so two completeness pages cannot drift apart. Denominators (Core 8 / Recommended 9 / Optional 7) were the TMAX-relevant slot counts at design time; readiness = 0.5·core + 0.4·recommended + 0.1·optional.</p>
   </footer>
 </div>
 

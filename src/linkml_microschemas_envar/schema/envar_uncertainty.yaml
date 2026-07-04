@@ -49,6 +49,7 @@ classes:
     - quality_flag_vocabulary_missing_reason
     - missing_data_handling_method
     - missing_data_handling_method_missing_reason
+    - missing_value_sentinel
     - data_completeness_pct
     - data_completeness_pct_missing_reason
 
@@ -331,6 +332,42 @@ slots:
         guess from nearby days and places, copy the last known value, and so
         on. Filled-in numbers can look just like real measurements, so it
         matters to know which is which.
+  missing_value_sentinel:
+    title: Missing Value Sentinel
+    range: string
+    description: >-
+      The stored value that means "missing" in the source product's files,
+      verbatim, e.g. `32767` (gridMET `_FillValue`) or `-9999` (Daymet
+      nodata). Complements `missing_data_handling_method`: the policy slot
+      says *how* gaps were handled, this says *which number encodes a gap*.
+    examples:
+    - value: "32767"
+      description: gridMET tmmx `_FillValue` / `missing_value` (packed int16)
+    - value: "-9999"
+      description: Daymet nodata sentinel as registered in the GAIA catalog
+    comments:
+    - >-
+      Added after the reverse gap survey (docs/reverse-gap-survey.md,
+      2026-07): two pipelines surfaced the same field independently —
+      the Amadeus THREDDS metadata declares `_FillValue`/`missing_value`
+      32767, and GAIA's ETL descriptor registers `nodata: [float4, -9999]`.
+      Neither number had a home: `missing_data_handling_method` records
+      policy, not the sentinel, and a consumer re-reading the source grid
+      needs the number itself. Kept as a string so non-numeric sentinels
+      (`NaN`, empty string) stay representable.
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#missing-data
+
+    annotations:
+      tier: optional
+      justification: >-
+        A sentinel read as data is a catastrophic outlier (−9999 °C) or a
+        silent bias (32767 packed); anyone touching the source files rather
+        than the cleaned companion file needs to know which value to mask.
+      explanation: >-
+        Datasets mark holes with an agreed impossible number, like −9999.
+        If software doesn't know the marker, it will average it in as if it
+        were a real reading. This field records the marker.
   missing_data_handling_method_missing_reason:
     title: Reason Handling Method Is Missing
     range: MissingReasonEnum

@@ -997,6 +997,28 @@ class VariableIdentity(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'domain_of_use': {'tag': 'domain_of_use',
                                            'value': 'environmental_exposure'}},
          'from_schema': 'https://w3id.org/linkml/microschemas/envar/variable',
+         'rules': [{'description': 'CF-based products (a `CF:`-prefixed '
+                                   '`standard_name`) must preserve the verbatim '
+                                   '`cell_methods` string — the context of SPEC.md '
+                                   'validation rule 5 and of the `conditionally_core` '
+                                   'tier on `cf_cell_methods`. Non-CF products are '
+                                   'exempt; their aggregation semantics live in the '
+                                   'required `temporal_aggregation_method`.',
+                    'postconditions': {'slot_conditions': {'cf_cell_methods': {'name': 'cf_cell_methods',
+                                                                               'required': True}}},
+                    'preconditions': {'slot_conditions': {'standard_name': {'name': 'standard_name',
+                                                                            'pattern': '^CF:'}}}},
+                   {'description': 'Declaring native units is declaring a conversion: '
+                                   'once `native_units_ucum` says the source stored '
+                                   'something other than `units_ucum`, the math that '
+                                   "bridged them must be written down or the sidecar's "
+                                   'values cannot be traced back to the source bytes '
+                                   '(tier conditionally_core context "native units '
+                                   'declared").',
+                    'postconditions': {'slot_conditions': {'unit_conversion_formula': {'name': 'unit_conversion_formula',
+                                                                                       'required': True}}},
+                    'preconditions': {'slot_conditions': {'native_units_ucum': {'name': 'native_units_ucum',
+                                                                                'value_presence': 'PRESENT'}}}}],
          'see_also': ['https://cfconventions.org/standard-names.html',
                       'https://ucum.org/'],
          'slot_usage': {'concept_status': {'name': 'concept_status', 'required': True},
@@ -1100,9 +1122,20 @@ class VariableIdentity(ConfiguredBaseModel):
                                                     'source products and the '
                                                     'CF-consistency triple check over '
                                                     '`standard_name` + '
-                                                    '`cf_cell_methods` + '
-                                                    '`units_ucum`.'},
-                         'tier': {'tag': 'tier', 'value': 'core'}},
+                                                    '`cf_cell_methods` + `units_ucum`. '
+                                                    'Conditionally-Core because the '
+                                                    'slot is CF-specific by design: it '
+                                                    'is mandatory when `standard_name` '
+                                                    'uses the `CF:` prefix (the '
+                                                    'context of SPEC.md validation '
+                                                    'rule 5), while a non-CF product '
+                                                    'genuinely has no verbatim '
+                                                    '`cell_methods` string to preserve '
+                                                    '— its vocabulary-neutral '
+                                                    'aggregation semantics live in the '
+                                                    'required '
+                                                    '`temporal_aggregation_method`.'},
+                         'tier': {'tag': 'tier', 'value': 'conditionally_core'}},
          'comments': ['Deliberately CF-specific — do not generalise. The '
                       'vocabulary-neutral capture of aggregation semantics already '
                       'exists as the required '
@@ -1174,6 +1207,123 @@ class VariableIdentity(ConfiguredBaseModel):
                          'tier': {'tag': 'tier', 'value': 'optional'}},
          'domain_of': ['VariableIdentity'],
          'examples': [{'value': '°C'}]} })
+    native_units_ucum: Optional[str] = Field(default=None, title="Native Units (UCUM)", description="""UCUM unit of the values as the *source product stores them*, when that differs from `units_ucum` (the unit of the values in the companion data file). Omit when the source already stores values in `units_ucum` — absence means \"no conversion happened\". Declaring it makes `unit_conversion_formula` required.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Data producers often store numbers '
+                                                  'in different units than the ones '
+                                                  'shown to users — Kelvin instead of '
+                                                  'Celsius, or compressed integers '
+                                                  'that need unpacking. This field '
+                                                  'records the unit the source '
+                                                  'actually uses, so anyone going back '
+                                                  'to the original files knows what '
+                                                  'the raw numbers mean.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'A value of 308 and a value of 35 '
+                                                    'can be the same temperature. When '
+                                                    'the source stores different units '
+                                                    '(or packed integers) than the '
+                                                    'companion file carries, the '
+                                                    'native unit is the anchor that '
+                                                    'lets a consumer check the '
+                                                    'conversion and re-read the source '
+                                                    "bytes; without it the sidecar's "
+                                                    'values cannot be traced back to '
+                                                    'the product.'},
+                         'tier': {'tag': 'tier', 'value': 'recommended'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      '2026-07): all three worked pipelines surfaced the same gap '
+                      'independently — Amadeus ships `value_kelvin`/`value_celsius` '
+                      'twin columns, GAIA stores °C with no record of the K→°C math, '
+                      'and DeGAUSS converts inside the container so the native unit '
+                      'never appears in any output. The Amadeus translation had to '
+                      'park the native unit in a YAML comment because the schema had '
+                      'no slot for it; the GAIA scenario prototyped exactly this key '
+                      'as a hand-added `envar:*` PropertyValue in its JSON-LD catalog '
+                      'entry before it existed here.'],
+         'domain_of': ['VariableIdentity'],
+         'examples': [{'description': 'gridMET tmmx stores Kelvin; the Amadeus '
+                                      'scenario emits Celsius',
+                       'value': 'K'}],
+         'see_also': ['https://ucum.org/']} })
+    native_value_scale_factor: Optional[float] = Field(default=None, title="Native Value Scale Factor", description="""CF-style packing multiplier applied when decoding the source's stored integers to physical values (`physical = stored × scale_factor + add_offset`). Only meaningful alongside `native_units_ucum`.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Big datasets often save space by '
+                                                  'storing small whole numbers that '
+                                                  'must be multiplied by a constant to '
+                                                  'get the real measurement. This is '
+                                                  'that constant.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'Anyone re-reading the source grid '
+                                                    'directly (rather than the '
+                                                    'companion file) must unpack '
+                                                    'stored integers with exactly this '
+                                                    'factor; a wrong or missing factor '
+                                                    'yields physically plausible but '
+                                                    'wrong values, the worst kind of '
+                                                    'error.'},
+                         'tier': {'tag': 'tier', 'value': 'optional'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      '2026-07): the THREDDS metadata the Amadeus flow fetches '
+                      'declares `scale_factor = 0.1`, `add_offset = 220.0`, '
+                      '`_Unsigned` — the packed int16 → Kelvin decode convention. The '
+                      'survey rated this the single most load-bearing no-home field it '
+                      'found: mis-decoding produces garbage temperatures, and nothing '
+                      'in the sidecar recorded it.'],
+         'domain_of': ['VariableIdentity'],
+         'examples': [{'description': 'gridMET tmmx packs Kelvin as unsigned int16 '
+                                      'with scale 0.1',
+                       'value': '0.1'}],
+         'see_also': ['https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data']} })
+    native_value_offset: Optional[float] = Field(default=None, title="Native Value Offset", description="""CF-style packing offset applied when decoding the source's stored integers to physical values (`physical = stored × scale_factor + add_offset`). Only meaningful alongside `native_units_ucum`.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'The second constant in the '
+                                                  'space-saving trick: after '
+                                                  'multiplying the stored number, add '
+                                                  'this to get the real measurement.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'The offset half of the unpacking '
+                                                    'convention; without it the scale '
+                                                    'factor alone still decodes to the '
+                                                    'wrong physical value.'},
+                         'tier': {'tag': 'tier', 'value': 'optional'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      '2026-07) together with `native_value_scale_factor` — the other '
+                      'half of the packed-value decode convention the Amadeus THREDDS '
+                      'metadata declares and the sidecar previously lost.'],
+         'domain_of': ['VariableIdentity'],
+         'examples': [{'description': 'gridMET tmmx packing offset (unpacks to true '
+                                      'Kelvin)',
+                       'value': '220.0'}],
+         'see_also': ['https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data']} })
+    unit_conversion_formula: Optional[str] = Field(default=None, title="Unit Conversion Formula", description="""The conversion from the source's native representation to the values in the companion data file, written out, e.g. `Cel = K - 273.15` or `K = stored × 0.1 + 220.0; Cel = K - 273.15`. Required whenever `native_units_ucum` is declared.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'When the original data used '
+                                                  'different units, this spells out '
+                                                  'the exact arithmetic that turned '
+                                                  'them into the numbers in the data '
+                                                  'file — like showing your work in a '
+                                                  'calculation, so others can check '
+                                                  'it.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'Twin value columns and silent '
+                                                    'container conversions are how '
+                                                    'factor-of-1.8 unit errors enter '
+                                                    'exposure analyses undetected. '
+                                                    'Once native units are declared, '
+                                                    'the bridging math is the only '
+                                                    "record of how the file's values "
+                                                    "relate to the source's — it is "
+                                                    'what makes the conversion '
+                                                    'checkable rather than trusted.'},
+                         'tier': {'tag': 'tier', 'value': 'conditionally_core'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      '2026-07): the Amadeus translation carried this exact math only '
+                      'as a YAML comment ("the schema has no slot for it"), and the '
+                      'GAIA scenario hand-added it as an `envar:unit_conversion` '
+                      'PropertyValue. The comparison table in the EnVar pipeline repo '
+                      '(COMPARISON.md §E) lists "K→°C conversion math recorded: ❌" for '
+                      'every pipeline — this slot is the fix.'],
+         'domain_of': ['VariableIdentity'],
+         'examples': [{'description': 'gridMET tmmx unpack-then-convert chain in the '
+                                      'Amadeus scenario',
+                       'value': 'K = stored * 0.1 + 220.0; Cel = K - 273.15'}]} })
     target_concept_vocabulary: Optional[str] = Field(default=None, title="Target Concept Vocabulary", description="""The downstream health-data vocabulary that `target_concept_id` and `concept_status` refer to, e.g. `omop` (OHDSI Standardised Vocabulary), `bdc` (BioData Catalyst). Names the vocabulary so the schema privileges no single health-data layer.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Health databases each keep their '
                                                   'own catalogue of codes for the '
@@ -1362,6 +1512,19 @@ class DataLayout(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'domain_of_use': {'tag': 'domain_of_use',
                                            'value': 'environmental_exposure'}},
          'from_schema': 'https://w3id.org/linkml/microschemas/envar/layout',
+         'rules': [{'description': 'Long-format layouts must name the variable '
+                                   'discriminator: the shared value column is only '
+                                   'interpretable once `variable_column` says which '
+                                   'column discriminates variables and `variable_key` '
+                                   "says which row value selects this record's rows "
+                                   '(SPEC.md rule 7; tier conditionally_core context '
+                                   '"long orientation").',
+                    'postconditions': {'slot_conditions': {'variable_column': {'name': 'variable_column',
+                                                                               'required': True},
+                                                           'variable_key': {'name': 'variable_key',
+                                                                            'required': True}}},
+                    'preconditions': {'slot_conditions': {'table_orientation': {'equals_string': 'long',
+                                                                                'name': 'table_orientation'}}}}],
          'slot_usage': {'table_orientation': {'name': 'table_orientation',
                                               'required': True},
                         'value_column': {'name': 'value_column', 'required': True}},
@@ -1511,6 +1674,35 @@ class DataLayout(ConfiguredBaseModel):
          'domain_of': ['DataLayout'],
          'examples': [{'description': 'daily data', 'value': 'date'},
                       {'description': 'annual aggregate', 'value': 'year'}]} })
+    native_value_column: Optional[str] = Field(default=None, title="Native Value Column", description="""Name of a second column carrying the same values in the source's *native* units (`VariableIdentity.native_units_ucum`), when the companion file ships both, e.g. Amadeus's `value_kelvin` next to `value_celsius`. `value_column` stays the binding for the values in `units_ucum`; this binds the native-unit twin.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Some data files helpfully include '
+                                                  'the same measurement twice, in two '
+                                                  'units — like a column in Kelvin '
+                                                  'next to one in Celsius. This names '
+                                                  'that second column so it is '
+                                                  'accounted for rather than '
+                                                  'mysterious.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'When a producer ships both unit '
+                                                    'representations, binding only one '
+                                                    'leaves an unexplained column in '
+                                                    'the data file and hides the '
+                                                    'cheapest available cross-check '
+                                                    '(recomputing one column from the '
+                                                    'other via '
+                                                    '`unit_conversion_formula`).'},
+                         'tier': {'tag': 'tier', 'value': 'optional'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      "2026-07): the Amadeus pipeline's native CSV carries "
+                      '`value_kelvin` and `value_celsius` twin columns, and '
+                      '`DataLayout` could bind exactly one of them — the native-unit '
+                      'copy had no home and its very existence went unrecorded. Rider '
+                      'on the native-unit conversion record in envar_variable '
+                      '(`native_units_ucum`, `unit_conversion_formula`).'],
+         'domain_of': ['DataLayout'],
+         'examples': [{'description': 'Amadeus gridMET output ships Kelvin and Celsius '
+                                      'side by side',
+                       'value': 'value_kelvin'}]} })
     value_uncertainty_column: Optional[str] = Field(default=None, title="Per-Value Uncertainty Column", description="""Name of the column carrying per-value uncertainty (e.g. `pm_se`, `tmax_stderr`). Its semantics (uncertainty type, units) live in the Uncertainty microschema. Null with reason for products whose per-value uncertainty exists upstream but is not surfaced.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Some datasets include a "plus or '
                                                   'minus" column next to each value — '
@@ -1608,11 +1800,13 @@ class SpatialReference(ConfiguredBaseModel):
          'slot_usage': {'crs': {'name': 'crs', 'required': True},
                         'extraction_method': {'name': 'extraction_method',
                                               'required': True},
+                        'native_spatial_resolution_m': {'name': 'native_spatial_resolution_m',
+                                                        'required': True},
                         'target_geography_type': {'name': 'target_geography_type',
                                                   'required': True}},
          'title': 'Spatial Reference'})
 
-    native_spatial_resolution_m: Optional[float] = Field(default=None, title="Native Spatial Resolution (m)", description="""Native spatial resolution of the source product in metres. Daymet = 1000, GridMET ≈ 4000, NARR ≈ 32000.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+    native_spatial_resolution_m: float = Field(default=..., title="Native Spatial Resolution (m)", description="""Native spatial resolution of the source product in metres. Daymet = 1000, GridMET ≈ 4000, NARR ≈ 32000.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Gridded environmental data divides '
                                                   'the world into square tiles, like '
                                                   'pixels in a photo, and reports one '
@@ -1783,7 +1977,16 @@ class SpatialReference(ConfiguredBaseModel):
                                                     'makes buffer-derived values '
                                                     'unreproducible and incomparable '
                                                     'across analyses.'},
-                         'tier': {'tag': 'tier', 'value': 'conditionally_core'}},
+                         'tier': {'tag': 'tier', 'value': 'conditionally_core'},
+                         'tier_context': {'tag': 'tier_context',
+                                          'value': 'cross-module — Core iff '
+                                                   'linkage_method.linkage_strategy is '
+                                                   'buffer_aggregation_around_residence. '
+                                                   'Not expressible as a class rule '
+                                                   '(rules cannot reach across '
+                                                   'classes), so the checker evaluates '
+                                                   'it in '
+                                                   'RESIDUAL_CONTEXT_PREDICATES.'}},
          'domain_of': ['SpatialReference'],
          'examples': [{'description': '500 m greenspace buffer; null in the Daymet '
                                       'Tmax scenario (no buffer)',
@@ -1833,7 +2036,18 @@ class SpatialReference(ConfiguredBaseModel):
                                                     'value cannot be reproduced or '
                                                     'compared with other weighted '
                                                     'products.'},
-                         'tier': {'tag': 'tier', 'value': 'conditionally_core'}},
+                         'tier': {'tag': 'tier', 'value': 'conditionally_core'},
+                         'tier_context': {'tag': 'tier_context',
+                                          'value': 'cross-module — Core iff '
+                                                   'spatial_reference.extraction_method '
+                                                   'is population_weighted_mean OR '
+                                                   'linkage_method.linkage_strategy is '
+                                                   'population_weighted_area_to_residence. '
+                                                   'The disjunction spans two classes, '
+                                                   'so it is not expressible as a '
+                                                   'class rule; the checker evaluates '
+                                                   'it in '
+                                                   'RESIDUAL_CONTEXT_PREDICATES.'}},
          'domain_of': ['SpatialReference'],
          'examples': [{'description': 'Gridded Population of the World v4, used in the '
                                       'ACAG PM2.5 scenario',
@@ -2426,7 +2640,16 @@ class SourceDataset(ConfiguredBaseModel):
                                                     'instrument changes masquerade as '
                                                     'climate signal. Mandatory for '
                                                     'station-based products.'},
-                         'tier': {'tag': 'tier', 'value': 'conditionally_core'}},
+                         'tier': {'tag': 'tier', 'value': 'conditionally_core'},
+                         'tier_context': {'tag': 'tier_context',
+                                          'value': 'not machine-decidable — the stated '
+                                                   'context is "station-based '
+                                                   'products", which cannot be read '
+                                                   'reliably off the sidecar (no slot '
+                                                   'declares station-ness). No rule '
+                                                   'and no checker predicate; the slot '
+                                                   'scores as Optional out of context '
+                                                   'by design.'}},
          'domain_of': ['SourceDataset'],
          'examples': [{'description': 'e.g. GHCN-Daily station observations',
                        'value': 'not_homogenised'}],
@@ -2499,6 +2722,14 @@ class ExposureModel(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'domain_of_use': {'tag': 'domain_of_use',
                                            'value': 'environmental_exposure'}},
          'from_schema': 'https://w3id.org/linkml/microschemas/envar/model',
+         'rules': [{'description': 'Ensemble products must state their member count — '
+                                   'ensemble spread is meaningless without knowing how '
+                                   'many realisations it summarises (tier '
+                                   'conditionally_core context "ensemble models").',
+                    'postconditions': {'slot_conditions': {'exposure_model_ensemble_member_count': {'name': 'exposure_model_ensemble_member_count',
+                                                                                                    'required': True}}},
+                    'preconditions': {'slot_conditions': {'exposure_model_type': {'equals_string': 'ensemble_machine_learning',
+                                                                                  'name': 'exposure_model_type'}}}}],
          'see_also': ['https://en.wikipedia.org/wiki/Reanalysis_(meteorology)'],
          'slot_usage': {'exposure_model_type': {'name': 'exposure_model_type',
                                                 'required': True}},
@@ -3006,6 +3237,39 @@ class Uncertainty(ConfiguredBaseModel):
          'examples': [{'description': 'The producer does not document its missing-data '
                                       'handling.',
                        'value': 'not_provided_by_source'}]} })
+    missing_value_sentinel: Optional[str] = Field(default=None, title="Missing Value Sentinel", description="""The stored value that means \"missing\" in the source product's files, verbatim, e.g. `32767` (gridMET `_FillValue`) or `-9999` (Daymet nodata). Complements `missing_data_handling_method`: the policy slot says *how* gaps were handled, this says *which number encodes a gap*.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Datasets mark holes with an agreed '
+                                                  'impossible number, like −9999. If '
+                                                  "software doesn't know the marker, "
+                                                  'it will average it in as if it were '
+                                                  'a real reading. This field records '
+                                                  'the marker.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'A sentinel read as data is a '
+                                                    'catastrophic outlier (−9999 °C) '
+                                                    'or a silent bias (32767 packed); '
+                                                    'anyone touching the source files '
+                                                    'rather than the cleaned companion '
+                                                    'file needs to know which value to '
+                                                    'mask.'},
+                         'tier': {'tag': 'tier', 'value': 'optional'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      '2026-07): two pipelines surfaced the same field independently — '
+                      'the Amadeus THREDDS metadata declares '
+                      "`_FillValue`/`missing_value` 32767, and GAIA's ETL descriptor "
+                      'registers `nodata: [float4, -9999]`. Neither number had a home: '
+                      '`missing_data_handling_method` records policy, not the '
+                      'sentinel, and a consumer re-reading the source grid needs the '
+                      'number itself. Kept as a string so non-numeric sentinels '
+                      '(`NaN`, empty string) stay representable.'],
+         'domain_of': ['Uncertainty'],
+         'examples': [{'description': 'gridMET tmmx `_FillValue` / `missing_value` '
+                                      '(packed int16)',
+                       'value': '32767'},
+                      {'description': 'Daymet nodata sentinel as registered in the '
+                                      'GAIA catalog',
+                       'value': '-9999'}],
+         'see_also': ['https://cfconventions.org/cf-conventions/cf-conventions.html#missing-data']} })
     data_completeness_pct: Optional[float] = Field(default=None, title="Data Completeness Percentage", description="""Percent of (location, date) cells in the extracted window that have a non-missing value. 0-100.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Out of all the days and places you '
                                                   'asked about, this is the percentage '
@@ -3098,7 +3362,10 @@ class ModelAggregateUncertainty(ConfiguredBaseModel):
                                                     'determines whether model error is '
                                                     'negligible or fatal for a given '
                                                     'effect size.'}},
-         'domain_of': ['ModelAggregateUncertainty']} })
+         'domain_of': ['ModelAggregateUncertainty'],
+         'examples': [{'description': 'Di et al. ensemble PM2.5, in µg/m³ (same model '
+                                      'as the cv_r2 example)',
+                       'value': '1.89'}]} })
     reported_in: Optional[str] = Field(default=None, title="Reporting Reference", description="""DOI / citation where the aggregate uncertainty is reported.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Where these numbers come from — the '
                                                   'paper or report (ideally a DOI) so '
@@ -3123,6 +3390,44 @@ class LinkageMethod(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'domain_of_use': {'tag': 'domain_of_use',
                                            'value': 'environmental_exposure'}},
          'from_schema': 'https://w3id.org/linkml/microschemas/envar/linkage',
+         'rules': [{'description': 'Buffer aggregation needs its radius: the buffer '
+                                   'size is a hyperparameter that changes which cells '
+                                   'contribute to the value (tier conditionally_core '
+                                   'context "buffer strategies").',
+                    'postconditions': {'slot_conditions': {'linkage_buffer_radius_m': {'name': 'linkage_buffer_radius_m',
+                                                                                       'required': True}}},
+                    'preconditions': {'slot_conditions': {'linkage_strategy': {'equals_string': 'buffer_aggregation_around_residence',
+                                                                               'name': 'linkage_strategy'}}}},
+                   {'description': 'Strategies that aggregate over an area (buffer, '
+                                   'polygon membership, population-weighted area) must '
+                                   'state how cell values were combined (tier '
+                                   'conditionally_core context "buffer/area '
+                                   'strategies").',
+                    'postconditions': {'slot_conditions': {'linkage_buffer_aggregation_method': {'name': 'linkage_buffer_aggregation_method',
+                                                                                                 'required': True}}},
+                    'preconditions': {'slot_conditions': {'linkage_strategy': {'equals_string_in': ['buffer_aggregation_around_residence',
+                                                                                                    'area_membership_residence_in_polygon',
+                                                                                                    'population_weighted_area_to_residence'],
+                                                                               'name': 'linkage_strategy'}}}},
+                   {'description': 'Nearest-station linkage must state its distance '
+                                   'cutoff — without it "nearest" is unbounded and '
+                                   'irreproducible (tier conditionally_core context '
+                                   '"station strategies").',
+                    'postconditions': {'slot_conditions': {'linkage_max_distance_to_station_m': {'name': 'linkage_max_distance_to_station_m',
+                                                                                                 'required': True}}},
+                    'preconditions': {'slot_conditions': {'linkage_strategy': {'equals_string': 'nearest_station_with_max_distance',
+                                                                               'name': 'linkage_strategy'}}}},
+                   {'description': 'Day-boundary cross-check, SPEC.md rule 8: when a '
+                                   'lagged or event-matched analysis is declared, the '
+                                   'clinical-side date convention is required so the '
+                                   'two declared day rulers can be compared (tier '
+                                   'conditionally_core context "lag_alignment_applied '
+                                   '!= none").',
+                    'postconditions': {'slot_conditions': {'clinical_date_assignment_convention': {'name': 'clinical_date_assignment_convention',
+                                                                                                   'required': True}}},
+                    'preconditions': {'slot_conditions': {'lag_alignment_applied': {'equals_string_in': ['lag_n_days',
+                                                                                                         'distributed_lag'],
+                                                                                    'name': 'lag_alignment_applied'}}}}],
          'see_also': ['https://degauss.org/'],
          'slot_usage': {'linkage_strategy': {'name': 'linkage_strategy',
                                              'required': True}},
@@ -3262,6 +3567,39 @@ class LinkageMethod(ConfiguredBaseModel):
          'examples': [{'description': 'strategy is gridded extraction, not '
                                       'nearest-station',
                        'value': 'not_applicable'}]} })
+    linkage_working_crs: Optional[str] = Field(default=None, title="Linkage Working CRS", description="""Coordinate reference system the point-to-cell join was actually executed in, as an EPSG identifier or PROJ string, when it differs from the native `SpatialReference.crs` — e.g. reprojecting WGS84 points into an equal-area CRS before the spatial join.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+                                         'value': 'Before matching patient locations '
+                                                  'to map tiles, software sometimes '
+                                                  'converts all coordinates into a '
+                                                  'different mapping system that is '
+                                                  'better for measuring areas. This '
+                                                  'names that intermediate system, '
+                                                  'because the choice can nudge a '
+                                                  'location into a neighbouring tile.'},
+                         'justification': {'tag': 'justification',
+                                           'value': 'Reprojection can move a point '
+                                                    'across a cell boundary: two runs '
+                                                    'with the same native CRS but '
+                                                    'different working CRS are '
+                                                    'different linkages that can '
+                                                    'assign different exposures to the '
+                                                    'same address. Recording the '
+                                                    'working CRS makes the join '
+                                                    'reproducible rather than '
+                                                    'deployment-dependent.'},
+                         'tier': {'tag': 'tier', 'value': 'optional'}},
+         'comments': ['Added after the reverse gap survey (docs/reverse-gap-survey.md, '
+                      "2026-07): GAIA's ETL descriptor carries both `epsg` (native, "
+                      '4326) and `local_epsg` (5070) — the working CRS its PostGIS '
+                      'join actually executes in. EnVar had exactly one `crs` slot, so '
+                      "the second one had no home; the survey's verdict was that the "
+                      'working CRS is a linkage hyperparameter, not a duplicate of the '
+                      'native CRS.'],
+         'domain_of': ['LinkageMethod'],
+         'examples': [{'description': 'CONUS Albers equal-area, the `local_epsg` the '
+                                      'GAIA spatial join runs in',
+                       'value': 'EPSG:5070'}],
+         'see_also': ['https://epsg.io/5070']} })
     geocoding_precision_propagated: Optional[GeocodingPrecisionEnum] = Field(default=None, title="Propagated Geocoding Precision", description="""Quality category propagated from the upstream geocoder (DeGAUSS `precision` column).""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Geocoding means turning a street '
                                                   'address into map coordinates, and '
@@ -3913,10 +4251,40 @@ class DerivedHeatMetric(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'domain_of_use': {'tag': 'domain_of_use',
                                            'value': 'environmental_exposure'}},
          'from_schema': 'https://w3id.org/linkml/microschemas/envar/heat_metric',
+         'rules': [{'description': 'Heat-wave-flag metrics must state which of the (at '
+                                   'least seven, mutually unconvertible) heat-wave '
+                                   'definitions was used and the minimum '
+                                   'consecutive-days criterion (tier '
+                                   'conditionally_core context "heat-wave flavoured '
+                                   'metrics").',
+                    'postconditions': {'slot_conditions': {'heat_wave_min_consecutive_days': {'name': 'heat_wave_min_consecutive_days',
+                                                                                              'required': True},
+                                                           'heat_wave_threshold_definition': {'name': 'heat_wave_threshold_definition',
+                                                                                              'required': True}}},
+                    'preconditions': {'slot_conditions': {'heat_metric_family': {'equals_string': 'heat_wave_flag',
+                                                                                 'name': 'heat_metric_family'}}}},
+                   {'description': 'Percentile-based heat-wave thresholds are '
+                                   'meaningless without their reference period — the '
+                                   'same percentile over different baselines flags '
+                                   'different days (tier conditionally_core context '
+                                   '"percentile-based thresholds").',
+                    'postconditions': {'slot_conditions': {'percentile_reference_period_end': {'name': 'percentile_reference_period_end',
+                                                                                               'required': True},
+                                                           'percentile_reference_period_start': {'name': 'percentile_reference_period_start',
+                                                                                                 'required': True}}},
+                    'preconditions': {'slot_conditions': {'heat_wave_threshold_definition': {'equals_string_in': ['percentile_local',
+                                                                                                                  'percentile_climatological'],
+                                                                                             'name': 'heat_wave_threshold_definition'}}}}],
          'see_also': ['https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature',
                       'https://www.weather.gov/safety/heat-index',
                       'http://www.utci.org/'],
-         'slot_usage': {'heat_metric_family': {'name': 'heat_metric_family',
+         'slot_usage': {'equation_inputs': {'name': 'equation_inputs',
+                                            'required': True},
+                        'equation_validity_range': {'name': 'equation_validity_range',
+                                                    'required': True},
+                        'equation_variant': {'name': 'equation_variant',
+                                             'required': True},
+                        'heat_metric_family': {'name': 'heat_metric_family',
                                                'required': True},
                         'indoor_outdoor': {'name': 'indoor_outdoor', 'required': True}},
          'title': 'Derived Heat Metric'})
@@ -3943,7 +4311,7 @@ class DerivedHeatMetric(ConfiguredBaseModel):
          'examples': [{'description': 'outdoor Wet Bulb Globe Temperature (Phoenix '
                                       '2022 heat-wave record)',
                        'value': 'wbgt_outdoor'}]} })
-    equation_variant: Optional[EquationVariantEnum] = Field(default=None, title="Equation Variant", description="""For derived heat metrics, the equation variant used. Mandatory for WBGT, HI, and UTCI: a Liljegren WBGT and an ACSM WBGT for the same inputs can differ by 2-3 °C.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+    equation_variant: EquationVariantEnum = Field(default=..., title="Equation Variant", description="""For derived heat metrics, the equation variant used. Mandatory for WBGT, HI, and UTCI: a Liljegren WBGT and an ACSM WBGT for the same inputs can differ by 2-3 °C.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Well-known heat metrics have '
                                                   'several published formulas that '
                                                   'share one name but differ '
@@ -3986,7 +4354,7 @@ class DerivedHeatMetric(ConfiguredBaseModel):
                          'tier': {'tag': 'tier', 'value': 'optional'}},
          'domain_of': ['DerivedHeatMetric'],
          'examples': [{'value': 'not_provided_by_source'}]} })
-    equation_inputs: Optional[list[EquationInput]] = Field(default=None, title="Equation Inputs", description="""Typed per-input references for a multi-input derived metric (Heat Index from T + RH; WBGT from T + RH + wind + radiation). Each entry names the input's role and points, by `provenance_id`, to the upstream sidecar carrying that input's full context — it is an index into the lineage, not an inline copy of it.
+    equation_inputs: list[EquationInput] = Field(default=..., title="Equation Inputs", description="""Typed per-input references for a multi-input derived metric (Heat Index from T + RH; WBGT from T + RH + wind + radiation). Each entry names the input's role and points, by `provenance_id`, to the upstream sidecar carrying that input's full context — it is an index into the lineage, not an inline copy of it.
 Option-B decomposition (see the `EquationInput` class): when the inputs originate from different products and diverge in resolution, day-boundary convention, or temporal aggregation, each input is a full upstream sidecar referenced here and listed as a step in `provenance_chain`, so the divergence stays explicit and checkable.
 Conditionally-Core: optional for a single-input metric, mandatory the moment a metric has more than one input.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Composite heat metrics are cooked '
@@ -4029,7 +4397,7 @@ Conditionally-Core: optional for a single-input metric, mandatory the moment a m
                        'object': {'input_provenance_id': '01HFA7K8R3M6XP-era5-wind',
                                   'input_role': 'wind_speed',
                                   'input_source_short_code': 'era5'}}]} })
-    equation_validity_range: Optional[str] = Field(default=None, title="Equation Validity Range", description="""Validity-range conditions for the equation, serialised as a JSON string. For Heat Index: `{\"min_temperature_F\": 80, \"min_relative_humidity_pct\": 40}` — Rothfusz is undefined below 80 °F / 40 % RH.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+    equation_validity_range: str = Field(default=..., title="Equation Validity Range", description="""Validity-range conditions for the equation, serialised as a JSON string. For Heat Index: `{\"min_temperature_F\": 80, \"min_relative_humidity_pct\": 40}` — Rothfusz is undefined below 80 °F / 40 % RH.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
                                          'value': 'Every formula only works within a '
                                                   'fence of weather conditions it was '
                                                   'designed for. This field writes the '

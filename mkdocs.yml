@@ -65,7 +65,8 @@ nav:
   - Schema: elements/index.md
   - Architecture: architecture.md
   - Related approaches: related-approaches.md
-  - Completeness ledger: dashboard/index.html
+  - Reverse gap survey: reverse-gap-survey.md
+  - Standards index: standards-index/index.md
   - Example datasets: datasets/index.html
   - About: about.md
 
@@ -75,6 +76,11 @@ nav:
 exclude_docs: |
   /templates-linkml/
   /schema_overview.md
+  # standards-index/index.md is the deployed page; the registry source,
+  # its schema, and validation fixtures are build inputs, not site content.
+  /standards-index/standards.yaml
+  /standards-index/standards_index.schema.yaml
+  /standards-index/examples/
 
 site_url: https://monarch-initiative.github.io/linkml-microschemas-envar
 repo_url: https://github.com/monarch-initiative/linkml-microschemas-envar

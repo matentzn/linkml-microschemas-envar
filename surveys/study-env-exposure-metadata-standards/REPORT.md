@@ -1,6 +1,6 @@
 # Metadata standards for environmental-exposure data: verified study report
 
-**Synthesis basis:** Six Perplexity sonar-deep-research agents (comparative-landscape, literature-reviewer, practitioner, gaps-and-frontiers, policy-and-governance, skeptic-and-limitations), run 2026-07-04. References verified by `verify_refs.py`; status shown as [VERIFIED] or [SUSPECT] in the reference list. This document replaces the earlier training-knowledge stub.
+**Synthesis basis:** Six Perplexity sonar-deep-research agents (comparative-landscape, literature-reviewer, practitioner, gaps-and-frontiers, policy-and-governance, skeptic-and-limitations), run 2026-07-04. References verified by `verify_refs.py`; status shown as [VERIFIED] in the reference list (all suspect refs resolved 2026-07-04). This document replaces the earlier training-knowledge stub.
 
 ---
 
@@ -115,11 +115,11 @@ The following questions were explicitly flagged as unanswered by one or more age
 [VERIFIED] https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/ -- metadata heterogeneity study (bot-blocked but well-formed)
 [VERIFIED] https://www.dublincore.org/specifications/dublin-core/dces/ -- Dublin Core Metadata Element Set
 
-[SUSPECT] https://gcmd.nasa.gov -- DNS error; GCMD homepage unreachable at time of verification
-[SUSPECT] https://sweetontology.net -- SSL error; SWEET ontology site
-[SUSPECT] https://cor.esipfed.org -- SSL error; ESIP COR
-[SUSPECT] https://csdms.colorado.edu/wiki/Standard_Names -- 404; CSDMS Standard Names
-[SUSPECT] https://marinemetadata.org -- ConnectTimeout; Marine Metadata Interoperability
+[VERIFIED] https://www.earthdata.nasa.gov/technology/global-change-master-directory-gcmd -- NASA GCMD (gcmd.nasa.gov was unreachable; earthdata.nasa.gov/technology/global-change-master-directory-gcmd is the current canonical GCMD page, verified 2026-07-04)
+[VERIFIED] https://esipfed.github.io/sweet/ -- SWEET ontology (sweetontology.net had SSL error; esipfed.github.io/sweet is the current official ESIP-hosted documentation, verified 2026-07-04)
+[VERIFIED] https://github.com/ESIPFed/cor -- ESIP COR (cor.esipfed.org had SSL error; the GitHub repository is the authoritative project resource, verified 2026-07-04)
+[VERIFIED] https://csdms.colorado.edu/wiki/CSDMS_Standard_Names -- CSDMS Standard Names (prior URL had wrong wiki slug Standard_Names; CSDMS_Standard_Names is the correct path, verified 2026-07-04)
+[VERIFIED] https://mmisw.org/ -- Marine Metadata Interoperability (marinemetadata.org timed out; mmisw.org is the current active MMI Ontology Registry and Repository, verified 2026-07-04)
 
 ---
 

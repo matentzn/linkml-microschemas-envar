@@ -48,37 +48,37 @@ A survey of approaches that record *metadata about environmental-exposure data* 
 
 | Standard | Status | Where |
 | --- | --- | --- |
-| ISO 19115 | new |  |
+| ISO 19115 | already_catalogued | projects_inventory.md §8.4 (NASA SEDAC uses ISO 19115 metadata; §12 cross-cutting standards silos discussion) |
 | OGC Observations, Measurements, and Samples | new |  |
 | SOSA/SSN | new |  |
-| CF Conventions | new |  |
+| CF Conventions | already_catalogued | projects_inventory.md §3.5 (EPA CMAQ uses CF Conventions/NetCDF), §7.2 (MESA Air uses CF Conventions for model output), §12 (standards silos: CF Conventions named explicitly) |
 | ACDD | new |  |
 | STAC | new |  |
 | OGC API Records | new |  |
 | WMO WIGOS Metadata Standard | new |  |
 | PROV-O | new |  |
 | RO-Crate | new |  |
-| DCAT | already_catalogued | projects_inventory.md §1.1 (GAIA meta_dcat) |
+| DCAT | already_catalogued | projects_inventory.md §1.2 (GAIA Toolchain uses DCAT for dataset discovery via meta_dcat_*.json files) |
 | DataCite Metadata Schema | new |  |
 | Frictionless Data Package | new |  |
-| schema.org / science-on-schema.org | new |  |
+| schema.org / science-on-schema.org | already_catalogued | projects_inventory.md §1.1 (OHDSI GIS WG uses Schema.org for catalog metadata) and §1.2 (GAIA Toolchain uses Schema.org JSON-LD for meta_json-ld_*.json files) |
 | DDI | new |  |
 | Croissant | new |  |
 | CDIF | new |  |
-| OMOP CDM | already_catalogued | surveys/study-env-exposure-metadata-standards/deep-research/agent-1-comparative-landscape.md |
-| HL7 FHIR | new |  |
+| OMOP CDM | already_catalogued | projects_inventory.md §1 (OMOP/OHDSI ecosystem throughout; §1.1 OHDSI GIS WG, §1.2 GAIA, §1.3 N3C, §1.4 SDoH) |
+| HL7 FHIR | already_catalogued | projects_inventory.md §2.2 (FHIR PIT project uses HL7 FHIR; §9.4 gap analysis explicitly names FHIR; §12 standards silos cross-cutting) |
 | ODM2 | new |  |
 | WaterML 2.0 | new |  |
 | CODATA / GEO Essential Variables | new |  |
 | NASA/GCMD DIF | new |  |
 | GeoSPARQL | new |  |
-| DeGAUSS | already_catalogued | surveys/study-env-exposure-metadata-standards/deep-research/agent-3-practitioner.md |
+| DeGAUSS | already_catalogued | projects_inventory.md §9.1 (DeGauss listed as primary geocoding tool) and §1.1 (DeGauss named in OHDSI GIS WG linkage method) |
 | gridMET / Daymet / PRISM sidecars | new |  |
-| GA4GH Human Exposome Data Standards | new |  |
-| OGC SensorThings API | new |  |
+| GA4GH Human Exposome Data Standards | already_catalogued | projects_inventory.md §10.3 (GA4GH Human Exposome Data Standards has a dedicated entry with architecture, Phenopackets linkage, and EnVar relevance notes) |
+| OGC SensorThings API | already_catalogued | projects_inventory.md §10.2 (OGC Health Domain WG explicitly lists SensorThings API in its standards suite) |
 | DCAT-AP | new |  |
 | Dublin Core | new |  |
-| FHIR PIT | new |  |
+| FHIR PIT | already_catalogued | projects_inventory.md §2.2 (FHIR PIT has a dedicated project entry including architecture, public resources, and key people) |
 | INSPIRE Directive | new |  |
 
 ## Triaged out

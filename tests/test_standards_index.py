@@ -96,6 +96,16 @@ def _covered_candidates() -> set[str]:
     return covered
 
 
+def test_every_entry_has_reconciliation():
+    r = yaml.safe_load((REPO / "docs" / "standards-index" / "standards.yaml").read_text())
+    bad_verdict = [e["id"] for e in r["entries"]
+                   if e.get("reconciliation") not in ("new", "already_catalogued")]
+    assert not bad_verdict, f"entries missing a reconciliation verdict: {bad_verdict}"
+    missing_ref = [e["id"] for e in r["entries"]
+                   if e.get("reconciliation") == "already_catalogued" and not e.get("reconciliation_ref")]
+    assert not missing_ref, f"already_catalogued entries missing reconciliation_ref: {missing_ref}"
+
+
 def test_every_todo_candidate_has_a_verdict():
     if not TODO.exists():
         pytest.skip(

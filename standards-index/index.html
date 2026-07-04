@@ -766,6 +766,15 @@
 <td>Overlaps source_dataset discovery; complementary, operates at dataset layer not instance layer.</td>
 </tr>
 <tr>
+<td><a href="https://semiceu.github.io/DCAT-AP/">DCAT-AP</a></td>
+<td>dataset</td>
+<td>find</td>
+<td>discovery</td>
+<td>absent</td>
+<td>peripheral</td>
+<td>Overlaps source_dataset discovery; complementary — European environmental datasets documented with an EnVar sidecar would use DCAT-AP for portal interoperability.</td>
+</tr>
+<tr>
 <td><a href="https://ddialliance.org/">DDI</a></td>
 <td>variable_type</td>
 <td>define</td>
@@ -775,6 +784,15 @@
 <td>Overlaps variable_identity at study/variable level; complementary — DDI variable metadata maps to EnVar VariableIdentity for survey-linked exposure assessments.</td>
 </tr>
 <tr>
+<td><a href="https://www.dublincore.org/specifications/dublin-core/dces/">Dublin Core</a></td>
+<td>dataset</td>
+<td>find</td>
+<td>discovery</td>
+<td>absent</td>
+<td>peripheral</td>
+<td>Overlaps source_dataset at minimum-metadata level; complementary — Dublin Core elements (title, creator, date, subject) are typically inherited by the richer standards EnVar targets.</td>
+</tr>
+<tr>
 <td><a href="https://specs.frictionlessdata.io/">Frictionless Data Package</a></td>
 <td>file</td>
 <td>define</td>
@@ -782,6 +800,15 @@
 <td>absent</td>
 <td>peripheral</td>
 <td>Overlaps data_layout for CSV/tabular exposure outputs; complementary — could describe the companion data file that an EnVar sidecar annotates.</td>
+</tr>
+<tr>
+<td><a href="https://www.ga4gh.org/product/human-exposome-data-standards/">GA4GH Human Exposome Data Standards</a></td>
+<td>dataset</td>
+<td>define</td>
+<td>conceptual</td>
+<td>absent</td>
+<td>in_scope</td>
+<td>Directly overlaps variable_identity and health_layer_linkage for genomics-linked exposure studies; complementary — EnVar could serve as a domain profile within a future GA4GH exposome framework.</td>
 </tr>
 <tr>
 <td><a href="https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/directory-interchange-format-standard">NASA/GCMD DIF</a></td>
@@ -809,6 +836,15 @@
 <td>partial</td>
 <td>peripheral</td>
 <td>Overlaps health_layer_linkage at the clinical record level; complementary — FHIR can receive exposure values from an EnVar-documented pipeline.</td>
+</tr>
+<tr>
+<td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002">INSPIRE Directive</a></td>
+<td>dataset</td>
+<td>find</td>
+<td>discovery</td>
+<td>partial</td>
+<td>peripheral</td>
+<td>Overlaps source_dataset (ISO 19115 compliance requirement); complementary — European exposure datasets used by EnVar-documented pipelines must satisfy INSPIRE metadata requirements.</td>
 </tr>
 <tr>
 <td><a href="https://www.iso.org/standard/53798.html">ISO 19115</a></td>
@@ -845,6 +881,15 @@
 <td>absent</td>
 <td>in_scope</td>
 <td>Overlaps source_dataset discovery; complementary — OGC API Records surfaces datasets whose instance-level detail is captured in an EnVar sidecar.</td>
+</tr>
+<tr>
+<td><a href="https://www.ogc.org/standard/sensorthings">OGC SensorThings API</a></td>
+<td>produced_value</td>
+<td>define</td>
+<td>instance</td>
+<td>partial</td>
+<td>in_scope</td>
+<td>Overlaps variable_identity, spatial_reference, and temporal_reference at observation level; complementary — SensorThings endpoints could serve as upstream data sources documented in EnVar source_dataset.</td>
 </tr>
 <tr>
 <td><a href="https://ohdsi.github.io/CommonDataModel/">OMOP CDM</a></td>
@@ -942,6 +987,15 @@
 <td>carried</td>
 <td>in_scope</td>
 <td>Directly overlaps linkage_method and health_layer_linkage; DeGAUSS container invocation metadata is the primary reference implementation for EnVar LinkageMethod in pediatric cohort studies.</td>
+</tr>
+<tr>
+<td><a href="https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html">FHIR PIT</a></td>
+<td>geocoded_row</td>
+<td>reproduce_pool</td>
+<td>linkage</td>
+<td>carried</td>
+<td>in_scope</td>
+<td>Directly overlaps linkage_method and health_layer_linkage for FHIR-based clinical data; complementary — FHIR PIT invocation metadata is the primary reference implementation for EnVar LinkageMethod in FHIR-based EHR cohorts.</td>
 </tr>
 <tr>
 <td><a href="https://www.climatologylab.org/gridmet.html">gridMET / Daymet / PRISM sidecars</a></td>
@@ -1051,8 +1105,8 @@
 </tr>
 <tr>
 <td>OMOP CDM</td>
-<td>new</td>
-<td></td>
+<td>already_catalogued</td>
+<td>surveys/study-env-exposure-metadata-standards/deep-research/agent-1-comparative-landscape.md</td>
 </tr>
 <tr>
 <td>HL7 FHIR</td>
@@ -1086,11 +1140,41 @@
 </tr>
 <tr>
 <td>DeGAUSS</td>
+<td>already_catalogued</td>
+<td>surveys/study-env-exposure-metadata-standards/deep-research/agent-3-practitioner.md</td>
+</tr>
+<tr>
+<td>gridMET / Daymet / PRISM sidecars</td>
 <td>new</td>
 <td></td>
 </tr>
 <tr>
-<td>gridMET / Daymet / PRISM sidecars</td>
+<td>GA4GH Human Exposome Data Standards</td>
+<td>new</td>
+<td></td>
+</tr>
+<tr>
+<td>OGC SensorThings API</td>
+<td>new</td>
+<td></td>
+</tr>
+<tr>
+<td>DCAT-AP</td>
+<td>new</td>
+<td></td>
+</tr>
+<tr>
+<td>Dublin Core</td>
+<td>new</td>
+<td></td>
+</tr>
+<tr>
+<td>FHIR PIT</td>
+<td>new</td>
+<td></td>
+</tr>
+<tr>
+<td>INSPIRE Directive</td>
 <td>new</td>
 <td></td>
 </tr>

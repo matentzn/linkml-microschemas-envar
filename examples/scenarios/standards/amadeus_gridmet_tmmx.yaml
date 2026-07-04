@@ -8,6 +8,15 @@
 # completeness checker shows Amadeus's true coverage. Translator-added
 # envelope only: schema_version, subject, phi_status, and data_layout (which
 # describes the pipeline's own output CSV, outputs/gridmet_tmmx.csv).
+#
+# Note on value_data_type: the run's THREDDS header capture
+# (outputs/gridmet_tmmx.cf_metadata.json) records the storage dtype (packed
+# short → Kelvin via scale/offset) and no CF flag_values/flag_meanings —
+# which is how CF expresses "continuous numeric" implicitly. A translator
+# COULD derive value_data_type: continuous_numeric from that, but Amadeus
+# declares no semantic data type, so under the strict emitted-only policy
+# the slot stays absent here. Contrast omop_gaia_daymet_tmax.yaml, whose
+# catalog layer declares it explicitly.
 schema_version: "0.1"
 provenance_id: "SH16BKV29EX1K6462TF5RHFJFM-gridmet"
 subject: "cohort:envar_heat_demo_2022"

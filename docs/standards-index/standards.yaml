@@ -255,7 +255,7 @@ entries:
     relevance_reason: Lightweight schema for tabular data packages; useful for documenting CSV exposure output files alongside an EnVar sidecar but lacks provenance depth.
     envar_relation: Overlaps data_layout for CSV/tabular exposure outputs; complementary — could describe the companion data file that an EnVar sidecar annotates.
     evidence:
-      - https://specs.frictionlessdata.io/
+      - https://specs.frictionlessdata.io/data-package/
     reconciliation: new
     source_candidates: []
 
@@ -275,6 +275,7 @@ entries:
     envar_relation: Overlaps source_dataset discovery and variable_identity (variableMeasured); complementary — landing page markup linking to EnVar-documented datasets.
     evidence:
       - https://schema.org/Dataset
+      - https://github.com/esipfed/science-on-schema.org
     reconciliation: new
     source_candidates: []
 
@@ -353,8 +354,11 @@ entries:
     relevance_reason: Primary CDM for observational health research; Exposome Extension provides structured schema for linking gridded exposures to patient rows with provenance fields.
     envar_relation: Directly overlaps health_layer_linkage and deposit_metadata; EnVar health_layer_linkage.target_cdm targets OMOP; competing at schema level but complementary as output consumer.
     evidence:
-      - https://ohdsi.github.io/CommonDataModel/
-    reconciliation: new
+      - https://ohdsi.github.io/CommonDataModel/cdm54.html
+      - https://github.com/OHDSI/GIS
+      - https://ohdsi.github.io/GIS/vocabulary.html
+    reconciliation: already_catalogued
+    reconciliation_ref: surveys/study-env-exposure-metadata-standards/deep-research/agent-1-comparative-landscape.md
     source_candidates: []
 
   - id: hl7-fhir
@@ -394,7 +398,7 @@ entries:
     relevance_reason: Most complete open standard for instance-level environmental observation provenance; method, equipment, QA, and uncertainty metadata per observation; designed for in-situ data but extensible.
     envar_relation: Overlaps variable_identity, exposure_model, uncertainty, and tool_run; most competitive standard with EnVar for in-situ data; EnVar extends scope to gridded/modeled exposures and health linkage.
     evidence:
-      - http://www.odm2.org/
+      - https://github.com/ODM2/ODM2
     reconciliation: new
     source_candidates:
       - "ODM2"
@@ -501,8 +505,9 @@ entries:
     relevance_reason: De facto sidecar for pediatric environmental health geocoding pipelines; records Docker image hash, version, and geomarker parameters per geocoded address row.
     envar_relation: Directly overlaps linkage_method and health_layer_linkage; DeGAUSS container invocation metadata is the primary reference implementation for EnVar LinkageMethod in pediatric cohort studies.
     evidence:
-      - https://degauss.org/
-    reconciliation: new
+      - https://degauss.org/using_degauss.html
+    reconciliation: already_catalogued
+    reconciliation_ref: surveys/study-env-exposure-metadata-standards/deep-research/agent-3-practitioner.md
     source_candidates: []
 
   - id: gridded-product-sidecars
@@ -519,6 +524,136 @@ entries:
     relevance: peripheral
     relevance_reason: Per-project README/script sidecars documenting download query, geographic extent, date range, and variable; no shared specification, non-interoperable across pipelines.
     envar_relation: The gap that EnVar source_dataset and tool_run are designed to replace; competing in intent, complementary until EnVar adoption grows.
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # Exposome-specific / emerging standards
+  # ============================================================
+  - id: ga4gh-exposome
+    name: GA4GH Human Exposome Data Standards
+    full_name: GA4GH Human Exposome Data Standards
+    standard_class: general_standard
+    spec_url: https://www.ga4gh.org/product/human-exposome-data-standards/
+    governance: Global Alliance for Genomics and Health (GA4GH)
+    unit_of_description: dataset
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: absent
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: GA4GH study group developing interoperable schemas for environmental exposures linked to genomic data; no finalized schema as of 2026 but the closest emerging standard to EnVar's domain from the genomics community.
+    envar_relation: Directly overlaps variable_identity and health_layer_linkage for genomics-linked exposure studies; complementary — EnVar could serve as a domain profile within a future GA4GH exposome framework.
+    evidence:
+      - https://www.ga4gh.org/product/human-exposome-data-standards/
+    reconciliation: new
+    source_candidates: []
+    notes: No finalized schema published as of 2026-07; study group only. Monitor for schema releases.
+
+  # ============================================================
+  # Additional geospatial / API standards
+  # ============================================================
+  - id: ogc-sensorthings
+    name: OGC SensorThings API
+    full_name: "OGC SensorThings API Part 1 — Sensing (OGC 15-078r6)"
+    standard_class: general_standard
+    spec_url: https://www.ogc.org/standard/sensorthings
+    governance: OGC International Standard
+    unit_of_description: produced_value
+    primary_purpose: define
+    layer: instance
+    carries_derivation_metadata: partial
+    domain_specificity: general_purpose
+    relevance: in_scope
+    relevance_reason: OGC REST API for real-time sensor observations; provides instance-level observation model (Thing, Sensor, Observation, FeatureOfInterest) applicable to automated environmental monitoring pipelines feeding exposure datasets.
+    envar_relation: Overlaps variable_identity, spatial_reference, and temporal_reference at observation level; complementary — SensorThings endpoints could serve as upstream data sources documented in EnVar source_dataset.
+    evidence:
+      - https://www.ogc.org/standard/sensorthings
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # FAIR packaging profiles
+  # ============================================================
+  - id: dcat-ap
+    name: DCAT-AP
+    full_name: DCAT Application Profile for European Data Portals
+    standard_class: general_standard
+    spec_url: https://semiceu.github.io/DCAT-AP/
+    governance: European Commission / SEMIC
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: EU mandatory profile of DCAT for open data portals; mandated under EU Open Data Directive 2019/1024 for all European public sector datasets including environmental data.
+    envar_relation: Overlaps source_dataset discovery; complementary — European environmental datasets documented with an EnVar sidecar would use DCAT-AP for portal interoperability.
+    evidence:
+      - https://semiceu.github.io/DCAT-AP/
+    reconciliation: new
+    source_candidates: []
+
+  - id: dublin-core
+    name: Dublin Core
+    full_name: "Dublin Core Metadata Element Set (ISO 15836-1:2017)"
+    standard_class: general_standard
+    spec_url: https://www.dublincore.org/specifications/dublin-core/dces/
+    governance: Dublin Core Metadata Initiative (DCMI) / ISO 15836
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: absent
+    domain_specificity: general_purpose
+    relevance: peripheral
+    relevance_reason: Minimal 15-element metadata vocabulary used as a baseline across scientific data repositories; widely embedded in ISO 19115, DCAT, and DataCite as a foundational layer.
+    envar_relation: Overlaps source_dataset at minimum-metadata level; complementary — Dublin Core elements (title, creator, date, subject) are typically inherited by the richer standards EnVar targets.
+    evidence:
+      - https://www.dublincore.org/specifications/dublin-core/dces/
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # Clinical pipeline tools
+  # ============================================================
+  - id: fhir-pit
+    name: FHIR PIT
+    full_name: FHIR Patient-centered Information Tool
+    standard_class: pipeline_sidecar
+    spec_url: https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html
+    governance: NIEHS / PCOR toolchain (single-project)
+    unit_of_description: geocoded_row
+    primary_purpose: reproduce_pool
+    layer: linkage
+    carries_derivation_metadata: carried
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: NIEHS tool for linking FHIR patient records to environmental exposure data at row level; records linkage method and exposure source per patient row; leading FHIR-native exposure linkage tool in current practice.
+    envar_relation: Directly overlaps linkage_method and health_layer_linkage for FHIR-based clinical data; complementary — FHIR PIT invocation metadata is the primary reference implementation for EnVar LinkageMethod in FHIR-based EHR cohorts.
+    evidence:
+      - https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html
+    reconciliation: new
+    source_candidates: []
+
+  # ============================================================
+  # Regulatory / governance standards
+  # ============================================================
+  - id: inspire
+    name: INSPIRE Directive
+    full_name: "INSPIRE Directive 2007/2/EC (EU Spatial Data Infrastructure)"
+    standard_class: general_standard
+    spec_url: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002
+    governance: European Parliament and Council (EU legislation)
+    unit_of_description: dataset
+    primary_purpose: find
+    layer: discovery
+    carries_derivation_metadata: partial
+    domain_specificity: env_health_specific
+    relevance: peripheral
+    relevance_reason: EU Directive mandating ISO 19115-compliant metadata for 34 spatial data themes including Annex III human-health-and-safety and atmospheric-conditions themes; primary regulatory driver for geospatial metadata compliance in European environmental datasets.
+    envar_relation: Overlaps source_dataset (ISO 19115 compliance requirement); complementary — European exposure datasets used by EnVar-documented pipelines must satisfy INSPIRE metadata requirements.
+    evidence:
+      - https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002
     reconciliation: new
     source_candidates: []
 

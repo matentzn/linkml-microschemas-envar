@@ -1,6 +1,6 @@
 # Reference verification report
 
-OK: 0 | Blocked: 0 | Failed: 0 | Time: 0.0s
+OK: 473 | Blocked: 85 | Failed: 248 | Time: 161.5s
 
 [OK] = reachable; [BLOCKED] = server refused our bot (403/405/429) but URL is well-formed and presumed valid; [FAIL] = DNS error or 404 (treat as suspect).
 
@@ -8,45 +8,881 @@ OK: 0 | Blocked: 0 | Failed: 0 | Time: 0.0s
 
 | File | OK | Blocked | Failed |
 |---|---:|---:|---:|
-| `agent-1-comparative-landscape.md` | 0 | 0 | 0 |
-| `agent-2-literature-reviewer.md` | 0 | 0 | 0 |
-| `agent-3-practitioner.md` | 0 | 0 | 0 |
-| `agent-4-gaps-and-frontiers.md` | 0 | 0 | 0 |
-| `agent-5-policy-and-governance.md` | 0 | 0 | 0 |
-| `agent-6-skeptic-and-limitations.md` | 0 | 0 | 0 |
+| `agent-1-comparative-landscape.citations.md` | 49 | 12 | 31 |
+| `agent-1-comparative-landscape.md` | 44 | 10 | 31 |
+| `agent-2-literature-reviewer.citations.md` | 31 | 4 | 1 |
+| `agent-2-literature-reviewer.md` | 30 | 4 | 1 |
+| `agent-3-practitioner.citations.md` | 47 | 4 | 12 |
+| `agent-3-practitioner.md` | 46 | 4 | 12 |
+| `agent-4-gaps-and-frontiers.citations.md` | 44 | 7 | 12 |
+| `agent-4-gaps-and-frontiers.md` | 43 | 5 | 12 |
+| `agent-5-policy-and-governance.citations.md` | 38 | 5 | 32 |
+| `agent-5-policy-and-governance.md` | 33 | 5 | 32 |
+| `agent-6-skeptic-and-limitations.citations.md` | 41 | 15 | 36 |
+| `agent-6-skeptic-and-limitations.md` | 27 | 10 | 36 |
+
+## `agent-1-comparative-landscape.citations.md`
+
+OK: 49 | Blocked: 12 | Failed: 31 | Total: 92
+
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://cfconventions.org` — HEAD -> 200
+- [OK]      `URL` `http://environmentontology.org` — HEAD -> 200
+- [OK]      `URL` `http://www.cgi-iugs.org/` — HEAD -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://agris.fao.org` — HEAD -> 200
+- [OK]      `URL` `https://agrovoc.fao.org` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cfconventions.org/standard-names.html` — GET -> 404
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [FAIL]    `URL` `https://csdms.colorado.edu/wiki/Standard_Names` — GET -> 404
+- [OK]      `URL` `https://data.4tu.nl` — HEAD -> 200
+- [OK]      `URL` `https://ddialliance.org/` — HEAD -> 200
+- [OK]      `URL` `https://doc.esri.com/en/arcgis-pro/latest/help/metadata/create-iso-19115-and-iso-19139-metadata.html` — HEAD -> 200
+- [FAIL]    `URL` `https://doc.esri.com/en/arcgis-pro/latest/help/metadata/create-iso-19115-and-iso-19139-metadata.html[14` — GET -> 404
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [FAIL]    `URL` `https://gcmd.nasa.gov/KeywordSearch/` — err: ConnectionError
+- [OK]      `URL` `https://gcos.wmo.int/site/global-climate-observing-system-gcos/essential-climate-variables/about-essential-climate-variables` — HEAD -> 200
+- [FAIL]    `URL` `https://gcos.wmo.int/site/global-climate-observing-system-gcos/essential-climate-variables/about-essential-climate-variables[18` — GET -> 404
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://hl7.org/fhir` — HEAD -> 202
+- [OK]      `URL` `https://hl7.org/fhir/` — HEAD -> 200
+- [FAIL]    `URL` `https://hl7.org/fhir/[unverified` — GET -> 404
+- [FAIL]    `URL` `https://marinemetadata.org` — err: ConnectTimeout
+- [OK]      `URL` `https://mlcommons.org/working-groups/data/croissant/` — HEAD -> 200
+- [FAIL]    `URL` `https://mlcommons.org/working-groups/data/croissant/[9` — GET -> 404
+- [OK]      `URL` `https://mmisw.org` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html` — HEAD -> 200
+- [FAIL]    `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html[16` — GET -> 404
+- [BLOCKED] `URL` `https://op.europa.eu/en/web/eu-vocabularies` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC4383187/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC4383187/[17` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC8728981/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC8728981/[2` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://public.wmo.int` — HEAD -> 200
+- [BLOCKED] `URL` `https://pubs.geoscienceworld.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://rruff.info` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org/` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.datacite.org/[unverified` — GET -> 404
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.org/Dataset[6` — GET -> 404
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [FAIL]    `URL` `https://specs.frictionlessdata.io/data-package/[10` — GET -> 404
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://stacspec.org[5` — err: InvalidURL
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [OK]      `URL` `https://unstats.un.org/iswghs/documents/ISWGHS-metadata-20221123.pdf` — HEAD -> 200
+- [OK]      `URL` `https://unstats.un.org/iswghs/documents/ISWGHS-metadata-20221123.pdf[19` — HEAD -> 200
+- [OK]      `URL` `https://vocab.nerc.ac.uk` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabs.acdh.oeaw.ac.at/envthes` — GET -> 404
+- [OK]      `URL` `https://vocabs.ardc.edu.au` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabs.tern.org.au` — err: ConnectionError
+- [FAIL]    `URL` `https://vocabulary.worldbank.org` — err: ConnectionError
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3` — HEAD -> 200
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3[4` — GET -> 404
+- [FAIL]    `URL` `https://www.abs.gov.au/ausstats/anzsrc-2020` — GET -> 404
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.cabi.org/cabthesaurus` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.dcc.ac.uk/resources/metadata-standards/iso-19115` — HEAD -> 200
+- [FAIL]    `URL` `https://www.dcc.ac.uk/resources/metadata-standards/iso-19115[3` — GET -> 404
+- [OK]      `URL` `https://www.earthcube.org/science-on-schema` — HEAD -> 200
+- [FAIL]    `URL` `https://www.earthcube.org/science-on-schema[7` — GET -> 400
+- [FAIL]    `URL` `https://www.fgdc.gov/standards/projects/CMECS` — GET -> 404
+- [OK]      `URL` `https://www.ga4gh.org/product/human-exposome-data-standards/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ga4gh.org/product/human-exposome-data-standards/[20` — GET -> 404
+- [BLOCKED] `URL` `https://www.gbif.org/vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [OK]      `URL` `https://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `https://www.iode.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.marinespecies.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standard/sensorthings` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/om/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/[13` — GET -> 404
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/[8` — GET -> 404
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S1364815224003025` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S1364815224003025[15` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.scienceontology.org` — err: ConnectionError
+- [FAIL]    `URL` `https://www.usgs.gov/thesaurus` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.w3.org/TR/prov-overview/[11` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.w3.org/TR/vocab-dcat-3/[12` — GET -> 404
 
 ## `agent-1-comparative-landscape.md`
 
-OK: 0 | Blocked: 0 | Failed: 0 | Total: 0
+OK: 44 | Blocked: 10 | Failed: 31 | Total: 85
 
-_No DOI/PMID/URL references detected._
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `PMID` `18849771` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://cfconventions.org` — HEAD -> 200
+- [OK]      `URL` `http://environmentontology.org` — HEAD -> 200
+- [OK]      `URL` `http://www.cgi-iugs.org/` — HEAD -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://agris.fao.org` — HEAD -> 200
+- [OK]      `URL` `https://agrovoc.fao.org` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cfconventions.org/standard-names.html` — GET -> 404
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [FAIL]    `URL` `https://csdms.colorado.edu/wiki/Standard_Names` — GET -> 404
+- [OK]      `URL` `https://data.4tu.nl` — HEAD -> 200
+- [OK]      `URL` `https://ddialliance.org/` — HEAD -> 200
+- [FAIL]    `URL` `https://doc.esri.com/en/arcgis-pro/latest/help/metadata/create-iso-19115-and-iso-19139-metadata.html[14` — GET -> 404
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [FAIL]    `URL` `https://gcmd.nasa.gov/KeywordSearch/` — err: ConnectionError
+- [FAIL]    `URL` `https://gcos.wmo.int/site/global-climate-observing-system-gcos/essential-climate-variables/about-essential-climate-variables[18` — GET -> 404
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://hl7.org/fhir` — HEAD -> 202
+- [OK]      `URL` `https://hl7.org/fhir/` — HEAD -> 200
+- [FAIL]    `URL` `https://hl7.org/fhir/[unverified` — GET -> 404
+- [FAIL]    `URL` `https://marinemetadata.org` — err: ConnectTimeout
+- [OK]      `URL` `https://mlcommons.org/working-groups/data/croissant/` — HEAD -> 200
+- [FAIL]    `URL` `https://mlcommons.org/working-groups/data/croissant/[9` — GET -> 404
+- [OK]      `URL` `https://mmisw.org` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html` — HEAD -> 200
+- [FAIL]    `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html[16` — GET -> 404
+- [BLOCKED] `URL` `https://op.europa.eu/en/web/eu-vocabularies` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC4383187/[17` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC8728981/[2` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://public.wmo.int` — HEAD -> 200
+- [BLOCKED] `URL` `https://pubs.geoscienceworld.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://rruff.info` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org/` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.datacite.org/[unverified` — GET -> 404
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.org/Dataset[6` — GET -> 404
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [FAIL]    `URL` `https://specs.frictionlessdata.io/data-package/[10` — GET -> 404
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://stacspec.org[5` — err: InvalidURL
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [OK]      `URL` `https://unstats.un.org/iswghs/documents/ISWGHS-metadata-20221123.pdf[19` — HEAD -> 200
+- [OK]      `URL` `https://vocab.nerc.ac.uk` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabs.acdh.oeaw.ac.at/envthes` — GET -> 404
+- [OK]      `URL` `https://vocabs.ardc.edu.au` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabs.tern.org.au` — err: ConnectionError
+- [FAIL]    `URL` `https://vocabulary.worldbank.org` — err: ConnectionError
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3[4` — GET -> 404
+- [FAIL]    `URL` `https://www.abs.gov.au/ausstats/anzsrc-2020` — GET -> 404
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.cabi.org/cabthesaurus` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.dcc.ac.uk/resources/metadata-standards/iso-19115[3` — GET -> 404
+- [OK]      `URL` `https://www.earthcube.org/science-on-schema` — HEAD -> 200
+- [FAIL]    `URL` `https://www.earthcube.org/science-on-schema[7` — GET -> 400
+- [FAIL]    `URL` `https://www.fgdc.gov/standards/projects/CMECS` — GET -> 404
+- [OK]      `URL` `https://www.ga4gh.org/product/human-exposome-data-standards/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ga4gh.org/product/human-exposome-data-standards/[20` — GET -> 404
+- [BLOCKED] `URL` `https://www.gbif.org/vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [OK]      `URL` `https://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `https://www.iode.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.marinespecies.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standard/sensorthings` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/[13` — GET -> 404
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/[8` — GET -> 404
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S1364815224003025` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S1364815224003025[15` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.scienceontology.org` — err: ConnectionError
+- [FAIL]    `URL` `https://www.usgs.gov/thesaurus` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.w3.org/TR/prov-overview/[11` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.w3.org/TR/vocab-dcat-3/[12` — GET -> 404
+
+## `agent-2-literature-reviewer.citations.md`
+
+OK: 31 | Blocked: 4 | Failed: 1 | Total: 36
+
+- [OK]      `DOI` `10.5281/zenodo.3665575` — doi.org -> 200
+- [OK]      `DOI` `10.5438/0014` — doi.org -> 200
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://www.opengeospatial.org/standards/om` — HEAD -> 200
+- [OK]      `URL` `http://www.opengeospatial.org/standards/sensorml` — HEAD -> 200
+- [OK]      `URL` `http://www.ukoln.ac.uk/metadata/rslp/schema/` — HEAD -> 200
+- [OK]      `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html` — HEAD -> 200
+- [OK]      `URL` `https://cfconventions.org/` — HEAD -> 200
+- [OK]      `URL` `https://ddialliance.org` — HEAD -> 200
+- [OK]      `URL` `https://github.com/esipfed/science-on-schema.org` — HEAD -> 200
+- [FAIL]    `URL` `https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/document/dcat-ap-v21` — GET -> 404
+- [OK]      `URL` `https://mlcommons.org/en/croissant/` — HEAD -> 200
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC1257643/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://rd-alliance.github.io/metadata-directory/standards/observations-and-measurements.html` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [OK]      `URL` `https://semiceu.github.io/DCAT-AP-reuse-guidelines/` — HEAD -> 200
+- [OK]      `URL` `https://semiceu.github.io/DCAT-AP/` — HEAD -> 200
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3` — HEAD -> 200
+- [OK]      `URL` `https://www.dublincore.org/specifications/dublin-core/dces/` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/observation.html` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/provenance.html` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql/` — HEAD -> 200
+- [OK]      `URL` `https://www.ohdsi.org/data-standardization/` — HEAD -> 200
+- [OK]      `URL` `https://www.ohdsi.org/web/wiki/doku.php?id=projects%3Aworkgroups%3Agis` — HEAD -> 200
+- [OK]      `URL` `https://www.qudt.org/2.1/catalog/qudt-catalog.html` — HEAD -> 200
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/specification/1.1/index.html` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/prov-o/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
 
 ## `agent-2-literature-reviewer.md`
 
-OK: 0 | Blocked: 0 | Failed: 0 | Total: 0
+OK: 30 | Blocked: 4 | Failed: 1 | Total: 35
 
-_No DOI/PMID/URL references detected._
+- [OK]      `DOI` `10.5281/zenodo.3665575` — doi.org -> 200
+- [OK]      `DOI` `10.5438/0014` — doi.org -> 200
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://www.opengeospatial.org/standards/om` — HEAD -> 200
+- [OK]      `URL` `http://www.opengeospatial.org/standards/sensorml` — HEAD -> 200
+- [OK]      `URL` `http://www.ukoln.ac.uk/metadata/rslp/schema/` — HEAD -> 200
+- [OK]      `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html` — HEAD -> 200
+- [OK]      `URL` `https://cfconventions.org/` — HEAD -> 200
+- [OK]      `URL` `https://ddialliance.org` — HEAD -> 200
+- [OK]      `URL` `https://github.com/esipfed/science-on-schema.org` — HEAD -> 200
+- [FAIL]    `URL` `https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/document/dcat-ap-v21` — GET -> 404
+- [OK]      `URL` `https://mlcommons.org/en/croissant/` — HEAD -> 200
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC1257643/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://schema.datacite.org` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [OK]      `URL` `https://semiceu.github.io/DCAT-AP-reuse-guidelines/` — HEAD -> 200
+- [OK]      `URL` `https://semiceu.github.io/DCAT-AP/` — HEAD -> 200
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3` — HEAD -> 200
+- [OK]      `URL` `https://www.dublincore.org/specifications/dublin-core/dces/` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/observation.html` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/provenance.html` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql/` — HEAD -> 200
+- [OK]      `URL` `https://www.ohdsi.org/data-standardization/` — HEAD -> 200
+- [OK]      `URL` `https://www.ohdsi.org/web/wiki/doku.php?id=projects%3Aworkgroups%3Agis` — HEAD -> 200
+- [OK]      `URL` `https://www.qudt.org/2.1/catalog/qudt-catalog.html` — HEAD -> 200
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/specification/1.1/index.html` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/prov-o/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+
+## `agent-3-practitioner.citations.md`
+
+OK: 47 | Blocked: 4 | Failed: 12 | Total: 63
+
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://aims.fao.org/agrovoc` — HEAD -> 200
+- [OK]      `URL` `http://ecoportal.org` — GET -> 200
+- [OK]      `URL` `http://environmentontology.org` — HEAD -> 200
+- [OK]      `URL` `http://sweetontology.net` — HEAD -> 200
+- [OK]      `URL` `http://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `http://www.iode.org` — HEAD -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://ads.atmosphere.copernicus.eu/stac-browser/` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cgi.vocabs.ands.org.au` — err: ConnectionError
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [FAIL]    `URL` `https://csdms.colorado.edu/wiki/Standard_Names` — GET -> 404
+- [OK]      `URL` `https://data.4tu.nl` — HEAD -> 200
+- [OK]      `URL` `https://datacite.org/blog/connecting-the-dots-with-datacite-doi-metadata/` — HEAD -> 200
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [FAIL]    `URL` `https://gcmd.nasa.gov/KeywordSearch` — err: ConnectionError
+- [FAIL]    `URL` `https://github.com/ESIPFed/svo` — GET -> 404
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://github.com/esipfed/science-on-schema.org` — HEAD -> 200
+- [FAIL]    `URL` `https://marinemetadata.org` — err: ConnectTimeout
+- [FAIL]    `URL` `https://marinemetadata.org/orr` — err: ConnectTimeout
+- [OK]      `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm54.html` — HEAD -> 200
+- [BLOCKED] `URL` `https://op.europa.eu/en/web/eu-vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://pro.arcgis.com/en/pro-app/3.4/help/metadata/create-iso-19115-and-iso-19139-metadata.htm` — HEAD -> 200
+- [OK]      `URL` `https://research.google/blog/croissant-a-metadata-format-for-ml-ready-datasets/` — HEAD -> 200
+- [OK]      `URL` `https://rruff.info` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [OK]      `URL` `https://vocab.nerc.ac.uk` — HEAD -> 200
+- [OK]      `URL` `https://vocabs.ands.org.au` — HEAD -> 200
+- [OK]      `URL` `https://vocabs.lter-europe.net/EnvThes` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabulary.worldbank.org` — err: ConnectionError
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3` — HEAD -> 200
+- [OK]      `URL` `https://wmo.int` — HEAD -> 200
+- [OK]      `URL` `https://www.abs.gov.au/ausstats/abs@.nsf/mf/1297.0` — HEAD -> 200
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [OK]      `URL` `https://www.cabi.org/cab-thesaurus` — HEAD -> 200
+- [FAIL]    `URL` `https://www.cmecs.org` — err: ConnectionError
+- [OK]      `URL` `https://www.dcc.ac.uk/resources/metadata-standards/iso-19115` — HEAD -> 200
+- [OK]      `URL` `https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/essential-variables` — HEAD -> 200
+- [OK]      `URL` `https://www.epa.gov/data` — HEAD -> 200
+- [OK]      `URL` `https://www.epa.gov/fera/human-exposure-modeling-databases-support-exposure-modeling` — HEAD -> 200
+- [OK]      `URL` `https://www.fao.org/fishery/asfis/en` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.gbif.org/vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/standard/82463.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.marinespecies.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ohdsi.org/data-standardization/` — HEAD -> 200
+- [OK]      `URL` `https://www.opengeospatial.org/standards/geosparql` — HEAD -> 200
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.tern.org.au/controlled-vocabularies` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [FAIL]    `URL` `https://www2.usgs.gov/science/about/thesaurus` — err: ConnectionError
 
 ## `agent-3-practitioner.md`
 
-OK: 0 | Blocked: 0 | Failed: 0 | Total: 0
+OK: 46 | Blocked: 4 | Failed: 12 | Total: 62
 
-_No DOI/PMID/URL references detected._
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `PMID` `18849771` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://aims.fao.org/agrovoc` — HEAD -> 200
+- [OK]      `URL` `http://ecoportal.org` — GET -> 200
+- [OK]      `URL` `http://environmentontology.org` — HEAD -> 200
+- [OK]      `URL` `http://sweetontology.net` — HEAD -> 200
+- [OK]      `URL` `http://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `http://www.iode.org` — HEAD -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://ads.atmosphere.copernicus.eu/stac-browser/` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cgi.vocabs.ands.org.au` — err: ConnectionError
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [FAIL]    `URL` `https://csdms.colorado.edu/wiki/Standard_Names` — GET -> 404
+- [OK]      `URL` `https://data.4tu.nl` — HEAD -> 200
+- [OK]      `URL` `https://datacite.org/blog/connecting-the-dots-with-datacite-doi-metadata/` — HEAD -> 200
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [FAIL]    `URL` `https://gcmd.nasa.gov/KeywordSearch` — err: ConnectionError
+- [FAIL]    `URL` `https://github.com/ESIPFed/svo` — GET -> 404
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://github.com/esipfed/science-on-schema.org` — HEAD -> 200
+- [FAIL]    `URL` `https://marinemetadata.org` — err: ConnectTimeout
+- [FAIL]    `URL` `https://marinemetadata.org/orr` — err: ConnectTimeout
+- [OK]      `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm54.html` — HEAD -> 200
+- [BLOCKED] `URL` `https://op.europa.eu/en/web/eu-vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://research.google/blog/croissant-a-metadata-format-for-ml-ready-datasets/` — HEAD -> 200
+- [OK]      `URL` `https://rruff.info` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [OK]      `URL` `https://vocab.nerc.ac.uk` — HEAD -> 200
+- [OK]      `URL` `https://vocabs.ands.org.au` — HEAD -> 200
+- [OK]      `URL` `https://vocabs.lter-europe.net/EnvThes` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabulary.worldbank.org` — err: ConnectionError
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3` — HEAD -> 200
+- [OK]      `URL` `https://wmo.int` — HEAD -> 200
+- [OK]      `URL` `https://www.abs.gov.au/ausstats/abs@.nsf/mf/1297.0` — HEAD -> 200
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [OK]      `URL` `https://www.cabi.org/cab-thesaurus` — HEAD -> 200
+- [FAIL]    `URL` `https://www.cmecs.org` — err: ConnectionError
+- [OK]      `URL` `https://www.dcc.ac.uk/resources/metadata-standards/iso-19115` — HEAD -> 200
+- [OK]      `URL` `https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/essential-variables` — HEAD -> 200
+- [OK]      `URL` `https://www.epa.gov/fera/human-exposure-modeling-databases-support-exposure-modeling` — HEAD -> 200
+- [OK]      `URL` `https://www.fao.org/fishery/asfis/en` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.gbif.org/vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/standard/82463.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.marinespecies.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ohdsi.org/data-standardization/` — HEAD -> 200
+- [OK]      `URL` `https://www.opengeospatial.org/standards/geosparql` — HEAD -> 200
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.tern.org.au/controlled-vocabularies` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [FAIL]    `URL` `https://www2.usgs.gov/science/about/thesaurus` — err: ConnectionError
+
+## `agent-4-gaps-and-frontiers.citations.md`
+
+OK: 44 | Blocked: 7 | Failed: 12 | Total: 63
+
+- [OK]      `DOI` `10.1371/journal.pone.0309210` — doi.org -> 200
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [OK]      `URL` `https://build.fhir.org/ig/HL7/personal-health-record-format-ig/StructureDefinition-Environmental-definitions.html` — HEAD -> 200
+- [OK]      `URL` `https://cfconventions.org` — HEAD -> 200
+- [OK]      `URL` `https://cgi.vocabs.ga.gov.au` — HEAD -> 200
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [OK]      `URL` `https://ddialliance.org/Specification/DDI-Lifecycle/3.3` — HEAD -> 200
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [OK]      `URL` `https://ecoportal.lifewatch.eu` — HEAD -> 200
+- [FAIL]    `URL` `https://environmentontology.org` — err: SSLError
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [OK]      `URL` `https://github.com/ESIPFed/science-on-schema.org` — HEAD -> 200
+- [OK]      `URL` `https://github.com/OHDSI/GIS` — HEAD -> 200
+- [OK]      `URL` `https://github.com/stac-extensions/processing` — HEAD -> 200
+- [OK]      `URL` `https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0309210` — HEAD -> 200
+- [OK]      `URL` `https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210` — HEAD -> 200
+- [FAIL]    `URL` `https://marinemetadata.org` — err: ConnectTimeout
+- [OK]      `URL` `https://mlcommons.org/croissant` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm54.html` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/GIS/vocabulary.html` — HEAD -> 200
+- [BLOCKED] `URL` `https://pmc.ncbi.nlm.nih.gov/articles/PMC4383187/` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://researchdata.4tu.nl` — GET -> 404
+- [OK]      `URL` `https://rruff.info` — HEAD -> 200
+- [OK]      `URL` `https://rs.gbif.org/vocabulary/` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org/meta/kernel-4.5/` — HEAD -> 200
+- [OK]      `URL` `https://schema.org` — HEAD -> 200
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [OK]      `URL` `https://vocabs.ardc.edu.au` — HEAD -> 200
+- [OK]      `URL` `https://vocabs.lter-europe.net/EnvThes` — HEAD -> 200
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Conventions_for_Data_Discovery` — GET -> 404
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [FAIL]    `URL` `https://www.bodc.ac.uk/data/codes_and_formats/vocabulary_search/` — GET -> 404
+- [OK]      `URL` `https://www.fao.org/agrovoc` — HEAD -> 200
+- [FAIL]    `URL` `https://www.fgdc.gov/standards/projects/FGDC-standards-projects/cmecs-folder/cmechs` — GET -> 404
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [OK]      `URL` `https://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `https://www.go-fair.org/fair-principles/` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/` — HEAD -> 200
+- [OK]      `URL` `https://www.iode.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.marinespecies.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standard/geosparql/` — HEAD -> 200
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S1364815216300093` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S2666389921001707` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.scivocab.org/svo` — err: ConnectionError
+- [OK]      `URL` `https://www.tdwg.org/community/cd/mids/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor` — GET -> 404
+- [FAIL]    `URL` `https://www2.usgs.gov/science/about/thesaurus.php` — err: ConnectionError
 
 ## `agent-4-gaps-and-frontiers.md`
 
-OK: 0 | Blocked: 0 | Failed: 0 | Total: 0
+OK: 43 | Blocked: 5 | Failed: 12 | Total: 60
 
-_No DOI/PMID/URL references detected._
+- [OK]      `DOI` `10.1371/journal.pone.0309210` — doi.org -> 200
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [OK]      `URL` `https://build.fhir.org/ig/HL7/personal-health-record-format-ig/StructureDefinition-Environmental-definitions.html` — HEAD -> 200
+- [OK]      `URL` `https://cfconventions.org` — HEAD -> 200
+- [OK]      `URL` `https://cgi.vocabs.ga.gov.au` — HEAD -> 200
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [OK]      `URL` `https://ddialliance.org/Specification/DDI-Lifecycle/3.3` — HEAD -> 200
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [OK]      `URL` `https://ecoportal.lifewatch.eu` — HEAD -> 200
+- [FAIL]    `URL` `https://environmentontology.org` — err: SSLError
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [OK]      `URL` `https://github.com/ESIPFed/science-on-schema.org` — HEAD -> 200
+- [OK]      `URL` `https://github.com/OHDSI/GIS` — HEAD -> 200
+- [OK]      `URL` `https://github.com/stac-extensions/processing` — HEAD -> 200
+- [OK]      `URL` `https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210` — HEAD -> 200
+- [FAIL]    `URL` `https://marinemetadata.org` — err: ConnectTimeout
+- [OK]      `URL` `https://mlcommons.org/croissant` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm54.html` — HEAD -> 200
+- [OK]      `URL` `https://ohdsi.github.io/GIS/vocabulary.html` — HEAD -> 200
+- [FAIL]    `URL` `https://researchdata.4tu.nl` — GET -> 404
+- [OK]      `URL` `https://rruff.info` — HEAD -> 200
+- [OK]      `URL` `https://rs.gbif.org/vocabulary/` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org/meta/kernel-4.5/` — HEAD -> 200
+- [OK]      `URL` `https://schema.org` — HEAD -> 200
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [OK]      `URL` `https://vocabs.ardc.edu.au` — HEAD -> 200
+- [OK]      `URL` `https://vocabs.lter-europe.net/EnvThes` — HEAD -> 200
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Conventions_for_Data_Discovery` — GET -> 404
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [FAIL]    `URL` `https://www.bodc.ac.uk/data/codes_and_formats/vocabulary_search/` — GET -> 404
+- [OK]      `URL` `https://www.fao.org/agrovoc` — HEAD -> 200
+- [FAIL]    `URL` `https://www.fgdc.gov/standards/projects/FGDC-standards-projects/cmecs-folder/cmechs` — GET -> 404
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [OK]      `URL` `https://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `https://www.go-fair.org/fair-principles/` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir/` — HEAD -> 200
+- [OK]      `URL` `https://www.iode.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.marinespecies.org` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standard/geosparql/` — HEAD -> 200
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S1364815216300093` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.scivocab.org/svo` — err: ConnectionError
+- [OK]      `URL` `https://www.tdwg.org/community/cd/mids/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor` — GET -> 404
+- [FAIL]    `URL` `https://www2.usgs.gov/science/about/thesaurus.php` — err: ConnectionError
+
+## `agent-5-policy-and-governance.citations.md`
+
+OK: 38 | Blocked: 5 | Failed: 32 | Total: 75
+
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://aims.fao.org/agrovoc` — HEAD -> 200
+- [OK]      `URL` `http://rruff.info` — HEAD -> 200
+- [OK]      `URL` `http://www.ihsn.org/documentation-standards` — HEAD -> 200
+- [FAIL]    `URL` `http://www.ihsn.org/documentation-standards[10` — GET -> 404
+- [OK]      `URL` `http://www.obofoundry.org/ontology/envo.html` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [OK]      `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html` — HEAD -> 200
+- [FAIL]    `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html.[13` — GET -> 404
+- [FAIL]    `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html[13` — GET -> 404
+- [OK]      `URL` `https://cfconventions.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cfconventions.org.[14` — err: InvalidURL
+- [FAIL]    `URL` `https://cfconventions.org[14` — err: InvalidURL
+- [FAIL]    `URL` `https://cgi.vocabs.org` — err: ConnectionError
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [OK]      `URL` `https://ddialliance.org/ddi-codebook_v2.5` — HEAD -> 200
+- [FAIL]    `URL` `https://ddialliance.org/ddi-codebook_v2.5.[18` — GET -> 404
+- [FAIL]    `URL` `https://ddialliance.org/ddi-codebook_v2.5[18` — GET -> 404
+- [OK]      `URL` `https://degauss.org/using_degauss.html` — HEAD -> 200
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html.[15` — GET -> 404
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html[15` — GET -> 404
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [OK]      `URL` `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002` — HEAD -> 200
+- [OK]      `URL` `https://frictionlessdata.io/specs/data-package/` — HEAD -> 200
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [FAIL]    `URL` `https://gcmd.nasa.gov/KeywordSearch` — err: ConnectionError
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://github.com/OHDSI/GIS` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/OHDSI/GIS[12` — GET -> 404
+- [OK]      `URL` `https://github.com/esipfed/science-on-schema.org` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/esipfed/science-on-schema.org.[6` — GET -> 404
+- [FAIL]    `URL` `https://github.com/esipfed/science-on-schema.org[6` — GET -> 404
+- [OK]      `URL` `https://github.com/mlcommons/croissant` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/mlcommons/croissant[17` — GET -> 404
+- [OK]      `URL` `https://mlcommons.org/working-groups/data/croissant/` — HEAD -> 200
+- [FAIL]    `URL` `https://mlcommons.org/working-groups/data/croissant/.[9` — GET -> 404
+- [FAIL]    `URL` `https://mlcommons.org/working-groups/data/croissant/[9` — GET -> 404
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html` — HEAD -> 200
+- [FAIL]    `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html.[11` — GET -> 404
+- [FAIL]    `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html[11` — GET -> 404
+- [OK]      `URL` `https://public.wmo.int` — HEAD -> 200
+- [OK]      `URL` `https://rs.gbif.org` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.org/Dataset[5` — GET -> 404
+- [OK]      `URL` `https://scientificvariablesontology.org/documentation.html` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://stacspec.org[7` — err: InvalidURL
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [OK]      `URL` `https://vocabs.ands.org.au` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabs.svs.ch/envthes` — err: ConnectionError
+- [FAIL]    `URL` `https://vocabulary.nerc.ac.uk` — err: ConnectionError
+- [OK]      `URL` `https://vocabularyserver.com/asfa/` — HEAD -> 200
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery` — HEAD -> 200
+- [OK]      `URL` `https://www.epa.gov` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/[2` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html.[1` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html[1` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/om` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/om/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/.[3` — GET -> 404
+- [FAIL]    `URL` `https://www.ogc.org/standards/om[3` — GET -> 404
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/specification` — HEAD -> 200
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/specification.[8` — GET -> 404
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/specification[8` — GET -> 404
+- [OK]      `URL` `https://www.ukri.org` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/prov-o/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/.[4` — HEAD -> 300
+- [FAIL]    `URL` `https://www.w3.org/TR/vocab-dcat-3/[4` — GET -> 404
+- [FAIL]    `URL` `https://www2.usgs.gov/science/about` — err: ConnectionError
 
 ## `agent-5-policy-and-governance.md`
 
-OK: 0 | Blocked: 0 | Failed: 0 | Total: 0
+OK: 33 | Blocked: 5 | Failed: 32 | Total: 70
 
-_No DOI/PMID/URL references detected._
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://aims.fao.org/agrovoc` — HEAD -> 200
+- [OK]      `URL` `http://rruff.info` — HEAD -> 200
+- [OK]      `URL` `http://www.ihsn.org/documentation-standards` — HEAD -> 200
+- [FAIL]    `URL` `http://www.ihsn.org/documentation-standards[10` — GET -> 404
+- [OK]      `URL` `http://www.obofoundry.org/ontology/envo.html` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [FAIL]    `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html.[13` — GET -> 404
+- [FAIL]    `URL` `https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html[13` — GET -> 404
+- [OK]      `URL` `https://cfconventions.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cfconventions.org.[14` — err: InvalidURL
+- [FAIL]    `URL` `https://cfconventions.org[14` — err: InvalidURL
+- [FAIL]    `URL` `https://cgi.vocabs.org` — err: ConnectionError
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [FAIL]    `URL` `https://ddialliance.org/ddi-codebook_v2.5.[18` — GET -> 404
+- [FAIL]    `URL` `https://ddialliance.org/ddi-codebook_v2.5[18` — GET -> 404
+- [OK]      `URL` `https://degauss.org/using_degauss.html` — HEAD -> 200
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html.[15` — GET -> 404
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html[15` — GET -> 404
+- [OK]      `URL` `https://dwc.tdwg.org` — HEAD -> 200
+- [OK]      `URL` `https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002` — HEAD -> 200
+- [OK]      `URL` `https://frictionlessdata.io/specs/data-package/` — HEAD -> 200
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [FAIL]    `URL` `https://gcmd.nasa.gov/KeywordSearch` — err: ConnectionError
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://github.com/OHDSI/GIS` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/OHDSI/GIS[12` — GET -> 404
+- [FAIL]    `URL` `https://github.com/esipfed/science-on-schema.org.[6` — GET -> 404
+- [FAIL]    `URL` `https://github.com/esipfed/science-on-schema.org[6` — GET -> 404
+- [OK]      `URL` `https://github.com/mlcommons/croissant` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/mlcommons/croissant[17` — GET -> 404
+- [FAIL]    `URL` `https://mlcommons.org/working-groups/data/croissant/.[9` — GET -> 404
+- [FAIL]    `URL` `https://mlcommons.org/working-groups/data/croissant/[9` — GET -> 404
+- [OK]      `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html` — HEAD -> 200
+- [FAIL]    `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html.[11` — GET -> 404
+- [FAIL]    `URL` `https://ohdsi.github.io/CommonDataModel/cdm53.html[11` — GET -> 404
+- [OK]      `URL` `https://public.wmo.int` — HEAD -> 200
+- [OK]      `URL` `https://rs.gbif.org` — HEAD -> 200
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.org/Dataset[5` — GET -> 404
+- [OK]      `URL` `https://scientificvariablesontology.org/documentation.html` — HEAD -> 200
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://stacspec.org[7` — err: InvalidURL
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [OK]      `URL` `https://vocabs.ands.org.au` — HEAD -> 200
+- [FAIL]    `URL` `https://vocabs.svs.ch/envthes` — err: ConnectionError
+- [FAIL]    `URL` `https://vocabulary.nerc.ac.uk` — err: ConnectionError
+- [OK]      `URL` `https://vocabularyserver.com/asfa/` — HEAD -> 200
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery` — HEAD -> 200
+- [OK]      `URL` `https://www.epa.gov` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/obp/ui/[2` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html.[1` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html[1` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/om` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/.[3` — GET -> 404
+- [FAIL]    `URL` `https://www.ogc.org/standards/om[3` — GET -> 404
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/specification` — HEAD -> 200
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/specification.[8` — GET -> 404
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/specification[8` — GET -> 404
+- [OK]      `URL` `https://www.ukri.org` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/prov-o/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/.[4` — HEAD -> 300
+- [FAIL]    `URL` `https://www.w3.org/TR/vocab-dcat-3/[4` — GET -> 404
+- [FAIL]    `URL` `https://www2.usgs.gov/science/about` — err: ConnectionError
+
+## `agent-6-skeptic-and-limitations.citations.md`
+
+OK: 41 | Blocked: 15 | Failed: 36 | Total: 92
+
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://environmentontology.org` — HEAD -> 200
+- [FAIL]    `URL` `http://external.cgi-iugs.org/cgi-list-vocabularies` — err: ConnectionError
+- [FAIL]    `URL` `http://marinemetadata.org` — err: ConnectTimeout
+- [OK]      `URL` `http://rruff.info` — HEAD -> 200
+- [OK]      `URL` `http://rs.tdwg.org/dwc` — HEAD -> 200
+- [OK]      `URL` `http://vocab.nerc.ac.uk` — HEAD -> 200
+- [OK]      `URL` `http://www.fao.org/agrovoc` — HEAD -> 200
+- [FAIL]    `URL` `http://www.geoscienceontology.org/svo` — err: ConnectionError
+- [OK]      `URL` `http://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `http://www.marinespecies.org` — HEAD -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [OK]      `URL` `https://cfconventions.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html[14` — GET -> 404
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [OK]      `URL` `https://data.4tu.nl` — HEAD -> 200
+- [OK]      `URL` `https://degauss.org/using_degauss.html` — HEAD -> 200
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html.[20` — GET -> 404
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html[20` — GET -> 404
+- [OK]      `URL` `https://doc.esri.com/en/arcgis-pro/latest/help/metadata/create-iso-19115-and-iso-19139-metadata.html` — HEAD -> 200
+- [FAIL]    `URL` `https://earthdata.nasa.gov/esds/gcmd-keywords` — GET -> 404
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [OK]      `URL` `https://github.com/mlcommons/croissant` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/mlcommons/croissant.[17` — GET -> 404
+- [FAIL]    `URL` `https://github.com/mlcommons/croissant[17` — GET -> 404
+- [OK]      `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html` — HEAD -> 200
+- [FAIL]    `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html.[19` — GET -> 404
+- [FAIL]    `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html[19` — GET -> 404
+- [OK]      `URL` `https://ohdsi.github.io/GIS/vocabulary.html` — HEAD -> 200
+- [FAIL]    `URL` `https://ohdsi.github.io/GIS/vocabulary.html.[18` — GET -> 404
+- [FAIL]    `URL` `https://ohdsi.github.io/GIS/vocabulary.html[18` — GET -> 404
+- [BLOCKED] `URL` `https://op.europa.eu/en/web/eu-vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://public.wmo.int` — HEAD -> 200
+- [OK]      `URL` `https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf.[9` — GET -> 404
+- [FAIL]    `URL` `https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf[9` — GET -> 404
+- [OK]      `URL` `https://schema.org/Dataset` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.org/Dataset.[5` — GET -> 404
+- [FAIL]    `URL` `https://schema.org/Dataset[5` — GET -> 404
+- [OK]      `URL` `https://specs.frictionlessdata.io/data-package/` — HEAD -> 200
+- [FAIL]    `URL` `https://specs.frictionlessdata.io/data-package/.[16` — GET -> 404
+- [FAIL]    `URL` `https://specs.frictionlessdata.io/data-package/[16` — GET -> 404
+- [OK]      `URL` `https://stacspec.org` — HEAD -> 200
+- [FAIL]    `URL` `https://stacspec.org.[7` — err: InvalidURL
+- [FAIL]    `URL` `https://stacspec.org[7` — err: InvalidURL
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [FAIL]    `URL` `https://vocabs.acdh.oeaw.ac.at/envthes` — GET -> 404
+- [OK]      `URL` `https://vocabs.ands.org.au` — HEAD -> 200
+- [OK]      `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3` — HEAD -> 200
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3.[15` — GET -> 404
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3[15` — GET -> 404
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [FAIL]    `URL` `https://www.cmecs.org` — err: ConnectionError
+- [OK]      `URL` `https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/climate-forecast-metadata-conventions` — HEAD -> 200
+- [FAIL]    `URL` `https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/climate-forecast-metadata-conventions.[14` — GET -> 404
+- [FAIL]    `URL` `https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/climate-forecast-metadata-conventions[14` — GET -> 404
+- [OK]      `URL` `https://www.epa.gov/geospatial/epa-metadata-technical-specification` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.esipfed.org/esip-endorses-guidance-for-science-on-schema-org-metadata/` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.esipfed.org/esip-endorses-guidance-for-science-on-schema.org-metadata.[6` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.esipfed.org/esip-endorses-guidance-for-science-on-schema.org-metadata[6` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.gbif.org/vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir` — HEAD -> 202
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html.[3` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html[3` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html.[11` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html[11` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql` — HEAD -> 200
+- [OK]      `URL` `https://www.ogc.org/standards/om/` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/.[13` — GET -> 404
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/[13` — GET -> 404
+- [OK]      `URL` `https://www.researchobject.org/ro-crate/about_ro_crate` — HEAD -> 200
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/about_ro_crate.[8` — GET -> 404
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/about_ro_crate[8` — GET -> 404
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S0198971517300558` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S0198971517300558.[10` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S2666389921001707` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.usgs.gov/products/thesaurus` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/.[4` — HEAD -> 300
+- [FAIL]    `URL` `https://www.w3.org/TR/vocab-dcat-3/[4` — GET -> 404
+- [OK]      `URL` `https://www.worldbank.org` — HEAD -> 200
 
 ## `agent-6-skeptic-and-limitations.md`
 
-OK: 0 | Blocked: 0 | Failed: 0 | Total: 0
+OK: 27 | Blocked: 10 | Failed: 36 | Total: 73
 
-_No DOI/PMID/URL references detected._
+- [OK]      `PMID` `12345678` — pubmed -> 200
+- [OK]      `URL` `http://agroportal.lirmm.fr` — HEAD -> 200
+- [OK]      `URL` `http://environmentontology.org` — HEAD -> 200
+- [FAIL]    `URL` `http://external.cgi-iugs.org/cgi-list-vocabularies` — err: ConnectionError
+- [FAIL]    `URL` `http://marinemetadata.org` — err: ConnectTimeout
+- [OK]      `URL` `http://rruff.info` — HEAD -> 200
+- [OK]      `URL` `http://rs.tdwg.org/dwc` — HEAD -> 200
+- [OK]      `URL` `http://vocab.nerc.ac.uk` — HEAD -> 200
+- [OK]      `URL` `http://www.fao.org/agrovoc` — HEAD -> 200
+- [FAIL]    `URL` `http://www.geoscienceontology.org/svo` — err: ConnectionError
+- [OK]      `URL` `http://www.getty.edu/research/tools/vocabularies/tgn` — HEAD -> 200
+- [OK]      `URL` `http://www.marinespecies.org` — HEAD -> 200
+- [OK]      `URL` `http://www.obofoundry.org` — HEAD -> 200
+- [OK]      `URL` `http://www.ontobee.org` — HEAD -> 200
+- [OK]      `URL` `http://www.qudt.org` — HEAD -> 200
+- [OK]      `URL` `https://bartoc.org` — HEAD -> 200
+- [OK]      `URL` `https://bioportal.bioontology.org` — HEAD -> 200
+- [OK]      `URL` `https://cfconventions.org` — HEAD -> 200
+- [FAIL]    `URL` `https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html[14` — GET -> 404
+- [FAIL]    `URL` `https://cor.esipfed.org` — err: SSLError
+- [OK]      `URL` `https://data.4tu.nl` — HEAD -> 200
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html.[20` — GET -> 404
+- [FAIL]    `URL` `https://degauss.org/using_degauss.html[20` — GET -> 404
+- [FAIL]    `URL` `https://earthdata.nasa.gov/esds/gcmd-keywords` — GET -> 404
+- [FAIL]    `URL` `https://gcmd.nasa.gov` — err: ConnectionError
+- [OK]      `URL` `https://github.com/ODM2/ODM2` — HEAD -> 200
+- [FAIL]    `URL` `https://github.com/mlcommons/croissant.[17` — GET -> 404
+- [FAIL]    `URL` `https://github.com/mlcommons/croissant[17` — GET -> 404
+- [FAIL]    `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html.[19` — GET -> 404
+- [FAIL]    `URL` `https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html[19` — GET -> 404
+- [FAIL]    `URL` `https://ohdsi.github.io/GIS/vocabulary.html.[18` — GET -> 404
+- [FAIL]    `URL` `https://ohdsi.github.io/GIS/vocabulary.html[18` — GET -> 404
+- [BLOCKED] `URL` `https://op.europa.eu/en/web/eu-vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://public.wmo.int` — HEAD -> 200
+- [FAIL]    `URL` `https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf.[9` — GET -> 404
+- [FAIL]    `URL` `https://schema.datacite.org/meta/kernel-4.0/doc/DataCite-MetadataKernel_v4.0.pdf[9` — GET -> 404
+- [FAIL]    `URL` `https://schema.org/Dataset.[5` — GET -> 404
+- [FAIL]    `URL` `https://schema.org/Dataset[5` — GET -> 404
+- [FAIL]    `URL` `https://specs.frictionlessdata.io/data-package/.[16` — GET -> 404
+- [FAIL]    `URL` `https://specs.frictionlessdata.io/data-package/[16` — GET -> 404
+- [FAIL]    `URL` `https://stacspec.org.[7` — err: InvalidURL
+- [FAIL]    `URL` `https://stacspec.org[7` — err: InvalidURL
+- [FAIL]    `URL` `https://sweetontology.net` — err: SSLError
+- [FAIL]    `URL` `https://vocabs.acdh.oeaw.ac.at/envthes` — GET -> 404
+- [OK]      `URL` `https://vocabs.ands.org.au` — HEAD -> 200
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3.[15` — GET -> 404
+- [FAIL]    `URL` `https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3[15` — GET -> 404
+- [OK]      `URL` `https://www.bco-dmo.org` — HEAD -> 200
+- [FAIL]    `URL` `https://www.cmecs.org` — err: ConnectionError
+- [FAIL]    `URL` `https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/climate-forecast-metadata-conventions.[14` — GET -> 404
+- [FAIL]    `URL` `https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/climate-forecast-metadata-conventions[14` — GET -> 404
+- [OK]      `URL` `https://www.epa.gov/geospatial/epa-metadata-technical-specification` — HEAD -> 200
+- [BLOCKED] `URL` `https://www.esipfed.org/esip-endorses-guidance-for-science-on-schema.org-metadata.[6` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.esipfed.org/esip-endorses-guidance-for-science-on-schema.org-metadata[6` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.gbif.org/vocabularies` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.geonames.org` — HEAD -> 200
+- [OK]      `URL` `https://www.hl7.org/fhir` — HEAD -> 202
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html.[3` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/32574.html[3` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html.[11` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.iso.org/standard/53798.html[11` — HEAD -> 403 (bot-blocked)
+- [BLOCKED] `URL` `https://www.mindat.org` — HEAD -> 403 (bot-blocked)
+- [OK]      `URL` `https://www.ogc.org/standards/geosparql` — HEAD -> 200
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/.[13` — GET -> 404
+- [FAIL]    `URL` `https://www.ogc.org/standards/om/[13` — GET -> 404
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/about_ro_crate.[8` — GET -> 404
+- [FAIL]    `URL` `https://www.researchobject.org/ro-crate/about_ro_crate[8` — GET -> 404
+- [BLOCKED] `URL` `https://www.sciencedirect.com/science/article/pii/S0198971517300558.[10` — HEAD -> 403 (bot-blocked)
+- [FAIL]    `URL` `https://www.usgs.gov/products/thesaurus` — GET -> 404
+- [OK]      `URL` `https://www.w3.org/TR/prov-overview/` — HEAD -> 200
+- [OK]      `URL` `https://www.w3.org/TR/vocab-dcat-3/.[4` — HEAD -> 300
+- [FAIL]    `URL` `https://www.w3.org/TR/vocab-dcat-3/[4` — GET -> 404
+- [OK]      `URL` `https://www.worldbank.org` — HEAD -> 200

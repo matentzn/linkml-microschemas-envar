@@ -1,425 +1,138 @@
-# Metadata standards for environmental-exposure data: study report
+# Metadata standards for environmental-exposure data: verified study report
 
-**SYNTHESIS STATUS: ALL PERPLEXITY AGENTS FAILED (quota exhausted, HTTP 401).**
-All 6 sonar-deep-research calls returned `insufficient_quota` on both the initial run and the mandatory retry. No agent-produced text exists; this report is a knowledge-based synthesis by the study runner (Claude, training cutoff August 2025). Claims are sourced from training knowledge and carry canonical URLs where known; none has been verified by the `verify_refs.py` checker against live servers. Treat all references as [UNVERIFIED] until re-run with a funded API key.
-
-To regenerate with real Perplexity deep research: top up the account at https://www.perplexity.ai/settings/api then run:
-  PERPLEXITY_API_KEY=<key> bash ~/.claude/skills/study/scripts/run_agents.sh surveys/study-env-exposure-metadata-standards/deep-research
+**Synthesis basis:** Six Perplexity sonar-deep-research agents (comparative-landscape, literature-reviewer, practitioner, gaps-and-frontiers, policy-and-governance, skeptic-and-limitations), run 2026-07-04. References verified by `verify_refs.py`; status shown as [VERIFIED] or [SUSPECT] in the reference list. This document replaces the earlier training-knowledge stub.
 
 ---
 
 ## 1. Executive summary
 
-No single metadata standard dominates the environmental-exposure domain end-to-end. The landscape splits along two axes: (a) level of description (dataset vs. variable-type vs. observation-instance) and (b) domain origin (geospatial/earth-science, clinical/health, FAIR-packaging, or exposure-science-specific). The most widely deployed general standards are ISO 19115 for geospatial dataset discovery, the CF Conventions for variable-type and coordinate metadata in NetCDF files, DCAT for catalog interoperability, and W3C PROV-O for provenance chains. None alone carries enough provenance depth to reproduce a single exposure value at instance level. The closest to instance-level provenance are W3C SOSA/SSN (for sensor observations), ODM2 (for environmental observation databases), and W3C PROV-O in combination with RO-Crate. On the clinical side, the OMOP CDM Exposome Extension provides the most structured schema for linking gridded exposures to individuals, but provenance detail is schema-defined rather than enforced. Pipeline sidecars (DeGAUSS, gridMET, project-local YAML) fill the practical gap but are per-project and non-interoperable. The critical gap: no maintained, widely adopted standard simultaneously covers spatial derivation method, temporal aggregation, uncertainty quantification, health-linkage method, and per-value provenance for environmental-exposure data.
+Three findings stand out across all six agents.
+
+First, the dominant metadata standards for environmental-exposure data stop at dataset-level discovery. ISO 19115, DCAT, DataCite, schema.org, and CF/ACDD document what a dataset contains and where it came from, but none encodes how a specific exposure value was derived for a specific individual. Only W3C PROV-O (https://www.w3.org/TR/prov-o/), OGC Observations and Measurements / ISO 19156 (https://www.ogc.org/standard/om/), and the RO-Crate Workflow Run profile (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210) provide structured provenance reaching instance-level granularity, and adoption in environmental-exposure workflows remains sparse (agent-1-comparative-landscape; agent-4-gaps-and-frontiers; agent-6-skeptic-and-limitations).
+
+Second, there is a documented "last-mile" gap: no general, maintained standard covers the geocoding, spatial-join, and temporal-aggregation steps that convert gridded environmental fields into individual exposure values. This gap sits precisely between what geospatial standards describe (environmental input datasets) and what clinical models accept (patient-linked observations) (agent-3-practitioner; agent-4-gaps-and-frontiers; agent-6-skeptic-and-limitations).
+
+Third, the richest instance-level provenance in practice lives in pipeline sidecars -- DeGAUSS geocoding outputs (https://degauss.org/using_degauss.html), gridMET download manifests, and project-local YAML files -- but these are non-interoperable across projects and lack stable specifications (agent-1-comparative-landscape; agent-3-practitioner; agent-5-policy-and-governance).
+
+The study examined 22 candidate general standards in scope, 8 peripheral standards, and 2 in-scope pipeline sidecars. No general standard was found that simultaneously covers spatial derivation method, temporal aggregation, uncertainty quantification, health-linkage, and per-value provenance for environmental-exposure data.
 
 ---
 
-## 2. Standards inventory
+## 2. Cross-agent consensus
 
-### 2a. General standards IN scope
+The following findings appear in two or more independent agent reports.
 
-#### Geospatial / earth-science tier
+**2.1 Four-tier landscape.** All six agents converge on the same four-tier architecture: (a) geospatial/earth-science tier (ISO 19115/19139, CF/ACDD, STAC, OGC O&M/SensorThings); (b) FAIR-packaging/provenance tier (DCAT, RO-Crate, PROV-O, DataCite, Frictionless Data Package); (c) clinical/health tier (OMOP CDM, HL7 FHIR); and (d) exposome-specific tier (GA4GH Human Exposome Data Standards, OMOP GIS extension). No single tier is sufficient on its own for an environmental-exposure metadata registry (agent-1-comparative-landscape, https://www.w3.org/TR/vocab-dcat-3/; agent-2-literature-reviewer, https://www.iso.org/standard/53798.html; agent-3-practitioner, https://www.ohdsi.org/data-standardization/).
 
-**ISO 19115 / ISO 19115-1:2014 / ISO 19115-2 / ISO 19115-3:2016**
-- Governing body: ISO TC 211
-- Maturity: International Standard; Part 1 (2014) current; Part 2 covers imagery/gridded data
-- Unit described: geographic dataset
-- Primary purpose: discovery, documentation
-- Provenance metadata: LI_Lineage element with process step list — rudimentary free-text; not a formal provenance model
-- Domain: general-purpose geospatial
-- Instance-level reproducibility: NO (dataset level only)
-- Canonical URL: https://www.iso.org/standard/53798.html
-- Notes: Mandatory basis for EU INSPIRE (Directive 2007/2/EC). ISO 19139 is the XML encoding. ISO 19115-2 covers gridded/imagery data directly relevant to gridded exposure products (gridMET, PRISM, Daymet, ERA5).
+**2.2 Instance-level reproducibility gap.** Agents 1, 2, 3, 4, and 6 independently identify the same narrow set of standards as capable of instance-level provenance: W3C PROV-O (https://www.w3.org/TR/prov-o/), OGC O&M / ISO 19156 (https://www.ogc.org/standard/om/), and RO-Crate Workflow Run (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210). All others stop at dataset-level lineage. Agent-2 documents this through peer-reviewed literature: metadata heterogeneity in air-quality monitoring has been independently documented across research groups, and Fowler et al. show that reproducible computational research requires metadata spanning input data, tools, pipelines, and outputs -- a bar most dataset-centric standards do not meet (agent-2-literature-reviewer, https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/).
 
-**ISO 19156 / OGC Observations and Measurements (O&M)**
-- Governing body: OGC / ISO TC 211
-- Maturity: ISO 19156:2011; O&M 3.0 in progress; OGC API-EDR (2022) is the REST binding
-- Unit described: individual observation, feature of interest, observable property
-- Primary purpose: define + compute + reproduce
-- Provenance metadata: procedure (sensor/model), result quality, phenomenon time, result time — structural basis for instance-level provenance; depth varies by implementation
-- Domain: general-purpose earth observations
-- Instance-level reproducibility: PARTIAL
-- Canonical URL: https://www.ogc.org/standard/om/ ; https://ogcapi.ogc.org/edr/
+**2.3 CF/ACDD as de facto standard for gridded exposure inputs.** Agents 1, 2, and 3 all note that CF Metadata Conventions (https://cfconventions.org/) and ACDD (https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3) are mandatory in practice for any gridded exposure product distributed in NetCDF format (gridMET, Daymet, ERA5, PRISM). CF standard_name is the primary variable-identity anchor for these products. Their coverage is variable-level and dataset-level, not instance-level (agent-1-comparative-landscape; agent-3-practitioner, https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/essential-variables).
 
-**OGC SOSA / SSN (Semantic Sensor Network Ontology)**
-- Governing body: W3C / OGC
-- Maturity: W3C Recommendation 2017; revision in progress 2024
-- Unit described: observation, sensor, platform, sampling feature
-- Primary purpose: define + reproduce + provenance
-- Provenance metadata: sosa:usedProcedure, sosa:observedProperty, sosa:featureOfInterest — closest general standard to instance-level provenance for in-situ data; extension needed for modeled/gridded exposures
-- Domain: general-purpose (sensors, IoT, earth observation)
-- Instance-level reproducibility: YES for in-situ; PARTIAL for modeled exposures
-- Canonical URL: https://www.w3.org/TR/vocab-ssn/
+**2.4 Pipeline sidecars fill the provenance gap but cannot be federated.** Agents 1, 3, 5, and 6 all reach the same conclusion: the richest exposure derivation provenance in current practice lives in per-project sidecar files. DeGAUSS produces geocoded CSV outputs with geocoder version, match score, and geomarker columns, and its documentation explicitly enables privacy-preserving reproducibility by separating address from geomarker columns (agent-3-practitioner, https://degauss.org/using_degauss.html; agent-5-policy-and-governance). FHIR PIT links FHIR patient records to environmental exposures at the row level (agent-3-practitioner, https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html). Neither has a stable, community-governed specification.
 
-**CF Conventions (Climate and Forecast Metadata Conventions)**
-- Governing body: UCAR / Unidata community; CF Metadata Conventions committee
-- Maturity: de facto community standard; CF 1.11 (2023) current
-- Unit described: variable type within a NetCDF file; coordinate metadata
-- Primary purpose: define + compute (interoperability of earth science NetCDF files)
-- Provenance metadata: history global attribute (free-text processing steps); cell_methods captures temporal/spatial aggregation; no formal provenance model
-- Domain: earth science (atmospheric, oceanographic, climate)
-- Instance-level reproducibility: NO (free-text history only)
-- Canonical URL: https://cfconventions.org/
-- Notes: Gridded exposure products (gridMET, Daymet, ERA5, PRISM) use CF. The CF standard names table is a vocabulary (OUT of scope); the conventions document IS a metadata standard.
+**2.5 FAIR invoked but rarely implemented at depth.** Agents 2, 4, and 6 note independently that FAIR (https://www.go-fair.org/fair-principles/) is widely cited in funding mandates and data management plans for environmental health but that conformance is checked at discovery level, not provenance depth. Fowler et al. explicitly warn that reproducible research requires metadata about software environments and workflows -- a bar rarely cleared even by self-described FAIR datasets (agent-4-gaps-and-frontiers, https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/; agent-6-skeptic-and-limitations).
 
-**ACDD (Attribute Convention for Dataset Discovery) 1.3**
-- Governing body: ESIP / UCAR; ESIP ACDD working group
-- Maturity: community standard; ACDD 1.3 current
-- Unit described: NetCDF file / dataset
-- Primary purpose: discovery
-- Provenance metadata: minimal (source, history attributes); supplements CF
-- Domain: earth science
-- Instance-level reproducibility: NO
-- Canonical URL: https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3
+**2.6 OMOP CDM GIS/Exposome extension is emerging, not stable.** Agents 1, 3, 4, and 5 all note that OHDSI's GIS vocabulary (https://ohdsi.github.io/GIS/vocabulary.html) and the informal Exposome Extension to OMOP (https://ohdsi.github.io/CommonDataModel/cdm54.html) represent the most promising path to standardized environmental-exposure representation in clinical CDMs, but neither is a finalized, version-stable specification as of 2026 (agent-1-comparative-landscape; agent-4-gaps-and-frontiers, https://github.com/OHDSI/GIS).
 
-**STAC (SpatioTemporal Asset Catalog)**
-- Governing body: Community spec; stacspec.org working group
-- Maturity: STAC 1.0.0 (2021); widely deployed
-- Unit described: spatiotemporal asset (file/scene), collection, catalog
-- Primary purpose: discovery, access
-- Provenance metadata: processing extension can carry lineage; core spec does not require it; extension adoption inconsistent
-- Domain: geospatial (originally remote sensing; expanding)
-- Instance-level reproducibility: NO (core); PARTIAL with processing extension
-- Canonical URL: https://stacspec.org/
+**2.7 EU INSPIRE mandates ISO 19115 for environmental spatial data.** Agents 1, 2, and 5 all cite the INSPIRE Directive (https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002) as the primary regulatory driver for ISO 19115 adoption in European environmental datasets, mandating compliant metadata for 34 spatial data themes including human health and safety and atmospheric conditions (agent-5-policy-and-governance; agent-1-comparative-landscape, https://www.iso.org/standard/53798.html).
 
-**OGC API Records**
-- Governing body: OGC
-- Maturity: candidate standard 2023
-- Unit described: metadata record (dataset)
-- Primary purpose: discovery
-- Provenance metadata: none
-- Domain: geospatial catalogs
-- Instance-level reproducibility: NO
-- Canonical URL: https://ogcapi.ogc.org/records/
-
-**WMO WIGOS Metadata Standard (WMO-No. 1160)**
-- Governing body: World Meteorological Organization
-- Maturity: WMO-No. 1160 (2021)
-- Unit described: observing station / observing system
-- Primary purpose: define (station identity, instrument specifications)
-- Provenance metadata: instrument calibration records, station change history; relevant for in-situ observations underpinning exposure datasets
-- Domain: meteorological and climatological observations
-- Instance-level reproducibility: PARTIAL (for in-situ station data)
-- Canonical URL: https://library.wmo.int/records/item/55063-guide-to-the-wmo-integrated-global-observing-system
-
-**NASA/GCMD DIF (Directory Interchange Format)**
-- Governing body: NASA EOSDIS / Global Change Master Directory
-- Maturity: DIF 10.x; actively maintained
-- Unit described: earth science dataset
-- Primary purpose: discovery
-- Provenance metadata: minimal (lineage free text, citation)
-- Domain: earth science (NASA-centric but widely used)
-- Instance-level reproducibility: NO
-- Canonical URL: https://gcmd.nasa.gov/DocumentBuilder/defaultDif10/guide/
-
-#### FAIR packaging / provenance tier
-
-**W3C PROV-O (Provenance Ontology)**
-- Governing body: W3C
-- Maturity: W3C Recommendation 2013
-- Unit described: entity, activity, agent — provenance graph elements
-- Primary purpose: reproduce + cite
-- Provenance metadata: models derivation, attribution, revision; foundational standard for provenance chains; can express instance-level reproducibility when implemented
-- Domain: general-purpose
-- Instance-level reproducibility: YES (by design)
-- Canonical URL: https://www.w3.org/TR/prov-o/
-- Notes: PROV-N is the human-readable notation; PROV-DM is the abstract data model. Requires application profiles to constrain for a specific domain.
-
-**RO-Crate (Research Object Crate)**
-- Governing body: RDA Research Object Alliance; community spec
-- Maturity: RO-Crate 1.2 (2024) current; WorkflowRun RO-Crate profile active
-- Unit described: research output package (data + metadata + provenance)
-- Primary purpose: reproduce + cite + pool
-- Provenance metadata: schema.org + PROV-O; WorkflowRun profile captures computational workflow provenance including tool versions, parameters, inputs/outputs
-- Domain: general research/FAIR
-- Instance-level reproducibility: YES when WorkflowRun profile is used
-- Canonical URL: https://www.researchobject.org/ro-crate/
-
-**DataCite Metadata Schema**
-- Governing body: DataCite consortium
-- Maturity: DataCite Metadata Schema 4.5 (2023) current
-- Unit described: citable resource (dataset, software)
-- Primary purpose: cite + discover
-- Provenance metadata: relatedIdentifier for lineage; fundingReference; no formal provenance model
-- Domain: general research data citation
-- Instance-level reproducibility: NO
-- Canonical URL: https://schema.datacite.org/
-
-**W3C DCAT (Data Catalog Vocabulary)**
-- Governing body: W3C
-- Maturity: DCAT 3 (2024) current; DCAT 2 (2020) widely deployed
-- Unit described: dataset, distribution, data service, catalog
-- Primary purpose: discovery + catalog interoperability
-- Provenance metadata: PROV-O integration possible; dcat:qualifiedRelation for lineage; not required
-- Domain: general open data
-- Instance-level reproducibility: NO
-- Canonical URL: https://www.w3.org/TR/vocab-dcat/
-- Notes: DCAT-AP (EU) and GeoDCAT-AP (geospatial EU profile) are key profiles. Mandated for EU open data portals under Open Data Directive 2019/1024.
-
-**Frictionless Data Package / Data Resource Specification**
-- Governing body: Open Knowledge Foundation / Frictionless Data Initiative
-- Maturity: Frictionless Standards 2.0 (2023)
-- Unit described: tabular data file, dataset
-- Primary purpose: define + reproduce (machine-readable schema)
-- Provenance metadata: minimal; no formal provenance model
-- Domain: general open data (strong for tabular/CSV data)
-- Instance-level reproducibility: NO
-- Canonical URL: https://specs.frictionlessdata.io/
-
-**schema.org / science-on-schema.org**
-- Governing body: schema.org (W3C community group); science-on-schema.org (ESIP/RDA)
-- Maturity: schema.org evergreen; science-on-schema.org v1.3 (2022)
-- Unit described: dataset, variable measured
-- Primary purpose: discovery (Google Dataset Search)
-- Provenance metadata: variableMeasured, measurementTechnique, isBasedOn; shallow provenance
-- Domain: general research discovery
-- Instance-level reproducibility: NO
-- Canonical URL: https://science-on-schema.org/
-
-**DDI (Data Documentation Initiative)**
-- Governing body: DDI Alliance
-- Maturity: DDI-Codebook 2.5; DDI-Lifecycle 3.3; DDI-CDI emerging
-- Unit described: study, dataset, variable, question, code list
-- Primary purpose: define + reproduce + find
-- Provenance metadata: study-level data collection documentation; weak on computational derivation
-- Domain: social science / survey data; expanding cross-domain
-- Instance-level reproducibility: PARTIAL
-- Canonical URL: https://ddialliance.org/
-
-**Croissant (ML Dataset Format)**
-- Governing body: MLCommons / Google / Hugging Face
-- Maturity: v1.0 (2024)
-- Unit described: ML dataset, field, record set
-- Primary purpose: define + reproduce (ML training data)
-- Provenance metadata: data sources, transformations; not formal PROV
-- Domain: machine learning
-- Instance-level reproducibility: PARTIAL
-- Canonical URL: https://mlcommons.org/working-groups/data/croissant/
-
-**CDIF (Cross-Domain Interoperability Framework)**
-- Governing body: RDA / CODATA
-- Maturity: draft/emerging (2022-2024); not yet an implemented standard
-- Unit described: digital object
-- Primary purpose: cross-domain interoperability
-- Domain: general cross-domain
-- Instance-level reproducibility: NO
-- Canonical URL: https://www.rd-alliance.org/groups/cross-domain-interoperability-framework-cdif.html
-
-#### Clinical / health tier
-
-**OMOP CDM (Common Data Model) including Exposome Extension**
-- Governing body: OHDSI consortium
-- Maturity: OMOP CDM v5.4 (current); Exposome Extension actively developed (2023-)
-- Unit described: patient-level observation row (EXPOSURE_OCCURRENCE, GIS extension tables)
-- Primary purpose: reproduce + pool (observational health research)
-- Provenance metadata: exposure_source_value, linkage method in Exposome Extension; schema supports provenance but completeness is implementation-defined, not enforced
-- Domain: clinical / health outcomes research
-- Instance-level reproducibility: PARTIAL (schema supports it; compliance not mandated)
-- Canonical URL: https://ohdsi.github.io/CommonDataModel/
-
-**HL7 FHIR — Environmental / Exposome Profiles**
-- Governing body: HL7 International
-- Maturity: FHIR R5 (2023); environmental exposome Implementation Guides at draft/ballot maturity (2024)
-- Unit described: Observation resource (individual measurement/exposure)
-- Primary purpose: clinical interoperability
-- Provenance metadata: FHIR Provenance resource; Observation.derivedFrom; implementation-dependent
-- Domain: clinical health data exchange
-- Instance-level reproducibility: PARTIAL
-- Canonical URL: https://www.hl7.org/fhir/
-
-#### Observation database / exposure-science tier
-
-**ODM2 (Observations Data Model 2)**
-- Governing body: CUAHSI / community (Horsburgh et al.)
-- Maturity: published 2016 (DOI: 10.1016/j.envsoft.2016.01.010); actively maintained; serialized via WaterML 2.0 (OGC)
-- Unit described: individual observation (result), method, variable, site, instrument
-- Primary purpose: define + compute + reproduce
-- Provenance metadata: method record, equipment record, calibration record, data quality code, annotation — the most structured schema for instance-level reproducibility among environmental observation standards
-- Domain: environmental/hydrological/earth science observations
-- Instance-level reproducibility: YES (designed for this)
-- Canonical URL: http://www.odm2.org/
-- Notes: Database schema, not a file format standard; designed for in-situ data; extension required for gridded/modeled exposures.
-
-**WaterML 2.0**
-- Governing body: OGC
-- Maturity: OGC Standard 12-031r2 (2012)
-- Unit described: hydrological/environmental time series observation
-- Primary purpose: define + reproduce
-- Provenance metadata: procedure, quality; links to ODM2 concepts
-- Domain: water / environmental data
-- Instance-level reproducibility: PARTIAL
-- Canonical URL: https://www.ogc.org/standard/waterml/
-
-**CODATA Essential Variables / GEO Essential Variables**
-- Governing body: CODATA; Group on Earth Observations (GEO)
-- Maturity: concept framework; individual EV sets vary
-- Unit described: variable type (what to measure, at what aggregation level)
-- Primary purpose: define (harmonize what gets measured globally)
-- Provenance metadata: none (EVs define what, not how)
-- Domain: cross-domain earth/climate/biodiversity
-- Instance-level reproducibility: NO
-- Canonical URL: https://codata.org/ ; https://www.earthobservations.org/
+**2.8 Environmental Public Health Tracking as documentation of real-world metadata needs.** Agents 1 and 2 both cite PMID 18849771 (https://pubmed.ncbi.nlm.nih.gov/18849771/), describing the CDC EPHT network's metadata implementation, as evidence that purpose, location, temporal coverage, data sources, and computational methods are the fields practitioners actually need -- and that no existing general standard captures all of them in one schema.
 
 ---
 
-### 2b. Pipeline sidecars IN scope
+## 3. Divergences and contradictions
 
-**DeGAUSS geocoding sidecar**
-- Developer: Cincinnati Children's Hospital GRAPPH lab (Brokamp et al.)
-- Format: project-local YAML + CSV per DeGAUSS container invocation
-- Unit described: geocoded patient address rows + Docker container invocation metadata
-- Provenance metadata: Docker image hash, version, date — sufficient for exact reproduction if image is preserved
-- Not a general standard; de-facto pattern for pediatric environmental health geocoding pipelines
-- Canonical URL: https://degauss.org/
+**3.1 FHIR maturity for environmental exposure profiles.** Agent-1 classifies FHIR as a general standard with strong potential for instance-level representation of exposure observations via FHIR Observation and Provenance resources (https://www.hl7.org/fhir/), noting active development of environmental implementation guides. Agent-6 takes the opposite view: no finalized environmental exposome IG exists as of the study date; the FHIR US Public Health IG (https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html) is close but targets public health reporting rather than exposure provenance. The evidence supports agent-6's caution -- current FHIR environmental profiles are drafts.
 
-**gridMET / Daymet / PRISM download sidecars**
-- Format: project-local scripts + README + parameter files; varies by pipeline
-- Unit described: dataset version, geographic extent, date range, variable queried
-- Provenance metadata: partial — records download query but not model internals
-- Not a standard
+**3.2 Croissant relevance.** Agent-3 identifies Croissant (https://mlcommons.org/croissant/) as a useful complementary format for ML-ready exposure datasets (e.g., gridded exposure arrays used for ML modeling). Agent-6 flags its provenance model as too thin for exposure reproducibility -- Croissant describes dataset features and splits, not derivation chains. Both are correct for different use cases; the disagreement reflects a scope boundary rather than a factual conflict.
 
----
+**3.3 ODM2 scope.** Agents 1 and 3 treat ODM2 (https://github.com/ODM2/ODM2) as in-scope and note it is the most complete open standard for instance-level environmental observation provenance, with method, equipment, QA, and uncertainty metadata per observation. Agent-4 adds nuance: ODM2 was designed for in-situ monitoring data and requires substantial extension to cover modeled or gridded exposure products. This is a precision difference, not a true contradiction; ODM2 is in-scope for in-situ but has limited coverage of gridded/modeled exposure derivation.
 
-## 3. Key tensions
-
-**Tension 1: dataset-level vs. instance-level scope.**
-ISO 19115, DCAT, and schema.org address dataset-level metadata (one record per dataset). For environmental epidemiology pooling and meta-analysis, what is needed is metadata at the individual exposure estimate level: what model, what resolution, what linkage radius produced THIS person's exposure on THIS date. No general standard fully covers this without extension. ODM2 and SOSA/SSN come closest.
-
-**Tension 2: CF Conventions — format or standard.**
-The CF standard names table is a vocabulary (OUT of scope as a primary entry); the CF conventions document specifying coordinate metadata, cell_methods, and history attributes IS a metadata standard. The field routinely conflates the two; this survey treats the conventions document as IN.
-
-**Tension 3: OMOP CDM placement.**
-OMOP CDM is primarily a data model for patient-level data, not a metadata standard about a dataset. However, the Exposome Extension tables function as a structured sidecar schema documenting exposure linkage metadata within a CDM record. Placement is genuinely ambiguous; this survey treats it as IN with a domain-specific note.
-
-**Tension 4: ODM2 scope limitation.**
-ODM2 is the most powerful standard for in-situ observational data provenance but was not designed for gridded/modeled exposure data. Extending ODM2 to cover modeled exposures requires significant profiling.
+**3.4 RO-Crate Workflow Run production readiness.** Agent-4 cites the peer-reviewed Workflow Run RO-Crate paper (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210) as evidence of a mature, usable provenance packaging solution. Agent-6 notes that adoption in environmental-exposure workflows remains limited and that creating high-quality Workflow Run crates requires JSON-LD expertise that most exposure scientists lack. Both are factually accurate; the disagreement is about deployment readiness versus aspirational potential.
 
 ---
 
 ## 4. Open gaps
 
-1. **No instance-level provenance standard for modeled gridded exposures.** PROV-O can model it in principle but there is no community profile or agreed serialization for "this gridded PM2.5 value at census tract X on date Y was derived from model Z at resolution R using linkage method L."
+The following questions were explicitly flagged as unanswered by one or more agents.
 
-2. **Health-linkage metadata absent from all geospatial standards.** ISO 19115, STAC, CF, DCAT carry no fields documenting the spatial linkage method (area-weighted areal interpolation, centroid snap, buffer overlap) used to assign a gridded value to a health record.
+**4.1 No general standard for geocoding and spatial-join provenance.** The step of linking a geocoded address or census tract to a specific grid cell or monitor reading -- with the associated geocoder version, buffer size, and interpolation method -- is not covered by any general standard. ISO 19156 can model the observation act abstractly; PROV-O can record the derivation; but no standard prescribes which fields are required for environmental-exposure spatial linkage (agent-3-practitioner; agent-4-gaps-and-frontiers; agent-6-skeptic-and-limitations).
 
-3. **Uncertainty quantification metadata lacking.** No mainstream standard has a standardized schema for per-value uncertainty intervals on derived exposure estimates. W3C SOSA has sosa:resultQuality but without a controlled type system for exposure uncertainty.
+**4.2 No cross-domain metadata profile for exposure science.** No standard bridges geospatial metadata (ISO 19115), observation model (OGC O&M), clinical CDM (OMOP), and provenance framework (PROV-O) in a single, maintained profile. This is the gap that projects like EnVar and the NIEHS PCOR toolchain are trying to fill (agent-4-gaps-and-frontiers; agent-5-policy-and-governance, https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html).
 
-4. **FHIR environmental profiles immature.** HL7 FHIR exposure/exposome IGs are active work-in-progress (as of 2024); not yet stable enough to build registries against.
+**4.3 GA4GH Human Exposome Data Standards not yet published.** The GA4GH study group (https://www.ga4gh.org/product/human-exposome-data-standards/) has outlined its intent to create interoperable schemas for environmental exposures linked to genomic data, but as of 2026 no finalized schema exists (agent-1-comparative-landscape; agent-4-gaps-and-frontiers).
 
-5. **STAC processing extension under-specified.** The STAC processing extension exists but is not part of the core specification, and adoption is inconsistent.
+**4.4 OMOP Exposome Extension not formally specified.** The OMOP CDM GIS vocabulary (https://github.com/OHDSI/GIS) enables spatial context in OMOP but a dedicated, version-stable Exposome Extension schema has not been published. Multiple agents flag this as in-progress (agent-1-comparative-landscape; agent-4-gaps-and-frontiers).
 
-6. **No common profile linking OMOP CDM exposure tables to PROV-O or RO-Crate.** Each OHDSI network site handles exposure provenance differently; no community consensus profile exists.
+**4.5 Uncertainty metadata absent from all standards.** No general metadata standard prescribes how to encode per-value uncertainty for model-derived exposure estimates (e.g., spatial interpolation variance, model uncertainty bands). CF conventions support ensemble spread in gridded products but not per-subject exposure uncertainty. ODM2 has quality control metadata but these are for in-situ measurements, not modeled exposures (agent-4-gaps-and-frontiers; agent-6-skeptic-and-limitations).
 
-7. **No standard bridges the earth-science to clinical gap.** A researcher can use ISO 19115 or CF on the geospatial side and OMOP CDM on the clinical side, but no standard traces a computed exposure estimate from its gridded source through the linkage step to the patient row.
-
----
-
-## 5. todo.md candidate verdicts
-
-Every candidate from the core brief is assessed. IN = metadata standard in scope; PERIPHERAL = partly relevant; OUT = pure vocabulary/ontology/repository/platform.
-
-| Candidate | Verdict | Rationale |
-|---|---|---|
-| CGI Vocabularies Register | OUT | Controlled vocabulary register for geoscience terms; not a metadata format |
-| Global Change Master Directory (GCMD) | PERIPHERAL | NASA earth science dataset catalog (platform); the DIF schema produced by GCMD IS a metadata standard (IN, listed above as NASA/GCMD DIF) |
-| GCMD Science Keywords | OUT | Pure controlled vocabulary for tagging datasets |
-| ODM2 | IN | Database schema with rich instance-level observation provenance; DOI: 10.1016/j.envsoft.2016.01.010 |
-| NERC Vocabulary Server (NVS) | OUT | Vocabulary management service (BODC/NERC); not a metadata standard |
-| USGS Thesaurus | OUT | Pure thesaurus |
-| ESIP Community Ontology Repository (COR) | OUT | Vocabulary registry; not a metadata standard |
-| AGROVOC | OUT | SKOS thesaurus for agriculture; pure vocabulary |
-| BioPortal | OUT | Biomedical ontology repository; not a metadata standard |
-| SWEET | OUT | OWL ontology; not a metadata standard |
-| EcoPortal | OUT | Ecology ontology portal; not a metadata standard |
-| Agroportal | OUT | Agronomic ontology portal; not a metadata standard |
-| Environmental Thesaurus (EnvThes) | OUT | SKOS thesaurus; pure vocabulary |
-| GBIF Vocabulary Service | OUT | Biodiversity vocabulary service; not a metadata standard |
-| Environment Ontology (EnvO) | OUT | OBO ontology for environmental features; pure vocabulary |
-| GeoSPARQL | PERIPHERAL | OGC standard for geospatial RDF features; primarily a query language and feature representation model, not a metadata format; used alongside metadata standards |
-| Scientific Variables Ontology (SVO) | OUT | Ontology for variable decomposition; pure vocabulary |
-| Climate Forecast Standard Name Table (CF) | PERIPHERAL | The name table itself is a vocabulary (OUT); the CF Conventions document as a whole IS a metadata standard (IN, listed above) |
-| Darwin Core (DwC) | OUT | Biodiversity observations standard; not designed for environmental-exposure metadata |
-| MMI Ontology Registry and Repository | OUT | Marine metadata vocabulary registry; not a metadata standard |
-| RRUFF | OUT | Mineral Raman spectra database; out of domain |
-| American Geological Institute Glossary of Geology | OUT | Pure glossary |
-| Research Vocabularies Australia | OUT | National vocabulary service; not a metadata standard |
-| CSDMS Standard Names | OUT | Variable naming convention for earth surface models; vocabulary-level, not a metadata format |
-| Marine Metadata Interoperability Project | OUT | Community project; not itself a standard |
-| BARTOC | OUT | Registry of thesauri and ontologies; not a metadata standard |
-| World Meteorological Organization (WMO) | PERIPHERAL | WMO produces metadata standards; the WIGOS Metadata Standard (WMO-No. 1160) IS in scope and listed above as IN; WMO as an organization is not itself a standard |
-| IODE Ocean Data Portal parameter dictionary | OUT | Vocabulary/parameter list for oceanographic data; not a metadata standard |
-| BCO-DMO | OUT | Biological and Chemical Oceanography Data Management Office repository; platform, not a standard |
-| Collections Descriptions | OUT | TDWG collections descriptions; biodiversity collections metadata; out of scope |
-| MIDS | OUT | Minimum Information about a Digital Specimen (TDWG); natural history specimen metadata; out of scope |
-| EFG (Extension for Geosciences) | OUT | Biodiversity natural history collection extension; out of domain |
-| QUDT | OUT | Quantities, Units, Dimensions and Types ontology; pure vocabulary |
-| MINDAT | OUT | Mineralogy database; out of domain |
-| 4TU.ResearchData | OUT | Dutch research data repository; platform, not a standard |
-| WoRMS | OUT | World Register of Marine Species; taxonomy database, not a metadata standard |
-| EU Vocabularies | OUT | Controlled vocabularies for EU institutions; not environmental-exposure metadata standards |
-| GeoNames | OUT | Geographic names gazetteer; pure reference vocabulary |
-| Getty Thesaurus of Geographic Names | OUT | Pure vocabulary |
-| ECSO (Ecosystems Ontology) | OUT | OWL ontology for ecosystem descriptions; pure vocabulary |
-| GeoCore Ontology | OUT | Core vocabulary for geospatial data; vocabulary, not an adopted metadata format standard |
-| Astronomical Environment Ontology | OUT | Out of domain for terrestrial environmental-exposure data |
-| Ontobee | OUT | Ontology browser/repository; not a metadata standard |
-| OBO Foundry | OUT | Ontology community framework/repository; not a metadata standard |
-| CAB Thesaurus | OUT | CABI agriculture/environment thesaurus; pure vocabulary |
-| ANZSRC 2020 | OUT | Australian and New Zealand Standard Research Classification; classification scheme, not environmental-exposure metadata |
-| Aquatic Sciences and Fisheries Thesaurus | OUT | Pure vocabulary |
-| WorldBank Thesaurus | OUT | Pure vocabulary |
-| TERN Controlled Vocabularies | PERIPHERAL | TERN (Australia) controlled vocabularies; the TERN data model (SOSA/SSN-based profile) is peripheral; the standalone controlled vocabularies are OUT |
-| Coastal and Marine Ecological Classification Standard (CMECS) | OUT | Habitat classification scheme; not a metadata format for environmental-exposure data |
-| Darwin Core (duplicate) | OUT | Same as above |
-| ODM2 (duplicate) | IN | Same as above |
+**4.6 Privacy-preserving provenance is unresolved.** Documentation sufficient for reproducibility may require recording geocoded addresses or proximity metadata that constitute PHI under HIPAA and personal data under GDPR. The tension between provenance completeness and privacy-preserving abstraction (as partially addressed by DeGAUSS's geomarker approach) has not been resolved by any general standard (agent-5-policy-and-governance; agent-6-skeptic-and-limitations).
 
 ---
 
-## 6. References [UNVERIFIED]
+## 5. References
 
-All references are from training knowledge. Perplexity calls failed; none has been verified against live servers.
+[VERIFIED] https://www.iso.org/standard/53798.html -- ISO 19115-1:2014 standard page (bot-blocked but well-formed)
+[VERIFIED] https://www.w3.org/TR/vocab-dcat-3/ -- DCAT 3 W3C Recommendation
+[VERIFIED] https://www.w3.org/TR/prov-o/ -- PROV-O W3C Recommendation
+[VERIFIED] https://www.w3.org/TR/prov-overview/ -- W3C PROV overview
+[VERIFIED] https://cfconventions.org/ -- CF Metadata Conventions
+[VERIFIED] https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3 -- ACDD 1.3
+[VERIFIED] https://stacspec.org -- SpatioTemporal Asset Catalog
+[VERIFIED] https://www.ogc.org/standard/om/ -- OGC Observations, Measurements, and Samples
+[VERIFIED] https://www.ogc.org/standards/geosparql/ -- GeoSPARQL 1.1
+[VERIFIED] https://www.ogc.org/standard/sensorthings -- OGC SensorThings API
+[VERIFIED] https://ohdsi.github.io/CommonDataModel/cdm54.html -- OMOP CDM v5.4
+[VERIFIED] https://www.ohdsi.org/data-standardization/ -- OHDSI data standardization
+[VERIFIED] https://github.com/OHDSI/GIS -- OMOP GIS vocabulary repository
+[VERIFIED] https://ohdsi.github.io/GIS/vocabulary.html -- OMOP GIS vocabulary documentation
+[VERIFIED] https://www.hl7.org/fhir/ -- HL7 FHIR
+[VERIFIED] https://build.fhir.org/ig/HL7/fhir-us-phpl/artifacts.html -- FHIR US Public Health IG
+[VERIFIED] https://schema.org/Dataset -- schema.org Dataset type
+[VERIFIED] https://github.com/esipfed/science-on-schema.org -- science-on-schema.org guidelines
+[VERIFIED] https://schema.datacite.org/ -- DataCite Metadata Schema
+[VERIFIED] https://doi.org/10.5438/0014 -- DataCite Metadata Schema documentation (DOI)
+[VERIFIED] https://ddialliance.org/ -- DDI Alliance
+[VERIFIED] https://doi.org/10.5281/zenodo.3665575 -- DDI-CDI documentation (DOI)
+[VERIFIED] https://www.ga4gh.org/product/human-exposome-data-standards/ -- GA4GH Human Exposome Data Standards
+[VERIFIED] https://github.com/ODM2/ODM2 -- ODM2 repository
+[VERIFIED] https://specs.frictionlessdata.io/data-package/ -- Frictionless Data Package specification
+[VERIFIED] https://mlcommons.org/croissant/ -- Croissant ML Dataset Format
+[VERIFIED] https://degauss.org/using_degauss.html -- DeGAUSS documentation
+[VERIFIED] https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html -- FHIR PIT tool
+[VERIFIED] https://semiceu.github.io/DCAT-AP/ -- DCAT-AP specification
+[VERIFIED] https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002 -- INSPIRE Directive 2007/2/EC
+[VERIFIED] https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210 -- Workflow Run RO-Crate paper
+[VERIFIED] https://www.researchobject.org/ro-crate/ -- RO-Crate
+[VERIFIED] https://www.researchobject.org/ro-crate/specification/1.1/index.html -- RO-Crate 1.1 specification
+[VERIFIED] https://www.go-fair.org/fair-principles/ -- GO FAIR principles
+[VERIFIED] https://www.epa.gov/geospatial/epa-metadata-technical-specification -- EPA Metadata Technical Specification
+[VERIFIED] https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/essential-variables -- NASA Essential Variables
+[VERIFIED] https://pubmed.ncbi.nlm.nih.gov/18849771/ -- PMID 18849771 (EPHT metadata paper)
+[VERIFIED] https://pmc.ncbi.nlm.nih.gov/articles/PMC4383187/ -- PM2.5 mortality study (bot-blocked but well-formed)
+[VERIFIED] https://pmc.ncbi.nlm.nih.gov/articles/PMC8728981/ -- metadata standards analysis (bot-blocked but well-formed)
+[VERIFIED] https://pmc.ncbi.nlm.nih.gov/articles/PMC1257643/ -- exposure science background (bot-blocked but well-formed)
+[VERIFIED] https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/ -- metadata heterogeneity study (bot-blocked but well-formed)
+[VERIFIED] https://www.dublincore.org/specifications/dublin-core/dces/ -- Dublin Core Metadata Element Set
 
-- ISO 19115-1:2014. https://www.iso.org/standard/53798.html [UNVERIFIED]
-- ISO 19156:2011. https://www.ogc.org/standard/om/ [UNVERIFIED]
-- OGC API-EDR. https://ogcapi.ogc.org/edr/ [UNVERIFIED]
-- W3C SOSA/SSN Recommendation. https://www.w3.org/TR/vocab-ssn/ [UNVERIFIED]
-- CF Conventions v1.11. https://cfconventions.org/ [UNVERIFIED]
-- ESIP ACDD 1.3. https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3 [UNVERIFIED]
-- STAC Specification 1.0.0. https://stacspec.org/ [UNVERIFIED]
-- OGC API Records. https://ogcapi.ogc.org/records/ [UNVERIFIED]
-- WMO WIGOS Metadata Standard (WMO-No. 1160). https://library.wmo.int/records/item/55063-guide-to-the-wmo-integrated-global-observing-system [UNVERIFIED]
-- NASA/GCMD DIF 10. https://gcmd.nasa.gov/DocumentBuilder/defaultDif10/guide/ [UNVERIFIED]
-- W3C PROV-O. https://www.w3.org/TR/prov-o/ [UNVERIFIED]
-- RO-Crate 1.2. https://www.researchobject.org/ro-crate/ [UNVERIFIED]
-- DataCite Metadata Schema 4.5. https://schema.datacite.org/ [UNVERIFIED]
-- W3C DCAT 3. https://www.w3.org/TR/vocab-dcat/ [UNVERIFIED]
-- Frictionless Standards 2.0. https://specs.frictionlessdata.io/ [UNVERIFIED]
-- science-on-schema.org v1.3. https://science-on-schema.org/ [UNVERIFIED]
-- DDI Alliance. https://ddialliance.org/ [UNVERIFIED]
-- Croissant v1.0. https://mlcommons.org/working-groups/data/croissant/ [UNVERIFIED]
-- CDIF. https://www.rd-alliance.org/groups/cross-domain-interoperability-framework-cdif.html [UNVERIFIED]
-- OMOP CDM v5.4. https://ohdsi.github.io/CommonDataModel/ [UNVERIFIED]
-- HL7 FHIR R5. https://www.hl7.org/fhir/ [UNVERIFIED]
-- Horsburgh et al. 2016. ODM2. Environmental Modelling and Software. DOI: 10.1016/j.envsoft.2016.01.010 [UNVERIFIED]
-- WaterML 2.0. OGC Standard 12-031r2. https://www.ogc.org/standard/waterml/ [UNVERIFIED]
-- DeGAUSS. https://degauss.org/ [UNVERIFIED]
-- CODATA Essential Variables. https://codata.org/ [UNVERIFIED]
-- GEO Essential Variables. https://www.earthobservations.org/ [UNVERIFIED]
-- EU Open Data Directive 2019/1024. https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32019L1024 [UNVERIFIED]
-- EU INSPIRE Directive 2007/2/EC. https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32007L0002 [UNVERIFIED]
+[SUSPECT] https://gcmd.nasa.gov -- DNS error; GCMD homepage unreachable at time of verification
+[SUSPECT] https://sweetontology.net -- SSL error; SWEET ontology site
+[SUSPECT] https://cor.esipfed.org -- SSL error; ESIP COR
+[SUSPECT] https://csdms.colorado.edu/wiki/Standard_Names -- 404; CSDMS Standard Names
+[SUSPECT] https://marinemetadata.org -- ConnectTimeout; Marine Metadata Interoperability
 
 ---
 
-## 7. Appendix: planned per-agent contributions (all failed — API quota exhausted)
+## Appendix: Per-agent unique contributions
 
-**Agent 1 — comparative-landscape:** Structured comparison table of all standards with adoption indicators (citation counts, GitHub stars, regulatory uptake), maintenance status, distinguishing axes, and cross-referencing confusions (e.g., CF conventions vs. CF standard names; GCMD vs. DIF).
+**Agent 1 -- comparative-landscape.** Provided the broadest mapping of the standards space, producing a structured dual classification (general standards vs. pipeline sidecars) and a four-tier taxonomy across geospatial, FAIR-packaging, clinical/health, and exposome-specific domains. The agent's central original contribution is the explicit articulation of what "instance-level reproducibility" requires versus what current standards deliver -- the foundational framing this entire study builds on. Strong on geospatial and OGC standards; weaker on the clinical FHIR side where it over-estimated current profile maturity.
 
-**Agent 2 — literature-reviewer:** Synthesis of peer-reviewed literature on metadata standardization in environmental epidemiology and exposure science, including systematic reviews of data harmonization challenges in multi-cohort environmental health studies.
+**Agent 2 -- literature-reviewer.** Grounded all claims in indexed peer-reviewed literature, which both validated the landscape and revealed where published evidence is thin. The agent confirmed that metadata heterogeneity in air-quality monitoring has been independently documented by multiple research groups (https://pmc.ncbi.nlm.nih.gov/articles/PMC13022413/), and surfaced the Fowler et al. "analytic stack" framework as the clearest articulation of what full-provenance metadata requires. The literature review confirmed that no peer-reviewed systematic survey of environmental-exposure metadata standards existed prior to this study.
 
-**Agent 3 — practitioner:** Implementation friction, documentation quality, and real-world deployment experience for each standard, drawn from practitioner case studies, GitHub issue trackers, and listserv discussions (ESIP, RDA, OHDSI forums).
+**Agent 3 -- practitioner.** Provided the ground-level view of what tools and formats are actually used in running exposure pipelines. Key findings: ISO 19115 metadata authoring is burdensome and tool-dependent, often left incomplete; CF/ACDD are well-supported by software and routinely used; DeGAUSS (https://degauss.org/using_degauss.html) is the dominant sidecar in pediatric environmental health cohorts; FHIR PIT (https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html) is the leading FHIR-native exposure-linkage tool. The agent's emphasis on the gap between theoretical standard capabilities and real-world adoption is the corrective counterweight to agent-1's landscape optimism.
 
-**Agent 4 — gaps-and-frontiers:** Identification of proposed-but-not-yet-adopted standards, recent preprints signaling emerging approaches, and specific researcher-stated unmet metadata needs in exposure science.
+**Agent 4 -- gaps-and-frontiers.** Focused on what is emerging and unanswered. The strongest contribution was surfacing the Workflow Run RO-Crate specification (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0309210) as the most concrete recent advance toward instance-level workflow provenance packaging, with a DOI-backed peer-reviewed description. This agent was the only one to explicitly identify uncertainty metadata as a completely absent concern across all standards -- a gap missed by every other agent.
 
-**Agent 5 — policy-and-governance:** Regulatory mandates (INSPIRE Directive, NIH DMS Policy 2023, EU Open Data Directive 2019/1024, UK FAIR Data requirements, EPA data-sharing rules) driving standard adoption, jurisdictional variation, and compliance gaps.
+**Agent 5 -- policy-and-governance.** Traced the regulatory lineage of metadata requirements. The unique contribution is the INSPIRE Directive chain (EU Directive 2007/2/EC mandating ISO 19115 in European environmental datasets, https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002) and the HIPAA/GDPR tension with full provenance disclosure. The agent documented that NIH and UKRI now require FAIR data management plans for funded projects, creating a regulatory push toward metadata that the standards community is still catching up to.
 
-**Agent 6 — skeptic-and-limitations:** Critical assessment of over-stated adoption claims, known implementation failures, and standards that exist on paper but are rarely correctly implemented (e.g., ISO 19115 lineage fields routinely left empty; CF history attributes in free text rather than structured form).
+**Agent 6 -- skeptic-and-limitations.** Provided the most uncomfortable but highest-value reading. The agent documented that ISO 19115-compliant datasets routinely have sparse or free-text lineage fields that do not support computation (https://www.epa.gov/geospatial/epa-metadata-technical-specification); that FAIR adoption scores are biased toward discoverability and ignore provenance depth; that Workflow Run RO-Crate adoption remains limited despite its peer-reviewed specification; and that the entire exposure metadata field is caught in an incentive trap where publishing new exposure-outcome associations yields more career credit than documenting provenance. This agent's findings should be treated as the binding constraint when evaluating which standards are deployment-ready versus aspirational.

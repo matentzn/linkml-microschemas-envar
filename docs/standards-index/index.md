@@ -13,15 +13,20 @@ A survey of approaches that record *metadata about environmental-exposure data* 
 | [Croissant](https://mlcommons.org/croissant/) | dataset | define | conceptual | partial | peripheral | Overlaps source_dataset and data_layout for ML training use of exposure datasets; complementary but ML-focused. |
 | [DataCite Metadata Schema](https://schema.datacite.org/) | dataset | cite | discovery | partial | peripheral | Overlaps deposit_metadata and source_dataset citation; complementary — DataCite DOI is the persistent identifier for upstream products an EnVar sidecar documents. |
 | [DCAT](https://www.w3.org/TR/vocab-dcat-3/) | dataset | find | discovery | absent | in_scope | Overlaps source_dataset discovery; complementary, operates at dataset layer not instance layer. |
+| [DCAT-AP](https://semiceu.github.io/DCAT-AP/) | dataset | find | discovery | absent | peripheral | Overlaps source_dataset discovery; complementary — European environmental datasets documented with an EnVar sidecar would use DCAT-AP for portal interoperability. |
 | [DDI](https://ddialliance.org/) | variable_type | define | conceptual | partial | peripheral | Overlaps variable_identity at study/variable level; complementary — DDI variable metadata maps to EnVar VariableIdentity for survey-linked exposure assessments. |
+| [Dublin Core](https://www.dublincore.org/specifications/dublin-core/dces/) | dataset | find | discovery | absent | peripheral | Overlaps source_dataset at minimum-metadata level; complementary — Dublin Core elements (title, creator, date, subject) are typically inherited by the richer standards EnVar targets. |
 | [Frictionless Data Package](https://specs.frictionlessdata.io/) | file | define | conceptual | absent | peripheral | Overlaps data_layout for CSV/tabular exposure outputs; complementary — could describe the companion data file that an EnVar sidecar annotates. |
+| [GA4GH Human Exposome Data Standards](https://www.ga4gh.org/product/human-exposome-data-standards/) | dataset | define | conceptual | absent | in_scope | Directly overlaps variable_identity and health_layer_linkage for genomics-linked exposure studies; complementary — EnVar could serve as a domain profile within a future GA4GH exposome framework. |
 | [NASA/GCMD DIF](https://www.earthdata.nasa.gov/about/esdis/esco/standards-practices/directory-interchange-format-standard) | dataset | find | discovery | partial | peripheral | Overlaps source_dataset for NASA-hosted exposure products; complementary — DIF records discovery metadata for datasets whose EnVar sidecar provides instance-level detail. |
 | [GeoSPARQL](https://www.ogc.org/standard/geosparql/) | produced_value | define | conceptual | absent | peripheral | Overlaps spatial_reference for Linked Data encoding; complementary — GeoSPARQL geo:hasGeometry carries the geometry referenced by EnVar SpatialReference. |
 | [HL7 FHIR](https://www.hl7.org/fhir/) | geocoded_row | define | linkage | partial | peripheral | Overlaps health_layer_linkage at the clinical record level; complementary — FHIR can receive exposure values from an EnVar-documented pipeline. |
+| [INSPIRE Directive](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32007L0002) | dataset | find | discovery | partial | peripheral | Overlaps source_dataset (ISO 19115 compliance requirement); complementary — European exposure datasets used by EnVar-documented pipelines must satisfy INSPIRE metadata requirements. |
 | [ISO 19115](https://www.iso.org/standard/53798.html) | dataset | find | discovery | partial | in_scope | Overlaps source_dataset and spatial_reference; complementary at dataset layer, silent at instance/linkage levels. |
 | [OGC Observations, Measurements, and Samples](https://www.ogc.org/standard/om/) | produced_value | define | instance | partial | in_scope | Overlaps variable_identity, spatial_reference, temporal_reference, and exposure_model; complementary — closest general standard to EnVar's instance-level observation model. |
 | [ODM2](http://www.odm2.org/) | produced_value | reproduce_pool | instance | carried | in_scope | Overlaps variable_identity, exposure_model, uncertainty, and tool_run; most competitive standard with EnVar for in-situ data; EnVar extends scope to gridded/modeled exposures and health linkage. |
 | [OGC API Records](https://ogcapi.ogc.org/records/) | dataset | find | discovery | absent | in_scope | Overlaps source_dataset discovery; complementary — OGC API Records surfaces datasets whose instance-level detail is captured in an EnVar sidecar. |
+| [OGC SensorThings API](https://www.ogc.org/standard/sensorthings) | produced_value | define | instance | partial | in_scope | Overlaps variable_identity, spatial_reference, and temporal_reference at observation level; complementary — SensorThings endpoints could serve as upstream data sources documented in EnVar source_dataset. |
 | [OMOP CDM](https://ohdsi.github.io/CommonDataModel/) | geocoded_row | reproduce_pool | linkage | partial | in_scope | Directly overlaps health_layer_linkage and deposit_metadata; EnVar health_layer_linkage.target_cdm targets OMOP; competing at schema level but complementary as output consumer. |
 | [PROV-O](https://www.w3.org/TR/prov-o/) | produced_value | reproduce_pool | instance | carried | in_scope | Directly overlaps provenance_chain and tool_run; complementary — EnVar ProvenanceChain is a domain-constrained PROV-O profile. |
 | [RO-Crate](https://www.researchobject.org/ro-crate/specification.html) | file | reproduce_pool | instance | carried | in_scope | Overlaps tool_run and provenance_chain; complementary — RO-Crate WorkflowRun profile is the closest existing standard to EnVar's reproducibility intent at file/package level. |
@@ -36,6 +41,7 @@ A survey of approaches that record *metadata about environmental-exposure data* 
 | Standard | Unit | Purpose | Layer | Derivation? | Relevance | EnVar relation |
 | --- | --- | --- | --- | --- | --- | --- |
 | [DeGAUSS](https://degauss.org/) | geocoded_row | reproduce_pool | linkage | carried | in_scope | Directly overlaps linkage_method and health_layer_linkage; DeGAUSS container invocation metadata is the primary reference implementation for EnVar LinkageMethod in pediatric cohort studies. |
+| [FHIR PIT](https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html) | geocoded_row | reproduce_pool | linkage | carried | in_scope | Directly overlaps linkage_method and health_layer_linkage for FHIR-based clinical data; complementary — FHIR PIT invocation metadata is the primary reference implementation for EnVar LinkageMethod in FHIR-based EHR cohorts. |
 | [gridMET / Daymet / PRISM sidecars](https://www.climatologylab.org/gridmet.html) | file | reproduce_pool | instance | partial | peripheral | The gap that EnVar source_dataset and tool_run are designed to replace; competing in intent, complementary until EnVar adoption grows. |
 
 ## Reconciliation with the niehs inventory
@@ -59,15 +65,21 @@ A survey of approaches that record *metadata about environmental-exposure data* 
 | DDI | new |  |
 | Croissant | new |  |
 | CDIF | new |  |
-| OMOP CDM | new |  |
+| OMOP CDM | already_catalogued | surveys/study-env-exposure-metadata-standards/deep-research/agent-1-comparative-landscape.md |
 | HL7 FHIR | new |  |
 | ODM2 | new |  |
 | WaterML 2.0 | new |  |
 | CODATA / GEO Essential Variables | new |  |
 | NASA/GCMD DIF | new |  |
 | GeoSPARQL | new |  |
-| DeGAUSS | new |  |
+| DeGAUSS | already_catalogued | surveys/study-env-exposure-metadata-standards/deep-research/agent-3-practitioner.md |
 | gridMET / Daymet / PRISM sidecars | new |  |
+| GA4GH Human Exposome Data Standards | new |  |
+| OGC SensorThings API | new |  |
+| DCAT-AP | new |  |
+| Dublin Core | new |  |
+| FHIR PIT | new |  |
+| INSPIRE Directive | new |  |
 
 ## Triaged out
 

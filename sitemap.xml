@@ -2,1230 +2,1226 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/about/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/architecture/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/related-approaches/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/reverse-gap-survey/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/AnyValue/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/CodedValue/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DailyMaxTemperatureRecord/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DailyMinTemperatureRecord/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DataLayout/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DepositMetadata/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DerivedHeatMetric/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/EnvironmentalExposureRecord/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/EquationInput/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ExposureModel/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ExtremeHeatDayFlagRecord/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/HealthLayerLinkage/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/LinkageMethod/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/MicroschemaDefinition/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ModelAggregateUncertainty/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ProvenanceChain/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/Quantity/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/SourceDataset/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/SpatialReference/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/TemporalReference/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/TimeInterval/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/Timepoint/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ToolRun/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/Uncertainty/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ValueMicroschemaDefinition/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/VariableIdentity/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/WetBulbGlobeTemperatureOutdoorRecord/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/AddressPeriodAlignmentEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/BiasCorrectionAppliedEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/BufferAggregationEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/CalendarEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/ClinicalDateAssignmentEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/ComparatorEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/ConceptStatusEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/DataTypeEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/DayBoundaryConventionEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/DepositRepositoryEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/EquationVariantEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/ExposureModelTypeEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/ExtractionMethodEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/GeocodingPrecisionEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/HealthLayerTargetEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/HeatMetricFamilyEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/HeatWaveThresholdDefinitionEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/HomogenisationStatusEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/IndoorOutdoorEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/LagAlignmentEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/LinkageStrategyEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/MissingDataHandlingEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/MissingReasonEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/PartialDayAttributionEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/PhiStatusEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/ProvenanceChainTerminusEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/SolarRadiationBasisEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/SourceNativeFormatEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/TableOrientationEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/TargetGeographyTypeEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/TemporalAggregationMethodEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/TemporalResolutionEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/enums/UncertaintyTypeEnum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/schemas/linkml-microschemas-envar/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/address_period_alignment/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/bias_correction_applied/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/bias_correction_applied_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/calendar/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/cf_cell_methods/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/chain_compatibility_assertions/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/clinical_date_assignment_convention/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/clinical_date_assignment_convention_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/code/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/code_label/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/code_system/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/cohort_size_anchored/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/cohort_size_anchored_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/comparator/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/concept_mappings/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/concept_status/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/container_image_digest/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/container_image_digest_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/container_image_repository/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/container_image_repository_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/crs/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/cv_r2/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/cv_rmse/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/data_completeness_pct/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/data_completeness_pct_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/data_layout/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/dataset_and_provenance/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/datetime/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/day_boundary_convention/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/dcat_distribution_url/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/dcat_distribution_url_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_doi/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_doi_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_license_spdx/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_metadata/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_redistribution_constraints_inherited/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_repository/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/deposit_repository_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/derived_heat_metric/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/domain_of_use/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/duration/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/equation_inputs/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/equation_validity_range/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/equation_validity_range_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/equation_variant/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/equation_variant_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_description/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_cross_validation_r2/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_cross_validation_r2_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_ensemble_member_count/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_ensemble_member_count_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_inputs/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_known_biases/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_paper_doi/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_paper_doi_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/exposure_model_type/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/extraction_buffer_m/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/extraction_buffer_m_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/extraction_method/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/extraction_window_end/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/extraction_window_start/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/geocoding_precision_propagated/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/geocoding_score_propagated/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/geocoding_score_propagated_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/health_data_integration/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/health_layer_link_field/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/health_layer_linkage/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/health_layer_target/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/heat_metric_family/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/heat_wave_min_consecutive_days/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/heat_wave_min_consecutive_days_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/heat_wave_threshold_definition/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/heat_wave_threshold_definition_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/heat_wave_threshold_specifier/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/indoor_outdoor/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/input_file_sha256/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/input_provenance_id/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/input_role/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/input_row_count/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/input_source_short_code/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/interval_end/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/interval_start/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/lag_alignment_applied/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/lag_alignment_applied_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/lag_alignment_specifier/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_buffer_aggregation_method/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_buffer_aggregation_method_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_buffer_radius_m/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_buffer_radius_m_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_max_distance_to_station_m/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_max_distance_to_station_m_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_method/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_strategy/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/linkage_working_crs/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/location/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/methodology/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/metric_temporal_aggregation_rule/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/metric_temporal_aggregation_rule_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/missing_data_handling_method/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/missing_data_handling_method_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/missing_value_sentinel/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/model_aggregate_uncertainty/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/model_aggregate_uncertainty_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_spatial_resolution_descriptor/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_spatial_resolution_m/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_units_ucum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_value_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_value_offset/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/native_value_scale_factor/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/observation_result/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/observation_type/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/offset/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/output_file_sha256/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/output_row_count/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/partial_day_attribution_rule/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/partial_day_attribution_rule_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/per_value_uncertainty_type/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/per_value_uncertainty_type_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/per_value_uncertainty_units_ucum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/per_value_uncertainty_units_ucum_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_geographic_scope/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_geographic_scope_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_period_end/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_period_end_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_period_start/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_period_start_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_seasonal_window/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/percentile_reference_seasonal_window_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/phi_status/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/population_weighting_source/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/population_weighting_source_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/profile_version/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/provenance_chain/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/provenance_chain_steps/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/provenance_chain_terminus_type/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/provenance_id/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/quality_flag_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/quality_flag_column_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/quality_flag_vocabulary/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/quality_flag_vocabulary_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/quantity_unit/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/quantity_value/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/recommended_citation/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/record_bookkeeping/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/relative_to_event/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/reported_in/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/run_arguments/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/run_duration_seconds/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/run_environment/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/run_log_excerpt/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/run_log_excerpt_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/run_timestamp_utc/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/schema_version/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/solar_radiation_basis/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/solar_radiation_basis_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_access_url/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_acdd_attributes/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_acdd_attributes_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_citation_apa/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_citation_bibtex/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_citation_bibtex_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_doi/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_doi_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_name/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_short_code/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_spatial_extent/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_temporal_coverage/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_dataset_version/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_homogenisation_status/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_homogenisation_status_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_license_spdx/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_native_format/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/source_producer_institution/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/spatial_extent_bbox/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/spatial_extent_descriptor/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/spatial_reference/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/standard_name/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/subject/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/subject_age/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/subject_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/table_orientation/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/target_concept_id/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/target_concept_id_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/target_concept_vocabulary/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/target_geography_type/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporal_aggregation_method/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporal_aggregation_window_seconds/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporal_coverage_end/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporal_coverage_start/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporal_reference/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporal_resolution/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/temporality/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/time_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/tool_description/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/tool_name/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/tool_run/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/tool_version/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/uncertainty/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/unit_conversion_formula/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/units_display/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/units_ucum/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/value_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/value_data_type/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/value_range_plausible_max/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/value_range_plausible_min/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/value_uncertainty_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/value_uncertainty_column_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/variable_column/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/variable_identity/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/variable_key/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/variable_label/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/variable_name/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/variable_specific_extensions/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/wind_speed_measurement_height_m/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/slots/wind_speed_measurement_height_m_missing_reason/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Boolean/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Curie/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Date/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/DateOrDatetime/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Datetime/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Decimal/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Double/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Float/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Integer/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Jsonpath/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Jsonpointer/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Ncname/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Nodeidentifier/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Objectidentifier/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Sparqlpath/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/String/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Time/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Uri/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/elements/types/Uriorcurie/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/slides/architecture-speaker-notes/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
     <url>
          <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/standards-index/</loc>
-         <lastmod>2026-07-04</lastmod>
-    </url>
-    <url>
-         <loc>https://monarch-initiative.github.io/linkml-microschemas-envar/superpowers/specs/2026-07-03-standard-coverage-design/</loc>
-         <lastmod>2026-07-04</lastmod>
+         <lastmod>2026-07-05</lastmod>
     </url>
 </urlset>

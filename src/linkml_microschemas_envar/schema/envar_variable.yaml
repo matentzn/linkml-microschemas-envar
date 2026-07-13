@@ -574,6 +574,22 @@ slots:
         Says what kind of value to expect: a decimal number that can take any
         value (like a temperature), a yes/no flag, or a category. Software
         needs this to know how to read and summarise the data correctly.
+      # First covered_by entry — the step-1 serialization spike of
+      # specs/2026-07-03-standard-coverage-design.md. One standard for now
+      # (omop_gaia); the full five-standard matrix follows once the generator
+      # pipeline is confirmed clean.
+      covered_by:
+        annotations:
+          omop_gaia:
+            annotations:
+              extent: full
+              status: verified
+              where: "gaia_catalog meta_etl_*.json qudt:dataType (numeric/float4)"
+              evidence: "examples/scenarios/standards/omop_gaia_daymet_tmax.yaml (value_data_type)"
+              note: >-
+                GAIA registers the attribute's numeric qudt:dataType at
+                dataset-registration time; the EnVar translation carries it
+                first-class as value_data_type.
   value_range_plausible_min:
     title: Plausible Minimum Value
     range: float

@@ -609,7 +609,7 @@
 
 
 <h1 id="enum-linkage-strategy-linkagestrategyenum">Enum: Linkage Strategy (LinkageStrategyEnum)</h1>
-<p><em>How a gridded value is attached to a patient location.</em></p>
+<p><em>The spatial rule used to read an environmental value out of the exposure surface (a grid, a monitoring network, or a set of administrative areas) and assign it to one patient at their location. This is the core geographic-join decision, and it trades spatial precision against robustness to location error: a point read is precise but breaks if the geocode is wrong, whereas an area or buffer read is coarser but more forgiving. Each value below names the companion fields it makes required.</em></p>
 <div>
 <p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/enum/LinkageStrategyEnum">envar:enum/LinkageStrategyEnum</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
@@ -625,27 +625,27 @@
 <tr>
 <td>point_extraction_at_residence</td>
 <td>None</td>
-<td>Extract value at the patient's residence coordinates</td>
+<td>Take the single value at the exact grid cell (or interpolated point) that con...</td>
 </tr>
 <tr>
 <td>buffer_aggregation_around_residence</td>
 <td>None</td>
-<td>Aggregate values within a buffer around the patient's residence</td>
+<td>Draw a circle of a fixed radius around the residence and summarise every valu...</td>
 </tr>
 <tr>
 <td>area_membership_residence_in_polygon</td>
 <td>None</td>
-<td>Membership of the patient's residence in a polygon (e</td>
+<td>Give the patient the value already attached to whichever administrative or se...</td>
 </tr>
 <tr>
 <td>nearest_station_with_max_distance</td>
 <td>None</td>
-<td>Use the nearest observing station, with a maximum allowed distance</td>
+<td>Use the reading from the closest monitoring station to the residence, but onl...</td>
 </tr>
 <tr>
 <td>population_weighted_area_to_residence</td>
 <td>None</td>
-<td>Population-weighted aggregation over an area surrounding the patient's reside...</td>
+<td>Combine the values over an area around the residence, but weight each part of...</td>
 </tr>
 </tbody>
 </table>
@@ -672,28 +672,57 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LinkageStrategyEnum</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">How a gridded value is attached to a patient location.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;The</span><span class="nv"> </span><span class="s">spatial</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">read</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">environmental</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">out</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">exposure</span>
+<span class="w">  </span><span class="s">surface</span><span class="nv"> </span><span class="s">(a</span><span class="nv"> </span><span class="s">grid,</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">monitoring</span><span class="nv"> </span><span class="s">network,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">set</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">administrative</span><span class="nv"> </span><span class="s">areas)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">assign</span>
+<span class="w">  </span><span class="s">it</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">patient</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">their</span><span class="nv"> </span><span class="s">location.</span><span class="nv"> </span><span class="s">This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">core</span><span class="nv"> </span><span class="s">geographic-join</span><span class="nv"> </span><span class="s">decision,</span>
+<span class="w">  </span><span class="s">and</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">trades</span><span class="nv"> </span><span class="s">spatial</span><span class="nv"> </span><span class="s">precision</span><span class="nv"> </span><span class="s">against</span><span class="nv"> </span><span class="s">robustness</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">location</span><span class="nv"> </span><span class="s">error:</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">point</span><span class="nv"> </span><span class="s">read</span>
+<span class="w">  </span><span class="s">is</span><span class="nv"> </span><span class="s">precise</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">breaks</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">geocode</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">wrong,</span><span class="nv"> </span><span class="s">whereas</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">area</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">buffer</span><span class="nv"> </span><span class="s">read</span><span class="nv"> </span><span class="s">is</span>
+<span class="w">  </span><span class="s">coarser</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">more</span><span class="nv"> </span><span class="s">forgiving.</span><span class="nv"> </span><span class="s">Each</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">below</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">companion</span><span class="nv"> </span><span class="s">fields</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">makes</span>
+<span class="w">  </span><span class="s">required.&#39;</span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Linkage Strategy</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">permissible_values</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">point_extraction_at_residence</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">point_extraction_at_residence</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Extract value at the patient&#39;s residence coordinates.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Take the single value at the exact grid cell (or interpolated point)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">that contains the patient&#39;s residence coordinates — one location in, one value</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">out. The simplest and most precise strategy when the residence geocode is accurate</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and the surface is fine-grained, but also the most sensitive to geocoding error,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">since a misplaced point reads the wrong cell.</span>
 <span class="w">  </span><span class="nt">buffer_aggregation_around_residence</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">buffer_aggregation_around_residence</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Aggregate values within a buffer around the patient&#39;s residence.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Draw a circle of a fixed radius around the residence and summarise</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">every value that falls inside it into one number. This deliberately blurs the</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exact point, smoothing over geocoding uncertainty and describing a neighbourhood</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">rather than a single spot, at the cost of flattening sharp local gradients.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Requires a buffer radius (`linkage_buffer_radius_m`) and a summary function</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(`linkage_buffer_aggregation_method`, e.g. mean or max).</span>
 <span class="w">  </span><span class="nt">area_membership_residence_in_polygon</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">area_membership_residence_in_polygon</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Membership of the patient&#39;s residence in a polygon (e.g. public water</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">system service area).</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Give the patient the value already attached to whichever administrative</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">or service-area polygon their residence falls in — for instance a census tract,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">a ZIP code, or a public water system&#39;s service area. Everyone inside the polygon</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">inherits its single value regardless of where in it they live. Appropriate when</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the exposure is genuinely defined at the area level (such as a regulated water</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">supply) rather than varying continuously across space. Requires a summary function</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(`linkage_buffer_aggregation_method`) stating how the polygon&#39;s value was derived.</span>
 <span class="w">  </span><span class="nt">nearest_station_with_max_distance</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nearest_station_with_max_distance</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Use the nearest observing station, with a maximum allowed distance.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Use the reading from the closest monitoring station to the residence,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">but only if that station lies within a stated maximum distance; past that cutoff</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">no value is assigned rather than trusting a far-off station. Typical for sparse</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">observing networks (air-quality or weather stations) where a distant station</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">is not representative of local conditions. Requires the distance cutoff (`linkage_max_distance_to_station_m`),</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">without which &quot;nearest&quot; is unbounded and the join is irreproducible.</span>
 <span class="w">  </span><span class="nt">population_weighted_area_to_residence</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">population_weighted_area_to_residence</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Population-weighted aggregation over an area surrounding the patient&#39;s</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">residence.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Combine the values over an area around the residence, but weight</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">each part of that area by how many people live there, so densely populated locations</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">count for more than empty ones. The result approximates the exposure of a typical</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">resident rather than a plain geographic average — useful when population is</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">unevenly spread across the area. Requires a summary function (`linkage_buffer_aggregation_method`)</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for how the weighted values were combined.</span>
 </code></pre></div>
 </details>
 </div>

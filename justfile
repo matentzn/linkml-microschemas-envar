@@ -106,7 +106,7 @@ clean: _wsl2_compat_check _clean_project
 # (render-schema-overview lives in project.justfile; it regenerates
 # docs/schema_overview.md and renders docs/overview/index.html)
 [group('model development')]
-site: gen-project gen-doc render-schema-overview gen-datasets-ledger
+site: gen-project gen-doc render-schema-overview gen-datasets-ledger standards-index
 
 # Deploy documentation site to Github Pages
 [group('deployment')]

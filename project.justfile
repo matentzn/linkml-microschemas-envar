@@ -8,7 +8,7 @@
 gen-schema-overview:
     uv run python scripts/gen_schema_overview.py
 
-# Render docs/schema_overview.md as a standalone HTML page (tmp/schema_overview.html)
+# Render docs/schema_overview.md as the standalone docs/overview/index.html page
 render-schema-overview: gen-schema-overview
     uv run python scripts/render_schema_overview_html.py
 

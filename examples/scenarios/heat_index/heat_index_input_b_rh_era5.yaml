@@ -35,7 +35,7 @@ temporal_reference:
   temporal_resolution: daily
   temporal_aggregation_method: mean                # <-- diverges from input A (maximum)
   temporal_aggregation_window_seconds: 86400
-  day_boundary_convention: utc                     # <-- diverges from input A (local_midnight)
+  day_boundary_convention: utc_midnight            # <-- diverges from input A (local_midnight)
   temporal_coverage_start: "1940-01-01"
   temporal_coverage_end: "2024-12-31"
   extraction_window_start: "2022-07-18"
@@ -83,9 +83,7 @@ provenance_chain:
     tool_version: "3.3.0"
     run_timestamp_utc: "2026-05-23T14:02:11Z"
 
-data_row:
-  subject: "cohort:phoenix_aki_2022"
-  date: "2022-07-19"
-  value: 18.0
-  unit: "%"
+subject: "cohort:phoenix_aki_2022"
+# Illustrative companion data-file row (values live in the batch sidecar, not
+# inline — see schema/README.md): date=2022-07-19  value=18.0  unit=%
 phi_status: no_phi

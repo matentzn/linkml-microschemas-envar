@@ -43,6 +43,7 @@ A survey of approaches that record *metadata about environmental-exposure data* 
 | [DeGAUSS](https://degauss.org/) | geocoded_row | reproduce_pool | linkage | carried | in_scope | Directly overlaps linkage_method and health_layer_linkage; DeGAUSS container invocation metadata is the primary reference implementation for EnVar LinkageMethod in pediatric cohort studies. |
 | [FHIR PIT](https://niehs.github.io/PCOR_bookdown_tools/chapter-fhir-pit.html) | geocoded_row | reproduce_pool | linkage | carried | in_scope | Directly overlaps linkage_method and health_layer_linkage for FHIR-based clinical data; complementary — FHIR PIT invocation metadata is the primary reference implementation for EnVar LinkageMethod in FHIR-based EHR cohorts. |
 | [gridMET / Daymet / PRISM sidecars](https://www.climatologylab.org/gridmet.html) | file | reproduce_pool | instance | partial | peripheral | The gap that EnVar source_dataset and tool_run are designed to replace; competing in intent, complementary until EnVar adoption grows. |
+| [PEGS GIS Exposure Codebook](https://doi.org/10.1038/s41597-026-07011-x) | variable_type | define | conceptual | carried | in_scope | Directly overlaps variable_identity, data_layout, source_dataset, spatial_reference, temporal_reference, and exposure_model at the cohort-codebook level; complementary — PEGS per-variable GIS documentation is a reference exemplar for EnVar's variable-level exposure record, not a competing general standard. |
 
 ## Reconciliation with the niehs inventory
 
@@ -74,6 +75,7 @@ A survey of approaches that record *metadata about environmental-exposure data* 
 | GeoSPARQL | new |  |
 | DeGAUSS | already_catalogued | projects_inventory.md §9.1 (DeGauss listed as primary geocoding tool) and §1.1 (DeGauss named in OHDSI GIS WG linkage method) |
 | gridMET / Daymet / PRISM sidecars | new |  |
+| PEGS GIS Exposure Codebook | new |  |
 | GA4GH Human Exposome Data Standards | already_catalogued | projects_inventory.md §10.3 (GA4GH Human Exposome Data Standards has a dedicated entry with architecture, Phenopackets linkage, and EnVar relevance notes) |
 | OGC SensorThings API | already_catalogued | projects_inventory.md §10.2 (OGC Health Domain WG explicitly lists SensorThings API in its standards suite) |
 | DCAT-AP | new |  |

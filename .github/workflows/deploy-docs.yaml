@@ -56,7 +56,14 @@ jobs:
       - name: Install dependencies
         run: uv sync --group dev --no-progress
 
-      - name: Generate schema documentation
-        run: |
-          just gen-doc
-          uv run mkdocs gh-deploy --force
+      - name: Generate schema docs and secondary pages
+        # Regenerate every generated page mkdocs serves so the deploy never ships
+        # stale committed HTML: schema element docs (gen-doc), the standalone
+        # schema-overview page (docs/overview/index.html), the datasets ledger
+        # (docs/datasets/index.html), and the standards index
+        # (docs/standards-index/index.md). Hand-authored docs/slides/*.html are
+        # not generated and need no step.
+        run: just gen-doc render-schema-overview gen-datasets-ledger standards-index
+
+      - name: Deploy to GitHub Pages
+        run: uv run mkdocs gh-deploy --force

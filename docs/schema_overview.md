@@ -540,15 +540,15 @@ How a gridded environmental value gets attached to a patient: the resolution of 
 
 ### Linkage Strategy
 
-How a gridded value is attached to a patient location.
+The spatial rule used to read an environmental value out of the exposure surface (a grid, a monitoring network, or a set of administrative areas) and assign it to one patient at their location. This is the core geographic-join decision, and it trades spatial precision against robustness to location error: a point read is precise but breaks if the geocode is wrong, whereas an area or buffer read is coarser but more forgiving. Each value below names the companion fields it makes required.
 
 | Value | Meaning |
 |---|---|
-| **point extraction at residence** | Extract value at the patient's residence coordinates. |
-| **buffer aggregation around residence** | Aggregate values within a buffer around the patient's residence. |
-| **area membership residence in polygon** | Membership of the patient's residence in a polygon (e.g. public water system service area). |
-| **nearest station with max distance** | Use the nearest observing station, with a maximum allowed distance. |
-| **population weighted area to residence** | Population-weighted aggregation over an area surrounding the patient's residence. |
+| **point extraction at residence** | Take the single value at the exact grid cell (or interpolated point) that contains the patient's residence coordinates — one location in, one value out. The simplest and most precise strategy when the residence geocode is accurate and the surface is fine-grained, but also the most sensitive to geocoding error, since a misplaced point reads the wrong cell. |
+| **buffer aggregation around residence** | Draw a circle of a fixed radius around the residence and summarise every value that falls inside it into one number. This deliberately blurs the exact point, smoothing over geocoding uncertainty and describing a neighbourhood rather than a single spot, at the cost of flattening sharp local gradients. Requires a buffer radius (`linkage_buffer_radius_m`) and a summary function (`linkage_buffer_aggregation_method`, e.g. mean or max). |
+| **area membership residence in polygon** | Give the patient the value already attached to whichever administrative or service-area polygon their residence falls in — for instance a census tract, a ZIP code, or a public water system's service area. Everyone inside the polygon inherits its single value regardless of where in it they live. Appropriate when the exposure is genuinely defined at the area level (such as a regulated water supply) rather than varying continuously across space. Requires a summary function (`linkage_buffer_aggregation_method`) stating how the polygon's value was derived. |
+| **nearest station with max distance** | Use the reading from the closest monitoring station to the residence, but only if that station lies within a stated maximum distance; past that cutoff no value is assigned rather than trusting a far-off station. Typical for sparse observing networks (air-quality or weather stations) where a distant station is not representative of local conditions. Requires the distance cutoff (`linkage_max_distance_to_station_m`), without which "nearest" is unbounded and the join is irreproducible. |
+| **population weighted area to residence** | Combine the values over an area around the residence, but weight each part of that area by how many people live there, so densely populated locations count for more than empty ones. The result approximates the exposure of a typical resident rather than a plain geographic average — useful when population is unevenly spread across the area. Requires a summary function (`linkage_buffer_aggregation_method`) for how the weighted values were combined. |
 
 ### Buffer Aggregation Method
 

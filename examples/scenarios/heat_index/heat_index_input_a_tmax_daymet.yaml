@@ -82,9 +82,7 @@ provenance_chain:
     tool_version: "3.3.0"
     run_timestamp_utc: "2026-05-23T14:02:11Z"
 
-data_row:
-  subject: "cohort:phoenix_aki_2022"
-  date: "2022-07-19"
-  value: 46.7
-  unit: Cel
+subject: "cohort:phoenix_aki_2022"
 phi_status: no_phi
+# Illustrative companion data-file row (values live in the batch sidecar, not
+# inline — see schema/README.md): date=2022-07-19  value=46.7  unit=Cel

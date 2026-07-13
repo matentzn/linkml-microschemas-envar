@@ -99,6 +99,31 @@ generator, fall back to flat annotation keys
 (`coverage_degauss_extent:`, `coverage_degauss_where:`, …). **Serialization is settled
 empirically, not guessed.**
 
+**Spike result (2026-07-12, `test_covered_by_reads_back_nested` in `tests/test_coverage.py`).**
+Settled. Two forms were tried on `value_data_type`:
+- A **plain nested dict** (`covered_by: {omop_gaia: {extent: full, …}}`) **fails at
+  SchemaView load**: LinkML coerces the annotation value into an `Annotation` and
+  rejects the sub-key (`Annotation.__init__() got an unexpected keyword argument
+  'omop_gaia'`). Do not use it.
+- LinkML's **native nested-annotation form** works end to end and is what we adopt:
+
+  ```yaml
+  covered_by:
+    annotations:
+      omop_gaia:
+        annotations:
+          extent: full
+          status: verified
+          where: "…"
+          evidence: "…"
+          note: "…"
+  ```
+
+  `just gen-project` stays clean across the whole pipeline (exit 0, no covered_by
+  errors), and the read-back path is
+  `slot.annotations["covered_by"].annotations["<id>"].annotations["<field>"].value`.
+  The flat-key fallback was **not** needed.
+
 ## 4. The generator — `coverage.py` (sibling to `checker.py`)
 
 Reuses `checker.py`'s slot-walk (every tier-annotated slot reachable from

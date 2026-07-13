@@ -531,6 +531,30 @@ entries:
     reconciliation: new
     source_candidates: []
 
+  - id: pegs-gis-codebook
+    name: PEGS GIS Exposure Codebook
+    full_name: "PEGS (Personalized Environment and Genes Study) geospatial exposure data dictionary — NIEHS Data Freeze"
+    standard_class: pipeline_sidecar
+    spec_url: https://doi.org/10.1038/s41597-026-07011-x
+    governance: NIEHS Clinical Research Branch / PEGS Executive Leadership Committee (single-project, controlled access)
+    unit_of_description: variable_type
+    primary_purpose: define
+    layer: conceptual
+    carries_derivation_metadata: carried
+    domain_specificity: env_health_specific
+    relevance: in_scope
+    relevance_reason: Variable-level data dictionary for ~29 residential-address-derived GIS exposure variables (air quality/PM2.5, EPA TRI emissions, proximity/road metrics, CDC/ATSDR SVI and EJI, MERRA-2 reanalysis), each documented with source dataset, units, spatial method, and temporal alignment; a concrete NIEHS-cohort exemplar of exactly the per-variable exposure metadata EnVar formalises.
+    envar_relation: Directly overlaps variable_identity, data_layout, source_dataset, spatial_reference, temporal_reference, and exposure_model at the cohort-codebook level; complementary — PEGS per-variable GIS documentation is a reference exemplar for EnVar's variable-level exposure record, not a competing general standard.
+    evidence:
+      - https://doi.org/10.1038/s41597-026-07011-x
+      - https://pmc.ncbi.nlm.nih.gov/articles/PMC13216552/
+      - https://www.niehs.nih.gov/research/atniehs/labs/crb/studies/pegs/collaboration/guidelines
+      - https://github.com/mellowish/PEGS-NIEHS
+    reconciliation: new
+    source_candidates:
+      - PEGS GIS Exposure Codebook
+    notes: "No standalone public 'GIS codebook' document exists; the geospatial exposure variables are documented in per-Data-Freeze data dictionaries and coding schemas delivered under a controlled-access Data Use Agreement, and described canonically in the 2026 Scientific Data descriptor (Akhtari et al., PMC13216552), Table 6. GIS computation scripts (ACAG PM2.5 raster joins, TRI, road density) are public at github.com/mellowish/PEGS-NIEHS. Data Freeze 3.1 (2023-06-27) current at descriptor publication."
+
   # ============================================================
   # Exposome-specific / emerging standards
   # ============================================================

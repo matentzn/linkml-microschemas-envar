@@ -30,12 +30,17 @@ SCHEMA_PATH = (
 )
 VALID_DIR = REPO_ROOT / "tests" / "data" / "valid"
 INVALID_DIR = REPO_ROOT / "tests" / "data" / "invalid"
+SCENARIOS_DIR = REPO_ROOT / "examples" / "scenarios"
 
 TARGET_CLASS = "EnvironmentalExposureRecord"
 
 
 def _example_files(directory: Path) -> list[Path]:
     return sorted(directory.glob(f"{TARGET_CLASS}-*.yaml"))
+
+
+def _yaml_files(directory: Path) -> list[Path]:
+    return sorted(directory.glob("*.yaml"))
 
 
 @pytest.fixture(scope="module")
@@ -177,6 +182,47 @@ def test_counter_examples_fail_validation(
 ) -> None:
     report = validate_file(counter_example, schema_view.schema, TARGET_CLASS)
     assert report.results, f"{counter_example.name} must FAIL validation but passed"
+
+
+@pytest.mark.parametrize(
+    "scenario", _yaml_files(SCENARIOS_DIR / "heat_index"), ids=lambda p: p.stem
+)
+def test_heat_index_scenarios_validate(schema_view: SchemaView, scenario: Path) -> None:
+    # The heat-index chain is a complete worked demo (derived metric + two
+    # upstream inputs), not a coverage counter-example — it must fully validate.
+    # It lives outside tests/data/valid, so this is its only guard against drift.
+    report = validate_file(scenario, schema_view.schema, TARGET_CLASS)
+    messages = [r.message for r in report.results]
+    assert not messages, f"{scenario.name} should validate but got: {messages}"
+
+
+@pytest.mark.parametrize(
+    "scenario", _yaml_files(SCENARIOS_DIR / "standards"), ids=lambda p: p.stem
+)
+def test_standards_scenarios_only_omit_required(
+    schema_view: SchemaView, scenario: Path
+) -> None:
+    """Standards translations may omit Core fields — but nothing else.
+
+    The standards comparison set (Amadeus / DeGAUSS / GAIA-OMOP) maps only what
+    each real pipeline emitted, so slots a pipeline does not supply are
+    deliberately absent and the record intentionally fails strict validation
+    (the datasets ledger shows this as each standard's true coverage). Full
+    validation is therefore the wrong guard. But every *other* kind of error —
+    a renamed enum value, an unknown property from a renamed slot, a type
+    mismatch — is real schema drift these files must still catch. So: allow
+    only ``is a required property`` errors; fail on anything else.
+    """
+    report = validate_file(scenario, schema_view.schema, TARGET_CLASS)
+    drift = [r.message for r in report.results if "is a required property" not in r.message]
+    assert not drift, f"{scenario.name} has non-omission schema drift: {drift}"
+
+
+def test_scenario_examples_exist() -> None:
+    # Guard against the silent-empty-directory failure mode: if the scenarios
+    # move or are renamed, the parametrized tests above would pass vacuously.
+    assert _yaml_files(SCENARIOS_DIR / "heat_index"), "no heat_index scenarios found"
+    assert _yaml_files(SCENARIOS_DIR / "standards"), "no standards scenarios found"
 
 
 def test_counter_examples_exist() -> None:

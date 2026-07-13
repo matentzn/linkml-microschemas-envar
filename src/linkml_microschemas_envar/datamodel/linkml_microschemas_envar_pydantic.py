@@ -587,27 +587,27 @@ class MissingDataHandlingEnum(str, Enum):
 
 class LinkageStrategyEnum(str, Enum):
     """
-    How a gridded value is attached to a patient location.
+    The spatial rule used to read an environmental value out of the exposure surface (a grid, a monitoring network, or a set of administrative areas) and assign it to one patient at their location. This is the core geographic-join decision, and it trades spatial precision against robustness to location error: a point read is precise but breaks if the geocode is wrong, whereas an area or buffer read is coarser but more forgiving. Each value below names the companion fields it makes required.
     """
     point_extraction_at_residence = "point_extraction_at_residence"
     """
-    Extract value at the patient's residence coordinates.
+    Take the single value at the exact grid cell (or interpolated point) that contains the patient's residence coordinates — one location in, one value out. The simplest and most precise strategy when the residence geocode is accurate and the surface is fine-grained, but also the most sensitive to geocoding error, since a misplaced point reads the wrong cell.
     """
     buffer_aggregation_around_residence = "buffer_aggregation_around_residence"
     """
-    Aggregate values within a buffer around the patient's residence.
+    Draw a circle of a fixed radius around the residence and summarise every value that falls inside it into one number. This deliberately blurs the exact point, smoothing over geocoding uncertainty and describing a neighbourhood rather than a single spot, at the cost of flattening sharp local gradients. Requires a buffer radius (`linkage_buffer_radius_m`) and a summary function (`linkage_buffer_aggregation_method`, e.g. mean or max).
     """
     area_membership_residence_in_polygon = "area_membership_residence_in_polygon"
     """
-    Membership of the patient's residence in a polygon (e.g. public water system service area).
+    Give the patient the value already attached to whichever administrative or service-area polygon their residence falls in — for instance a census tract, a ZIP code, or a public water system's service area. Everyone inside the polygon inherits its single value regardless of where in it they live. Appropriate when the exposure is genuinely defined at the area level (such as a regulated water supply) rather than varying continuously across space. Requires a summary function (`linkage_buffer_aggregation_method`) stating how the polygon's value was derived.
     """
     nearest_station_with_max_distance = "nearest_station_with_max_distance"
     """
-    Use the nearest observing station, with a maximum allowed distance.
+    Use the reading from the closest monitoring station to the residence, but only if that station lies within a stated maximum distance; past that cutoff no value is assigned rather than trusting a far-off station. Typical for sparse observing networks (air-quality or weather stations) where a distant station is not representative of local conditions. Requires the distance cutoff (`linkage_max_distance_to_station_m`), without which "nearest" is unbounded and the join is irreproducible.
     """
     population_weighted_area_to_residence = "population_weighted_area_to_residence"
     """
-    Population-weighted aggregation over an area surrounding the patient's residence.
+    Combine the values over an area around the residence, but weight each part of that area by how many people live there, so densely populated locations count for more than empty ones. The result approximates the exposure of a typical resident rather than a plain geographic average — useful when population is unevenly spread across the area. Requires a summary function (`linkage_buffer_aggregation_method`) for how the weighted values were combined.
     """
 
 
@@ -1445,7 +1445,39 @@ class VariableIdentity(ConfiguredBaseModel):
          'see_also': ['https://obofoundry.org/ontology/ecto.html',
                       'https://obofoundry.org/ontology/envo.html',
                       'https://loinc.org/']} })
-    value_data_type: DataTypeEnum = Field(default=..., title="Value Data Type", description="""The data type of the stored exposure value.""", json_schema_extra = { "linkml_meta": {'annotations': {'explanation': {'tag': 'explanation',
+    value_data_type: DataTypeEnum = Field(default=..., title="Value Data Type", description="""The data type of the stored exposure value.""", json_schema_extra = { "linkml_meta": {'annotations': {'covered_by': {'annotations': {'omop_gaia': {'annotations': {'evidence': {'tag': 'evidence',
+                                                                                                   'value': 'examples/scenarios/standards/omop_gaia_daymet_tmax.yaml '
+                                                                                                            '(value_data_type)'},
+                                                                                      'extent': {'tag': 'extent',
+                                                                                                 'value': 'full'},
+                                                                                      'note': {'tag': 'note',
+                                                                                               'value': 'GAIA '
+                                                                                                        'registers '
+                                                                                                        'the '
+                                                                                                        "attribute's "
+                                                                                                        'numeric '
+                                                                                                        'qudt:dataType '
+                                                                                                        'at '
+                                                                                                        'dataset-registration '
+                                                                                                        'time; '
+                                                                                                        'the '
+                                                                                                        'EnVar '
+                                                                                                        'translation '
+                                                                                                        'carries '
+                                                                                                        'it '
+                                                                                                        'first-class '
+                                                                                                        'as '
+                                                                                                        'value_data_type.'},
+                                                                                      'status': {'tag': 'status',
+                                                                                                 'value': 'verified'},
+                                                                                      'where': {'tag': 'where',
+                                                                                                'value': 'gaia_catalog '
+                                                                                                         'meta_etl_*.json '
+                                                                                                         'qudt:dataType '
+                                                                                                         '(numeric/float4)'}},
+                                                                      'tag': 'omop_gaia'}},
+                                        'tag': 'covered_by'},
+                         'explanation': {'tag': 'explanation',
                                          'value': 'Says what kind of value to expect: '
                                                   'a decimal number that can take any '
                                                   'value (like a temperature), a '

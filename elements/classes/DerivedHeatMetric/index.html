@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DerivedHeatMetric/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Derived Heat Metric (DerivedHeatMetric) - linkml-microschemas-envar</title>
+<title>DerivedHeatMetric - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-derived-heat-metric-derivedheatmetric">
+<a class="md-skip" href="#derived-heat-metric">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Derived Heat Metric (DerivedHeatMetric)
+              DerivedHeatMetric
             
           </span>
 </div>
@@ -262,49 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#rules">
-<span class="md-ellipsis">
-      
-        Rules
-      
-    </span>
-</a>
-<nav aria-label="Rules" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
-</span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2">
-<span class="md-ellipsis">
-</span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -353,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -391,10 +318,1120 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-derived-heat-metric-derivedheatmetric">Class: Derived Heat Metric (DerivedHeatMetric)</h1>
-<p><em>Methodology slots specific to derived heat metrics (WBGT, Heat Index, UTCI, apparent temperature, heat-wave flag, etc.). Captures the decisions that the heat-epidemiology literature flags as critical sources of cross-study disagreement: which equation variant, which indoor / outdoor regime, which solar-radiation input, and -- for percentile-based metrics -- the reference period, scope, and seasonal window. One per record where applicable.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DerivedHeatMetric">envar:class/DerivedHeatMetric</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="derived-heat-metric">Derived Heat Metric</h1>
+<p><span class="envar-classname">DerivedHeatMetric</span></p>
+<p class="envar-lead">Methodology slots specific to derived heat metrics (WBGT, Heat Index, UTCI, apparent temperature, heat-wave flag, etc.). Captures the decisions that the heat-epidemiology literature flags as critical sources of cross-study disagreement: which equation variant, which indoor / outdoor regime, which solar-radiation input, and -- for percentile-based metrics -- the reference period, scope, and seasonal window. One per record where applicable.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">26 fields</span>
+<span class="envar-metachip">1 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DerivedHeatMetric">envar:class/DerivedHeatMetric</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">References</span><span class="envar-chip"><a href="../EquationInput/">EquationInput</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Core</span>
+<span class="envar-groupnote">Required for a valid record</span>
+<span class="envar-groupcount">1 field</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Heat Metric Family</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>heat_metric_family</code> · range <a href="../../enums/HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>There are many different "heat numbers" — plain air temperature, composite scores that also fold in humidity, wind and sunshine, or a simple yes/no heat-wave flag. This field says which kind of heat number the record is about.</p>
+</div>
+<div class="envar-desc">
+<p>The family of heat metric this variable represents.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>wbgt_outdoor</code> — <span class="egdesc">outdoor Wet Bulb Globe Temperature (Phoenix 2022 heat-wave record)</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Daily maximum air temperature."><code>tmax</code> <span class="vdesc">Daily maximum air temperature</span></span>
+<span class="envar-value" title="Daily minimum air temperature."><code>tmin</code> <span class="vdesc">Daily minimum air temperature</span></span>
+<span class="envar-value" title="Daily mean air temperature."><code>tmean</code> <span class="vdesc">Daily mean air temperature</span></span>
+<span class="envar-value" title="Heat Index (NWS Rothfusz / Steadman)."><code>heat_index</code> <span class="vdesc">Heat Index (NWS Rothfusz / Steadman)</span></span>
+<span class="envar-value" title="Wet Bulb Globe Temperature, outdoor variant."><code>wbgt_outdoor</code> <span class="vdesc">Wet Bulb Globe Temperature, outdoor variant</span></span>
+<span class="envar-value" title="Wet Bulb Globe Temperature, indoor variant."><code>wbgt_indoor</code> <span class="vdesc">Wet Bulb Globe Temperature, indoor variant</span></span>
+<span class="envar-value" title="Universal Thermal Climate Index."><code>utci</code> <span class="vdesc">Universal Thermal Climate Index</span></span>
+<span class="envar-value" title="Apparent temperature (Steadman family)."><code>apparent_temperature</code> <span class="vdesc">Apparent temperature (Steadman family)</span></span>
+<span class="envar-value" title="Humidex (Masterton-Richardson)."><code>humidex</code> <span class="vdesc">Humidex (Masterton-Richardson)</span></span>
+<span class="envar-value" title="Binary heat-wave flag."><code>heat_wave_flag</code> <span class="vdesc">Binary heat-wave flag</span></span>
+<span class="envar-value" title="Count of consecutive extreme-heat days."><code>consecutive_extreme_heat_days</code> <span class="vdesc">Count of consecutive extreme-heat days</span></span>
+<span class="envar-value" title="Cooling degree-days."><code>cooling_degree_days</code> <span class="vdesc">Cooling degree-days</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Tmax, Heat Index, WBGT, and a heat-wave flag are distinct exposures with distinct health associations; without the family, values from different metrics are indistinguishable and get pooled as if they measured the same thing.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">8 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Equation Variant</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>equation_variant</code> · range <a href="../../enums/EquationVariantEnum/">EquationVariantEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Well-known heat metrics have several published formulas that share one name but differ mathematically — like recipes with the same title from different cookbooks. This records which exact recipe was used to cook the number.</p>
+</div>
+<div class="envar-desc">
+<p>For derived heat metrics, the equation variant used. Mandatory for WBGT, HI, and UTCI: a Liljegren WBGT and an ACSM WBGT for the same inputs can differ by 2-3 °C.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>liljegren_2008</code> — <span class="egdesc">Liljegren et al. 2008 outdoor WBGT formulation</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="WBGT — Liljegren et al. 2008 outdoor formulation."><code>liljegren_2008</code> <span class="vdesc">WBGT — Liljegren et al</span></span>
+<span class="envar-value" title="WBGT — American College of Sports Medicine simplified."><code>acsm_simplified</code> <span class="vdesc">WBGT — American College of Sports Medicine simplified</span></span>
+<span class="envar-value" title="WBGT — Bernard simplified."><code>bernard_simplified</code> <span class="vdesc">WBGT — Bernard simplified</span></span>
+<span class="envar-value" title="Heat Index — Rothfusz / NWS 1990 polynomial."><code>rothfusz_1990_nws</code> <span class="vdesc">Heat Index — Rothfusz / NWS 1990 polynomial</span></span>
+<span class="envar-value" title="Heat Index / apparent temperature — Steadman 1979."><code>steadman_1979</code> <span class="vdesc">Heat Index / apparent temperature — Steadman 1979</span></span>
+<span class="envar-value" title="UTCI — Bröde et al. 2012 polynomial approximation."><code>brode_2012_polynomial</code> <span class="vdesc">UTCI — Bröde et al</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>WBGT approximations diverge materially from the reference model — well beyond 2-3 °C in hot-humid conditions — so two studies using "WBGT" with different variants are measuring systematically different quantities; pooling them without this field mixes those quantities silently.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Equation Inputs</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>equation_inputs</code> · range <a href="../EquationInput/">EquationInput</a> · cardinality 1..* · multivalued</p>
+</div>
+<div class="envar-explain">
+<p>Composite heat metrics are cooked from several ingredients — temperature, humidity, wind, sunshine. This is the ingredient list, where each entry points to that ingredient's own full paperwork instead of hiding it inside the final number.</p>
+</div>
+<div class="envar-desc">
+<p>Typed per-input references for a multi-input derived metric (Heat Index from T + RH; WBGT from T + RH + wind + radiation). Each entry names the input's role and points, by <code>provenance_id</code>, to the upstream sidecar carrying that input's full context — it is an index into the lineage, not an inline copy of it. Option-B decomposition (see the <code>EquationInput</code> class): when the inputs originate from different products and diverge in resolution, day-boundary convention, or temporal aggregation, each input is a full upstream sidecar referenced here and listed as a step in <code>provenance_chain</code>, so the divergence stays explicit and checkable. Conditionally-Core: optional for a single-input metric, mandatory the moment a metric has more than one input.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">one entry of the list — the air-temperature input of a Liljegren WBGT; a wind-speed entry from a divergent product (e.g. ~31 km ERA5) would sit alongside it as a second element</span></p>
+</div>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">a second list entry from a divergent product (~31 km ERA5 vs 1 km Daymet), pointing at its own full upstream sidecar</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Multi-input metrics can silently absorb mismatched inputs — e.g. a Heat Index built from a 1 km local-midnight daily-max temperature and a ~31 km UTC daily-mean humidity. Without per-input references that divergence is invisible and no checker can surface it.</p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Equation Validity Range</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>equation_validity_range</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Every formula only works within a fence of weather conditions it was designed for. This field writes the fence down, so anyone can check whether a value was computed inside or outside it.</p>
+</div>
+<div class="envar-desc">
+<p>Validity-range conditions for the equation, serialised as a JSON string. For Heat Index: <code>{"min_temperature_F": 80, "min_relative_humidity_pct": 40}</code> — Rothfusz is undefined below 80 °F / 40 % RH.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>{"min_wind_speed_m_s": 0.13}</code> — <span class="egdesc">Liljegren 2008 clamps wind speed below 0.13 m/s</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The Rothfusz Heat Index is undefined below ~80 °F / 40 % RH; applied outside its range an equation produces plausible-looking nonsense. Without the recorded range, no downstream consumer can flag values computed where the formula does not hold.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.weather.gov/safety/heat-index">https://www.weather.gov/safety/heat-index</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Indoor or Outdoor Regime</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>indoor_outdoor</code> · range <a href="../../enums/IndoorOutdoorEnum/">IndoorOutdoorEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Heat stress works differently inside and outside — indoors there is no direct sun and little wind — so heat metrics come in indoor and outdoor versions, and you need to know which one you are looking at.</p>
+</div>
+<div class="envar-desc">
+<p>Indoor / outdoor regime. Mandatory for WBGT (the indoor vs outdoor distinction changes the equation and the health interpretation).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>outdoor</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Outdoor (default for all reanalysis / satellite / interpolation products)."><code>outdoor</code> <span class="vdesc">Outdoor (default for all reanalysis / satellite / interpolation products)</span></span>
+<span class="envar-value" title="Indoor regime, modelled."><code>indoor_modeled</code> <span class="vdesc">Indoor regime, modelled</span></span>
+<span class="envar-value" title="Indoor regime, measured by an indoor instrument."><code>indoor_measured</code> <span class="vdesc">Indoor regime, measured by an indoor instrument</span></span>
+<span class="envar-value" title="Mixed indoor / outdoor, regime unspecified."><code>mixed_unspecified</code> <span class="vdesc">Mixed indoor / outdoor, regime unspecified</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Indoor and outdoor WBGT use different equations and carry different health interpretations; an indoor formula applied to outdoor conditions (or a regime left unstated) makes the value invalid or uninterpretable for the exposure being claimed.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.iso.org/standard/67188.html">https://www.iso.org/standard/67188.html</a>, <a href="https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Heat-Wave Threshold Definition</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>heat_wave_threshold_definition</code> · range <a href="../../enums/HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>There is no universal definition of a heat wave. "Above 35 °C" and "hotter than 95 % of days usually are here" are both in use and flag different days — this field records which rulebook was applied.</p>
+</div>
+<div class="envar-desc">
+<p>For heat-wave flags, the definition of the threshold (absolute, percentile-local, percentile-climatological, NWS advisory, ETCCDI).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>percentile_local</code> — <span class="egdesc">95th percentile of the local Tmax distribution</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Absolute threshold value (e.g. 35 °C). Concrete value in `heat_wave_threshold_specifier`."><code>absolute</code> <span class="vdesc">Absolute threshold value (e</span></span>
+<span class="envar-value" title="Local-distribution percentile (e.g. 95th percentile of local Tmax history). Percentile in `heat_wave_threshold_specifier`."><code>percentile_local</code> <span class="vdesc">Local-distribution percentile (e</span></span>
+<span class="envar-value" title="Climatological-baseline percentile."><code>percentile_climatological</code> <span class="vdesc">Climatological-baseline percentile</span></span>
+<span class="envar-value" title="National Weather Service Heat Advisory criteria."><code>nws_heat_advisory_criteria</code> <span class="vdesc">National Weather Service Heat Advisory criteria</span></span>
+<span class="envar-value" title="ETCCDI Warm Spell Duration Index."><code>etccdi_warm_spell_duration_index</code> <span class="vdesc">ETCCDI Warm Spell Duration Index</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>At least seven heat-wave definitions are in active use and none are convertible after the fact; two definitions can disagree on most flagged days, which changes both the exposure series and the resulting mortality estimate.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://en.wikipedia.org/wiki/Heat_wave">https://en.wikipedia.org/wiki/Heat_wave</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Heat-Wave Minimum Consecutive Days</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>heat_wave_min_consecutive_days</code> · range <a href="../../types/Integer/">Integer</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A heat wave means it stays hot for several days in a row — but how many days count as "several" is a choice (usually 2 or 3), and the choice changes which days get flagged.</p>
+</div>
+<div class="envar-desc">
+<p>Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3). Changes which days are flagged.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>3</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A 2-day rule and a 3-day rule flag different sets of days from the same temperature series, changing which person-days count as heat-wave-exposed and therefore the effect estimates built on them.</p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Percentile Reference Period Start</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_period_start</code> · range <a href="../../types/Date/">Date</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>"Unusually hot" means hot compared to some stretch of past years. Which years you compare against changes what counts as unusual — this field records where that stretch begins.</p>
+</div>
+<div class="envar-desc">
+<p>Start of the reference distribution used for percentile-based thresholds. Mandatory for percentile metrics: "95th percentile" over 2000-2019 gives a different threshold than 1980-2010, and this delta is real.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>1991-01-01</code> — <span class="egdesc">start of the 1991-2020 climate-normal baseline</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>In a warming climate a "95th percentile" computed over 1971-2000 is a materially different threshold than one over 2000-2019; leaving the baseline unstated makes percentile-based studies non-comparable and non-reproducible.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals">https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Percentile Reference Period End</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_period_end</code> · range <a href="../../types/Date/">Date</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>The other end of the stretch of past years used as the comparison — start and end together say exactly which years define "normal".</p>
+</div>
+<div class="envar-desc">
+<p>End of the reference distribution.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>2020-12-31</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Together with the start date this pins down the reference distribution; an end date that includes or excludes the most recent warm years shifts the percentile threshold, so an open-ended baseline is not reproducible.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">5 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Wind Speed Measurement Height (Metres)</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>wind_speed_measurement_height_m</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Wind blows faster the higher above the ground you measure it, so a "wind speed" is only meaningful together with the height it was taken at — this field records that height.</p>
+</div>
+<div class="envar-desc">
+<p>For WBGT and UTCI inputs, the wind-speed measurement height in metres. The ISO 7243 standard is 2 m, but reanalysis products often supply 10 m -- the height affects the WBGT value.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>10</code> — <span class="egdesc">ERA5 10 m wind used without height adjustment</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>ISO 7243 assumes wind measured at 2 m, but reanalysis products usually supply 10 m wind; wind is slower near the ground, so an uncorrected 10 m input systematically shifts the resulting WBGT.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.iso.org/standard/67188.html">https://www.iso.org/standard/67188.html</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Solar Radiation Basis</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>solar_radiation_basis</code> · range <a href="../../enums/SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>How much sunshine hits a person is part of how hot they feel, and datasets represent "sunshine" in different ways — or not at all. This says which representation fed the calculation.</p>
+</div>
+<div class="envar-desc">
+<p>For WBGT / UTCI inputs, the basis used for solar radiation.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>surface_downwelling_shortwave_flux</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Surface downwelling shortwave flux density."><code>surface_downwelling_shortwave_flux</code> <span class="vdesc">Surface downwelling shortwave flux density</span></span>
+<span class="envar-value" title="Modelled mean radiant temperature."><code>mean_radiant_temperature_modeled</code> <span class="vdesc">Modelled mean radiant temperature</span></span>
+<span class="envar-value" title="Solar radiation input not available; metric falls back."><code>not_available</code> <span class="vdesc">Solar radiation input not available; metric falls back</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>WBGT and UTCI respond strongly to solar load; whether the sun input was a measured shortwave flux, a modelled mean radiant temperature, or absent (triggering a fallback formula) changes the value and whether two records are comparable at all.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Percentile Reference Geographic Scope</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_geographic_scope</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>"Unusually hot" can mean hot compared to what is normal HERE, or compared to the whole country. This field says which area's history the comparison was made against.</p>
+</div>
+<div class="envar-desc">
+<p>Geographic scope over which the reference distribution was computed. One of <code>local_tract</code>, <code>local_county</code>, <code>local_climate_region</code>, <code>national</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>local_county</code> — <span class="egdesc">reference distribution computed over Maricopa County</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A 95th percentile computed over one county and one computed over the whole nation are very different thresholds; the scope is what encodes "hot for here", and without it the threshold cannot be reproduced or compared across studies.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Percentile Reference Seasonal Window</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_seasonal_window</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Whether "normal" includes the whole year or only the summer months changes what counts as unusually hot — a day that is extreme against summer-only history may be unremarkable against the full year.</p>
+</div>
+<div class="envar-desc">
+<p>Seasonal window over which the reference was computed. One of <code>annual</code>, <code>warm_season_may_sep</code>, <code>calendar_month</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>warm_season_may_sep</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>An annual reference distribution includes winter days and drags the 95th percentile far below a warm-season-only percentile; two thresholds that sound identical diverge substantially when the seasonal window is left unstated.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Metric Temporal Aggregation Rule</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>metric_temporal_aggregation_rule</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A heat wave spans several days but health records are kept day by day; this says which calendar days actually get the "heat wave" label — just the first day, every day, or the last.</p>
+</div>
+<div class="envar-desc">
+<p>For heat-wave flags, how multi-day exposures are stamped on individual days (e.g. <code>first_day_of_event</code> / <code>each_day_of_event</code> / <code>last_day_of_event</code>).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>each_day_of_event</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Stamping a five-day event only on its first day versus on every day changes which person-days count as exposed, directly altering effect estimates in daily time-series and case-crossover designs.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">12 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Equation Variant Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>equation_variant_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>equation_variant</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "no equation variant exists for this metric" from "the variant was used but never captured" — the first is fine, the second means the record is unusable for cross-study comparison and someone should go back to the producer.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Validity Range Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>equation_validity_range_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>equation_validity_range</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "this equation has no published validity range" from "the range exists but was not captured" — the difference decides whether out-of-range screening is impossible or merely deferred.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Measurement Height Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>wind_speed_measurement_height_m_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>wind_speed_measurement_height_m</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>available_but_not_extracted</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "the producer never recorded a measurement height" from "it exists upstream but was not extracted" — only the latter is recoverable, and only the former precludes a height correction.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Radiation Basis Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>solar_radiation_basis_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>solar_radiation_basis</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "the source never stated its radiation basis" from "it was not extracted" — deciding whether the ambiguity can be resolved by going back to the source or is permanent.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Threshold Definition Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>heat_wave_threshold_definition_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>heat_wave_threshold_definition</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "this record is not a heat-wave flag, so no threshold definition exists" from "a definition was used but not captured" — the first is benign, the second makes the flag unusable.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Heat-Wave Threshold Specifier</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>heat_wave_threshold_specifier</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>The threshold definition is the type of cutoff; this is the actual number plugged into it — like knowing a speed limit exists versus knowing it is 50.</p>
+</div>
+<div class="envar-desc">
+<p>Free-form specifier paired with <code>heat_wave_threshold_definition</code> to capture the concrete threshold values (e.g. <code>"35_Cel"</code> for an absolute threshold, <code>"95"</code> for the 95th percentile).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>95</code> — <span class="egdesc">percentile, paired with heat_wave_threshold_definition = percentile_local</span></p>
+</div>
+<div class="envar-eg">
+<p><code>35_Cel</code> — <span class="egdesc">absolute threshold, paired with heat_wave_threshold_definition = absolute</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The definition names the rule but not the number: two records both marked "percentile_local" are still incomparable unless the concrete value (95th vs 90th percentile, 35 vs 40 °C) is recorded here.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Consecutive Days Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>heat_wave_min_consecutive_days_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>heat_wave_min_consecutive_days</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "not a heat-wave flag, so no consecutive-days rule applies" from "a rule was applied but not recorded" — only the latter undermines reuse of the flag.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Period Start Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_period_start_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>percentile_reference_period_start</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "not a percentile-based metric, so no baseline exists" from "a baseline was used but not captured" — without the reason, a consumer cannot tell a benign blank from a blocking one.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Period End Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_period_end_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>percentile_reference_period_end</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "no percentile baseline applies to this metric" from "the baseline end was used but never recorded" — deciding whether the threshold is merely undocumented or genuinely absent.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Geographic Scope Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_geographic_scope_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>percentile_reference_geographic_scope</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "the source never stated its baseline geography" from "it was not extracted" — telling consumers whether the ambiguity is recoverable from the source or permanent.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Seasonal Window Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>percentile_reference_seasonal_window_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>percentile_reference_seasonal_window</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "the source never stated its seasonal window" from "it was not extracted" — so consumers know whether asking the producer could still recover it.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Aggregation Rule Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>metric_temporal_aggregation_rule_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A blank field is ambiguous: it could mean the thing does not exist, or that nobody wrote it down. This companion field says which one it is.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>metric_temporal_aggregation_rule</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>available_but_not_extracted</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "no multi-day stamping rule applies to this metric" from "a rule was applied but never captured" — only the latter makes the daily exposure series ambiguous.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Heat Metric Family</strong></td>
+<td><code>heat_metric_family</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a></td>
+<td>The family of heat metric this variable represents</td>
+</tr>
+<tr>
+<td><strong>Equation Variant</strong></td>
+<td><code>equation_variant</code></td>
+<td>conditionally core</td>
+<td>1 <br/> <a href="../../enums/EquationVariantEnum/">EquationVariantEnum</a></td>
+<td>For derived heat metrics, the equation variant used</td>
+</tr>
+<tr>
+<td><strong>Reason Equation Variant Is Missing</strong></td>
+<td><code>equation_variant_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>equation_variant</code> is null</td>
+</tr>
+<tr>
+<td><strong>Equation Inputs</strong></td>
+<td><code>equation_inputs</code></td>
+<td>conditionally core</td>
+<td>1..* <br/> <a href="../EquationInput/">EquationInput</a></td>
+<td>Typed per-input references for a multi-input derived metric (Heat Index from ...</td>
+</tr>
+<tr>
+<td><strong>Equation Validity Range</strong></td>
+<td><code>equation_validity_range</code></td>
+<td>conditionally core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>Validity-range conditions for the equation, serialised as a JSON string</td>
+</tr>
+<tr>
+<td><strong>Reason Validity Range Is Missing</strong></td>
+<td><code>equation_validity_range_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>equation_validity_range</code> is null</td>
+</tr>
+<tr>
+<td><strong>Indoor or Outdoor Regime</strong></td>
+<td><code>indoor_outdoor</code></td>
+<td>conditionally core</td>
+<td>1 <br/> <a href="../../enums/IndoorOutdoorEnum/">IndoorOutdoorEnum</a></td>
+<td>Indoor / outdoor regime</td>
+</tr>
+<tr>
+<td><strong>Wind Speed Measurement Height (Metres)</strong></td>
+<td><code>wind_speed_measurement_height_m</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>For WBGT and UTCI inputs, the wind-speed measurement height in metres</td>
+</tr>
+<tr>
+<td><strong>Reason Measurement Height Is Missing</strong></td>
+<td><code>wind_speed_measurement_height_m_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>wind_speed_measurement_height_m</code> is null</td>
+</tr>
+<tr>
+<td><strong>Solar Radiation Basis</strong></td>
+<td><code>solar_radiation_basis</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../enums/SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a></td>
+<td>For WBGT / UTCI inputs, the basis used for solar radiation</td>
+</tr>
+<tr>
+<td><strong>Reason Radiation Basis Is Missing</strong></td>
+<td><code>solar_radiation_basis_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>solar_radiation_basis</code> is null</td>
+</tr>
+<tr>
+<td><strong>Heat-Wave Threshold Definition</strong></td>
+<td><code>heat_wave_threshold_definition</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../enums/HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a></td>
+<td>For heat-wave flags, the definition of the threshold (absolute, percentile-lo...</td>
+</tr>
+<tr>
+<td><strong>Reason Threshold Definition Is Missing</strong></td>
+<td><code>heat_wave_threshold_definition_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>heat_wave_threshold_definition</code> is null</td>
+</tr>
+<tr>
+<td><strong>Heat-Wave Threshold Specifier</strong></td>
+<td><code>heat_wave_threshold_specifier</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Free-form specifier paired with <code>heat_wave_threshold_definition</code> to capture t...</td>
+</tr>
+<tr>
+<td><strong>Heat-Wave Minimum Consecutive Days</strong></td>
+<td><code>heat_wave_min_consecutive_days</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
+<td>Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3)</td>
+</tr>
+<tr>
+<td><strong>Reason Consecutive Days Is Missing</strong></td>
+<td><code>heat_wave_min_consecutive_days_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>heat_wave_min_consecutive_days</code> is null</td>
+</tr>
+<tr>
+<td><strong>Percentile Reference Period Start</strong></td>
+<td><code>percentile_reference_period_start</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/Date/">Date</a></td>
+<td>Start of the reference distribution used for percentile-based thresholds</td>
+</tr>
+<tr>
+<td><strong>Reason Period Start Is Missing</strong></td>
+<td><code>percentile_reference_period_start_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>percentile_reference_period_start</code> is null</td>
+</tr>
+<tr>
+<td><strong>Percentile Reference Period End</strong></td>
+<td><code>percentile_reference_period_end</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/Date/">Date</a></td>
+<td>End of the reference distribution</td>
+</tr>
+<tr>
+<td><strong>Reason Period End Is Missing</strong></td>
+<td><code>percentile_reference_period_end_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>percentile_reference_period_end</code> is null</td>
+</tr>
+<tr>
+<td><strong>Percentile Reference Geographic Scope</strong></td>
+<td><code>percentile_reference_geographic_scope</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Geographic scope over which the reference distribution was computed</td>
+</tr>
+<tr>
+<td><strong>Reason Geographic Scope Is Missing</strong></td>
+<td><code>percentile_reference_geographic_scope_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>percentile_reference_geographic_scope</code> is null</td>
+</tr>
+<tr>
+<td><strong>Percentile Reference Seasonal Window</strong></td>
+<td><code>percentile_reference_seasonal_window</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Seasonal window over which the reference was computed</td>
+</tr>
+<tr>
+<td><strong>Reason Seasonal Window Is Missing</strong></td>
+<td><code>percentile_reference_seasonal_window_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>percentile_reference_seasonal_window</code> is null</td>
+</tr>
+<tr>
+<td><strong>Metric Temporal Aggregation Rule</strong></td>
+<td><code>metric_temporal_aggregation_rule</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>For heat-wave flags, how multi-day exposures are stamped on individual days (...</td>
+</tr>
+<tr>
+<td><strong>Reason Aggregation Rule Is Missing</strong></td>
+<td><code>metric_temporal_aggregation_rule_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>metric_temporal_aggregation_rule</code> is null</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Conditional rules on this class</summary>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'heat_metric_family': {'equals_string': 'heat_wave_flag'}}</code></td>
+<td><code>{'heat_wave_threshold_definition': {'required': True}, 'heat_wave_min_consecutive_days': {'required': True}}</code></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'heat_wave_threshold_definition': {'equals_string_in': ['percentile_local', 'percentile_climatological']}}</code></td>
+<td><code>{'percentile_reference_period_start': {'required': True}, 'percentile_reference_period_end': {'required': True}}</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class DerivedHeatMetric
     click DerivedHeatMetric href "../../classes/DerivedHeatMetric/"
@@ -604,307 +1641,6 @@
 
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/heat_metric_family/">heat_metric_family</a></td>
-<td>1 <br/> <a href="../../enums/HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a></td>
-<td>The family of heat metric this variable represents</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/equation_variant/">equation_variant</a></td>
-<td>1 <br/> <a href="../../enums/EquationVariantEnum/">EquationVariantEnum</a></td>
-<td>For derived heat metrics, the equation variant used</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/equation_variant_missing_reason/">equation_variant_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>equation_variant</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/equation_inputs/">equation_inputs</a></td>
-<td>1..* <br/> <a href="../EquationInput/">EquationInput</a></td>
-<td>Typed per-input references for a multi-input derived metric (Heat Index from ...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/equation_validity_range/">equation_validity_range</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Validity-range conditions for the equation, serialised as a JSON string</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/equation_validity_range_missing_reason/">equation_validity_range_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>equation_validity_range</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/indoor_outdoor/">indoor_outdoor</a></td>
-<td>1 <br/> <a href="../../enums/IndoorOutdoorEnum/">IndoorOutdoorEnum</a></td>
-<td>Indoor / outdoor regime</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/wind_speed_measurement_height_m/">wind_speed_measurement_height_m</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>For WBGT and UTCI inputs, the wind-speed measurement height in metres</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/wind_speed_measurement_height_m_missing_reason/">wind_speed_measurement_height_m_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>wind_speed_measurement_height_m</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/solar_radiation_basis/">solar_radiation_basis</a></td>
-<td>0..1 <br/> <a href="../../enums/SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a></td>
-<td>For WBGT / UTCI inputs, the basis used for solar radiation</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/solar_radiation_basis_missing_reason/">solar_radiation_basis_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>solar_radiation_basis</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/heat_wave_threshold_definition/">heat_wave_threshold_definition</a></td>
-<td>0..1 <br/> <a href="../../enums/HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a></td>
-<td>For heat-wave flags, the definition of the threshold (absolute, percentile-lo...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/heat_wave_threshold_definition_missing_reason/">heat_wave_threshold_definition_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>heat_wave_threshold_definition</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/heat_wave_threshold_specifier/">heat_wave_threshold_specifier</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Free-form specifier paired with <code>heat_wave_threshold_definition</code> to capture t...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/heat_wave_min_consecutive_days/">heat_wave_min_consecutive_days</a></td>
-<td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
-<td>Minimum-consecutive-days rule for heat-wave flags (commonly 2 or 3)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/heat_wave_min_consecutive_days_missing_reason/">heat_wave_min_consecutive_days_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>heat_wave_min_consecutive_days</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_period_start/">percentile_reference_period_start</a></td>
-<td>0..1 <br/> <a href="../../types/Date/">Date</a></td>
-<td>Start of the reference distribution used for percentile-based thresholds</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_period_start_missing_reason/">percentile_reference_period_start_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>percentile_reference_period_start</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_period_end/">percentile_reference_period_end</a></td>
-<td>0..1 <br/> <a href="../../types/Date/">Date</a></td>
-<td>End of the reference distribution</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_period_end_missing_reason/">percentile_reference_period_end_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>percentile_reference_period_end</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_geographic_scope/">percentile_reference_geographic_scope</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Geographic scope over which the reference distribution was computed</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_geographic_scope_missing_reason/">percentile_reference_geographic_scope_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>percentile_reference_geographic_scope</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_seasonal_window/">percentile_reference_seasonal_window</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Seasonal window over which the reference was computed</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/percentile_reference_seasonal_window_missing_reason/">percentile_reference_seasonal_window_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>percentile_reference_seasonal_window</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/metric_temporal_aggregation_rule/">metric_temporal_aggregation_rule</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>For heat-wave flags, how multi-day exposures are stamped on individual days (...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/metric_temporal_aggregation_rule_missing_reason/">metric_temporal_aggregation_rule_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>metric_temporal_aggregation_rule</code> is null</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/derived_heat_metric/">derived_heat_metric</a></td>
-<td>range</td>
-<td><a href="./">DerivedHeatMetric</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/derived_heat_metric/">derived_heat_metric</a></td>
-<td>range</td>
-<td><a href="./">DerivedHeatMetric</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/derived_heat_metric/">derived_heat_metric</a></td>
-<td>range</td>
-<td><a href="./">DerivedHeatMetric</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/derived_heat_metric/">derived_heat_metric</a></td>
-<td>range</td>
-<td><a href="./">DerivedHeatMetric</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/derived_heat_metric/">derived_heat_metric</a></td>
-<td>range</td>
-<td><a href="./">DerivedHeatMetric</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="rules">Rules</h2>
-<h3 id="_1"></h3>
-<table>
-<thead>
-<tr>
-<th>Rule Applied</th>
-<th>Preconditions</th>
-<th>Postconditions</th>
-<th>Elseconditions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>slot_conditions</td>
-<td><code>{'heat_metric_family': {'equals_string': 'heat_wave_flag'}}</code></td>
-<td><code>{'heat_wave_threshold_definition': {'required': True}, 'heat_wave_min_consecutive_days': {'required': True}}</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="_2"></h3>
-<table>
-<thead>
-<tr>
-<th>Rule Applied</th>
-<th>Preconditions</th>
-<th>Postconditions</th>
-<th>Elseconditions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>slot_conditions</td>
-<td><code>{'heat_wave_threshold_definition': {'equals_string_in': ['percentile_local', 'percentile_climatological']}}</code></td>
-<td><code>{'percentile_reference_period_start': {'required': True}, 'percentile_reference_period_end': {'required': True}}</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</a></li>
-<li><a href="https://www.weather.gov/safety/heat-index">https://www.weather.gov/safety/heat-index</a></li>
-<li><a href="http://www.utci.org/">http://www.utci.org/</a></li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>domain_of_use</td>
-<td>environmental_exposure</td>
-</tr>
-</tbody>
-</table>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>envar:DerivedHeatMetric</td>
-</tr>
-<tr>
-<td>native</td>
-<td>envar:DerivedHeatMetric</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="nt">annotations</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
@@ -922,105 +1658,7 @@
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.weather.gov/safety/heat-index</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://www.utci.org/</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_metric_family</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_variant</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_variant_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_inputs</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_validity_range</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_validity_range_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">indoor_outdoor</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wind_speed_measurement_height_m</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wind_speed_measurement_height_m_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar_radiation_basis</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solar_radiation_basis_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_threshold_definition</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_threshold_definition_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_threshold_specifier</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_min_consecutive_days</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_min_consecutive_days_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_period_start</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_period_start_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_period_end</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_period_end_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_geographic_scope</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_geographic_scope_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_seasonal_window</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_seasonal_window_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metric_temporal_aggregation_rule</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metric_temporal_aggregation_rule_missing_reason</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">heat_metric_family</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_metric_family</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">indoor_outdoor</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">indoor_outdoor</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">equation_variant</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_variant</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">equation_inputs</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_inputs</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">equation_validity_range</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">equation_validity_range</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">rules</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">heat_metric_family</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_metric_family</span>
-<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_flag</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">heat_wave_threshold_definition</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_threshold_definition</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">heat_wave_min_consecutive_days</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_min_consecutive_days</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Heat-wave-flag metrics must state which of the (at least seven, mutually</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">unconvertible) heat-wave definitions was used and the minimum consecutive-days</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">criterion (tier conditionally_core context "heat-wave flavoured metrics").</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">heat_wave_threshold_definition</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_wave_threshold_definition</span>
-<span class="w">        </span><span class="nt">equals_string_in</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_local</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_climatological</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">percentile_reference_period_start</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_period_start</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">percentile_reference_period_end</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentile_reference_period_end</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Percentile-based heat-wave thresholds are meaningless without their</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">reference period — the same percentile over different baselines flags different</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">days (tier conditionally_core context "percentile-based thresholds").</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Methodology</span><span class="nv"> </span><span class="s">slots</span><span class="nv"> </span><span class="s">specific</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">derived</span><span class="nv"> </span><span class="s">heat</span><span class="nv"> </span><span class="s">metrics</span><span class="nv"> </span><span class="s">(WBGT,</span><span class="nv"> </span><span class="s">Heat</span><span class="nv"> </span><span class="s">Index,</span>
-<span class="w">  </span><span class="s">UTCI,</span><span class="nv"> </span><span class="s">apparent</span><span class="nv"> </span><span class="s">temperature,</span><span class="nv"> </span><span class="s">heat-wave</span><span class="nv"> </span><span class="s">flag,</span><span class="nv"> </span><span class="s">etc.).</span><span class="nv"> </span><span class="s">Captures</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">decisions</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">  </span><span class="s">heat-epidemiology</span><span class="nv"> </span><span class="s">literature</span><span class="nv"> </span><span class="s">flags</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">critical</span><span class="nv"> </span><span class="s">sources</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">cross-study</span><span class="nv"> </span><span class="s">disagreement:</span>
-<span class="w">  </span><span class="s">which</span><span class="nv"> </span><span class="s">equation</span><span class="nv"> </span><span class="s">variant,</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">indoor</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">outdoor</span><span class="nv"> </span><span class="s">regime,</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">solar-radiation</span><span class="nv"> </span><span class="s">input,</span>
-<span class="w">  </span><span class="s">and</span><span class="nv"> </span><span class="s">--</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">percentile-based</span><span class="nv"> </span><span class="s">metrics</span><span class="nv"> </span><span class="s">--</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reference</span><span class="nv"> </span><span class="s">period,</span><span class="nv"> </span><span class="s">scope,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">seasonal</span>
-<span class="w">  </span><span class="s">window.</span><span class="nv"> </span><span class="s">One</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">where</span><span class="nv"> </span><span class="s">applicable.'</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Derived Heat Metric</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.weather.gov/safety/heat-index</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://www.utci.org/</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_usage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">heat_metric_family</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">heat_metric_family</span>
@@ -1062,7 +1700,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wbgt_outdoor</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outdoor Wet Bulb Globe Temperature (Phoenix 2022 heat-wave record)</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1096,7 +1733,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1123,7 +1759,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1183,7 +1818,6 @@
 <span class="w">        </span><span class="nt">input_provenance_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">01HFA7K8R3M6XP-era5-wind</span>
 <span class="w">        </span><span class="nt">input_source_short_code</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">era5</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1219,7 +1853,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.weather.gov/safety/heat-index</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1245,7 +1878,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1276,7 +1908,6 @@
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.iso.org/standard/67188.html</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1308,7 +1939,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.iso.org/standard/67188.html</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1333,7 +1963,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">available_but_not_extracted</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1360,7 +1989,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">surface_downwelling_shortwave_flux</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1385,7 +2013,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1416,7 +2043,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Heat_wave</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1441,7 +2067,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1473,7 +2098,6 @@
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absolute threshold, paired with heat_wave_threshold_definition</span>
 <span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">= absolute</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1500,7 +2124,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'3'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1525,7 +2148,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1556,7 +2178,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1581,7 +2202,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1606,7 +2226,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'2020-12-31'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1631,7 +2250,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1660,7 +2278,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local_county</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reference distribution computed over Maricopa County</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1685,7 +2302,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1713,7 +2329,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warm_season_may_sep</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1738,7 +2353,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1765,7 +2379,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">each_day_of_event</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1790,7 +2403,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">available_but_not_extracted</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DerivedHeatMetric</span>
@@ -1832,6 +2444,51 @@
 <span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">days (tier conditionally_core context "percentile-based thresholds").</span>
 </code></pre></div>
 </details>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature">https://en.wikipedia.org/wiki/Wet-bulb_globe_temperature</a></li>
+<li><a href="https://www.weather.gov/safety/heat-index">https://www.weather.gov/safety/heat-index</a></li>
+<li><a href="http://www.utci.org/">http://www.utci.org/</a></li>
+</ul>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain_of_use</td>
+<td>environmental_exposure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>envar:DerivedHeatMetric</td>
+</tr>
+<tr>
+<td>native</td>
+<td>envar:DerivedHeatMetric</td>
+</tr>
+</tbody>
+</table>
 </div>
 </article>
 </div>

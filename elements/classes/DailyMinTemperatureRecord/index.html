@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DailyMinTemperatureRecord/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Daily Minimum Temperature Record (DailyMinTemperatureRecord) - linkml-microschemas-envar</title>
+<title>DailyMinTemperatureRecord - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-daily-minimum-temperature-record-dailymintemperaturerecord">
+<a class="md-skip" href="#daily-minimum-temperature-record">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Daily Minimum Temperature Record (DailyMinTemperatureRecord)
+              DailyMinTemperatureRecord
             
           </span>
 </div>
@@ -262,24 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -319,37 +302,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -357,10 +309,665 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-daily-minimum-temperature-record-dailymintemperaturerecord">Class: Daily Minimum Temperature Record (DailyMinTemperatureRecord)</h1>
-<p><em>Canonical record for daily minimum 2 m air temperature (Tmin). Pins <code>standard_name = CF:air_temperature</code>, <code>cf_cell_methods = "time: minimum"</code>, <code>units_ucum = Cel</code>, <code>value_data_type = continuous_numeric</code>.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DailyMinTemperatureRecord">envar:class/DailyMinTemperatureRecord</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="daily-minimum-temperature-record">Daily Minimum Temperature Record</h1>
+<p><span class="envar-classname">DailyMinTemperatureRecord</span></p>
+<p class="envar-lead">Canonical record for daily minimum 2 m air temperature (Tmin). Pins <code>standard_name = CF:air_temperature</code>, <code>cf_cell_methods = "time: minimum"</code>, <code>units_ucum = Cel</code>, <code>value_data_type = continuous_numeric</code>.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">17 fields</span>
+<span class="envar-metachip">12 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DailyMinTemperatureRecord">envar:class/DailyMinTemperatureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Specialises</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">References</span><span class="envar-chip"><a href="../VariableIdentity/">VariableIdentity</a></span><span class="envar-chip"><a href="../SpatialReference/">SpatialReference</a></span><span class="envar-chip"><a href="../TemporalReference/">TemporalReference</a></span><span class="envar-chip"><a href="../ExposureModel/">ExposureModel</a></span><span class="envar-chip"><a href="../Uncertainty/">Uncertainty</a></span><span class="envar-chip"><a href="../DerivedHeatMetric/">DerivedHeatMetric</a></span><span class="envar-chip"><a href="../DataLayout/">DataLayout</a></span><span class="envar-chip"><a href="../SourceDataset/">SourceDataset</a></span><span class="envar-chip"><a href="../ToolRun/">ToolRun</a></span><span class="envar-chip"><a href="../ProvenanceChain/">ProvenanceChain</a></span><span class="envar-chip"><a href="../LinkageMethod/">LinkageMethod</a></span><span class="envar-chip"><a href="../HealthLayerLinkage/">HealthLayerLinkage</a></span><span class="envar-chip"><a href="../DepositMetadata/">DepositMetadata</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Core</span>
+<span class="envar-groupnote">Required for a valid record</span>
+<span class="envar-groupcount">12 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Subject (Patient or Cohort)</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>subject</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Who (or what group) the values belong to — a study cohort or an individual patient, named by an anonymous code rather than anything identifying.</p>
+</div>
+<div class="envar-desc">
+<p>The patient or cohort the exposure value is attached to. Carried as an opaque identifier; PHI must not appear here.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>cohort:phoenix_aki_2022</code> — <span class="egdesc">an opaque cohort handle — no PHI</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>An exposure value is meaningless without knowing whose exposure it is. The opaque handle is what lets the sidecar be joined back to the right cohort or patient in the health-data layer while staying PHI-free.</p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Variable Identity</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>variable_identity</code> · range <a href="../VariableIdentity/">VariableIdentity</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This block pins down exactly what was measured. Instead of relying on a nickname like "tmax", it uses shared vocabularies to say "daily maximum air temperature, in degrees Celsius", so any tool or researcher reads it the same way.</p>
+</div>
+<div class="envar-desc">
+<p>The variable identity object — what physical quantity is being captured. Bound to VariableIdentity (see envar_variable). Readable rename of the profile's <code>observation_type</code> anatomy slot.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without a standard variable identity, "tmax" in one file and "TMAX" in another cannot be recognised as the same physical quantity, and unit mix-ups (Celsius vs Fahrenheit vs Kelvin) go undetected — pooling and cross-study comparison silently break.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>Mappings:</strong> <a href="https://w3id.org/linkml/linkml-microschema-profile/observation_type">msprofile:observation_type</a></p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/">https://cfconventions.org/</a>, <a href="https://ucum.org/">https://ucum.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Spatial Reference</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>spatial_reference</code> · range <a href="../SpatialReference/">SpatialReference</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This block says where the number applies and how it was pulled out of a map. Environmental data usually comes as a grid of cells covering a region; this records how big those cells are and how the value for a specific place was picked from them.</p>
+</div>
+<div class="envar-desc">
+<p>Spatial reference object describing the native grid and extraction. Bound to SpatialReference (see envar_spatial). Readable rename of the profile's <code>location</code> anatomy slot.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A value without its grid, coordinate system, and extraction method cannot be located or compared: a 1 km neighbourhood average and a ~31 km regional average look identical as numbers but describe very different exposures, and the extraction cannot be re-run without the method.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>Mappings:</strong> <a href="https://w3id.org/linkml/linkml-microschema-profile/location">msprofile:location</a></p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://epsg.io/">https://epsg.io/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Temporal Reference</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>temporal_reference</code> · range <a href="../TemporalReference/">TemporalReference</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This block explains the time ruler behind each value: how long a period each number summarises (a day, a month), how it was summarised (maximum, mean), and — surprisingly important — when a "day" is considered to start and end.</p>
+</div>
+<div class="envar-desc">
+<p>Temporal reference object describing resolution, aggregation, and day-boundary convention. Bound to TemporalReference (see envar_temporal). Readable rename of the profile's <code>temporality</code> anatomy slot.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A "daily maximum" is ambiguous without the day-boundary convention: Daymet days end at local midnight while PRISM days end at 12:00 GMT, so the same calendar date can cover different physical hours — the most-omitted detail in the heat literature and a known source of cross-product disagreement.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>Mappings:</strong> <a href="https://w3id.org/linkml/linkml-microschema-profile/temporality">msprofile:temporality</a></p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/">https://cfconventions.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Exposure Model</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model</code> · range <a href="../ExposureModel/">ExposureModel</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Most exposure values are not direct readings from an instrument at someone's house — they are estimates computed from weather stations, satellites, or models. This block says which estimation method produced the numbers and what went into it.</p>
+</div>
+<div class="envar-desc">
+<p>The exposure-model object describing how values were produced. Bound to ExposureModel (see envar_model). Readable rename of the profile's <code>methodology</code> anatomy slot, narrowed to the model itself: other methodology-adjacent concerns (source dataset, tool run, provenance chain, derived heat metric) are surfaced as separate envar-extension slots.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The same quantity can be estimated by station interpolation, satellite retrieval, or model reanalysis, each with different inputs and biases; without the model description, values from different products get pooled as if equivalent and their systematic differences stay invisible.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>Mappings:</strong> <a href="https://w3id.org/linkml/linkml-microschema-profile/methodology">msprofile:methodology</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Data Layout</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>data_layout</code> · range <a href="../DataLayout/">DataLayout</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>The actual numbers live in a separate data table that travels with this record. This block is the map between the two: it names which column holds the values, which holds the person identifier, which holds the date, and so on.</p>
+</div>
+<div class="envar-desc">
+<p>Data-layout object binding this sidecar to the columns of the companion data file — see envar_layout. Required: without it a consumer cannot locate the values the sidecar describes.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The sidecar describes values that live in a companion CSV/parquet file; without the column bindings a consumer cannot tell which column holds the values, subjects, or dates, so the metadata is unanchored and the data unusable — hence the slot is required.</p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Source Dataset</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>source_dataset</code> · range <a href="../SourceDataset/">SourceDataset</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Exposure values are derived from a published data product (for example Daymet, a daily weather dataset). This block names that product precisely — including its version, citation, and license — so anyone can find it and check its documentation.</p>
+</div>
+<div class="envar-desc">
+<p>Source dataset object — see envar_source.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without the upstream product's identity, version, DOI, and license, the record cannot be cited, its documented biases cannot be looked up, and reuse terms are unknown — and two records built from different product versions cannot be told apart.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>, <a href="https://www.doi.org/">https://www.doi.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Tool Run</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>tool_run</code> · range <a href="../ToolRun/">ToolRun</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This block is the receipt for the software step that produced the values: which program ran, which exact version, with what settings, and when. With it, someone else can re-run the same step and get the same numbers.</p>
+</div>
+<div class="envar-desc">
+<p>The current ToolRun — see envar_toolrun.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without the exact tool name, version, container image, parameters, and timestamp, the record cannot be re-run: "we used the daymet tool" is not reproducible, but a pinned container invocation is.</p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Linkage Method</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>linkage_method</code> · range <a href="../LinkageMethod/">LinkageMethod</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Environmental data describes places, but health research is about people. This block records how the value for a place was attached to a particular person — for example, by looking up the map cell containing their home address — since that step involves real choices that affect the result.</p>
+</div>
+<div class="envar-desc">
+<p>Linkage-method object — see envar_linkage.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Attaching a place-based value to a person is a lossy, choice-laden step (geocoding, point vs buffer extraction, date alignment) — the "linkage descriptor" gap the GECC/EIRENE forum names as central. Without it, two studies using the same data product can differ solely through undocumented joins.</p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Schema Version</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>schema_version</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Schemas change over time, like editions of a paper form. This is the edition number stamped on the document, so anyone reading it knows exactly which version of the form was filled in and can interpret the fields accordingly.</p>
+</div>
+<div class="envar-desc">
+<p>The version of the EnVar micro-schema this document conforms to. Required on every sidecar so downstream consumers can branch on schema evolution.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>0.1</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Downstream consumers must branch on schema evolution: a parser built for one version will silently misread or wrongly reject sidecars written against another. Without this slot there is no way to tell which iteration of the schema a document targets.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://semver.org/">https://semver.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Record Identifier</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>provenance_id</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>A unique serial number for this metadata document, like the tracking number on a parcel. Wherever the data value ends up, that number lets you look up exactly where it came from and how it was made.</p>
+</div>
+<div class="envar-desc">
+<p>Stable identifier for this sidecar / record (ULID recommended). This is the value the downstream health-data layer's source-value field carries to link a row back to its provenance (for OMOP, that field is <code>external_exposure.exposure_source_value</code>).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>01HFA7K8R3M6XP-daymet-deposit</code> — <span class="egdesc">ULID-based sidecar identifier for the Daymet Tmax deposit</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This identifier is what the downstream health-data layer's source-value field carries (for OMOP, <code>external_exposure.exposure_source_value</code>); it is the only hook that links an exposure value in the health layer back to its full spatial, temporal, and model provenance. Omit it and the value becomes untraceable — its metadata can never be recovered.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://github.com/ulid/spec">https://github.com/ulid/spec</a>, <a href="https://ohdsi.github.io/CommonDataModel/">https://ohdsi.github.io/CommonDataModel/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">PHI Status</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>phi_status</code> · range <a href="../../enums/PhiStatusEnum/">PhiStatusEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>PHI (protected health information) means private medical details about an identifiable person. This flag is a written promise on the document saying "no private patient information inside", so it can be passed around and published safely.</p>
+</div>
+<div class="envar-desc">
+<p>Whether the sidecar carries any Protected Health Information. A record-level safety assertion; by design, sidecars are PHI-free.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>no_phi</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="The sidecar carries no PHI."><code>no_phi</code> <span class="vdesc">The sidecar carries no PHI</span></span>
+<span class="envar-value" title="The sidecar carries aggregated values with no PHI."><code>aggregated_no_phi</code> <span class="vdesc">The sidecar carries aggregated values with no PHI</span></span>
+<span class="envar-value" title="The sidecar carries PHI. Should never happen; sidecars are by design PHI-free."><code>phi_present</code> <span class="vdesc">The sidecar carries PHI</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Sidecars are designed to be PHI-free, and this slot is the explicit machine-readable assertion of that. Without it, every sharing, deposit, or export step must treat the document as potentially containing patient data and re-review it manually before it can leave a protected environment.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.hhs.gov/hipaa/for-professionals/privacy/index.html">https://www.hhs.gov/hipaa/for-professionals/privacy/index.html</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">1 field</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Derived Heat Metric</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>derived_heat_metric</code> · range <a href="../DerivedHeatMetric/">DerivedHeatMetric</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Some heat measures are not read from a thermometer but calculated from several ingredients (temperature, humidity, wind, sunshine) using a chosen formula. This block records which formula and ingredients were used — it is only needed when the variable is one of these computed heat metrics.</p>
+</div>
+<div class="envar-desc">
+<p>Heat-metric methodology, present when the variable is a derived heat metric — see envar_heat_metric. Omitted for non-heat variables.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">illustrative outdoor-WBGT methodology block — not part of the tmax scenario, where this slot is omitted</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Heat metrics like WBGT or Heat Index can be computed by several non-equivalent equations from different inputs, and heat-wave flags depend on the threshold definition; the heat-epidemiology literature flags these choices as the main sources of cross-study disagreement, so omitting the block for a heat metric makes the record uncomparable.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">3 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Uncertainty</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>uncertainty</code> · range <a href="../Uncertainty/">Uncertainty</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>No estimate is perfect. This block says how far off the numbers might be and what was done about gaps in the data, so users know how much confidence to place in each value.</p>
+</div>
+<div class="envar-desc">
+<p>Uncertainty object — see envar_uncertainty.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Exposure values are model estimates with error; without recorded per-value or aggregate uncertainty and missing-data handling, downstream analyses treat estimates as exact, and exposure-measurement error propagates invisibly into health-effect estimates.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Provenance Chain</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>provenance_chain</code> · range <a href="../ProvenanceChain/">ProvenanceChain</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Data usually passes through several tools before the final value appears — download, geocode, extract. This block lists those earlier steps in order, like a chain of custody reaching back to the original raw source.</p>
+</div>
+<div class="envar-desc">
+<p>Ordered W3C-PROV-style chain of upstream tool runs — see envar_toolrun. Recommended (not required): a record is reproducible in principle without the full chain, but real reproduction needs it.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The final tool run is rarely the whole story — downloads, geocoding, and intermediate transforms precede it; without the ordered chain back to the raw source, end-to-end reproduction and error tracing are impossible even when the last step is pinned.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.w3.org/TR/prov-o/">https://www.w3.org/TR/prov-o/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Health-Layer Linkage</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>health_layer_linkage</code> · range <a href="../HealthLayerLinkage/">HealthLayerLinkage</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Health studies keep patient data in large standard databases. This block notes which of those systems the exposure values were wired into and through which field, so someone browsing the health data can find their way back to this record.</p>
+</div>
+<div class="envar-desc">
+<p>Downstream health-data-layer linkage hooks (OMOP, BDC, …) — see envar_health_layer. Optional: its members are Recommended/Optional, and the Core PHI assertion lives at the record root (<code>phi_status</code>).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Naming the downstream health-data layer (OMOP, BDC, …) and the join field makes the exposure record findable from the clinical side; without it the sidecar and the health records it serves drift apart, and the link must be reconstructed by hand.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://ohdsi.github.io/CommonDataModel/">https://ohdsi.github.io/CommonDataModel/</a>, <a href="https://biodatacatalyst.nhlbi.nih.gov/">https://biodatacatalyst.nhlbi.nih.gov/</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">1 field</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">FAIR Deposit Metadata</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_metadata</code> · range <a href="../DepositMetadata/">DepositMetadata</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>If this record and its data are published in a public archive (such as Zenodo), this block holds the publication details: the permanent DOI link, where it lives, and the license saying how others may use it.</p>
+</div>
+<div class="envar-desc">
+<p>FAIR-deposit metadata, present when the sidecar is intended to travel with a published deposit — see envar_health_layer.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>None</code> — <span class="egdesc">abridged — see tests/data/valid/EnvironmentalExposureRecord-tmax_ideal.yaml for a full instance</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>When the sidecar travels with a published deposit, the DOI, repository, and license are what make the object findable, citable, and legally reusable — omitting them strands a public artifact without citation or reuse terms. Optional because most records are never deposited.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.go-fair.org/fair-principles/">https://www.go-fair.org/fair-principles/</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Subject (Patient or Cohort)</strong></td>
+<td><code>subject</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>The patient or cohort the exposure value is attached to</td>
+</tr>
+<tr>
+<td><strong>Variable Identity</strong></td>
+<td><code>variable_identity</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../VariableIdentity/">VariableIdentity</a></td>
+<td>The variable identity object — what physical quantity is being captured</td>
+</tr>
+<tr>
+<td><strong>Spatial Reference</strong></td>
+<td><code>spatial_reference</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../SpatialReference/">SpatialReference</a></td>
+<td>Spatial reference object describing the native grid and extraction</td>
+</tr>
+<tr>
+<td><strong>Temporal Reference</strong></td>
+<td><code>temporal_reference</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../TemporalReference/">TemporalReference</a></td>
+<td>Temporal reference object describing resolution, aggregation, and day-boundar...</td>
+</tr>
+<tr>
+<td><strong>Exposure Model</strong></td>
+<td><code>exposure_model</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../ExposureModel/">ExposureModel</a></td>
+<td>The exposure-model object describing how values were produced</td>
+</tr>
+<tr>
+<td><strong>Uncertainty</strong></td>
+<td><code>uncertainty</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../Uncertainty/">Uncertainty</a></td>
+<td>Uncertainty object — see envar_uncertainty</td>
+</tr>
+<tr>
+<td><strong>Derived Heat Metric</strong></td>
+<td><code>derived_heat_metric</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../DerivedHeatMetric/">DerivedHeatMetric</a></td>
+<td>Heat-metric methodology, present when the variable is a derived heat metric —...</td>
+</tr>
+<tr>
+<td><strong>Data Layout</strong></td>
+<td><code>data_layout</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../DataLayout/">DataLayout</a></td>
+<td>Data-layout object binding this sidecar to the columns of the companion data ...</td>
+</tr>
+<tr>
+<td><strong>Source Dataset</strong></td>
+<td><code>source_dataset</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../SourceDataset/">SourceDataset</a></td>
+<td>Source dataset object — see envar_source</td>
+</tr>
+<tr>
+<td><strong>Tool Run</strong></td>
+<td><code>tool_run</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../ToolRun/">ToolRun</a></td>
+<td>The current ToolRun — see envar_toolrun</td>
+</tr>
+<tr>
+<td><strong>Provenance Chain</strong></td>
+<td><code>provenance_chain</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../ProvenanceChain/">ProvenanceChain</a></td>
+<td>Ordered W3C-PROV-style chain of upstream tool runs — see envar_toolrun</td>
+</tr>
+<tr>
+<td><strong>Linkage Method</strong></td>
+<td><code>linkage_method</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../LinkageMethod/">LinkageMethod</a></td>
+<td>Linkage-method object — see envar_linkage</td>
+</tr>
+<tr>
+<td><strong>Health-Layer Linkage</strong></td>
+<td><code>health_layer_linkage</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../HealthLayerLinkage/">HealthLayerLinkage</a></td>
+<td>Downstream health-data-layer linkage hooks (OMOP, BDC, …) — see envar_health_...</td>
+</tr>
+<tr>
+<td><strong>FAIR Deposit Metadata</strong></td>
+<td><code>deposit_metadata</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../DepositMetadata/">DepositMetadata</a></td>
+<td>FAIR-deposit metadata, present when the sidecar is intended to travel with a ...</td>
+</tr>
+<tr>
+<td><strong>Schema Version</strong></td>
+<td><code>schema_version</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>The version of the EnVar micro-schema this document conforms to</td>
+</tr>
+<tr>
+<td><strong>Record Identifier</strong></td>
+<td><code>provenance_id</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>Stable identifier for this sidecar / record (ULID recommended)</td>
+</tr>
+<tr>
+<td><strong>PHI Status</strong></td>
+<td><code>phi_status</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/PhiStatusEnum/">PhiStatusEnum</a></td>
+<td>Whether the sidecar carries any Protected Health Information</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class DailyMinTemperatureRecord
     click DailyMinTemperatureRecord href "../../classes/DailyMinTemperatureRecord/"
@@ -528,161 +1135,6 @@
 
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a><ul>
-<li><strong>DailyMinTemperatureRecord</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/subject/">subject</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The patient or cohort the exposure value is attached to</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/variable_identity/">variable_identity</a></td>
-<td>1 <br/> <a href="../VariableIdentity/">VariableIdentity</a></td>
-<td>The variable identity object — what physical quantity is being captured</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/spatial_reference/">spatial_reference</a></td>
-<td>1 <br/> <a href="../SpatialReference/">SpatialReference</a></td>
-<td>Spatial reference object describing the native grid and extraction</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/temporal_reference/">temporal_reference</a></td>
-<td>1 <br/> <a href="../TemporalReference/">TemporalReference</a></td>
-<td>Temporal reference object describing resolution, aggregation, and day-boundar...</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model/">exposure_model</a></td>
-<td>1 <br/> <a href="../ExposureModel/">ExposureModel</a></td>
-<td>The exposure-model object describing how values were produced</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uncertainty/">uncertainty</a></td>
-<td>0..1 <br/> <a href="../Uncertainty/">Uncertainty</a></td>
-<td>Uncertainty object — see envar_uncertainty</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/derived_heat_metric/">derived_heat_metric</a></td>
-<td>0..1 <br/> <a href="../DerivedHeatMetric/">DerivedHeatMetric</a></td>
-<td>Heat-metric methodology, present when the variable is a derived heat metric —...</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/data_layout/">data_layout</a></td>
-<td>1 <br/> <a href="../DataLayout/">DataLayout</a></td>
-<td>Data-layout object binding this sidecar to the columns of the companion data ...</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/source_dataset/">source_dataset</a></td>
-<td>1 <br/> <a href="../SourceDataset/">SourceDataset</a></td>
-<td>Source dataset object — see envar_source</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/tool_run/">tool_run</a></td>
-<td>1 <br/> <a href="../ToolRun/">ToolRun</a></td>
-<td>The current ToolRun — see envar_toolrun</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/provenance_chain/">provenance_chain</a></td>
-<td>0..1 <br/> <a href="../ProvenanceChain/">ProvenanceChain</a></td>
-<td>Ordered W3C-PROV-style chain of upstream tool runs — see envar_toolrun</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/linkage_method/">linkage_method</a></td>
-<td>1 <br/> <a href="../LinkageMethod/">LinkageMethod</a></td>
-<td>Linkage-method object — see envar_linkage</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/health_layer_linkage/">health_layer_linkage</a></td>
-<td>0..1 <br/> <a href="../HealthLayerLinkage/">HealthLayerLinkage</a></td>
-<td>Downstream health-data-layer linkage hooks (OMOP, BDC, …) — see envar_health_...</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/deposit_metadata/">deposit_metadata</a></td>
-<td>0..1 <br/> <a href="../DepositMetadata/">DepositMetadata</a></td>
-<td>FAIR-deposit metadata, present when the sidecar is intended to travel with a ...</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/schema_version/">schema_version</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The version of the EnVar micro-schema this document conforms to</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/provenance_id/">provenance_id</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Stable identifier for this sidecar / record (ULID recommended)</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/phi_status/">phi_status</a></td>
-<td>1 <br/> <a href="../../enums/PhiStatusEnum/">PhiStatusEnum</a></td>
-<td>Whether the sidecar carries any Protected Health Information</td>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="https://cfconventions.org/standard-names.html">https://cfconventions.org/standard-names.html</a></li>
-<li><a href="https://ucum.org/">https://ucum.org/</a></li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>envar:DailyMinTemperatureRecord</td>
-</tr>
-<tr>
-<td>native</td>
-<td>envar:DailyMinTemperatureRecord</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DailyMinTemperatureRecord</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Canonical</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">daily</span><span class="nv"> </span><span class="s">minimum</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">m</span><span class="nv"> </span><span class="s">air</span><span class="nv"> </span><span class="s">temperature</span><span class="nv"> </span><span class="s">(Tmin).</span><span class="nv"> </span><span class="s">Pins</span>
 <span class="w">  </span><span class="s">`standard_name</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">CF:air_temperature`,</span><span class="nv"> </span><span class="s">`cf_cell_methods</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">"time:</span><span class="nv"> </span><span class="s">minimum"`,</span><span class="nv"> </span><span class="s">`units_ucum</span>
@@ -692,20 +1144,7 @@
 <span class="nt">see_also</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/standard-names.html</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
-<span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnvironmentalExposureRecord</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DailyMinTemperatureRecord</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Canonical</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">daily</span><span class="nv"> </span><span class="s">minimum</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">m</span><span class="nv"> </span><span class="s">air</span><span class="nv"> </span><span class="s">temperature</span><span class="nv"> </span><span class="s">(Tmin).</span><span class="nv"> </span><span class="s">Pins</span>
-<span class="w">  </span><span class="s">`standard_name</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">CF:air_temperature`,</span><span class="nv"> </span><span class="s">`cf_cell_methods</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">"time:</span><span class="nv"> </span><span class="s">minimum"`,</span><span class="nv"> </span><span class="s">`units_ucum</span>
-<span class="w">  </span><span class="s">=</span><span class="nv"> </span><span class="s">Cel`,</span><span class="nv"> </span><span class="s">`value_data_type</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">continuous_numeric`.'</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daily Minimum Temperature Record</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/standard-names.html</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnvironmentalExposureRecord</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">subject</span><span class="p">:</span>
@@ -1381,6 +1820,35 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://cfconventions.org/standard-names.html">https://cfconventions.org/standard-names.html</a></li>
+<li><a href="https://ucum.org/">https://ucum.org/</a></li>
+</ul>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>envar:DailyMinTemperatureRecord</td>
+</tr>
+<tr>
+<td>native</td>
+<td>envar:DailyMinTemperatureRecord</td>
+</tr>
+</tbody>
+</table>
 </div>
 </article>
 </div>

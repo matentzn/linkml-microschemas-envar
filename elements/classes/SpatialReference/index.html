@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/SpatialReference/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Spatial Reference (SpatialReference) - linkml-microschemas-envar</title>
+<title>SpatialReference - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-spatial-reference-spatialreference">
+<a class="md-skip" href="#spatial-reference">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Spatial Reference (SpatialReference)
+              SpatialReference
             
           </span>
 </div>
@@ -262,24 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -328,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -366,10 +318,493 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-spatial-reference-spatialreference">Class: Spatial Reference (SpatialReference)</h1>
-<p><em>Spatial provenance of an environmental exposure value: the native grid / footprint of the source product, the CRS, the geographic extent, the extraction rule used to attach a value to a patient location, and the target geography type. One per record.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/SpatialReference">envar:class/SpatialReference</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="spatial-reference">Spatial Reference</h1>
+<p><span class="envar-classname">SpatialReference</span></p>
+<p class="envar-lead">Spatial provenance of an environmental exposure value: the native grid / footprint of the source product, the CRS, the geographic extent, the extraction rule used to attach a value to a patient location, and the target geography type. One per record.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">11 fields</span>
+<span class="envar-metachip">4 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/SpatialReference">envar:class/SpatialReference</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Core</span>
+<span class="envar-groupnote">Required for a valid record</span>
+<span class="envar-groupcount">4 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Native Spatial Resolution (m)</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>native_spatial_resolution_m</code> · range <a href="../../types/Float/">Float</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Gridded environmental data divides the world into square tiles, like pixels in a photo, and reports one value per tile. This field says how wide each tile is in metres — small tiles give a sharp picture of local conditions, big tiles give a blurry average over a large area.</p>
+</div>
+<div class="envar-desc">
+<p>Native spatial resolution of the source product in metres. Daymet = 1000, GridMET ≈ 4000, NARR ≈ 32000.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>1000</code> — <span class="egdesc">Daymet V4 1 km grid</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Exposure misclassification scales directly with cell size: a value from a 32 km NARR cell averages over an entire metro area while a 1 km Daymet cell resolves a neighbourhood. Without the resolution, downstream users cannot judge how precise a per-patient exposure really is or whether two studies' values are comparable.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://daymet.ornl.gov/">https://daymet.ornl.gov/</a>, <a href="https://www.climatologylab.org/gridmet.html">https://www.climatologylab.org/gridmet.html</a>, <a href="https://psl.noaa.gov/data/gridded/data.narr.html">https://psl.noaa.gov/data/gridded/data.narr.html</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Coordinate Reference System (CRS)</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>crs</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>A coordinate reference system is the agreed way of turning numbers into places on the Earth — the same pair of coordinates means different spots under different systems. Naming the system (usually as a short EPSG code) tells software exactly which convention the numbers follow.</p>
+</div>
+<div class="envar-desc">
+<p>Coordinate reference system as an EPSG identifier or PROJ string. Mandatory. E.g. <code>EPSG:4326</code> for Daymet, <code>EPSG:5072</code> for NARR Lambert Conformal Conic.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>EPSG:4326</code> — <span class="egdesc">WGS 84, used by the Daymet and ACAG PM2.5 scenarios</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without the CRS the grid cannot be placed on the Earth correctly: the same coordinate pair points to different physical locations under different reference systems, so a mismatched or missing CRS silently shifts every location and attaches exposure values to the wrong places.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://epsg.io/">https://epsg.io/</a>, <a href="https://proj.org/">https://proj.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Extraction Method</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>extraction_method</code> · range <a href="../../enums/ExtractionMethodEnum/">ExtractionMethodEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>A patient's home almost never sits exactly at the centre of a data tile, so a rule is needed to pick or blend nearby tile values into one number for that spot — take the closest tile, average the four nearest ones, and so on. This field records which rule was used.</p>
+</div>
+<div class="envar-desc">
+<p>How a gridded value was extracted at the patient's coordinates. Default for DeGAUSS daymet / narr is <code>inverse_distance_weighted_4_nearest_cells</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>inverse_distance_weighted_4_nearest_cells</code> — <span class="egdesc">DeGAUSS default for point extraction (Daymet Tmax scenario)</span></p>
+</div>
+<div class="envar-eg">
+<p><code>area_weighted_polygon_mean</code> — <span class="egdesc">polygon aggregation (ACAG PM2.5 tract scenario)</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Take the value from the single nearest grid cell."><code>nearest_cell</code> <span class="vdesc">Take the value from the single nearest grid cell</span></span>
+<span class="envar-value" title="Bilinear interpolation of the four nearest cells."><code>bilinear</code> <span class="vdesc">Bilinear interpolation of the four nearest cells</span></span>
+<span class="envar-value" title="Inverse-distance-weighted average of the 4 nearest cells. Default for DeGAUSS `daymet` and `narr`."><code>inverse_distance_weighted_4_nearest_cells</code> <span class="vdesc">Inverse-distance-weighted average of the 4 nearest cells</span></span>
+<span class="envar-value" title="Area-weighted mean of cells overlapping a polygon."><code>area_weighted_polygon_mean</code> <span class="vdesc">Area-weighted mean of cells overlapping a polygon</span></span>
+<span class="envar-value" title="Population-weighted mean over a target geography (e.g. tract)."><code>population_weighted_mean</code> <span class="vdesc">Population-weighted mean over a target geography (e</span></span>
+<span class="envar-value" title="Direct lookup at a point station observation."><code>point_station_lookup</code> <span class="vdesc">Direct lookup at a point station observation</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the single biggest lever in turning a grid into a per-person value: different extraction methods yield different exposure values at the very same point. If the method is unknown, exposure values are not reproducible and cannot be compared across studies or tool runs.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://degauss.org/">https://degauss.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Target Geography Type</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>target_geography_type</code> · range <a href="../../enums/TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This says what kind of place the value belongs to: one specific home address, a neighbourhood-sized census area, a ZIP-code area, a whole county, and so on. The bigger the unit, the more the number is a shared average rather than a personal measurement.</p>
+</div>
+<div class="envar-desc">
+<p>Geographic unit the exposure value is attached to.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>point_residence</code> — <span class="egdesc">patient's exact residence coordinates (Daymet Tmax scenario)</span></p>
+</div>
+<div class="envar-eg">
+<p><code>census_tract</code> — <span class="egdesc">tract-level aggregate (ACAG PM2.5 scenario)</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Attached to the patient's exact lat / lon."><code>point_residence</code> <span class="vdesc">Attached to the patient's exact lat / lon</span></span>
+<span class="envar-value" title="US Census Block Group."><code>census_block_group</code> <span class="vdesc">US Census Block Group</span></span>
+<span class="envar-value" title="US Census Tract."><code>census_tract</code> <span class="vdesc">US Census Tract</span></span>
+<span class="envar-value" title="ZIP Code Tabulation Area."><code>zcta</code> <span class="vdesc">ZIP Code Tabulation Area</span></span>
+<span class="envar-value" title="US County (FIPS)."><code>county</code> <span class="vdesc">US County (FIPS)</span></span>
+<span class="envar-value" title="H3 hexagon at some resolution. Resolution captured separately."><code>h3_hex</code> <span class="vdesc">H3 hexagon at some resolution</span></span>
+<span class="envar-value" title="Public water system service area polygon."><code>public_water_system</code> <span class="vdesc">Public water system service area polygon</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>An exposure pinned to an exact residence and one averaged over a whole county are fundamentally different quantities with different privacy and misclassification profiles. Without the target geography, users cannot tell how localised the value is or link it correctly to health records held at a given geographic level.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html">https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Extraction Buffer Radius (m)</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>extraction_buffer_m</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Some exposures are summarised over a circle drawn around the patient's home rather than at the exact address — for example, how much green space lies within walking distance. This field gives the radius of that circle in metres; a bigger circle averages over more surroundings.</p>
+</div>
+<div class="envar-desc">
+<p>Radius of any spatial buffer applied (e.g. greenspace at 500 / 1500 / 2500 m). Null when no buffer is applied.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>500</code> — <span class="egdesc">500 m greenspace buffer; null in the Daymet Tmax scenario (no buffer)</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>For buffer-based strategies the radius is a hyperparameter that changes the assigned exposure — greenspace within 500 m and within 2500 m of a home are different quantities. Omitting it makes buffer-derived values unreproducible and incomparable across analyses.</p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Population Weighting Source</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>population_weighting_source</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Some datasets average their tiles by giving more weight to places where more people live, so the number reflects what a typical resident experiences rather than a plain average over land. This field names the population map (and its year) that was used for that weighting.</p>
+</div>
+<div class="envar-desc">
+<p>Census vintage used for population weighting (e.g. the Spangler et al. WBGT product is population-weighted from gridMET). Null when no weighting is applied.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>GPW v4 (2020)</code> — <span class="egdesc">Gridded Population of the World v4, used in the ACAG PM2.5 scenario</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Population-weighted values depend on which population dataset and census vintage supplied the weights; the same grid weighted by 2010 versus 2020 populations gives different exposures. Without the source, a weighted value cannot be reproduced or compared with other weighted products.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html">https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html</a>, <a href="https://www.climatologylab.org/gridmet.html">https://www.climatologylab.org/gridmet.html</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">3 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Native Resolution Descriptor</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>native_spatial_resolution_descriptor</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A short plain-English phrase saying what the map data actually looks like — evenly spaced square tiles, honeycomb-shaped cells, irregular neighbourhood outlines, or individual measuring stations dotted around.</p>
+</div>
+<div class="envar-desc">
+<p>Human-readable label for the native resolution, e.g. "1 km regular grid", "H3 hex zoom 8", "census tract polygon", "point station".</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>1 km regular grid</code> — <span class="egdesc">Daymet V4 native grid</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The numeric resolution alone cannot distinguish a regular grid from hex cells, polygons, or point stations, and these layouts imply different extraction and error behaviour. Omitting the label leaves the geometry of the source data ambiguous even when the cell size is known.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Product Bounding Box</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>spatial_extent_bbox</code> · range <a href="../../types/Float/">Float</a> · cardinality * · multivalued</p>
+</div>
+<div class="envar-explain">
+<p>A bounding box is a rectangle drawn on the map that just barely contains all the data — four numbers giving its western, southern, eastern, and northern edges. Anything outside that rectangle was never covered by the dataset in the first place.</p>
+</div>
+<div class="envar-desc">
+<p>Bounding box of the source <em>product</em> (not the extracted subset), as <code>[min_lon, min_lat, max_lon, max_lat]</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>[-131.104, 14.075, -52.95, 53.038]</code> — <span class="egdesc">Daymet V4 product bounding box (CONUS + Hawaii + Puerto Rico); one float per list element, ordered min_lon, min_lat, max_lon, max_lat</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The product footprint distinguishes "no value here" (the location lies outside the product's coverage) from "missing value" (the product covers it but the value is absent). Without it, out-of-extent patients look like data gaps and can be silently misinterpreted.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://datatracker.ietf.org/doc/html/rfc7946#section-5">https://datatracker.ietf.org/doc/html/rfc7946#section-5</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Product Extent Description</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>spatial_extent_descriptor</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A plain-English description of where in the world the dataset has data — for example "the continental United States plus Hawaii and Puerto Rico" — so you can tell at a glance whether your study area is covered.</p>
+</div>
+<div class="envar-desc">
+<p>Human-readable description of the product extent, e.g. "CONUS + Hawaii + Puerto Rico", "global land surface 60°S-80°N".</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>CONUS + Hawaii + Puerto Rico</code> — <span class="egdesc">Daymet V4 product extent</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The numeric bounding box is precise but opaque; a human-readable extent lets reviewers and data users sanity-check coverage at a glance (e.g. spotting that Alaska is not included) without decoding coordinates.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Buffer Radius Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>extraction_buffer_m_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When the circle-radius field above is left empty, this field says why — most often because no circle was drawn at all and the value was taken straight at the address. It turns a silent blank into an explicit, trustworthy statement.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>extraction_buffer_m</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code> — <span class="egdesc">no buffer is used for point extraction (Daymet Tmax scenario)</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>An empty buffer field is ambiguous: it could mean no buffer was used or that the radius was simply not recorded. Stating the reason makes the absence deliberate and checkable, so validators and reviewers do not flag a legitimate point extraction as incomplete metadata.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Population Weighting Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>population_weighting_source_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When the population-weighting field above is empty, this field explains why — usually because the dataset is a plain average with no population weighting at all. It makes the emptiness intentional rather than an oversight.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>population_weighting_source</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code> — <span class="egdesc">no population weighting applied (Daymet Tmax scenario)</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A blank weighting source is ambiguous between "no weighting was applied" and "the source was not recorded". Recording the reason keeps unweighted products from looking like incompletely documented weighted ones and lets automated checks pass legitimately null records.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Native Spatial Resolution (m)</strong></td>
+<td><code>native_spatial_resolution_m</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>Native spatial resolution of the source product in metres</td>
+</tr>
+<tr>
+<td><strong>Native Resolution Descriptor</strong></td>
+<td><code>native_spatial_resolution_descriptor</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Human-readable label for the native resolution, e</td>
+</tr>
+<tr>
+<td><strong>Coordinate Reference System (CRS)</strong></td>
+<td><code>crs</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>Coordinate reference system as an EPSG identifier or PROJ string</td>
+</tr>
+<tr>
+<td><strong>Product Bounding Box</strong></td>
+<td><code>spatial_extent_bbox</code></td>
+<td>recommended</td>
+<td>* <br/> <a href="../../types/Float/">Float</a></td>
+<td>Bounding box of the source <em>product</em> (not the extracted subset), as `[min_lon...</td>
+</tr>
+<tr>
+<td><strong>Product Extent Description</strong></td>
+<td><code>spatial_extent_descriptor</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Human-readable description of the product extent, e</td>
+</tr>
+<tr>
+<td><strong>Extraction Method</strong></td>
+<td><code>extraction_method</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/ExtractionMethodEnum/">ExtractionMethodEnum</a></td>
+<td>How a gridded value was extracted at the patient's coordinates</td>
+</tr>
+<tr>
+<td><strong>Extraction Buffer Radius (m)</strong></td>
+<td><code>extraction_buffer_m</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>Radius of any spatial buffer applied (e</td>
+</tr>
+<tr>
+<td><strong>Reason Buffer Radius Is Missing</strong></td>
+<td><code>extraction_buffer_m_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>extraction_buffer_m</code> is null</td>
+</tr>
+<tr>
+<td><strong>Population Weighting Source</strong></td>
+<td><code>population_weighting_source</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Census vintage used for population weighting (e</td>
+</tr>
+<tr>
+<td><strong>Reason Population Weighting Is Missing</strong></td>
+<td><code>population_weighting_source_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>population_weighting_source</code> is null</td>
+</tr>
+<tr>
+<td><strong>Target Geography Type</strong></td>
+<td><code>target_geography_type</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a></td>
+<td>Geographic unit the exposure value is attached to</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class SpatialReference
     click SpatialReference href "../../classes/SpatialReference/"
@@ -432,177 +867,6 @@
 
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/native_spatial_resolution_m/">native_spatial_resolution_m</a></td>
-<td>1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>Native spatial resolution of the source product in metres</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/native_spatial_resolution_descriptor/">native_spatial_resolution_descriptor</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Human-readable label for the native resolution, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/crs/">crs</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Coordinate reference system as an EPSG identifier or PROJ string</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/spatial_extent_bbox/">spatial_extent_bbox</a></td>
-<td>* <br/> <a href="../../types/Float/">Float</a></td>
-<td>Bounding box of the source <em>product</em> (not the extracted subset), as `[min_lon...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/spatial_extent_descriptor/">spatial_extent_descriptor</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Human-readable description of the product extent, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/extraction_method/">extraction_method</a></td>
-<td>1 <br/> <a href="../../enums/ExtractionMethodEnum/">ExtractionMethodEnum</a></td>
-<td>How a gridded value was extracted at the patient's coordinates</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/extraction_buffer_m/">extraction_buffer_m</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>Radius of any spatial buffer applied (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/extraction_buffer_m_missing_reason/">extraction_buffer_m_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>extraction_buffer_m</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/population_weighting_source/">population_weighting_source</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Census vintage used for population weighting (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/population_weighting_source_missing_reason/">population_weighting_source_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>population_weighting_source</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/target_geography_type/">target_geography_type</a></td>
-<td>1 <br/> <a href="../../enums/TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a></td>
-<td>Geographic unit the exposure value is attached to</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/spatial_reference/">spatial_reference</a></td>
-<td>range</td>
-<td><a href="./">SpatialReference</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/spatial_reference/">spatial_reference</a></td>
-<td>range</td>
-<td><a href="./">SpatialReference</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/spatial_reference/">spatial_reference</a></td>
-<td>range</td>
-<td><a href="./">SpatialReference</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/spatial_reference/">spatial_reference</a></td>
-<td>range</td>
-<td><a href="./">SpatialReference</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/spatial_reference/">spatial_reference</a></td>
-<td>range</td>
-<td><a href="./">SpatialReference</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="https://epsg.io/">https://epsg.io/</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Coordinate_reference_system">https://en.wikipedia.org/wiki/Coordinate_reference_system</a></li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>domain_of_use</td>
-<td>environmental_exposure</td>
-</tr>
-</tbody>
-</table>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>envar:SpatialReference</td>
-</tr>
-<tr>
-<td>native</td>
-<td>envar:SpatialReference</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="nt">annotations</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
@@ -617,49 +881,7 @@
 <span class="nt">see_also</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://epsg.io/</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Coordinate_reference_system</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_spatial_resolution_m</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_spatial_resolution_descriptor</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crs</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spatial_extent_bbox</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spatial_extent_descriptor</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extraction_method</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extraction_buffer_m</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extraction_buffer_m_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">population_weighting_source</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">population_weighting_source_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_geography_type</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">crs</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crs</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">extraction_method</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">extraction_method</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">native_spatial_resolution_m</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_spatial_resolution_m</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">target_geography_type</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_geography_type</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Spatial</span><span class="nv"> </span><span class="s">provenance</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">environmental</span><span class="nv"> </span><span class="s">exposure</span><span class="nv"> </span><span class="s">value:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">grid</span>
-<span class="w">  </span><span class="s">/</span><span class="nv"> </span><span class="s">footprint</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">product,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">CRS,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">geographic</span><span class="nv"> </span><span class="s">extent,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">extraction</span>
-<span class="w">  </span><span class="s">rule</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">attach</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">patient</span><span class="nv"> </span><span class="s">location,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">target</span><span class="nv"> </span><span class="s">geography</span><span class="nv"> </span><span class="s">type.</span>
-<span class="w">  </span><span class="s">One</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">record.'</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Spatial Reference</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://epsg.io/</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Coordinate_reference_system</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_usage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">crs</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">crs</span>
@@ -704,7 +926,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://daymet.ornl.gov/</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.climatologylab.org/gridmet.html</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://psl.noaa.gov/data/gridded/data.narr.html</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -734,7 +955,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1 km regular grid</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet V4 native grid</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -768,7 +988,6 @@
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://epsg.io/</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://proj.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -802,7 +1021,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://datatracker.ietf.org/doc/html/rfc7946#section-5</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -831,7 +1049,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CONUS + Hawaii + Puerto Rico</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet V4 product extent</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -865,7 +1082,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://degauss.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -901,7 +1117,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'500'</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500 m greenspace buffer; null in the Daymet Tmax scenario (no buffer)</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -930,7 +1145,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no buffer is used for point extraction (Daymet Tmax scenario)</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -970,7 +1184,6 @@
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.climatologylab.org/gridmet.html</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -998,7 +1211,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no population weighting applied (Daymet Tmax scenario)</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -1032,7 +1244,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.census.gov/programs-surveys/geography/guidance/geo-areas.html</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SpatialReference</span>
@@ -1040,6 +1251,50 @@
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://epsg.io/">https://epsg.io/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Coordinate_reference_system">https://en.wikipedia.org/wiki/Coordinate_reference_system</a></li>
+</ul>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain_of_use</td>
+<td>environmental_exposure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>envar:SpatialReference</td>
+</tr>
+<tr>
+<td>native</td>
+<td>envar:SpatialReference</td>
+</tr>
+</tbody>
+</table>
 </div>
 </article>
 </div>

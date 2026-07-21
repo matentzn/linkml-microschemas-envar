@@ -52,6 +52,8 @@
       
     
     
+      <link rel="stylesheet" href="../css/atlas.css">
+    
       <link rel="stylesheet" href="../css/ansi-colours.css">
     
       <link rel="stylesheet" href="../css/jupyter-cells.css">
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#envar-microschemas-umbrella-schema" class="md-skip">
+        <a href="#classes" class="md-skip">
           Skip to content
         </a>
       
@@ -328,8 +330,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -372,8 +372,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -386,17 +384,6 @@
     <span class="md-ellipsis">
       
         Classes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Slots
       
     </span>
   </a>
@@ -426,10 +413,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#subsets" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Subsets
+        Slots
       
     </span>
   </a>
@@ -623,8 +610,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -637,17 +622,6 @@
     <span class="md-ellipsis">
       
         Classes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Slots
       
     </span>
   </a>
@@ -677,10 +651,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#subsets" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Subsets
+        Slots
       
     </span>
   </a>
@@ -708,32 +682,43 @@
   
 
 
-<h1 id="envar-microschemas-umbrella-schema">EnVar Microschemas — Umbrella Schema</h1>
-<p>LinkML microschemas for environmental exposure variables (EnVar). Initial
-scope: heat-related exposures (Tmax, WBGT, heat index, heat-wave flags)
-and the surrounding provenance metadata needed to load them into OMOP
-external_exposure with full reproducibility.</p>
-<p>This umbrella schema imports the fourteen modules that together define the
-EnVar metadata layer:</p>
-<ul>
-<li>envar_common         shared enums and slots</li>
-<li>envar_variable       variable identity (CF, UCUM, target-vocab concept, ECTO, ENVO)</li>
-<li>envar_layout         data layout (column bindings into the companion data file)</li>
-<li>envar_spatial        spatial reference, extraction</li>
-<li>envar_temporal       temporal reference, day-boundary convention</li>
-<li>envar_source         upstream source dataset</li>
-<li>envar_model          exposure model character</li>
-<li>envar_uncertainty    uncertainty and quality</li>
-<li>envar_linkage        gridded-to-patient linkage</li>
-<li>envar_toolrun        tool run and W3C-PROV provenance chain</li>
-<li>envar_heat_metric    derived heat metrics (WBGT, HI, UTCI, heat-wave)</li>
-<li>envar_health_layer   health-data-layer linkage (OMOP, BDC, …) and FAIR deposit</li>
-<li>envar_record         the top EnvironmentalExposureRecord composite</li>
-<li>envar_examples       concrete record subclasses (Tmax, Tmin, WBGT, EHD)</li>
-</ul>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></p>
-<p>Name: linkml-microschemas-envar</p>
-<h2 id="classes">Classes</h2>
+<div class="envar-atlas">
+<div class="envar-atlas-hero">
+<p class="envar-eyebrow">EnVar microschemas · class atlas</p>
+<h1>EnVar Microschemas — Umbrella Schema</h1>
+<p class="envar-lead">LinkML microschemas for environmental exposure variables (EnVar). Initial scope: heat-related exposures (Tmax, WBGT, heat index, heat-wave flags) and the surrounding provenance metadata needed to load them into OMOP external_exposure with full reproducibility…</p>
+</div>
+<a class="envar-recordcard" href="classes/EnvironmentalExposureRecord/">
+<span class="envar-eyebrow">The composite record · <code>EnvironmentalExposureRecord</code></span>
+<span class="envar-recordname">Environmental Exposure Record</span>
+<span class="envar-recorddesc">A single environmental-exposure record sidecar: the complete metadata graph t...</span>
+</a>
+<p class="envar-sectionlabel">What the record composes</p>
+<div class="envar-tiergroup">
+<div class="envar-grouphead"><span class="envar-groupname">Core</span><span class="envar-groupnote">Required for every valid record</span><span class="envar-groupcount">8 components</span></div>
+<div class="envar-tiles"><a class="envar-tile core" href="classes/VariableIdentity/"><span class="envar-tilehead"><span class="envar-tilename">Variable Identity</span><span class="envar-tileslot">VariableIdentity · via variable_identity</span></span><span class="envar-tiledesc">The identity and semantics of an environmental exposure variable — what physi...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 18 fields</span></a><a class="envar-tile core" href="classes/SpatialReference/"><span class="envar-tilehead"><span class="envar-tilename">Spatial Reference</span><span class="envar-tileslot">SpatialReference · via spatial_reference</span></span><span class="envar-tiledesc">Spatial provenance of an environmental exposure value: the native grid / foot...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 11 fields</span></a><a class="envar-tile core" href="classes/TemporalReference/"><span class="envar-tilehead"><span class="envar-tilename">Temporal Reference</span><span class="envar-tileslot">TemporalReference · via temporal_reference</span></span><span class="envar-tiledesc">Temporal provenance of an environmental exposure value: native temporal grain...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 9 fields</span></a><a class="envar-tile core" href="classes/ExposureModel/"><span class="envar-tilehead"><span class="envar-tilename">Exposure Model</span><span class="envar-tileslot">ExposureModel · via exposure_model</span></span><span class="envar-tiledesc">The model class that produced the values (interpolation, reanalysis, ML, stat...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 11 fields</span></a><a class="envar-tile core" href="classes/DataLayout/"><span class="envar-tilehead"><span class="envar-tilename">Data Layout</span><span class="envar-tileslot">DataLayout · via data_layout</span></span><span class="envar-tiledesc">How the companion data file (CSV / parquet) is laid out and how this record's...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 11 fields</span></a><a class="envar-tile core" href="classes/SourceDataset/"><span class="envar-tilehead"><span class="envar-tilename">Source Dataset</span><span class="envar-tileslot">SourceDataset · via source_dataset</span></span><span class="envar-tiledesc">The upstream gridded / station product the exposure values originate from</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 18 fields</span></a><a class="envar-tile core" href="classes/ToolRun/"><span class="envar-tilehead"><span class="envar-tilename">Tool Run</span><span class="envar-tileslot">ToolRun · via tool_run</span></span><span class="envar-tiledesc">A single tool invocation that produced an output from one or more inputs: too...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 17 fields</span></a><a class="envar-tile core" href="classes/LinkageMethod/"><span class="envar-tilehead"><span class="envar-tilename">Linkage Method</span><span class="envar-tileslot">LinkageMethod · via linkage_method</span></span><span class="envar-tiledesc">How a gridded environmental value gets attached to a patient: the resolution ...</span><span class="envar-tilefoot"><span class="envar-tierbadge core">core</span> · 19 fields</span></a></div>
+</div>
+<div class="envar-tiergroup">
+<div class="envar-grouphead"><span class="envar-groupname">Conditionally core</span><span class="envar-groupnote">Required in specific contexts</span><span class="envar-groupcount">1 component</span></div>
+<div class="envar-tiles"><a class="envar-tile conditionally_core" href="classes/DerivedHeatMetric/"><span class="envar-tilehead"><span class="envar-tilename">Derived Heat Metric</span><span class="envar-tileslot">DerivedHeatMetric · via derived_heat_metric</span></span><span class="envar-tiledesc">Methodology slots specific to derived heat metrics (WBGT, Heat Index, UTCI, a...</span><span class="envar-tilefoot"><span class="envar-tierbadge conditionally_core">conditionally core</span> · 26 fields</span></a></div>
+</div>
+<div class="envar-tiergroup">
+<div class="envar-grouphead"><span class="envar-groupname">Recommended</span><span class="envar-groupnote">Strongly encouraged</span><span class="envar-groupcount">3 components</span></div>
+<div class="envar-tiles"><a class="envar-tile recommended" href="classes/Uncertainty/"><span class="envar-tilehead"><span class="envar-tilename">Uncertainty and Quality</span><span class="envar-tileslot">Uncertainty · via uncertainty</span></span><span class="envar-tiledesc">Uncertainty and quality character of a value series: per-value uncertainty ty...</span><span class="envar-tilefoot"><span class="envar-tierbadge recommended">recommended</span> · 13 fields</span></a><a class="envar-tile recommended" href="classes/ProvenanceChain/"><span class="envar-tilehead"><span class="envar-tilename">Provenance Chain</span><span class="envar-tileslot">ProvenanceChain · via provenance_chain</span></span><span class="envar-tiledesc">The ordered list of all upstream `ToolRun`s whose outputs were inputs to this...</span><span class="envar-tilefoot"><span class="envar-tierbadge recommended">recommended</span> · 3 fields</span></a><a class="envar-tile recommended" href="classes/HealthLayerLinkage/"><span class="envar-tilehead"><span class="envar-tilename">Health-Layer Linkage</span><span class="envar-tileslot">HealthLayerLinkage · via health_layer_linkage</span></span><span class="envar-tiledesc">Hooks the sidecar uses to be findable from a downstream health-data layer (OM...</span><span class="envar-tilefoot"><span class="envar-tierbadge recommended">recommended</span> · 4 fields</span></a></div>
+</div>
+<div class="envar-tiergroup">
+<div class="envar-grouphead"><span class="envar-groupname">Optional</span><span class="envar-groupnote">Include when available</span><span class="envar-groupcount">1 component</span></div>
+<div class="envar-tiles"><a class="envar-tile optional" href="classes/DepositMetadata/"><span class="envar-tilehead"><span class="envar-tilename">Deposit Metadata</span><span class="envar-tileslot">DepositMetadata · via deposit_metadata</span></span><span class="envar-tiledesc">Deposit-time slots required when the sidecar travels alongside a published FA...</span><span class="envar-tilefoot"><span class="envar-tierbadge optional">optional</span> · 9 fields</span></a></div>
+</div>
+<p class="envar-sectionlabel">Worked variants</p>
+<p class="envar-variantnote">Concrete record subclasses pre-wired for a specific variable — the shapes a workshop dataset actually instantiates.</p>
+<div class="envar-variants"><a class="envar-variant" href="classes/DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a><a class="envar-variant" href="classes/DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a><a class="envar-variant" href="classes/WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a><a class="envar-variant" href="classes/ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></div>
+</div>
+
+<div class="envar-atlas">
+<details class="envar-details">
+<summary>Full element index — every class, enum, type &amp; slot</summary>
+<h3 id="classes">Classes</h3>
 <table>
 <thead>
 <tr>
@@ -852,7 +837,237 @@ EnVar metadata layer:</p>
 </tr>
 </tbody>
 </table>
-<h2 id="slots">Slots</h2>
+<h3 id="enumerations">Enumerations</h3>
+<table>
+<thead>
+<tr>
+<th>Enumeration</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="enums/AddressPeriodAlignmentEnum/">AddressPeriodAlignmentEnum</a></td>
+<td>How the patient's location-over-time (the spatial axis of trajectory resoluti...</td>
+</tr>
+<tr>
+<td><a href="enums/BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a></td>
+<td>Whether and how bias correction has been applied</td>
+</tr>
+<tr>
+<td><a href="enums/BufferAggregationEnum/">BufferAggregationEnum</a></td>
+<td>Aggregation within a buffer</td>
+</tr>
+<tr>
+<td><a href="enums/CalendarEnum/">CalendarEnum</a></td>
+<td>CF <code>calendar</code> values</td>
+</tr>
+<tr>
+<td><a href="enums/ClinicalDateAssignmentEnum/">ClinicalDateAssignmentEnum</a></td>
+<td>The clinical-side mirror of <code>DayBoundaryConventionEnum</code> (envar_temporal): whi...</td>
+</tr>
+<tr>
+<td><a href="enums/ComparatorEnum/">ComparatorEnum</a></td>
+<td>Comparator for quantity values</td>
+</tr>
+<tr>
+<td><a href="enums/ConceptStatusEnum/">ConceptStatusEnum</a></td>
+<td>Status of a variable's representation in the target health-data vocabulary na...</td>
+</tr>
+<tr>
+<td><a href="enums/DataTypeEnum/">DataTypeEnum</a></td>
+<td>The data type of an exposure value</td>
+</tr>
+<tr>
+<td><a href="enums/DayBoundaryConventionEnum/">DayBoundaryConventionEnum</a></td>
+<td>Where the 24-hour day window starts</td>
+</tr>
+<tr>
+<td><a href="enums/DepositRepositoryEnum/">DepositRepositoryEnum</a></td>
+<td>Repository hosting a FAIR deposit</td>
+</tr>
+<tr>
+<td><a href="enums/EquationVariantEnum/">EquationVariantEnum</a></td>
+<td>Equation variant for a derived heat metric</td>
+</tr>
+<tr>
+<td><a href="enums/ExposureModelTypeEnum/">ExposureModelTypeEnum</a></td>
+<td>The class of model that produced the values</td>
+</tr>
+<tr>
+<td><a href="enums/ExtractionMethodEnum/">ExtractionMethodEnum</a></td>
+<td>How a gridded value was extracted at a target location</td>
+</tr>
+<tr>
+<td><a href="enums/GeocodingPrecisionEnum/">GeocodingPrecisionEnum</a></td>
+<td>Geocoder precision category, mirroring DeGAUSS `geocoder</td>
+</tr>
+<tr>
+<td><a href="enums/HealthLayerTargetEnum/">HealthLayerTargetEnum</a></td>
+<td>The downstream health-data layer a sidecar links into</td>
+</tr>
+<tr>
+<td><a href="enums/HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a></td>
+<td>Family of heat metric</td>
+</tr>
+<tr>
+<td><a href="enums/HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a></td>
+<td>How the heat-wave threshold is defined</td>
+</tr>
+<tr>
+<td><a href="enums/HomogenisationStatusEnum/">HomogenisationStatusEnum</a></td>
+<td>For station-based products, the homogenisation status of values across the re...</td>
+</tr>
+<tr>
+<td><a href="enums/IndoorOutdoorEnum/">IndoorOutdoorEnum</a></td>
+<td>Indoor / outdoor regime for derived heat metrics</td>
+</tr>
+<tr>
+<td><a href="enums/LagAlignmentEnum/">LagAlignmentEnum</a></td>
+<td>Whether the values have been pre-aligned to a clinical event window in this E...</td>
+</tr>
+<tr>
+<td><a href="enums/LinkageStrategyEnum/">LinkageStrategyEnum</a></td>
+<td>The spatial rule used to read an environmental value out of the exposure surf...</td>
+</tr>
+<tr>
+<td><a href="enums/MissingDataHandlingEnum/">MissingDataHandlingEnum</a></td>
+<td>How the source handles missing values</td>
+</tr>
+<tr>
+<td><a href="enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Controlled reasons that a slot value is missing</td>
+</tr>
+<tr>
+<td><a href="enums/PartialDayAttributionEnum/">PartialDayAttributionEnum</a></td>
+<td>How boundary / transition days of the patient's trajectory (trip start / end,...</td>
+</tr>
+<tr>
+<td><a href="enums/PhiStatusEnum/">PhiStatusEnum</a></td>
+<td>PHI content of the sidecar</td>
+</tr>
+<tr>
+<td><a href="enums/ProvenanceChainTerminusEnum/">ProvenanceChainTerminusEnum</a></td>
+<td>The kind of root of a provenance chain</td>
+</tr>
+<tr>
+<td><a href="enums/SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a></td>
+<td>Basis used for the solar-radiation input to a heat metric</td>
+</tr>
+<tr>
+<td><a href="enums/SourceNativeFormatEnum/">SourceNativeFormatEnum</a></td>
+<td>Format the source ships in</td>
+</tr>
+<tr>
+<td><a href="enums/TableOrientationEnum/">TableOrientationEnum</a></td>
+<td>How variables map onto columns in the companion data file</td>
+</tr>
+<tr>
+<td><a href="enums/TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a></td>
+<td>Geographic unit the exposure is attached to</td>
+</tr>
+<tr>
+<td><a href="enums/TemporalAggregationMethodEnum/">TemporalAggregationMethodEnum</a></td>
+<td>How sub-period values were aggregated</td>
+</tr>
+<tr>
+<td><a href="enums/TemporalResolutionEnum/">TemporalResolutionEnum</a></td>
+<td>Native temporal grain of the source product</td>
+</tr>
+<tr>
+<td><a href="enums/UncertaintyTypeEnum/">UncertaintyTypeEnum</a></td>
+<td>Kind of per-value uncertainty</td>
+</tr>
+</tbody>
+</table>
+<h3 id="types">Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="types/Boolean/">Boolean</a></td>
+<td>A binary (true or false) value</td>
+</tr>
+<tr>
+<td><a href="types/Curie/">Curie</a></td>
+<td>a compact URI</td>
+</tr>
+<tr>
+<td><a href="types/Date/">Date</a></td>
+<td>a date (year, month and day) in an idealized calendar</td>
+</tr>
+<tr>
+<td><a href="types/DateOrDatetime/">DateOrDatetime</a></td>
+<td>Either a date or a datetime</td>
+</tr>
+<tr>
+<td><a href="types/Datetime/">Datetime</a></td>
+<td>The combination of a date and time</td>
+</tr>
+<tr>
+<td><a href="types/Decimal/">Decimal</a></td>
+<td>A real number with arbitrary precision that conforms to the xsd:decimal speci...</td>
+</tr>
+<tr>
+<td><a href="types/Double/">Double</a></td>
+<td>A real number that conforms to the xsd:double specification</td>
+</tr>
+<tr>
+<td><a href="types/Float/">Float</a></td>
+<td>A real number that conforms to the xsd:float specification</td>
+</tr>
+<tr>
+<td><a href="types/Integer/">Integer</a></td>
+<td>An integer</td>
+</tr>
+<tr>
+<td><a href="types/Jsonpath/">Jsonpath</a></td>
+<td>A string encoding a JSON Path</td>
+</tr>
+<tr>
+<td><a href="types/Jsonpointer/">Jsonpointer</a></td>
+<td>A string encoding a JSON Pointer</td>
+</tr>
+<tr>
+<td><a href="types/Ncname/">Ncname</a></td>
+<td>Prefix part of CURIE</td>
+</tr>
+<tr>
+<td><a href="types/Nodeidentifier/">Nodeidentifier</a></td>
+<td>A URI, CURIE or BNODE that represents a node in a model</td>
+</tr>
+<tr>
+<td><a href="types/Objectidentifier/">Objectidentifier</a></td>
+<td>A URI or CURIE that represents an object in the model</td>
+</tr>
+<tr>
+<td><a href="types/Sparqlpath/">Sparqlpath</a></td>
+<td>A string encoding a SPARQL Property Path</td>
+</tr>
+<tr>
+<td><a href="types/String/">String</a></td>
+<td>A character string</td>
+</tr>
+<tr>
+<td><a href="types/Time/">Time</a></td>
+<td>A time object represents a (local) time of day, independent of any particular...</td>
+</tr>
+<tr>
+<td><a href="types/Uri/">Uri</a></td>
+<td>a complete URI</td>
+</tr>
+<tr>
+<td><a href="types/Uriorcurie/">Uriorcurie</a></td>
+<td>a URI or a CURIE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="slots">Slots</h3>
 <table>
 <thead>
 <tr>
@@ -1735,251 +1950,8 @@ EnVar metadata layer:</p>
 </tr>
 </tbody>
 </table>
-<h2 id="enumerations">Enumerations</h2>
-<table>
-<thead>
-<tr>
-<th>Enumeration</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="enums/AddressPeriodAlignmentEnum/">AddressPeriodAlignmentEnum</a></td>
-<td>How the patient's location-over-time (the spatial axis of trajectory resoluti...</td>
-</tr>
-<tr>
-<td><a href="enums/BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a></td>
-<td>Whether and how bias correction has been applied</td>
-</tr>
-<tr>
-<td><a href="enums/BufferAggregationEnum/">BufferAggregationEnum</a></td>
-<td>Aggregation within a buffer</td>
-</tr>
-<tr>
-<td><a href="enums/CalendarEnum/">CalendarEnum</a></td>
-<td>CF <code>calendar</code> values</td>
-</tr>
-<tr>
-<td><a href="enums/ClinicalDateAssignmentEnum/">ClinicalDateAssignmentEnum</a></td>
-<td>The clinical-side mirror of <code>DayBoundaryConventionEnum</code> (envar_temporal): whi...</td>
-</tr>
-<tr>
-<td><a href="enums/ComparatorEnum/">ComparatorEnum</a></td>
-<td>Comparator for quantity values</td>
-</tr>
-<tr>
-<td><a href="enums/ConceptStatusEnum/">ConceptStatusEnum</a></td>
-<td>Status of a variable's representation in the target health-data vocabulary na...</td>
-</tr>
-<tr>
-<td><a href="enums/DataTypeEnum/">DataTypeEnum</a></td>
-<td>The data type of an exposure value</td>
-</tr>
-<tr>
-<td><a href="enums/DayBoundaryConventionEnum/">DayBoundaryConventionEnum</a></td>
-<td>Where the 24-hour day window starts</td>
-</tr>
-<tr>
-<td><a href="enums/DepositRepositoryEnum/">DepositRepositoryEnum</a></td>
-<td>Repository hosting a FAIR deposit</td>
-</tr>
-<tr>
-<td><a href="enums/EquationVariantEnum/">EquationVariantEnum</a></td>
-<td>Equation variant for a derived heat metric</td>
-</tr>
-<tr>
-<td><a href="enums/ExposureModelTypeEnum/">ExposureModelTypeEnum</a></td>
-<td>The class of model that produced the values</td>
-</tr>
-<tr>
-<td><a href="enums/ExtractionMethodEnum/">ExtractionMethodEnum</a></td>
-<td>How a gridded value was extracted at a target location</td>
-</tr>
-<tr>
-<td><a href="enums/GeocodingPrecisionEnum/">GeocodingPrecisionEnum</a></td>
-<td>Geocoder precision category, mirroring DeGAUSS `geocoder</td>
-</tr>
-<tr>
-<td><a href="enums/HealthLayerTargetEnum/">HealthLayerTargetEnum</a></td>
-<td>The downstream health-data layer a sidecar links into</td>
-</tr>
-<tr>
-<td><a href="enums/HeatMetricFamilyEnum/">HeatMetricFamilyEnum</a></td>
-<td>Family of heat metric</td>
-</tr>
-<tr>
-<td><a href="enums/HeatWaveThresholdDefinitionEnum/">HeatWaveThresholdDefinitionEnum</a></td>
-<td>How the heat-wave threshold is defined</td>
-</tr>
-<tr>
-<td><a href="enums/HomogenisationStatusEnum/">HomogenisationStatusEnum</a></td>
-<td>For station-based products, the homogenisation status of values across the re...</td>
-</tr>
-<tr>
-<td><a href="enums/IndoorOutdoorEnum/">IndoorOutdoorEnum</a></td>
-<td>Indoor / outdoor regime for derived heat metrics</td>
-</tr>
-<tr>
-<td><a href="enums/LagAlignmentEnum/">LagAlignmentEnum</a></td>
-<td>Whether the values have been pre-aligned to a clinical event window in this E...</td>
-</tr>
-<tr>
-<td><a href="enums/LinkageStrategyEnum/">LinkageStrategyEnum</a></td>
-<td>The spatial rule used to read an environmental value out of the exposure surf...</td>
-</tr>
-<tr>
-<td><a href="enums/MissingDataHandlingEnum/">MissingDataHandlingEnum</a></td>
-<td>How the source handles missing values</td>
-</tr>
-<tr>
-<td><a href="enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Controlled reasons that a slot value is missing</td>
-</tr>
-<tr>
-<td><a href="enums/PartialDayAttributionEnum/">PartialDayAttributionEnum</a></td>
-<td>How boundary / transition days of the patient's trajectory (trip start / end,...</td>
-</tr>
-<tr>
-<td><a href="enums/PhiStatusEnum/">PhiStatusEnum</a></td>
-<td>PHI content of the sidecar</td>
-</tr>
-<tr>
-<td><a href="enums/ProvenanceChainTerminusEnum/">ProvenanceChainTerminusEnum</a></td>
-<td>The kind of root of a provenance chain</td>
-</tr>
-<tr>
-<td><a href="enums/SolarRadiationBasisEnum/">SolarRadiationBasisEnum</a></td>
-<td>Basis used for the solar-radiation input to a heat metric</td>
-</tr>
-<tr>
-<td><a href="enums/SourceNativeFormatEnum/">SourceNativeFormatEnum</a></td>
-<td>Format the source ships in</td>
-</tr>
-<tr>
-<td><a href="enums/TableOrientationEnum/">TableOrientationEnum</a></td>
-<td>How variables map onto columns in the companion data file</td>
-</tr>
-<tr>
-<td><a href="enums/TargetGeographyTypeEnum/">TargetGeographyTypeEnum</a></td>
-<td>Geographic unit the exposure is attached to</td>
-</tr>
-<tr>
-<td><a href="enums/TemporalAggregationMethodEnum/">TemporalAggregationMethodEnum</a></td>
-<td>How sub-period values were aggregated</td>
-</tr>
-<tr>
-<td><a href="enums/TemporalResolutionEnum/">TemporalResolutionEnum</a></td>
-<td>Native temporal grain of the source product</td>
-</tr>
-<tr>
-<td><a href="enums/UncertaintyTypeEnum/">UncertaintyTypeEnum</a></td>
-<td>Kind of per-value uncertainty</td>
-</tr>
-</tbody>
-</table>
-<h2 id="types">Types</h2>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="types/Boolean/">Boolean</a></td>
-<td>A binary (true or false) value</td>
-</tr>
-<tr>
-<td><a href="types/Curie/">Curie</a></td>
-<td>a compact URI</td>
-</tr>
-<tr>
-<td><a href="types/Date/">Date</a></td>
-<td>a date (year, month and day) in an idealized calendar</td>
-</tr>
-<tr>
-<td><a href="types/DateOrDatetime/">DateOrDatetime</a></td>
-<td>Either a date or a datetime</td>
-</tr>
-<tr>
-<td><a href="types/Datetime/">Datetime</a></td>
-<td>The combination of a date and time</td>
-</tr>
-<tr>
-<td><a href="types/Decimal/">Decimal</a></td>
-<td>A real number with arbitrary precision that conforms to the xsd:decimal speci...</td>
-</tr>
-<tr>
-<td><a href="types/Double/">Double</a></td>
-<td>A real number that conforms to the xsd:double specification</td>
-</tr>
-<tr>
-<td><a href="types/Float/">Float</a></td>
-<td>A real number that conforms to the xsd:float specification</td>
-</tr>
-<tr>
-<td><a href="types/Integer/">Integer</a></td>
-<td>An integer</td>
-</tr>
-<tr>
-<td><a href="types/Jsonpath/">Jsonpath</a></td>
-<td>A string encoding a JSON Path</td>
-</tr>
-<tr>
-<td><a href="types/Jsonpointer/">Jsonpointer</a></td>
-<td>A string encoding a JSON Pointer</td>
-</tr>
-<tr>
-<td><a href="types/Ncname/">Ncname</a></td>
-<td>Prefix part of CURIE</td>
-</tr>
-<tr>
-<td><a href="types/Nodeidentifier/">Nodeidentifier</a></td>
-<td>A URI, CURIE or BNODE that represents a node in a model</td>
-</tr>
-<tr>
-<td><a href="types/Objectidentifier/">Objectidentifier</a></td>
-<td>A URI or CURIE that represents an object in the model</td>
-</tr>
-<tr>
-<td><a href="types/Sparqlpath/">Sparqlpath</a></td>
-<td>A string encoding a SPARQL Property Path</td>
-</tr>
-<tr>
-<td><a href="types/String/">String</a></td>
-<td>A character string</td>
-</tr>
-<tr>
-<td><a href="types/Time/">Time</a></td>
-<td>A time object represents a (local) time of day, independent of any particular...</td>
-</tr>
-<tr>
-<td><a href="types/Uri/">Uri</a></td>
-<td>a complete URI</td>
-</tr>
-<tr>
-<td><a href="types/Uriorcurie/">Uriorcurie</a></td>
-<td>a URI or a CURIE</td>
-</tr>
-</tbody>
-</table>
-<h2 id="subsets">Subsets</h2>
-<table>
-<thead>
-<tr>
-<th>Subset</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</details>
+</div>
 
 
 

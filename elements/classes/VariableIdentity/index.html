@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/VariableIdentity/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Variable Identity (VariableIdentity) - linkml-microschemas-envar</title>
+<title>VariableIdentity - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-variable-identity-variableidentity">
+<a class="md-skip" href="#variable-identity">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Variable Identity (VariableIdentity)
+              VariableIdentity
             
           </span>
 </div>
@@ -262,49 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#rules">
-<span class="md-ellipsis">
-      
-        Rules
-      
-    </span>
-</a>
-<nav aria-label="Rules" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
-</span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_2">
-<span class="md-ellipsis">
-</span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -353,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -391,10 +318,756 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-variable-identity-variableidentity">Class: Variable Identity (VariableIdentity)</h1>
-<p><em>The identity and semantics of an environmental exposure variable — what physical quantity is being captured, in what units, and how it binds to community vocabularies. One per record.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/VariableIdentity">envar:class/VariableIdentity</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="variable-identity">Variable Identity</h1>
+<p><span class="envar-classname">VariableIdentity</span></p>
+<p class="envar-lead">The identity and semantics of an environmental exposure variable — what physical quantity is being captured, in what units, and how it binds to community vocabularies. One per record.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">18 fields</span>
+<span class="envar-metachip">5 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/VariableIdentity">envar:class/VariableIdentity</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Core</span>
+<span class="envar-groupnote">Required for a valid record</span>
+<span class="envar-groupcount">5 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Variable Name</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>variable_name</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Data tools give each measurement a short nickname, like <code>tmax</code> for maximum temperature. This is that nickname, written down exactly as the tool spells it, so you can go back to the source and find the same measurement again.</p>
+</div>
+<div class="envar-desc">
+<p>Short machine-readable name for the variable, usually the name the upstream tool uses for it (e.g. <code>tmax</code>, <code>tmmx</code>, <code>air.2m</code>). Identity only — not necessarily the column header in the companion data file; that binding lives in <code>DataLayout.value_column</code> (see envar_layout).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>tmax</code> — <span class="egdesc">Daymet daily maximum air temperature variable</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the handle under which the upstream product knows the variable (Daymet <code>tmax</code> vs gridMET <code>tmmx</code>). Without it the record cannot be traced back to the source product's variable, and a rerun cannot request the same quantity from the tool.</p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Standard Name</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>standard_name</code> · range <a href="../../types/Uriorcurie/">Uriorcurie</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Different tools use different nicknames for the same thing, so scientific communities maintain shared official names for physical quantities (like "air_temperature"). Tagging the record with the official name lets computers tell that two datasets measure the same thing, no matter what each dataset called it.</p>
+</div>
+<div class="envar-desc">
+<p>The standard-name identifier for the physical quantity, as a CURIE so the schema privileges no single naming authority. Use a CF Convention Standard Name where one exists (<code>CF:air_temperature</code>, <code>CF:relative_humidity</code>); for health-relevant quantities CF does not define (e.g. Heat Index, WBGT), mint a term in the project registry (<code>ENVAR:heat_index</code>) or reuse an ontology term (<code>ECTO:...</code>). The prefix carries the authority; the slot name does not. Mandatory.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>CF:air_temperature</code> — <span class="egdesc">CF Standard Name for the Daymet daily Tmax scenario</span></p>
+</div>
+<div class="envar-eg">
+<p><code>CF:mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air</code> — <span class="egdesc">CF Standard Name for the ACAG PM2.5 scenario</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the cross-agency identifier that makes the variable interoperable: without it, <code>tmax</code> from one product and <code>tmmx</code> from another cannot be recognised by machines as the same physical quantity, so records cannot be pooled or harmonised across studies.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/standard-names.html">https://cfconventions.org/standard-names.html</a>, <a href="https://obofoundry.org/ontology/ecto.html">https://obofoundry.org/ontology/ecto.html</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Units (UCUM)</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>units_ucum</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>UCUM is a compact, machine-readable spelling of the unit — <code>Cel</code> for degrees Celsius, <code>ug/m3</code> for micrograms per cubic metre — so software can convert °C to °F or check units automatically without guessing what a human-written unit string means.</p>
+</div>
+<div class="envar-desc">
+<p>The unit expressed in UCUM syntax, e.g. <code>Cel</code> for degrees Celsius, <code>K</code> for Kelvin, <code>ug/m3</code> for PM2.5 mass concentration.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>Cel</code> — <span class="egdesc">degrees Celsius (Daymet Tmax)</span></p>
+</div>
+<div class="envar-eg">
+<p><code>ug/m3</code> — <span class="egdesc">micrograms per cubic metre (PM2.5 mass concentration)</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A number without units is uninterpretable — a value of 35 could be °C or °F, a factor-of-1.8 error in an exposure analysis. UCUM is the machine-readable form that health-data layers (e.g. OMOP's unit_concept_id) align to, so omitting it also blocks automated unit conversion and downstream integration.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://ucum.org/">https://ucum.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Concept Status</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>concept_status</code> · range <a href="../../enums/ConceptStatusEnum/">ConceptStatusEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>A simple status flag saying whether the health-data catalogue already has a code for this measurement, has one in the works, or has nothing yet. It turns a silent gap into an explicit, reportable fact.</p>
+</div>
+<div class="envar-desc">
+<p>Status of this variable's coverage in the target health-data vocabulary (<code>existing</code> / <code>proposed</code> / <code>gap</code>). Makes the vocabulary gap explicit rather than silent. Required.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>gap</code> — <span class="egdesc">no OMOP concept exists yet for daily Tmax</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="A concept id is available in the target vocabulary."><code>existing</code> <span class="vdesc">A concept id is available in the target vocabulary</span></span>
+<span class="envar-value" title="A concept submission is in flight."><code>proposed</code> <span class="vdesc">A concept submission is in flight</span></span>
+<span class="envar-value" title="No concept exists yet and none is yet proposed."><code>gap</code> <span class="vdesc">No concept exists yet and none is yet proposed</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A downstream system must know whether to expect a concept id. The explicit existing/proposed/gap status makes vocabulary gaps visible and countable rather than silently null — which is what drives vocabulary-extension requests for environmental variables.</p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Value Data Type</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>value_data_type</code> · range <a href="../../enums/DataTypeEnum/">DataTypeEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Says what kind of value to expect: a decimal number that can take any value (like a temperature), a yes/no flag, or a category. Software needs this to know how to read and summarise the data correctly.</p>
+</div>
+<div class="envar-desc">
+<p>The data type of the stored exposure value.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>continuous_numeric</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Continuous numeric value (e.g. temperature in °C)."><code>continuous_numeric</code> <span class="vdesc">Continuous numeric value (e</span></span>
+<span class="envar-value" title="Categorical value (e.g. land-use class)."><code>categorical</code> <span class="vdesc">Categorical value (e</span></span>
+<span class="envar-value" title="Binary flag (e.g. extreme-heat-day yes/no)."><code>binary_flag</code> <span class="vdesc">Binary flag (e</span></span>
+<span class="envar-value" title="Integer count (e.g. consecutive heat days)."><code>count</code> <span class="vdesc">Integer count (e</span></span>
+<span class="envar-value" title="Date-stamped event (e.g. wildfire smoke plume)."><code>event_marker</code> <span class="vdesc">Date-stamped event (e</span></span>
+</div>
+</div>
+<div class="envar-block envar-coverage">
+<p class="envar-blocklabel">Covered by</p>
+<div class="envar-cov st-verified">
+<div class="envar-cov-head"><span class="envar-cov-std">omop_gaia</span><span class="envar-cov-status st-verified">verified</span><span class="envar-cov-extent">full coverage</span></div>
+<div class="envar-cov-row"><span class="k">where</span> gaia_catalog meta_etl_*.json qudt:dataType (numeric/float4)</div>
+<div class="envar-cov-row"><span class="k">evidence</span> <code>examples/scenarios/standards/omop_gaia_daymet_tmax.yaml (value_data_type)</code></div>
+<div class="envar-cov-note">GAIA registers the attribute's numeric qudt:dataType at dataset-registration time; the EnVar translation carries it first-class as value_data_type.</div>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Tells consumers how to parse and analyse the values — continuous numbers, categories, and flags need different statistics and storage. Omitting it forces guessing from the data, which fails on ambiguous cases like 0/1 columns (count, flag, or category?).</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">CF Cell Methods</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>cf_cell_methods</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A "daily temperature" value could be the day's highest reading, its average, or its lowest — very different numbers. This short standard phrase (like "time: maximum") records which one it is, in the exact wording that climate-data software already understands.</p>
+</div>
+<div class="envar-desc">
+<p>CF <code>cell_methods</code> string describing how the value summarises sub-period values, e.g. <code>time: maximum</code> for Tmax, <code>time: mean</code> for daily mean.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>time: maximum</code> — <span class="egdesc">daily maximum (Tmax)</span></p>
+</div>
+<div class="envar-eg">
+<p><code>time: mean</code> — <span class="egdesc">mean over the aggregation period (e.g. annual-mean PM2.5)</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A daily maximum and a daily mean of the same quantity carry the same standard name and units; only the aggregation statement tells them apart. Keeping the verbatim CF string also enables round-tripping against CF/NetCDF source products and the CF-consistency triple check over <code>standard_name</code> + <code>cf_cell_methods</code> + <code>units_ucum</code>. Conditionally-Core because the slot is CF-specific by design: it is mandatory when <code>standard_name</code> uses the <code>CF:</code> prefix (the context of SPEC.md validation rule 5), while a non-CF product genuinely has no verbatim <code>cell_methods</code> string to preserve — its vocabulary-neutral aggregation semantics live in the required <code>temporal_aggregation_method</code>.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods">https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Unit Conversion Formula</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>unit_conversion_formula</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When the original data used different units, this spells out the exact arithmetic that turned them into the numbers in the data file — like showing your work in a calculation, so others can check it.</p>
+</div>
+<div class="envar-desc">
+<p>The conversion from the source's native representation to the values in the companion data file, written out, e.g. <code>Cel = K - 273.15</code> or <code>K = stored × 0.1 + 220.0; Cel = K - 273.15</code>. Required whenever <code>native_units_ucum</code> is declared.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>K = stored * 0.1 + 220.0; Cel = K - 273.15</code> — <span class="egdesc">gridMET tmmx unpack-then-convert chain in the Amadeus scenario</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Twin value columns and silent container conversions are how factor-of-1.8 unit errors enter exposure analyses undetected. Once native units are declared, the bridging math is the only record of how the file's values relate to the source's — it is what makes the conversion checkable rather than trusted.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">6 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Variable Label</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>variable_label</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A friendly, spelled-out name for the measurement — like "daily maximum air temperature at 2 m" instead of the cryptic code <code>tmax</code> — so anyone reading the record knows what it is without decoding jargon.</p>
+</div>
+<div class="envar-desc">
+<p>Human-readable label, e.g. "daily maximum air temperature at 2 m".</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>daily maximum air temperature at 2 m</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Terse tool codes like <code>tmmx</code> are easy to misread (maximum vs mean) and force readers to consult external tool documentation. A plain-language label lets a human verify at a glance that the record describes the intended quantity.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Native Units (UCUM)</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>native_units_ucum</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Data producers often store numbers in different units than the ones shown to users — Kelvin instead of Celsius, or compressed integers that need unpacking. This field records the unit the source actually uses, so anyone going back to the original files knows what the raw numbers mean.</p>
+</div>
+<div class="envar-desc">
+<p>UCUM unit of the values as the <em>source product stores them</em>, when that differs from <code>units_ucum</code> (the unit of the values in the companion data file). Omit when the source already stores values in <code>units_ucum</code> — absence means "no conversion happened". Declaring it makes <code>unit_conversion_formula</code> required.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>K</code> — <span class="egdesc">gridMET tmmx stores Kelvin; the Amadeus scenario emits Celsius</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A value of 308 and a value of 35 can be the same temperature. When the source stores different units (or packed integers) than the companion file carries, the native unit is the anchor that lets a consumer check the conversion and re-read the source bytes; without it the sidecar's values cannot be traced back to the product.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://ucum.org/">https://ucum.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Target Concept Vocabulary</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>target_concept_vocabulary</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Health databases each keep their own catalogue of codes for the things they record. This slot says which catalogue the record's health-data code (and its status) comes from — for example the OMOP catalogue used by many hospital research databases.</p>
+</div>
+<div class="envar-desc">
+<p>The downstream health-data vocabulary that <code>target_concept_id</code> and <code>concept_status</code> refer to, e.g. <code>omop</code> (OHDSI Standardised Vocabulary), <code>bdc</code> (BioData Catalyst). Names the vocabulary so the schema privileges no single health-data layer.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>omop</code> — <span class="egdesc">OHDSI Standardised Vocabulary (OMOP CDM)</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p><code>target_concept_id</code> and <code>concept_status</code> are meaningless without knowing which vocabulary they refer to; naming it explicitly keeps the record portable across health-data layers (OMOP, BDC, ...) instead of silently assuming one.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://athena.ohdsi.org/">https://athena.ohdsi.org/</a>, <a href="https://biodatacatalyst.nhlbi.nih.gov/">https://biodatacatalyst.nhlbi.nih.gov/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Target Concept Identifier</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>target_concept_id</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Health databases store everything under numeric codes from a shared catalogue. This is that code for the environmental measurement, when one exists, so the exposure value can sit alongside clinical data under an identifier the database already knows.</p>
+</div>
+<div class="envar-desc">
+<p>Concept identifier for the variable in the vocabulary named by <code>target_concept_vocabulary</code> (e.g. an OHDSI concept_id). Nullable with reason for environmental variables that lack coverage today.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>2005200123</code> — <span class="egdesc">illustrative OHDSI concept_id; in the canonical Tmax and PM2.5 scenarios this slot is null with a missing reason</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the hook that lets the environmental value land in a health database as a recognised concept. Recording it — or its documented absence — shows whether the vocabulary binding was attempted and against what, instead of leaving the linkage silent and unreproducible.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://athena.ohdsi.org/">https://athena.ohdsi.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Plausible Minimum Value</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>value_range_plausible_min</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>The lowest value that would still make physical sense — for example -50 °C for outdoor air temperature. Anything below it is probably an error; this is a warning signal, not a hard rule.</p>
+</div>
+<div class="envar-desc">
+<p>Physical / domain lower bound for plausible values (e.g. -50 °C for ambient Tmax). Not a hard validation bound; sanity-check signal.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>-50</code> — <span class="egdesc">plausible lower bound for ambient Tmax in °C</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Gives automated quality checks a sanity band: without it, unit mix-ups and corrupted values (e.g. a Tmax of 350 from unconverted Kelvin) pass silently into downstream analyses.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Plausible Maximum Value</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>value_range_plausible_max</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>The highest value that would still make physical sense — for example 60 °C for outdoor air temperature. Anything above it likely signals a unit mix-up or a data error worth investigating.</p>
+</div>
+<div class="envar-desc">
+<p>Physical / domain upper bound for plausible values (e.g. 60 °C for ambient Tmax).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>60</code> — <span class="egdesc">plausible upper bound for ambient Tmax in °C</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Together with the plausible minimum, this gives automated quality checks a sanity band: without it, unit mix-ups and corrupted values slip silently past validation into exposure analyses.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">5 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Display Units</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>units_display</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>The pretty version of the unit for people to read, like "°C". The machine version (<code>Cel</code>) is stored separately; this one exists purely for showing on screen or in print.</p>
+</div>
+<div class="envar-desc">
+<p>Human-readable unit string for display purposes, e.g. <code>°C</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>°C</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Keeps human-facing output (tables, plots, reports) readable without every consumer having to translate UCUM codes; omitting it risks each tool rendering the unit differently or mislabelling axes.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Native Value Scale Factor</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>native_value_scale_factor</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Big datasets often save space by storing small whole numbers that must be multiplied by a constant to get the real measurement. This is that constant.</p>
+</div>
+<div class="envar-desc">
+<p>CF-style packing multiplier applied when decoding the source's stored integers to physical values (<code>physical = stored × scale_factor + add_offset</code>). Only meaningful alongside <code>native_units_ucum</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>0.1</code> — <span class="egdesc">gridMET tmmx packs Kelvin as unsigned int16 with scale 0.1</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Anyone re-reading the source grid directly (rather than the companion file) must unpack stored integers with exactly this factor; a wrong or missing factor yields physically plausible but wrong values, the worst kind of error.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data">https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Native Value Offset</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>native_value_offset</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>The second constant in the space-saving trick: after multiplying the stored number, add this to get the real measurement.</p>
+</div>
+<div class="envar-desc">
+<p>CF-style packing offset applied when decoding the source's stored integers to physical values (<code>physical = stored × scale_factor + add_offset</code>). Only meaningful alongside <code>native_units_ucum</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>220.0</code> — <span class="egdesc">gridMET tmmx packing offset (unpacks to true Kelvin)</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The offset half of the unpacking convention; without it the scale factor alone still decodes to the wrong physical value.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data">https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Concept ID Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>target_concept_id_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When a code is missing, it matters why. This slot records the reason — for example that no such code has been invented yet — so an empty field is not mistaken for a processing mistake.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>target_concept_id</code> is null. Distinguishes "no concept yet exists in the target vocabulary" from "the pipeline did not resolve it".</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without a stated reason, a null <code>target_concept_id</code> is ambiguous: downstream users cannot tell a genuine vocabulary gap from a pipeline that simply failed to look the concept up, and so cannot decide whether to fix the data or request a new concept.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Concept Cross-References</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>concept_mappings</code> · range <a href="../../types/Uriorcurie/">Uriorcurie</a> · cardinality * · multivalued</p>
+</div>
+<div class="envar-explain">
+<p>Different scientific communities keep different dictionaries of concepts. This is a list of "also known as" links pointing to the matching entries in those dictionaries, so people searching any of them can still find this measurement.</p>
+</div>
+<div class="envar-desc">
+<p>Cross-references binding this variable to other vocabularies and ontologies, each as a CURIE. One generic list rather than a slot per standard, so adding a vocabulary is a new prefix, not a schema change. Examples: <code>ECTO:0000012</code> (Environmental Conditions, Treatments and Exposures Ontology — cross-Monarch / cross-CHORDS alignment), <code>ENVO:01000339</code> (Environment Ontology — material or process exposed to), <code>LOINC:...</code> / <code>SNOMED:...</code> (where the variable has clinical coverage). Note: the <em>primary</em> downstream health-data binding, with its <code>existing</code> / <code>proposed</code> / <code>gap</code> status, stays in the structured <code>target_concept_*</code> slots — this list is for additional, status-free cross-references.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>ECTO:0000012</code> — <span class="egdesc">exposure to temperature (ECTO) — one element of the cross-reference list for the Daymet daily Tmax scenario</span></p>
+</div>
+<div class="envar-eg">
+<p><code>ENVO:03000049</code> — <span class="egdesc">temperature of air (ENVO) — a second element of the same cross-reference list</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Cross-references to ontologies (ECTO, ENVO) and clinical codes (LOINC, SNOMED) let the variable be found and aligned across projects and communities; without them, cross-study harmonisation has to be redone by hand. Enrichment only — not needed to reproduce the value.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://obofoundry.org/ontology/ecto.html">https://obofoundry.org/ontology/ecto.html</a>, <a href="https://obofoundry.org/ontology/envo.html">https://obofoundry.org/ontology/envo.html</a>, <a href="https://loinc.org/">https://loinc.org/</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Variable Name</strong></td>
+<td><code>variable_name</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>Short machine-readable name for the variable, usually the name the upstream t...</td>
+</tr>
+<tr>
+<td><strong>Variable Label</strong></td>
+<td><code>variable_label</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Human-readable label, e</td>
+</tr>
+<tr>
+<td><strong>Standard Name</strong></td>
+<td><code>standard_name</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/Uriorcurie/">Uriorcurie</a></td>
+<td>The standard-name identifier for the physical quantity, as a CURIE so the sch...</td>
+</tr>
+<tr>
+<td><strong>CF Cell Methods</strong></td>
+<td><code>cf_cell_methods</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>CF <code>cell_methods</code> string describing how the value summarises sub-period value...</td>
+</tr>
+<tr>
+<td><strong>Units (UCUM)</strong></td>
+<td><code>units_ucum</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>The unit expressed in UCUM syntax, e</td>
+</tr>
+<tr>
+<td><strong>Display Units</strong></td>
+<td><code>units_display</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Human-readable unit string for display purposes, e</td>
+</tr>
+<tr>
+<td><strong>Native Units (UCUM)</strong></td>
+<td><code>native_units_ucum</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>UCUM unit of the values as the <em>source product stores them</em>, when that differ...</td>
+</tr>
+<tr>
+<td><strong>Native Value Scale Factor</strong></td>
+<td><code>native_value_scale_factor</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>CF-style packing multiplier applied when decoding the source's stored integer...</td>
+</tr>
+<tr>
+<td><strong>Native Value Offset</strong></td>
+<td><code>native_value_offset</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>CF-style packing offset applied when decoding the source's stored integers to...</td>
+</tr>
+<tr>
+<td><strong>Unit Conversion Formula</strong></td>
+<td><code>unit_conversion_formula</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>The conversion from the source's native representation to the values in the c...</td>
+</tr>
+<tr>
+<td><strong>Target Concept Vocabulary</strong></td>
+<td><code>target_concept_vocabulary</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>The downstream health-data vocabulary that <code>target_concept_id</code> and `concept_s...</td>
+</tr>
+<tr>
+<td><strong>Target Concept Identifier</strong></td>
+<td><code>target_concept_id</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Concept identifier for the variable in the vocabulary named by `target_concep...</td>
+</tr>
+<tr>
+<td><strong>Reason Concept ID Is Missing</strong></td>
+<td><code>target_concept_id_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>target_concept_id</code> is null</td>
+</tr>
+<tr>
+<td><strong>Concept Status</strong></td>
+<td><code>concept_status</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/ConceptStatusEnum/">ConceptStatusEnum</a></td>
+<td>Status of this variable's coverage in the target health-data vocabulary (`exi...</td>
+</tr>
+<tr>
+<td><strong>Concept Cross-References</strong></td>
+<td><code>concept_mappings</code></td>
+<td>optional</td>
+<td>* <br/> <a href="../../types/Uriorcurie/">Uriorcurie</a></td>
+<td>Cross-references binding this variable to other vocabularies and ontologies, ...</td>
+</tr>
+<tr>
+<td><strong>Value Data Type</strong></td>
+<td><code>value_data_type</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/DataTypeEnum/">DataTypeEnum</a></td>
+<td>The data type of the stored exposure value</td>
+</tr>
+<tr>
+<td><strong>Plausible Minimum Value</strong></td>
+<td><code>value_range_plausible_min</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>Physical / domain lower bound for plausible values (e</td>
+</tr>
+<tr>
+<td><strong>Plausible Maximum Value</strong></td>
+<td><code>value_range_plausible_max</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>Physical / domain upper bound for plausible values (e</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Conditional rules on this class</summary>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'standard_name': {'pattern': '^CF:'}}</code></td>
+<td><code>{'cf_cell_methods': {'required': True}}</code></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'native_units_ucum': {'value_presence': 'PRESENT'}}</code></td>
+<td><code>{'unit_conversion_formula': {'required': True}}</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class VariableIdentity
     click VariableIdentity href "../../classes/VariableIdentity/"
@@ -462,258 +1135,6 @@
       VariableIdentity : variable_name
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/variable_name/">variable_name</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short machine-readable name for the variable, usually the name the upstream t...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/variable_label/">variable_label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Human-readable label, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/standard_name/">standard_name</a></td>
-<td>1 <br/> <a href="../../types/Uriorcurie/">Uriorcurie</a></td>
-<td>The standard-name identifier for the physical quantity, as a CURIE so the sch...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/cf_cell_methods/">cf_cell_methods</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>CF <code>cell_methods</code> string describing how the value summarises sub-period value...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/units_ucum/">units_ucum</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The unit expressed in UCUM syntax, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/units_display/">units_display</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Human-readable unit string for display purposes, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/native_units_ucum/">native_units_ucum</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>UCUM unit of the values as the <em>source product stores them</em>, when that differ...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/native_value_scale_factor/">native_value_scale_factor</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>CF-style packing multiplier applied when decoding the source's stored integer...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/native_value_offset/">native_value_offset</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>CF-style packing offset applied when decoding the source's stored integers to...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/unit_conversion_formula/">unit_conversion_formula</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The conversion from the source's native representation to the values in the c...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/target_concept_vocabulary/">target_concept_vocabulary</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The downstream health-data vocabulary that <code>target_concept_id</code> and `concept_s...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/target_concept_id/">target_concept_id</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Concept identifier for the variable in the vocabulary named by `target_concep...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/target_concept_id_missing_reason/">target_concept_id_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>target_concept_id</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/concept_status/">concept_status</a></td>
-<td>1 <br/> <a href="../../enums/ConceptStatusEnum/">ConceptStatusEnum</a></td>
-<td>Status of this variable's coverage in the target health-data vocabulary (`exi...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/concept_mappings/">concept_mappings</a></td>
-<td>* <br/> <a href="../../types/Uriorcurie/">Uriorcurie</a></td>
-<td>Cross-references binding this variable to other vocabularies and ontologies, ...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/value_data_type/">value_data_type</a></td>
-<td>1 <br/> <a href="../../enums/DataTypeEnum/">DataTypeEnum</a></td>
-<td>The data type of the stored exposure value</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/value_range_plausible_min/">value_range_plausible_min</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>Physical / domain lower bound for plausible values (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/value_range_plausible_max/">value_range_plausible_max</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>Physical / domain upper bound for plausible values (e</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/variable_identity/">variable_identity</a></td>
-<td>range</td>
-<td><a href="./">VariableIdentity</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/variable_identity/">variable_identity</a></td>
-<td>range</td>
-<td><a href="./">VariableIdentity</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/variable_identity/">variable_identity</a></td>
-<td>range</td>
-<td><a href="./">VariableIdentity</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/variable_identity/">variable_identity</a></td>
-<td>range</td>
-<td><a href="./">VariableIdentity</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/variable_identity/">variable_identity</a></td>
-<td>range</td>
-<td><a href="./">VariableIdentity</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="rules">Rules</h2>
-<h3 id="_1"></h3>
-<table>
-<thead>
-<tr>
-<th>Rule Applied</th>
-<th>Preconditions</th>
-<th>Postconditions</th>
-<th>Elseconditions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>slot_conditions</td>
-<td><code>{'standard_name': {'pattern': '^CF:'}}</code></td>
-<td><code>{'cf_cell_methods': {'required': True}}</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="_2"></h3>
-<table>
-<thead>
-<tr>
-<th>Rule Applied</th>
-<th>Preconditions</th>
-<th>Postconditions</th>
-<th>Elseconditions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>slot_conditions</td>
-<td><code>{'native_units_ucum': {'value_presence': 'PRESENT'}}</code></td>
-<td><code>{'unit_conversion_formula': {'required': True}}</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="https://cfconventions.org/standard-names.html">https://cfconventions.org/standard-names.html</a></li>
-<li><a href="https://ucum.org/">https://ucum.org/</a></li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>domain_of_use</td>
-<td>environmental_exposure</td>
-</tr>
-</tbody>
-</table>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>envar:VariableIdentity</td>
-</tr>
-<tr>
-<td>native</td>
-<td>envar:VariableIdentity</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="nt">annotations</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
@@ -727,87 +1148,7 @@
 <span class="nt">see_also</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/standard-names.html</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_name</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_label</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard_name</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cf_cell_methods</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">units_ucum</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">units_display</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_units_ucum</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_scale_factor</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_offset</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit_conversion_formula</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_concept_vocabulary</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_concept_id</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target_concept_id_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_status</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_mappings</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_data_type</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_range_plausible_min</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_range_plausible_max</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">variable_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_name</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">standard_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard_name</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">units_ucum</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">units_ucum</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">concept_status</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">concept_status</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">value_data_type</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_data_type</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">rules</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">standard_name</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard_name</span>
-<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">'^CF:'</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">cf_cell_methods</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cf_cell_methods</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CF-based products (a `CF:`-prefixed `standard_name`) must preserve</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">the verbatim `cell_methods` string — the context of SPEC.md validation rule 5</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">and of the `conditionally_core` tier on `cf_cell_methods`. Non-CF products are</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">exempt; their aggregation semantics live in the required `temporal_aggregation_method`.</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">native_units_ucum</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_units_ucum</span>
-<span class="w">        </span><span class="nt">value_presence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PRESENT</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">unit_conversion_formula</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit_conversion_formula</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Declaring</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">declaring</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">conversion:</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`native_units_ucum`</span>
-<span class="w">    </span><span class="s">says</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">stored</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">`units_ucum`,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">math</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">bridged</span>
-<span class="w">    </span><span class="s">them</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">written</span><span class="nv"> </span><span class="s">down</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">sidecar</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">traced</span><span class="nv"> </span><span class="s">back</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">    </span><span class="s">source</span><span class="nv"> </span><span class="s">bytes</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">declared").'</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The identity and semantics of an environmental exposure variable — what</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">physical quantity is being captured, in what units, and how it binds to community</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">vocabularies. One per record.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable Identity</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/standard-names.html</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_usage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">variable_name</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_name</span>
@@ -852,7 +1193,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet daily maximum air temperature variable</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -880,7 +1220,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">daily maximum air temperature at 2 m</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -920,7 +1259,6 @@
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/standard-names.html</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://obofoundry.org/ontology/ecto.html</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcterms:subject</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
@@ -976,7 +1314,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/cf-conventions/cf-conventions.html#cell-methods</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1010,7 +1347,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1037,7 +1373,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">°C</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1081,7 +1416,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ucum.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1117,7 +1451,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1151,7 +1484,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1188,7 +1520,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">K = stored * 0.1 + 220.0; Cel = K - 273.15</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gridMET tmmx unpack-then-convert chain in the Amadeus scenario</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1223,7 +1554,6 @@
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://athena.ohdsi.org/</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://biodatacatalyst.nhlbi.nih.gov/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1257,7 +1587,6 @@
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://athena.ohdsi.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1285,7 +1614,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1315,7 +1643,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gap</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no OMOP concept exists yet for daily Tmax</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1361,7 +1688,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://obofoundry.org/ontology/ecto.html</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://obofoundry.org/ontology/envo.html</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://loinc.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1411,7 +1737,6 @@
 <span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">continuous_numeric</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1440,7 +1765,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'-50'</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plausible lower bound for ambient Tmax in °C</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1468,7 +1792,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'60'</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">plausible upper bound for ambient Tmax in °C</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VariableIdentity</span>
@@ -1504,6 +1827,50 @@
 <span class="w">    </span><span class="s">source</span><span class="nv"> </span><span class="s">bytes</span><span class="nv"> </span><span class="s">(tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"native</span><span class="nv"> </span><span class="s">units</span><span class="nv"> </span><span class="s">declared").'</span>
 </code></pre></div>
 </details>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://cfconventions.org/standard-names.html">https://cfconventions.org/standard-names.html</a></li>
+<li><a href="https://ucum.org/">https://ucum.org/</a></li>
+</ul>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain_of_use</td>
+<td>environmental_exposure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>envar:VariableIdentity</td>
+</tr>
+<tr>
+<td>native</td>
+<td>envar:VariableIdentity</td>
+</tr>
+</tbody>
+</table>
 </div>
 </article>
 </div>

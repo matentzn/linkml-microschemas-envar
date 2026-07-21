@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DataLayout/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Data Layout (DataLayout) - linkml-microschemas-envar</title>
+<title>DataLayout - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-data-layout-datalayout">
+<a class="md-skip" href="#data-layout">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Data Layout (DataLayout)
+              DataLayout
             
           </span>
 </div>
@@ -262,43 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#rules">
-<span class="md-ellipsis">
-      
-        Rules
-      
-    </span>
-</a>
-<nav aria-label="Rules" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
-</span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
 <span class="md-ellipsis">
       
@@ -338,37 +302,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -376,10 +309,497 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-data-layout-datalayout">Class: Data Layout (DataLayout)</h1>
-<p><em>How the companion data file (CSV / parquet) is laid out and how this record's values are located inside it. Separates the file-layout concern from variable identity: <code>VariableIdentity.variable_name</code> says what the variable is; <code>DataLayout</code> says which column (and, for long format, which rows) carry its values. One per record.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DataLayout">envar:class/DataLayout</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="data-layout">Data Layout</h1>
+<p><span class="envar-classname">DataLayout</span></p>
+<p class="envar-lead">How the companion data file (CSV / parquet) is laid out and how this record's values are located inside it. Separates the file-layout concern from variable identity: <code>VariableIdentity.variable_name</code> says what the variable is; <code>DataLayout</code> says which column (and, for long format, which rows) carry its values. One per record.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">11 fields</span>
+<span class="envar-metachip">2 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DataLayout">envar:class/DataLayout</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Core</span>
+<span class="envar-groupnote">Required for a valid record</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Table Orientation</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>table_orientation</code> · range <a href="../../enums/TableOrientationEnum/">TableOrientationEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Wide means one column per measurement type (a <code>tmax</code> column, a <code>vp</code> column, and so on); long means one row per measurement, with a shared <code>value</code> column and a label column saying which measurement each row is. Long is also known as "tidy" format.</p>
+</div>
+<div class="envar-desc">
+<p>Whether the companion file is wide (one column per variable) or long (one <code>value</code> column, variables discriminated by row). Required.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>wide</code> — <span class="egdesc">one column per variable, e.g. a <code>tmax</code> column in a Daymet extract</span></p>
+</div>
+<div class="envar-eg">
+<p><code>long</code> — <span class="egdesc">tidy format with a shared <code>value</code> column, e.g. tract-level PM2.5</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="One column per variable; column name identifies the variable."><code>wide</code> <span class="vdesc">One column per variable; column name identifies the variable</span></span>
+<span class="envar-value" title="One shared value column; the variable is discriminated by a row value in a variable column (tidy format)."><code>long</code> <span class="vdesc">One shared value column; the variable is discriminated by a row value in a va...</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Every other column binding in this class is read relative to the orientation: in a wide file <code>value_column</code> names a variable-specific column, in a long file it names a shared column whose rows must be filtered. Without this flag a consumer cannot interpret the bindings and so cannot reliably locate this record's values in the companion file.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Value Column</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>value_column</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This is simply the name of the spreadsheet column where the actual numbers live — for example a column headed <code>tmax</code> holding daily maximum temperatures, or a generic column headed <code>value</code> in a long table.</p>
+</div>
+<div class="envar-desc">
+<p>Name of the column carrying this record's exposure values, e.g. <code>tmax</code> in a wide file or <code>value</code> in a long file. Required.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>tmax</code> — <span class="egdesc">wide file — the variable's own column carries the values</span></p>
+</div>
+<div class="envar-eg">
+<p><code>value</code> — <span class="egdesc">long file — the shared value column</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The record deliberately carries no inline observation result — the values live only in the companion CSV/parquet file. Without this column binding, a validator or downstream pipeline has no way to find the values the sidecar describes, so the sidecar is unverifiable and the data unusable.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Variable Column</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>variable_column</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>In a long table there is a column — often literally called <code>variable</code> — that says what each row measures (<code>tmax</code>, <code>vp</code>, ...). This slot names that column. Wide files do not have one, which is why this only applies to long orientation.</p>
+</div>
+<div class="envar-desc">
+<p>For long orientation: name of the column that discriminates variables (e.g. <code>variable</code>). Not applicable to wide files.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>variable</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>In a long file many variables share one value column and are told apart only by a discriminator column. Without naming that column, a consumer cannot separate this record's variable from every other variable in the file, so the value binding is ambiguous for all long-format data.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Variable Key</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>variable_key</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>This is the label to filter on: keep only the rows where the variable column says, for example, <code>tmax</code>, and you have exactly this record's measurements. It usually matches the variable's short name, but does not have to.</p>
+</div>
+<div class="envar-desc">
+<p>For long orientation: the value in <code>variable_column</code> that selects this record's rows (e.g. <code>tmax</code>). Often, but not necessarily, equal to <code>VariableIdentity.variable_name</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>pm25_annual</code> — <span class="egdesc">selects the PM2.5 rows in a long tract-level file</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Knowing which column discriminates variables is not enough — a consumer also needs the label value that selects this record's rows. Without the key, every row of a long file is a candidate and this record's values cannot be filtered out of the shared value column.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">3 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Subject Column</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>subject_column</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>This names the ID column that says who (or where) each row belongs to — a patient identifier like <code>subject_id</code>, or a place identifier like a census-tract code.</p>
+</div>
+<div class="envar-desc">
+<p>Name of the column carrying the opaque subject / cohort identifier the record-level <code>subject</code> refers to (e.g. <code>subject_id</code>).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>subject_id</code> — <span class="egdesc">patient-level extract</span></p>
+</div>
+<div class="envar-eg">
+<p><code>tract_id</code> — <span class="egdesc">census-tract-level extract</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The whole point of an exposure sidecar is to be joined back to a health-data layer. Without knowing which column carries the subject or cohort identifier, the values cannot be attached to the people or places the record-level <code>subject</code> refers to, and the linkage step becomes guesswork.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Time Column</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>time_column</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>This names the column that gives each measurement its "when" — a <code>date</code> column for daily data, or a <code>year</code> column for annual summaries.</p>
+</div>
+<div class="envar-desc">
+<p>Name of the column carrying the observation date / timestamp (e.g. <code>date</code>).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>date</code> — <span class="egdesc">daily data</span></p>
+</div>
+<div class="envar-eg">
+<p><code>year</code> — <span class="egdesc">annual aggregate</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without knowing which column carries the date or timestamp, each value cannot be placed in time, so exposure values cannot be aligned with clinical events — which day's exposure goes with which health record — and any lag or window analysis is impossible.</p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Per-Value Uncertainty Column</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>value_uncertainty_column</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Some datasets include a "plus or minus" column next to each value — an estimate of how far off each number might be. This slot names that column so the uncertainty travels with the data instead of being lost.</p>
+</div>
+<div class="envar-desc">
+<p>Name of the column carrying per-value uncertainty (e.g. <code>pm_se</code>, <code>tmax_stderr</code>). Its semantics (uncertainty type, units) live in the Uncertainty microschema. Null with reason for products whose per-value uncertainty exists upstream but is not surfaced.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>tmax_stderr</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Products like Daymet ship per-value standard errors that most pipelines silently drop. Without this binding, downstream analyses cannot find or propagate the measurement error attached to each value, and dropped uncertainty is indistinguishable from uncertainty that never existed.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">4 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Native Value Column</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>native_value_column</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Some data files helpfully include the same measurement twice, in two units — like a column in Kelvin next to one in Celsius. This names that second column so it is accounted for rather than mysterious.</p>
+</div>
+<div class="envar-desc">
+<p>Name of a second column carrying the same values in the source's <em>native</em> units (<code>VariableIdentity.native_units_ucum</code>), when the companion file ships both, e.g. Amadeus's <code>value_kelvin</code> next to <code>value_celsius</code>. <code>value_column</code> stays the binding for the values in <code>units_ucum</code>; this binds the native-unit twin.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>value_kelvin</code> — <span class="egdesc">Amadeus gridMET output ships Kelvin and Celsius side by side</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>When a producer ships both unit representations, binding only one leaves an unexplained column in the data file and hides the cheapest available cross-check (recomputing one column from the other via <code>unit_conversion_formula</code>).</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Uncertainty Column Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>value_uncertainty_column_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When there is no uncertainty column, this slot says why — for example "the upstream product does not provide one" versus "it exists upstream but was not extracted".</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>value_uncertainty_column</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A bare null cannot be audited: it could mean the source has no per-value uncertainty, the pipeline dropped it, or the producer forgot to record it. Stating the reason makes the absence deliberate and lets reviewers tell "unavailable" from "lost", which matters for reproducing the extraction.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Quality Flag Column</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>quality_flag_column</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A quality flag column is like a traffic light next to each number — good, suspect, or bad — recorded by the data producer. This slot names that column; what the flag codes mean is described in the Uncertainty microschema.</p>
+</div>
+<div class="envar-desc">
+<p>Name of any per-value QA flag column. CF <code>ancillary_variables</code> analogue; the flag vocabulary lives in the Uncertainty microschema.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>tmax_qc</code> — <span class="egdesc">per-value QA flag column accompanying a <code>tmax</code> value column</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without knowing where the per-value QA flags live, consumers cannot filter or down-weight values the producer already marked as suspect, so known-bad measurements flow silently into analyses.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/">https://cfconventions.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Quality Flag Column Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>quality_flag_column_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When there is no quality-flag column, this slot says why it is absent — for example because the source dataset simply does not publish quality flags.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>quality_flag_column</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without a stated reason, a missing QA-flag column is ambiguous: the source may publish no flags, or the pipeline may have dropped them. The reason turns a silent gap into a documented decision that a reviewer can check against the upstream product.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Table Orientation</strong></td>
+<td><code>table_orientation</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/TableOrientationEnum/">TableOrientationEnum</a></td>
+<td>Whether the companion file is wide (one column per variable) or long (one `va...</td>
+</tr>
+<tr>
+<td><strong>Value Column</strong></td>
+<td><code>value_column</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of the column carrying this record's exposure values, e</td>
+</tr>
+<tr>
+<td><strong>Variable Column</strong></td>
+<td><code>variable_column</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>For long orientation: name of the column that discriminates variables (e</td>
+</tr>
+<tr>
+<td><strong>Variable Key</strong></td>
+<td><code>variable_key</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>For long orientation: the value in <code>variable_column</code> that selects this record...</td>
+</tr>
+<tr>
+<td><strong>Subject Column</strong></td>
+<td><code>subject_column</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of the column carrying the opaque subject / cohort identifier the record...</td>
+</tr>
+<tr>
+<td><strong>Time Column</strong></td>
+<td><code>time_column</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of the column carrying the observation date / timestamp (e</td>
+</tr>
+<tr>
+<td><strong>Native Value Column</strong></td>
+<td><code>native_value_column</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of a second column carrying the same values in the source's <em>native</em> uni...</td>
+</tr>
+<tr>
+<td><strong>Per-Value Uncertainty Column</strong></td>
+<td><code>value_uncertainty_column</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of the column carrying per-value uncertainty (e</td>
+</tr>
+<tr>
+<td><strong>Reason Uncertainty Column Is Missing</strong></td>
+<td><code>value_uncertainty_column_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>value_uncertainty_column</code> is null</td>
+</tr>
+<tr>
+<td><strong>Quality Flag Column</strong></td>
+<td><code>quality_flag_column</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of any per-value QA flag column</td>
+</tr>
+<tr>
+<td><strong>Reason Quality Flag Column Is Missing</strong></td>
+<td><code>quality_flag_column_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>quality_flag_column</code> is null</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Conditional rules on this class</summary>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'table_orientation': {'equals_string': 'long'}}</code></td>
+<td><code>{'variable_column': {'required': True}, 'variable_key': {'required': True}}</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class DataLayout
     click DataLayout href "../../classes/DataLayout/"
@@ -433,149 +853,377 @@
       DataLayout : variable_key
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/table_orientation/">table_orientation</a></td>
-<td>1 <br/> <a href="../../enums/TableOrientationEnum/">TableOrientationEnum</a></td>
-<td>Whether the companion file is wide (one column per variable) or long (one `va...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/value_column/">value_column</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of the column carrying this record's exposure values, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/variable_column/">variable_column</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>For long orientation: name of the column that discriminates variables (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/variable_key/">variable_key</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>For long orientation: the value in <code>variable_column</code> that selects this record...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/subject_column/">subject_column</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of the column carrying the opaque subject / cohort identifier the record...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/time_column/">time_column</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of the column carrying the observation date / timestamp (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/native_value_column/">native_value_column</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of a second column carrying the same values in the source's <em>native</em> uni...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/value_uncertainty_column/">value_uncertainty_column</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of the column carrying per-value uncertainty (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/value_uncertainty_column_missing_reason/">value_uncertainty_column_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>value_uncertainty_column</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/quality_flag_column/">quality_flag_column</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of any per-value QA flag column</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/quality_flag_column_missing_reason/">quality_flag_column_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>quality_flag_column</code> is null</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/data_layout/">data_layout</a></td>
-<td>range</td>
-<td><a href="./">DataLayout</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/data_layout/">data_layout</a></td>
-<td>range</td>
-<td><a href="./">DataLayout</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/data_layout/">data_layout</a></td>
-<td>range</td>
-<td><a href="./">DataLayout</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/data_layout/">data_layout</a></td>
-<td>range</td>
-<td><a href="./">DataLayout</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/data_layout/">data_layout</a></td>
-<td>range</td>
-<td><a href="./">DataLayout</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="rules">Rules</h2>
-<h3 id="_1"></h3>
-<table>
-<thead>
-<tr>
-<th>Rule Applied</th>
-<th>Preconditions</th>
-<th>Postconditions</th>
-<th>Elseconditions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>slot_conditions</td>
-<td><code>{'table_orientation': {'equals_string': 'long'}}</code></td>
-<td><code>{'variable_column': {'required': True}, 'variable_key': {'required': True}}</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="nt">annotations</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'How</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">companion</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">(CSV</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">parquet)</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">laid</span><span class="nv"> </span><span class="s">out</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">this</span>
+<span class="w">  </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">located</span><span class="nv"> </span><span class="s">inside</span><span class="nv"> </span><span class="s">it.</span><span class="nv"> </span><span class="s">Separates</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">file-layout</span><span class="nv"> </span><span class="s">concern</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">variable</span>
+<span class="w">  </span><span class="s">identity:</span><span class="nv"> </span><span class="s">`VariableIdentity.variable_name`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">is;</span><span class="nv"> </span><span class="s">`DataLayout`</span>
+<span class="w">  </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">(and,</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">format,</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">rows)</span><span class="nv"> </span><span class="s">carry</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">values.</span><span class="nv"> </span><span class="s">One</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">record.'</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data Layout</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">slot_usage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">table_orientation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">value_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">table_orientation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Every</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">binding</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">class</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">read</span><span class="nv"> </span><span class="s">relative</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">orientation:</span>
+<span class="w">          </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">wide</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">`value_column`</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">variable-specific</span><span class="nv"> </span><span class="s">column,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">long</span>
+<span class="w">          </span><span class="s">file</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">shared</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">whose</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">filtered.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">this</span>
+<span class="w">          </span><span class="s">flag</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">consumer</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">interpret</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">bindings</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">reliably</span><span class="nv"> </span><span class="s">locate</span>
+<span class="w">          </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">companion</span><span class="nv"> </span><span class="s">file.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wide means one column per measurement type (a `tmax` column, a `vp`</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column, and so on); long means one row per measurement, with a shared `value`</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column and a label column saying which measurement each row is. Long is</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">also known as "tidy" format.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Whether the companion file is wide (one column per variable) or long</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(one `value` column, variables discriminated by row). Required.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Table Orientation</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wide</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">one column per variable, e.g. a `tmax` column in a Daymet extract</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tidy format with a shared `value` column, e.g. tract-level PM2.5</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.18637/jss.v059.i10</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TableOrientationEnum</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">value_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The record deliberately carries no inline observation result — the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">values live only in the companion CSV/parquet file. Without this column</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">binding, a validator or downstream pipeline has no way to find the values</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the sidecar describes, so the sidecar is unverifiable and the data unusable.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This is simply the name of the spreadsheet column where the actual</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">numbers live — for example a column headed `tmax` holding daily maximum</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">temperatures, or a generic column headed `value` in a long table.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying this record's exposure values, e.g. `tmax`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">in a wide file or `value` in a long file. Required.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Value Column</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wide file — the variable's own column carries the values</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long file — the shared value column</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">variable_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">In a long file many variables share one value column and are told apart</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">only by a discriminator column. Without naming that column, a consumer cannot</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">separate this record's variable from every other variable in the file, so</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the value binding is ambiguous for all long-format data.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">In a long table there is a column — often literally called `variable`</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— that says what each row measures (`tmax`, `vp`, ...). This slot names</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">that column. Wide files do not have one, which is why this only applies</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to long orientation.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'For</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">orientation:</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">discriminates</span><span class="nv"> </span><span class="s">variables</span>
+<span class="w">      </span><span class="s">(e.g.</span><span class="nv"> </span><span class="s">`variable`).</span><span class="nv"> </span><span class="s">Not</span><span class="nv"> </span><span class="s">applicable</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">wide</span><span class="nv"> </span><span class="s">files.'</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable Column</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.18637/jss.v059.i10</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">variable_key</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Knowing which column discriminates variables is not enough — a consumer</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">also needs the label value that selects this record's rows. Without the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">key, every row of a long file is a candidate and this record's values cannot</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">be filtered out of the shared value column.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">label</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">filter</span><span class="nv"> </span><span class="s">on:</span><span class="nv"> </span><span class="s">keep</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">where</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span>
+<span class="w">          </span><span class="s">column</span><span class="nv"> </span><span class="s">says,</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">example,</span><span class="nv"> </span><span class="s">`tmax`,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">measurements.</span>
+<span class="w">          </span><span class="s">It</span><span class="nv"> </span><span class="s">usually</span><span class="nv"> </span><span class="s">matches</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">short</span><span class="nv"> </span><span class="s">name,</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">does</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">to.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'For</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">orientation:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">selects</span>
+<span class="w">      </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">(e.g.</span><span class="nv"> </span><span class="s">`tmax`).</span><span class="nv"> </span><span class="s">Often,</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">necessarily,</span><span class="nv"> </span><span class="s">equal</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">`VariableIdentity.variable_name`.'</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable Key</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_annual</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selects the PM2.5 rows in a long tract-level file</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.18637/jss.v059.i10</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">subject_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The whole point of an exposure sidecar is to be joined back to a health-data</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">layer. Without knowing which column carries the subject or cohort identifier,</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the values cannot be attached to the people or places the record-level `subject`</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">refers to, and the linkage step becomes guesswork.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This names the ID column that says who (or where) each row belongs</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to — a patient identifier like `subject_id`, or a place identifier like</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a census-tract code.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying the opaque subject / cohort identifier</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the record-level `subject` refers to (e.g. `subject_id`).</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Subject Column</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject_id</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patient-level extract</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tract_id</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census-tract-level extract</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">time_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Without knowing which column carries the date or timestamp, each value</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">cannot be placed in time, so exposure values cannot be aligned with clinical</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">events — which day's exposure goes with which health record — and any lag</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">or window analysis is impossible.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This names the column that gives each measurement its "when" — a `date`</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column for daily data, or a `year` column for annual summaries.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying the observation date / timestamp (e.g.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">`date`).</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Time Column</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">daily data</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annual aggregate</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">native_value_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When a producer ships both unit representations, binding only one leaves</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an unexplained column in the data file and hides the cheapest available</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">cross-check (recomputing one column from the other via `unit_conversion_formula`).</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some data files helpfully include the same measurement twice, in two</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">units — like a column in Kelvin next to one in Celsius. This names that</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">second column so it is accounted for rather than mysterious.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of a second column carrying the same values in the source's</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">*native* units (`VariableIdentity.native_units_ucum`), when the companion file</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">ships both, e.g. Amadeus's `value_kelvin` next to `value_celsius`. `value_column`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">stays the binding for the values in `units_ucum`; this binds the native-unit</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">twin.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Value Column</span>
+<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">      </span><span class="s">Amadeus</span><span class="nv"> </span><span class="s">pipeline</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">CSV</span><span class="nv"> </span><span class="s">carries</span><span class="nv"> </span><span class="s">`value_kelvin`</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`value_celsius`</span><span class="nv"> </span><span class="s">twin</span>
+<span class="w">      </span><span class="s">columns,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`DataLayout`</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">bind</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native-unit</span><span class="nv"> </span><span class="s">copy</span>
+<span class="w">      </span><span class="s">had</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">home</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">very</span><span class="nv"> </span><span class="s">existence</span><span class="nv"> </span><span class="s">went</span><span class="nv"> </span><span class="s">unrecorded.</span><span class="nv"> </span><span class="s">Rider</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native-unit</span>
+<span class="w">      </span><span class="s">conversion</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">envar_variable</span><span class="nv"> </span><span class="s">(`native_units_ucum`,</span><span class="nv"> </span><span class="s">`unit_conversion_formula`).'</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_kelvin</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Amadeus gridMET output ships Kelvin and Celsius side by side</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">value_uncertainty_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Products like Daymet ship per-value standard errors that most pipelines</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">silently drop. Without this binding, downstream analyses cannot find or</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">propagate the measurement error attached to each value, and dropped uncertainty</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">is indistinguishable from uncertainty that never existed.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some datasets include a "plus or minus" column next to each value —</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an estimate of how far off each number might be. This slot names that column</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">so the uncertainty travels with the data instead of being lost.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying per-value uncertainty (e.g. `pm_se`,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">`tmax_stderr`). Its semantics (uncertainty type, units) live in the Uncertainty</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">microschema. Null with reason for products whose per-value uncertainty exists</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">upstream but is not surfaced.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Per-Value Uncertainty Column</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax_stderr</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">value_uncertainty_column_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">bare</span><span class="nv"> </span><span class="s">null</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">audited:</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">mean</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">per-value</span>
+<span class="w">          </span><span class="s">uncertainty,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">dropped</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">producer</span><span class="nv"> </span><span class="s">forgot</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">it.</span>
+<span class="w">          </span><span class="s">Stating</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reason</span><span class="nv"> </span><span class="s">makes</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">absence</span><span class="nv"> </span><span class="s">deliberate</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">lets</span><span class="nv"> </span><span class="s">reviewers</span><span class="nv"> </span><span class="s">tell</span>
+<span class="w">          </span><span class="s">"unavailable"</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">"lost",</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">matters</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">reproducing</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">extraction.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When there is no uncertainty column, this slot says why — for example</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">"the upstream product does not provide one" versus "it exists upstream but</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">was not extracted".</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `value_uncertainty_column` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Uncertainty Column Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">quality_flag_column</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Without knowing where the per-value QA flags live, consumers cannot</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">filter or down-weight values the producer already marked as suspect, so</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">known-bad measurements flow silently into analyses.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A quality flag column is like a traffic light next to each number —</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">good, suspect, or bad — recorded by the data producer. This slot names that</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column; what the flag codes mean is described in the Uncertainty microschema.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of any per-value QA flag column. CF `ancillary_variables` analogue;</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the flag vocabulary lives in the Uncertainty microschema.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Quality Flag Column</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax_qc</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">per-value QA flag column accompanying a `tmax` value column</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">quality_flag_column_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Without</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">stated</span><span class="nv"> </span><span class="s">reason,</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">missing</span><span class="nv"> </span><span class="s">QA-flag</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">ambiguous:</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">          </span><span class="s">source</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">publish</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">flags,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">dropped</span><span class="nv"> </span><span class="s">them.</span><span class="nv"> </span><span class="s">The</span>
+<span class="w">          </span><span class="s">reason</span><span class="nv"> </span><span class="s">turns</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">silent</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">into</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">documented</span><span class="nv"> </span><span class="s">decision</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">reviewer</span><span class="nv"> </span><span class="s">can</span>
+<span class="w">          </span><span class="s">check</span><span class="nv"> </span><span class="s">against</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">upstream</span><span class="nv"> </span><span class="s">product.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When there is no quality-flag column, this slot says why it is absent</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— for example because the source dataset simply does not publish quality</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">flags.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `quality_flag_column` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Quality Flag Column Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">table_orientation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">variable_column</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">variable_key</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Long-format</span><span class="nv"> </span><span class="s">layouts</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">discriminator:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">shared</span>
+<span class="w">    </span><span class="s">value</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">interpretable</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">discriminates</span>
+<span class="w">    </span><span class="s">variables</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`variable_key`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">selects</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span>
+<span class="w">    </span><span class="s">(SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">7;</span><span class="nv"> </span><span class="s">tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"long</span><span class="nv"> </span><span class="s">orientation").'</span>
+</code></pre></div>
+</details>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="annotations">Annotations</h3>
 <table>
@@ -615,443 +1263,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'How</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">companion</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">(CSV</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">parquet)</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">laid</span><span class="nv"> </span><span class="s">out</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">this</span>
-<span class="w">  </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">located</span><span class="nv"> </span><span class="s">inside</span><span class="nv"> </span><span class="s">it.</span><span class="nv"> </span><span class="s">Separates</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">file-layout</span><span class="nv"> </span><span class="s">concern</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">variable</span>
-<span class="w">  </span><span class="s">identity:</span><span class="nv"> </span><span class="s">`VariableIdentity.variable_name`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">is;</span><span class="nv"> </span><span class="s">`DataLayout`</span>
-<span class="w">  </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">(and,</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">format,</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">rows)</span><span class="nv"> </span><span class="s">carry</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">values.</span><span class="nv"> </span><span class="s">One</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">record.'</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data Layout</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column_missing_reason</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">table_orientation</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">value_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">rules</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">table_orientation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
-<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">variable_column</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">variable_key</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Long-format</span><span class="nv"> </span><span class="s">layouts</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">discriminator:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">shared</span>
-<span class="w">    </span><span class="s">value</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">interpretable</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">discriminates</span>
-<span class="w">    </span><span class="s">variables</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`variable_key`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">selects</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span>
-<span class="w">    </span><span class="s">(SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">7;</span><span class="nv"> </span><span class="s">tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"long</span><span class="nv"> </span><span class="s">orientation").'</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'How</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">companion</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">(CSV</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">parquet)</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">laid</span><span class="nv"> </span><span class="s">out</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">this</span>
-<span class="w">  </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">located</span><span class="nv"> </span><span class="s">inside</span><span class="nv"> </span><span class="s">it.</span><span class="nv"> </span><span class="s">Separates</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">file-layout</span><span class="nv"> </span><span class="s">concern</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">variable</span>
-<span class="w">  </span><span class="s">identity:</span><span class="nv"> </span><span class="s">`VariableIdentity.variable_name`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">is;</span><span class="nv"> </span><span class="s">`DataLayout`</span>
-<span class="w">  </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">(and,</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">format,</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">rows)</span><span class="nv"> </span><span class="s">carry</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">values.</span><span class="nv"> </span><span class="s">One</span><span class="nv"> </span><span class="s">per</span><span class="nv"> </span><span class="s">record.'</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data Layout</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">table_orientation</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">value_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">attributes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">table_orientation</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Every</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">binding</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">class</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">read</span><span class="nv"> </span><span class="s">relative</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">orientation:</span>
-<span class="w">          </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">wide</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">`value_column`</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">variable-specific</span><span class="nv"> </span><span class="s">column,</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">long</span>
-<span class="w">          </span><span class="s">file</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">shared</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">whose</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">filtered.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">this</span>
-<span class="w">          </span><span class="s">flag</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">consumer</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">interpret</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">bindings</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">reliably</span><span class="nv"> </span><span class="s">locate</span>
-<span class="w">          </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">values</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">companion</span><span class="nv"> </span><span class="s">file.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wide means one column per measurement type (a `tmax` column, a `vp`</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column, and so on); long means one row per measurement, with a shared `value`</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column and a label column saying which measurement each row is. Long is</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">also known as "tidy" format.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Whether the companion file is wide (one column per variable) or long</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">(one `value` column, variables discriminated by row). Required.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Table Orientation</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wide</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">one column per variable, e.g. a `tmax` column in a Daymet extract</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tidy format with a shared `value` column, e.g. tract-level PM2.5</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.18637/jss.v059.i10</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TableOrientationEnum</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">value_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The record deliberately carries no inline observation result — the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">values live only in the companion CSV/parquet file. Without this column</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">binding, a validator or downstream pipeline has no way to find the values</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the sidecar describes, so the sidecar is unverifiable and the data unusable.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This is simply the name of the spreadsheet column where the actual</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">numbers live — for example a column headed `tmax` holding daily maximum</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">temperatures, or a generic column headed `value` in a long table.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying this record's exposure values, e.g. `tmax`</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">in a wide file or `value` in a long file. Required.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Value Column</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wide file — the variable's own column carries the values</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long file — the shared value column</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">variable_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">In a long file many variables share one value column and are told apart</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">only by a discriminator column. Without naming that column, a consumer cannot</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">separate this record's variable from every other variable in the file, so</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the value binding is ambiguous for all long-format data.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">In a long table there is a column — often literally called `variable`</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— that says what each row measures (`tmax`, `vp`, ...). This slot names</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">that column. Wide files do not have one, which is why this only applies</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to long orientation.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'For</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">orientation:</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">discriminates</span><span class="nv"> </span><span class="s">variables</span>
-<span class="w">      </span><span class="s">(e.g.</span><span class="nv"> </span><span class="s">`variable`).</span><span class="nv"> </span><span class="s">Not</span><span class="nv"> </span><span class="s">applicable</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">wide</span><span class="nv"> </span><span class="s">files.'</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable Column</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.18637/jss.v059.i10</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">variable_key</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Knowing which column discriminates variables is not enough — a consumer</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">also needs the label value that selects this record's rows. Without the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">key, every row of a long file is a candidate and this record's values cannot</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">be filtered out of the shared value column.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">label</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">filter</span><span class="nv"> </span><span class="s">on:</span><span class="nv"> </span><span class="s">keep</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">where</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span>
-<span class="w">          </span><span class="s">column</span><span class="nv"> </span><span class="s">says,</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">example,</span><span class="nv"> </span><span class="s">`tmax`,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">measurements.</span>
-<span class="w">          </span><span class="s">It</span><span class="nv"> </span><span class="s">usually</span><span class="nv"> </span><span class="s">matches</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">short</span><span class="nv"> </span><span class="s">name,</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">does</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">to.'</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'For</span><span class="nv"> </span><span class="s">long</span><span class="nv"> </span><span class="s">orientation:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">selects</span>
-<span class="w">      </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">(e.g.</span><span class="nv"> </span><span class="s">`tmax`).</span><span class="nv"> </span><span class="s">Often,</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">necessarily,</span><span class="nv"> </span><span class="s">equal</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">`VariableIdentity.variable_name`.'</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable Key</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pm25_annual</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selects the PM2.5 rows in a long tract-level file</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://doi.org/10.18637/jss.v059.i10</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">subject_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The whole point of an exposure sidecar is to be joined back to a health-data</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">layer. Without knowing which column carries the subject or cohort identifier,</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the values cannot be attached to the people or places the record-level `subject`</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">refers to, and the linkage step becomes guesswork.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This names the ID column that says who (or where) each row belongs</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to — a patient identifier like `subject_id`, or a place identifier like</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a census-tract code.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying the opaque subject / cohort identifier</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the record-level `subject` refers to (e.g. `subject_id`).</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Subject Column</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject_id</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">patient-level extract</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tract_id</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">census-tract-level extract</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">time_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">time_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Without knowing which column carries the date or timestamp, each value</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">cannot be placed in time, so exposure values cannot be aligned with clinical</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">events — which day's exposure goes with which health record — and any lag</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">or window analysis is impossible.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This names the column that gives each measurement its "when" — a `date`</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column for daily data, or a `year` column for annual summaries.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying the observation date / timestamp (e.g.</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">`date`).</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Time Column</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">date</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">daily data</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">year</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">annual aggregate</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">native_value_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">native_value_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When a producer ships both unit representations, binding only one leaves</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an unexplained column in the data file and hides the cheapest available</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">cross-check (recomputing one column from the other via `unit_conversion_formula`).</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some data files helpfully include the same measurement twice, in two</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">units — like a column in Kelvin next to one in Celsius. This names that</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">second column so it is accounted for rather than mysterious.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of a second column carrying the same values in the source's</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">*native* units (`VariableIdentity.native_units_ucum`), when the companion file</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">ships both, e.g. Amadeus's `value_kelvin` next to `value_celsius`. `value_column`</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">stays the binding for the values in `units_ucum`; this binds the native-unit</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">twin.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Native Value Column</span>
-<span class="w">    </span><span class="nt">comments</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'Added</span><span class="nv"> </span><span class="s">after</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reverse</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">survey</span><span class="nv"> </span><span class="s">(docs/reverse-gap-survey.md,</span><span class="nv"> </span><span class="s">2026-07):</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">      </span><span class="s">Amadeus</span><span class="nv"> </span><span class="s">pipeline</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">native</span><span class="nv"> </span><span class="s">CSV</span><span class="nv"> </span><span class="s">carries</span><span class="nv"> </span><span class="s">`value_kelvin`</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`value_celsius`</span><span class="nv"> </span><span class="s">twin</span>
-<span class="w">      </span><span class="s">columns,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`DataLayout`</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">bind</span><span class="nv"> </span><span class="s">exactly</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native-unit</span><span class="nv"> </span><span class="s">copy</span>
-<span class="w">      </span><span class="s">had</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">home</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">very</span><span class="nv"> </span><span class="s">existence</span><span class="nv"> </span><span class="s">went</span><span class="nv"> </span><span class="s">unrecorded.</span><span class="nv"> </span><span class="s">Rider</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">native-unit</span>
-<span class="w">      </span><span class="s">conversion</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">envar_variable</span><span class="nv"> </span><span class="s">(`native_units_ucum`,</span><span class="nv"> </span><span class="s">`unit_conversion_formula`).'</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_kelvin</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Amadeus gridMET output ships Kelvin and Celsius side by side</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">value_uncertainty_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Products like Daymet ship per-value standard errors that most pipelines</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">silently drop. Without this binding, downstream analyses cannot find or</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">propagate the measurement error attached to each value, and dropped uncertainty</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">is indistinguishable from uncertainty that never existed.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some datasets include a "plus or minus" column next to each value —</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an estimate of how far off each number might be. This slot names that column</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">so the uncertainty travels with the data instead of being lost.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the column carrying per-value uncertainty (e.g. `pm_se`,</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">`tmax_stderr`). Its semantics (uncertainty type, units) live in the Uncertainty</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">microschema. Null with reason for products whose per-value uncertainty exists</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">upstream but is not surfaced.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Per-Value Uncertainty Column</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax_stderr</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">value_uncertainty_column_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value_uncertainty_column_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">bare</span><span class="nv"> </span><span class="s">null</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">audited:</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">mean</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">source</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">per-value</span>
-<span class="w">          </span><span class="s">uncertainty,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">dropped</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">producer</span><span class="nv"> </span><span class="s">forgot</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">it.</span>
-<span class="w">          </span><span class="s">Stating</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">reason</span><span class="nv"> </span><span class="s">makes</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">absence</span><span class="nv"> </span><span class="s">deliberate</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">lets</span><span class="nv"> </span><span class="s">reviewers</span><span class="nv"> </span><span class="s">tell</span>
-<span class="w">          </span><span class="s">"unavailable"</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">"lost",</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">matters</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">reproducing</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">extraction.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When there is no uncertainty column, this slot says why — for example</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">"the upstream product does not provide one" versus "it exists upstream but</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">was not extracted".</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `value_uncertainty_column` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Uncertainty Column Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="w">  </span><span class="nt">quality_flag_column</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Without knowing where the per-value QA flags live, consumers cannot</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">filter or down-weight values the producer already marked as suspect, so</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">known-bad measurements flow silently into analyses.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A quality flag column is like a traffic light next to each number —</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">good, suspect, or bad — recorded by the data producer. This slot names that</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">column; what the flag codes mean is described in the Uncertainty microschema.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of any per-value QA flag column. CF `ancillary_variables` analogue;</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the flag vocabulary lives in the Uncertainty microschema.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Quality Flag Column</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tmax_qc</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">per-value QA flag column accompanying a `tmax` value column</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">quality_flag_column_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quality_flag_column_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Without</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">stated</span><span class="nv"> </span><span class="s">reason,</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">missing</span><span class="nv"> </span><span class="s">QA-flag</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">ambiguous:</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">          </span><span class="s">source</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">publish</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">flags,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">pipeline</span><span class="nv"> </span><span class="s">may</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">dropped</span><span class="nv"> </span><span class="s">them.</span><span class="nv"> </span><span class="s">The</span>
-<span class="w">          </span><span class="s">reason</span><span class="nv"> </span><span class="s">turns</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">silent</span><span class="nv"> </span><span class="s">gap</span><span class="nv"> </span><span class="s">into</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">documented</span><span class="nv"> </span><span class="s">decision</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">reviewer</span><span class="nv"> </span><span class="s">can</span>
-<span class="w">          </span><span class="s">check</span><span class="nv"> </span><span class="s">against</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">upstream</span><span class="nv"> </span><span class="s">product.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When there is no quality-flag column, this slot says why it is absent</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— for example because the source dataset simply does not publish quality</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">flags.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `quality_flag_column` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Quality Flag Column Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataLayout</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="nt">rules</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">table_orientation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">table_orientation</span>
-<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">long</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">variable_column</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_column</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">      </span><span class="nt">variable_key</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_key</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Long-format</span><span class="nv"> </span><span class="s">layouts</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">discriminator:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">shared</span>
-<span class="w">    </span><span class="s">value</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">only</span><span class="nv"> </span><span class="s">interpretable</span><span class="nv"> </span><span class="s">once</span><span class="nv"> </span><span class="s">`variable_column`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">column</span><span class="nv"> </span><span class="s">discriminates</span>
-<span class="w">    </span><span class="s">variables</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">`variable_key`</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">selects</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">rows</span>
-<span class="w">    </span><span class="s">(SPEC.md</span><span class="nv"> </span><span class="s">rule</span><span class="nv"> </span><span class="s">7;</span><span class="nv"> </span><span class="s">tier</span><span class="nv"> </span><span class="s">conditionally_core</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">"long</span><span class="nv"> </span><span class="s">orientation").'</span>
-</code></pre></div>
-</details>
 </div>
 </article>
 </div>

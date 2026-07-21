@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/ExposureModel/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Exposure Model (ExposureModel) - linkml-microschemas-envar</title>
+<title>ExposureModel - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-exposure-model-exposuremodel">
+<a class="md-skip" href="#exposure-model">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Exposure Model (ExposureModel)
+              ExposureModel
             
           </span>
 </div>
@@ -262,43 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#rules">
-<span class="md-ellipsis">
-      
-        Rules
-      
-    </span>
-</a>
-<nav aria-label="Rules" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#_1">
-<span class="md-ellipsis">
-</span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -347,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -385,10 +318,534 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-exposure-model-exposuremodel">Class: Exposure Model (ExposureModel)</h1>
-<p><em>The model class that produced the values (interpolation, reanalysis, ML, statistical blend, equation), its inputs, its methods-paper DOI, its cross-validation skill, known biases, and any bias correction. One per record; may be null for direct observation.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/ExposureModel">envar:class/ExposureModel</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="exposure-model">Exposure Model</h1>
+<p><span class="envar-classname">ExposureModel</span></p>
+<p class="envar-lead">The model class that produced the values (interpolation, reanalysis, ML, statistical blend, equation), its inputs, its methods-paper DOI, its cross-validation skill, known biases, and any bias correction. One per record; may be null for direct observation.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">11 fields</span>
+<span class="envar-metachip">1 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/ExposureModel">envar:class/ExposureModel</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Core</span>
+<span class="envar-groupnote">Required for a valid record</span>
+<span class="envar-groupcount">1 field</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Exposure Model Type</span><span class="envar-cardbadges"><span class="envar-tierbadge core">core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_type</code> · range <a href="../../enums/ExposureModelTypeEnum/">ExposureModelTypeEnum</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Most "exposure" numbers were never measured at your door: a model estimates them from weather stations, satellites, or physics equations. This field says which kind of machinery produced the number, so you know how much to trust it and what could go wrong.</p>
+</div>
+<div class="envar-desc">
+<p>The class of model that produced the values. Daymet = <code>spatial_interpolation</code>; NARR / ERA5 = <code>reanalysis</code>; GridMET = <code>statistical_blend</code>; Brokamp PM = <code>single_machine_learning</code>; Di et al. PM = <code>ensemble_machine_learning</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>spatial_interpolation</code> — <span class="egdesc">Daymet V4 daily Tmax (station observations interpolated to a 1 km grid)</span></p>
+</div>
+<div class="envar-eg">
+<p><code>satellite_retrieval</code> — <span class="egdesc">ACAG V5.GL satellite-derived annual PM2.5</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Direct instrument observation."><code>direct_measurement</code> <span class="vdesc">Direct instrument observation</span></span>
+<span class="envar-value" title="Station observations interpolated to a grid (Daymet)."><code>spatial_interpolation</code> <span class="vdesc">Station observations interpolated to a grid (Daymet)</span></span>
+<span class="envar-value" title="Data-assimilation reanalysis (NARR, ERA5)."><code>reanalysis</code> <span class="vdesc">Data-assimilation reanalysis (NARR, ERA5)</span></span>
+<span class="envar-value" title="Blend of multiple sources (GridMET = PRISM + NLDAS-2)."><code>statistical_blend</code> <span class="vdesc">Blend of multiple sources (GridMET = PRISM + NLDAS-2)</span></span>
+<span class="envar-value" title="Deterministic chemical transport model (CMAQ, GEOS-Chem)."><code>chemical_transport_model</code> <span class="vdesc">Deterministic chemical transport model (CMAQ, GEOS-Chem)</span></span>
+<span class="envar-value" title="Ensemble ML model (Di et al. PM2.5)."><code>ensemble_machine_learning</code> <span class="vdesc">Ensemble ML model (Di et al</span></span>
+<span class="envar-value" title="Single ML model (Brokamp PM2.5)."><code>single_machine_learning</code> <span class="vdesc">Single ML model (Brokamp PM2</span></span>
+<span class="envar-value" title="Derived analytically from other variables via an equation."><code>equation_derived</code> <span class="vdesc">Derived analytically from other variables via an equation</span></span>
+<span class="envar-value" title="Satellite-based retrieval algorithm."><code>satellite_retrieval</code> <span class="vdesc">Satellite-based retrieval algorithm</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A measured value, an interpolated value, and an ML-predicted value have different error structures and cannot be pooled naively; this is the field that tells them apart. Without it, users cannot judge whether values are measurements or predictions.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://daymet.ornl.gov/">https://daymet.ornl.gov/</a>, <a href="https://www.climatologylab.org/gridmet.html">https://www.climatologylab.org/gridmet.html</a>, <a href="https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5">https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">1 field</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Ensemble Member Count</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_ensemble_member_count</code> · range <a href="../../types/Integer/">Integer</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Some products run the same model many times with slightly different settings and combine the results — each run is a "member". Knowing how many members there were (say, 100) tells you how much the spread between runs can be trusted as a measure of uncertainty.</p>
+</div>
+<div class="envar-desc">
+<p>For ensemble products, the number of members. Null with reason <code>not_provided_by_source</code> for single-realisation products.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>100</code> — <span class="egdesc">e.g. an ensemble ML product with 100 members; single-realisation products such as Daymet leave this null</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Mandatory for ensemble products: the member count determines how the ensemble spread can be interpreted as an uncertainty estimate. Without it, per-value spread statistics cannot be reproduced or sanity-checked.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://en.wikipedia.org/wiki/Ensemble_forecasting">https://en.wikipedia.org/wiki/Ensemble_forecasting</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">5 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Exposure Model Inputs</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_inputs</code> · range <a href="../../types/String/">String</a> · cardinality * · multivalued</p>
+</div>
+<div class="envar-explain">
+<p>A model is only as good as what you feed it. This lists the raw ingredients — station readings, satellite images, other datasets — that went into cooking up the final numbers.</p>
+</div>
+<div class="envar-desc">
+<p>Inputs to the model. For GridMET: <code>["PRISM monthly normals", "NLDAS-2 sub-daily reanalysis"]</code>. For derived heat metrics, the input variable list (held in <code>DerivedHeatMetric.equation_inputs</code> for typed cases).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>GHCN-Daily station observations</code> — <span class="egdesc">sole element of the Daymet V4 input list</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Needed to trace what the value actually derives from. Without the input list, a shared bias or gap in an upstream dataset cannot be traced through to the exposure values it contaminated.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://prism.oregonstate.edu/">https://prism.oregonstate.edu/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Methods Paper DOI</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_paper_doi</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Scientists publish a paper describing exactly how a model works, and a DOI is a permanent web address for that paper. Recording it here means anyone can look up the full recipe behind the numbers, even years later.</p>
+</div>
+<div class="envar-desc">
+<p>DOI of the methods paper describing the model (Thornton et al. 2022 for Daymet; Abatzoglou 2013 for GridMET).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>10.1021/acs.est.1c05309</code> — <span class="egdesc">van Donkelaar et al. 2021 methods paper for ACAG PM2.5</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The reproducibility anchor for how the value was made. Without it, anyone auditing or reproducing the analysis must guess which of several versions of a method the values actually came from.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.doi.org/">https://www.doi.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Cross-Validation R²</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_cross_validation_r2</code> · range <a href="../../types/Float/">Float</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Cross-validation R² is a 0-to-1 score of how well the model predicted values it had never seen during training — closer to 1 is better. A score of 0.90 means the model captures most of the real variation; a low score means treat the numbers with caution.</p>
+</div>
+<div class="envar-desc">
+<p>Model cross-validation R², where reported by the producer.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>0.90</code> — <span class="egdesc">reported for ACAG V5.GL satellite-derived PM2.5</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The single most useful one-number quality signal for a modeled product. Omitting it leaves downstream users with no quantitative basis for weighing one exposure product against another or for propagating model skill into their error budgets.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">https://en.wikipedia.org/wiki/Coefficient_of_determination</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Known Model Biases</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_known_biases</code> · range <a href="../../types/String/">String</a> · cardinality * · multivalued</p>
+</div>
+<div class="envar-explain">
+<p>Every model has known blind spots — places or conditions where it is reliably a bit wrong, like running warm in summer or cold at the coast. This slot writes those warnings down so the next person does not rediscover them the hard way.</p>
+</div>
+<div class="envar-desc">
+<p>Free-text flags of known issues, e.g. "NLDAS-2 coastal Tmax bias up to -1.48 °C", "NARR cold bias at extremes", "Daymet warm bias in summer in some western US regions". The field reviewers care about.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Examples</p>
+<div class="envar-eg">
+<p><code>warm-season warm bias documented in some western US regions</code> — <span class="egdesc">one known bias of Daymet V4 daily Tmax</span></p>
+</div>
+<div class="envar-eg">
+<p><code>interpolation degrades in sparse-station areas</code> — <span class="egdesc">another element of the same Daymet V4 bias list</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The field reviewers care about most; it bites coastal and sparse-station analyses in particular. Omitting it lets a documented systematic error (e.g. a coastal cold bias) silently propagate into health-effect estimates that reviewers will later reject.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://psl.noaa.gov/data/gridded/data.narr.html">https://psl.noaa.gov/data/gridded/data.narr.html</a>, <a href="https://daymet.ornl.gov/">https://daymet.ornl.gov/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Bias Correction Applied</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>bias_correction_applied</code> · range <a href="../../enums/BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Sometimes model output is nudged after the fact to better match real observations — that nudging is "bias correction". This slot records whether the numbers were adjusted that way and, if so, which technique was used.</p>
+</div>
+<div class="envar-desc">
+<p>Whether and how bias correction has been applied. Usually <code>none</code> for Tmax from reference products.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>none</code> — <span class="egdesc">Daymet V4 daily Tmax is used uncorrected</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="No bias correction applied."><code>none</code> <span class="vdesc">No bias correction applied</span></span>
+<span class="envar-value" title="Quantile-mapping bias correction."><code>quantile_mapping</code> <span class="vdesc">Quantile-mapping bias correction</span></span>
+<span class="envar-value" title="Linear scaling bias correction."><code>linear_scaling</code> <span class="vdesc">Linear scaling bias correction</span></span>
+<span class="envar-value" title="Delta-method bias correction."><code>delta_method</code> <span class="vdesc">Delta-method bias correction</span></span>
+<span class="envar-value" title="Some other bias-correction method has been applied."><code>other</code> <span class="vdesc">Some other bias-correction method has been applied</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Pooling bias-corrected and raw values silently mixes apples and oranges. Without this flag, an analyst cannot tell whether two datasets differ because of the environment or because one of them was statistically adjusted.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">4 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Methods Paper DOI Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_paper_doi_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When a field is empty, it helps to say why. This slot records whether the paper genuinely does not exist, was not shared by the producer, or simply was not looked up.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>exposure_model_paper_doi</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "no methods paper exists" from "nobody bothered to record it". Without the reason, a blank DOI silently hides whether the model is undocumented or the metadata is just incomplete.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Cross-Validation R² Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_cross_validation_r2_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>If the quality score is blank, this slot says why — for example, some well-known products simply never publish one. It turns an empty field into an honest answer.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>exposure_model_cross_validation_r2</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code> — <span class="egdesc">Daymet does not publish a cross-validation R²</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Separates "the producer never published a skill score" from "we forgot to record it". Without this, a missing R² is ambiguous and reviewers cannot tell an undocumented model from sloppy metadata.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Ensemble Member Count Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>exposure_model_ensemble_member_count_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Many products come from just one model run, so "number of members" genuinely does not apply. This slot says so explicitly, instead of leaving readers to wonder whether information was lost.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>exposure_model_ensemble_member_count</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code> — <span class="egdesc">single-realisation products (Daymet, ACAG) have no ensemble</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Confirms explicitly that a product is single-realisation rather than an ensemble whose member count was dropped. Without it, a null count is ambiguous and the conditionally-core rule for ensemble products cannot be audited.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Bias Correction Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>bias_correction_applied_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>If nobody could say whether the numbers were statistically adjusted, this slot records why that answer is missing — for example, the data producer never documented it.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>bias_correction_applied</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_provided_by_source</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "the producer never documented any correction" from an unrecorded answer. Without it, a blank bias-correction field cannot be told apart from missing metadata, weakening any audit of how values were adjusted.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exposure Model Type</strong></td>
+<td><code>exposure_model_type</code></td>
+<td>core</td>
+<td>1 <br/> <a href="../../enums/ExposureModelTypeEnum/">ExposureModelTypeEnum</a></td>
+<td>The class of model that produced the values</td>
+</tr>
+<tr>
+<td><strong>Exposure Model Inputs</strong></td>
+<td><code>exposure_model_inputs</code></td>
+<td>recommended</td>
+<td>* <br/> <a href="../../types/String/">String</a></td>
+<td>Inputs to the model</td>
+</tr>
+<tr>
+<td><strong>Methods Paper DOI</strong></td>
+<td><code>exposure_model_paper_doi</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>DOI of the methods paper describing the model (Thornton et al</td>
+</tr>
+<tr>
+<td><strong>Reason Methods Paper DOI Is Missing</strong></td>
+<td><code>exposure_model_paper_doi_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>exposure_model_paper_doi</code> is null</td>
+</tr>
+<tr>
+<td><strong>Cross-Validation R²</strong></td>
+<td><code>exposure_model_cross_validation_r2</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
+<td>Model cross-validation R², where reported by the producer</td>
+</tr>
+<tr>
+<td><strong>Reason Cross-Validation R² Is Missing</strong></td>
+<td><code>exposure_model_cross_validation_r2_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>exposure_model_cross_validation_r2</code> is null</td>
+</tr>
+<tr>
+<td><strong>Known Model Biases</strong></td>
+<td><code>exposure_model_known_biases</code></td>
+<td>recommended</td>
+<td>* <br/> <a href="../../types/String/">String</a></td>
+<td>Free-text flags of known issues, e</td>
+</tr>
+<tr>
+<td><strong>Ensemble Member Count</strong></td>
+<td><code>exposure_model_ensemble_member_count</code></td>
+<td>conditionally core</td>
+<td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
+<td>For ensemble products, the number of members</td>
+</tr>
+<tr>
+<td><strong>Reason Ensemble Member Count Is Missing</strong></td>
+<td><code>exposure_model_ensemble_member_count_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>exposure_model_ensemble_member_count</code> is null</td>
+</tr>
+<tr>
+<td><strong>Bias Correction Applied</strong></td>
+<td><code>bias_correction_applied</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../enums/BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a></td>
+<td>Whether and how bias correction has been applied</td>
+</tr>
+<tr>
+<td><strong>Reason Bias Correction Is Missing</strong></td>
+<td><code>bias_correction_applied_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>bias_correction_applied</code> is null</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Conditional rules on this class</summary>
+<hr/>
+<table>
+<thead>
+<tr>
+<th>Rule Applied</th>
+<th>Preconditions</th>
+<th>Postconditions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slot_conditions</td>
+<td><code>{'exposure_model_type': {'equals_string': 'ensemble_machine_learning'}}</code></td>
+<td><code>{'exposure_model_ensemble_member_count': {'required': True}}</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class ExposureModel
     click ExposureModel href "../../classes/ExposureModel/"
@@ -469,149 +926,366 @@
 
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/exposure_model_type/">exposure_model_type</a></td>
-<td>1 <br/> <a href="../../enums/ExposureModelTypeEnum/">ExposureModelTypeEnum</a></td>
-<td>The class of model that produced the values</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_inputs/">exposure_model_inputs</a></td>
-<td>* <br/> <a href="../../types/String/">String</a></td>
-<td>Inputs to the model</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_paper_doi/">exposure_model_paper_doi</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>DOI of the methods paper describing the model (Thornton et al</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_paper_doi_missing_reason/">exposure_model_paper_doi_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>exposure_model_paper_doi</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_cross_validation_r2/">exposure_model_cross_validation_r2</a></td>
-<td>0..1 <br/> <a href="../../types/Float/">Float</a></td>
-<td>Model cross-validation R², where reported by the producer</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_cross_validation_r2_missing_reason/">exposure_model_cross_validation_r2_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>exposure_model_cross_validation_r2</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_known_biases/">exposure_model_known_biases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a></td>
-<td>Free-text flags of known issues, e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_ensemble_member_count/">exposure_model_ensemble_member_count</a></td>
-<td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
-<td>For ensemble products, the number of members</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/exposure_model_ensemble_member_count_missing_reason/">exposure_model_ensemble_member_count_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>exposure_model_ensemble_member_count</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/bias_correction_applied/">bias_correction_applied</a></td>
-<td>0..1 <br/> <a href="../../enums/BiasCorrectionAppliedEnum/">BiasCorrectionAppliedEnum</a></td>
-<td>Whether and how bias correction has been applied</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/bias_correction_applied_missing_reason/">bias_correction_applied_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>bias_correction_applied</code> is null</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/exposure_model/">exposure_model</a></td>
-<td>range</td>
-<td><a href="./">ExposureModel</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/exposure_model/">exposure_model</a></td>
-<td>range</td>
-<td><a href="./">ExposureModel</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/exposure_model/">exposure_model</a></td>
-<td>range</td>
-<td><a href="./">ExposureModel</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/exposure_model/">exposure_model</a></td>
-<td>range</td>
-<td><a href="./">ExposureModel</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/exposure_model/">exposure_model</a></td>
-<td>range</td>
-<td><a href="./">ExposureModel</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="rules">Rules</h2>
-<h3 id="_1"></h3>
-<table>
-<thead>
-<tr>
-<th>Rule Applied</th>
-<th>Preconditions</th>
-<th>Postconditions</th>
-<th>Elseconditions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>slot_conditions</td>
-<td><code>{'exposure_model_type': {'equals_string': 'ensemble_machine_learning'}}</code></td>
-<td><code>{'exposure_model_ensemble_member_count': {'required': True}}</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="nt">annotations</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The model class that produced the values (interpolation, reanalysis,</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">ML, statistical blend, equation), its inputs, its methods-paper DOI, its cross-validation</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">skill, known biases, and any bias correction. One per record; may be null for direct</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">observation.</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="nt">see_also</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Reanalysis_(meteorology)</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">slot_usage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">exposure_model_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">exposure_model_type</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A measured value, an interpolated value, and an ML-predicted value</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">have different error structures and cannot be pooled naively; this is the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">field that tells them apart. Without it, users cannot judge whether values</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">are measurements or predictions.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Most</span><span class="nv"> </span><span class="s">"exposure"</span><span class="nv"> </span><span class="s">numbers</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">never</span><span class="nv"> </span><span class="s">measured</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">door:</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">model</span>
+<span class="w">          </span><span class="s">estimates</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">weather</span><span class="nv"> </span><span class="s">stations,</span><span class="nv"> </span><span class="s">satellites,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">physics</span><span class="nv"> </span><span class="s">equations.</span>
+<span class="w">          </span><span class="s">This</span><span class="nv"> </span><span class="s">field</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">kind</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">machinery</span><span class="nv"> </span><span class="s">produced</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">number,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">know</span>
+<span class="w">          </span><span class="s">how</span><span class="nv"> </span><span class="s">much</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">trust</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">go</span><span class="nv"> </span><span class="s">wrong.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The class of model that produced the values. Daymet = `spatial_interpolation`;</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">NARR / ERA5 = `reanalysis`; GridMET = `statistical_blend`; Brokamp PM = `single_machine_learning`;</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Di et al. PM = `ensemble_machine_learning`.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model Type</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spatial_interpolation</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet V4 daily Tmax (station observations interpolated to a 1</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">km grid)</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">satellite_retrieval</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ACAG V5.GL satellite-derived annual PM2.5</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://daymet.ornl.gov/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.climatologylab.org/gridmet.html</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModelTypeEnum</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">exposure_model_inputs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_inputs</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Needed to trace what the value actually derives from. Without the input</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">list, a shared bias or gap in an upstream dataset cannot be traced through</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to the exposure values it contaminated.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A model is only as good as what you feed it. This lists the raw ingredients</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— station readings, satellite images, other datasets — that went into cooking</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">up the final numbers.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Inputs</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">model.</span><span class="nv"> </span><span class="s">For</span><span class="nv"> </span><span class="s">GridMET:</span><span class="nv"> </span><span class="s">`["PRISM</span><span class="nv"> </span><span class="s">monthly</span><span class="nv"> </span><span class="s">normals",</span><span class="nv"> </span><span class="s">"NLDAS-2</span>
+<span class="w">      </span><span class="s">sub-daily</span><span class="nv"> </span><span class="s">reanalysis"]`.</span><span class="nv"> </span><span class="s">For</span><span class="nv"> </span><span class="s">derived</span><span class="nv"> </span><span class="s">heat</span><span class="nv"> </span><span class="s">metrics,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">input</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">list</span><span class="nv"> </span><span class="s">(held</span>
+<span class="w">      </span><span class="s">in</span><span class="nv"> </span><span class="s">`DerivedHeatMetric.equation_inputs`</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">typed</span><span class="nv"> </span><span class="s">cases).'</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model Inputs</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GHCN-Daily station observations</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sole element of the Daymet V4 input list</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://prism.oregonstate.edu/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">exposure_model_paper_doi</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_paper_doi</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The reproducibility anchor for how the value was made. Without it,</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">anyone auditing or reproducing the analysis must guess which of several</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">versions of a method the values actually came from.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scientists publish a paper describing exactly how a model works, and</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a DOI is a permanent web address for that paper. Recording it here means</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">anyone can look up the full recipe behind the numbers, even years later.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DOI of the methods paper describing the model (Thornton et al. 2022</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for Daymet; Abatzoglou 2013 for GridMET).</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Methods Paper DOI</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.1021/acs.est.1c05309</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">van Donkelaar et al. 2021 methods paper for ACAG PM2.5</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.doi.org/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">exposure_model_paper_doi_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_paper_doi_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinguishes "no methods paper exists" from "nobody bothered to record</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">it". Without the reason, a blank DOI silently hides whether the model is</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">undocumented or the metadata is just incomplete.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When a field is empty, it helps to say why. This slot records whether</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the paper genuinely does not exist, was not shared by the producer, or simply</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">was not looked up.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `exposure_model_paper_doi` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Methods Paper DOI Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">exposure_model_cross_validation_r2</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_cross_validation_r2</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The single most useful one-number quality signal for a modeled product.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Omitting it leaves downstream users with no quantitative basis for weighing</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">one exposure product against another or for propagating model skill into</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">their error budgets.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cross-validation R² is a 0-to-1 score of how well the model predicted</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">values it had never seen during training — closer to 1 is better. A score</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">of 0.90 means the model captures most of the real variation; a low score</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">means treat the numbers with caution.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model cross-validation R², where reported by the producer.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cross-Validation R²</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'0.90'</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reported for ACAG V5.GL satellite-derived PM2.5</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Coefficient_of_determination</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<span class="w">  </span><span class="nt">exposure_model_cross_validation_r2_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_cross_validation_r2_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Separates "the producer never published a skill score" from "we forgot</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to record it". Without this, a missing R² is ambiguous and reviewers cannot</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">tell an undocumented model from sloppy metadata.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If the quality score is blank, this slot says why — for example, some</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">well-known products simply never publish one. It turns an empty field into</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an honest answer.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `exposure_model_cross_validation_r2` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Cross-Validation R² Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet does not publish a cross-validation R²</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">exposure_model_known_biases</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_known_biases</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The field reviewers care about most; it bites coastal and sparse-station</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">analyses in particular. Omitting it lets a documented systematic error (e.g.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a coastal cold bias) silently propagate into health-effect estimates that</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">reviewers will later reject.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Every model has known blind spots — places or conditions where it is</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">reliably a bit wrong, like running warm in summer or cold at the coast.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">This slot writes those warnings down so the next person does not rediscover</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">them the hard way.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Free-text flags of known issues, e.g. "NLDAS-2 coastal Tmax bias</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">up to -1.48 °C", "NARR cold bias at extremes", "Daymet warm bias in summer in</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">some western US regions". The field reviewers care about.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Known Model Biases</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warm-season warm bias documented in some western US regions</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">one known bias of Daymet V4 daily Tmax</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interpolation degrades in sparse-station areas</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">another element of the same Daymet V4 bias list</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://psl.noaa.gov/data/gridded/data.narr.html</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://daymet.ornl.gov/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">exposure_model_ensemble_member_count</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Mandatory</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">ensemble</span><span class="nv"> </span><span class="s">products:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">member</span><span class="nv"> </span><span class="s">count</span><span class="nv"> </span><span class="s">determines</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">          </span><span class="s">ensemble</span><span class="nv"> </span><span class="s">spread</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">interpreted</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">uncertainty</span><span class="nv"> </span><span class="s">estimate.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">it,</span>
+<span class="w">          </span><span class="s">per-value</span><span class="nv"> </span><span class="s">spread</span><span class="nv"> </span><span class="s">statistics</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">reproduced</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">sanity-checked.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some products run the same model many times with slightly different</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">settings and combine the results — each run is a "member". Knowing how many</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">members there were (say, 100) tells you how much the spread between runs</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">can be trusted as a measure of uncertainty.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">For ensemble products, the number of members. Null with reason `not_provided_by_source`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for single-realisation products.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensemble Member Count</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'100'</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">e.g. an ensemble ML product with 100 members; single-realisation</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">products such as Daymet leave this null</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Ensemble_forecasting</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">  </span><span class="nt">exposure_model_ensemble_member_count_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Confirms explicitly that a product is single-realisation rather than</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an ensemble whose member count was dropped. Without it, a null count is</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">ambiguous and the conditionally-core rule for ensemble products cannot be</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">audited.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Many products come from just one model run, so "number of members"</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">genuinely does not apply. This slot says so explicitly, instead of leaving</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">readers to wonder whether information was lost.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `exposure_model_ensemble_member_count` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Ensemble Member Count Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">single-realisation products (Daymet, ACAG) have no ensemble</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">bias_correction_applied</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bias_correction_applied</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pooling bias-corrected and raw values silently mixes apples and oranges.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Without this flag, an analyst cannot tell whether two datasets differ because</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">of the environment or because one of them was statistically adjusted.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sometimes model output is nudged after the fact to better match real</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">observations — that nudging is "bias correction". This slot records whether</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the numbers were adjusted that way and, if so, which technique was used.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Whether and how bias correction has been applied. Usually `none`</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for Tmax from reference products.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bias Correction Applied</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet V4 daily Tmax is used uncorrected</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BiasCorrectionAppliedEnum</span>
+<span class="w">  </span><span class="nt">bias_correction_applied_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bias_correction_applied_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinguishes "the producer never documented any correction" from an</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">unrecorded answer. Without it, a blank bias-correction field cannot be told</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">apart from missing metadata, weakening any audit of how values were adjusted.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If nobody could say whether the numbers were statistically adjusted,</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">this slot records why that answer is missing — for example, the data producer</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">never documented it.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `bias_correction_applied` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Bias Correction Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="nt">rules</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">exposure_model_type</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
+<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ensemble_machine_learning</span>
+<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">exposure_model_ensemble_member_count</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count</span>
+<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensemble products must state their member count — ensemble spread is</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">meaningless without knowing how many realisations it summarises (tier conditionally_core</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">context "ensemble models").</span>
+</code></pre></div>
+</details>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Reanalysis_(meteorology)">https://en.wikipedia.org/wiki/Reanalysis_(meteorology)</a></li>
@@ -655,427 +1329,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The model class that produced the values (interpolation, reanalysis,</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">ML, statistical blend, equation), its inputs, its methods-paper DOI, its cross-validation</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">skill, known biases, and any bias correction. One per record; may be null for direct</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">observation.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Reanalysis_(meteorology)</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_inputs</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_paper_doi</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_paper_doi_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_cross_validation_r2</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_cross_validation_r2_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_known_biases</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bias_correction_applied</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bias_correction_applied_missing_reason</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">exposure_model_type</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">rules</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">exposure_model_type</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
-<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ensemble_machine_learning</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">exposure_model_ensemble_member_count</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensemble products must state their member count — ensemble spread is</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">meaningless without knowing how many realisations it summarises (tier conditionally_core</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">context "ensemble models").</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The model class that produced the values (interpolation, reanalysis,</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">ML, statistical blend, equation), its inputs, its methods-paper DOI, its cross-validation</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">skill, known biases, and any bias correction. One per record; may be null for direct</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">observation.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Reanalysis_(meteorology)</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">exposure_model_type</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">attributes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">exposure_model_type</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A measured value, an interpolated value, and an ML-predicted value</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">have different error structures and cannot be pooled naively; this is the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">field that tells them apart. Without it, users cannot judge whether values</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">are measurements or predictions.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Most</span><span class="nv"> </span><span class="s">"exposure"</span><span class="nv"> </span><span class="s">numbers</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">never</span><span class="nv"> </span><span class="s">measured</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">your</span><span class="nv"> </span><span class="s">door:</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">model</span>
-<span class="w">          </span><span class="s">estimates</span><span class="nv"> </span><span class="s">them</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">weather</span><span class="nv"> </span><span class="s">stations,</span><span class="nv"> </span><span class="s">satellites,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">physics</span><span class="nv"> </span><span class="s">equations.</span>
-<span class="w">          </span><span class="s">This</span><span class="nv"> </span><span class="s">field</span><span class="nv"> </span><span class="s">says</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">kind</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">machinery</span><span class="nv"> </span><span class="s">produced</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">number,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">know</span>
-<span class="w">          </span><span class="s">how</span><span class="nv"> </span><span class="s">much</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">trust</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">could</span><span class="nv"> </span><span class="s">go</span><span class="nv"> </span><span class="s">wrong.'</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The class of model that produced the values. Daymet = `spatial_interpolation`;</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">NARR / ERA5 = `reanalysis`; GridMET = `statistical_blend`; Brokamp PM = `single_machine_learning`;</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Di et al. PM = `ensemble_machine_learning`.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model Type</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spatial_interpolation</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet V4 daily Tmax (station observations interpolated to a 1</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">km grid)</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">satellite_retrieval</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ACAG V5.GL satellite-derived annual PM2.5</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://daymet.ornl.gov/</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.climatologylab.org/gridmet.html</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModelTypeEnum</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">exposure_model_inputs</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_inputs</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Needed to trace what the value actually derives from. Without the input</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">list, a shared bias or gap in an upstream dataset cannot be traced through</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to the exposure values it contaminated.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A model is only as good as what you feed it. This lists the raw ingredients</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— station readings, satellite images, other datasets — that went into cooking</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">up the final numbers.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Inputs</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">model.</span><span class="nv"> </span><span class="s">For</span><span class="nv"> </span><span class="s">GridMET:</span><span class="nv"> </span><span class="s">`["PRISM</span><span class="nv"> </span><span class="s">monthly</span><span class="nv"> </span><span class="s">normals",</span><span class="nv"> </span><span class="s">"NLDAS-2</span>
-<span class="w">      </span><span class="s">sub-daily</span><span class="nv"> </span><span class="s">reanalysis"]`.</span><span class="nv"> </span><span class="s">For</span><span class="nv"> </span><span class="s">derived</span><span class="nv"> </span><span class="s">heat</span><span class="nv"> </span><span class="s">metrics,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">input</span><span class="nv"> </span><span class="s">variable</span><span class="nv"> </span><span class="s">list</span><span class="nv"> </span><span class="s">(held</span>
-<span class="w">      </span><span class="s">in</span><span class="nv"> </span><span class="s">`DerivedHeatMetric.equation_inputs`</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">typed</span><span class="nv"> </span><span class="s">cases).'</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exposure Model Inputs</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GHCN-Daily station observations</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sole element of the Daymet V4 input list</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://prism.oregonstate.edu/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">exposure_model_paper_doi</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_paper_doi</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The reproducibility anchor for how the value was made. Without it,</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">anyone auditing or reproducing the analysis must guess which of several</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">versions of a method the values actually came from.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Scientists publish a paper describing exactly how a model works, and</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a DOI is a permanent web address for that paper. Recording it here means</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">anyone can look up the full recipe behind the numbers, even years later.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DOI of the methods paper describing the model (Thornton et al. 2022</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for Daymet; Abatzoglou 2013 for GridMET).</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Methods Paper DOI</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.1021/acs.est.1c05309</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">van Donkelaar et al. 2021 methods paper for ACAG PM2.5</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.doi.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">exposure_model_paper_doi_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_paper_doi_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinguishes "no methods paper exists" from "nobody bothered to record</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">it". Without the reason, a blank DOI silently hides whether the model is</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">undocumented or the metadata is just incomplete.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When a field is empty, it helps to say why. This slot records whether</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the paper genuinely does not exist, was not shared by the producer, or simply</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">was not looked up.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `exposure_model_paper_doi` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Methods Paper DOI Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="w">  </span><span class="nt">exposure_model_cross_validation_r2</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_cross_validation_r2</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The single most useful one-number quality signal for a modeled product.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Omitting it leaves downstream users with no quantitative basis for weighing</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">one exposure product against another or for propagating model skill into</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">their error budgets.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cross-validation R² is a 0-to-1 score of how well the model predicted</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">values it had never seen during training — closer to 1 is better. A score</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">of 0.90 means the model captures most of the real variation; a low score</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">means treat the numbers with caution.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model cross-validation R², where reported by the producer.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cross-Validation R²</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'0.90'</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reported for ACAG V5.GL satellite-derived PM2.5</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Coefficient_of_determination</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
-<span class="w">  </span><span class="nt">exposure_model_cross_validation_r2_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_cross_validation_r2_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Separates "the producer never published a skill score" from "we forgot</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to record it". Without this, a missing R² is ambiguous and reviewers cannot</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">tell an undocumented model from sloppy metadata.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If the quality score is blank, this slot says why — for example, some</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">well-known products simply never publish one. It turns an empty field into</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an honest answer.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `exposure_model_cross_validation_r2` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Cross-Validation R² Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet does not publish a cross-validation R²</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="w">  </span><span class="nt">exposure_model_known_biases</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_known_biases</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The field reviewers care about most; it bites coastal and sparse-station</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">analyses in particular. Omitting it lets a documented systematic error (e.g.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a coastal cold bias) silently propagate into health-effect estimates that</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">reviewers will later reject.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Every model has known blind spots — places or conditions where it is</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">reliably a bit wrong, like running warm in summer or cold at the coast.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">This slot writes those warnings down so the next person does not rediscover</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">them the hard way.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Free-text flags of known issues, e.g. "NLDAS-2 coastal Tmax bias</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">up to -1.48 °C", "NARR cold bias at extremes", "Daymet warm bias in summer in</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">some western US regions". The field reviewers care about.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Known Model Biases</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warm-season warm bias documented in some western US regions</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">one known bias of Daymet V4 daily Tmax</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">interpolation degrades in sparse-station areas</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">another element of the same Daymet V4 bias list</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://psl.noaa.gov/data/gridded/data.narr.html</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://daymet.ornl.gov/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">exposure_model_ensemble_member_count</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditionally_core</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Mandatory</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">ensemble</span><span class="nv"> </span><span class="s">products:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">member</span><span class="nv"> </span><span class="s">count</span><span class="nv"> </span><span class="s">determines</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">          </span><span class="s">ensemble</span><span class="nv"> </span><span class="s">spread</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">interpreted</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">uncertainty</span><span class="nv"> </span><span class="s">estimate.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">it,</span>
-<span class="w">          </span><span class="s">per-value</span><span class="nv"> </span><span class="s">spread</span><span class="nv"> </span><span class="s">statistics</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">reproduced</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">sanity-checked.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Some products run the same model many times with slightly different</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">settings and combine the results — each run is a "member". Knowing how many</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">members there were (say, 100) tells you how much the spread between runs</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">can be trusted as a measure of uncertainty.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">For ensemble products, the number of members. Null with reason `not_provided_by_source`</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for single-realisation products.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensemble Member Count</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'100'</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">e.g. an ensemble ML product with 100 members; single-realisation</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">products such as Daymet leave this null</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://en.wikipedia.org/wiki/Ensemble_forecasting</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">  </span><span class="nt">exposure_model_ensemble_member_count_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Confirms explicitly that a product is single-realisation rather than</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an ensemble whose member count was dropped. Without it, a null count is</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">ambiguous and the conditionally-core rule for ensemble products cannot be</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">audited.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Many products come from just one model run, so "number of members"</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">genuinely does not apply. This slot says so explicitly, instead of leaving</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">readers to wonder whether information was lost.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `exposure_model_ensemble_member_count` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Ensemble Member Count Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">single-realisation products (Daymet, ACAG) have no ensemble</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="w">  </span><span class="nt">bias_correction_applied</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bias_correction_applied</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pooling bias-corrected and raw values silently mixes apples and oranges.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Without this flag, an analyst cannot tell whether two datasets differ because</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">of the environment or because one of them was statistically adjusted.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sometimes model output is nudged after the fact to better match real</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">observations — that nudging is "bias correction". This slot records whether</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the numbers were adjusted that way and, if so, which technique was used.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Whether and how bias correction has been applied. Usually `none`</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">for Tmax from reference products.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bias Correction Applied</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Daymet V4 daily Tmax is used uncorrected</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BiasCorrectionAppliedEnum</span>
-<span class="w">  </span><span class="nt">bias_correction_applied_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bias_correction_applied_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinguishes "the producer never documented any correction" from an</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">unrecorded answer. Without it, a blank bias-correction field cannot be told</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">apart from missing metadata, weakening any audit of how values were adjusted.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If nobody could say whether the numbers were statistically adjusted,</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">this slot records why that answer is missing — for example, the data producer</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">never documented it.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `bias_correction_applied` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Bias Correction Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_provided_by_source</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExposureModel</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="nt">rules</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">preconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">exposure_model_type</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_type</span>
-<span class="w">        </span><span class="nt">equals_string</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ensemble_machine_learning</span>
-<span class="w">  </span><span class="nt">postconditions</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">slot_conditions</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">exposure_model_ensemble_member_count</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_model_ensemble_member_count</span>
-<span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ensemble products must state their member count — ensemble spread is</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">meaningless without knowing how many realisations it summarises (tier conditionally_core</span>
-<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">context "ensemble models").</span>
-</code></pre></div>
-</details>
 </div>
 </article>
 </div>

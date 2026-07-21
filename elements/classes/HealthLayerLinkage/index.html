@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/HealthLayerLinkage/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Health-Layer Linkage (HealthLayerLinkage) - linkml-microschemas-envar</title>
+<title>HealthLayerLinkage - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-health-layer-linkage-healthlayerlinkage">
+<a class="md-skip" href="#health-layer-linkage">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Health-Layer Linkage (HealthLayerLinkage)
+              HealthLayerLinkage
             
           </span>
 </div>
@@ -262,24 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -328,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -366,10 +318,215 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-health-layer-linkage-healthlayerlinkage">Class: Health-Layer Linkage (HealthLayerLinkage)</h1>
-<p><em>Hooks the sidecar uses to be findable from a downstream health-data layer (OMOP, BioData Catalyst, …). These are <em>not</em> clinical metadata — they are the hooks the exposure record needs so a health-side row can resolve back to its provenance. The target layer is named in <code>health_layer_target</code>, so no single model is privileged. One per record.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/HealthLayerLinkage">envar:class/HealthLayerLinkage</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="health-layer-linkage">Health-Layer Linkage</h1>
+<p><span class="envar-classname">HealthLayerLinkage</span></p>
+<p class="envar-lead">Hooks the sidecar uses to be findable from a downstream health-data layer (OMOP, BioData Catalyst, …). These are <em>not</em> clinical metadata — they are the hooks the exposure record needs so a health-side row can resolve back to its provenance. The target layer is named in <code>health_layer_target</code>, so no single model is privileged. One per record.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">4 fields</span>
+<span class="envar-metachip">0 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/HealthLayerLinkage">envar:class/HealthLayerLinkage</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Target Health-Data Layer</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>health_layer_target</code> · range <a href="../../enums/HealthLayerTargetEnum/">HealthLayerTargetEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Health records are stored in different standard formats — for example OMOP, a widely used common format for health records, so tools written for one hospital's data work on another's. This slot simply says which of those formats this exposure record is meant to plug into.</p>
+</div>
+<div class="envar-desc">
+<p>The downstream health-data layer this sidecar links into. Names the target so <code>health_layer_link_field</code> is interpreted against the right model.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>omop_external_exposure</code> — <span class="egdesc">OMOP CDM via the OHDSI GIS <code>external_exposure</code> table extension</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="OMOP CDM, via the OHDSI GIS `external_exposure` table extension."><code>omop_external_exposure</code> <span class="vdesc">OMOP CDM, via the OHDSI GIS `external_exposure` table extension</span></span>
+<span class="envar-value" title="BioData Catalyst (BDC) harmonised model."><code>bdc</code> <span class="vdesc">BioData Catalyst (BDC) harmonised model</span></span>
+<span class="envar-value" title="Another health-data layer named out of band."><code>other</code> <span class="vdesc">Another health-data layer named out of band</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without naming the target layer, <code>health_layer_link_field</code> is ambiguous — a consumer cannot know which data model the link field belongs to, so the exposure record cannot be reliably resolved from the health side. Naming the target in a slot (rather than baking it into slot names) is also what keeps the schema neutral across health data models.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://ohdsi.github.io/CommonDataModel/">https://ohdsi.github.io/CommonDataModel/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Health-Layer Link Field</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>health_layer_link_field</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>Think of the exposure record and the patient database as two spreadsheets that need to be matched up. This slot names the column in the patient-side spreadsheet that holds the matching ID, so anyone can connect the two tables without guessing.</p>
+</div>
+<div class="envar-desc">
+<p>Name of the field in the target health-data layer that carries <code>provenance_id</code>. For OMOP this is <code>external_exposure.exposure_source_value</code> (the default); other layers name their own field.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>exposure_source_value</code> — <span class="egdesc">the OMOP <code>external_exposure</code> field that carries <code>provenance_id</code></span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the join key declaration: it names the exact field in the health-data layer that holds this record's <code>provenance_id</code>. Without it, exposure rows cannot be joined back to patients in the health data model, and a health-side row cannot resolve to its exposure provenance.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://ohdsi.github.io/CommonDataModel/">https://ohdsi.github.io/CommonDataModel/</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Anchored Cohort Size</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>cohort_size_anchored</code> · range <a href="../../types/Integer/">Integer</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>This is simply a head count: how many different people this exposure record covers. It lets whoever receives the data check that nothing went missing along the way.</p>
+</div>
+<div class="envar-desc">
+<p>Number of distinct persons this exposure record was extracted for. Helps downstream estimate the volume of health-layer rows the sidecar describes.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>3</code> — <span class="egdesc">three cohort members in the worked Phoenix example</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Gives downstream consumers a volume expectation: without it, a health-layer loader cannot sanity-check whether the number of exposure rows it receives matches the number of persons the record was extracted for, so silent truncation or duplication goes unnoticed.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Cohort Size Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>cohort_size_anchored_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>When the head count is missing, this slot says why — for example, the tool could have counted but did not, or counting simply does not apply. An explained blank is far more useful than a silent one.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>cohort_size_anchored</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>available_but_not_extracted</code> — <span class="egdesc">the pipeline could count anchored persons but does not yet surface it</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Distinguishes "the cohort size is genuinely unknown" from "the pipeline just did not record it". Without the reason, a null count is uninterpretable and downstream users cannot tell whether to chase the number or accept its absence.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target Health-Data Layer</strong></td>
+<td><code>health_layer_target</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../enums/HealthLayerTargetEnum/">HealthLayerTargetEnum</a></td>
+<td>The downstream health-data layer this sidecar links into</td>
+</tr>
+<tr>
+<td><strong>Health-Layer Link Field</strong></td>
+<td><code>health_layer_link_field</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Name of the field in the target health-data layer that carries `provenance_id...</td>
+</tr>
+<tr>
+<td><strong>Anchored Cohort Size</strong></td>
+<td><code>cohort_size_anchored</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
+<td>Number of distinct persons this exposure record was extracted for</td>
+</tr>
+<tr>
+<td><strong>Reason Cohort Size Is Missing</strong></td>
+<td><code>cohort_size_anchored_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>cohort_size_anchored</code> is null</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class HealthLayerLinkage
     click HealthLayerLinkage href "../../classes/HealthLayerLinkage/"
@@ -400,87 +557,145 @@
 
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/health_layer_target/">health_layer_target</a></td>
-<td>0..1 <br/> <a href="../../enums/HealthLayerTargetEnum/">HealthLayerTargetEnum</a></td>
-<td>The downstream health-data layer this sidecar links into</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/health_layer_link_field/">health_layer_link_field</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of the field in the target health-data layer that carries `provenance_id...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/cohort_size_anchored/">cohort_size_anchored</a></td>
-<td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
-<td>Number of distinct persons this exposure record was extracted for</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/cohort_size_anchored_missing_reason/">cohort_size_anchored_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>cohort_size_anchored</code> is null</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/health_layer_linkage/">health_layer_linkage</a></td>
-<td>range</td>
-<td><a href="./">HealthLayerLinkage</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/health_layer_linkage/">health_layer_linkage</a></td>
-<td>range</td>
-<td><a href="./">HealthLayerLinkage</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/health_layer_linkage/">health_layer_linkage</a></td>
-<td>range</td>
-<td><a href="./">HealthLayerLinkage</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/health_layer_linkage/">health_layer_linkage</a></td>
-<td>range</td>
-<td><a href="./">HealthLayerLinkage</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/health_layer_linkage/">health_layer_linkage</a></td>
-<td>range</td>
-<td><a href="./">HealthLayerLinkage</a></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="nt">annotations</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hooks the sidecar uses to be findable from a downstream health-data layer</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(OMOP, BioData Catalyst, …). These are *not* clinical metadata — they are the hooks</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the exposure record needs so a health-side row can resolve back to its provenance.</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">The target layer is named in `health_layer_target`, so no single model is privileged.</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">One per record.</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health-Layer Linkage</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="nt">see_also</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://biodatacatalyst.nhlbi.nih.gov/</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">health_layer_target</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health_layer_target</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Without naming the target layer, `health_layer_link_field` is ambiguous</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— a consumer cannot know which data model the link field belongs to, so</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the exposure record cannot be reliably resolved from the health side. Naming</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the target in a slot (rather than baking it into slot names) is also what</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">keeps the schema neutral across health data models.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health records are stored in different standard formats — for example</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">OMOP, a widely used common format for health records, so tools written for</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">one hospital's data work on another's. This slot simply says which of those</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">formats this exposure record is meant to plug into.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The downstream health-data layer this sidecar links into. Names the</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">target so `health_layer_link_field` is interpreted against the right model.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Target Health-Data Layer</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">omop_external_exposure</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OMOP CDM via the OHDSI GIS `external_exposure` table extension</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerTargetEnum</span>
+<span class="w">  </span><span class="nt">health_layer_link_field</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health_layer_link_field</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">join</span><span class="nv"> </span><span class="s">key</span><span class="nv"> </span><span class="s">declaration:</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">exact</span><span class="nv"> </span><span class="s">field</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">          </span><span class="s">health-data</span><span class="nv"> </span><span class="s">layer</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">holds</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">`provenance_id`.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">it,</span>
+<span class="w">          </span><span class="s">exposure</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">joined</span><span class="nv"> </span><span class="s">back</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">patients</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">health</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">model,</span>
+<span class="w">          </span><span class="s">and</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">health-side</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">resolve</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">exposure</span><span class="nv"> </span><span class="s">provenance.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Think of the exposure record and the patient database as two spreadsheets</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">that need to be matched up. This slot names the column in the patient-side</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">spreadsheet that holds the matching ID, so anyone can connect the two tables</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">without guessing.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the field in the target health-data layer that carries `provenance_id`.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">For OMOP this is `external_exposure.exposure_source_value` (the default); other</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">layers name their own field.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health-Layer Link Field</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_source_value</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the OMOP `external_exposure` field that carries `provenance_id`</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">cohort_size_anchored</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cohort_size_anchored</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Gives</span><span class="nv"> </span><span class="s">downstream</span><span class="nv"> </span><span class="s">consumers</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">volume</span><span class="nv"> </span><span class="s">expectation:</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">health-layer</span>
+<span class="w">          </span><span class="s">loader</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">sanity-check</span><span class="nv"> </span><span class="s">whether</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">exposure</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">receives</span>
+<span class="w">          </span><span class="s">matches</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">persons</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">extracted</span><span class="nv"> </span><span class="s">for,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">silent</span><span class="nv"> </span><span class="s">truncation</span>
+<span class="w">          </span><span class="s">or</span><span class="nv"> </span><span class="s">duplication</span><span class="nv"> </span><span class="s">goes</span><span class="nv"> </span><span class="s">unnoticed.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">simply</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">head</span><span class="nv"> </span><span class="s">count:</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">many</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">people</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">exposure</span>
+<span class="w">          </span><span class="s">record</span><span class="nv"> </span><span class="s">covers.</span><span class="nv"> </span><span class="s">It</span><span class="nv"> </span><span class="s">lets</span><span class="nv"> </span><span class="s">whoever</span><span class="nv"> </span><span class="s">receives</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">check</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">nothing</span><span class="nv"> </span><span class="s">went</span>
+<span class="w">          </span><span class="s">missing</span><span class="nv"> </span><span class="s">along</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">way.'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Number of distinct persons this exposure record was extracted for.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Helps downstream estimate the volume of health-layer rows the sidecar describes.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Anchored Cohort Size</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'3'</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">three cohort members in the worked Phoenix example</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">  </span><span class="nt">cohort_size_anchored_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cohort_size_anchored_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinguishes "the cohort size is genuinely unknown" from "the pipeline</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">just did not record it". Without the reason, a null count is uninterpretable</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">and downstream users cannot tell whether to chase the number or accept its</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">absence.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When the head count is missing, this slot says why — for example, the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">tool could have counted but did not, or counting simply does not apply.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">An explained blank is far more useful than a silent one.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `cohort_size_anchored` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Cohort Size Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">available_but_not_extracted</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the pipeline could count anchored persons but does not yet surface</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">it</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+</code></pre></div>
+</details>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://ohdsi.github.io/CommonDataModel/">https://ohdsi.github.io/CommonDataModel/</a></li>
@@ -525,176 +740,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hooks the sidecar uses to be findable from a downstream health-data layer</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(OMOP, BioData Catalyst, …). These are *not* clinical metadata — they are the hooks</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the exposure record needs so a health-side row can resolve back to its provenance.</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">The target layer is named in `health_layer_target`, so no single model is privileged.</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">One per record.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health-Layer Linkage</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://biodatacatalyst.nhlbi.nih.gov/</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health_layer_target</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health_layer_link_field</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cohort_size_anchored</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cohort_size_anchored_missing_reason</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hooks the sidecar uses to be findable from a downstream health-data layer</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">(OMOP, BioData Catalyst, …). These are *not* clinical metadata — they are the hooks</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">the exposure record needs so a health-side row can resolve back to its provenance.</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">The target layer is named in `health_layer_target`, so no single model is privileged.</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">One per record.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health-Layer Linkage</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://biodatacatalyst.nhlbi.nih.gov/</span>
-<span class="nt">attributes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">health_layer_target</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health_layer_target</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Without naming the target layer, `health_layer_link_field` is ambiguous</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— a consumer cannot know which data model the link field belongs to, so</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the exposure record cannot be reliably resolved from the health side. Naming</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the target in a slot (rather than baking it into slot names) is also what</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">keeps the schema neutral across health data models.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health records are stored in different standard formats — for example</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">OMOP, a widely used common format for health records, so tools written for</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">one hospital's data work on another's. This slot simply says which of those</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">formats this exposure record is meant to plug into.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The downstream health-data layer this sidecar links into. Names the</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">target so `health_layer_link_field` is interpreted against the right model.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Target Health-Data Layer</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">omop_external_exposure</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OMOP CDM via the OHDSI GIS `external_exposure` table extension</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerTargetEnum</span>
-<span class="w">  </span><span class="nt">health_layer_link_field</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">health_layer_link_field</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">join</span><span class="nv"> </span><span class="s">key</span><span class="nv"> </span><span class="s">declaration:</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">exact</span><span class="nv"> </span><span class="s">field</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">          </span><span class="s">health-data</span><span class="nv"> </span><span class="s">layer</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">holds</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">record</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">`provenance_id`.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">it,</span>
-<span class="w">          </span><span class="s">exposure</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">joined</span><span class="nv"> </span><span class="s">back</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">patients</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">health</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">model,</span>
-<span class="w">          </span><span class="s">and</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">health-side</span><span class="nv"> </span><span class="s">row</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">resolve</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">exposure</span><span class="nv"> </span><span class="s">provenance.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Think of the exposure record and the patient database as two spreadsheets</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">that need to be matched up. This slot names the column in the patient-side</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">spreadsheet that holds the matching ID, so anyone can connect the two tables</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">without guessing.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of the field in the target health-data layer that carries `provenance_id`.</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">For OMOP this is `external_exposure.exposure_source_value` (the default); other</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">layers name their own field.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health-Layer Link Field</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">exposure_source_value</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the OMOP `external_exposure` field that carries `provenance_id`</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://ohdsi.github.io/CommonDataModel/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">cohort_size_anchored</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cohort_size_anchored</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Gives</span><span class="nv"> </span><span class="s">downstream</span><span class="nv"> </span><span class="s">consumers</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">volume</span><span class="nv"> </span><span class="s">expectation:</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">health-layer</span>
-<span class="w">          </span><span class="s">loader</span><span class="nv"> </span><span class="s">cannot</span><span class="nv"> </span><span class="s">sanity-check</span><span class="nv"> </span><span class="s">whether</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">exposure</span><span class="nv"> </span><span class="s">rows</span><span class="nv"> </span><span class="s">it</span><span class="nv"> </span><span class="s">receives</span>
-<span class="w">          </span><span class="s">matches</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">number</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">persons</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">extracted</span><span class="nv"> </span><span class="s">for,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">silent</span><span class="nv"> </span><span class="s">truncation</span>
-<span class="w">          </span><span class="s">or</span><span class="nv"> </span><span class="s">duplication</span><span class="nv"> </span><span class="s">goes</span><span class="nv"> </span><span class="s">unnoticed.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">simply</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">head</span><span class="nv"> </span><span class="s">count:</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">many</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">people</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">exposure</span>
-<span class="w">          </span><span class="s">record</span><span class="nv"> </span><span class="s">covers.</span><span class="nv"> </span><span class="s">It</span><span class="nv"> </span><span class="s">lets</span><span class="nv"> </span><span class="s">whoever</span><span class="nv"> </span><span class="s">receives</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">check</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">nothing</span><span class="nv"> </span><span class="s">went</span>
-<span class="w">          </span><span class="s">missing</span><span class="nv"> </span><span class="s">along</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">way.'</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Number of distinct persons this exposure record was extracted for.</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Helps downstream estimate the volume of health-layer rows the sidecar describes.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Anchored Cohort Size</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'3'</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">three cohort members in the worked Phoenix example</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
-<span class="w">  </span><span class="nt">cohort_size_anchored_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cohort_size_anchored_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Distinguishes "the cohort size is genuinely unknown" from "the pipeline</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">just did not record it". Without the reason, a null count is uninterpretable</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">and downstream users cannot tell whether to chase the number or accept its</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">absence.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When the head count is missing, this slot says why — for example, the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">tool could have counted but did not, or counting simply does not apply.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">An explained blank is far more useful than a silent one.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `cohort_size_anchored` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Cohort Size Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">available_but_not_extracted</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the pipeline could count anchored persons but does not yet surface</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">it</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HealthLayerLinkage</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-</code></pre></div>
-</details>
 </div>
 </article>
 </div>

@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/DepositMetadata/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Deposit Metadata (DepositMetadata) - linkml-microschemas-envar</title>
+<title>DepositMetadata - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-deposit-metadata-depositmetadata">
+<a class="md-skip" href="#deposit-metadata">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Deposit Metadata (DepositMetadata)
+              DepositMetadata
             
           </span>
 </div>
@@ -262,24 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -328,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -366,10 +318,392 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-deposit-metadata-depositmetadata">Class: Deposit Metadata (DepositMetadata)</h1>
-<p><em>Deposit-time slots required when the sidecar travels alongside a published FAIR object (Zenodo / Dryad / C-HER / etc.). Most slots are pulled from other modules; this class names the required-for-deposit subset and adds a few deposit-specific slots.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DepositMetadata">envar:class/DepositMetadata</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="deposit-metadata">Deposit Metadata</h1>
+<p><span class="envar-classname">DepositMetadata</span></p>
+<p class="envar-lead">Deposit-time slots required when the sidecar travels alongside a published FAIR object (Zenodo / Dryad / C-HER / etc.). Most slots are pulled from other modules; this class names the required-for-deposit subset and adds a few deposit-specific slots.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">9 fields</span>
+<span class="envar-metachip">0 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/DepositMetadata">envar:class/DepositMetadata</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">9 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Deposit DOI (Digital Object Identifier)</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_doi</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A DOI is a permanent ID for a published dataset, like an ISBN for a book. Whatever happens to the hosting website, the DOI keeps pointing to the dataset, so people can always find and cite it.</p>
+</div>
+<div class="envar-desc">
+<p>DOI assigned by the deposit repository (e.g. Zenodo).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>10.5281/zenodo.9999999</code> — <span class="egdesc">illustrative Zenodo DOI from the worked Daymet Tmax example</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>The DOI is the permanent, citable identifier of the published deposit — the F in FAIR. Without it the record cannot be cited, found in catalogues, or re-retrieved once the original download link rots.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.doi.org/">https://www.doi.org/</a>, <a href="https://zenodo.org/">https://zenodo.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Deposit DOI Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_doi_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>If the permanent dataset ID is missing, this slot explains why — for instance the record is circulating before publication and the ID has not been issued yet.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>deposit_doi</code> is null (e.g. pre-deposit).</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>under_investigation</code> — <span class="egdesc">sidecar circulated pre-deposit; DOI pending</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Separates "this record was never deposited" from "the DOI is pending". Without it, a missing DOI is ambiguous and a consumer cannot tell whether a citable identifier will ever exist for this record.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Deposit Repository</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_repository</code> · range <a href="../../enums/DepositRepositoryEnum/">DepositRepositoryEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A deposit repository is a public archive for research data — a place like Zenodo where a dataset is published with a permanent ID and kept available long-term. This slot records which archive was used.</p>
+</div>
+<div class="envar-desc">
+<p>Repository hosting the deposit.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>zenodo</code></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Zenodo."><code>zenodo</code> <span class="vdesc">Zenodo</span></span>
+<span class="envar-value" title="Dryad."><code>dryad</code> <span class="vdesc">Dryad</span></span>
+<span class="envar-value" title="Figshare."><code>figshare</code> <span class="vdesc">Figshare</span></span>
+<span class="envar-value" title="ORNL C-HER (Centralized Health and Exposomic Resource)."><code>c_her</code> <span class="vdesc">ORNL C-HER (Centralized Health and Exposomic Resource)</span></span>
+<span class="envar-value" title="Open Science Framework."><code>osf</code> <span class="vdesc">Open Science Framework</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Names where the deposited object actually lives, which determines access routes, retention guarantees, and how the DOI resolves. Without it, the deposit's accessibility (the A in FAIR) rests on the DOI alone and cannot be assessed.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://zenodo.org/">https://zenodo.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Deposit Repository Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_repository_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>If no archive is named, this slot says why — most often because the record was never meant to be published as a standalone dataset in the first place.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>deposit_repository</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code> — <span class="egdesc">the record is not published as a standalone FAIR deposit</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Makes an absent repository name interpretable: most records are never deposited, and this slot records that this is deliberate rather than an oversight, so completeness checks do not raise false alarms.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Deposit License (SPDX Identifier)</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_license_spdx</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A license is the legal permission slip attached to the data — for example "you may reuse this if you credit the authors". SPDX is just a standard list of short codes for licenses (like CC-BY-4.0), so software can read the terms without a lawyer.</p>
+</div>
+<div class="envar-desc">
+<p>SPDX identifier of the license under which the <em>derived</em> exposure record (not the source) is published.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>CC-BY-4.0</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>States, in a machine-readable form, what a reuser is legally allowed to do with the published exposure record. Without it, reuse of the deposit is legally uncertain and cautious downstream users must treat the data as all-rights-reserved — the R in FAIR fails.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Inherited Redistribution Constraints</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>deposit_redistribution_constraints_inherited</code> · range <a href="../../types/String/">String</a> · cardinality * · multivalued</p>
+</div>
+<div class="envar-explain">
+<p>Datasets built from other datasets can inherit rules from their ingredients, the way a recipe using someone's secret sauce may come with strings attached. This slot lists any such inherited rules so nobody accidentally breaks them when sharing the result.</p>
+</div>
+<div class="envar-desc">
+<p>Constraints from any input source that pass through to the deposit.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>no redistribution of raw PRISM grids</code> — <span class="egdesc">one inherited pass-through constraint (list element); an empty list is also valid and asserts that no constraints pass through</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A derived product can carry restrictions from its inputs even when its own license is permissive; without recording them, a deposit may violate an upstream license — for example by redistributing grids the source forbids sharing. An explicit empty list positively asserts that nothing passes through.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Recommended Citation</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>recommended_citation</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>This is the one-line "how to credit us" text, like the suggested citation on the back of a report. Anyone reusing the dataset can copy it verbatim into their paper.</p>
+</div>
+<div class="envar-desc">
+<p>One-line recommended citation derived from the slots above.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>EnVar exposure record for cohort:phoenix_aki_2022 daily Tmax (Daymet V4), 2026. Deposited at Zenodo, doi:10.5281/zenodo.9999999.</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>A ready-made citation lowers the barrier to correct attribution: without it, reusers assemble citations by hand, producing inconsistent references that break citation tracking and deprive the producers of credit for the deposit.</p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Data-Catalog (DCAT) Distribution URL</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>dcat_distribution_url</code> · range <a href="../../types/Uri/">Uri</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>DCAT is a standard way for data catalogues — searchable indexes of datasets, like a library catalogue — to describe where a file can be downloaded. This slot holds that direct download address so catalogue software can list and fetch the data automatically.</p>
+</div>
+<div class="envar-desc">
+<p>DCAT-compatible distribution URL for catalogue integration.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>https://zenodo.org/record/9999999/files/tmax_phoenix.parquet</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the machine-actionable download hook for data catalogues: with it, the deposit can be indexed and fetched by DCAT-speaking catalogue software without human mediation. Without it, the record is findable by humans (via the DOI) but invisible to automated catalogue harvesting.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.w3.org/TR/vocab-dcat-3/">https://www.w3.org/TR/vocab-dcat-3/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Reason Distribution URL Is Missing</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>dcat_distribution_url_missing_reason</code> · range <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>If there is no catalogue download link, this slot explains why — usually because the dataset was never registered in a data catalogue at all.</p>
+</div>
+<div class="envar-desc">
+<p>Reason <code>dcat_distribution_url</code> is null.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>not_applicable</code> — <span class="egdesc">the record is not registered in a DCAT catalogue</span></p>
+</div>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Source product does not produce this information. Terminal."><code>not_provided_by_source</code> <span class="vdesc">Source product does not produce this information</span></span>
+<span class="envar-value" title="Source produces this information but the current pipeline does not surface it. Roadmap item."><code>available_but_not_extracted</code> <span class="vdesc">Source produces this information but the current pipeline does not surface it</span></span>
+<span class="envar-value" title="An upstream tool emitted this information but the current pipeline dropped it on the way through. Bug."><code>upstream_data_not_propagated</code> <span class="vdesc">An upstream tool emitted this information but the current pipeline dropped it...</span></span>
+<span class="envar-value" title="We are working on populating this slot."><code>under_investigation</code> <span class="vdesc">We are working on populating this slot</span></span>
+<span class="envar-value" title="This slot does not apply to this variable / record."><code>not_applicable</code> <span class="vdesc">This slot does not apply to this variable / record</span></span>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Records whether the absence of a catalogue link is deliberate (the record is simply not catalogued) or a gap to be filled, so automated FAIR-ness assessments do not misreport an intentional omission as missing metadata.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Deposit DOI (Digital Object Identifier)</strong></td>
+<td><code>deposit_doi</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>DOI assigned by the deposit repository (e</td>
+</tr>
+<tr>
+<td><strong>Reason Deposit DOI Is Missing</strong></td>
+<td><code>deposit_doi_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>deposit_doi</code> is null (e</td>
+</tr>
+<tr>
+<td><strong>Deposit Repository</strong></td>
+<td><code>deposit_repository</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/DepositRepositoryEnum/">DepositRepositoryEnum</a></td>
+<td>Repository hosting the deposit</td>
+</tr>
+<tr>
+<td><strong>Reason Deposit Repository Is Missing</strong></td>
+<td><code>deposit_repository_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>deposit_repository</code> is null</td>
+</tr>
+<tr>
+<td><strong>Deposit License (SPDX Identifier)</strong></td>
+<td><code>deposit_license_spdx</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>SPDX identifier of the license under which the <em>derived</em> exposure record (not...</td>
+</tr>
+<tr>
+<td><strong>Inherited Redistribution Constraints</strong></td>
+<td><code>deposit_redistribution_constraints_inherited</code></td>
+<td>optional</td>
+<td>* <br/> <a href="../../types/String/">String</a></td>
+<td>Constraints from any input source that pass through to the deposit</td>
+</tr>
+<tr>
+<td><strong>Recommended Citation</strong></td>
+<td><code>recommended_citation</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>One-line recommended citation derived from the slots above</td>
+</tr>
+<tr>
+<td><strong>Data-Catalog (DCAT) Distribution URL</strong></td>
+<td><code>dcat_distribution_url</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../types/Uri/">Uri</a></td>
+<td>DCAT-compatible distribution URL for catalogue integration</td>
+</tr>
+<tr>
+<td><strong>Reason Distribution URL Is Missing</strong></td>
+<td><code>dcat_distribution_url_missing_reason</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
+<td>Reason <code>dcat_distribution_url</code> is null</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class DepositMetadata
     click DepositMetadata href "../../classes/DepositMetadata/"
@@ -428,117 +762,276 @@
       DepositMetadata : recommended_citation
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/deposit_doi/">deposit_doi</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>DOI assigned by the deposit repository (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/deposit_doi_missing_reason/">deposit_doi_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>deposit_doi</code> is null (e</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/deposit_repository/">deposit_repository</a></td>
-<td>0..1 <br/> <a href="../../enums/DepositRepositoryEnum/">DepositRepositoryEnum</a></td>
-<td>Repository hosting the deposit</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/deposit_repository_missing_reason/">deposit_repository_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>deposit_repository</code> is null</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/deposit_license_spdx/">deposit_license_spdx</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>SPDX identifier of the license under which the <em>derived</em> exposure record (not...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/deposit_redistribution_constraints_inherited/">deposit_redistribution_constraints_inherited</a></td>
-<td>* <br/> <a href="../../types/String/">String</a></td>
-<td>Constraints from any input source that pass through to the deposit</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/recommended_citation/">recommended_citation</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>One-line recommended citation derived from the slots above</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/dcat_distribution_url/">dcat_distribution_url</a></td>
-<td>0..1 <br/> <a href="../../types/Uri/">Uri</a></td>
-<td>DCAT-compatible distribution URL for catalogue integration</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/dcat_distribution_url_missing_reason/">dcat_distribution_url_missing_reason</a></td>
-<td>0..1 <br/> <a href="../../enums/MissingReasonEnum/">MissingReasonEnum</a></td>
-<td>Reason <code>dcat_distribution_url</code> is null</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../EnvironmentalExposureRecord/">EnvironmentalExposureRecord</a></td>
-<td><a href="../../slots/deposit_metadata/">deposit_metadata</a></td>
-<td>range</td>
-<td><a href="./">DepositMetadata</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMaxTemperatureRecord/">DailyMaxTemperatureRecord</a></td>
-<td><a href="../../slots/deposit_metadata/">deposit_metadata</a></td>
-<td>range</td>
-<td><a href="./">DepositMetadata</a></td>
-</tr>
-<tr>
-<td><a href="../DailyMinTemperatureRecord/">DailyMinTemperatureRecord</a></td>
-<td><a href="../../slots/deposit_metadata/">deposit_metadata</a></td>
-<td>range</td>
-<td><a href="./">DepositMetadata</a></td>
-</tr>
-<tr>
-<td><a href="../WetBulbGlobeTemperatureOutdoorRecord/">WetBulbGlobeTemperatureOutdoorRecord</a></td>
-<td><a href="../../slots/deposit_metadata/">deposit_metadata</a></td>
-<td>range</td>
-<td><a href="./">DepositMetadata</a></td>
-</tr>
-<tr>
-<td><a href="../ExtremeHeatDayFlagRecord/">ExtremeHeatDayFlagRecord</a></td>
-<td><a href="../../slots/deposit_metadata/">deposit_metadata</a></td>
-<td>range</td>
-<td><a href="./">DepositMetadata</a></td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="nt">annotations</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit-time slots required when the sidecar travels alongside a published</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">FAIR object (Zenodo / Dryad / C-HER / etc.). Most slots are pulled from other modules;</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">this class names the required-for-deposit subset and adds a few deposit-specific</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">slots.</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit Metadata</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="nt">see_also</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.go-fair.org/fair-principles/</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">attributes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deposit_doi</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_doi</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The DOI is the permanent, citable identifier of the published deposit</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— the F in FAIR. Without it the record cannot be cited, found in catalogues,</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">or re-retrieved once the original download link rots.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A DOI is a permanent ID for a published dataset, like an ISBN for a</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">book. Whatever happens to the hosting website, the DOI keeps pointing to</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the dataset, so people can always find and cite it.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DOI assigned by the deposit repository (e.g. Zenodo).</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit DOI (Digital Object Identifier)</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.5281/zenodo.9999999</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">illustrative Zenodo DOI from the worked Daymet Tmax example</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.doi.org/</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">deposit_doi_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_doi_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Separates "this record was never deposited" from "the DOI is pending".</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Without it, a missing DOI is ambiguous and a consumer cannot tell whether</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a citable identifier will ever exist for this record.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If the permanent dataset ID is missing, this slot explains why — for</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">instance the record is circulating before publication and the ID has not</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">been issued yet.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `deposit_doi` is null (e.g. pre-deposit).</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Deposit DOI Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">under_investigation</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sidecar circulated pre-deposit; DOI pending</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">deposit_repository</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_repository</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Names where the deposited object actually lives, which determines access</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">routes, retention guarantees, and how the DOI resolves. Without it, the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">deposit's accessibility (the A in FAIR) rests on the DOI alone and cannot</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">be assessed.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A deposit repository is a public archive for research data — a place</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">like Zenodo where a dataset is published with a permanent ID and kept available</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">long-term. This slot records which archive was used.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Repository hosting the deposit.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit Repository</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zenodo</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositRepositoryEnum</span>
+<span class="w">  </span><span class="nt">deposit_repository_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_repository_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Makes</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">absent</span><span class="nv"> </span><span class="s">repository</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">interpretable:</span><span class="nv"> </span><span class="s">most</span><span class="nv"> </span><span class="s">records</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">never</span>
+<span class="w">          </span><span class="s">deposited,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">slot</span><span class="nv"> </span><span class="s">records</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">deliberate</span><span class="nv"> </span><span class="s">rather</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">an</span>
+<span class="w">          </span><span class="s">oversight,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">completeness</span><span class="nv"> </span><span class="s">checks</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">raise</span><span class="nv"> </span><span class="s">false</span><span class="nv"> </span><span class="s">alarms.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If no archive is named, this slot says why — most often because the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">record was never meant to be published as a standalone dataset in the first</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">place.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `deposit_repository` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Deposit Repository Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the record is not published as a standalone FAIR deposit</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+<span class="w">  </span><span class="nt">deposit_license_spdx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_license_spdx</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">States, in a machine-readable form, what a reuser is legally allowed</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to do with the published exposure record. Without it, reuse of the deposit</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">is legally uncertain and cautious downstream users must treat the data as</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">all-rights-reserved — the R in FAIR fails.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A license is the legal permission slip attached to the data — for example</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">"you may reuse this if you credit the authors". SPDX is just a standard</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">list of short codes for licenses (like CC-BY-4.0), so software can read</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the terms without a lawyer.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPDX identifier of the license under which the *derived* exposure</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">record (not the source) is published.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit License (SPDX Identifier)</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CC-BY-4.0</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://spdx.org/licenses/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">deposit_redistribution_constraints_inherited</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_redistribution_constraints_inherited</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A derived product can carry restrictions from its inputs even when</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">its own license is permissive; without recording them, a deposit may violate</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an upstream license — for example by redistributing grids the source forbids</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">sharing. An explicit empty list positively asserts that nothing passes through.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Datasets built from other datasets can inherit rules from their ingredients,</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the way a recipe using someone's secret sauce may come with strings attached.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">This slot lists any such inherited rules so nobody accidentally breaks them</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">when sharing the result.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Constraints from any input source that pass through to the deposit.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inherited Redistribution Constraints</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no redistribution of raw PRISM grids</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">one inherited pass-through constraint (list element); an empty</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">list is also valid and asserts that no constraints pass through</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://spdx.org/licenses/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">recommended_citation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended_citation</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">ready-made</span><span class="nv"> </span><span class="s">citation</span><span class="nv"> </span><span class="s">lowers</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">barrier</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">correct</span><span class="nv"> </span><span class="s">attribution:</span><span class="nv"> </span><span class="s">without</span>
+<span class="w">          </span><span class="s">it,</span><span class="nv"> </span><span class="s">reusers</span><span class="nv"> </span><span class="s">assemble</span><span class="nv"> </span><span class="s">citations</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">hand,</span><span class="nv"> </span><span class="s">producing</span><span class="nv"> </span><span class="s">inconsistent</span><span class="nv"> </span><span class="s">references</span>
+<span class="w">          </span><span class="s">that</span><span class="nv"> </span><span class="s">break</span><span class="nv"> </span><span class="s">citation</span><span class="nv"> </span><span class="s">tracking</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">deprive</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">producers</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">credit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span>
+<span class="w">          </span><span class="s">deposit.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This is the one-line "how to credit us" text, like the suggested citation</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">on the back of a report. Anyone reusing the dataset can copy it verbatim</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">into their paper.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">One-line recommended citation derived from the slots above.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Recommended Citation</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnVar exposure record for cohort:phoenix_aki_2022 daily Tmax (Daymet</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">V4), 2026. Deposited at Zenodo, doi:10.5281/zenodo.9999999.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">dcat_distribution_url</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat_distribution_url</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">machine-actionable</span><span class="nv"> </span><span class="s">download</span><span class="nv"> </span><span class="s">hook</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">catalogues:</span>
+<span class="w">          </span><span class="s">with</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">deposit</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">indexed</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">fetched</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">DCAT-speaking</span><span class="nv"> </span><span class="s">catalogue</span>
+<span class="w">          </span><span class="s">software</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">human</span><span class="nv"> </span><span class="s">mediation.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">findable</span><span class="nv"> </span><span class="s">by</span>
+<span class="w">          </span><span class="s">humans</span><span class="nv"> </span><span class="s">(via</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">DOI)</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">invisible</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">automated</span><span class="nv"> </span><span class="s">catalogue</span><span class="nv"> </span><span class="s">harvesting.'</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DCAT is a standard way for data catalogues — searchable indexes of</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">datasets, like a library catalogue — to describe where a file can be downloaded.</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">This slot holds that direct download address so catalogue software can list</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">and fetch the data automatically.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DCAT-compatible distribution URL for catalogue integration.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data-Catalog (DCAT) Distribution URL</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/record/9999999/files/tmax_phoenix.parquet</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.w3.org/TR/vocab-dcat-3/</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span>
+<span class="w">  </span><span class="nt">dcat_distribution_url_missing_reason</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat_distribution_url_missing_reason</span>
+<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
+<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Records whether the absence of a catalogue link is deliberate (the</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">record is simply not catalogued) or a gap to be filled, so automated FAIR-ness</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">assessments do not misreport an intentional omission as missing metadata.</span>
+<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
+<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If there is no catalogue download link, this slot explains why — usually</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">because the dataset was never registered in a data catalogue at all.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `dcat_distribution_url` is null.</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Distribution URL Is Missing</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the record is not registered in a DCAT catalogue</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
+</code></pre></div>
+</details>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://www.go-fair.org/fair-principles/">https://www.go-fair.org/fair-principles/</a></li>
@@ -583,316 +1076,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit-time slots required when the sidecar travels alongside a published</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">FAIR object (Zenodo / Dryad / C-HER / etc.). Most slots are pulled from other modules;</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">this class names the required-for-deposit subset and adds a few deposit-specific</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">slots.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit Metadata</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.go-fair.org/fair-principles/</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_doi</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_doi_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_repository</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_repository_missing_reason</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_license_spdx</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_redistribution_constraints_inherited</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended_citation</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat_distribution_url</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat_distribution_url_missing_reason</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit-time slots required when the sidecar travels alongside a published</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">FAIR object (Zenodo / Dryad / C-HER / etc.). Most slots are pulled from other modules;</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">this class names the required-for-deposit subset and adds a few deposit-specific</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">slots.</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit Metadata</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.go-fair.org/fair-principles/</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
-<span class="nt">attributes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">deposit_doi</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_doi</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The DOI is the permanent, citable identifier of the published deposit</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">— the F in FAIR. Without it the record cannot be cited, found in catalogues,</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">or re-retrieved once the original download link rots.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A DOI is a permanent ID for a published dataset, like an ISBN for a</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">book. Whatever happens to the hosting website, the DOI keeps pointing to</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the dataset, so people can always find and cite it.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DOI assigned by the deposit repository (e.g. Zenodo).</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit DOI (Digital Object Identifier)</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.5281/zenodo.9999999</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">illustrative Zenodo DOI from the worked Daymet Tmax example</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.doi.org/</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">deposit_doi_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_doi_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Separates "this record was never deposited" from "the DOI is pending".</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">Without it, a missing DOI is ambiguous and a consumer cannot tell whether</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">a citable identifier will ever exist for this record.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If the permanent dataset ID is missing, this slot explains why — for</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">instance the record is circulating before publication and the ID has not</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">been issued yet.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `deposit_doi` is null (e.g. pre-deposit).</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Deposit DOI Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">under_investigation</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sidecar circulated pre-deposit; DOI pending</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="w">  </span><span class="nt">deposit_repository</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_repository</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Names where the deposited object actually lives, which determines access</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">routes, retention guarantees, and how the DOI resolves. Without it, the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">deposit's accessibility (the A in FAIR) rests on the DOI alone and cannot</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">be assessed.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A deposit repository is a public archive for research data — a place</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">like Zenodo where a dataset is published with a permanent ID and kept available</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">long-term. This slot records which archive was used.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Repository hosting the deposit.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit Repository</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zenodo</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositRepositoryEnum</span>
-<span class="w">  </span><span class="nt">deposit_repository_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_repository_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'Makes</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">absent</span><span class="nv"> </span><span class="s">repository</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">interpretable:</span><span class="nv"> </span><span class="s">most</span><span class="nv"> </span><span class="s">records</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">never</span>
-<span class="w">          </span><span class="s">deposited,</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">slot</span><span class="nv"> </span><span class="s">records</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">deliberate</span><span class="nv"> </span><span class="s">rather</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">an</span>
-<span class="w">          </span><span class="s">oversight,</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">completeness</span><span class="nv"> </span><span class="s">checks</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">raise</span><span class="nv"> </span><span class="s">false</span><span class="nv"> </span><span class="s">alarms.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If no archive is named, this slot says why — most often because the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">record was never meant to be published as a standalone dataset in the first</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">place.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `deposit_repository` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Deposit Repository Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the record is not published as a standalone FAIR deposit</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-<span class="w">  </span><span class="nt">deposit_license_spdx</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_license_spdx</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">States, in a machine-readable form, what a reuser is legally allowed</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">to do with the published exposure record. Without it, reuse of the deposit</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">is legally uncertain and cautious downstream users must treat the data as</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">all-rights-reserved — the R in FAIR fails.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A license is the legal permission slip attached to the data — for example</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">"you may reuse this if you credit the authors". SPDX is just a standard</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">list of short codes for licenses (like CC-BY-4.0), so software can read</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the terms without a lawyer.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPDX identifier of the license under which the *derived* exposure</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">record (not the source) is published.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deposit License (SPDX Identifier)</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CC-BY-4.0</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://spdx.org/licenses/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">deposit_redistribution_constraints_inherited</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deposit_redistribution_constraints_inherited</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A derived product can carry restrictions from its inputs even when</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">its own license is permissive; without recording them, a deposit may violate</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">an upstream license — for example by redistributing grids the source forbids</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">sharing. An explicit empty list positively asserts that nothing passes through.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Datasets built from other datasets can inherit rules from their ingredients,</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">the way a recipe using someone's secret sauce may come with strings attached.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">This slot lists any such inherited rules so nobody accidentally breaks them</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">when sharing the result.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Constraints from any input source that pass through to the deposit.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inherited Redistribution Constraints</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no redistribution of raw PRISM grids</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">one inherited pass-through constraint (list element); an empty</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">list is also valid and asserts that no constraints pass through</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://spdx.org/licenses/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">recommended_citation</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recommended_citation</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">ready-made</span><span class="nv"> </span><span class="s">citation</span><span class="nv"> </span><span class="s">lowers</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">barrier</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">correct</span><span class="nv"> </span><span class="s">attribution:</span><span class="nv"> </span><span class="s">without</span>
-<span class="w">          </span><span class="s">it,</span><span class="nv"> </span><span class="s">reusers</span><span class="nv"> </span><span class="s">assemble</span><span class="nv"> </span><span class="s">citations</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">hand,</span><span class="nv"> </span><span class="s">producing</span><span class="nv"> </span><span class="s">inconsistent</span><span class="nv"> </span><span class="s">references</span>
-<span class="w">          </span><span class="s">that</span><span class="nv"> </span><span class="s">break</span><span class="nv"> </span><span class="s">citation</span><span class="nv"> </span><span class="s">tracking</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">deprive</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">producers</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">credit</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span>
-<span class="w">          </span><span class="s">deposit.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">This is the one-line "how to credit us" text, like the suggested citation</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">on the back of a report. Anyone reusing the dataset can copy it verbatim</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">into their paper.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">One-line recommended citation derived from the slots above.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Recommended Citation</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnVar exposure record for cohort:phoenix_aki_2022 daily Tmax (Daymet</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">V4), 2026. Deposited at Zenodo, doi:10.5281/zenodo.9999999.</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">  </span><span class="nt">dcat_distribution_url</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat_distribution_url</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">'This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">machine-actionable</span><span class="nv"> </span><span class="s">download</span><span class="nv"> </span><span class="s">hook</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">catalogues:</span>
-<span class="w">          </span><span class="s">with</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">deposit</span><span class="nv"> </span><span class="s">can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">indexed</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">fetched</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">DCAT-speaking</span><span class="nv"> </span><span class="s">catalogue</span>
-<span class="w">          </span><span class="s">software</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">human</span><span class="nv"> </span><span class="s">mediation.</span><span class="nv"> </span><span class="s">Without</span><span class="nv"> </span><span class="s">it,</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">record</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">findable</span><span class="nv"> </span><span class="s">by</span>
-<span class="w">          </span><span class="s">humans</span><span class="nv"> </span><span class="s">(via</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">DOI)</span><span class="nv"> </span><span class="s">but</span><span class="nv"> </span><span class="s">invisible</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">automated</span><span class="nv"> </span><span class="s">catalogue</span><span class="nv"> </span><span class="s">harvesting.'</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DCAT is a standard way for data catalogues — searchable indexes of</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">datasets, like a library catalogue — to describe where a file can be downloaded.</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">This slot holds that direct download address so catalogue software can list</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">and fetch the data automatically.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DCAT-compatible distribution URL for catalogue integration.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Data-Catalog (DCAT) Distribution URL</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://zenodo.org/record/9999999/files/tmax_phoenix.parquet</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">see_also</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://www.w3.org/TR/vocab-dcat-3/</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span>
-<span class="w">  </span><span class="nt">dcat_distribution_url_missing_reason</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat_distribution_url_missing_reason</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">tier</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional</span>
-<span class="w">      </span><span class="nt">justification</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">justification</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Records whether the absence of a catalogue link is deliberate (the</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">record is simply not catalogued) or a gap to be filled, so automated FAIR-ness</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">assessments do not misreport an intentional omission as missing metadata.</span>
-<span class="w">      </span><span class="nt">explanation</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">explanation</span>
-<span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If there is no catalogue download link, this slot explains why — usually</span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">because the dataset was never registered in a data catalogue at all.</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason `dcat_distribution_url` is null.</span>
-<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reason Distribution URL Is Missing</span>
-<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_applicable</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">the record is not registered in a DCAT catalogue</span>
-<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepositMetadata</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MissingReasonEnum</span>
-</code></pre></div>
-</details>
 </div>
 </article>
 </div>

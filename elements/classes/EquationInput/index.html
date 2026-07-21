@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/EquationInput/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Equation Input (EquationInput) - linkml-microschemas-envar</title>
+<title>EquationInput - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-equation-input-equationinput">
+<a class="md-skip" href="#equation-input">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Equation Input (EquationInput)
+              EquationInput
             
           </span>
 </div>
@@ -262,24 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#see-also">
 <span class="md-ellipsis">
       
@@ -328,37 +311,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -366,11 +318,166 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-equation-input-equationinput">Class: Equation Input (EquationInput)</h1>
-<p><em>A single physical-state input to a derived heat metric, recorded as a typed reference into the provenance chain rather than an inline copy of the input's metadata. It names the input's role (a CF standard name) and points, via <code>input_provenance_id</code>, to the upstream sidecar that carries that input's full spatial / temporal / model context.</em></p>
-<p><em>This is the Option-B decomposition: when a multi-input metric (Heat Index from T + RH; WBGT from T + RH + wind + radiation) draws its inputs from different products that diverge in resolution, day-boundary convention, or temporal aggregation, each input remains its own full sidecar — listed here and as a step in <code>provenance_chain</code> — so the divergence stays explicit and machine-checkable instead of being silently absorbed into the single output value.</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/EquationInput">envar:class/EquationInput</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="equation-input">Equation Input</h1>
+<p><span class="envar-classname">EquationInput</span></p>
+<p class="envar-lead">A single physical-state input to a derived heat metric, recorded as a typed reference into the provenance chain rather than an inline copy of the input's metadata. It names the input's role (a CF standard name) and points, via <code>input_provenance_id</code>, to the upstream sidecar that carries that input's full spatial / temporal / model context. This is the Option-B decomposition: when a multi-input metric (Heat Index from T + RH; WBGT from T + RH + wind + radiation) draws its inputs from different products that diverge in resolution, day-boundary convention, or temporal aggregation, each input remains its own full sidecar — listed here and as a step in <code>provenance_chain</code> — so the divergence stays explicit and machine-checkable instead of being silently absorbed into the single output value.</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">3 fields</span>
+<span class="envar-metachip">0 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/EquationInput">envar:class/EquationInput</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../DerivedHeatMetric/">DerivedHeatMetric</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Conditionally core</span>
+<span class="envar-groupnote">Required in specific contexts</span>
+<span class="envar-groupcount">2 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Input Role</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>input_role</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>This labels what each ingredient actually is — temperature versus humidity versus wind — using a shared standard vocabulary so that machines and people read the label the same way.</p>
+</div>
+<div class="envar-desc">
+<p>The standard-name local token of this input's physical quantity (the same quantity the referenced sidecar carries in <code>standard_name</code>), e.g. <code>air_temperature</code>, <code>relative_humidity</code>, <code>wind_speed</code>, <code>surface_downwelling_shortwave_flux_in_air</code>.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>air_temperature</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Without a named role, a consumer cannot tell which physical quantity each referenced input supplied to the equation, so inputs cannot be matched to equation terms and cross-input consistency checks cannot run.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://cfconventions.org/">https://cfconventions.org/</a></p>
+</div>
+</details>
+</div>
+<div class="envar-card conditionally_core">
+<div class="envar-cardhead"><span class="envar-cardtitle">Input Provenance ID</span><span class="envar-cardbadges"><span class="envar-tierbadge conditionally_core">conditionally core</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>input_provenance_id</code> · range <a href="../../types/String/">String</a> · cardinality 1</p>
+</div>
+<div class="envar-explain">
+<p>Think of it as a tracking number: instead of copying all the details of the ingredient into this record, we store a pointer to the record that already holds them, and anyone can follow the pointer.</p>
+</div>
+<div class="envar-desc">
+<p>The <code>provenance_id</code> of the upstream sidecar that fully describes this input — its source dataset, spatial / temporal reference, and exposure model. Dereferencing it lets a consumer (or the completeness checker) compare inputs and surface any divergence in resolution, day-boundary convention, or temporal aggregation.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>01HFA7K8R3M6XP-daymet-tmax</code> — <span class="egdesc">provenance_id of the upstream Daymet Tmax sidecar</span></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>This is the only machine-followable link from an input back to its full spatial, temporal, and model context; without it, divergences between inputs in resolution, day-boundary convention, or aggregation cannot be detected at all.</p>
+</div>
+<div class="envar-whyblock">
+<p><strong>See also:</strong> <a href="https://www.w3.org/TR/prov-o/">https://www.w3.org/TR/prov-o/</a></p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Recommended</span>
+<span class="envar-groupnote">Strongly encouraged</span>
+<span class="envar-groupcount">1 field</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card recommended">
+<div class="envar-cardhead"><span class="envar-cardtitle">Input Source Short Code</span><span class="envar-cardbadges"><span class="envar-tierbadge recommended">recommended</span></span></div>
+<div class="envar-cardmeta">
+<p><code>input_source_short_code</code> · range <a href="../../types/String/">String</a> · cardinality 0..1</p>
+</div>
+<div class="envar-explain">
+<p>A friendly nickname for the dataset an ingredient came from (like "daymet_v4"), written next to the tracking number so people do not have to look everything up just to get oriented.</p>
+</div>
+<div class="envar-desc">
+<p>Human-readable short code of the input's source product (e.g. <code>daymet_v4</code>, <code>era5</code>), duplicated from the referenced sidecar for convenience when scanning the record. Not authoritative — <code>input_provenance_id</code> is.</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Example</p>
+<div class="envar-eg">
+<p><code>daymet_v4</code></p>
+</div>
+</div>
+<details class="envar-why">
+<summary>Why it matters &amp; mappings</summary>
+<div class="envar-whyblock">
+<p>Lets a human scanning the record see at a glance which product each input came from without dereferencing every provenance id; because it is a non-authoritative duplicate, omitting it costs readability, not machine-checkability.</p>
+</div>
+</details>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Input Role</strong></td>
+<td><code>input_role</code></td>
+<td>conditionally core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>The standard-name local token of this input's physical quantity (the same qua...</td>
+</tr>
+<tr>
+<td><strong>Input Provenance ID</strong></td>
+<td><code>input_provenance_id</code></td>
+<td>conditionally core</td>
+<td>1 <br/> <a href="../../types/String/">String</a></td>
+<td>The <code>provenance_id</code> of the upstream sidecar that fully describes this input —...</td>
+</tr>
+<tr>
+<td><strong>Input Source Short Code</strong></td>
+<td><code>input_source_short_code</code></td>
+<td>recommended</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>Human-readable short code of the input's source product (e</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class EquationInput
     click EquationInput href "../../classes/EquationInput/"
@@ -381,104 +488,6 @@
       EquationInput : input_source_short_code
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/input_role/">input_role</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The standard-name local token of this input's physical quantity (the same qua...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/input_provenance_id/">input_provenance_id</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The <code>provenance_id</code> of the upstream sidecar that fully describes this input —...</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/input_source_short_code/">input_source_short_code</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Human-readable short code of the input's source product (e</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../DerivedHeatMetric/">DerivedHeatMetric</a></td>
-<td><a href="../../slots/equation_inputs/">equation_inputs</a></td>
-<td>range</td>
-<td><a href="./">EquationInput</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="see-also">See Also</h2>
-<ul>
-<li><a href="https://cfconventions.org/">https://cfconventions.org/</a></li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>domain_of_use</td>
-<td>environmental_exposure</td>
-</tr>
-</tbody>
-</table>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>envar:EquationInput</td>
-</tr>
-<tr>
-<td>native</td>
-<td>envar:EquationInput</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EquationInput</span>
 <span class="nt">annotations</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
@@ -500,42 +509,7 @@
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
 <span class="nt">see_also</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input_role</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input_provenance_id</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input_source_short_code</span>
-<span class="nt">slot_usage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">input_role</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input_role</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">input_provenance_id</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input_provenance_id</span>
-<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EquationInput</span>
-<span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">domain_of_use</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_of_use</span>
-<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">environmental_exposure</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">physical-state</span><span class="nv"> </span><span class="s">input</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">derived</span><span class="nv"> </span><span class="s">heat</span><span class="nv"> </span><span class="s">metric,</span><span class="nv"> </span><span class="s">recorded</span><span class="nv"> </span><span class="s">as</span>
-<span class="w">  </span><span class="s">a</span><span class="nv"> </span><span class="s">typed</span><span class="nv"> </span><span class="s">reference</span><span class="nv"> </span><span class="s">into</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">provenance</span><span class="nv"> </span><span class="s">chain</span><span class="nv"> </span><span class="s">rather</span><span class="nv"> </span><span class="s">than</span><span class="nv"> </span><span class="s">an</span><span class="nv"> </span><span class="s">inline</span><span class="nv"> </span><span class="s">copy</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">input</span><span class="se">''</span><span class="s">s</span>
-<span class="w">  </span><span class="s">metadata.</span><span class="nv"> </span><span class="s">It</span><span class="nv"> </span><span class="s">names</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">input</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">role</span><span class="nv"> </span><span class="s">(a</span><span class="nv"> </span><span class="s">CF</span><span class="nv"> </span><span class="s">standard</span><span class="nv"> </span><span class="s">name)</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">points,</span><span class="nv"> </span><span class="s">via</span><span class="nv"> </span><span class="s">`input_provenance_id`,</span>
-<span class="w">  </span><span class="s">to</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">upstream</span><span class="nv"> </span><span class="s">sidecar</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">carries</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">input</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">full</span><span class="nv"> </span><span class="s">spatial</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">temporal</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">model</span>
-<span class="w">  </span><span class="s">context.</span>
-
-<span class="w">  </span><span class="s">This</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Option-B</span><span class="nv"> </span><span class="s">decomposition:</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">multi-input</span><span class="nv"> </span><span class="s">metric</span><span class="nv"> </span><span class="s">(Heat</span><span class="nv"> </span><span class="s">Index</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">T</span>
-<span class="w">  </span><span class="s">+</span><span class="nv"> </span><span class="s">RH;</span><span class="nv"> </span><span class="s">WBGT</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">T</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">RH</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">wind</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">radiation)</span><span class="nv"> </span><span class="s">draws</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">inputs</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">products</span>
-<span class="w">  </span><span class="s">that</span><span class="nv"> </span><span class="s">diverge</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">resolution,</span><span class="nv"> </span><span class="s">day-boundary</span><span class="nv"> </span><span class="s">convention,</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">temporal</span><span class="nv"> </span><span class="s">aggregation,</span><span class="nv"> </span><span class="s">each</span>
-<span class="w">  </span><span class="s">input</span><span class="nv"> </span><span class="s">remains</span><span class="nv"> </span><span class="s">its</span><span class="nv"> </span><span class="s">own</span><span class="nv"> </span><span class="s">full</span><span class="nv"> </span><span class="s">sidecar</span><span class="nv"> </span><span class="s">—</span><span class="nv"> </span><span class="s">listed</span><span class="nv"> </span><span class="s">here</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">step</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">`provenance_chain`</span>
-<span class="w">  </span><span class="s">—</span><span class="nv"> </span><span class="s">so</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">divergence</span><span class="nv"> </span><span class="s">stays</span><span class="nv"> </span><span class="s">explicit</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">machine-checkable</span><span class="nv"> </span><span class="s">instead</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">being</span><span class="nv"> </span><span class="s">silently</span>
-<span class="w">  </span><span class="s">absorbed</span><span class="nv"> </span><span class="s">into</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">output</span><span class="nv"> </span><span class="s">value.'</span>
-<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Equation Input</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">see_also</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cfconventions.org/</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">slot_usage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">input_role</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input_role</span>
@@ -640,6 +614,49 @@
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://cfconventions.org/">https://cfconventions.org/</a></li>
+</ul>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain_of_use</td>
+<td>environmental_exposure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>envar:EquationInput</td>
+</tr>
+<tr>
+<td>native</td>
+<td>envar:EquationInput</td>
+</tr>
+</tbody>
+</table>
 </div>
 </article>
 </div>

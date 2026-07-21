@@ -8,13 +8,14 @@
 <link href="https://monarch-initiative.github.io/linkml-microschemas-envar/elements/classes/Quantity/" rel="canonical"/>
 <link href="../../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
-<title>Class: Quantity - linkml-microschemas-envar</title>
+<title>Quantity - linkml-microschemas-envar</title>
 <link href="../../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <script src="../../../assets/pymdownx-extras/material-extra-theme-2ek1P7jT.js" type="text/javascript"></script>
 <script src="../../../assets/pymdownx-extras/material-extra-3rdparty-BUCF4rjN.js" type="text/javascript"></script>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../css/atlas.css" rel="stylesheet"/>
 <link href="../../../css/ansi-colours.css" rel="stylesheet"/>
 <link href="../../../css/jupyter-cells.css" rel="stylesheet"/>
 <link href="../../../css/pandas-dataframe.css" rel="stylesheet"/>
@@ -26,7 +27,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-quantity">
+<a class="md-skip" href="#quantity">
           Skip to content
         </a>
 </div>
@@ -50,7 +51,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Quantity
+              Quantity
             
           </span>
 </div>
@@ -262,24 +263,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
 <span class="md-ellipsis">
       
@@ -310,37 +293,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
 </ul>
 </nav>
 </div>
@@ -348,10 +300,115 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-quantity">Class: Quantity</h1>
-<p><em>A numerical value with unit</em></p>
-<div>
-<p>URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/Quantity">envar:class/Quantity</a></p>
+<div class="envar-class">
+<div class="envar-hero">
+<p class="envar-eyebrow">EnVar microschema · class</p>
+<h1 id="quantity">Quantity</h1>
+<p><span class="envar-classname">Quantity</span></p>
+<p class="envar-lead">A numerical value with unit</p>
+<div class="envar-meta">
+<p><span class="envar-metachip">3 fields</span>
+<span class="envar-metachip">0 core</span></p>
+<p><span class="envar-metachip">URI: <a href="https://w3id.org/linkml/microschemas/envar/vocab/class/Quantity">envar:class/Quantity</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits">
+<div class="envar-sitsrow">
+<p><span class="envar-sitskey">Composed into</span><span class="envar-chip"><a href="../Timepoint/">Timepoint</a></span><span class="envar-chip"><a href="../TimeInterval/">TimeInterval</a></span></p>
+</div>
+</div>
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+<div class="envar-fieldgroup">
+<div class="envar-grouphead">
+<span class="envar-groupname">Optional</span>
+<span class="envar-groupnote">Include when available</span>
+<span class="envar-groupcount">3 fields</span>
+</div>
+<div class="envar-cards">
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Quantity Value</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>quantity_value</code> · range <a href="../../types/Decimal/">Decimal</a> · cardinality 1</p>
+</div>
+<div class="envar-desc">
+<p>The numeric value</p>
+</div>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Quantity Unit</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span><span class="envar-req">required</span></span></div>
+<div class="envar-cardmeta">
+<p><code>quantity_unit</code> · range <a href="../../types/Uriorcurie/">Uriorcurie</a> · cardinality 1</p>
+</div>
+<div class="envar-desc">
+<p>Unit (UCUM, UO, QUDT, etc.)</p>
+</div>
+</div>
+<div class="envar-card optional">
+<div class="envar-cardhead"><span class="envar-cardtitle">Comparator</span><span class="envar-cardbadges"><span class="envar-tierbadge optional">optional</span></span></div>
+<div class="envar-cardmeta">
+<p><code>comparator</code> · range <a href="../../enums/ComparatorEnum/">ComparatorEnum</a> · cardinality 0..1</p>
+</div>
+<div class="envar-desc">
+<p>Comparison operator (less than, greater than, etc.) or exact if null</p>
+</div>
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+<span class="envar-value" title="Less than"><code>lt</code> <span class="vdesc">Less than</span></span>
+<span class="envar-value" title="Less than or equal to"><code>le</code> <span class="vdesc">Less than or equal to</span></span>
+<span class="envar-value" title="Greater than or equal to"><code>ge</code> <span class="vdesc">Greater than or equal to</span></span>
+<span class="envar-value" title="Greater than"><code>gt</code> <span class="vdesc">Greater than</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<details class="envar-details">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Name</th>
+<th>Tier</th>
+<th>Cardinality / Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quantity Value</strong></td>
+<td><code>quantity_value</code></td>
+<td>optional</td>
+<td>1 <br/> <a href="../../types/Decimal/">Decimal</a></td>
+<td>The numeric value</td>
+</tr>
+<tr>
+<td><strong>Quantity Unit</strong></td>
+<td><code>quantity_unit</code></td>
+<td>optional</td>
+<td>1 <br/> <a href="../../types/Uriorcurie/">Uriorcurie</a></td>
+<td>Unit (UCUM, UO, QUDT, etc</td>
+</tr>
+<tr>
+<td><strong>Comparator</strong></td>
+<td><code>comparator</code></td>
+<td>optional</td>
+<td>0..1 <br/> <a href="../../enums/ComparatorEnum/">ComparatorEnum</a></td>
+<td>Comparison operator (less than, greater than, etc</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="envar-details">
+<summary>Diagram &amp; LinkML source</summary>
 <pre class="mermaid"><code> classDiagram
     class Quantity
     click Quantity href "../../classes/Quantity/"
@@ -371,115 +428,12 @@
       Quantity : quantity_value
 
 </code></pre>
-<!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/quantity_value/">quantity_value</a></td>
-<td>1 <br/> <a href="../../types/Decimal/">Decimal</a></td>
-<td>The numeric value</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/quantity_unit/">quantity_unit</a></td>
-<td>1 <br/> <a href="../../types/Uriorcurie/">Uriorcurie</a></td>
-<td>Unit (UCUM, UO, QUDT, etc</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/comparator/">comparator</a></td>
-<td>0..1 <br/> <a href="../../enums/ComparatorEnum/">ComparatorEnum</a></td>
-<td>Comparison operator (less than, greater than, etc</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../Timepoint/">Timepoint</a></td>
-<td><a href="../../slots/offset/">offset</a></td>
-<td>range</td>
-<td><a href="./">Quantity</a></td>
-</tr>
-<tr>
-<td><a href="../Timepoint/">Timepoint</a></td>
-<td><a href="../../slots/subject_age/">subject_age</a></td>
-<td>range</td>
-<td><a href="./">Quantity</a></td>
-</tr>
-<tr>
-<td><a href="../TimeInterval/">TimeInterval</a></td>
-<td><a href="../../slots/duration/">duration</a></td>
-<td>range</td>
-<td><a href="./">Quantity</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>envar:Quantity</td>
-</tr>
-<tr>
-<td>native</td>
-<td>envar:Quantity</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Quantity</span>
 <span class="nt">instantiates</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ValueMicroschemaDefinition</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A numerical value with unit</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
-<span class="nt">slots</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quantity_value</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quantity_unit</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comparator</span>
-</code></pre></div>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Quantity</span>
-<span class="nt">instantiates</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ValueMicroschemaDefinition</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A numerical value with unit</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/linkml/microschemas/envar</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">quantity_value</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quantity_value</span>
@@ -513,6 +467,30 @@
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ComparatorEnum</span>
 </code></pre></div>
 </details>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: <a href="https://w3id.org/linkml/microschemas/envar">https://w3id.org/linkml/microschemas/envar</a></li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>envar:Quantity</td>
+</tr>
+<tr>
+<td>native</td>
+<td>envar:Quantity</td>
+</tr>
+</tbody>
+</table>
 </div>
 </article>
 </div>

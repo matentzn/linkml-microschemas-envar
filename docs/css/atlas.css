@@ -1,0 +1,380 @@
+/* ============================================================================
+   EnVar class atlas — enrichment styling for the generated class pages.
+
+   Loaded site-wide via mkdocs `extra_css`. Every rule is scoped under an
+   `.envar-*` container the templates emit, and DELIBERATELY inherits the
+   mkdocs-material theme's fonts and colours (via `--md-*` custom properties)
+   rather than introducing its own palette — the cards should read as part of
+   the site, not a separate publication. Structure only: card layout, a
+   title-first hierarchy, small muted machine names, and restrained tier
+   status colours.
+
+   Companion of docs/templates-linkml/class.md.jinja2 and index.md.jinja2.
+   Do not hand-edit docs/elements — edit the templates + this file and rerun
+   `just gen-doc`.
+   ============================================================================ */
+
+.envar-class,
+.envar-atlas {
+  /* tier status accents — the only non-theme colours, kept restrained */
+  --t-core: #c62828;
+  --t-conditionally_core: #b26a00;
+  --t-recommended: #2e7d32;
+  --t-optional: #607d8b;
+  --envar-line: var(--md-default-fg-color--lightest);
+  --envar-muted: var(--md-default-fg-color--light);
+}
+
+/* --- Hero header ----------------------------------------------------------- */
+.envar-hero { margin: 0 0 1.4rem; }
+.envar-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--md-primary-fg-color);
+  margin: 0 0 0.2rem;
+}
+.envar-hero .envar-classname {
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.85rem;
+  color: var(--envar-muted);
+}
+.envar-lead {
+  font-size: 1.08rem;
+  line-height: 1.55;
+  max-width: 64ch;
+  margin: 0.7rem 0 0;
+}
+.envar-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+.envar-metachip {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--envar-muted);
+  border: 1px solid var(--envar-line);
+  border-radius: 999px;
+  padding: 0.12rem 0.65rem;
+}
+.envar-metachip code { font-size: 0.7rem; background: none; padding: 0; }
+
+/* --- Section labels -------------------------------------------------------- */
+.envar-class .envar-sectionlabel,
+.envar-atlas .envar-sectionlabel {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--envar-muted);
+  margin: 2rem 0 0.7rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--envar-line);
+}
+
+/* --- "Where it sits" chips ------------------------------------------------- */
+.envar-sits { margin: 0.3rem 0 0.5rem; }
+.envar-sitsrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.35rem 0;
+}
+.envar-sitskey {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--envar-muted);
+  min-width: 8.5rem;
+}
+.envar-chip {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.1rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--envar-line);
+  background: var(--md-code-bg-color);
+}
+.envar-chip a { text-decoration: none; }
+
+/* --- Tier legend ----------------------------------------------------------- */
+.envar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--envar-muted);
+  margin: 0.2rem 0 0.6rem;
+}
+.envar-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.envar-dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
+.envar-dot.core { background: var(--t-core); }
+.envar-dot.conditionally_core { background: var(--t-conditionally_core); }
+.envar-dot.recommended { background: var(--t-recommended); }
+.envar-dot.optional { background: var(--t-optional); }
+
+/* --- Field group ----------------------------------------------------------- */
+.envar-fieldgroup { margin: 1.3rem 0 0.5rem; }
+.envar-grouphead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 0 0.6rem;
+}
+.envar-groupname { font-weight: 700; font-size: 1.12rem; }
+.envar-groupnote { font-size: 0.82rem; color: var(--envar-muted); }
+.envar-groupcount {
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.72rem;
+  color: var(--envar-muted);
+  margin-left: auto;
+}
+
+/* --- Field cards : ONE PER ROW, rich --------------------------------------- */
+.envar-cards { display: grid; grid-template-columns: 1fr; gap: 0.7rem; }
+.envar-card {
+  border: 1px solid var(--envar-line);
+  border-left: 4px solid var(--t-optional);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem 1rem;
+  background: var(--md-default-bg-color);
+}
+.envar-card.core { border-left-color: var(--t-core); }
+.envar-card.conditionally_core { border-left-color: var(--t-conditionally_core); }
+.envar-card.recommended { border-left-color: var(--t-recommended); }
+.envar-card.optional { border-left-color: var(--t-optional); }
+
+.envar-cardhead {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.envar-cardtitle { font-size: 1.08rem; font-weight: 700; line-height: 1.2; }
+.envar-tierbadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.42rem;
+  border-radius: 5px;
+  color: #fff;
+}
+.envar-card.core .envar-tierbadge,
+.envar-tierbadge.core { background: var(--t-core); }
+.envar-card.conditionally_core .envar-tierbadge,
+.envar-tierbadge.conditionally_core { background: var(--t-conditionally_core); }
+.envar-card.recommended .envar-tierbadge,
+.envar-tierbadge.recommended { background: var(--t-recommended); }
+.envar-card.optional .envar-tierbadge,
+.envar-tierbadge.optional { background: var(--t-optional); }
+.envar-req {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--t-core);
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  padding: 0.05rem 0.35rem;
+}
+.envar-req.recommended { color: var(--t-recommended); }
+.envar-cardbadges { margin-left: auto; display: inline-flex; gap: 0.35rem; align-items: center; }
+
+/* meta line: machine name · range · cardinality */
+.envar-cardmeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.7rem;
+  margin: 0.3rem 0 0.55rem;
+  font-size: 0.8rem;
+  color: var(--envar-muted);
+}
+.envar-cardname {
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.8rem;
+  color: var(--envar-muted);
+}
+.envar-cardmeta .k { font-weight: 700; text-transform: uppercase; font-size: 0.64rem; letter-spacing: 0.06em; }
+.envar-cardmeta .envar-range a { font-family: var(--md-code-font-family, monospace); font-size: 0.78rem; text-decoration: none; }
+
+/* plain-language explanation leads; technical description follows, muted */
+.envar-explain { line-height: 1.5; margin: 0.2rem 0 0.4rem; }
+.envar-desc { font-size: 0.9rem; line-height: 1.5; color: var(--envar-muted); margin: 0.2rem 0 0.4rem; }
+
+/* rich sub-blocks ----------------------------------------------------------- */
+.envar-block { margin: 0.55rem 0 0; }
+.envar-blocklabel {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--envar-muted);
+  margin: 0 0 0.28rem;
+}
+.envar-eg { margin: 0.15rem 0; line-height: 1.45; }
+.envar-eg code {
+  font-size: 0.8rem;
+  background: var(--md-code-bg-color);
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+  color: var(--md-code-fg-color);
+}
+.envar-eg .egdesc { color: var(--envar-muted); font-size: 0.86rem; }
+
+.envar-values { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.envar-value {
+  font-size: 0.8rem;
+  border: 1px solid var(--envar-line);
+  border-radius: 6px;
+  padding: 0.08rem 0.5rem;
+  background: var(--md-code-bg-color);
+}
+.envar-value code { font-family: var(--md-code-font-family, monospace); background: none; padding: 0; font-size: 0.76rem; }
+.envar-value .vdesc { color: var(--envar-muted); }
+
+.envar-constraints { font-size: 0.82rem; }
+.envar-constraints code { font-size: 0.78rem; }
+
+/* coverage: which downstream standards cover this field ---------------------- */
+.envar-cov {
+  border: 1px solid var(--envar-line);
+  border-left: 3px solid var(--t-optional);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  margin: 0.3rem 0 0;
+  background: var(--md-code-bg-color);
+}
+.envar-cov.st-verified { border-left-color: var(--t-recommended); }
+.envar-cov.st-proposed,
+.envar-cov.st-partial { border-left-color: var(--t-conditionally_core); }
+.envar-cov.st-gap,
+.envar-cov.st-absent { border-left-color: var(--t-core); }
+.envar-cov-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem; }
+.envar-cov-std { font-family: var(--md-code-font-family, monospace); font-weight: 700; font-size: 0.86rem; }
+.envar-cov-status {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.06rem 0.38rem;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--t-optional);
+}
+.envar-cov-status.st-verified { background: var(--t-recommended); }
+.envar-cov-status.st-proposed,
+.envar-cov-status.st-partial { background: var(--t-conditionally_core); }
+.envar-cov-status.st-gap,
+.envar-cov-status.st-absent { background: var(--t-core); }
+.envar-cov-extent { font-size: 0.72rem; color: var(--envar-muted); }
+.envar-cov-row { font-size: 0.8rem; color: var(--envar-muted); margin-top: 0.22rem; }
+.envar-cov-row .k {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-right: 0.35rem;
+}
+.envar-cov-row code { font-size: 0.74rem; }
+.envar-cov-note { font-size: 0.83rem; line-height: 1.42; margin-top: 0.28rem; }
+
+.envar-card details.envar-why {
+  margin: 0.55rem 0 0;
+  border-top: 1px dashed var(--envar-line);
+  padding-top: 0.4rem;
+}
+.envar-card details.envar-why > summary {
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--envar-muted);
+  letter-spacing: 0.03em;
+}
+.envar-why .envar-whyblock { margin: 0.4rem 0 0.2rem; font-size: 0.88rem; line-height: 1.5; }
+
+/* md_in_html wraps embedded markdown (links) in <p>; flatten those. */
+.envar-cardtitle p, .envar-explain p, .envar-desc p, .envar-range p,
+.envar-chip p, .envar-lead p, .envar-metachip p, .envar-eg p,
+.envar-value p, .envar-constraints p, .envar-whyblock p,
+.envar-recorddesc p, .envar-tiledesc p { margin: 0; display: inline; }
+
+/* --- Collapsible reference / technical blocks ------------------------------ */
+.envar-class details.envar-details,
+.envar-atlas details.envar-details {
+  border: 1px solid var(--envar-line);
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+.envar-details > summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.7rem 0.2rem;
+}
+.envar-details[open] > summary { border-bottom: 1px solid var(--envar-line); margin-bottom: 0.4rem; }
+
+/* ============================================================================
+   Atlas landing page
+   ============================================================================ */
+.envar-atlas-hero { padding: 0.2rem 0 1.2rem; border-bottom: 1px solid var(--envar-line); margin-bottom: 1.2rem; }
+.envar-atlas-hero .envar-lead { margin-top: 0.5rem; }
+
+.envar-recordcard {
+  display: block;
+  border: 1px solid var(--md-primary-fg-color);
+  border-left: 5px solid var(--md-primary-fg-color);
+  border-radius: 10px;
+  padding: 1rem 1.3rem;
+  margin: 1rem 0 0.4rem;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+.envar-recordcard:hover { background: var(--md-code-bg-color); }
+.envar-recordcard > span { display: block; }
+.envar-recordname { font-weight: 700; font-size: 1.35rem; margin-top: 0.15rem; }
+.envar-recorddesc { color: var(--envar-muted); font-size: 0.92rem; margin-top: 0.25rem; }
+.envar-variantnote { font-size: 0.88rem; color: var(--envar-muted); margin: 0 0 0.5rem; }
+
+.envar-tiergroup { margin: 1.4rem 0 0.4rem; }
+.envar-tiles { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+.envar-tile {
+  display: block;
+  border: 1px solid var(--envar-line);
+  border-left: 4px solid var(--t-optional);
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+.envar-tile:hover { background: var(--md-code-bg-color); }
+.envar-tile.core { border-left-color: var(--t-core); }
+.envar-tile.conditionally_core { border-left-color: var(--t-conditionally_core); }
+.envar-tile.recommended { border-left-color: var(--t-recommended); }
+.envar-tile.optional { border-left-color: var(--t-optional); }
+.envar-tilehead { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+.envar-tilename { font-weight: 700; font-size: 1.1rem; }
+.envar-tileslot { font-family: var(--md-code-font-family, monospace); font-size: 0.74rem; color: var(--envar-muted); }
+.envar-tiledesc { display: block; font-size: 0.9rem; line-height: 1.45; color: var(--envar-muted); margin: 0.35rem 0 0.4rem; }
+.envar-tilefoot { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--envar-muted); }
+
+.envar-variants { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+.envar-variant {
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.82rem;
+  padding: 0.28rem 0.7rem;
+  border: 1px solid var(--envar-line);
+  border-radius: 6px;
+  text-decoration: none !important;
+}
+.envar-variant:hover { background: var(--md-code-bg-color); }
+
+@media (max-width: 44rem) {
+  .envar-sitskey { min-width: unset; width: 100%; }
+}

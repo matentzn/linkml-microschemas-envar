@@ -1,0 +1,243 @@
+---
+search:
+  boost: {% if element.deprecated %}0.5{% else %}10.0{% endif %}
+---
+
+{# EnVar customization of the gen-doc class page: a class becomes a
+   workshop-readable page — hero, plain-language description, a "where it sits"
+   relationship band, then its fields as tier-coloured CARDS (one per row) that
+   lead with the human-readable title, keep the machine name small, and surface
+   the full plain-language explanation, every example, enum values and
+   constraints. Machine detail survives, collapsed, below. Styling inherits the
+   mkdocs-material theme via docs/css/atlas.css. Do not hand-edit
+   docs/elements — edit this template and rerun `just gen-doc`. #}
+{% if element.title %}{% set title = element.title %}{% else %}{% set title = gen.name(element) %}{% endif %}
+{% set tiers = [
+  ('core', 'Core', 'Required for a valid record'),
+  ('conditionally_core', 'Conditionally core', 'Required in specific contexts'),
+  ('recommended', 'Recommended', 'Strongly encouraged'),
+  ('optional', 'Optional', 'Include when available')
+] %}
+{% set all_slots = schemaview.class_induced_slots(element.name) %}
+{% macro compute_range(slot) -%}
+  {%- if slot.any_of or slot.exactly_one_of -%}
+    {%- for subslot_range in schemaview.slot_range_as_union(slot) -%}
+      {{ gen.link(subslot_range) }}{% if not loop.last %} or {% endif %}
+    {%- endfor -%}
+  {%- else -%}
+    {{ gen.link(slot.range) }}
+  {%- endif -%}
+{%- endmacro %}
+<div class="envar-class" markdown="1">
+
+<div class="envar-hero" markdown="1">
+<p class="envar-eyebrow">EnVar microschema · class{% if element.deprecated %} · deprecated{% endif %}</p>
+
+# {{ title }}
+
+<span class="envar-classname">{{ element.name }}</span>
+{% if element.description %}
+<p class="envar-lead" markdown="1">{{ element.description | replace('\n', ' ') }}</p>
+{% endif %}
+{% set core_n = [] %}
+{% for s in all_slots %}{% if s.annotations and 'tier' in s.annotations and s.annotations['tier'].value == 'core' %}{{ core_n.append(1) or '' }}{% endif %}{% endfor %}
+<div class="envar-meta" markdown="1">
+<span class="envar-metachip">{{ all_slots|length }} fields</span>
+<span class="envar-metachip">{{ core_n|length }} core</span>
+{% if element.abstract %}<span class="envar-metachip">abstract</span>{% endif %}
+<span class="envar-metachip">URI: {{ gen.uri_link(element) }}</span>
+</div>
+</div>
+
+{# ---------- Where it sits ---------- #}
+{% set parents = schemaview.class_parents(element.name) %}
+{% set children = schemaview.class_children(element.name, mixins=False) %}
+{% set used_by_all = [] %}
+{% for u in schemaview.usage_index().get(element.name) or [] %}{% if u.used_by not in used_by_all and u.used_by != element.name %}{{ used_by_all.append(u.used_by) or '' }}{% endif %}{% endfor %}
+{% set used_by = [] %}
+{% for c in used_by_all %}{% set anc = schemaview.class_ancestors(c) | reject('equalto', c) | list %}{% if not (anc | select('in', used_by_all) | list) %}{{ used_by.append(c) or '' }}{% endif %}{% endfor %}
+{% set refs = [] %}
+{% for s in all_slots %}{% if s.range in schemaview.all_classes() and s.range not in refs and s.range != element.name %}{{ refs.append(s.range) or '' }}{% endif %}{% endfor %}
+{% if parents or children or used_by or refs %}
+<p class="envar-sectionlabel">Where it sits</p>
+<div class="envar-sits" markdown="1">
+{% if parents %}
+<div class="envar-sitsrow" markdown="1"><span class="envar-sitskey">Specialises</span>{% for p in parents %}<span class="envar-chip">{{ gen.link(p) }}</span>{% endfor %}</div>
+{% endif %}
+{% if children %}
+<div class="envar-sitsrow" markdown="1"><span class="envar-sitskey">Specialised by</span>{% for c in children %}<span class="envar-chip">{{ gen.link(c) }}</span>{% endfor %}</div>
+{% endif %}
+{% if used_by %}
+<div class="envar-sitsrow" markdown="1"><span class="envar-sitskey">Composed into</span>{% for c in used_by %}<span class="envar-chip">{{ gen.link(c) }}</span>{% endfor %}</div>
+{% endif %}
+{% if refs %}
+<div class="envar-sitsrow" markdown="1"><span class="envar-sitskey">References</span>{% for c in refs %}<span class="envar-chip">{{ gen.link(c) }}</span>{% endfor %}</div>
+{% endif %}
+</div>
+{% endif %}
+
+{# ---------- Fields as tier cards, one per row ---------- #}
+<p class="envar-sectionlabel">Fields</p>
+<div class="envar-legend">
+<span><i class="envar-dot core"></i> Core</span>
+<span><i class="envar-dot conditionally_core"></i> Conditionally core</span>
+<span><i class="envar-dot recommended"></i> Recommended</span>
+<span><i class="envar-dot optional"></i> Optional</span>
+</div>
+
+{% for key, label, note in tiers %}
+{% set bucket = [] %}
+{% for s in all_slots %}{% set t = s.annotations['tier'].value if (s.annotations and 'tier' in s.annotations) else 'optional' %}{% if t == key %}{{ bucket.append(s) or '' }}{% endif %}{% endfor %}
+{% if bucket %}
+<div class="envar-fieldgroup" markdown="1">
+<div class="envar-grouphead">
+<span class="envar-groupname">{{ label }}</span>
+<span class="envar-groupnote">{{ note }}</span>
+<span class="envar-groupcount">{{ bucket|length }} field{% if bucket|length != 1 %}s{% endif %}</span>
+</div>
+<div class="envar-cards" markdown="1">
+{% for s in bucket %}
+{% set stitle = s.title if s.title else (s.name | replace('_', ' ') | title) %}
+{% set expl = s.annotations['explanation'].value if (s.annotations and 'explanation' in s.annotations) else '' %}
+{% set just = s.annotations['justification'].value if (s.annotations and 'justification' in s.annotations) else '' %}
+{% set rng_enum = schemaview.get_enum(s.range) if s.range in schemaview.all_enums() else None %}
+{% set maps = (s.exact_mappings or []) + (s.close_mappings or []) + (s.related_mappings or []) %}
+<div class="envar-card {{ key }}" markdown="1">
+<div class="envar-cardhead"><span class="envar-cardtitle">{{ stitle }}</span><span class="envar-cardbadges"><span class="envar-tierbadge {{ key }}">{{ key.replace('_', ' ') }}</span>{% if s.required %}<span class="envar-req">required</span>{% elif s.recommended %}<span class="envar-req recommended">recommended</span>{% endif %}</span></div>
+<div class="envar-cardmeta" markdown="1">`{{ s.name }}` · range {{ compute_range(s) }} · cardinality {{ gen.cardinality(s) }}{% if s.multivalued %} · multivalued{% endif %}</div>
+{% if expl %}
+<div class="envar-explain" markdown="1">{{ expl | replace('\n', ' ') }}</div>
+{% endif %}
+{% if s.description and s.description != expl %}
+<div class="envar-desc" markdown="1">{{ s.description | replace('\n', ' ') }}</div>
+{% endif %}
+{% if s.examples %}
+<div class="envar-block" markdown="1">
+<p class="envar-blocklabel">Example{% if s.examples|length > 1 %}s{% endif %}</p>
+{% for e in s.examples %}
+<div class="envar-eg" markdown="1">`{{ e.value }}`{% if e.description %} — <span class="egdesc">{{ e.description }}</span>{% endif %}</div>
+{% endfor %}
+</div>
+{% endif %}
+{% if rng_enum and rng_enum.permissible_values %}
+<div class="envar-block">
+<p class="envar-blocklabel">Allowed values</p>
+<div class="envar-values">
+{% for pv in rng_enum.permissible_values.values() %}
+<span class="envar-value" title="{{ pv.description }}"><code>{{ pv.text }}</code>{% if pv.description %} <span class="vdesc">{{ pv.description | enshorten }}</span>{% endif %}</span>
+{% endfor %}
+</div>
+</div>
+{% endif %}
+{% set cb = s.annotations['covered_by'] if (s.annotations and 'covered_by' in s.annotations) else None %}
+{% if cb and cb.annotations %}
+<div class="envar-block envar-coverage">
+<p class="envar-blocklabel">Covered by</p>
+{% for stdkey, stdann in cb.annotations.items() %}
+{% set inner = stdann.annotations or {} %}
+{% set c_extent = inner['extent'].value if 'extent' in inner else '' %}
+{% set c_status = inner['status'].value if 'status' in inner else '' %}
+{% set c_where = inner['where'].value if 'where' in inner else '' %}
+{% set c_evidence = inner['evidence'].value if 'evidence' in inner else '' %}
+{% set c_note = inner['note'].value if 'note' in inner else '' %}
+<div class="envar-cov st-{{ c_status }}">
+<div class="envar-cov-head"><span class="envar-cov-std">{{ stdkey }}</span>{% if c_status %}<span class="envar-cov-status st-{{ c_status }}">{{ c_status }}</span>{% endif %}{% if c_extent %}<span class="envar-cov-extent">{{ c_extent }} coverage</span>{% endif %}</div>
+{% if c_where %}<div class="envar-cov-row"><span class="k">where</span> {{ c_where }}</div>{% endif %}
+{% if c_evidence %}<div class="envar-cov-row"><span class="k">evidence</span> <code>{{ c_evidence }}</code></div>{% endif %}
+{% if c_note %}<div class="envar-cov-note">{{ c_note }}</div>{% endif %}
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% if s.pattern or s.minimum_value is not none or s.maximum_value is not none or s.equals_string %}
+<div class="envar-block envar-constraints" markdown="1">
+<p class="envar-blocklabel">Constraints</p>
+{% if s.pattern %}pattern `{{ s.pattern }}`{% endif %}{% if s.minimum_value is not none %} · min `{{ s.minimum_value }}`{% endif %}{% if s.maximum_value is not none %} · max `{{ s.maximum_value }}`{% endif %}{% if s.equals_string %} · must equal `{{ s.equals_string }}`{% endif %}
+</div>
+{% endif %}
+{% if just or maps or s.see_also %}
+<details class="envar-why" markdown="1">
+<summary>Why it matters &amp; mappings</summary>
+{% if just %}
+<div class="envar-whyblock" markdown="1">{{ just | replace('\n', ' ') }}</div>
+{% endif %}
+{% if maps %}
+<div class="envar-whyblock" markdown="1"><strong>Mappings:</strong> {% for m in maps %}{{ gen.uri_link(m) }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
+{% endif %}
+{% if s.see_also %}
+<div class="envar-whyblock" markdown="1"><strong>See also:</strong> {% for u in s.see_also %}{{ gen.uri_link(u) }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
+{% endif %}
+</details>
+{% endif %}
+</div>
+{% endfor %}
+</div>
+</div>
+{% endif %}
+{% endfor %}
+
+{# ---------- Full field reference (collapsed) ---------- #}
+<details class="envar-details" markdown="1">
+<summary>Full field reference — every slot, cardinality &amp; inheritance</summary>
+
+| Field | Name | Tier | Cardinality / Range | Description |
+| --- | --- | --- | --- | --- |
+{% for s in all_slots -%}
+{%- set t = s.annotations['tier'].value if (s.annotations and 'tier' in s.annotations) else 'optional' -%}
+| **{{ s.title if s.title else (s.name | replace('_',' ') | title) }}** | `{{ s.name }}` | {{ t.replace('_', ' ') }} | {{ gen.cardinality(s) }} <br/> {{ compute_range(s) }} | {{ s.description|enshorten }} |
+{% endfor %}
+</details>
+
+{% if element.rules %}
+<details class="envar-details" markdown="1">
+<summary>Conditional rules on this class</summary>
+
+{% for rule in gen.classrule_to_dict_view(element) %}
+**{{ rule.title }}**
+
+| Rule Applied | Preconditions | Postconditions |
+|--------------|---------------|----------------|
+{% for key in rule.preconditions|default({}) -%}
+| {{ key }} | {% if rule.preconditions[key] is defined %}`{{ rule.preconditions[key] }}`{% endif %} | {% if rule.postconditions and rule.postconditions[key] is defined %}`{{ rule.postconditions[key] }}`{% endif %} |
+{% endfor %}
+{% endfor %}
+</details>
+{% endif %}
+
+{% if gen.example_object_blobs(element.name) %}
+<details class="envar-details" markdown="1">
+<summary>Worked example objects</summary>
+
+{% for name, blob in gen.example_object_blobs(element.name) -%}
+### {{ name }}
+
+```yaml
+{{ blob }}
+```
+{% endfor %}
+</details>
+{% endif %}
+
+<details class="envar-details" markdown="1">
+<summary>Diagram &amp; LinkML source</summary>
+
+{% if diagram_type == "er_diagram" %}
+```{{ gen.mermaid_directive() }}
+{{ gen.mermaid_diagram([element.name]) }}
+```
+{% else %}
+{% include "class_diagram.md.jinja2" %}
+{% endif %}
+
+```yaml
+{{ gen.yaml(element, inferred=True) }}
+```
+</details>
+
+{% include "common_metadata.md.jinja2" %}
+
+{%- if footer -%}
+{{ footer }}
+{%- endif -%}
+
+</div>

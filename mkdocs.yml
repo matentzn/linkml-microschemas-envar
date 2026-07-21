@@ -19,7 +19,8 @@ theme:
     - content.code.copy    # enable copy to clipboard
 
 # extra css/js see https://www.mkdocs.org/user-guide/customizing-your-theme/
-extra_css: []
+extra_css:
+  - css/atlas.css
 extra_javascript: []
 
 plugins:

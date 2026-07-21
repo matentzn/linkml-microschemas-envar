@@ -717,27 +717,58 @@ enums:
         description: Fill from the nearest non-missing neighbour cell.
   LinkageStrategyEnum:
     name: LinkageStrategyEnum
-    description: How a gridded value is attached to a patient location.
+    description: 'The spatial rule used to read an environmental value out of the
+      exposure surface (a grid, a monitoring network, or a set of administrative areas)
+      and assign it to one patient at their location. This is the core geographic-join
+      decision, and it trades spatial precision against robustness to location error:
+      a point read is precise but breaks if the geocode is wrong, whereas an area
+      or buffer read is coarser but more forgiving. Each value below names the companion
+      fields it makes required.'
     title: Linkage Strategy
     from_schema: https://w3id.org/linkml/microschemas/envar
     permissible_values:
       point_extraction_at_residence:
         text: point_extraction_at_residence
-        description: Extract value at the patient's residence coordinates.
+        description: Take the single value at the exact grid cell (or interpolated
+          point) that contains the patient's residence coordinates — one location
+          in, one value out. The simplest and most precise strategy when the residence
+          geocode is accurate and the surface is fine-grained, but also the most sensitive
+          to geocoding error, since a misplaced point reads the wrong cell.
       buffer_aggregation_around_residence:
         text: buffer_aggregation_around_residence
-        description: Aggregate values within a buffer around the patient's residence.
+        description: Draw a circle of a fixed radius around the residence and summarise
+          every value that falls inside it into one number. This deliberately blurs
+          the exact point, smoothing over geocoding uncertainty and describing a neighbourhood
+          rather than a single spot, at the cost of flattening sharp local gradients.
+          Requires a buffer radius (`linkage_buffer_radius_m`) and a summary function
+          (`linkage_buffer_aggregation_method`, e.g. mean or max).
       area_membership_residence_in_polygon:
         text: area_membership_residence_in_polygon
-        description: Membership of the patient's residence in a polygon (e.g. public
-          water system service area).
+        description: Give the patient the value already attached to whichever administrative
+          or service-area polygon their residence falls in — for instance a census
+          tract, a ZIP code, or a public water system's service area. Everyone inside
+          the polygon inherits its single value regardless of where in it they live.
+          Appropriate when the exposure is genuinely defined at the area level (such
+          as a regulated water supply) rather than varying continuously across space.
+          Requires a summary function (`linkage_buffer_aggregation_method`) stating
+          how the polygon's value was derived.
       nearest_station_with_max_distance:
         text: nearest_station_with_max_distance
-        description: Use the nearest observing station, with a maximum allowed distance.
+        description: Use the reading from the closest monitoring station to the residence,
+          but only if that station lies within a stated maximum distance; past that
+          cutoff no value is assigned rather than trusting a far-off station. Typical
+          for sparse observing networks (air-quality or weather stations) where a
+          distant station is not representative of local conditions. Requires the
+          distance cutoff (`linkage_max_distance_to_station_m`), without which "nearest"
+          is unbounded and the join is irreproducible.
       population_weighted_area_to_residence:
         text: population_weighted_area_to_residence
-        description: Population-weighted aggregation over an area surrounding the
-          patient's residence.
+        description: Combine the values over an area around the residence, but weight
+          each part of that area by how many people live there, so densely populated
+          locations count for more than empty ones. The result approximates the exposure
+          of a typical resident rather than a plain geographic average — useful when
+          population is unevenly spread across the area. Requires a summary function
+          (`linkage_buffer_aggregation_method`) for how the weighted values were combined.
   BufferAggregationEnum:
     name: BufferAggregationEnum
     description: Aggregation within a buffer.
@@ -1300,14 +1331,18 @@ slots:
     annotations:
       tier:
         tag: tier
-        value: core
+        value: conditionally_core
       justification:
         tag: justification
-        value: A daily maximum and a daily mean of the same quantity carry the same
+        value: 'A daily maximum and a daily mean of the same quantity carry the same
           standard name and units; only the aggregation statement tells them apart.
           Keeping the verbatim CF string also enables round-tripping against CF/NetCDF
           source products and the CF-consistency triple check over `standard_name`
-          + `cf_cell_methods` + `units_ucum`.
+          + `cf_cell_methods` + `units_ucum`. Conditionally-Core because the slot
+          is CF-specific by design: it is mandatory when `standard_name` uses the
+          `CF:` prefix (the context of SPEC.md validation rule 5), while a non-CF
+          product genuinely has no verbatim `cell_methods` string to preserve — its
+          vocabulary-neutral aggregation semantics live in the required `temporal_aggregation_method`.'
       explanation:
         tag: explanation
         value: 'A "daily temperature" value could be the day''s highest reading, its
@@ -1395,6 +1430,149 @@ slots:
     title: Display Units
     examples:
     - value: °C
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    domain_of:
+    - VariableIdentity
+    range: string
+  native_units_ucum:
+    name: native_units_ucum
+    annotations:
+      tier:
+        tag: tier
+        value: recommended
+      justification:
+        tag: justification
+        value: A value of 308 and a value of 35 can be the same temperature. When
+          the source stores different units (or packed integers) than the companion
+          file carries, the native unit is the anchor that lets a consumer check the
+          conversion and re-read the source bytes; without it the sidecar's values
+          cannot be traced back to the product.
+      explanation:
+        tag: explanation
+        value: Data producers often store numbers in different units than the ones
+          shown to users — Kelvin instead of Celsius, or compressed integers that
+          need unpacking. This field records the unit the source actually uses, so
+          anyone going back to the original files knows what the raw numbers mean.
+    description: UCUM unit of the values as the *source product stores them*, when
+      that differs from `units_ucum` (the unit of the values in the companion data
+      file). Omit when the source already stores values in `units_ucum` — absence
+      means "no conversion happened". Declaring it makes `unit_conversion_formula`
+      required.
+    title: Native Units (UCUM)
+    comments:
+    - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07): all
+      three worked pipelines surfaced the same gap independently — Amadeus ships `value_kelvin`/`value_celsius`
+      twin columns, GAIA stores °C with no record of the K→°C math, and DeGAUSS converts
+      inside the container so the native unit never appears in any output. The Amadeus
+      translation had to park the native unit in a YAML comment because the schema
+      had no slot for it; the GAIA scenario prototyped exactly this key as a hand-added
+      `envar:*` PropertyValue in its JSON-LD catalog entry before it existed here.'
+    examples:
+    - value: K
+      description: gridMET tmmx stores Kelvin; the Amadeus scenario emits Celsius
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    see_also:
+    - https://ucum.org/
+    domain_of:
+    - VariableIdentity
+    range: string
+  native_value_scale_factor:
+    name: native_value_scale_factor
+    annotations:
+      tier:
+        tag: tier
+        value: optional
+      justification:
+        tag: justification
+        value: Anyone re-reading the source grid directly (rather than the companion
+          file) must unpack stored integers with exactly this factor; a wrong or missing
+          factor yields physically plausible but wrong values, the worst kind of error.
+      explanation:
+        tag: explanation
+        value: Big datasets often save space by storing small whole numbers that must
+          be multiplied by a constant to get the real measurement. This is that constant.
+    description: CF-style packing multiplier applied when decoding the source's stored
+      integers to physical values (`physical = stored × scale_factor + add_offset`).
+      Only meaningful alongside `native_units_ucum`.
+    title: Native Value Scale Factor
+    comments:
+    - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07): the
+      THREDDS metadata the Amadeus flow fetches declares `scale_factor = 0.1`, `add_offset
+      = 220.0`, `_Unsigned` — the packed int16 → Kelvin decode convention. The survey
+      rated this the single most load-bearing no-home field it found: mis-decoding
+      produces garbage temperatures, and nothing in the sidecar recorded it.'
+    examples:
+    - value: '0.1'
+      description: gridMET tmmx packs Kelvin as unsigned int16 with scale 0.1
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data
+    domain_of:
+    - VariableIdentity
+    range: float
+  native_value_offset:
+    name: native_value_offset
+    annotations:
+      tier:
+        tag: tier
+        value: optional
+      justification:
+        tag: justification
+        value: The offset half of the unpacking convention; without it the scale factor
+          alone still decodes to the wrong physical value.
+      explanation:
+        tag: explanation
+        value: 'The second constant in the space-saving trick: after multiplying the
+          stored number, add this to get the real measurement.'
+    description: CF-style packing offset applied when decoding the source's stored
+      integers to physical values (`physical = stored × scale_factor + add_offset`).
+      Only meaningful alongside `native_units_ucum`.
+    title: Native Value Offset
+    comments:
+    - Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07) together
+      with `native_value_scale_factor` — the other half of the packed-value decode
+      convention the Amadeus THREDDS metadata declares and the sidecar previously
+      lost.
+    examples:
+    - value: '220.0'
+      description: gridMET tmmx packing offset (unpacks to true Kelvin)
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data
+    domain_of:
+    - VariableIdentity
+    range: float
+  unit_conversion_formula:
+    name: unit_conversion_formula
+    annotations:
+      tier:
+        tag: tier
+        value: conditionally_core
+      justification:
+        tag: justification
+        value: Twin value columns and silent container conversions are how factor-of-1.8
+          unit errors enter exposure analyses undetected. Once native units are declared,
+          the bridging math is the only record of how the file's values relate to
+          the source's — it is what makes the conversion checkable rather than trusted.
+      explanation:
+        tag: explanation
+        value: When the original data used different units, this spells out the exact
+          arithmetic that turned them into the numbers in the data file — like showing
+          your work in a calculation, so others can check it.
+    description: The conversion from the source's native representation to the values
+      in the companion data file, written out, e.g. `Cel = K - 273.15` or `K = stored
+      × 0.1 + 220.0; Cel = K - 273.15`. Required whenever `native_units_ucum` is declared.
+    title: Unit Conversion Formula
+    comments:
+    - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07): the
+      Amadeus translation carried this exact math only as a YAML comment ("the schema
+      has no slot for it"), and the GAIA scenario hand-added it as an `envar:unit_conversion`
+      PropertyValue. The comparison table in the EnVar pipeline repo (COMPARISON.md
+      §E) lists "K→°C conversion math recorded: ❌" for every pipeline — this slot
+      is the fix.'
+    examples:
+    - value: K = stored * 0.1 + 220.0; Cel = K - 273.15
+      description: gridMET tmmx unpack-then-convert chain in the Amadeus scenario
     from_schema: https://w3id.org/linkml/microschemas/envar
     domain_of:
     - VariableIdentity
@@ -1579,6 +1757,28 @@ slots:
         value: 'Says what kind of value to expect: a decimal number that can take
           any value (like a temperature), a yes/no flag, or a category. Software needs
           this to know how to read and summarise the data correctly.'
+      covered_by:
+        tag: covered_by
+        annotations:
+          omop_gaia:
+            tag: omop_gaia
+            annotations:
+              extent:
+                tag: extent
+                value: full
+              status:
+                tag: status
+                value: verified
+              where:
+                tag: where
+                value: gaia_catalog meta_etl_*.json qudt:dataType (numeric/float4)
+              evidence:
+                tag: evidence
+                value: examples/scenarios/standards/omop_gaia_daymet_tmax.yaml (value_data_type)
+              note:
+                tag: note
+                value: GAIA registers the attribute's numeric qudt:dataType at dataset-registration
+                  time; the EnVar translation carries it first-class as value_data_type.
     description: The data type of the stored exposure value.
     title: Value Data Type
     examples:
@@ -1697,6 +1897,41 @@ slots:
       description: wide file — the variable's own column carries the values
     - value: value
       description: long file — the shared value column
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    domain_of:
+    - DataLayout
+    range: string
+  native_value_column:
+    name: native_value_column
+    annotations:
+      tier:
+        tag: tier
+        value: optional
+      justification:
+        tag: justification
+        value: When a producer ships both unit representations, binding only one leaves
+          an unexplained column in the data file and hides the cheapest available
+          cross-check (recomputing one column from the other via `unit_conversion_formula`).
+      explanation:
+        tag: explanation
+        value: Some data files helpfully include the same measurement twice, in two
+          units — like a column in Kelvin next to one in Celsius. This names that
+          second column so it is accounted for rather than mysterious.
+    description: Name of a second column carrying the same values in the source's
+      *native* units (`VariableIdentity.native_units_ucum`), when the companion file
+      ships both, e.g. Amadeus's `value_kelvin` next to `value_celsius`. `value_column`
+      stays the binding for the values in `units_ucum`; this binds the native-unit
+      twin.
+    title: Native Value Column
+    comments:
+    - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07): the
+      Amadeus pipeline''s native CSV carries `value_kelvin` and `value_celsius` twin
+      columns, and `DataLayout` could bind exactly one of them — the native-unit copy
+      had no home and its very existence went unrecorded. Rider on the native-unit
+      conversion record in envar_variable (`native_units_ucum`, `unit_conversion_formula`).'
+    examples:
+    - value: value_kelvin
+      description: Amadeus gridMET output ships Kelvin and Celsius side by side
     from_schema: https://w3id.org/linkml/microschemas/envar
     domain_of:
     - DataLayout
@@ -2110,6 +2345,11 @@ slots:
       tier:
         tag: tier
         value: conditionally_core
+      tier_context:
+        tag: tier_context
+        value: cross-module — Core iff linkage_method.linkage_strategy is buffer_aggregation_around_residence.
+          Not expressible as a class rule (rules cannot reach across classes), so
+          the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.
       justification:
         tag: justification
         value: For buffer-based strategies the radius is a hyperparameter that changes
@@ -2165,6 +2405,12 @@ slots:
       tier:
         tag: tier
         value: conditionally_core
+      tier_context:
+        tag: tier_context
+        value: cross-module — Core iff spatial_reference.extraction_method is population_weighted_mean
+          OR linkage_method.linkage_strategy is population_weighted_area_to_residence.
+          The disjunction spans two classes, so it is not expressible as a class rule;
+          the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.
       justification:
         tag: justification
         value: Population-weighted values depend on which population dataset and census
@@ -2880,6 +3126,12 @@ slots:
       tier:
         tag: tier
         value: conditionally_core
+      tier_context:
+        tag: tier_context
+        value: not machine-decidable — the stated context is "station-based products",
+          which cannot be read reliably off the sidecar (no slot declares station-ness).
+          No rule and no checker predicate; the slot scores as Optional out of context
+          by design.
       justification:
         tag: justification
         value: 'Using a non-homogenised station product (e.g. GHCN-Daily) for trend
@@ -3563,6 +3815,46 @@ slots:
     domain_of:
     - Uncertainty
     range: MissingDataHandlingEnum
+  missing_value_sentinel:
+    name: missing_value_sentinel
+    annotations:
+      tier:
+        tag: tier
+        value: optional
+      justification:
+        tag: justification
+        value: A sentinel read as data is a catastrophic outlier (−9999 °C) or a silent
+          bias (32767 packed); anyone touching the source files rather than the cleaned
+          companion file needs to know which value to mask.
+      explanation:
+        tag: explanation
+        value: Datasets mark holes with an agreed impossible number, like −9999. If
+          software doesn't know the marker, it will average it in as if it were a
+          real reading. This field records the marker.
+    description: 'The stored value that means "missing" in the source product''s files,
+      verbatim, e.g. `32767` (gridMET `_FillValue`) or `-9999` (Daymet nodata). Complements
+      `missing_data_handling_method`: the policy slot says *how* gaps were handled,
+      this says *which number encodes a gap*.'
+    title: Missing Value Sentinel
+    comments:
+    - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07): two
+      pipelines surfaced the same field independently — the Amadeus THREDDS metadata
+      declares `_FillValue`/`missing_value` 32767, and GAIA''s ETL descriptor registers
+      `nodata: [float4, -9999]`. Neither number had a home: `missing_data_handling_method`
+      records policy, not the sentinel, and a consumer re-reading the source grid
+      needs the number itself. Kept as a string so non-numeric sentinels (`NaN`, empty
+      string) stay representable.'
+    examples:
+    - value: '32767'
+      description: gridMET tmmx `_FillValue` / `missing_value` (packed int16)
+    - value: '-9999'
+      description: Daymet nodata sentinel as registered in the GAIA catalog
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    see_also:
+    - https://cfconventions.org/cf-conventions/cf-conventions.html#missing-data
+    domain_of:
+    - Uncertainty
+    range: string
   missing_data_handling_method_missing_reason:
     name: missing_data_handling_method_missing_reason
     annotations:
@@ -3828,6 +4120,44 @@ slots:
     domain_of:
     - LinkageMethod
     range: MissingReasonEnum
+  linkage_working_crs:
+    name: linkage_working_crs
+    annotations:
+      tier:
+        tag: tier
+        value: optional
+      justification:
+        tag: justification
+        value: 'Reprojection can move a point across a cell boundary: two runs with
+          the same native CRS but different working CRS are different linkages that
+          can assign different exposures to the same address. Recording the working
+          CRS makes the join reproducible rather than deployment-dependent.'
+      explanation:
+        tag: explanation
+        value: Before matching patient locations to map tiles, software sometimes
+          converts all coordinates into a different mapping system that is better
+          for measuring areas. This names that intermediate system, because the choice
+          can nudge a location into a neighbouring tile.
+    description: Coordinate reference system the point-to-cell join was actually executed
+      in, as an EPSG identifier or PROJ string, when it differs from the native `SpatialReference.crs`
+      — e.g. reprojecting WGS84 points into an equal-area CRS before the spatial join.
+    title: Linkage Working CRS
+    comments:
+    - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07): GAIA''s
+      ETL descriptor carries both `epsg` (native, 4326) and `local_epsg` (5070) —
+      the working CRS its PostGIS join actually executes in. EnVar had exactly one
+      `crs` slot, so the second one had no home; the survey''s verdict was that the
+      working CRS is a linkage hyperparameter, not a duplicate of the native CRS.'
+    examples:
+    - value: EPSG:5070
+      description: CONUS Albers equal-area, the `local_epsg` the GAIA spatial join
+        runs in
+    from_schema: https://w3id.org/linkml/microschemas/envar
+    see_also:
+    - https://epsg.io/5070
+    domain_of:
+    - LinkageMethod
+    range: string
   geocoding_precision_propagated:
     name: geocoding_precision_propagated
     annotations:
@@ -6600,6 +6930,10 @@ classes:
     - cf_cell_methods
     - units_ucum
     - units_display
+    - native_units_ucum
+    - native_value_scale_factor
+    - native_value_offset
+    - unit_conversion_formula
     - target_concept_vocabulary
     - target_concept_id
     - target_concept_id_missing_reason
@@ -6731,14 +7065,19 @@ classes:
         annotations:
           tier:
             tag: tier
-            value: core
+            value: conditionally_core
           justification:
             tag: justification
-            value: A daily maximum and a daily mean of the same quantity carry the
+            value: 'A daily maximum and a daily mean of the same quantity carry the
               same standard name and units; only the aggregation statement tells them
               apart. Keeping the verbatim CF string also enables round-tripping against
               CF/NetCDF source products and the CF-consistency triple check over `standard_name`
-              + `cf_cell_methods` + `units_ucum`.
+              + `cf_cell_methods` + `units_ucum`. Conditionally-Core because the slot
+              is CF-specific by design: it is mandatory when `standard_name` uses
+              the `CF:` prefix (the context of SPEC.md validation rule 5), while a
+              non-CF product genuinely has no verbatim `cell_methods` string to preserve
+              — its vocabulary-neutral aggregation semantics live in the required
+              `temporal_aggregation_method`.'
           explanation:
             tag: explanation
             value: 'A "daily temperature" value could be the day''s highest reading,
@@ -6832,6 +7171,160 @@ classes:
         title: Display Units
         examples:
         - value: °C
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        owner: VariableIdentity
+        domain_of:
+        - VariableIdentity
+        range: string
+      native_units_ucum:
+        name: native_units_ucum
+        annotations:
+          tier:
+            tag: tier
+            value: recommended
+          justification:
+            tag: justification
+            value: A value of 308 and a value of 35 can be the same temperature. When
+              the source stores different units (or packed integers) than the companion
+              file carries, the native unit is the anchor that lets a consumer check
+              the conversion and re-read the source bytes; without it the sidecar's
+              values cannot be traced back to the product.
+          explanation:
+            tag: explanation
+            value: Data producers often store numbers in different units than the
+              ones shown to users — Kelvin instead of Celsius, or compressed integers
+              that need unpacking. This field records the unit the source actually
+              uses, so anyone going back to the original files knows what the raw
+              numbers mean.
+        description: UCUM unit of the values as the *source product stores them*,
+          when that differs from `units_ucum` (the unit of the values in the companion
+          data file). Omit when the source already stores values in `units_ucum` —
+          absence means "no conversion happened". Declaring it makes `unit_conversion_formula`
+          required.
+        title: Native Units (UCUM)
+        comments:
+        - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07):
+          all three worked pipelines surfaced the same gap independently — Amadeus
+          ships `value_kelvin`/`value_celsius` twin columns, GAIA stores °C with no
+          record of the K→°C math, and DeGAUSS converts inside the container so the
+          native unit never appears in any output. The Amadeus translation had to
+          park the native unit in a YAML comment because the schema had no slot for
+          it; the GAIA scenario prototyped exactly this key as a hand-added `envar:*`
+          PropertyValue in its JSON-LD catalog entry before it existed here.'
+        examples:
+        - value: K
+          description: gridMET tmmx stores Kelvin; the Amadeus scenario emits Celsius
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        see_also:
+        - https://ucum.org/
+        owner: VariableIdentity
+        domain_of:
+        - VariableIdentity
+        range: string
+      native_value_scale_factor:
+        name: native_value_scale_factor
+        annotations:
+          tier:
+            tag: tier
+            value: optional
+          justification:
+            tag: justification
+            value: Anyone re-reading the source grid directly (rather than the companion
+              file) must unpack stored integers with exactly this factor; a wrong
+              or missing factor yields physically plausible but wrong values, the
+              worst kind of error.
+          explanation:
+            tag: explanation
+            value: Big datasets often save space by storing small whole numbers that
+              must be multiplied by a constant to get the real measurement. This is
+              that constant.
+        description: CF-style packing multiplier applied when decoding the source's
+          stored integers to physical values (`physical = stored × scale_factor +
+          add_offset`). Only meaningful alongside `native_units_ucum`.
+        title: Native Value Scale Factor
+        comments:
+        - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07):
+          the THREDDS metadata the Amadeus flow fetches declares `scale_factor = 0.1`,
+          `add_offset = 220.0`, `_Unsigned` — the packed int16 → Kelvin decode convention.
+          The survey rated this the single most load-bearing no-home field it found:
+          mis-decoding produces garbage temperatures, and nothing in the sidecar recorded
+          it.'
+        examples:
+        - value: '0.1'
+          description: gridMET tmmx packs Kelvin as unsigned int16 with scale 0.1
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        see_also:
+        - https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data
+        owner: VariableIdentity
+        domain_of:
+        - VariableIdentity
+        range: float
+      native_value_offset:
+        name: native_value_offset
+        annotations:
+          tier:
+            tag: tier
+            value: optional
+          justification:
+            tag: justification
+            value: The offset half of the unpacking convention; without it the scale
+              factor alone still decodes to the wrong physical value.
+          explanation:
+            tag: explanation
+            value: 'The second constant in the space-saving trick: after multiplying
+              the stored number, add this to get the real measurement.'
+        description: CF-style packing offset applied when decoding the source's stored
+          integers to physical values (`physical = stored × scale_factor + add_offset`).
+          Only meaningful alongside `native_units_ucum`.
+        title: Native Value Offset
+        comments:
+        - Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07)
+          together with `native_value_scale_factor` — the other half of the packed-value
+          decode convention the Amadeus THREDDS metadata declares and the sidecar
+          previously lost.
+        examples:
+        - value: '220.0'
+          description: gridMET tmmx packing offset (unpacks to true Kelvin)
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        see_also:
+        - https://cfconventions.org/cf-conventions/cf-conventions.html#packed-data
+        owner: VariableIdentity
+        domain_of:
+        - VariableIdentity
+        range: float
+      unit_conversion_formula:
+        name: unit_conversion_formula
+        annotations:
+          tier:
+            tag: tier
+            value: conditionally_core
+          justification:
+            tag: justification
+            value: Twin value columns and silent container conversions are how factor-of-1.8
+              unit errors enter exposure analyses undetected. Once native units are
+              declared, the bridging math is the only record of how the file's values
+              relate to the source's — it is what makes the conversion checkable rather
+              than trusted.
+          explanation:
+            tag: explanation
+            value: When the original data used different units, this spells out the
+              exact arithmetic that turned them into the numbers in the data file
+              — like showing your work in a calculation, so others can check it.
+        description: The conversion from the source's native representation to the
+          values in the companion data file, written out, e.g. `Cel = K - 273.15`
+          or `K = stored × 0.1 + 220.0; Cel = K - 273.15`. Required whenever `native_units_ucum`
+          is declared.
+        title: Unit Conversion Formula
+        comments:
+        - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07):
+          the Amadeus translation carried this exact math only as a YAML comment ("the
+          schema has no slot for it"), and the GAIA scenario hand-added it as an `envar:unit_conversion`
+          PropertyValue. The comparison table in the EnVar pipeline repo (COMPARISON.md
+          §E) lists "K→°C conversion math recorded: ❌" for every pipeline — this slot
+          is the fix.'
+        examples:
+        - value: K = stored * 0.1 + 220.0; Cel = K - 273.15
+          description: gridMET tmmx unpack-then-convert chain in the Amadeus scenario
         from_schema: https://w3id.org/linkml/microschemas/envar
         owner: VariableIdentity
         domain_of:
@@ -7024,6 +7517,30 @@ classes:
             value: 'Says what kind of value to expect: a decimal number that can take
               any value (like a temperature), a yes/no flag, or a category. Software
               needs this to know how to read and summarise the data correctly.'
+          covered_by:
+            tag: covered_by
+            annotations:
+              omop_gaia:
+                tag: omop_gaia
+                annotations:
+                  extent:
+                    tag: extent
+                    value: full
+                  status:
+                    tag: status
+                    value: verified
+                  where:
+                    tag: where
+                    value: gaia_catalog meta_etl_*.json qudt:dataType (numeric/float4)
+                  evidence:
+                    tag: evidence
+                    value: examples/scenarios/standards/omop_gaia_daymet_tmax.yaml
+                      (value_data_type)
+                  note:
+                    tag: note
+                    value: GAIA registers the attribute's numeric qudt:dataType at
+                      dataset-registration time; the EnVar translation carries it
+                      first-class as value_data_type.
         description: The data type of the stored exposure value.
         title: Value Data Type
         examples:
@@ -7088,6 +7605,35 @@ classes:
         domain_of:
         - VariableIdentity
         range: float
+    rules:
+    - preconditions:
+        slot_conditions:
+          standard_name:
+            name: standard_name
+            pattern: '^CF:'
+      postconditions:
+        slot_conditions:
+          cf_cell_methods:
+            name: cf_cell_methods
+            required: true
+      description: CF-based products (a `CF:`-prefixed `standard_name`) must preserve
+        the verbatim `cell_methods` string — the context of SPEC.md validation rule
+        5 and of the `conditionally_core` tier on `cf_cell_methods`. Non-CF products
+        are exempt; their aggregation semantics live in the required `temporal_aggregation_method`.
+    - preconditions:
+        slot_conditions:
+          native_units_ucum:
+            name: native_units_ucum
+            value_presence: PRESENT
+      postconditions:
+        slot_conditions:
+          unit_conversion_formula:
+            name: unit_conversion_formula
+            required: true
+      description: 'Declaring native units is declaring a conversion: once `native_units_ucum`
+        says the source stored something other than `units_ucum`, the math that bridged
+        them must be written down or the sidecar''s values cannot be traced back to
+        the source bytes (tier conditionally_core context "native units declared").'
   DataLayout:
     name: DataLayout
     annotations:
@@ -7108,6 +7654,7 @@ classes:
     - variable_key
     - subject_column
     - time_column
+    - native_value_column
     - value_uncertainty_column
     - value_uncertainty_column_missing_reason
     - quality_flag_column
@@ -7310,6 +7857,42 @@ classes:
         domain_of:
         - DataLayout
         range: string
+      native_value_column:
+        name: native_value_column
+        annotations:
+          tier:
+            tag: tier
+            value: optional
+          justification:
+            tag: justification
+            value: When a producer ships both unit representations, binding only one
+              leaves an unexplained column in the data file and hides the cheapest
+              available cross-check (recomputing one column from the other via `unit_conversion_formula`).
+          explanation:
+            tag: explanation
+            value: Some data files helpfully include the same measurement twice, in
+              two units — like a column in Kelvin next to one in Celsius. This names
+              that second column so it is accounted for rather than mysterious.
+        description: Name of a second column carrying the same values in the source's
+          *native* units (`VariableIdentity.native_units_ucum`), when the companion
+          file ships both, e.g. Amadeus's `value_kelvin` next to `value_celsius`.
+          `value_column` stays the binding for the values in `units_ucum`; this binds
+          the native-unit twin.
+        title: Native Value Column
+        comments:
+        - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07):
+          the Amadeus pipeline''s native CSV carries `value_kelvin` and `value_celsius`
+          twin columns, and `DataLayout` could bind exactly one of them — the native-unit
+          copy had no home and its very existence went unrecorded. Rider on the native-unit
+          conversion record in envar_variable (`native_units_ucum`, `unit_conversion_formula`).'
+        examples:
+        - value: value_kelvin
+          description: Amadeus gridMET output ships Kelvin and Celsius side by side
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        owner: DataLayout
+        domain_of:
+        - DataLayout
+        range: string
       value_uncertainty_column:
         name: value_uncertainty_column
         annotations:
@@ -7422,6 +8005,25 @@ classes:
         domain_of:
         - DataLayout
         range: MissingReasonEnum
+    rules:
+    - preconditions:
+        slot_conditions:
+          table_orientation:
+            name: table_orientation
+            equals_string: long
+      postconditions:
+        slot_conditions:
+          variable_column:
+            name: variable_column
+            required: true
+          variable_key:
+            name: variable_key
+            required: true
+      description: 'Long-format layouts must name the variable discriminator: the
+        shared value column is only interpretable once `variable_column` says which
+        column discriminates variables and `variable_key` says which row value selects
+        this record''s rows (SPEC.md rule 7; tier conditionally_core context "long
+        orientation").'
   SpatialReference:
     name: SpatialReference
     annotations:
@@ -7455,6 +8057,9 @@ classes:
         required: true
       extraction_method:
         name: extraction_method
+        required: true
+      native_spatial_resolution_m:
+        name: native_spatial_resolution_m
         required: true
       target_geography_type:
         name: target_geography_type
@@ -7494,6 +8099,7 @@ classes:
         domain_of:
         - SpatialReference
         range: float
+        required: true
       native_spatial_resolution_descriptor:
         name: native_spatial_resolution_descriptor
         annotations:
@@ -7657,6 +8263,11 @@ classes:
           tier:
             tag: tier
             value: conditionally_core
+          tier_context:
+            tag: tier_context
+            value: cross-module — Core iff linkage_method.linkage_strategy is buffer_aggregation_around_residence.
+              Not expressible as a class rule (rules cannot reach across classes),
+              so the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.
           justification:
             tag: justification
             value: For buffer-based strategies the radius is a hyperparameter that
@@ -7715,6 +8326,12 @@ classes:
           tier:
             tag: tier
             value: conditionally_core
+          tier_context:
+            tag: tier_context
+            value: cross-module — Core iff spatial_reference.extraction_method is
+              population_weighted_mean OR linkage_method.linkage_strategy is population_weighted_area_to_residence.
+              The disjunction spans two classes, so it is not expressible as a class
+              rule; the checker evaluates it in RESIDUAL_CONTEXT_PREDICATES.
           justification:
             tag: justification
             value: Population-weighted values depend on which population dataset and
@@ -8550,6 +9167,12 @@ classes:
           tier:
             tag: tier
             value: conditionally_core
+          tier_context:
+            tag: tier_context
+            value: not machine-decidable — the stated context is "station-based products",
+              which cannot be read reliably off the sidecar (no slot declares station-ness).
+              No rule and no checker predicate; the slot scores as Optional out of
+              context by design.
           justification:
             tag: justification
             value: 'Using a non-homogenised station product (e.g. GHCN-Daily) for
@@ -9020,6 +9643,20 @@ classes:
         domain_of:
         - ExposureModel
         range: MissingReasonEnum
+    rules:
+    - preconditions:
+        slot_conditions:
+          exposure_model_type:
+            name: exposure_model_type
+            equals_string: ensemble_machine_learning
+      postconditions:
+        slot_conditions:
+          exposure_model_ensemble_member_count:
+            name: exposure_model_ensemble_member_count
+            required: true
+      description: Ensemble products must state their member count — ensemble spread
+        is meaningless without knowing how many realisations it summarises (tier conditionally_core
+        context "ensemble models").
   Uncertainty:
     name: Uncertainty
     annotations:
@@ -9046,6 +9683,7 @@ classes:
     - quality_flag_vocabulary_missing_reason
     - missing_data_handling_method
     - missing_data_handling_method_missing_reason
+    - missing_value_sentinel
     - data_completeness_pct
     - data_completeness_pct_missing_reason
     attributes:
@@ -9356,6 +9994,47 @@ classes:
         domain_of:
         - Uncertainty
         range: MissingReasonEnum
+      missing_value_sentinel:
+        name: missing_value_sentinel
+        annotations:
+          tier:
+            tag: tier
+            value: optional
+          justification:
+            tag: justification
+            value: A sentinel read as data is a catastrophic outlier (−9999 °C) or
+              a silent bias (32767 packed); anyone touching the source files rather
+              than the cleaned companion file needs to know which value to mask.
+          explanation:
+            tag: explanation
+            value: Datasets mark holes with an agreed impossible number, like −9999.
+              If software doesn't know the marker, it will average it in as if it
+              were a real reading. This field records the marker.
+        description: 'The stored value that means "missing" in the source product''s
+          files, verbatim, e.g. `32767` (gridMET `_FillValue`) or `-9999` (Daymet
+          nodata). Complements `missing_data_handling_method`: the policy slot says
+          *how* gaps were handled, this says *which number encodes a gap*.'
+        title: Missing Value Sentinel
+        comments:
+        - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07):
+          two pipelines surfaced the same field independently — the Amadeus THREDDS
+          metadata declares `_FillValue`/`missing_value` 32767, and GAIA''s ETL descriptor
+          registers `nodata: [float4, -9999]`. Neither number had a home: `missing_data_handling_method`
+          records policy, not the sentinel, and a consumer re-reading the source grid
+          needs the number itself. Kept as a string so non-numeric sentinels (`NaN`,
+          empty string) stay representable.'
+        examples:
+        - value: '32767'
+          description: gridMET tmmx `_FillValue` / `missing_value` (packed int16)
+        - value: '-9999'
+          description: Daymet nodata sentinel as registered in the GAIA catalog
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        see_also:
+        - https://cfconventions.org/cf-conventions/cf-conventions.html#missing-data
+        owner: Uncertainty
+        domain_of:
+        - Uncertainty
+        range: string
       data_completeness_pct:
         name: data_completeness_pct
         annotations:
@@ -9519,6 +10198,7 @@ classes:
     - linkage_buffer_aggregation_method_missing_reason
     - linkage_max_distance_to_station_m
     - linkage_max_distance_to_station_m_missing_reason
+    - linkage_working_crs
     - geocoding_precision_propagated
     - geocoding_score_propagated
     - geocoding_score_propagated_missing_reason
@@ -9725,6 +10405,47 @@ classes:
         domain_of:
         - LinkageMethod
         range: MissingReasonEnum
+      linkage_working_crs:
+        name: linkage_working_crs
+        annotations:
+          tier:
+            tag: tier
+            value: optional
+          justification:
+            tag: justification
+            value: 'Reprojection can move a point across a cell boundary: two runs
+              with the same native CRS but different working CRS are different linkages
+              that can assign different exposures to the same address. Recording the
+              working CRS makes the join reproducible rather than deployment-dependent.'
+          explanation:
+            tag: explanation
+            value: Before matching patient locations to map tiles, software sometimes
+              converts all coordinates into a different mapping system that is better
+              for measuring areas. This names that intermediate system, because the
+              choice can nudge a location into a neighbouring tile.
+        description: Coordinate reference system the point-to-cell join was actually
+          executed in, as an EPSG identifier or PROJ string, when it differs from
+          the native `SpatialReference.crs` — e.g. reprojecting WGS84 points into
+          an equal-area CRS before the spatial join.
+        title: Linkage Working CRS
+        comments:
+        - 'Added after the reverse gap survey (docs/reverse-gap-survey.md, 2026-07):
+          GAIA''s ETL descriptor carries both `epsg` (native, 4326) and `local_epsg`
+          (5070) — the working CRS its PostGIS join actually executes in. EnVar had
+          exactly one `crs` slot, so the second one had no home; the survey''s verdict
+          was that the working CRS is a linkage hyperparameter, not a duplicate of
+          the native CRS.'
+        examples:
+        - value: EPSG:5070
+          description: CONUS Albers equal-area, the `local_epsg` the GAIA spatial
+            join runs in
+        from_schema: https://w3id.org/linkml/microschemas/envar
+        see_also:
+        - https://epsg.io/5070
+        owner: LinkageMethod
+        domain_of:
+        - LinkageMethod
+        range: string
       geocoding_precision_propagated:
         name: geocoding_precision_propagated
         annotations:
@@ -10038,6 +10759,65 @@ classes:
         domain_of:
         - LinkageMethod
         range: MissingReasonEnum
+    rules:
+    - preconditions:
+        slot_conditions:
+          linkage_strategy:
+            name: linkage_strategy
+            equals_string: buffer_aggregation_around_residence
+      postconditions:
+        slot_conditions:
+          linkage_buffer_radius_m:
+            name: linkage_buffer_radius_m
+            required: true
+      description: 'Buffer aggregation needs its radius: the buffer size is a hyperparameter
+        that changes which cells contribute to the value (tier conditionally_core
+        context "buffer strategies").'
+    - preconditions:
+        slot_conditions:
+          linkage_strategy:
+            name: linkage_strategy
+            equals_string_in:
+            - buffer_aggregation_around_residence
+            - area_membership_residence_in_polygon
+            - population_weighted_area_to_residence
+      postconditions:
+        slot_conditions:
+          linkage_buffer_aggregation_method:
+            name: linkage_buffer_aggregation_method
+            required: true
+      description: Strategies that aggregate over an area (buffer, polygon membership,
+        population-weighted area) must state how cell values were combined (tier conditionally_core
+        context "buffer/area strategies").
+    - preconditions:
+        slot_conditions:
+          linkage_strategy:
+            name: linkage_strategy
+            equals_string: nearest_station_with_max_distance
+      postconditions:
+        slot_conditions:
+          linkage_max_distance_to_station_m:
+            name: linkage_max_distance_to_station_m
+            required: true
+      description: Nearest-station linkage must state its distance cutoff — without
+        it "nearest" is unbounded and irreproducible (tier conditionally_core context
+        "station strategies").
+    - preconditions:
+        slot_conditions:
+          lag_alignment_applied:
+            name: lag_alignment_applied
+            equals_string_in:
+            - lag_n_days
+            - distributed_lag
+      postconditions:
+        slot_conditions:
+          clinical_date_assignment_convention:
+            name: clinical_date_assignment_convention
+            required: true
+      description: 'Day-boundary cross-check, SPEC.md rule 8: when a lagged or event-matched
+        analysis is declared, the clinical-side date convention is required so the
+        two declared day rulers can be compared (tier conditionally_core context "lag_alignment_applied
+        != none").'
   ToolRun:
     name: ToolRun
     annotations:
@@ -10709,6 +11489,15 @@ classes:
       indoor_outdoor:
         name: indoor_outdoor
         required: true
+      equation_variant:
+        name: equation_variant
+        required: true
+      equation_inputs:
+        name: equation_inputs
+        required: true
+      equation_validity_range:
+        name: equation_validity_range
+        required: true
     attributes:
       heat_metric_family:
         name: heat_metric_family
@@ -10772,6 +11561,7 @@ classes:
         domain_of:
         - DerivedHeatMetric
         range: EquationVariantEnum
+        required: true
       equation_variant_missing_reason:
         name: equation_variant_missing_reason
         annotations:
@@ -10857,6 +11647,7 @@ classes:
         domain_of:
         - DerivedHeatMetric
         range: EquationInput
+        required: true
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -10891,6 +11682,7 @@ classes:
         domain_of:
         - DerivedHeatMetric
         range: string
+        required: true
       equation_validity_range_missing_reason:
         name: equation_validity_range_missing_reason
         annotations:
@@ -11451,6 +12243,41 @@ classes:
         domain_of:
         - DerivedHeatMetric
         range: MissingReasonEnum
+    rules:
+    - preconditions:
+        slot_conditions:
+          heat_metric_family:
+            name: heat_metric_family
+            equals_string: heat_wave_flag
+      postconditions:
+        slot_conditions:
+          heat_wave_threshold_definition:
+            name: heat_wave_threshold_definition
+            required: true
+          heat_wave_min_consecutive_days:
+            name: heat_wave_min_consecutive_days
+            required: true
+      description: Heat-wave-flag metrics must state which of the (at least seven,
+        mutually unconvertible) heat-wave definitions was used and the minimum consecutive-days
+        criterion (tier conditionally_core context "heat-wave flavoured metrics").
+    - preconditions:
+        slot_conditions:
+          heat_wave_threshold_definition:
+            name: heat_wave_threshold_definition
+            equals_string_in:
+            - percentile_local
+            - percentile_climatological
+      postconditions:
+        slot_conditions:
+          percentile_reference_period_start:
+            name: percentile_reference_period_start
+            required: true
+          percentile_reference_period_end:
+            name: percentile_reference_period_end
+            required: true
+      description: Percentile-based heat-wave thresholds are meaningless without their
+        reference period — the same percentile over different baselines flags different
+        days (tier conditionally_core context "percentile-based thresholds").
   EquationInput:
     name: EquationInput
     annotations:

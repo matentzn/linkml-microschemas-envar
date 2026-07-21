@@ -1,0 +1,116 @@
+{#-
+  EnVar customization of the gen-doc schema index → a workshop "atlas".
+
+  The composite record sits at the centre; every class it composes becomes a
+  tier-coloured tile, grouped Core → Conditionally core → Recommended →
+  Optional. The exhaustive element listing survives, collapsed, below.
+
+  IMPORTANT: the visual atlas is written as RAW HTML with NO markdown="1", so
+  python-markdown passes it through verbatim. (Wrapping block <div>s in an <a>
+  inside a markdown="1" block makes the parser eject the divs from the anchor —
+  empty, unclickable boxes.) Links are therefore NOT rewritten by mkdocs, so we
+  emit final directory-style URLs (classes/<Name>/) directly; this assumes
+  use_directory_urls (mkdocs default, and what gen-doc relies on too). Only the
+  collapsed full index uses markdown="1" for its tables. Styling inherits the
+  mkdocs-material theme via docs/css/atlas.css. Regenerate with `just gen-doc`.
+-#}
+{%- set roots = gen.all_class_objects() | selectattr('tree_root') | list -%}
+{%- set root = roots[0].name if roots else 'EnvironmentalExposureRecord' -%}
+{%- set root_obj = schemaview.get_class(root) -%}
+{%- set tiers = [
+  ('core', 'Core', 'Required for every valid record'),
+  ('conditionally_core', 'Conditionally core', 'Required in specific contexts'),
+  ('recommended', 'Recommended', 'Strongly encouraged'),
+  ('optional', 'Optional', 'Include when available')
+] -%}
+{%- set comp_slots = [] -%}
+{%- for s in schemaview.class_induced_slots(root) -%}
+  {%- if s.range in schemaview.all_classes() -%}{{ comp_slots.append(s) or '' }}{%- endif -%}
+{%- endfor -%}
+<div class="envar-atlas">
+<div class="envar-atlas-hero">
+<p class="envar-eyebrow">EnVar microschemas · class atlas</p>
+<h1>{% if schema.title %}{{ schema.title }}{% else %}{{ schema.name }}{% endif %}</h1>
+{% if schema.description %}<p class="envar-lead">{{ schema.description | replace('\n', ' ') | truncate(260, True, '…') }}</p>{% endif %}
+</div>
+<a class="envar-recordcard" href="classes/{{ root }}/">
+<span class="envar-eyebrow">The composite record · <code>{{ root }}</code></span>
+<span class="envar-recordname">{{ root_obj.title if root_obj.title else gen.name(root_obj) }}</span>
+<span class="envar-recorddesc">{{ root_obj.description | enshorten }}</span>
+</a>
+<p class="envar-sectionlabel">What the record composes</p>
+{%- for key, label, note in tiers -%}
+{%- set bucket = [] -%}
+{%- for s in comp_slots -%}
+  {%- set t = s.annotations['tier'].value if (s.annotations and 'tier' in s.annotations) else 'optional' -%}
+  {%- if t == key -%}{{ bucket.append(s) or '' }}{%- endif -%}
+{%- endfor -%}
+{%- if bucket %}
+<div class="envar-tiergroup">
+<div class="envar-grouphead"><span class="envar-groupname">{{ label }}</span><span class="envar-groupnote">{{ note }}</span><span class="envar-groupcount">{{ bucket|length }} component{% if bucket|length != 1 %}s{% endif %}</span></div>
+<div class="envar-tiles">
+{%- for s in bucket -%}
+{%- set cname = s.range -%}
+{%- set cobj = schemaview.get_class(cname) -%}
+<a class="envar-tile {{ key }}" href="classes/{{ cname }}/"><span class="envar-tilehead"><span class="envar-tilename">{{ cobj.title if cobj.title else gen.name(cobj) }}</span><span class="envar-tileslot">{{ cname }} · via {{ s.name }}{% if s.multivalued %} (many){% endif %}</span></span><span class="envar-tiledesc">{{ cobj.description | enshorten }}</span><span class="envar-tilefoot"><span class="envar-tierbadge {{ key }}">{{ key.replace('_',' ') }}</span> · {{ schemaview.class_induced_slots(cname)|length }} fields</span></a>
+{%- endfor -%}
+</div>
+</div>
+{%- endif -%}
+{%- endfor -%}
+{%- set variants = schemaview.class_children(root, mixins=False) -%}
+{%- if variants %}
+<p class="envar-sectionlabel">Worked variants</p>
+<p class="envar-variantnote">Concrete record subclasses pre-wired for a specific variable — the shapes a workshop dataset actually instantiates.</p>
+<div class="envar-variants">
+{%- for v in variants -%}
+<a class="envar-variant" href="classes/{{ v }}/">{{ v }}</a>
+{%- endfor -%}
+</div>
+{%- endif %}
+</div>
+
+<div class="envar-atlas" markdown="1">
+<details class="envar-details" markdown="1">
+<summary>Full element index — every class, enum, type &amp; slot</summary>
+
+### Classes
+
+| Class | Description |
+| --- | --- |
+{% if gen.hierarchical_class_view -%}
+{% for u, v in gen.class_hierarchy_as_tuples() -%}
+| {{ "&nbsp;"|safe*u*8 }}{{ gen.link(schemaview.get_class(v), True) }} | {{ schemaview.get_class(v).description|enshorten }} |
+{% endfor %}
+{% else -%}
+{% for c in gen.all_class_objects()|sort(attribute=sort_by) -%}
+| {{ gen.link(c, True) }} | {{ c.description|enshorten }} |
+{% endfor %}
+{% endif %}
+
+### Enumerations
+
+| Enumeration | Description |
+| --- | --- |
+{% for e in gen.all_enum_objects()|sort(attribute=sort_by) -%}
+| {{ gen.link(e, True) }} | {{ e.description|enshorten }} |
+{% endfor %}
+
+### Types
+
+| Type | Description |
+| --- | --- |
+{% for t in gen.all_type_objects()|sort(attribute=sort_by) -%}
+| {{ gen.link(t, True) }} | {{ t.description|enshorten }} |
+{% endfor %}
+
+### Slots
+
+| Slot | Description |
+| --- | --- |
+{% for s in gen.all_slot_objects()|sort(attribute=sort_by) -%}
+| {{ gen.link(s, True) }} | {{ s.description|enshorten }} |
+{% endfor %}
+</details>
+
+</div>
